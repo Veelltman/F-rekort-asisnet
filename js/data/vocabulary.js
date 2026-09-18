@@ -11,22 +11,22 @@
   window.QUESTION_DATA.vocabulary = [
     /* Основные понятия */
     w("001", "førerkort", "водительские права", "Jeg skal ta førerkort klasse B.", "Я собираюсь получить права категории B.", "Основное"),
-    w("002", "teoriprøve", "теоретический экзамен", "Teoriprøven tas på trafikkstasjonen.", "Теоретический экзамен сдают на трафиковой станции.", "Основное"),
-    w("003", "oppkjøring", "практический экзамен (вождение)", "Jeg har oppkjøring neste uke.", "У меня практический экзамен на следующей неделе.", "Основное"),
-    w("004", "trafikkstasjon", "отделение Vegvesen (типа ГИБДД)", "Du bestiller time på trafikkstasjonen.", "Ты записываешься на приём в трафиковую станцию.", "Основное"),
+    w("002", "teoriprøve", "теоретический экзамен", "Teoriprøven tas på trafikkstasjonen.", "Теоретический экзамен сдают в отделении Statens vegvesen.", "Основное"),
+    w("003", "oppkjøring (praktisk prøve)", "практический экзамен (вождение)", "Jeg har oppkjøring neste uke.", "У меня практический экзамен на следующей неделе.", "Основное"),
+    w("004", "trafikkstasjon", "отделение Vegvesen (типа ГИБДД)", "Du bestiller time på trafikkstasjonen.", "Ты записываешься на приём в отделение Statens vegvesen.", "Основное"),
     w("005", "trafikkskole", "автошкола", "Jeg går på trafikkskole i Oslo.", "Я хожу в автошколу в Осло.", "Основное"),
     w("006", "trafikklærer", "инструктор по вождению", "Trafikklæreren min er veldig tålmodig.", "Мой инструктор очень терпеливый.", "Основное"),
-    w("007", "øvelseskjøring", "учебная езда (с сопровождающим)", "Øvelseskjøring er lov fra 16 år.", "Учебная езда разрешена с 16 лет.", "Основное"),
-    w("008", "ledsager", "сопровождающий при учебной езде", "Ledsageren må være over 25 år.", "Сопровождающий должен быть старше 25 лет.", "Основное"),
+    w("007", "øvelseskjøring", "учебная езда (с сопровождающим)", "Øvelseskjøring gir erfaring før oppkjøringen.", "Учебная езда даёт опыт перед практическим экзаменом.", "Основное"),
+    w("008", "ledsager", "сопровождающий при учебной езде", "Ledsageren må ha hatt førerkort i minst fem år.", "Сопровождающий должен иметь права не менее пяти лет.", "Основное"),
 
     /* Приоритет и правила */
     w("009", "vikeplikt", "обязанность уступить дорогу", "Du har vikeplikt for trafikk fra høyre.", "Ты обязан уступить транспорту справа.", "Приоритет"),
     w("010", "å vike", "уступать", "Jeg viker for bussen.", "Я уступаю автобусу.", "Приоритет"),
-    w("011", "forkjørsvei", "главная дорога", "På forkjørsvei har du forrang.", "На главной дороге у тебя преимущество.", "Приоритет"),
+    w("011", "forkjørsvei (forkjørsveg)", "главная дорога", "På forkjørsvei har du forrang.", "На главной дороге у тебя преимущество.", "Приоритет"),
     w("012", "forkjørsrett / forrang", "преимущество (право первым проехать)", "Sporvognen har alltid forkjørsrett.", "Трамвай всегда имеет преимущество.", "Приоритет"),
     w("013", "høyreregelen", "правило правой руки", "Uten skilt gjelder høyreregelen.", "Без знаков действует правило правой руки.", "Приоритет"),
     w("014", "vegkryss / kryss", "перекрёсток", "Senk farten før krysset.", "Снизь скорость перед перекрёстком.", "Приоритет"),
-    w("015", "rundkjøring", "круговое движение", "I rundkjøringen kjører du mot høyre.", "На кругу едешь направо (против часовой).", "Приоритет"),
+    w("015", "rundkjøring", "круговое движение", "I rundkjøringen har du vikeplikt for dem som allerede er inne.", "На кругу ты уступаешь тем, кто уже на нём.", "Приоритет"),
     w("016", "gangfelt", "пешеходный переход", "Stopp for fotgjengere i gangfeltet.", "Останавливайся перед пешеходами на переходе.", "Приоритет"),
     w("017", "fotgjenger", "пешеход", "Fotgjengeren ventet på fortauet.", "Пешеход ждал на тротуаре.", "Приоритет"),
     w("018", "fortau", "тротуар", "Barna gikk på fortauet.", "Дети шли по тротуару.", "Приоритет"),
@@ -39,7 +39,7 @@
 
     /* Действия за рулём */
     w("025", "å svinge", "поворачивать", "Sving til venstre ved neste kryss.", "Поверни налево на следующем перекрёстке.", "Действия"),
-    w("026", "å rygge", "сдавать назад", "Rygg forsiktig inn i luken.", "Осторожно сдай назад в карман.", "Действия"),
+    w("026", "å rygge", "сдавать назад", "Rygg forsiktig inn på parkeringsplassen.", "Осторожно сдай назад на парковочное место.", "Действия"),
     w("027", "å bremse", "тормозить", "Brems tidlig på glatt vei.", "Тормози заранее на скользкой дороге.", "Действия"),
     w("028", "å gi tegn / å blinke", "подавать сигнал / включать поворотник", "Husk å gi tegn før du svinger.", "Не забудь включить поворотник перед поворотом.", "Действия"),
     w("029", "blinklys", "поворотник", "Blinklyset til høyre virker ikke.", "Правый поворотник не работает.", "Действия"),
@@ -66,18 +66,18 @@
     /* Условия и опасности */
     w("047", "glatt (vei / føre)", "скользкая (дорога)", "Det er veldig glatt i dag.", "Сегодня очень скользко.", "Условия"),
     w("048", "vinterføre", "зимние дорожные условия", "Kjør rolig på vinterføre.", "Езди спокойно в зимних условиях.", "Условия"),
-    w("049", "tåke", "туман", "I tåke må du bruke tåkelys.", "В туман нужно включать противотуманки.", "Условия"),
+    w("049", "tåke", "туман", "I tåke kan du bruke tåkelys i stedet for nærlys.", "В туман можно включить противотуманки вместо ближнего света.", "Условия"),
     w("050", "vilt", "дикие животные", "Pass på vilt langs veien.", "Осторожно: дикие животные у дороги.", "Условия"),
     w("051", "ulykke", "авария, ДТП", "Det skjedde en ulykke på E6.", "На E6 произошла авария.", "Условия"),
     w("052", "utrykningskjøretøy", "спецтранспорт (скорая, пожарные, полиция)", "Gi fri vei for utrykningskjøretøy.", "Освободи дорогу спецтранспорту.", "Условия"),
     w("053", "promille", "промилле (уровень алкоголя)", "Grensen er 0,2 promille.", "Предел — 0,2 промилле.", "Условия"),
     w("054", "prikk (på førerkortet)", "штрафной балл", "Jeg fikk tre prikker for mobilbruk.", "Я получил три балла за телефон.", "Условия"),
-    w("055", "gebyr / bot", "штраф", "Gebyret for å ikke bruke belte er høyt.", "Штраф за непристёгнутый ремень высокий.", "Условия"),
-    w("056", "tettbebygd strøk", "населённый пункт (застроенная зона)", "I tettbebygd strøk er grensen 50.", "В населённом пункте предел — 50.", "Условия"),
+    w("055", "gebyr / bot", "штраф", "Gebyret for ikke å bruke belte er høyt.", "Штраф за непристёгнутый ремень высокий.", "Условия"),
+    w("056", "tettbygd strøk", "населённый пункт (застроенная зона)", "I tettbygd strøk er grensen 50.", "В населённом пункте предел — 50.", "Условия"),
 
     w("057", "tunnel", "тоннель", "Slå på nærlys før du kjører inn i tunnelen.", "Включи ближний свет перед въездом в тоннель.", "Условия"),
     w("058", "trøtthet", "усталость (за рулём)", "Trøtthet er en vanlig årsak til ulykker.", "Усталость — частая причина аварий.", "Условия"),
-    w("059", "sykkelfelt", "велополоса", "Syklister skal bruke sykkelfelt når det finnes.", "Велосипедисты должны использовать велополосу, если она есть.", "Приоритет"),
+    w("059", "sykkelfelt", "велополоса", "Se etter syklister i sykkelfeltet før du svinger til høyre.", "Проверь велосипедистов на велополосе перед поворотом направо.", "Приоритет"),
     w("060", "holdeplass", "остановка (автобуса, трамвая)", "Bussen stanser ved holdeplassen for å slippe av passasjerer.", "Автобус останавливается на остановке, чтобы высадить пассажиров.", "Приоритет"),
     w("061", "vogntog", "автопоезд (грузовик с прицепом)", "Et vogntog trenger mye plass for å svinge.", "Автопоезду нужно много места, чтобы повернуть.", "Машина"),
     w("062", "tilhenger", "прицеп", "Jeg kjører med tilhenger til hytta i helgen.", "В выходные я еду с прицепом на дачу.", "Машина")
