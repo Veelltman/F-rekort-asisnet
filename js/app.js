@@ -15,7 +15,8 @@
     situational: SW("circle-blue", SI.roundabout()),
     rules: SW("circle-red", `<text x="50" y="66" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="46" fill="#1a1a1a">§</text>`),
     vocab: SW("diamond-yellow", `<text x="50" y="60" text-anchor="middle" font-family="Arial" font-weight="800" font-size="26" fill="#1a1a1a">Aa</text>`),
-    daily: SW("square-blue", `<text x="50" y="64" text-anchor="middle" font-family="Arial" font-weight="800" font-size="40" fill="#fff">1</text>`)
+    daily: SW("square-blue", `<text x="50" y="64" text-anchor="middle" font-family="Arial" font-weight="800" font-size="40" fill="#fff">1</text>`),
+    exam: SW("octagon-red", `<text x="50" y="62" text-anchor="middle" font-family="Arial" font-weight="800" font-size="30" fill="#fff">45</text>`)
   };
 
   const TOPICS = {
@@ -137,6 +138,60 @@
       </div>`;
   }
 
+  /* ---------- Экзамен: 45 вопросов, 90 минут, максимум 7 ошибок ---------- */
+  function examSet() {
+    const k = D.signsByKind;
+    return [].concat(
+      shuffle(k.meaning).slice(0, 15),
+      shuffle(k.pick).slice(0, 5),
+      shuffle(k.category).slice(0, 3),
+      shuffle(D.situational).slice(0, 12),
+      shuffle(D.rules).slice(0, 10)
+    );
+  }
+
+  function examCard() {
+    const rows = S.getProfiles().map(p => {
+      const ex = S.getExams(p);
+      const last = ex[ex.length - 1];
+      const passed = ex.filter(e => e.passed).length;
+      return `<div class="daily-row ${p === S.getCurrentProfile() ? "me" : ""}">
+        <span class="daily-name">${esc(p)}</span>
+        ${last
+          ? `<span class="pill ${last.passed ? "good" : "bad"}">${last.passed ? "bestått" : "ikke bestått"}</span><span class="muted">${last.correct}/${last.total}, сдано ${passed} из ${ex.length}</span>`
+          : `<span class="muted">ещё не сдавал(а)</span>`}
+      </div>`;
+    }).join("");
+    return `
+      <div class="card daily-card exam-card">
+        <div class="daily-head">
+          <div class="topic-icon">${ICONS.exam}</div>
+          <div>
+            <h3>Teoriprøve</h3>
+            <p class="topic-sub">Пробный экзамен</p>
+          </div>
+        </div>
+        <p class="topic-desc">45 вопросов, 90 минут, без подсказок по ходу. Сдано, если ошибок не больше 7. Как на настоящем экзамене.</p>
+        <div class="daily-rows">${rows}</div>
+        <div class="daily-foot"><button class="btn btn-primary" onclick="go('exam')">Начать экзамен</button></div>
+      </div>`;
+  }
+
+  routes.exam = function () {
+    view.innerHTML = "";
+    window.QuizEngine.start(view, examSet(), {
+      title: "Teoriprøve",
+      exitLabel: "Прервать",
+      exam: true,
+      timeLimit: 90 * 60,
+      maxWrong: 7,
+      confirmExit: "Прервать экзамен? Результат не сохранится.",
+      onExit: () => go("home"),
+      onRestart: () => go("exam"),
+      onFinish: res => S.recordExam(res)
+    });
+  };
+
   routes.daily = function () {
     const key = todayKey();
     const already = S.getDaily(key);
@@ -188,7 +243,10 @@
         <div class="hero-sign">${SW("diamond-yellow", "")}</div>
       </section>
 
-      ${dailyCard()}
+      <div class="grid grid-2">
+        ${dailyCard()}
+        ${examCard()}
+      </div>
 
       <h2 class="section-title">Темы</h2>
       <div class="grid">

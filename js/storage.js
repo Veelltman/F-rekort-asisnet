@@ -95,6 +95,17 @@
     const s = profileName ? readProfileState(profileName) : state;
     return (s.daily || {})[dateKey] || null;
   }
+  function recordExam(result) {
+    state.exams = state.exams || [];
+    state.exams.push({ correct: result.correct, total: result.total, passed: !!result.passed, at: Date.now() });
+    if (state.exams.length > 50) state.exams = state.exams.slice(-50);
+    save();
+  }
+  function getExams(profileName) {
+    const s = profileName ? readProfileState(profileName) : state;
+    return (s.exams || []).slice();
+  }
+
   function getStreak() {
     let n = 0;
     const d = new Date();
@@ -175,7 +186,7 @@
   }
 
   window.Storage = {
-    recordAnswer, recordVocab, recordDaily, getDaily, getStreak,
+    recordAnswer, recordVocab, recordDaily, getDaily, getStreak, recordExam, getExams,
     getTopicStats, getWeakQuestions, getUnseenFirst,
     getVocabStats, getWeakVocab, getAnswerEntry, getLastTopic, reset,
     getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile

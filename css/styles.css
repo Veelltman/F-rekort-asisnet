@@ -482,3 +482,41 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 .msg-assistant { align-self: flex-start; background: var(--surface-2); }
 .chat-input { display: flex; gap: 10px; align-items: flex-end; }
 .chat-input textarea { flex: 1; font: inherit; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); resize: vertical; }
+
+/* ---------- Проверка, навигация, экзамен ---------- */
+.grid-2 { margin-bottom: 4px; }
+.daily-card { margin-bottom: 0; }
+.option.is-selected { border-color: var(--asphalt); background: var(--surface-2); }
+.option.is-selected .option-letter { background: var(--asphalt); color: #fff; }
+@media (prefers-color-scheme: dark) {
+  .option.is-selected { border-color: var(--line); }
+  .option.is-selected .option-letter { background: var(--line); color: #16202a; }
+}
+.check-row { margin-top: 16px; }
+.btn-check { width: 100%; min-height: 50px; font-size: 1.02rem; }
+@media (min-width: 720px) { .btn-check { width: auto; min-width: 220px; } }
+.quiz-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; }
+.nav-btn { width: 56px; height: 52px; padding: 0; flex: none; }
+.nav-btn svg { width: 26px; height: 26px; }
+.nav-status { font-size: 0.86rem; color: var(--ink-3); text-align: center; }
+.quiz-timer { font-family: var(--display); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+.quiz-timer.warn { color: var(--sign-red); }
+.exam-hint { font-size: 0.85rem; text-align: center; margin-top: 10px; }
+.review-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.review-filter { font-size: 0.9rem; color: var(--ink-2); display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.review-list { display: flex; flex-direction: column; gap: 12px; }
+.review-card { display: flex; gap: 14px; align-items: flex-start; border-left: 5px solid; }
+.review-ok { border-left-color: var(--ok); }
+.review-fail { border-left-color: var(--sign-red); }
+.review-mark { flex: none; width: 34px; display: flex; flex-direction: column; align-items: center; font-family: var(--display); font-weight: 700; font-size: 1.1rem; line-height: 1.1; }
+.review-mark span { font-size: 0.72rem; color: var(--ink-3); font-weight: 500; }
+.review-ok .review-mark { color: var(--ok); }
+.review-fail .review-mark { color: var(--sign-red); }
+@media (max-width: 719px) {
+  .review-card { flex-wrap: wrap; }
+  .review-card .mistake-image { order: 3; width: 100%; }
+}
+.option.is-selected.is-correct { border-color: var(--ok); background: var(--ok-soft); }
+.option.is-selected.is-correct .option-letter { background: var(--ok); color: #fff; }
+.option.is-selected.is-wrong { border-color: var(--sign-red); background: var(--sign-red-soft); }
+.option.is-selected.is-wrong .option-letter { background: var(--sign-red); color: #fff; }
