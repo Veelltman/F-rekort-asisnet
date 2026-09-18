@@ -10,6 +10,11 @@
   let situation = null;
 
   function settingsBlock() {
+    if (T.settings.viaCloud) {
+      return T.settings.ready
+        ? `<p class="muted small">Учитель работает через сервер. Ключ API хранится только там.</p>`
+        : `<div class="card"><p><strong>Учитель доступен только владельцу сайта.</strong></p><p class="muted">Ключ API и счёт за него принадлежат владельцу. Остальные разделы работают без ограничений.</p></div>`;
+    }
     const ready = T.settings.ready;
     return `
       <details class="card settings ${ready ? "" : "open"}" ${ready ? "" : "open"}>
@@ -41,7 +46,7 @@
       <h1>Læreren <span class="muted">· Учитель</span></h1>
       <p class="lead">Живой репетитор: придумывает ситуации, проверяет твой ответ по правилам и по языку, генерирует новые задания и отвечает на вопросы.</p>
       ${settingsBlock()}
-      ${tabs()}
+      ${T.settings.ready ? tabs() : ""}
       <div id="teacher-body"></div>
       ${bank.length ? `
         <div class="card bank-card">
@@ -55,12 +60,14 @@
           </div>
         </div>` : ""}`;
 
-    document.getElementById("save-settings").onclick = () => {
+    const save = document.getElementById("save-settings");
+    if (save) save.onclick = () => {
       T.settings.key = document.getElementById("api-key").value.trim();
       T.settings.proxy = document.getElementById("api-proxy").value.trim();
       render();
     };
-    document.getElementById("clear-settings").onclick = () => { T.settings.key = ""; T.settings.proxy = ""; render(); };
+    const clear = document.getElementById("clear-settings");
+    if (clear) clear.onclick = () => { T.settings.key = ""; T.settings.proxy = ""; render(); };
     view.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
     const bq = document.getElementById("bank-quiz");
     if (bq) bq.onclick = () => {
@@ -73,7 +80,7 @@
 
     const body = document.getElementById("teacher-body");
     if (!T.settings.ready) {
-      body.innerHTML = `<div class="card"><p>Сначала вставь ключ API выше.</p></div>`;
+      body.innerHTML = T.settings.viaCloud ? "" : `<div class="card"><p>Сначала вставь ключ API выше.</p></div>`;
       return;
     }
     if (tab === "free") renderFree(body);

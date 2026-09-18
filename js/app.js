@@ -16,7 +16,8 @@
     rules: SW("circle-red", `<text x="50" y="66" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="46" fill="#1a1a1a">§</text>`),
     vocab: SW("diamond-yellow", `<text x="50" y="60" text-anchor="middle" font-family="Arial" font-weight="800" font-size="26" fill="#1a1a1a">Aa</text>`),
     daily: SW("square-blue", `<text x="50" y="64" text-anchor="middle" font-family="Arial" font-weight="800" font-size="40" fill="#fff">1</text>`),
-    exam: SW("octagon-red", `<text x="50" y="62" text-anchor="middle" font-family="Arial" font-weight="800" font-size="30" fill="#fff">45</text>`)
+    exam: SW("octagon-red", `<text x="50" y="62" text-anchor="middle" font-family="Arial" font-weight="800" font-size="30" fill="#fff">45</text>`),
+    circle: SW("circle-blue", `<circle cx="36" cy="40" r="9" fill="#fff"/><circle cx="64" cy="40" r="9" fill="#fff"/><path d="M18 76c0-12 8-20 18-20s18 8 18 20M46 76c0-12 8-20 18-20s18 8 18 20" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>`)
   };
 
   const TOPICS = {
@@ -27,6 +28,7 @@
 
   const routes = {};
   function go(name, params) {
+    window.CURRENT_ROUTE = name;
     routes[name](params || {});
     window.scrollTo({ top: 0 });
     document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("active", a.dataset.route === name));
@@ -35,13 +37,20 @@
   window.ROUTES = routes;
 
   /* ---------- Профили ---------- */
+  const C = window.Cloud;
+
   function renderProfileSwitch() {
     const el = document.getElementById("profile-switch");
     if (!el) return;
+    if (C.enabled && !C.isLoggedIn()) {
+      el.innerHTML = `<button class="profile-btn profile-login" onclick="go('login')">Войти</button>`;
+      return;
+    }
     const cur = S.getCurrentProfile();
-    el.innerHTML = `<button class="profile-btn" title="Сменить профиль"><span class="profile-dot"></span>${esc(cur)}</button>`;
+    el.innerHTML = `<button class="profile-btn" title="Профиль"><span class="profile-dot"></span>${esc(cur)}</button>`;
     el.querySelector(".profile-btn").onclick = openProfileMenu;
   }
+  window.renderProfileSwitch = renderProfileSwitch;
 
   function openProfileMenu() {
     const existing = document.querySelector(".profile-menu");
@@ -49,20 +58,29 @@
     const menu = document.createElement("div");
     menu.className = "profile-menu";
     const cur = S.getCurrentProfile();
-    menu.innerHTML = `
-      <div class="profile-menu-title">Кто занимается?</div>
-      ${S.getProfiles().map(p => `
-        <button class="profile-item ${p === cur ? "active" : ""}" data-name="${esc(p)}">${esc(p)}</button>`).join("")}
-      <button class="profile-item profile-add">Добавить человека</button>`;
-    document.getElementById("profile-switch").appendChild(menu);
-    menu.querySelectorAll(".profile-item[data-name]").forEach(b => {
-      b.onclick = () => { S.switchProfile(b.dataset.name); menu.remove(); renderProfileSwitch(); go("home"); };
-    });
-    menu.querySelector(".profile-add").onclick = () => {
-      const name = prompt("Имя (как будет отображаться):");
-      if (name && S.addProfile(name)) { renderProfileSwitch(); go("home"); }
-      menu.remove();
-    };
+    if (C.isLoggedIn()) {
+      menu.innerHTML = `
+        <div class="profile-menu-title">Ты вошёл как</div>
+        <button class="profile-item active">${esc(cur)}</button>
+        <button class="profile-item profile-add" data-act="logout">Выйти</button>`;
+      document.getElementById("profile-switch").appendChild(menu);
+      menu.querySelector("[data-act=logout]").onclick = () => { C.logout(); menu.remove(); renderProfileSwitch(); go("home"); };
+    } else {
+      menu.innerHTML = `
+        <div class="profile-menu-title">Кто занимается?</div>
+        ${S.getProfiles().map(p => `
+          <button class="profile-item ${p === cur ? "active" : ""}" data-name="${esc(p)}">${esc(p)}</button>`).join("")}
+        <button class="profile-item profile-add">Добавить человека</button>`;
+      document.getElementById("profile-switch").appendChild(menu);
+      menu.querySelectorAll(".profile-item[data-name]").forEach(b => {
+        b.onclick = () => { S.switchProfile(b.dataset.name); menu.remove(); renderProfileSwitch(); go("home"); };
+      });
+      menu.querySelector(".profile-add").onclick = () => {
+        const name = prompt("Имя (как будет отображаться):");
+        if (name && S.addProfile(name)) { renderProfileSwitch(); go("home"); }
+        menu.remove();
+      };
+    }
     setTimeout(() => {
       document.addEventListener("click", function close(e) {
         if (!menu.contains(e.target) && !e.target.closest(".profile-btn")) { menu.remove(); document.removeEventListener("click", close); }
@@ -129,13 +147,107 @@
             <p class="topic-sub">Задание дня, ${key.split("-").reverse().join(".")}</p>
           </div>
         </div>
-        <p class="topic-desc">20 вопросов, одинаковые для всех, кто занимается на этом устройстве. Сравните результаты.</p>
+        <p class="topic-desc">20 вопросов, одинаковые для всех в этот день. Сравните результаты.</p>
         <div class="daily-rows">${rows}</div>
         <div class="daily-foot">
           <button class="btn btn-primary" onclick="go('daily')">${mine ? "Пройти ещё раз" : "Начать задание дня"}</button>
           ${streak > 1 ? `<span class="streak">${streak} дней подряд</span>` : ""}
         </div>
       </div>`;
+  }
+
+  /* ---------- Вход и регистрация ---------- */
+  routes.login = function (p) {
+    let tab = p.tab || "login";
+    function render(error) {
+      view.innerHTML = `
+        <div class="quiz">
+          <h1>${tab === "login" ? "Вход" : "Регистрация"}</h1>
+          <p class="lead">Прогресс хранится на сервере: войди с любого телефона, и всё будет на месте. Результаты видны друзьям из круга.</p>
+          <div class="tabs">
+            <button class="tab ${tab === "login" ? "active" : ""}" data-tab="login">Войти</button>
+            <button class="tab ${tab === "register" ? "active" : ""}" data-tab="register">Регистрация</button>
+          </div>
+          <form class="card" id="auth-form" autocomplete="off">
+            <label class="field"><span>Имя (как тебя увидят друзья)</span><input type="text" id="auth-name" maxlength="24" required autocomplete="username"></label>
+            <label class="field"><span>PIN (4–6 цифр)</span><input type="password" id="auth-pin" inputmode="numeric" pattern="\\d{4,6}" maxlength="6" required autocomplete="current-password"></label>
+            ${tab === "register" ? `<label class="field"><span>Код приглашения</span><input type="text" id="auth-invite" required autocomplete="off" placeholder="спроси у того, кто дал ссылку"></label>` : ""}
+            ${error ? `<p class="form-error">${esc(error)}</p>` : ""}
+            <div class="row">
+              <button class="btn btn-primary" type="submit">${tab === "login" ? "Войти" : "Создать аккаунт"}</button>
+              <button class="btn btn-ghost" type="button" onclick="go('home')">Без входа</button>
+            </div>
+            ${tab === "register" ? `<p class="muted small">Прогресс, который уже есть в этом браузере, перенесётся в новый аккаунт.</p>` : ""}
+          </form>
+        </div>`;
+      view.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
+      const form = document.getElementById("auth-form");
+      form.onsubmit = async e => {
+        e.preventDefault();
+        const btn = form.querySelector("[type=submit]");
+        btn.disabled = true; btn.textContent = "Секунду…";
+        try {
+          const name = document.getElementById("auth-name").value.trim();
+          const pin = document.getElementById("auth-pin").value.trim();
+          if (tab === "login") await C.login(name, pin);
+          else await C.register(name, pin, document.getElementById("auth-invite").value.trim());
+          renderProfileSwitch();
+          go("home");
+        } catch (err) { render(err.message); }
+      };
+    }
+    render();
+  };
+
+  /* ---------- Круг друзей ---------- */
+  function circleCard() {
+    if (!C.isLoggedIn()) {
+      return `
+        <div class="card daily-card circle-card">
+          <div class="daily-head">
+            <div class="topic-icon">${ICONS.circle}</div>
+            <div><h3>Vennekretsen</h3><p class="topic-sub">Круг друзей</p></div>
+          </div>
+          <p class="topic-desc">Войди, чтобы прогресс сохранялся на сервере и было видно, кто как занимается.</p>
+          <div class="daily-foot"><button class="btn btn-primary" onclick="go('login')">Войти или зарегистрироваться</button></div>
+        </div>`;
+    }
+    setTimeout(loadCircle, 0);
+    return `
+      <div class="card daily-card circle-card" id="circle-card">
+        <div class="daily-head">
+          <div class="topic-icon">${ICONS.circle}</div>
+          <div><h3>Vennekretsen</h3><p class="topic-sub">Круг друзей</p></div>
+        </div>
+        <div class="daily-rows" id="circle-rows"><div class="busy"><span class="spinner"></span> загружаю…</div></div>
+      </div>`;
+  }
+
+  async function loadCircle() {
+    const el = document.getElementById("circle-rows");
+    if (!el) return;
+    try {
+      const data = await C.circle();
+      const key = todayKey();
+      el.innerHTML = `
+        <div class="circle-table">
+          <div class="circle-row circle-head"><span>Имя</span><span>Сегодня</span><span>Верно</span><span>Экзамены</span><span>Дней</span></div>
+          ${data.rows.map(r => {
+            const t = r.today ? `${Math.round((r.today.correct / r.today.total) * 100)}%` : "—";
+            const ex = r.exams ? `${r.examsPassed}/${r.exams}` : "—";
+            return `<div class="circle-row ${r.name === data.me ? "me" : ""}">
+              <span class="circle-name">${esc(r.name)}${r.name === data.owner ? ' <span class="crown" title="владелец">★</span>' : ""}</span>
+              <span class="${r.today ? (t.replace("%", "") >= 85 ? "good-text" : "") : "muted"}">${t}</span>
+              <span>${r.accuracy != null ? r.accuracy + "%" : "—"}</span>
+              <span>${ex}</span>
+              <span>${r.streak ? r.streak + " подряд" : r.dailyCount || "—"}</span>
+            </div>`;
+          }).join("")}
+        </div>
+        <p class="muted small">Сегодня — результат задания дня ${key.split("-").reverse().join(".")}. Верно — доля верных ответов за всё время. Экзамены — сдано из попыток.</p>`;
+    } catch (e) {
+      el.innerHTML = `<p class="muted">Не удалось загрузить круг: ${esc(e.message)}</p>`;
+    }
   }
 
   /* ---------- Экзамен: 45 вопросов, 90 минут, максимум 7 ошибок ---------- */
@@ -243,6 +355,7 @@
         <div class="hero-sign">${SW("diamond-yellow", "")}</div>
       </section>
 
+      ${circleCard()}
       <div class="grid grid-2">
         ${dailyCard()}
         ${examCard()}

@@ -20,7 +20,8 @@
     set key(v) { try { v ? localStorage.setItem(KEY_KEY, v) : localStorage.removeItem(KEY_KEY); } catch (e) { /* ignore */ } },
     get proxy() { try { return localStorage.getItem(PROXY_KEY) || ""; } catch (e) { return ""; } },
     set proxy(v) { try { v ? localStorage.setItem(PROXY_KEY, v) : localStorage.removeItem(PROXY_KEY); } catch (e) { /* ignore */ } },
-    get ready() { return !!(this.key || this.proxy); }
+    get ready() { return (window.Cloud && window.Cloud.isLoggedIn() && window.Cloud.teacherAllowed()) || !!(this.key || this.proxy); },
+    get viaCloud() { return !!(window.Cloud && window.Cloud.isLoggedIn()); }
   };
 
   function loadBank() { try { return JSON.parse(localStorage.getItem(BANK_KEY) || "[]"); } catch (e) { return []; } }
@@ -58,10 +59,15 @@ Prinsipper: vær presis og konkret. Ikke finn på regler eller satser du er usik
 
     let res;
     try {
-      res = await fetch(url, { method: "POST", headers, body: JSON.stringify(payload) });
+      if (settings.viaCloud) {
+        res = await window.Cloud.teacherFetch(JSON.stringify(payload), { "anthropic-version": headers["anthropic-version"], "anthropic-beta": headers["anthropic-beta"] });
+      } else {
+        res = await fetch(url, { method: "POST", headers, body: JSON.stringify(payload) });
+      }
     } catch (e) {
-      throw new Error("Нет связи с API. Проверь интернет или адрес прокси.");
+      throw new Error(e.message && e.message.startsWith("Нет связи") ? e.message : "Нет связи с API. Проверь интернет.");
     }
+    if (res.status === 403) { const d = await res.json().catch(() => ({})); throw new Error(d.error || "Учитель доступен только владельцу сайта."); }
     if (res.status === 401) throw new Error("Ключ API не принят (401). Проверь ключ в настройках.");
     if (res.status === 429) throw new Error("Слишком много запросов (429). Подожди минуту и попробуй снова.");
     if (res.status === 400) {

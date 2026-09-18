@@ -520,3 +520,21 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 .option.is-selected.is-correct .option-letter { background: var(--ok); color: #fff; }
 .option.is-selected.is-wrong { border-color: var(--sign-red); background: var(--sign-red-soft); }
 .option.is-selected.is-wrong .option-letter { background: var(--sign-red); color: #fff; }
+
+/* ---------- Вход и круг ---------- */
+.profile-login { background: var(--line); color: #16202a; border-color: var(--line); }
+.profile-login:hover { background: #ffd54a; }
+.form-error { color: var(--sign-red); font-size: 0.92rem; margin: 4px 0 10px; }
+.small { font-size: 0.85rem; }
+.circle-card { margin-bottom: 16px; }
+.circle-table { display: flex; flex-direction: column; gap: 4px; }
+.circle-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 8px; align-items: center; padding: 8px 12px; border-radius: 10px; font-size: 0.92rem; }
+.circle-row:not(.circle-head) { background: var(--surface); border: 1px solid var(--border); }
+.circle-row.me { border-color: var(--line); }
+.circle-head { font-size: 0.75rem; color: var(--ink-3); padding: 2px 12px; }
+.circle-name { font-weight: 600; }
+.crown { color: var(--line-dark); }
+.good-text { color: var(--ok); font-weight: 600; }
+@media (max-width: 719px) {
+  .circle-row { grid-template-columns: 1.4fr 0.8fr 0.8fr 0.9fr 0.9fr; gap: 4px; font-size: 0.82rem; padding: 8px; }
+}

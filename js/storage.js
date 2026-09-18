@@ -24,7 +24,8 @@
     write(PROFILES_KEY, profiles);
   }
 
-  function stateKey() { return "forerkort-trener-v1:" + profiles.current; }
+  let cloudName = null;
+  function stateKey() { return cloudName ? "forerkort-trener-v1:cloud:" + cloudName : "forerkort-trener-v1:" + profiles.current; }
   function emptyState() { return { answers: {}, vocab: {}, daily: {}, lastTopic: null }; }
 
   let state = read(stateKey(), null);
@@ -35,11 +36,27 @@
     write(stateKey(), state);
   }
 
-  function save() { write(stateKey(), state); }
+  function save() {
+    write(stateKey(), state);
+    if (cloudName && window.Cloud) window.Cloud.schedulePush();
+  }
+
+  /* ---------- Облачный профиль ---------- */
+  function exportState() { return state; }
+  function useCloudProfile(name, remoteState) {
+    cloudName = name;
+    state = Object.assign(emptyState(), remoteState || {});
+    write(stateKey(), state);
+  }
+  function useLocalProfile() {
+    cloudName = null;
+    state = read(stateKey(), null) || emptyState();
+  }
+  function isCloud() { return !!cloudName; }
 
   /* ---------- Профили ---------- */
-  function getProfiles() { return profiles.list.slice(); }
-  function getCurrentProfile() { return profiles.current; }
+  function getProfiles() { return cloudName ? [cloudName] : profiles.list.slice(); }
+  function getCurrentProfile() { return cloudName || profiles.current; }
   function switchProfile(name) {
     if (!profiles.list.includes(name)) return;
     profiles.current = name;
@@ -64,6 +81,7 @@
     state = read(stateKey(), null) || emptyState();
   }
   function readProfileState(name) {
+    if (cloudName && name === cloudName) return state;
     return read("forerkort-trener-v1:" + name, null) || emptyState();
   }
 
@@ -189,6 +207,7 @@
     recordAnswer, recordVocab, recordDaily, getDaily, getStreak, recordExam, getExams,
     getTopicStats, getWeakQuestions, getUnseenFirst,
     getVocabStats, getWeakVocab, getAnswerEntry, getLastTopic, reset,
-    getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile
+    getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile,
+    exportState, useCloudProfile, useLocalProfile, isCloud
   };
 })();

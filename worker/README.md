@@ -1,18 +1,20 @@
-# Прокси для ключа API (необязательно)
+# Сервер (Cloudflare Worker)
 
-Без прокси ключ вводится на странице «Учитель» и хранится в браузере. Это нормально для личного использования на своих устройствах. Прокси нужен, если хочешь дать ссылку на сайт кому-то ещё и не передавать ключ.
+Адрес: https://forerkort-trener.velltman.workers.dev
 
-## Деплой на Cloudflare Workers (бесплатный тариф)
+Что делает: регистрация по имени, PIN и коду приглашения; хранение прогресса; таблица круга друзей; прокси к Claude API для «Учителя», доступный только владельцу (первый зарегистрированный) и именам из списка разрешённых.
 
-1. Зарегистрируйся на cloudflare.com.
-2. В этой папке:
+## Команды (из папки worker/)
 
 ```bash
-npx wrangler login
-npx wrangler deploy
-npx wrangler secret put ANTHROPIC_API_KEY
+npx wrangler deploy                          # выложить изменения кода
+npx wrangler secret put INVITE_CODE          # сменить код приглашения
+npx wrangler secret put ANTHROPIC_API_KEY    # задать ключ учителя (вводится скрытно)
+npx wrangler kv key list --binding USERS --remote   # посмотреть, кто зарегистрирован
 ```
 
-3. Wrangler покажет адрес вида `https://forerkort-proxy.<имя>.workers.dev`. Вставь его в поле «Адрес прокси» на странице «Учитель» и оставь поле ключа пустым.
+Разрешить учителя ещё кому-то (от аккаунта владельца, в консоли браузера на сайте):
 
-Опционально: `npx wrangler secret put ALLOWED_ORIGIN` с адресом сайта (например `https://<имя>.github.io`), чтобы прокси отвечал только твоему сайту.
+```js
+Cloud.setTeacherAllowed(["Имя друга"])
+```
