@@ -157,15 +157,16 @@
       if (check) check.onclick = () => {
         if (it.selected == null) return;
         it.checked = true;
+        session.showRu = false;
         window.Storage.recordAnswer(it.base, !!it.options[it.selected].correct);
         renderQuestion();
         const fb = container.querySelector(".feedback");
         if (fb) fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
       };
       const prev = container.querySelector("[data-action=prev]");
-      if (prev) prev.onclick = () => { if (session.index > 0) { session.index -= 1; renderQuestion(); } };
+      if (prev) prev.onclick = () => { if (session.index > 0) { session.index -= 1; session.showRu = false; renderQuestion(); } };
       const next = container.querySelector("[data-action=next]");
-      if (next) next.onclick = () => { if (session.index < total - 1) { session.index += 1; renderQuestion(); } };
+      if (next) next.onclick = () => { if (session.index < total - 1) { session.index += 1; session.showRu = false; renderQuestion(); } };
       const fin = container.querySelector("[data-action=finish]");
       if (fin) fin.onclick = () => {
         if (exam) {

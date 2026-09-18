@@ -4,72 +4,163 @@
 (function () {
   "use strict";
 
-  const POS = {
-    south: { x: 100, y: 158, rot: 0 },
-    north: { x: 100, y: 42, rot: 180 },
-    east:  { x: 158, y: 100, rot: 270 },
-    west:  { x: 42,  y: 100, rot: 90 }
-  };
-  const EXIT = { north: [100, 10], south: [100, 190], east: [190, 100], west: [10, 100] };
-  const ENTRY = { north: [100, 60], south: [100, 140], east: [140, 100], west: [60, 100] };
+  /* ---------- Отрисовка перекрёстка ----------
+     viewBox 200×200, центр (100,100). Дорога шириной 64, две полосы по 32.
+     Правостороннее движение: машина едет по правой полосе своего направления. */
 
-  function car(from, to, label, color, kind) {
-    const p = POS[from];
-    const path = `M ${ENTRY[from][0]} ${ENTRY[from][1]} L 100 100 L ${EXIT[to][0]} ${EXIT[to][1]}`;
-    if (kind === "bike") {
-      const bx = from === "south" ? 118 : from === "north" ? 82 : p.x;
-      const by = from === "south" ? 150 : from === "north" ? 50 : p.y;
-      return `
-        <path d="M ${bx} ${by} L ${bx} 12" stroke="${color}" stroke-width="2.5" fill="none" stroke-dasharray="4 4" opacity="0.9"/>
-        <circle cx="${bx}" cy="${by}" r="7" fill="${color}"/>
-        <text x="${bx}" y="${by + 4}" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="#fff">${label}</text>`;
+  const C = 100, HALF = 32, LANE = 16, EDGE = 168, BOUND = 132;
+  /* Полоса подъезда (координата поперёк дороги) и направление движения */
+  const APPROACH = {
+    south: { axis: "y", lane: C + LANE, from: 200, dir: -1, rot: 0 },
+    north: { axis: "y", lane: C - LANE, from: 0, dir: 1, rot: 180 },
+    east:  { axis: "x", lane: C - LANE, from: 200, dir: -1, rot: 270 },
+    west:  { axis: "x", lane: C + LANE, from: 0, dir: 1, rot: 90 }
+  };
+  /* Полоса выезда для направления движения "to" */
+  const EXITLANE = {
+    north: { axis: "y", lane: C + LANE, end: 4 },
+    south: { axis: "y", lane: C - LANE, end: 196 },
+    east:  { axis: "x", lane: C + LANE, end: 196 },
+    west:  { axis: "x", lane: C - LANE, end: 4 }
+  };
+
+  function pt(axisCoord, laneCoord, axis) {
+    return axis === "y" ? [laneCoord, axisCoord] : [axisCoord, laneCoord];
+  }
+
+  function trajectory(from, to, laneShift) {
+    const a = APPROACH[from], e = EXITLANE[to];
+    const aLane = a.lane + (laneShift || 0) * (a.axis === "y" ? (from === "south" ? 1 : -1) : (from === "east" ? -1 : 1));
+    const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
+    const boundIn = a.from === 200 ? BOUND : 200 - BOUND;
+    const p0 = pt(startCoord, aLane, a.axis);
+    const p1 = pt(boundIn, aLane, a.axis);
+    if (a.axis === e.axis) {
+      const p3 = pt(e.end, aLane, a.axis);
+      return { d: `M ${p0} L ${p3}`, endAngle: angleOf(p1, p3) };
     }
-    return `
-      <path d="${path}" stroke="${color}" stroke-width="3" fill="none" stroke-dasharray="5 4" opacity="0.85"/>
-      <g transform="translate(${p.x} ${p.y}) rotate(${p.rot})">
-        <rect x="-9" y="-15" width="18" height="30" rx="4" fill="${color}"/>
-        <rect x="-6" y="-10" width="12" height="7" rx="2" fill="#fff" opacity="0.6"/>
-        <text x="0" y="9" text-anchor="middle" font-family="Arial" font-weight="700" font-size="11" fill="#fff"
-          transform="rotate(${-p.rot})">${label}</text>
+    const eLane = e.lane + (laneShift || 0) * (e.axis === "y" ? (to === "north" ? 1 : -1) : (to === "east" ? 1 : -1));
+    const boundOut = e.end > C ? BOUND : 200 - BOUND;
+    const p2 = pt(boundOut, eLane, e.axis);
+    const p3 = pt(e.end, eLane, e.axis);
+    const ctrl = a.axis === "y" ? [aLane, eLane] : [eLane, aLane];
+    return { d: `M ${p0} L ${p1} Q ${ctrl} ${p2} L ${p3}`, endAngle: angleOf(p2, p3) };
+  }
+
+  function roundaboutPath(from, to) {
+    const R = 40;
+    const ang = { south: 90, east: 0, north: -90, west: 180 };
+    /* Правая полоса подъезда входит в кольцо чуть «раньше» по ходу, выезд чуть «позже» */
+    const inA = ang[from] - 22, outA = ang[to] + 22;
+    let a1 = inA, a2 = outA;
+    while (a2 >= a1 - 10) a2 -= 360;
+    const pts = [];
+    for (let t = a1; t >= a2; t -= 8) pts.push([C + R * Math.cos(t * Math.PI / 180), C + R * Math.sin(t * Math.PI / 180)]);
+    const a = APPROACH[from];
+    const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
+    const p0 = pt(startCoord, a.lane, a.axis);
+    const e = EXITLANE[to];
+    const p3 = pt(e.end, e.lane, e.axis);
+    const last = pts[pts.length - 1];
+    return { d: `M ${p0} L ${pts.map(p => p.map(v => v.toFixed(1)).join(" ")).join(" L ")} L ${p3}`, endAngle: angleOf(last, p3) };
+  }
+
+  function angleOf(p, q) { return Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI; }
+
+  function arrowHead(d, endAngle, color) {
+    const m = d.match(/L ([\d.]+)[ ,]([\d.]+)$/);
+    if (!m) return "";
+    const x = +m[1], y = +m[2];
+    return `<polygon points="0,-5 9,0 0,5" fill="${color}" transform="translate(${x} ${y}) rotate(${endAngle})"/>`;
+  }
+
+  function vehicle(from, to, label, color, kind, roundabout) {
+    const a = APPROACH[from];
+    const traj = roundabout ? roundaboutPath(from, to) : trajectory(from, to, kind === "bike" ? 11 : 0);
+    const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
+    const lane = a.lane + (kind === "bike" ? 11 * (a.axis === "y" ? (from === "south" ? 1 : -1) : (from === "east" ? -1 : 1)) : 0);
+    const [x, y] = pt(startCoord, lane, a.axis);
+    const path = `<path d="${traj.d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
+      ${arrowHead(traj.d, traj.endAngle, color)}`;
+    if (kind === "bike") {
+      return `${path}
+        <g transform="translate(${x} ${y}) rotate(${a.rot})">
+          <rect x="-3" y="-8" width="6" height="16" rx="3" fill="${color}"/>
+          <circle cx="0" cy="-5" r="3.2" fill="#fff"/>
+          <text x="0" y="24" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${color}" transform="rotate(${-a.rot})">${label}</text>
+        </g>`;
+    }
+    return `${path}
+      <g transform="translate(${x} ${y}) rotate(${a.rot})">
+        <rect x="-8" y="-14" width="16" height="28" rx="4" fill="${color}"/>
+        <rect x="-6" y="-11" width="12" height="6" rx="2" fill="#fff" opacity="0.75"/>
+        <rect x="-6" y="7" width="12" height="4" rx="1.5" fill="#fff" opacity="0.35"/>
+        <text x="0" y="4.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff" transform="rotate(${-a.rot})">${label}</text>
       </g>`;
   }
 
-  function lightMarker(side, color) {
-    const spots = { south: [132, 132], north: [68, 68], east: [132, 68], west: [68, 132] };
-    const [x, y] = spots[side];
-    const fill = color === "green" ? "#2aa46a" : color === "yellow" ? "#f6c945" : "#d81e1e";
-    return `<rect x="${x - 6}" y="${y - 9}" width="12" height="18" rx="3" fill="#222"/>
-      <circle cx="${x}" cy="${y}" r="4" fill="${fill}"/>`;
-  }
+  /* Знак стоит справа от подъезжающего, перед перекрёстком */
+  const SIGN_SPOT = { south: [144, 146], north: [56, 54], east: [146, 56], west: [54, 144] };
+  const LIGHT_SPOT = { south: [142, 136], north: [58, 64], east: [136, 58], west: [64, 142] };
 
   function signMarker(side, kind) {
-    const spots = { south: [132, 150], north: [68, 50], east: [150, 68], west: [50, 132] };
-    const [x, y] = spots[side];
-    if (kind === "yield") return `<polygon points="${x-7},${y-6} ${x+7},${y-6} ${x},${y+7}" fill="#fff" stroke="#d81e1e" stroke-width="2.5"/>`;
-    if (kind === "priority") return `<polygon points="${x},${y-8} ${x+8},${y} ${x},${y+8} ${x-8},${y}" fill="#f6c945" stroke="#fff" stroke-width="2"/>`;
-    if (kind === "stop") return `<polygon points="${x-4},${y-8} ${x+4},${y-8} ${x+8},${y-4} ${x+8},${y+4} ${x+4},${y+8} ${x-4},${y+8} ${x-8},${y+4} ${x-8},${y-4}" fill="#d81e1e"/>`;
+    const [x, y] = SIGN_SPOT[side];
+    const post = `<line x1="${x}" y1="${y + 8}" x2="${x}" y2="${y + 14}" stroke="#4b5563" stroke-width="2"/>`;
+    if (kind === "yield") return `${post}<polygon points="${x - 8},${y - 7} ${x + 8},${y - 7} ${x},${y + 8}" fill="#fff" stroke="#d81e1e" stroke-width="2.5" stroke-linejoin="round"/>`;
+    if (kind === "priority") return `${post}<polygon points="${x},${y - 9} ${x + 9},${y} ${x},${y + 9} ${x - 9},${y}" fill="#fff" stroke="#d81e1e" stroke-width="1.5"/><polygon points="${x},${y - 5} ${x + 5},${y} ${x},${y + 5} ${x - 5},${y}" fill="#f6c945"/>`;
+    if (kind === "stop") return `${post}<polygon points="${x - 4},${y - 9} ${x + 4},${y - 9} ${x + 9},${y - 4} ${x + 9},${y + 4} ${x + 4},${y + 9} ${x - 4},${y + 9} ${x - 9},${y + 4} ${x - 9},${y - 4}" fill="#d81e1e" stroke="#fff" stroke-width="1.5"/>`;
     return "";
   }
 
+  function lightMarker(side, color) {
+    const [x, y] = LIGHT_SPOT[side];
+    const on = color === "green" ? "#2aa46a" : color === "yellow" ? "#f6c945" : "#d81e1e";
+    return `<rect x="${x - 5}" y="${y - 12}" width="10" height="24" rx="3" fill="#1f2937"/>
+      <circle cx="${x}" cy="${y - 6}" r="3" fill="${color === "red" ? on : "#4b2020"}"/>
+      <circle cx="${x}" cy="${y}" r="3" fill="${color === "yellow" ? on : "#4b4020"}"/>
+      <circle cx="${x}" cy="${y + 6}" r="3" fill="${color === "green" ? on : "#1f3a2a"}"/>`;
+  }
+
   function scene(cfg) {
-    const cars = [car(cfg.you.from, cfg.you.to, "A", "#1d5fd6")];
     const palette = ["#e0483a", "#2aa46a", "#f0a020"];
-    (cfg.others || []).forEach((o, i) => cars.push(car(o.from, o.to, o.label || String.fromCharCode(66 + i), o.kind === "bike" ? "#2aa46a" : palette[i % 3], o.kind)));
+    const cars = [vehicle(cfg.you.from, cfg.you.to, "A", "#1d5fd6", null, cfg.roundabout)];
+    (cfg.others || []).forEach((o, i) => cars.push(vehicle(o.from, o.to, o.label || String.fromCharCode(66 + i), o.kind === "bike" ? "#2aa46a" : palette[i % 3], o.kind, cfg.roundabout)));
     const signs = Object.keys(cfg.signs || {}).map(side => signMarker(side, cfg.signs[side])).join("");
     const lights = Object.keys(cfg.lights || {}).map(side => lightMarker(side, cfg.lights[side])).join("");
+
+    const centerLines = cfg.roundabout ? "" : `
+      <g stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6">
+        <line x1="100" y1="0" x2="100" y2="66"/><line x1="100" y1="134" x2="100" y2="200"/>
+        <line x1="0" y1="100" x2="66" y2="100"/><line x1="134" y1="100" x2="200" y2="100"/>
+      </g>`;
     const roundabout = cfg.roundabout ? `
-      <circle cx="100" cy="100" r="38" fill="#6b7280"/>
-      <circle cx="100" cy="100" r="16" fill="#3f9d5a"/>` : "";
+      <circle cx="100" cy="100" r="62" fill="#5d6770"/>
+      <circle cx="100" cy="100" r="26" fill="#cfd6dc"/>
+      <circle cx="100" cy="100" r="20" fill="#7fb37a"/>
+      <g fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.7">
+        <circle cx="100" cy="100" r="30"/>
+      </g>` : "";
+    const crossings = cfg.roundabout ? "" : `
+      <g stroke="#fff" stroke-width="1.6" opacity="0.9">
+        <line x1="68" y1="134" x2="100" y2="134"/><line x1="100" y1="66" x2="132" y2="66"/>
+        <line x1="134" y1="68" x2="134" y2="100"/><line x1="66" y1="100" x2="66" y2="132"/>
+      </g>`;
+
     return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
-      <rect width="200" height="200" fill="#e9f0e6"/>
-      <rect x="75" y="0" width="50" height="200" fill="#6b7280"/>
-      <rect x="0" y="75" width="200" height="50" fill="#6b7280"/>
-      ${cfg.roundabout ? "" : `
-      <line x1="100" y1="0" x2="100" y2="75" stroke="#f6c945" stroke-width="2" stroke-dasharray="6 5"/>
-      <line x1="100" y1="125" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="6 5"/>
-      <line x1="0" y1="100" x2="75" y2="100" stroke="#f6c945" stroke-width="2" stroke-dasharray="6 5"/>
-      <line x1="125" y1="100" x2="200" y2="100" stroke="#f6c945" stroke-width="2" stroke-dasharray="6 5"/>`}
+      <rect width="200" height="200" fill="#e4ede0"/>
+      <rect x="62" y="0" width="76" height="200" fill="#cfd6dc"/>
+      <rect x="0" y="62" width="200" height="76" fill="#cfd6dc"/>
+      <rect x="68" y="0" width="64" height="200" fill="#5d6770"/>
+      <rect x="0" y="68" width="200" height="64" fill="#5d6770"/>
+      <g stroke="#fff" stroke-width="1.5" opacity="0.85">
+        <line x1="68" y1="0" x2="68" y2="66"/><line x1="132" y1="0" x2="132" y2="66"/>
+        <line x1="68" y1="134" x2="68" y2="200"/><line x1="132" y1="134" x2="132" y2="200"/>
+        <line x1="0" y1="68" x2="66" y2="68"/><line x1="0" y1="132" x2="66" y2="132"/>
+        <line x1="134" y1="68" x2="200" y2="68"/><line x1="134" y1="132" x2="200" y2="132"/>
+      </g>
+      ${centerLines}
       ${roundabout}
+      ${crossings}
       ${signs}
       ${lights}
       ${cars.join("")}
