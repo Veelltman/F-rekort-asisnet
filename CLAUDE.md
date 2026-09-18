@@ -9,7 +9,7 @@
 - Сайт: https://veelltman.github.io/F-rekort-asisnet/ (GitHub Pages, ветка `main`, обновляется через ~1 мин после push)
 - Репозиторий: https://github.com/Veelltman/F-rekort-asisnet
 - Сервер: https://forerkort-trener.velltman.workers.dev (Cloudflare Worker, папка `worker/`, KV `USERS`; wrangler залогинен на этой машине)
-- Робот-редактор: routine `trig_01Ur86axpC8vnp75S2iwextm`, каждое воскресенье 04:00 UTC (07:00 Киев) читает `CONTRIBUTING-BOT.md`, добавляет +8 ситуаций, +6 правил, +6 слов, гоняет `node scripts/check-data.js`, коммитит в main. Его коммиты стоит проверять на факты (уже была ошибка про велополосу).
+- Робот-редактор: routine `trig_01Ur86axpC8vnp75S2iwextm`, каждый день 04:00 UTC (07:00 Киев) читает `CONTRIBUTING-BOT.md`, добавляет +8 ситуаций, +6 правил, +6 слов, гоняет `node scripts/check-data.js`, коммитит в main. Его коммиты стоит проверять на факты (уже была ошибка про велополосу).
 - Код приглашения для регистрации на сайте: `prøve`. Первый зарегистрированный = владелец.
 - «Учитель» (Claude API) пользователь решил не подключать: ключ на сервере не задан, друзьям учитель закрыт по замыслу. Не предлагать снова, если не спросит.
 
