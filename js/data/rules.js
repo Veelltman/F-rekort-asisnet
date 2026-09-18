@@ -336,12 +336,12 @@
       "«Танковый люк» в лобовом стекле — штраф и опасность. Чисти всё, это 3 минуты."),
 
     /* ---------- Сигналы, полосы, разное ---------- */
-    q("045", "Er syklister pliktig til å bruke sykkelfelt når det finnes langs veien?",
-      "Обязаны ли велосипедисты использовать велополосу, если она есть на этой дороге?",
-      [["Ja, syklister skal som hovedregel bruke sykkelfelt der det er anlagt", "Да, велосипедисты по умолчанию обязаны использовать велополосу, если она проложена"], ["Nei, sykkelfelt er valgfritt å bruke", "Нет, велополоса используется по желанию"], ["Bare om sommeren", "Только летом"], ["Bare hvis det er mer enn 5 syklister", "Только если велосипедистов больше 5"]],
-      "Der det er anlagt sykkelfelt for kjøreretningen, skal syklister bruke det, med unntak for eksempel ved forbikjøring eller sving.",
-      "Там, где для нужного направления проложена велополоса, велосипедисты обязаны ею пользоваться, за исключением, например, обгона или поворота.",
-      "Как водитель, помни: сузившаяся полоса рядом с велополосой — это нормально, велосипедисты обязаны там ехать."),
+    q("045", "Må syklister bruke sykkelfeltet når det finnes langs vegen?",
+      "Обязаны ли велосипедисты ехать по велополосе, если она есть на этой дороге?",
+      [["Nei, i Norge kan syklister velge å sykle i kjørebanen", "Нет, в Норвегии велосипедист может ехать и по проезжей части"], ["Ja, sykkelfelt er påbudt der det er anlagt", "Да, велополоса обязательна там, где она проложена"], ["Bare om sommeren", "Только летом"], ["Bare hvis det er mer enn 5 syklister", "Только если велосипедистов больше 5"]],
+      "Norge har ingen bruksplikt for sykkelfelt eller sykkelveg. Syklister kan sykle i kjørebanen, og du må regne med dem der selv om det finnes sykkelfelt.",
+      "В Норвегии нет обязанности пользоваться велополосой или велодорожкой. Велосипедисты могут ехать по проезжей части, и ты должен быть к этому готов, даже если рядом есть велополоса.",
+      "Не сигналь велосипедисту на дороге «иди на велополосу»: он имеет право ехать здесь. Обгоняй с запасом не меньше 1,5 м."),
 
     q("046", "Når har du lov til å bruke horn (lydsignal) i trafikken?",
       "Когда разрешено использовать звуковой сигнал (клаксон) в дорожном движении?",
