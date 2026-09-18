@@ -73,6 +73,13 @@
     w("053", "promille", "промилле (уровень алкоголя)", "Grensen er 0,2 promille.", "Предел — 0,2 промилле.", "Условия"),
     w("054", "prikk (på førerkortet)", "штрафной балл", "Jeg fikk tre prikker for mobilbruk.", "Я получил три балла за телефон.", "Условия"),
     w("055", "gebyr / bot", "штраф", "Gebyret for å ikke bruke belte er høyt.", "Штраф за непристёгнутый ремень высокий.", "Условия"),
-    w("056", "tettbebygd strøk", "населённый пункт (застроенная зона)", "I tettbebygd strøk er grensen 50.", "В населённом пункте предел — 50.", "Условия")
+    w("056", "tettbebygd strøk", "населённый пункт (застроенная зона)", "I tettbebygd strøk er grensen 50.", "В населённом пункте предел — 50.", "Условия"),
+
+    w("057", "tunnel", "тоннель", "Slå på nærlys før du kjører inn i tunnelen.", "Включи ближний свет перед въездом в тоннель.", "Условия"),
+    w("058", "trøtthet", "усталость (за рулём)", "Trøtthet er en vanlig årsak til ulykker.", "Усталость — частая причина аварий.", "Условия"),
+    w("059", "sykkelfelt", "велополоса", "Syklister skal bruke sykkelfelt når det finnes.", "Велосипедисты должны использовать велополосу, если она есть.", "Приоритет"),
+    w("060", "holdeplass", "остановка (автобуса, трамвая)", "Bussen stanser ved holdeplassen for å slippe av passasjerer.", "Автобус останавливается на остановке, чтобы высадить пассажиров.", "Приоритет"),
+    w("061", "vogntog", "автопоезд (грузовик с прицепом)", "Et vogntog trenger mye plass for å svinge.", "Автопоезду нужно много места, чтобы повернуть.", "Машина"),
+    w("062", "tilhenger", "прицеп", "Jeg kjører med tilhenger til hytta i helgen.", "В выходные я еду с прицепом на дачу.", "Машина")
   ];
 })();

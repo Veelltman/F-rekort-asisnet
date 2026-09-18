@@ -333,6 +333,49 @@
       [["Nei, alle ruter og lys skal være fri, og snø på taket må fjernes", "Нет: все стёкла и фары должны быть чистыми, снег с крыши убран"], ["Ja, hvis frontruta er skrapt", "Да, если лобовое очищено"], ["Ja, snøen blåser av", "Да, снег сдует"], ["Ja, i under 50 km/t", "Да, если меньше 50 км/ч"]],
       "Du skal ha fri sikt gjennom alle ruter, og lys og skilt skal være synlige. Snø fra taket kan fly av og treffe bilen bak.",
       "Обзор через все стёкла должен быть свободен, фары и номера видны. Снег с крыши может слететь на машину сзади.",
-      "«Танковый люк» в лобовом стекле — штраф и опасность. Чисти всё, это 3 минуты.")
+      "«Танковый люк» в лобовом стекле — штраф и опасность. Чисти всё, это 3 минуты."),
+
+    /* ---------- Сигналы, полосы, разное ---------- */
+    q("045", "Er syklister pliktig til å bruke sykkelfelt når det finnes langs veien?",
+      "Обязаны ли велосипедисты использовать велополосу, если она есть на этой дороге?",
+      [["Ja, syklister skal som hovedregel bruke sykkelfelt der det er anlagt", "Да, велосипедисты по умолчанию обязаны использовать велополосу, если она проложена"], ["Nei, sykkelfelt er valgfritt å bruke", "Нет, велополоса используется по желанию"], ["Bare om sommeren", "Только летом"], ["Bare hvis det er mer enn 5 syklister", "Только если велосипедистов больше 5"]],
+      "Der det er anlagt sykkelfelt for kjøreretningen, skal syklister bruke det, med unntak for eksempel ved forbikjøring eller sving.",
+      "Там, где для нужного направления проложена велополоса, велосипедисты обязаны ею пользоваться, за исключением, например, обгона или поворота.",
+      "Как водитель, помни: сузившаяся полоса рядом с велополосой — это нормально, велосипедисты обязаны там ехать."),
+
+    q("046", "Når har du lov til å bruke horn (lydsignal) i trafikken?",
+      "Когда разрешено использовать звуковой сигнал (клаксон) в дорожном движении?",
+      [["Bare for å varsle om fare", "Только чтобы предупредить об опасности"], ["For å hilse på kjente", "Чтобы поприветствовать знакомых"], ["For å få trafikken foran til å skynde seg", "Чтобы поторопить машину впереди"], ["Når som helst, det er ingen begrensning", "Когда угодно, ограничений нет"]],
+      "Lyd- og lyssignal skal bare brukes når det er nødvendig for å varsle om fare, ikke for å uttrykke irritasjon eller hilse.",
+      "Звуковой и световой сигнал используют только при необходимости предупредить об опасности, а не чтобы выразить раздражение или поприветствовать.",
+      "Гудеть от нетерпения в пробке — это не «предупреждение об опасности», такое использование сигнала не по правилам."),
+
+    q("047", "Du oppdager en bilkø rett bak en sving på motorveien. Hva bør du gjøre for å varsle bilene bak deg?",
+      "Ты замечаешь затор сразу за поворотом на автомагистрали. Как предупредить машины позади себя?",
+      [["Sette på nødblink en kort stund", "На короткое время включить аварийную сигнализацию"], ["Blinke med fjernlys flere ganger", "Несколько раз мигнуть дальним светом"], ["Tute lenge", "Долго сигналить"], ["Stoppe midt i feltet uten varsel", "Остановиться посреди полосы без предупреждения"]],
+      "Nødblink brukes for å varsle andre trafikanter om fare forut, for eksempel en uventet kø. Slå det av igjen når faren er over.",
+      "Аварийная сигнализация используется, чтобы предупредить остальных участников об опасности впереди, например о неожиданном заторе. Выключи её, когда опасность миновала.",
+      "Аварийка на пару секунд при внезапном заторе на трассе может предотвратить ДТП сзади — это стандартная практика в Норвегии."),
+
+    q("048", "Du kjører forbi en buss som har stoppet ved en holdeplass for av- og påstigning. Hva skal du gjøre?",
+      "Ты проезжаешь мимо автобуса, который остановился на остановке для посадки и высадки. Что нужно сделать?",
+      [["Kjøre særlig forsiktig og senke farten, passasjerer kan krysse veien", "Ехать особенно осторожно и снизить скорость — пассажиры могут переходить дорогу"], ["Kjøre forbi i vanlig fart, bussen står stille", "Проезжать с обычной скоростью, автобус же стоит"], ["Tute for å varsle passasjerene", "Посигналить, чтобы предупредить пассажиров"], ["Stoppe helt til bussen kjører videre", "Полностью остановиться, пока автобус не поедет"]],
+      "Passasjerer som går av bussen kan komme til å krysse veien uten å se seg godt for. Reduser farten og vær klar til å stoppe.",
+      "Пассажиры, выходящие из автобуса, могут перейти дорогу, не посмотрев внимательно по сторонам. Снизь скорость и будь готов остановиться.",
+      "Особенно актуально там, где выходят дети или пожилые — они не всегда оценивают скорость машин."),
+
+    q("049", "Du ser et rundt skilt med rød kant og en hvit vannrett strek i midten ved innkjørselen til en gate. Hva betyr det?",
+      "У въезда на улицу висит круглый знак с красной каймой и белой горизонтальной полосой посередине. Что он означает?",
+      [["Innkjøring forbudt", "Въезд запрещён"], ["Forbudt å stoppe", "Остановка запрещена"], ["Enveiskjøring startet her", "Начало одностороннего движения"], ["Gjennomkjøring forbudt for tunge kjøretøy", "Проезд запрещён для тяжёлого транспорта"]],
+      "Skiltet «innkjøring forbudt» forbyr kjøretøy å kjøre inn fra den siden. Gaten kan være envegskjørt fra motsatt retning.",
+      "Знак «въезд запрещён» запрещает въезд транспорту именно с этой стороны. Улица может быть с односторонним движением, открытым с другой стороны.",
+      "Круг + красная кайма + белая полоса — запомни этот знак отдельно от треугольного «уступи дорогу»."),
+
+    q("050", "Hva er piggdekkgebyr?",
+      "Что такое piggdekkgebyr?",
+      [["En avgift for å kjøre med piggdekk i enkelte storbyer som Oslo, Bergen og Trondheim", "Сбор за использование шипованных шин в некоторых крупных городах, например Осло, Бергене и Тронхейме"], ["En bot for å ikke ha piggdekk om vinteren", "Штраф за отсутствие шипованных шин зимой"], ["En avgift alle bileiere betaler uansett dekktype", "Сбор, который платят все владельцы машин независимо от типа шин"], ["Et gebyr for å bytte dekk på verksted", "Плата за замену шин в автосервисе"]],
+      "I byer med mye piggdekkbruk, som Oslo, Bergen, Trondheim og Stavanger, må du betale piggdekkgebyr for å kjøre med piggdekk. Pengene går blant annet til bedre veivedlikehold.",
+      "В городах с активным использованием шипов — Осло, Бергене, Тронхейме и Ставангере — за езду на шипованных шинах нужно платить особый сбор. Деньги идут в том числе на содержание дорог.",
+      "Купи сезонный абонемент заранее онлайн — это обычно дешевле, чем платить при каждом въезде.")
   ];
 })();
