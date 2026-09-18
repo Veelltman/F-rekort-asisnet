@@ -165,8 +165,8 @@
     q("021", "Hva er minste tillatte mønsterdybde på dekk om vinteren?",
       "Какая минимальная глубина протектора шин зимой?",
       [["3 mm", "3 мм"], ["1,6 mm", "1,6 мм"], ["5 mm", "5 мм"], ["2 mm", "2 мм"]],
-      "I vinterperioden (1. november til første søndag etter påske, i Nord-Norge 16. oktober til 30. april) er kravet 3 mm. Ellers 1,6 mm.",
-      "В зимний период (1 ноября — первое воскресенье после Пасхи, на севере 16 октября — 30 апреля) требование 3 мм. В остальное время 1,6 мм.",
+      "I vinterperioden (1. november til og med første søndag etter 2. påskedag, i Nordland, Troms og Finnmark 16. oktober til 30. april) er kravet 3 mm. Ellers 1,6 mm.",
+      "В зимний период (с 1 ноября по первое воскресенье после второго дня Пасхи, в Nordland, Troms и Finnmark с 16 октября по 30 апреля) требование 3 мм. В остальное время 1,6 мм.",
       "Зима 3 мм, лето 1,6 мм. Новая шина имеет около 8 мм."),
 
     q("022", "Når er det lov å bruke piggdekk i Sør-Norge?",
@@ -174,7 +174,7 @@
       [["Fra 1. november til første mandag etter 2. påskedag", "С 1 ноября до первого понедельника после второго дня Пасхи"], ["Fra 1. oktober til 1. mai", "С 1 октября до 1 мая"], ["Hele året", "Круглый год"], ["Fra 1. desember til 1. mars", "С 1 декабря до 1 марта"]],
       "I Sør-Norge: 1. november til første mandag etter 2. påskedag. I Nordland, Troms og Finnmark: 16. oktober til 30. april. Ved vinterføre er piggdekk lov også utenfor perioden.",
       "На юге: с 1 ноября до первого понедельника после второго дня Пасхи. В Nordland, Troms и Finnmark: с 16 октября до 30 апреля. При зимних условиях шипы разрешены и вне периода.",
-      "В Oslo, Bergen, Trondheim и Stavanger за шипы платят piggdekkgebyr (около 35 kr/день или сезонный абонемент)."),
+      "В Oslo, Bergen и Trondheim за шипы платят piggdekkgebyr: дневной билет или сезонный абонемент. Stavanger отменил сбор в 2023 году."),
 
     q("023", "Er det påbudt med vinterdekk på personbil?",
       "Обязательны ли зимние шины на легковом автомобиле?",
@@ -364,18 +364,18 @@
       "Пассажиры, выходящие из автобуса, могут перейти дорогу, не посмотрев внимательно по сторонам. Снизь скорость и будь готов остановиться.",
       "Особенно актуально там, где выходят дети или пожилые — они не всегда оценивают скорость машин."),
 
-    q("049", "Du ser et rundt skilt med rød kant og en hvit vannrett strek i midten ved innkjørselen til en gate. Hva betyr det?",
-      "У въезда на улицу висит круглый знак с красной каймой и белой горизонтальной полосой посередине. Что он означает?",
+    q("049", "Du ser et rødt rundt skilt med en hvit vannrett strek i midten ved innkjørselen til en gate. Hva betyr det?",
+      "У въезда на улицу висит красный круглый знак с белой горизонтальной полосой посередине. Что он означает?",
       [["Innkjøring forbudt", "Въезд запрещён"], ["Forbudt å stoppe", "Остановка запрещена"], ["Enveiskjøring startet her", "Начало одностороннего движения"], ["Gjennomkjøring forbudt for tunge kjøretøy", "Проезд запрещён для тяжёлого транспорта"]],
       "Skiltet «innkjøring forbudt» forbyr kjøretøy å kjøre inn fra den siden. Gaten kan være envegskjørt fra motsatt retning.",
       "Знак «въезд запрещён» запрещает въезд транспорту именно с этой стороны. Улица может быть с односторонним движением, открытым с другой стороны.",
-      "Круг + красная кайма + белая полоса — запомни этот знак отдельно от треугольного «уступи дорогу»."),
+      "Красный круг с белой полосой — единственный полностью красный круглый знак, «кирпич». Не путай с белым кругом с красной каймой: тот запрещает движение всем."),
 
     q("050", "Hva er piggdekkgebyr?",
       "Что такое piggdekkgebyr?",
       [["En avgift for å kjøre med piggdekk i enkelte storbyer som Oslo, Bergen og Trondheim", "Сбор за использование шипованных шин в некоторых крупных городах, например Осло, Бергене и Тронхейме"], ["En bot for å ikke ha piggdekk om vinteren", "Штраф за отсутствие шипованных шин зимой"], ["En avgift alle bileiere betaler uansett dekktype", "Сбор, который платят все владельцы машин независимо от типа шин"], ["Et gebyr for å bytte dekk på verksted", "Плата за замену шин в автосервисе"]],
-      "I byer med mye piggdekkbruk, som Oslo, Bergen, Trondheim og Stavanger, må du betale piggdekkgebyr for å kjøre med piggdekk. Pengene går blant annet til bedre veivedlikehold.",
-      "В городах с активным использованием шипов — Осло, Бергене, Тронхейме и Ставангере — за езду на шипованных шинах нужно платить особый сбор. Деньги идут в том числе на содержание дорог.",
+      "I Oslo, Bergen og Trondheim må du betale piggdekkgebyr for å kjøre med piggdekk i gebyrsonen. Stavanger og Kristiansand avviklet ordningen i 2023.",
+      "В Осло, Бергене и Тронхейме за езду на шипованных шинах в зоне сбора нужно платить piggdekkgebyr. Ставангер и Кристиансанн отменили сбор в 2023 году.",
       "Купи сезонный абонемент заранее онлайн — это обычно дешевле, чем платить при каждом въезде.")
   ];
 })();
