@@ -645,7 +645,24 @@
         const vp = document.getElementById("voice-pick");
         if (vp) { vp.value = Speech.getVoicePref(); vp.onchange = () => Speech.setVoicePref(vp.value); }
       }
+      const copyBtn = (side) => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "btn-speak flash-copy"; b.title = "Скопировать слово"; b.setAttribute("aria-label", "Скопировать");
+        b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>`;
+        b.onclick = e => {
+          e.stopPropagation(); e.preventDefault();
+          const text = side === "back" ? c.translation_ru : c.word_no;
+          const done = () => { b.classList.add("copied"); b.title = "Скопировано"; setTimeout(() => { b.classList.remove("copied"); b.title = "Скопировать слово"; }, 1500); };
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => {});
+          else { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (err) { /* ignore */ } ta.remove(); }
+        };
+        return b;
+      };
+      view.querySelector(".flash-front").appendChild(copyBtn("front"));
+      view.querySelector(".flash-back").appendChild(copyBtn("back"));
       document.getElementById("flashcard").onclick = () => {
+        const sel = window.getSelection && window.getSelection();
+        if (sel && sel.toString().trim()) return;
         session.flipped = !session.flipped;
         document.getElementById("flashcard").classList.toggle("flipped", session.flipped);
         document.querySelector(".flash-actions").classList.toggle("hidden", !session.flipped);

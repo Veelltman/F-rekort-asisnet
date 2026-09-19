@@ -563,3 +563,7 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 .voice-row { display: flex; justify-content: center; margin-top: 14px; }
 .voice-row label { display: flex; align-items: center; gap: 8px; }
 .voice-select { font: inherit; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); }
+.flash-copy { position: absolute; top: 12px; right: 62px; }
+.flash-back .flash-copy { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
+.btn-speak.copied { color: var(--ok); border-color: var(--ok); }
+.flash-word, .flash-example { user-select: text; -webkit-user-select: text; }
