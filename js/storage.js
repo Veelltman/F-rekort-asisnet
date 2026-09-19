@@ -196,6 +196,7 @@
   }
 
   function getAnswerEntry(id) { return state.answers[id] || null; }
+  function getVocabEntry(id) { return state.vocab[id] || null; }
   function getLastTopic() { return state.lastTopic; }
 
   function reset() {
@@ -206,7 +207,7 @@
   window.Storage = {
     recordAnswer, recordVocab, recordDaily, getDaily, getStreak, recordExam, getExams,
     getTopicStats, getWeakQuestions, getUnseenFirst,
-    getVocabStats, getWeakVocab, getAnswerEntry, getLastTopic, reset,
+    getVocabStats, getWeakVocab, getAnswerEntry, getVocabEntry, getLastTopic, reset,
     getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile,
     exportState, useCloudProfile, useLocalProfile, isCloud
   };

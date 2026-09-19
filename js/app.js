@@ -43,6 +43,8 @@
   function renderProfileSwitch() {
     const el = document.getElementById("profile-switch");
     if (!el) return;
+    const foot = document.querySelector("footer");
+    if (foot) foot.textContent = C.isLoggedIn() ? "Учебный тренажёр. Прогресс сохраняется в аккаунте и доступен с любого устройства." : "Учебный тренажёр. Прогресс хранится только в этом браузере, войди, чтобы сохранять его на сервере.";
     if (C.enabled && !C.isLoggedIn()) {
       el.innerHTML = `<button class="profile-btn profile-login" onclick="go('login')">Войти</button>`;
       return;
@@ -535,12 +537,66 @@
   };
 
   /* ---------- Лексика (флеш-карточки) ---------- */
+  /* ---------- Лексика ---------- */
+  const VOCAB_SESSION_KEY = "forerkort-vocab-session";
+  function vocabStatus(w) {
+    const v = S.getVocabEntry(w.id);
+    if (!v) return "new";
+    return v.lastResult === "fail" || v.unknown > v.known ? "weak" : "known";
+  }
+  function saveVocabSession(session, mode) {
+    try { localStorage.setItem(VOCAB_SESSION_KEY + ":" + S.getCurrentProfile(), JSON.stringify({ mode, ids: session.cards.map(c => c.id), index: session.index, known: session.known, unknown: session.unknown.map(c => c.id) })); } catch (e) { /* ignore */ }
+  }
+  function loadVocabSession() {
+    try { return JSON.parse(localStorage.getItem(VOCAB_SESSION_KEY + ":" + S.getCurrentProfile()) || "null"); } catch (e) { return null; }
+  }
+  function clearVocabSession() { try { localStorage.removeItem(VOCAB_SESSION_KEY + ":" + S.getCurrentProfile()); } catch (e) { /* ignore */ } }
+
   routes.vocab = function (p) {
     const all = D.vocabulary;
-    const set = p.mode === "weak" ? S.getWeakVocab(all) : shuffle(all);
-    if (!set.length) { go("home"); return; }
+    const byId = Object.fromEntries(all.map(w => [w.id, w]));
+    const groups = { new: all.filter(w => vocabStatus(w) === "new"), weak: all.filter(w => vocabStatus(w) === "weak"), known: all.filter(w => vocabStatus(w) === "known") };
+    const saved = loadVocabSession();
 
-    const session = { cards: shuffle(set), index: 0, known: 0, unknown: [], flipped: false };
+    if (!p.mode) {
+      const resumable = saved && saved.index < saved.ids.length;
+      view.innerHTML = `
+        <button class="btn btn-ghost" onclick="go(home)">Главная</button>
+        <section class="topic-hero">
+          <div class="topic-icon big">${ICONS.vocab}</div>
+          <div>
+            <h1>Ordforråd</h1>
+            <p class="lead muted">Лексика: ${all.length} слов</p>
+            <div class="stat-line">
+              <span class="pill good">знаю ${groups.known.length}</span>
+              <span class="pill bad">повторить ${groups.weak.length}</span>
+              <span class="pill">новых ${groups.new.length}</span>
+            </div>
+          </div>
+        </section>
+        <div class="grid modes">
+          ${resumable ? `<div class="card mode-card"><h3>Продолжить</h3><p class="muted">Начатая колода: ${saved.index} из ${saved.ids.length} пройдено.</p><button class="btn btn-primary" onclick="go(vocab,{mode:resume})">Продолжить</button></div>` : ""}
+          <div class="card mode-card"><h3>Новые слова</h3><p class="muted">${groups.new.length ? "20 слов, которые ты ещё не видел." : "Все слова уже пройдены хотя бы раз."}</p><button class="btn ${resumable ? "" : "btn-primary"}" ${groups.new.length ? "" : "disabled"} onclick="go(vocab,{mode:new})">Начать</button></div>
+          <div class="card mode-card"><h3>Повторить незнакомые</h3><p class="muted">${groups.weak.length ? groups.weak.length + " слов, которые ты отметил «не знаю»." : "Незнакомых слов нет."}</p><button class="btn" ${groups.weak.length ? "" : "disabled"} onclick="go(vocab,{mode:weak})">Начать</button></div>
+          <div class="card mode-card"><h3>Все слова</h3><p class="muted">Вся колода в случайном порядке.</p><button class="btn" onclick="go(vocab,{mode:all})">Начать</button></div>
+        </div>`;
+      return;
+    }
+
+    let session;
+    if (p.mode === "resume" && saved) {
+      session = { cards: saved.ids.map(id => byId[id]).filter(Boolean), index: saved.index, known: saved.known || 0, unknown: (saved.unknown || []).map(id => byId[id]).filter(Boolean), flipped: false };
+      if (session.index >= session.cards.length) { clearVocabSession(); go("vocab"); return; }
+    } else {
+      let set;
+      if (p.mode === "weak") set = groups.weak;
+      else if (p.mode === "new") set = shuffle(groups.new).slice(0, 20);
+      else set = all;
+      if (!set.length) { go("vocab"); return; }
+      session = { cards: shuffle(set), index: 0, known: 0, unknown: [], flipped: false };
+    }
+    const mode = p.mode === "resume" ? (saved.mode || "all") : p.mode;
+    saveVocabSession(session, mode);
 
     function render() {
       const c = session.cards[session.index];
@@ -548,9 +604,9 @@
       view.innerHTML = `
         <div class="quiz">
           <div class="quiz-head">
-            <button class="btn btn-ghost" onclick="go('home')">Главная</button>
+            <button class="btn btn-ghost" onclick="go('vocab')">К лексике</button>
             <div class="quiz-meta">
-              <span class="quiz-title">${p.mode === "weak" ? "Повторение лексики" : "Лексика"}</span>
+              <span class="quiz-title">${mode === "weak" ? "Повторение" : mode === "new" ? "Новые слова" : "Лексика"}</span>
               <span class="quiz-counter">${session.index + 1} / ${session.cards.length}</span>
             </div>
           </div>
@@ -616,7 +672,8 @@
       if (known) session.known += 1; else session.unknown.push(c);
       session.index += 1;
       session.flipped = false;
-      if (session.index >= session.cards.length) renderResult(); else render();
+      saveVocabSession(session, mode);
+      if (session.index >= session.cards.length) { clearVocabSession(); renderResult(); } else render();
     }
 
     function renderResult() {
@@ -647,9 +704,11 @@
       const r = document.getElementById("retry");
       if (r) r.onclick = () => {
         session.cards = shuffle(session.unknown); session.index = 0; session.known = 0; session.unknown = []; session.flipped = false;
+        saveVocabSession(session, "weak");
         render();
       };
     }
+
 
     render();
   };
