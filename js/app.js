@@ -181,6 +181,9 @@
           </form>
         </div>`;
       view.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
+      const pinInput = document.getElementById("auth-pin");
+      pinInput.oninput = () => { pinInput.value = pinInput.value.replace(/D/g, "").slice(0, 6); };
+      pinInput.onkeydown = e => { if (e.key.length === 1 && !/d/.test(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); };
       const form = document.getElementById("auth-form");
       form.onsubmit = async e => {
         e.preventDefault();
