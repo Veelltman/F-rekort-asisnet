@@ -49,7 +49,9 @@
         prompt_no: "Hva betyr dette skiltet?",
         prompt_ru: "Что означает этот знак?",
         image: img(entry),
-        options: [entry, ...d].map((x, i) => ({ text_no: x.no, text_ru: x.ru, correct: i === 0 })),
+        options: [entry, ...d].map((x, i) => ({ text_no: x.no, text_ru: x.ru, correct: i === 0,
+          why_no: i === 0 ? null : `«${x.no}» er et annet skilt (${CATS[x.cat].no.toLowerCase()}): ${x.expl_no}`,
+          why_ru: i === 0 ? null : `«${x.ru}» — это другой знак (${CATS[x.cat].ru.toLowerCase()}): ${x.expl_ru}` })),
         explanation_no: entry.expl_no,
         explanation_ru: entry.expl_ru,
         tip_ru: entry.tip_ru
@@ -73,7 +75,9 @@
         prompt_ru: `Какой знак означает «${entry.ru}»?`,
         image: null,
         imageOptions: true,
-        options: [entry, ...d].map((x, i) => ({ text_no: x.no, text_ru: x.ru, image: img(x), correct: i === 0 })),
+        options: [entry, ...d].map((x, i) => ({ text_no: x.no, text_ru: x.ru, image: img(x), correct: i === 0,
+          why_no: i === 0 ? null : `Skiltet du valgte betyr «${x.no}»: ${x.expl_no}`,
+          why_ru: i === 0 ? null : `Выбранный знак означает «${x.ru}»: ${x.expl_ru}` })),
         explanation_no: entry.expl_no,
         explanation_ru: entry.expl_ru,
         tip_ru: entry.tip_ru
@@ -97,7 +101,9 @@
         prompt_no: "Hva slags skilt er dette?",
         prompt_ru: "К какому типу относится этот знак?",
         image: img(entry),
-        options: opts.map((k, i) => ({ text_no: CATS[k].no, text_ru: CATS[k].ru, correct: i === 0 })),
+        options: opts.map((k, i) => ({ text_no: CATS[k].no, text_ru: CATS[k].ru, correct: i === 0,
+          why_no: i === 0 ? null : `${CATS[k].no} ser annerledes ut. ${CATS[k].tip_no || ""}`.trim(),
+          why_ru: i === 0 ? null : `${CATS[k].ru} выглядит иначе. ${CATS[k].tip}` })),
         explanation_no: `${entry.no} er et ${CATS[entry.cat].no.toLowerCase()}. ${entry.expl_no}`,
         explanation_ru: `«${entry.ru}» — ${CATS[entry.cat].ru.toLowerCase()}. ${entry.expl_ru}`,
         tip_ru: CATS[entry.cat].tip
@@ -118,7 +124,7 @@
     return {
       id: "signs-" + id, topic: "signs", kind: "marking",
       prompt_no, prompt_ru, image: null,
-      options: opts.map((o, i) => ({ text_no: o[0], text_ru: o[1], correct: i === 0 })),
+      options: opts.map((o, i) => ({ text_no: o[0], text_ru: o[1], correct: i === 0, why_no: o[2] || null, why_ru: o[3] || null })),
       explanation_no, explanation_ru, tip_ru
     };
   }

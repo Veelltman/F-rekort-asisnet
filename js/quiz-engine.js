@@ -217,13 +217,39 @@
 
     function feedbackHtml(it) {
       const q = it.inst;
-      const ok = !!it.options[it.selected].correct;
-      return `
-        <div class="feedback ${ok ? "feedback-ok" : "feedback-fail"}">
-          <div class="feedback-title">${ok ? "Riktig! — Верно!" : "Feil — Неверно"}</div>
+      const chosen = it.options[it.selected];
+      const right = it.options.find(o => o.correct);
+      const ok = !!chosen.correct;
+      const ru = session.showRu ? "" : "hidden";
+      if (ok) {
+        return `
+        <div class="feedback feedback-ok">
+          <div class="feedback-title">Riktig! — Верно!</div>
           <p class="lang-no">${esc(q.explanation_no)}</p>
-          <p class="lang-ru ${session.showRu ? "" : "hidden"}">${esc(q.explanation_ru)}</p>
-          ${!ok && q.tip_ru ? `<div class="tip lang-ru ${session.showRu ? "" : "hidden"}"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
+          <p class="lang-ru ${ru}">${esc(q.explanation_ru)}</p>
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+        </div>`;
+      }
+      const whyNo = chosen.why_no || "Dette alternativet stemmer ikke med trafikkreglene.";
+      const whyRu = chosen.why_ru || "Этот вариант не соответствует правилам.";
+      return `
+        <div class="feedback feedback-fail">
+          <div class="feedback-title">Feil — Неверно</div>
+          <div class="fb-block fb-wrong">
+            <div class="fb-label">Du svarte <span class="lang-ru ${ru}">· ты ответил</span></div>
+            <p class="fb-answer lang-no">${esc(chosen.text_no)}</p>
+            <p class="fb-answer lang-ru ${ru}">${esc(chosen.text_ru)}</p>
+            <p class="lang-no">${esc(whyNo)}</p>
+            <p class="lang-ru ${ru}">${esc(whyRu)}</p>
+          </div>
+          <div class="fb-block fb-right">
+            <div class="fb-label">Riktig svar <span class="lang-ru ${ru}">· правильный ответ</span></div>
+            <p class="fb-answer lang-no">${esc(right.text_no)}</p>
+            <p class="fb-answer lang-ru ${ru}">${esc(right.text_ru)}</p>
+            <p class="lang-no">${esc(q.explanation_no)}</p>
+            <p class="lang-ru ${ru}">${esc(q.explanation_ru)}</p>
+          </div>
+          ${q.tip_ru ? `<div class="tip lang-ru ${ru}"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
           <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
         </div>`;
     }
@@ -295,6 +321,7 @@
                 ${r.ok
                   ? `<p class="mistake-line right">Твой ответ: ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`
                   : `<p class="mistake-line wrong">Твой ответ: ${r.chosen ? `${esc(r.chosen.text_no)} (${esc(r.chosen.text_ru)})` : "без ответа"}</p>
+                     ${r.chosen && r.chosen.why_ru ? `<p class="mistake-why">${esc(r.chosen.why_ru)}</p>` : ""}
                      <p class="mistake-line right">Правильно: ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`}
                 <p class="lang-ru-always">${esc(r.it.inst.explanation_ru)}</p>
                 ${!r.ok && r.it.inst.tip_ru ? `<div class="tip"><strong>Как исправить:</strong> ${esc(r.it.inst.tip_ru)}</div>` : ""}

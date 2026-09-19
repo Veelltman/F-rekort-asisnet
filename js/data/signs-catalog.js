@@ -6,12 +6,12 @@
   "use strict";
 
   const CATS = {
-    fare: { no: "Fareskilt", ru: "Предупреждающий знак", tip: "Треугольник с красной каймой предупреждает, но ничего не запрещает. Он просит снизить скорость и быть готовым." },
-    vikeplikt: { no: "Vikeplikt- og forkjørsskilt", ru: "Знак приоритета", tip: "Знаки приоритета решают, кто едет первым. Они важнее правила правой руки." },
-    forbud: { no: "Forbudsskilt", ru: "Запрещающий знак", tip: "Круг с красной каймой = запрет. Действует от знака до следующего перекрёстка, если не указано иначе." },
-    pabud: { no: "Påbudsskilt", ru: "Предписывающий знак", tip: "Синий круг = обязанность. Не «можно», а «нужно именно так»." },
-    opplysning: { no: "Opplysningsskilt", ru: "Информационный знак", tip: "Прямоугольник или квадрат — сообщает об условиях движения. Часто вводит особые правила (motorveg, gågate, gatetun)." },
-    underskilt: { no: "Underskilt", ru: "Дополнительная табличка", tip: "Табличка снизу уточняет основной знак: для кого, когда, на каком расстоянии. Без основного знака она ничего не значит." }
+    fare: { no: "Fareskilt", ru: "Предупреждающий знак", tip_no: "Fareskilt er trekantede med rød kant og varsler om en fare lenger framme.", tip: "Треугольник с красной каймой предупреждает, но ничего не запрещает. Он просит снизить скорость и быть готовым." },
+    vikeplikt: { no: "Vikeplikt- og forkjørsskilt", ru: "Знак приоритета", tip_no: "Vikepliktskilt bestemmer hvem som skal vike: trekant med spissen ned, stoppskilt og det gule rombeskiltet.", tip: "Знаки приоритета решают, кто едет первым. Они важнее правила правой руки." },
+    forbud: { no: "Forbudsskilt", ru: "Запрещающий знак", tip_no: "Forbudsskilt er runde med rød kant og forbyr noe.", tip: "Круг с красной каймой = запрет. Действует от знака до следующего перекрёстка, если не указано иначе." },
+    pabud: { no: "Påbudsskilt", ru: "Предписывающий знак", tip_no: "Påbudsskilt er runde og blå og sier hva du må gjøre.", tip: "Синий круг = обязанность. Не «можно», а «нужно именно так»." },
+    opplysning: { no: "Opplysningsskilt", ru: "Информационный знак", tip_no: "Opplysningsskilt er firkantede, som regel blå, og gir informasjon om vegen.", tip: "Прямоугольник или квадрат — сообщает об условиях движения. Часто вводит особые правила (motorveg, gågate, gatetun)." },
+    underskilt: { no: "Underskilt", ru: "Дополнительная табличка", tip_no: "Underskilt er små rektangulære tavler under hovedskiltet og gjelder aldri alene.", tip: "Табличка снизу уточняет основной знак: для кого, когда, на каком расстоянии. Без основного знака она ничего не значит." }
   };
 
   function e(file, cat, no, ru, expl_no, expl_ru, tip_ru, group) {

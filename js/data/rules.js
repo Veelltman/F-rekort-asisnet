@@ -9,7 +9,7 @@
     return {
       id: "rules-" + id, topic: "rules", type: "single-choice",
       prompt_no, prompt_ru, image: null,
-      options: opts.map((o, i) => ({ text_no: o[0], text_ru: o[1], correct: i === 0 })),
+      options: opts.map((o, i) => ({ text_no: o[0], text_ru: o[1], correct: i === 0, why_no: o[2] || null, why_ru: o[3] || null })),
       explanation_no, explanation_ru, tip_ru
     };
   }
