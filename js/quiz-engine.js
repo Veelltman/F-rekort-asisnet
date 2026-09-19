@@ -133,7 +133,7 @@
 
       if (window.Speech && Speech.available()) {
         const qt = container.querySelector(".question-text");
-        qt.appendChild(Speech.button(() => q.prompt_no + " " + it.options.map((o, i) => "ABCD"[i] + ". " + o.text_no).join(". "), "q-speak"));
+        qt.appendChild(Speech.button(() => q.prompt_no, "q-speak"));
       }
       container.querySelector("[data-action=exit]").onclick = () => {
         if (cfg.confirmExit && !confirm(cfg.confirmExit)) return;

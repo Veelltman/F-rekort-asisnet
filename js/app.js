@@ -580,8 +580,8 @@
 
       if (window.Speech && Speech.available()) {
         const front = view.querySelector(".flash-front"), back = view.querySelector(".flash-back");
-        front.appendChild(Speech.button(() => c.word_no + ". " + c.example_no, "flash-speak"));
-        back.appendChild(Speech.button(() => c.word_no + ". " + c.example_no, "flash-speak"));
+        front.appendChild(Speech.button(() => c.word_no, "flash-speak"));
+        back.appendChild(Speech.button(() => c.word_no, "flash-speak"));
       }
       document.getElementById("flashcard").onclick = () => {
         session.flipped = !session.flipped;
