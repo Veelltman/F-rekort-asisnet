@@ -675,17 +675,17 @@
       "Резкое торможение или руль в сторону во время аквапланирования — верный способ уйти в занос. Главное — не паниковать и ехать прямо."),
 
     q("039", null,
-      "Du kjører inn i et anleggsområde med oransje skilt som viser en lavere fartsgrense enn den faste skiltingen. Hva gjelder?",
-      "Ты въезжаешь в зону дорожных работ с оранжевыми знаками, показывающими ограничение скорости ниже обычного. Что действует?",
+      "Du kjører inn i et anleggsområde med gule (midlertidige) skilt som viser en lavere fartsgrense enn den faste skiltingen. Hva gjelder?",
+      "Ты въезжаешь в зону дорожных работ с жёлтыми (временными) знаками, показывающими ограничение скорости ниже обычного. Что действует?",
       [
-        ["Den midlertidige (oransje) fartsgrensen gjelder foran den faste skiltingen", "Действует временное (оранжевое) ограничение — оно важнее постоянных знаков"],
-        ["Den faste fartsgrensen gjelder alltid, oransje skilt er bare informasjon", "Всегда действует постоянное ограничение, оранжевые знаки — просто информация"],
+        ["Den midlertidige (gule) fartsgrensen gjelder foran den faste skiltingen", "Действует временное (жёлтое) ограничение — оно важнее постоянных знаков"],
+        ["Den faste fartsgrensen gjelder alltid, gule skilt er bare informasjon", "Всегда действует постоянное ограничение, жёлтые знаки — просто информация"],
         ["Du velger selv hvilken grense du følger", "Можно самому выбрать, какое ограничение соблюдать"],
-        ["Oransje skilt gjelder bare for tunge kjøretøy", "Оранжевые знаки касаются только грузового транспорта"]
+        ["Gule skilt gjelder bare for tunge kjøretøy", "Жёлтые знаки касаются только грузового транспорта"]
       ],
-      "Oransje skilt i anleggsområder er midlertidig skilting og går foran den faste (hvite) skiltingen. Vær ekstra oppmerksom på arbeidere og endret veibane.",
-      "Оранжевые знаки в зоне дорожных работ — временные, и они важнее постоянных (белых) знаков. Будь особенно внимателен к рабочим и изменённой траектории дороги.",
-      "Оранжевый цвет знака в Норвегии означает «временно», и он всегда приоритетнее обычного белого знака на этом участке."),
+      "Gule skilt i anleggsområder er midlertidig skilting og går foran den faste (hvite) skiltingen. Vær ekstra oppmerksom på arbeidere og endret veibane.",
+      "Жёлтые знаки в зоне дорожных работ — временные, и они важнее постоянных (белых) знаков. Будь особенно внимателен к рабочим и изменённой траектории дороги.",
+      "Жёлтый фон знака в Норвегии означает «временно», и такой знак всегда приоритетнее обычного белого на этом участке."),
 
     q("040", null,
       "Du oppdager i speilet at barnet i baksetet har løsnet beltet mens du kjører på motorveien. Hva gjør du?",
