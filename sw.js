@@ -21,8 +21,9 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.origin !== self.location.origin) return;
+  const fresh = /\.(html|js|css|webmanifest)$/.test(url.pathname) || url.pathname.endsWith("/");
   e.respondWith(
-    fetch(e.request).then(res => {
+    fetch(fresh ? new Request(e.request, { cache: "no-cache" }) : e.request).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); }
       return res;
     }).catch(() => caches.match(e.request).then(hit => hit || (e.request.mode === "navigate" ? caches.match("./index.html") : undefined)))
