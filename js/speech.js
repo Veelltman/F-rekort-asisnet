@@ -41,8 +41,25 @@
     return true;
   }
 
+  /* Готовые mp3 (нейросетевой голос) с запасным вариантом через синтез */
+  const VOICE_KEY = "forerkort-voice";
+  function getVoicePref() { try { return localStorage.getItem(VOICE_KEY) || "pernille"; } catch (e) { return "pernille"; } }
+  function setVoicePref(v) { try { localStorage.setItem(VOICE_KEY, v); } catch (e) { /* ignore */ } }
+  let current = null;
+  function playFile(url, fallbackText) {
+    if (synth) synth.cancel();
+    if (current) { current.pause(); current = null; }
+    return new Promise(resolve => {
+      const a = new Audio(url);
+      current = a;
+      a.onended = () => resolve(true);
+      a.onerror = () => { current = null; speak(fallbackText); resolve(false); };
+      a.play().catch(() => { current = null; speak(fallbackText); resolve(false); });
+    });
+  }
+
   /* Кнопка-динамик. text может быть функцией, чтобы читать актуальный текст. */
-  function button(text, cls) {
+  function button(text, cls, fileUrl) {
     const b = document.createElement("button");
     b.type = "button";
     b.className = "btn-speak " + (cls || "");
@@ -53,6 +70,8 @@
       e.stopPropagation();
       e.preventDefault();
       const t = typeof text === "function" ? text() : text;
+      const f = typeof fileUrl === "function" ? fileUrl() : fileUrl;
+      if (f) { b.classList.add("speaking"); playFile(f, t).then(() => b.classList.remove("speaking")); return; }
       if (!hasNorwegian()) {
         b.classList.add("no-voice");
         b.title = "В системе нет норвежского голоса. iPhone: Настройки → Универсальный доступ → Устный контент → Голоса → Norsk. Android: настройки Google TTS → установить норвежский.";
@@ -66,5 +85,5 @@
     return b;
   }
 
-  window.Speech = { available, hasNorwegian, speak, button };
+  window.Speech = { available, hasNorwegian, speak, button, playFile, getVoicePref, setVoicePref };
 })();

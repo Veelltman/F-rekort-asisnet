@@ -70,3 +70,13 @@ w("057", "ord på norsk", "перевод", "Eksempelsetning på norsk.", "Пе�
 - Piggdekkgebyr только в Oslo, Bergen, Trondheim (Stavanger и Kristiansand отменили в 2023).
 - Парковка на двусторонней дороге только справа по ходу; на односторонней — с обеих сторон.
 - Знак «innkjøring forbudt» — красный круг с белой полосой (не белый с красной каймой).
+
+## Озвучка новых слов
+
+После добавления слов запусти (создаёт только недостающие mp3 в `audio/vocab/`):
+
+```bash
+npm install --no-save msedge-tts && node scripts/make-audio.js
+```
+
+Добавь в коммит папку `audio/vocab/`. Если озвучка не сработала (нет сети к Microsoft), не страшно: сайт подставит системный голос.

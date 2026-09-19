@@ -575,13 +575,24 @@
             <button class="btn btn-danger" id="btn-unknown">← Не знаю</button>
             <button class="btn btn-success" id="btn-known">Знаю →</button>
           </div>
+          <div class="voice-row">
+            <label class="muted small">Голос
+              <select id="voice-pick" class="voice-select">
+                <option value="pernille">Pernille (женский)</option>
+                <option value="finn">Finn (мужской)</option>
+              </select>
+            </label>
+          </div>
           <p class="key-hint muted">Клавиатура: пробел — перевернуть, ← не знаю, → знаю, S — озвучить</p>
         </div>`;
 
       if (window.Speech && Speech.available()) {
         const front = view.querySelector(".flash-front"), back = view.querySelector(".flash-back");
-        front.appendChild(Speech.button(() => c.word_no, "flash-speak"));
-        back.appendChild(Speech.button(() => c.word_no, "flash-speak"));
+        const file = () => `audio/vocab/${c.id}-${Speech.getVoicePref()}.mp3`;
+        front.appendChild(Speech.button(() => c.word_no, "flash-speak", file));
+        back.appendChild(Speech.button(() => c.word_no, "flash-speak", file));
+        const vp = document.getElementById("voice-pick");
+        if (vp) { vp.value = Speech.getVoicePref(); vp.onchange = () => Speech.setVoicePref(vp.value); }
       }
       document.getElementById("flashcard").onclick = () => {
         session.flipped = !session.flipped;

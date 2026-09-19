@@ -560,3 +560,6 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 .flash-back .flash-speak { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
 .question-text { position: relative; padding-right: 48px; }
 .q-speak { position: absolute; top: -2px; right: 0; }
+.voice-row { display: flex; justify-content: center; margin-top: 14px; }
+.voice-row label { display: flex; align-items: center; gap: 8px; }
+.voice-select { font: inherit; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); }
