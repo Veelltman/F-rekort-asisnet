@@ -376,6 +376,48 @@
       [["En avgift for å kjøre med piggdekk i enkelte storbyer som Oslo, Bergen og Trondheim", "Сбор за использование шипованных шин в некоторых крупных городах, например Осло, Бергене и Тронхейме"], ["En bot for å ikke ha piggdekk om vinteren", "Штраф за отсутствие шипованных шин зимой"], ["En avgift alle bileiere betaler uansett dekktype", "Сбор, который платят все владельцы машин независимо от типа шин"], ["Et gebyr for å bytte dekk på verksted", "Плата за замену шин в автосервисе"]],
       "I Oslo, Bergen og Trondheim må du betale piggdekkgebyr for å kjøre med piggdekk i gebyrsonen. Stavanger og Kristiansand avviklet ordningen i 2023.",
       "В Осло, Бергене и Тронхейме за езду на шипованных шинах в зоне сбора нужно платить piggdekkgebyr. Ставангер и Кристиансанн отменили сбор в 2023 году.",
-      "Купи сезонный абонемент заранее онлайн — это обычно дешевле, чем платить при каждом въезде.")
+      "Купи сезонный абонемент заранее онлайн — это обычно дешевле, чем платить при каждом въезде."),
+
+    q("051", "Hvor stor avstand bør du minst holde til en syklist når du kjører forbi?",
+      "Какое минимальное расстояние нужно соблюдать при обгоне велосипедиста?",
+      [["Minst 1,5 meter", "Не менее 1,5 метра"], ["Minst 0,5 meter", "Не менее 0,5 метра"], ["Det finnes ingen anbefalt avstand", "Рекомендованной дистанции не существует"], ["Minst 3 meter", "Не менее 3 метров"]],
+      "Ved forbikjøring av syklende skal du holde en klar avstand, minst 1,5 meter, slik at syklisten ikke kommer i fare hvis vedkommende vingler eller vinden tar tak.",
+      "При обгоне велосипедиста нужно держать чёткую дистанцию, не менее 1,5 метра, чтобы велосипедист не оказался в опасности, если его качнёт или подхватит ветер.",
+      "Даже если дорога кажется широкой, не «срезай» рядом с велосипедистом — порыв ветра от твоей машины может его качнуть."),
+
+    q("052", "Kan du krysse en heltrukket midtlinje for å kjøre forbi en syklist eller moped?",
+      "Можно ли пересечь сплошную осевую линию, чтобы обогнать велосипедиста или мопед?",
+      [["Ja, hvis sikten er god og det ikke er farlig eller til hinder for andre", "Да, если хороший обзор и это не опасно и не мешает другим"], ["Nei, heltrukket linje kan aldri krysses", "Нет, сплошную линию нельзя пересекать никогда"], ["Bare på motorveg", "Только на автомагистрали"], ["Bare hvis syklisten gir tegn om at det er greit", "Только если велосипедист сам разрешит жестом"]],
+      "Trafikkreglene gir et unntak: du kan krysse en heltrukket vikelinje for å kjøre forbi syklende eller andre kjøretøy som ikke kan holde normal fart, dersom sikten er god og det er trygt.",
+      "Правила дорожного движения делают исключение: сплошную линию можно пересечь, чтобы обогнать велосипедиста или другой медленный транспорт, если хороший обзор и это безопасно.",
+      "Это исключение касается именно медленных участников (велосипед, мопед) — обгонять обычную машину через сплошную линию по-прежнему нельзя."),
+
+    q("053", "Har en vanlig personbil med bare føreren om bord normalt lov til å kjøre i kollektivfelt?",
+      "Имеет ли обычный легковой автомобиль, в котором едет только водитель, право ехать по полосе для общественного транспорта?",
+      [["Nei, med mindre eget skilt sier noe annet", "Нет, если только отдельный знак не разрешает иное"], ["Ja, alltid, kollektivfelt er åpent for alle biler", "Да, всегда — полоса для общественного транспорта открыта для всех машин"], ["Ja, men bare etter klokken 18", "Да, но только после 18:00"], ["Ja, hvis det ikke er buss i sikte", "Да, если поблизости не видно автобуса"]],
+      "Kollektivfelt er forbeholdt buss, taxi i visse tilfeller, motorsykkel og kjøretøy med flere passasjerer der det er skiltet. Vanlige personbiler med bare fører skal holde seg i det ordinære feltet, hvis ikke skiltingen sier noe annet.",
+      "Полоса для общественного транспорта предназначена для автобусов, в некоторых случаях такси, мотоциклов и машин с несколькими пассажирами там, где это указано знаком. Обычные легковушки с одним водителем должны оставаться в обычной полосе, если знак не говорит иначе.",
+      "Проверяй знак под словом «Kollektivfelt» — там часто написано исключение, например для мотоциклов или машин с 2+ пассажирами."),
+
+    q("054", "Du kjører ut av en rundkjøring, og fotgjengere står klare til å krysse gangfeltet ved utkjørselen. Hvem har vikeplikt?",
+      "Ты выезжаешь с круга, и пешеходы готовы перейти дорогу по переходу на выезде. У кого обязанность уступить?",
+      [["Du har vikeplikt for fotgjengerne i gangfeltet", "Ты обязан уступить пешеходам на переходе"], ["Fotgjengerne må vente til alle biler har kjørt ut", "Пешеходы должны ждать, пока все машины не выедут"], ["Den som kommer først har forrang", "Преимущество у того, кто подошёл первым"], ["Vikeplikten avhenger av hvor fort du kjører", "Обязанность уступить зависит от того, с какой скоростью ты едешь"]],
+      "Gangfelt ved utkjørsel fra rundkjøring fungerer som alle andre gangfelt: bilister har vikeplikt for fotgjengere som er i ferd med å krysse eller står klare til det.",
+      "Переход на выезде с круга работает так же, как любой другой переход: водители обязаны уступать пешеходам, которые переходят или готовы перейти дорогу.",
+      "Не расслабляйся сразу после круга — переход на выезде такой же «настоящий», как и любой другой."),
+
+    q("055", "Bilen har ABS-bremser. Hva bør du gjøre med bremsepedalen ved en nødbrems?",
+      "В машине есть ABS. Что нужно делать с педалью тормоза при экстренном торможении?",
+      [["Trykke hardt ned og holde bremsen inne, ABS regulerer automatisk", "Резко и сильно нажать и удерживать педаль, ABS сработает автоматически"], ["Pumpe bremsepedalen raskt selv for å etterligne ABS", "Самому быстро «качать» педаль тормоза, имитируя работу ABS"], ["Trykke forsiktig, ellers blir bremsingen for kraftig", "Нажимать осторожно, иначе торможение будет слишком сильным"], ["Slippe bremsen med jevne mellomrom", "Периодически отпускать педаль"]],
+      "Med ABS skal du trykke bremsepedalen hardt i bunn og holde den nede. Systemet pulserer bremsetrykket automatisk slik at hjulene ikke låser seg, og du beholder styreevnen.",
+      "С ABS нужно резко нажать педаль тормоза до упора и удерживать её. Система сама пульсирует тормозное давление, чтобы колёса не блокировались, и ты сохраняешь управляемость.",
+      "Не пытайся «помогать» ABS, качая педаль сама — система делает это быстрее и лучше тебя."),
+
+    q("056", "Hva skjer med lufttrykket i dekkene når temperaturen synker mye om vinteren, og hva bør du gjøre?",
+      "Что происходит с давлением воздуха в шинах при сильном похолодании зимой, и что нужно делать?",
+      [["Trykket synker, så du bør sjekke og fylle på lufttrykket jevnlig", "Давление падает, поэтому нужно регулярно проверять и подкачивать шины"], ["Trykket øker, så du bør slippe ut luft", "Давление растёт, поэтому нужно спускать воздух"], ["Trykket er upåvirket av temperatur", "Давление не зависит от температуры"], ["Du trenger bare å sjekke trykket om sommeren", "Проверять давление нужно только летом"]],
+      "Lufttrykket i dekk synker når temperaturen faller. For lavt dekktrykk gir dårligere veigrep og økt slitasje, så sjekk trykket regelmessig gjennom vinteren.",
+      "Давление воздуха в шинах падает при понижении температуры. Слишком низкое давление ухудшает сцепление с дорогой и увеличивает износ, поэтому зимой стоит регулярно проверять давление.",
+      "Хорошая привычка — проверять давление в шинах при каждой заправке зимой, особенно после резкого похолодания.")
   ];
 })();

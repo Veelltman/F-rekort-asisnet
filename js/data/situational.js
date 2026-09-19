@@ -620,6 +620,110 @@
       ],
       "Lange kjøretøy må ofte svinge ut til motsatt side for å få plass til høyresvingen. Å kjøre forbi på høyre side da er svært farlig — bli liggende bak og vent.",
       "Длинным транспортным средствам часто нужно сместиться в противоположную сторону, чтобы вписаться в поворот направо. Обгонять справа в этот момент очень опасно — держись позади и жди.",
-      "Это классическая ловушка «мёртвой зоны» у грузовиков — никогда не ныряй в пространство, которое освобождает длинномер перед поворотом.")
+      "Это классическая ловушка «мёртвой зоны» у грузовиков — никогда не ныряй в пространство, которое освобождает длинномер перед поворотом."),
+
+    q("035", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east", kind: "bike" }], roundabout: true }),
+      "Du (A) skal kjøre inn i rundkjøringen. En syklist (B) er allerede inne i rundkjøringen. Hva gjør du?",
+      "Ты (A) собираешься въехать на круг. Велосипедист (B) уже находится на кругу. Что делаешь?",
+      [
+        ["Venter og slipper syklisten fram — samme regel som for biler", "Жду и пропускаю велосипедиста — то же правило, что и для машин"],
+        ["Kjører inn med en gang, sykler har ikke forrang i rundkjøring", "Въезжаю сразу — у велосипедистов нет преимущества на кругу"],
+        ["Tuter for å varsle syklisten om at jeg kommer", "Сигналю, чтобы предупредить велосипедиста о своём въезде"],
+        ["Kjører inn fordi jeg er større og mer synlig", "Въезжаю, потому что я крупнее и заметнее"]
+      ],
+      "I rundkjøring gjelder samme vikeplikt for syklende som for biler: trafikk som allerede er inne i rundkjøringen har forrang, uansett kjøretøytype.",
+      "На круге действует та же обязанность уступать для велосипедистов, что и для машин: тот, кто уже на кругу, имеет преимущество — независимо от типа транспорта.",
+      "Не думай, что раз это велосипедист, можно «проскочить». Правило приоритета на круге не зависит от размера транспорта."),
+
+    q("036", null,
+      "En trikk har stoppet ved en holdeplass midt i gaten, uten trafikkøy mellom skinnene og fortauet. Dørene åpnes. Hva gjør du?",
+      "Трамвай остановился на остановке посреди улицы, без островка безопасности между рельсами и тротуаром. Двери открылись. Что делаешь?",
+      [
+        ["Stopper bak trikken og venter til passasjerene har krysset over til fortauet", "Останавливаюсь позади трамвая и жду, пока пассажиры перейдут на тротуар"],
+        ["Kjører forbi trikken i vanlig fart, jeg har ikke plikt til å stoppe", "Проезжаю мимо трамвая с обычной скоростью — останавливаться не обязан"],
+        ["Kjører forbi sakte samtidig som passasjerene krysser", "Медленно проезжаю мимо, пока пассажиры переходят"],
+        ["Tuter for å få passasjerene til å skynde seg", "Сигналю, чтобы пассажиры поторопились"]
+      ],
+      "Når en trikk eller buss stopper uten trafikkøy og slipper av passasjerer, skal du stoppe og vente til de har kommet trygt over til fortauet.",
+      "Когда трамвай или автобус останавливается без островка безопасности и высаживает пассажиров, нужно остановиться и подождать, пока они безопасно дойдут до тротуара.",
+      "Пассажиры трамвая выходят прямо на проезжую часть — это одна из самых опасных ситуаций в городе, всегда останавливайся полностью."),
+
+    q("037", null,
+      "Du skal parkere i en bakke uten fortauskant (grøft på siden), og bilen peker nedover. Hva bør du gjøre med forhjulene?",
+      "Нужно припарковаться на склоне без бордюра (сбоку канава), машина направлена вниз по склону. Что сделать с передними колёсами?",
+      [
+        ["Vri hjulene mot grøften, slik at bilen ruller av veien og ikke ut i trafikken hvis den beveger seg", "Повернуть колёса в сторону канавы, чтобы машина при откате съехала с дороги, а не выехала на проезжую часть"],
+        ["Vri hjulene rett fram, det spiller ingen rolle når håndbrekket er på", "Оставить колёса прямо — не важно, ведь стояночный тормоз включён"],
+        ["Vri hjulene mot kjørebanen, slik at bilen står tettest mulig på veien", "Повернуть колёса в сторону дороги, чтобы машина стояла как можно ближе к проезжей части"],
+        ["Bruke gir i stedet for håndbrekk er alltid nok alene", "Достаточно только включить передачу, без ручника"]
+      ],
+      "Ved parkering i bakke uten fortauskant vrir du hjulene slik at bilen triller vekk fra vegen (mot grøften) hvis bremsene skulle svikte. I tillegg bruker du håndbrekk og legger i gir eller parkeringsposisjon.",
+      "При парковке на склоне без бордюра поворачивай колёса так, чтобы при откате машина ушла от дороги (в сторону канавы). Дополнительно используй ручник и включи передачу или паркинг.",
+      "Правило простое: колёса должны «уводить» машину от проезжей части, а не на неё, если тормоза подведут."),
+
+    q("038", null,
+      "Du kjører i kraftig regn og merker plutselig at rattet føles lett og bilen ikke reagerer på styringen. Hva er dette, og hva gjør du?",
+      "Ты едешь в сильный дождь и вдруг чувствуешь, что руль стал «лёгким», а машина не реагирует на управление. Что это, и что делать?",
+      [
+        ["Vannplaning — slipp gassen forsiktig og hold rattet rett fram til dekkene får kontakt igjen", "Аквапланирование — плавно отпусти газ и держи руль прямо, пока шины снова не сцепятся с дорогой"],
+        ["Servostyringen har sviktet — trykk gassen i bunn for å få kontroll", "Отказал гидроусилитель руля — выжми газ до пола, чтобы вернуть контроль"],
+        ["Dette er normalt i regn — brems hardt med en gang", "Это нормально в дождь — резко затормози"],
+        ["Bilen er overopphetet — slå av motoren mens du kjører", "Машина перегрелась — заглуши двигатель на ходу"]
+      ],
+      "Vannplaning oppstår når et vannlag løfter dekkene fra veibanen, og bilen mister kontakt med underlaget. Slipp gassen rolig, unngå bråbrems og bråe rattbevegelser til dekkene får grep igjen.",
+      "Аквапланирование возникает, когда слой воды приподнимает шины над дорогой, и машина теряет сцепление с покрытием. Плавно отпусти газ, избегай резкого торможения и резких движений рулём, пока шины снова не «зацепятся» за дорогу.",
+      "Резкое торможение или руль в сторону во время аквапланирования — верный способ уйти в занос. Главное — не паниковать и ехать прямо."),
+
+    q("039", null,
+      "Du kjører inn i et anleggsområde med oransje skilt som viser en lavere fartsgrense enn den faste skiltingen. Hva gjelder?",
+      "Ты въезжаешь в зону дорожных работ с оранжевыми знаками, показывающими ограничение скорости ниже обычного. Что действует?",
+      [
+        ["Den midlertidige (oransje) fartsgrensen gjelder foran den faste skiltingen", "Действует временное (оранжевое) ограничение — оно важнее постоянных знаков"],
+        ["Den faste fartsgrensen gjelder alltid, oransje skilt er bare informasjon", "Всегда действует постоянное ограничение, оранжевые знаки — просто информация"],
+        ["Du velger selv hvilken grense du følger", "Можно самому выбрать, какое ограничение соблюдать"],
+        ["Oransje skilt gjelder bare for tunge kjøretøy", "Оранжевые знаки касаются только грузового транспорта"]
+      ],
+      "Oransje skilt i anleggsområder er midlertidig skilting og går foran den faste (hvite) skiltingen. Vær ekstra oppmerksom på arbeidere og endret veibane.",
+      "Оранжевые знаки в зоне дорожных работ — временные, и они важнее постоянных (белых) знаков. Будь особенно внимателен к рабочим и изменённой траектории дороги.",
+      "Оранжевый цвет знака в Норвегии означает «временно», и он всегда приоритетнее обычного белого знака на этом участке."),
+
+    q("040", null,
+      "Du oppdager i speilet at barnet i baksetet har løsnet beltet mens du kjører på motorveien. Hva gjør du?",
+      "Ты замечаешь в зеркале, что ребёнок на заднем сиденье отстегнул ремень во время движения по автомагистрали. Что делаешь?",
+      [
+        ["Finner et trygt sted å stoppe og fester beltet der, i stedet for å gjøre noe mens bilen er i fart", "Нахожу безопасное место для остановки и там пристёгиваю ремень, а не пытаюсь сделать это на ходу"],
+        ["Rekker meg bakover og fester beltet mens jeg fortsetter å kjøre", "Тянусь назад и пристёгиваю ремень, продолжая ехать"],
+        ["Ber en passasjer i forsetet klatre bak for å ordne beltet med en gang", "Прошу пассажира с переднего сиденья перелезть назад и сразу пристегнуть ремень"],
+        ["Ignorerer det, barnet sitter jo fortsatt i setet", "Не обращаю внимания — ребёнок ведь всё ещё в кресле"]
+      ],
+      "Å ta oppmerksomheten bort fra veien for å ordne noe i baksetet er svært farlig i fart. Finn et trygt sted å stanse, og løs problemet der.",
+      "Отвлекаться от дороги, чтобы что-то сделать на заднем сиденье, очень опасно на скорости. Найди безопасное место для остановки и реши проблему там.",
+      "Правило простое: любая проблема с ребёнком в машине решается после безопасной остановки, а не за рулём на ходу."),
+
+    q("041", null,
+      "Du kolliderer lett med en annen bil på en parkeringsplass — bare materiell skade. Den andre føreren vil bare kjøre videre uten å utveksle opplysninger. Hva gjør du?",
+      "Ты слегка столкнулся с другой машиной на парковке — только материальный ущерб. Другой водитель хочет просто уехать, не обменявшись данными. Что делаешь?",
+      [
+        ["Insisterer på å utveksle navn, adresse og forsikringsopplysninger før noen kjører fra stedet", "Настаиваю на обмене именем, адресом и данными страховки, прежде чем кто-то уедет"],
+        ["Lar den andre kjøre, det er bare en parkeringsplass", "Отпускаю его — это же просто парковка"],
+        ["Ringer bare eget forsikringsselskap uken etter, uten å snakke med den andre føreren", "Просто звоню в свою страховую через неделю, не разговаривая со вторым водителем"],
+        ["Tar bilde av skaden og drar, det holder", "Фотографирую повреждения и уезжаю — этого достаточно"]
+      ],
+      "Alle involvert i en trafikkulykke plikter å oppgi navn og adresse, og bli på stedet til nødvendige opplysninger er utvekslet. Dette gjelder også ved kun materiell skade.",
+      "Все участники ДТП обязаны сообщить имя и адрес и оставаться на месте, пока не обменяются необходимыми данными. Это касается и случаев только с материальным ущербом.",
+      "Не позволяй второму водителю просто уехать — обмен данными обязателен по закону, а не только «по-хорошему»."),
+
+    q("042", null,
+      "Du drakk et par glass vin på middagsselskap i går kveld og sov godt. I dag føler du deg helt våken og skal kjøre til jobb. Hva bør du tenke på?",
+      "Вчера вечером на ужине ты выпил пару бокалов вина и хорошо выспался. Сегодня чувствуешь себя бодрым и собираешься ехать на работу. О чём нужно помнить?",
+      [
+        ["Kroppen bryter ned alkohol sakte, og du kan fortsatt ha promille over grensen selv om du føler deg våken", "Организм расщепляет алкоголь медленно, и промилле всё ещё может быть выше нормы, даже если ты чувствуешь себя бодрым"],
+        ["Etter en natts søvn er all alkohol garantert borte fra kroppen", "После ночного сна алкоголь гарантированно полностью выводится из организма"],
+        ["Å føle seg våken betyr at promillen er under grensen", "Если чувствуешь бодрость, значит промилле уже в норме"],
+        ["Bare kaffe om morgenen er nok til å være sikker på å kjøre", "Достаточно выпить утром кофе, чтобы быть уверенным в возможности ехать"]
+      ],
+      "Kroppen bryter ned alkohol med omtrent 0,1–0,15 promille i timen. Etter en kveld med flere glass kan du fortsatt ligge over 0,2 promille neste morgen, selv om du føler deg uthvilt.",
+      "Организм расщепляет алкоголь со скоростью примерно 0,1–0,15 промилле в час. После вечера с несколькими бокалами утром промилле всё ещё может быть выше 0,2, даже если чувствуешь себя выспавшимся.",
+      "«Чувствую себя нормально» — не показатель. Если сомневаешься, не садись за руль или используй алкотестер.")
   ];
 })();

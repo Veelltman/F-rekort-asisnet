@@ -80,6 +80,13 @@
     w("059", "sykkelfelt", "велополоса", "Se etter syklister i sykkelfeltet før du svinger til høyre.", "Проверь велосипедистов на велополосе перед поворотом направо.", "Приоритет"),
     w("060", "holdeplass", "остановка (автобуса, трамвая)", "Bussen stanser ved holdeplassen for å slippe av passasjerer.", "Автобус останавливается на остановке, чтобы высадить пассажиров.", "Приоритет"),
     w("061", "vogntog", "автопоезд (грузовик с прицепом)", "Et vogntog trenger mye plass for å svinge.", "Автопоезду нужно много места, чтобы повернуть.", "Машина"),
-    w("062", "tilhenger", "прицеп", "Jeg kjører med tilhenger til hytta i helgen.", "В выходные я еду с прицепом на дачу.", "Машина")
+    w("062", "tilhenger", "прицеп", "Jeg kjører med tilhenger til hytta i helgen.", "В выходные я еду с прицепом на дачу.", "Машина"),
+
+    w("063", "syklist", "велосипедист", "Hold god avstand til syklisten når du kjører forbi.", "Держи хорошую дистанцию до велосипедиста при обгоне.", "Приоритет"),
+    w("064", "trafikkskilt / skilt", "дорожный знак", "Skiltet viser fartsgrense 60.", "Знак показывает ограничение скорости 60.", "Приоритет"),
+    w("065", "midtlinje", "осевая линия (разметка посередине дороги)", "Det er forbudt å krysse en heltrukket midtlinje uten grunn.", "Пересекать сплошную осевую линию без причины запрещено.", "Приоритет"),
+    w("066", "kollektivfelt", "полоса для общественного транспорта", "Kollektivfeltet er stort sett forbeholdt buss og taxi.", "Полоса для общественного транспорта в основном предназначена для автобусов и такси.", "Приоритет"),
+    w("067", "dekktrykk", "давление в шинах", "Sjekk dekktrykket når det blir kaldere ute.", "Проверяй давление в шинах, когда на улице холодает.", "Машина"),
+    w("068", "fører / sjåfør", "водитель", "Føreren er ansvarlig for at bilen er i forsvarlig stand.", "Водитель отвечает за исправное состояние машины.", "Основное")
   ];
 })();
