@@ -139,11 +139,14 @@
         if (cfg.confirmExit && !confirm(cfg.confirmExit)) return;
         stopTimer(); cfg.onExit && cfg.onExit();
       };
-      container.querySelector("[data-action=toggle-ru]").onclick = () => {
+      const toggleRu = () => {
         session.showRu = !session.showRu;
         container.querySelectorAll(".lang-ru").forEach(el => el.classList.toggle("hidden", !session.showRu));
-        container.querySelector("[data-action=toggle-ru]").textContent = session.showRu ? "Скрыть перевод" : "Показать перевод";
+        container.querySelectorAll("[data-action=toggle-ru], [data-action=toggle-ru-fb]").forEach(b => { b.textContent = session.showRu ? "Скрыть перевод" : "Показать перевод"; });
       };
+      container.querySelector("[data-action=toggle-ru]").onclick = toggleRu;
+      const fbT = container.querySelector("[data-action=toggle-ru-fb]");
+      if (fbT) fbT.onclick = toggleRu;
       container.querySelectorAll("[data-action=select]").forEach(btn => {
         btn.onclick = () => {
           it.selected = Number(btn.dataset.index);
@@ -219,8 +222,9 @@
         <div class="feedback ${ok ? "feedback-ok" : "feedback-fail"}">
           <div class="feedback-title">${ok ? "Riktig! — Верно!" : "Feil — Неверно"}</div>
           <p class="lang-no">${esc(q.explanation_no)}</p>
-          <p class="lang-ru-always">${esc(q.explanation_ru)}</p>
-          ${!ok && q.tip_ru ? `<div class="tip"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
+          <p class="lang-ru ${session.showRu ? "" : "hidden"}">${esc(q.explanation_ru)}</p>
+          ${!ok && q.tip_ru ? `<div class="tip lang-ru ${session.showRu ? "" : "hidden"}"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
         </div>`;
     }
 
