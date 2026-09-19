@@ -1,12 +1,12 @@
 /* Service worker: сеть в приоритете, кэш как запасной вариант (офлайн на телефоне).
    Версию меняй при крупных обновлениях, чтобы сбросить старый кэш. */
 
-const CACHE = "forerkort-v2";
+const CACHE = "forerkort-v3";
 const SHELL = [
   "./", "./index.html", "./css/styles.css", "./manifest.webmanifest",
   "./js/icons/signs-svg.js", "./js/data/signs-catalog.js", "./js/data/signs.js",
   "./js/data/situational.js", "./js/data/rules.js", "./js/data/generated.js",
-  "./js/data/vocabulary.js", "./js/storage.js", "./js/cloud.js", "./js/quiz-engine.js",
+  "./js/data/vocabulary.js", "./js/speech.js", "./js/storage.js", "./js/cloud.js", "./js/quiz-engine.js",
   "./js/app.js", "./js/teacher.js", "./js/teacher-ui.js"
 ];
 

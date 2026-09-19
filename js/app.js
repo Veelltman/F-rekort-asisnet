@@ -575,9 +575,14 @@
             <button class="btn btn-danger" id="btn-unknown">← Не знаю</button>
             <button class="btn btn-success" id="btn-known">Знаю →</button>
           </div>
-          <p class="key-hint muted">Клавиатура: пробел — перевернуть, ← не знаю, → знаю</p>
+          <p class="key-hint muted">Клавиатура: пробел — перевернуть, ← не знаю, → знаю, S — озвучить</p>
         </div>`;
 
+      if (window.Speech && Speech.available()) {
+        const front = view.querySelector(".flash-front"), back = view.querySelector(".flash-back");
+        front.appendChild(Speech.button(() => c.word_no + ". " + c.example_no, "flash-speak"));
+        back.appendChild(Speech.button(() => c.word_no + ". " + c.example_no, "flash-speak"));
+      }
       document.getElementById("flashcard").onclick = () => {
         session.flipped = !session.flipped;
         document.getElementById("flashcard").classList.toggle("flipped", session.flipped);
@@ -589,6 +594,7 @@
         if (e.key === " " || e.key === "Enter" || e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); document.getElementById("flashcard").click(); }
         else if (e.key === "ArrowRight" && session.flipped) { e.preventDefault(); mark(true); }
         else if (e.key === "ArrowLeft" && session.flipped) { e.preventDefault(); mark(false); }
+        else if (e.key.toLowerCase() === "s" || e.key.toLowerCase() === "ы") { const b = view.querySelector(".flash-speak"); if (b) b.click(); }
       };
       document.getElementById("btn-unknown").onclick = () => mark(false);
     }

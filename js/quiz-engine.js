@@ -128,9 +128,13 @@
                 : `<button class="btn nav-btn" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="Следующий вопрос">${ARROW_R}</button>`}
           </div>
           ${exam ? `<p class="exam-hint muted">Ответы можно менять до сдачи. Кнопка «Lever» на последнем вопросе.</p>` : ""}
-          <p class="key-hint muted">Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод</p>
+          <p class="key-hint muted">Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод, S — озвучить</p>
         </div>`;
 
+      if (window.Speech && Speech.available()) {
+        const qt = container.querySelector(".question-text");
+        qt.appendChild(Speech.button(() => q.prompt_no + " " + it.options.map((o, i) => "ABCD"[i] + ". " + o.text_no).join(". "), "q-speak"));
+      }
       container.querySelector("[data-action=exit]").onclick = () => {
         if (cfg.confirmExit && !confirm(cfg.confirmExit)) return;
         stopTimer(); cfg.onExit && cfg.onExit();
@@ -202,6 +206,8 @@
           if (prv && !prv.disabled) { ev.preventDefault(); prv.click(); }
         } else if (k.toLowerCase() === "t" || k.toLowerCase() === "е") {
           container.querySelector("[data-action=toggle-ru]").click();
+        } else if (k.toLowerCase() === "s" || k.toLowerCase() === "ы") {
+          const b = container.querySelector(".q-speak"); if (b) b.click();
         }
       };
     }

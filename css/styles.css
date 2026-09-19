@@ -544,3 +544,19 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 
 .key-hint { font-size: 0.8rem; text-align: center; margin-top: 10px; }
 @media (max-width: 719px) { .key-hint { display: none; } }
+
+/* ---------- Озвучка ---------- */
+.btn-speak {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border);
+  background: var(--surface); color: var(--ink-2); cursor: pointer; flex: none;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+.btn-speak svg { width: 20px; height: 20px; }
+.btn-speak:hover { background: var(--surface-2); color: var(--ink); }
+.btn-speak.speaking { color: var(--line-dark); border-color: var(--line); transform: scale(1.08); }
+.btn-speak.no-voice { color: var(--sign-red); }
+.flash-speak { position: absolute; top: 12px; right: 14px; }
+.flash-back .flash-speak { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
+.question-text { position: relative; padding-right: 48px; }
+.q-speak { position: absolute; top: -2px; right: 0; }
