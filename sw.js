@@ -1,7 +1,7 @@
 /* Service worker: сеть в приоритете, кэш как запасной вариант (офлайн на телефоне).
    Версию меняй при крупных обновлениях, чтобы сбросить старый кэш. */
 
-const CACHE = "forerkort-v3";
+const CACHE = "forerkort-v4";
 const SHELL = [
   "./", "./index.html", "./css/styles.css", "./manifest.webmanifest",
   "./js/icons/signs-svg.js", "./js/data/signs-catalog.js", "./js/data/signs.js",
