@@ -541,3 +541,6 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 }
 
 .brand-mark { object-fit: cover; }
+
+.key-hint { font-size: 0.8rem; text-align: center; margin-top: 10px; }
+@media (max-width: 719px) { .key-hint { display: none; } }

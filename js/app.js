@@ -29,6 +29,7 @@
   const routes = {};
   function go(name, params) {
     window.CURRENT_ROUTE = name;
+    document.onkeydown = null;
     routes[name](params || {});
     window.scrollTo({ top: 0 });
     document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("active", a.dataset.route === name));
@@ -571,9 +572,10 @@
           </div>
 
           <div class="flash-actions ${session.flipped ? "" : "hidden"}">
-            <button class="btn btn-danger" id="btn-unknown">Не знаю</button>
-            <button class="btn btn-success" id="btn-known">Знаю</button>
+            <button class="btn btn-danger" id="btn-unknown">← Не знаю</button>
+            <button class="btn btn-success" id="btn-known">Знаю →</button>
           </div>
+          <p class="key-hint muted">Клавиатура: пробел — перевернуть, ← не знаю, → знаю</p>
         </div>`;
 
       document.getElementById("flashcard").onclick = () => {
@@ -582,6 +584,12 @@
         document.querySelector(".flash-actions").classList.toggle("hidden", !session.flipped);
       };
       document.getElementById("btn-known").onclick = () => mark(true);
+      document.onkeydown = e => {
+        if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+        if (e.key === " " || e.key === "Enter" || e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); document.getElementById("flashcard").click(); }
+        else if (e.key === "ArrowRight" && session.flipped) { e.preventDefault(); mark(true); }
+        else if (e.key === "ArrowLeft" && session.flipped) { e.preventDefault(); mark(false); }
+      };
       document.getElementById("btn-unknown").onclick = () => mark(false);
     }
 

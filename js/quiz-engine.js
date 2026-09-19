@@ -128,6 +128,7 @@
                 : `<button class="btn nav-btn" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="Следующий вопрос">${ARROW_R}</button>`}
           </div>
           ${exam ? `<p class="exam-hint muted">Ответы можно менять до сдачи. Кнопка «Lever» на последнем вопросе.</p>` : ""}
+          <p class="key-hint muted">Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод</p>
         </div>`;
 
       container.querySelector("[data-action=exit]").onclick = () => {
@@ -177,6 +178,32 @@
       };
       window.scrollTo({ top: 0 });
       startTimer();
+
+      document.onkeydown = ev => {
+        if (ev.target && /INPUT|TEXTAREA/.test(ev.target.tagName)) return;
+        const k = ev.key;
+        if (/^[1-4]$/.test(k) || /^[a-dA-D]$/.test(k)) {
+          const idx = /^[1-4]$/.test(k) ? Number(k) - 1 : "abcd".indexOf(k.toLowerCase());
+          const btn = container.querySelectorAll("[data-action=select]")[idx];
+          if (btn && !btn.disabled) { ev.preventDefault(); btn.click(); }
+        } else if (k === "Enter" || k === " ") {
+          const chk = container.querySelector("[data-action=check]");
+          const nxt = container.querySelector("[data-action=next]");
+          const fin = container.querySelector("[data-action=finish]");
+          ev.preventDefault();
+          if (chk && !chk.disabled) chk.click();
+          else if (nxt && !nxt.disabled) nxt.click();
+          else if (fin && !fin.disabled && exam === false) fin.click();
+        } else if (k === "ArrowRight") {
+          const nxt = container.querySelector("[data-action=next]");
+          if (nxt && !nxt.disabled) { ev.preventDefault(); nxt.click(); }
+        } else if (k === "ArrowLeft") {
+          const prv = container.querySelector("[data-action=prev]");
+          if (prv && !prv.disabled) { ev.preventDefault(); prv.click(); }
+        } else if (k.toLowerCase() === "t" || k.toLowerCase() === "е") {
+          container.querySelector("[data-action=toggle-ru]").click();
+        }
+      };
     }
 
     function feedbackHtml(it) {
@@ -223,6 +250,7 @@
         : pct >= 70 ? "Неплохо, но до экзаменационного порога (85%) ещё есть запас."
         : "Тема пока слабая. Пройди ошибки ниже и повтори.";
 
+      document.onkeydown = null;
       if (cfg.onFinish) cfg.onFinish({ correct, total, passed });
 
       const mistakes = results.filter(r => !r.ok);
