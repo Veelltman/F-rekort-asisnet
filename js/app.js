@@ -43,8 +43,6 @@
   function renderProfileSwitch() {
     const el = document.getElementById("profile-switch");
     if (!el) return;
-    const foot = document.querySelector("footer");
-    if (foot) foot.textContent = C.isLoggedIn() ? "Учебный тренажёр. Прогресс сохраняется в аккаунте и доступен с любого устройства." : "Учебный тренажёр. Прогресс хранится только в этом браузере, войди, чтобы сохранять его на сервере.";
     if (C.enabled && !C.isLoggedIn()) {
       el.innerHTML = `<button class="profile-btn profile-login" onclick="go('login')">Войти</button>`;
       return;
@@ -383,10 +381,7 @@
           </div>
         </div>
       </div>
-
-      <div class="notice">
-        <span>Это учебный тренажёр, а не официальный материал Statens vegvesen. Ставки штрафов даны на 2026 год и индексируются ежегодно; перед экзаменом сверь их с актуальной teoriboka.</span>
-      </div>`;
+`;
   };
 
   function topicCard(key, t, st) {
