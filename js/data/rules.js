@@ -14,6 +14,17 @@
     };
   }
 
+  /* Вопрос с несколькими правильными ответами (как «Velg alle riktige» на teoriprøven).
+     Каждый вариант: [text_no, text_ru, correct(true/false), why_no, why_ru]. why — только у неверных. */
+  function qm(id, prompt_no, prompt_ru, opts, explanation_no, explanation_ru, tip_ru) {
+    return {
+      id: "rules-" + id, topic: "rules", type: "multi-choice", multi: true,
+      prompt_no, prompt_ru, image: null,
+      options: opts.map(o => ({ text_no: o[0], text_ru: o[1], correct: !!o[2], why_no: o[3] || null, why_ru: o[4] || null })),
+      explanation_no, explanation_ru, tip_ru
+    };
+  }
+
   window.QUESTION_DATA = window.QUESTION_DATA || {};
   window.QUESTION_DATA.rules = [
 
@@ -418,6 +429,147 @@
       [["Trykket synker, så du bør sjekke og fylle på lufttrykket jevnlig", "Давление падает, поэтому нужно регулярно проверять и подкачивать шины"], ["Trykket øker, så du bør slippe ut luft", "Давление растёт, поэтому нужно спускать воздух", "Trykket synker når det blir kaldere, det øker ikke, så du skal fylle på, ikke slippe ut.", "При похолодании давление падает, а не растёт, — значит, нужно подкачивать, а не спускать."], ["Trykket er upåvirket av temperatur", "Давление не зависит от температуры", "Lufttrykket i dekk endrer seg tydelig med temperaturen, det er ikke upåvirket.", "Давление в шинах заметно меняется от температуры, оно не остаётся постоянным."], ["Du trenger bare å sjekke trykket om sommeren", "Проверять давление нужно только летом", "Trykket faller mest om vinteren, så det er nettopp da kontroll er viktigst.", "Сильнее всего давление падает именно зимой, поэтому проверять его важнее всего в это время."]],
       "Lufttrykket i dekk synker når temperaturen faller. For lavt dekktrykk gir dårligere veigrep og økt slitasje, så sjekk trykket regelmessig gjennom vinteren.",
       "Давление воздуха в шинах падает при понижении температуры. Слишком низкое давление ухудшает сцепление с дорогой и увеличивает износ, поэтому зимой стоит регулярно проверять давление.",
-      "Хорошая привычка — проверять давление в шинах при каждой заправке зимой, особенно после резкого похолодания.")
+      "Хорошая привычка — проверять давление в шинах при каждой заправке зимой, особенно после резкого похолодания."),
+
+    /* ---------- Несколько правильных ответов ---------- */
+    qm("m01", "Hvilket utstyr er lovpålagt å ha i en personbil? Velg alle riktige.", "Какое оборудование обязательно по закону в легковой машине? Выбери все верные.", [
+      ["Varseltrekant", "Знак аварийной остановки", true],
+      ["Refleksvest", "Светоотражающий жилет", true],
+      ["Førstehjelpsskrin", "Аптечка", false, "Førstehjelpsskrin anbefales, men står ikke i forskriften som krav for personbil.", "Аптечка рекомендуется, но в предписании как обязательное для легковой не значится."],
+      ["Brannslukker", "Огнетушитель", false, "Brannslukker er påbudt i buss og enkelte spesialkjøretøy, ikke i vanlig personbil.", "Огнетушитель обязателен в автобусах и спецтранспорте, но не в обычной легковой."]
+    ],
+    "Forskrift om bruk av kjøretøy § 1-6: bilen skal ha minst én varseltrekant og minst én refleksvest som er lett tilgjengelig for føreren.",
+    "Forskrift om bruk av kjøretøy § 1-6: в машине должны быть как минимум один знак аварийной остановки и один светоотражающий жилет, легко доступный водителю.",
+    "Запомни пару «треугольник + жилет». Всё остальное — по желанию."),
+
+    qm("m02", "Hvilke overtredelser gir 3 prikker i førerkortet (2026)? Velg alle riktige.", "За какие нарушения дают 3 балла (2026)? Выбери все верные.", [
+      ["Bruk av håndholdt mobiltelefon", "Телефон в руке за рулём", true],
+      ["Kjøring på rødt lys", "Проезд на красный", true],
+      ["Kjøring uten lys om dagen", "Езда без света днём", false, "Manglende lys gir gebyr på 4 100 kr, men ingen prikker.", "За отсутствие света штраф 4 100 kr, но без баллов."],
+      ["5 km/t over i 50-sone", "+5 км/ч в зоне 50", false, "Inntil 5 km/t over gir bare 1 250 kr og ingen prikker; prikker starter fra 11 km/t over.", "До +5 км/ч — только 1 250 kr без баллов; баллы начинаются с +11."]
+    ],
+    "Mobil, rødt lys, brudd på vikeplikt, for kort avstand og ulovlig forbikjøring gir 10 750 kr og 3 prikker.",
+    "Телефон, красный свет, непропуск, короткая дистанция и незаконный обгон — 10 750 kr и 3 балла.",
+    "Группа «10 750 kr + 3 балла»: телефон, красный, vikeplikt, дистанция, обгон."),
+
+    qm("m03", "Hvor er det forbudt å stanse? Velg alle riktige.", "Где запрещена остановка? Выбери все верные.", [
+      ["Nærmere enn 5 meter foran gangfelt", "Ближе 5 м перед пешеходным переходом", true],
+      ["Nærmere enn 20 meter fra skilt for bussholdeplass", "Ближе 20 м от знака автобусной остановки", true],
+      ["I vegkryss og nærmere enn 5 meter fra krysset", "На перекрёстке и ближе 5 м от него", true],
+      ["På alle veger med fartsgrense 50 km/t", "На всех дорогах с лимитом 50", false, "Fartsgrensen bestemmer ikke om stans er forbudt; det avgjøres av skilt og de faste avstandsreglene.", "Лимит скорости не определяет запрет остановки — его задают знаки и правила дистанций."]
+    ],
+    "Trafikkreglene § 17: stans er forbudt i vegkryss og nærmere enn 5 meter fra krysset, nærmere enn 5 meter foran gangfelt og innenfor 20 meter fra holdeplasskilt.",
+    "Trafikkreglene § 17: остановка запрещена на перекрёстке и ближе 5 м от него, ближе 5 м перед переходом и в пределах 20 м от знака остановки транспорта.",
+    "Две цифры: 5 м (переход, перекрёсток) и 20 м (остановка автобуса/трамвая)."),
+
+    qm("m04", "Hvem har du vikeplikt for når du kjører ut fra en parkeringsplass? Velg alle riktige.", "Кому ты уступаешь, выезжая с парковки? Выбери все верные.", [
+      ["Kjørende på vegen", "Транспорту на дороге", true],
+      ["Gående på fortauet", "Пешеходам на тротуаре", true],
+      ["Syklende på sykkelveg langs vegen", "Велосипедистам на велодорожке вдоль дороги", true],
+      ["Ingen: høyreregelen gjelder", "Никому: действует правило правой руки", false, "Høyreregelen gjelder ikke ved utkjøring fra parkeringsplass, gårdsveg eller lignende. Der viker du for alle.", "Правило правой руки не работает при выезде с парковки, двора и т.п. — там уступаешь всем."]
+    ],
+    "Trafikkreglene § 7: den som kjører ut fra parkeringsplass, gårdsveg, bensinstasjon eller annen veg som ikke er åpen for alminnelig ferdsel, har vikeplikt for all trafikk, også gående og syklende.",
+    "Trafikkreglene § 7: выезжающий с парковки, двора, заправки и т.п. уступает всем — и машинам, и пешеходам, и велосипедистам.",
+    "Выезд с «не-дороги» = уступи всем без исключения."),
+
+    qm("m05", "I hvilke situasjoner gjelder IKKE høyreregelen? Velg alle riktige.", "В каких случаях правило правой руки НЕ действует? Выбери все верные.", [
+      ["Når krysset er regulert med trafikklys som virker", "Когда перекрёсток регулируется работающим светофором", true],
+      ["Når du har vikepliktskilt eller stoppskilt", "Когда у тебя знак «уступи» или STOP", true],
+      ["Når du kjører ut fra gårdsveg eller parkeringsplass", "Когда выезжаешь со двора или парковки", true],
+      ["I et vanlig kryss uten skilt og lys", "На обычном перекрёстке без знаков и светофора", false, "Det er nettopp der høyreregelen gjelder: uten skilt og lys viker du for trafikk fra høyre.", "Именно там правило правой руки и действует: без знаков и светофора уступаешь тому, кто справа."]
+    ],
+    "Rangordningen er: politiets tegn, trafikklys, skilt, og til slutt de generelle reglene som høyreregelen. Ved utkjøring fra gårdsveg og lignende har du vikeplikt for alle.",
+    "Порядок: указания полиции, светофор, знаки, и только потом общие правила вроде правила правой руки. При выезде со двора уступаешь всем.",
+    "Правило правой руки — «запасное»: работает, только когда нет ничего другого."),
+
+    qm("m06", "Hva er riktig om sikring av barn i bil? Velg alle riktige.", "Что верно про перевозку детей? Выбери все верные.", [
+      ["Barn under 135 cm skal bruke godkjent barnesikring", "Дети ниже 135 см — в одобренном детском удерживающем устройстве", true],
+      ["Føreren har ansvaret for at barn under 15 år er sikret", "За детей младше 15 лет отвечает водитель", true],
+      ["Barn over 135 cm kan bruke bilens vanlige belte", "Дети выше 135 см могут пользоваться обычным ремнём", true],
+      ["Barn kan sitte på fanget hvis turen er kort", "На короткую поездку ребёнка можно взять на колени", false, "Det finnes ikke noe unntak for korte turer. Alle skal være sikret hele tiden.", "Исключений для коротких поездок нет — все должны быть пристёгнуты всегда."]
+    ],
+    "Grensen er 135 cm: under den skal barn ha godkjent barnesikring, over den holder bilbelte. Fører har ansvaret for passasjerer under 15 år.",
+    "Порог 135 см: ниже — детское устройство, выше — достаточно ремня. За пассажиров младше 15 отвечает водитель.",
+    "135 см и 15 лет — две цифры, которые надо помнить."),
+
+    qm("m07", "Hva er riktig om alkohol og bilkjøring i Norge? Velg alle riktige.", "Что верно про алкоголь и вождение в Норвегии? Выбери все верные.", [
+      ["Promillegrensen er 0,2", "Лимит — 0,2 промилле", true],
+      ["Du kan fortsatt ha promille morgenen etter en fest", "Утром после вечеринки промилле может ещё быть выше лимита", true],
+      ["Kaffe og dusj senker promillen", "Кофе и душ снижают промилле", false, "Bare tid bryter ned alkoholen, omtrent 0,1–0,15 promille i timen. Kaffe gjør deg bare mer våken.", "Алкоголь выводит только время, примерно 0,1–0,15 промилле в час. Кофе лишь бодрит."],
+      ["Grensen er 0,5 som i mange andre land", "Лимит 0,5, как во многих странах", false, "Norge har en strengere grense enn mange land: 0,2 promille.", "В Норвегии лимит строже, чем во многих странах: 0,2 промилле."]
+    ],
+    "Vegtrafikkloven § 22: promillegrensen er 0,2. Kroppen bryter ned alkohol sakte, så «dagen derpå» kan du fortsatt være over grensen.",
+    "Vegtrafikkloven § 22: лимит 0,2 промилле. Организм расщепляет алкоголь медленно, поэтому «на следующий день» можно всё ещё быть над лимитом.",
+    "0,2 — это практически ноль. Если пил вечером, утром — не за руль без проверки."),
+
+    qm("m08", "I hvilke byer må du betale piggdekkgebyr (2026)? Velg alle riktige.", "В каких городах платят сбор за шипованные шины (2026)? Выбери все верные.", [
+      ["Oslo", "Осло", true],
+      ["Bergen", "Берген", true],
+      ["Trondheim", "Тронхейм", true],
+      ["Stavanger", "Ставангер", false, "Stavanger avviklet piggdekkgebyret i 2023.", "Ставангер отменил сбор за шипы в 2023 году."]
+    ],
+    "Piggdekkgebyr kreves i Oslo, Bergen og Trondheim. Stavanger avviklet ordningen i 2023.",
+    "Сбор за шипы действует в Осло, Бергене и Тронхейме. Ставангер отменил его в 2023.",
+    "Три города: Oslo, Bergen, Trondheim."),
+
+    qm("m09", "Hva er riktig om bruk av lys? Velg alle riktige.", "Что верно про использование света? Выбери все верные.", [
+      ["Nærlys er påbudt hele døgnet, også om dagen", "Ближний свет обязателен круглосуточно, и днём", true],
+      ["Fjernlys skal slås av ved møtende trafikk", "Дальний свет выключают при встречном транспорте", true],
+      ["Fjernlys skal slås av når du ligger bak en annen bil", "Дальний свет выключают, когда едешь за другой машиной", true],
+      ["Tåkelys kan brukes når som helst", "Противотуманные фары можно включать когда угодно", false, "Tåkelys skal bare brukes ved tåke, snøvær eller annen dårlig sikt, ellers blender de.", "Противотуманки — только в туман, снегопад или другую плохую видимость, иначе они слепят."]
+    ],
+    "Trafikkreglene § 15: nærlys hele døgnet; fjernlys skal ikke brukes slik at det blender møtende eller bilen foran. Tåkelys bare ved dårlig sikt.",
+    "Trafikkreglene § 15: ближний свет всегда; дальний нельзя использовать так, чтобы слепить встречных или машину впереди. Противотуманки только при плохой видимости.",
+    "Дальний свет = «никого впереди и навстречу». Иначе ближний."),
+
+    qm("m10", "Hva er riktig om dekk om vinteren? Velg alle riktige.", "Что верно про зимние шины? Выбери все верные.", [
+      ["Minste mønsterdybde i vinterperioden er 3 mm", "Минимальная глубина протектора зимой — 3 мм", true],
+      ["Piggdekk er tillatt i Sør-Norge fra 1. november", "Шипы разрешены на юге Норвегии с 1 ноября", true],
+      ["Piggdekk kan brukes hele året", "Шипы можно использовать круглый год", false, "Piggdekk er bare tillatt i vinterperioden (til første mandag etter 2. påskedag), eller når føret krever det.", "Шипы разрешены только в зимний период (до первого понедельника после 2. påskedag) или когда этого требуют дорожные условия."],
+      ["Sommerdekk er alltid lov, uansett føre", "Летние шины разрешены всегда, при любых условиях", false, "Dekkene skal passe føret. På snø og is oppfyller sommerdekk ikke kravet til veggrep.", "Шины должны соответствовать условиям. На снегу и льду летняя резина не отвечает требованию к сцеплению."]
+    ],
+    "Fra 1. november til første søndag etter 2. påskedag (Nord-Norge 16. oktober–30. april) er kravet minst 3 mm mønster. Piggdekk kan brukes i samme periode.",
+    "С 1 ноября до первого воскресенья после 2. påskedag (север: 16 октября – 30 апреля) требуется минимум 3 мм протектора. Шипы — в тот же период.",
+    "Зимой 3 мм, летом 1,6 мм. Шипы — с 1 ноября."),
+
+    qm("m11", "Hvilke kjøretøy og trafikanter har ikke lov til å bruke motorveg? Velg alle riktige.", "Кому нельзя на автомагистраль? Выбери все верные.", [
+      ["Gående", "Пешеходам", true],
+      ["Syklende", "Велосипедистам", true],
+      ["Kjøretøy som ikke kan holde minst 40 km/t", "Транспорту, не способному ехать 40 км/ч", true],
+      ["Elbiler", "Электромобилям", false, "Elbiler er vanlige biler og kan kjøre på motorveg. Regelen handler om fartsevne, ikke drivstoff.", "Электромобили — обычные машины и ездят по автомагистрали. Правило про способность держать скорость, а не про тип двигателя."]
+    ],
+    "På motorveg er det forbudt for gående, syklende og kjøretøy som ikke kan eller får kjøre minst 40 km/t. Det er også forbudt å stanse, rygge, snu og parkere.",
+    "На автомагистрали запрещены пешеходы, велосипеды и транспорт, который не может ехать минимум 40 км/ч. Также запрещены остановка, движение задним ходом, разворот и парковка.",
+    "Автомагистраль — только для тех, кто держит 40+ км/ч, и без остановок."),
+
+    qm("m12", "Hva er riktig om tilhenger med førerkort klasse B? Velg alle riktige.", "Что верно про прицеп с категорией B? Выбери все верные.", [
+      ["Tilhenger med tillatt totalvekt inntil 750 kg kan alltid trekkes", "Прицеп с разрешённой полной массой до 750 кг можно тянуть всегда", true],
+      ["Tyngre tilhenger er lov hvis bil og henger til sammen ikke overstiger 3 500 kg", "Прицеп тяжелее можно, если сумма масс машины и прицепа не превышает 3 500 кг", true],
+      ["Med kode 96 kan samlet vekt være inntil 4 250 kg", "С кодом 96 суммарная масса может быть до 4 250 кг", true],
+      ["Alle tilhengere inntil 3 500 kg er lov uansett bil", "Любой прицеп до 3 500 кг можно тянуть с любой машиной", false, "3 500 kg er grensen for bil og henger til sammen, ikke for hengeren alene.", "3 500 кг — предел для машины и прицепа вместе, а не для прицепа отдельно."]
+    ],
+    "Klasse B: henger inntil 750 kg, eller tyngre henger så lenge bil + henger ≤ 3 500 kg. Kode 96 utvider til 4 250 kg samlet, klasse BE til henger inntil 3 500 kg.",
+    "Категория B: прицеп до 750 кг, либо тяжелее при условии машина + прицеп ≤ 3 500 кг. Код 96 расширяет до 4 250 кг суммарно, категория BE — до прицепа 3 500 кг.",
+    "Считай сумму: машина + прицеп ≤ 3 500 кг. Прицеп ≤ 750 кг — считать не надо."),
+
+    qm("m13", "Hva er riktig om prikker i førerkortet? Velg alle riktige.", "Что верно про штрафные баллы? Выбери все верные.", [
+      ["8 prikker i løpet av 3 år gir tap av førerkort i 6 måneder", "8 баллов за 3 года — лишение прав на 6 месяцев", true],
+      ["I prøveperioden (første 2 år) teller hver prikk dobbelt", "В испытательный срок (первые 2 года) каждый балл считается вдвойне", true],
+      ["Prikker slettes 3 år etter at de ble gitt", "Баллы сгорают через 3 года после получения", true],
+      ["Prikkene forsvinner hvis du betaler boten med en gang", "Баллы исчезают, если сразу оплатить штраф", false, "Betaling av boten endrer ikke prikkene. De står i 3 år uansett.", "Оплата штрафа на баллы не влияет — они висят 3 года в любом случае."]
+    ],
+    "Prikkbelastning: 8 prikker på 3 år gir 6 måneders tap. Nye førere får dobbelt antall prikker de første 2 årene. Prikkene slettes etter 3 år.",
+    "Система баллов: 8 баллов за 3 года — лишение на 6 месяцев. Новички первые 2 года получают двойные баллы. Баллы сгорают через 3 года.",
+    "Цифры: 8 баллов, 3 года, 6 месяцев, ×2 первые 2 года."),
+
+    qm("m14", "Når må politiet varsles etter en trafikkulykke? Velg alle riktige.", "Когда после ДТП нужно вызывать полицию? Выбери все верные.", [
+      ["Når noen er skadet", "Когда есть пострадавшие", true],
+      ["Når du mistenker at en fører er påvirket av alkohol eller rus", "Когда есть подозрение, что водитель пьян или под веществами", true],
+      ["Når partene ikke blir enige om hva som skjedde", "Когда стороны не согласны в том, что произошло", true],
+      ["Alltid, også ved en liten bulk på parkeringsplass", "Всегда, даже при мелкой царапине на парковке", false, "Ved bare materiell skade og enighet holder det å fylle ut skademelding sammen. Politiet trengs ikke.", "При только материальном ущербе и согласии сторон достаточно вместе заполнить skademelding. Полиция не нужна."]
+    ],
+    "Ved personskade skal politiet varsles. Det er også klokt ved mistanke om rus eller uenighet. Ved små materielle skader fyller partene ut skademelding.",
+    "При травмах полицию вызывать обязательно. Также разумно при подозрении на опьянение или разногласиях. При мелком материальном ущербе стороны заполняют skademelding.",
+    "Травма = полиция всегда. Царапина + согласие = skademelding без полиции.")
   ];
 })();

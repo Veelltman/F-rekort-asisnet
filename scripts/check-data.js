@@ -42,7 +42,10 @@ function checkQuestion(q, where) {
   if (!Array.isArray(inst.options) || inst.options.length !== 4) errors.push(`${where} ${q.id}: должно быть 4 варианта`);
   else {
     const correct = inst.options.filter(o => o.correct).length;
-    if (correct !== 1) errors.push(`${where} ${q.id}: правильных вариантов ${correct}, должен быть 1`);
+    if (inst.multi) {
+      if (correct < 2 || correct > 3) errors.push(`${where} ${q.id}: у multi-вопроса должно быть 2–3 правильных, сейчас ${correct}`);
+    } else if (correct !== 1) errors.push(`${where} ${q.id}: правильных вариантов ${correct}, должен быть 1`);
+    inst.options.forEach(o => { if (!o.correct && (!o.why_no || !o.why_ru) && !q.fresh) errors.push(`${where} ${q.id}: неверный вариант без пояснения why_no/why_ru`); });
     const texts = new Set(inst.options.map(o => o.text_no));
     if (texts.size !== 4) errors.push(`${where} ${q.id}: варианты повторяются`);
     inst.options.forEach(o => { if (!o.text_no || !o.text_ru) errors.push(`${where} ${q.id}: вариант без текста`); });

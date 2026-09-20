@@ -364,6 +364,15 @@
     };
   }
 
+  function qm(id, image, prompt_no, prompt_ru, opts, explanation_no, explanation_ru, tip_ru) {
+    return {
+      id: "sit-" + id, topic: "situational", type: "multi-choice", multi: true,
+      prompt_no, prompt_ru, image,
+      options: opts.map(o => ({ text_no: o[0], text_ru: o[1], correct: !!o[2], why_no: o[3] || null, why_ru: o[4] || null })),
+      explanation_no, explanation_ru, tip_ru
+    };
+  }
+
   window.QUESTION_DATA = window.QUESTION_DATA || {};
   window.QUESTION_DATA.situational = [
 
@@ -911,6 +920,40 @@
       ],
       "Kroppen bryter ned alkohol med omtrent 0,1–0,15 promille i timen. Etter en kveld med flere glass kan du fortsatt ligge over 0,2 promille neste morgen, selv om du føler deg uthvilt.",
       "Организм расщепляет алкоголь со скоростью примерно 0,1–0,15 промилле в час. После вечера с несколькими бокалами утром промилле всё ещё может быть выше 0,2, даже если чувствуешь себя выспавшимся.",
-      "«Чувствую себя нормально» — не показатель. Если сомневаешься, не садись за руль или используй алкотестер.")
+      "«Чувствую себя нормально» — не показатель. Если сомневаешься, не садись за руль или используй алкотестер."),
+
+    /* ---------- Несколько правильных ответов ---------- */
+    qm("m01", road({ crossing: true }),
+      "Du nærmer deg et gangfelt. Hva skal du gjøre? Velg alle riktige.", "Ты подъезжаешь к пешеходному переходу. Что нужно делать? Выбери все верные.", [
+      ["Senke farten i god tid", "Заранее снизить скорость", true],
+      ["Være klar til å stoppe for gående som er på veg ut i gangfeltet", "Быть готовым остановиться перед пешеходом, выходящим на переход", true],
+      ["Ikke kjøre forbi en bil som har stanset foran gangfeltet", "Не объезжать машину, остановившуюся перед переходом", true],
+      ["Tute for å varsle de gående om at du kommer", "Посигналить, чтобы пешеходы знали, что ты едешь", false, "Lydsignal skal bare brukes for å avverge fare, ikke for å få gående til å vente.", "Сигнал — только чтобы предотвратить опасность, а не чтобы пешеходы подождали."]
+    ],
+    "Trafikkreglene § 9: ved gangfelt skal du kjøre slik at du kan stoppe, og vike for gående som er i eller på veg ut i feltet. Forbikjøring rett foran gangfelt er forbudt.",
+    "Trafikkreglene § 9: у перехода едешь так, чтобы суметь остановиться, и уступаешь пешеходам на переходе или выходящим на него. Обгон прямо перед переходом запрещён.",
+    "Переход = «нога на тормозе». Машина, стоящая перед зеброй, стоит не просто так."),
+
+    qm("m02", scene({ you: { from: "south", to: "west" }, others: [{ from: "east", to: "south" }], roundabout: true }),
+      "Hva er riktig om kjøring i rundkjøring? Velg alle riktige.", "Что верно про движение на круге? Выбери все верные.", [
+      ["Du har vikeplikt for trafikk som allerede er i rundkjøringen", "Ты уступаешь тем, кто уже на круге", true],
+      ["Du gir tegn til høyre før du kjører ut", "Перед выездом включаешь правый поворотник", true],
+      ["Du kjører mot klokka", "Едешь против часовой стрелки", true],
+      ["Høyreregelen gjelder når du kjører inn", "При въезде действует правило правой руки", false, "Rundkjøringer er skiltet med vikeplikt, så du viker for alle inne i sirkelen, ikke bare de fra høyre.", "Перед кругом стоит знак «уступи», поэтому уступаешь всем на круге, а не только тем, кто справа."]
+    ],
+    "I rundkjøring kjører du mot klokka, viker for trafikk inne i sirkelen og gir tegn til høyre når du skal ut. Tegn til venstre brukes når du skal langt rundt.",
+    "На круге едешь против часовой, уступаешь всем внутри круга, перед выездом включаешь правый поворотник. Левый — если едешь далеко по кругу.",
+    "Въезд: уступи всем на круге. Выезд: правый поворотник."),
+
+    qm("m03", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west", kind: "emergency" }], lights: { south: "green", east: "red" } }),
+      "Du hører sirene og ser et utrykningskjøretøy med blålys. Hva skal du gjøre? Velg alle riktige.", "Ты слышишь сирену и видишь машину с мигалкой. Что нужно делать? Выбери все верные.", [
+      ["Gi fri veg", "Освободить дорогу", true],
+      ["Om nødvendig stanse ved siden av vegen", "При необходимости остановиться у обочины", true],
+      ["Kjøre på rødt lys for å slippe det fram", "Проехать на красный, чтобы его пропустить", false, "Du skal ikke bryte trafikkreglene for å gi fri veg. Kjør til siden eller stans der du er, uten å kjøre på rødt.", "Ради освобождения дороги правила нарушать нельзя. Отъедь в сторону или остановись, но на красный не езжай."],
+      ["Øke farten for å komme unna", "Ускориться, чтобы уйти вперёд", false, "Høyere fart skaper bare mer fare. Utrykningskjøretøyet trenger at du blir forutsigbar og gir plass.", "Больше скорости — больше опасности. Спецмашине нужно, чтобы ты был предсказуем и дал место."]
+    ],
+    "Trafikkreglene § 10: alle skal gi fri veg for utrykningskjøretøy med blålys og sirene, og om nødvendig stanse. Det gir ikke rett til å kjøre på rødt.",
+    "Trafikkreglene § 10: все обязаны освободить дорогу спецтранспорту с мигалкой и сиреной и при необходимости остановиться. Права проезжать на красный это не даёт.",
+    "Прижмись вправо, остановись, не суетись. Красный остаётся красным.")
   ];
 })();

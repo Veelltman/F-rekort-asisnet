@@ -40,6 +40,18 @@
       secondsLeft: cfg.timeLimit || 0
     };
 
+    /* Вопрос с несколькими правильными ответами: it.selected — массив индексов.
+       Засчитывается только точное совпадение набора, как на экзамене. */
+    function isMulti(it) { return !!it.inst.multi; }
+    function hasSel(it) { return isMulti(it) ? !!(it.selected && it.selected.length) : it.selected != null; }
+    function isSel(it, i) { return isMulti(it) ? !!(it.selected && it.selected.includes(i)) : it.selected === i; }
+    function chosenList(it) { return isMulti(it) ? (it.selected || []).map(i => it.options[i]) : (it.selected != null ? [it.options[it.selected]] : []); }
+    function isOk(it) {
+      if (!hasSel(it)) return false;
+      if (!isMulti(it)) return !!it.options[it.selected].correct;
+      return it.options.every((o, i) => !!o.correct === it.selected.includes(i));
+    }
+
     function item(i) {
       const it = session.items[i];
       if (!it.inst) {
@@ -68,7 +80,7 @@
       const it = item(session.index);
       const q = it.inst;
       const total = session.items.length;
-      const answered = session.items.filter(x => exam ? x.selected != null : x.checked).length;
+      const answered = session.items.filter(x => exam ? hasSel(x) : x.checked).length;
       const pct = Math.round((answered / total) * 100);
       const revealed = !exam && it.checked;
 
@@ -93,11 +105,12 @@
             <button class="btn btn-small btn-translate" data-action="toggle-ru">
               ${session.showRu ? "Скрыть перевод" : "Показать перевод"}
             </button>
+            ${q.multi ? `<div class="multi-hint">Velg alle riktige svar <span class="lang-ru ${session.showRu ? "" : "hidden"}">· выбери все верные</span></div>` : ""}
 
             <div class="options ${q.imageOptions ? "options-images" : ""} ${revealed ? "revealed" : ""}">
               ${it.options.map((o, i) => {
-                const cls = ["option", o.image ? "option-image" : "", i === it.selected ? "is-selected" : ""];
-                if (revealed) { if (o.correct) cls.push("is-correct"); else if (i === it.selected) cls.push("is-wrong"); }
+                const cls = ["option", o.image ? "option-image" : "", q.multi ? "option-multi" : "", isSel(it, i) ? "is-selected" : ""];
+                if (revealed) { if (o.correct) cls.push("is-correct"); else if (isSel(it, i)) cls.push("is-wrong"); }
                 return `
                 <button class="${cls.join(" ")}" data-action="select" data-index="${i}" ${revealed ? "disabled" : ""}>
                   <span class="option-letter">${"ABCD"[i]}</span>
@@ -112,7 +125,7 @@
 
             ${!exam && !it.checked ? `
               <div class="check-row">
-                <button class="btn btn-primary btn-check" data-action="check" ${it.selected == null ? "disabled" : ""}>Sjekk <small>проверить</small></button>
+                <button class="btn btn-primary btn-check" data-action="check" ${hasSel(it) ? "" : "disabled"}>Sjekk <small>проверить</small></button>
               </div>` : ""}
 
             ${revealed ? feedbackHtml(it) : ""}
@@ -149,13 +162,19 @@
       if (fbT) fbT.onclick = toggleRu;
       container.querySelectorAll("[data-action=select]").forEach(btn => {
         btn.onclick = () => {
-          it.selected = Number(btn.dataset.index);
-          container.querySelectorAll("[data-action=select]").forEach((b, i) => b.classList.toggle("is-selected", i === it.selected));
+          const idx = Number(btn.dataset.index);
+          if (isMulti(it)) {
+            const set = it.selected || [];
+            it.selected = set.includes(idx) ? set.filter(x => x !== idx) : set.concat(idx);
+          } else {
+            it.selected = idx;
+          }
+          container.querySelectorAll("[data-action=select]").forEach((b, i) => b.classList.toggle("is-selected", isSel(it, i)));
           const check = container.querySelector("[data-action=check]");
-          if (check) check.disabled = false;
+          if (check) check.disabled = !hasSel(it);
           if (exam) {
             const st = container.querySelector(".nav-status");
-            const n = session.items.filter(x => x.selected != null).length;
+            const n = session.items.filter(x => hasSel(x)).length;
             if (st) st.textContent = `отвечено ${n} из ${total}`;
             container.querySelector(".progress-bar").style.width = Math.round((n / total) * 100) + "%";
           }
@@ -163,10 +182,10 @@
       });
       const check = container.querySelector("[data-action=check]");
       if (check) check.onclick = () => {
-        if (it.selected == null) return;
+        if (!hasSel(it)) return;
         it.checked = true;
         session.showRu = false;
-        window.Storage.recordAnswer(it.base, !!it.options[it.selected].correct);
+        window.Storage.recordAnswer(it.base, isOk(it));
         renderQuestion();
         const fb = container.querySelector(".feedback");
         if (fb) fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -178,7 +197,7 @@
       const fin = container.querySelector("[data-action=finish]");
       if (fin) fin.onclick = () => {
         if (exam) {
-          const un = session.items.filter(x => x.selected == null).length;
+          const un = session.items.filter(x => !hasSel(x)).length;
           if (un && !confirm(`Без ответа: ${un}. Они будут засчитаны как ошибки. Сдать?`)) return;
         }
         finish();
@@ -217,10 +236,11 @@
 
     function feedbackHtml(it) {
       const q = it.inst;
+      const ru = session.showRu ? "" : "hidden";
+      if (isMulti(it)) return feedbackMultiHtml(it, ru);
       const chosen = it.options[it.selected];
       const right = it.options.find(o => o.correct);
       const ok = !!chosen.correct;
-      const ru = session.showRu ? "" : "hidden";
       if (ok) {
         return `
         <div class="feedback feedback-ok">
@@ -254,6 +274,50 @@
         </div>`;
     }
 
+    function feedbackMultiHtml(it, ru) {
+      const q = it.inst;
+      const ok = isOk(it);
+      const rightOnes = it.options.filter(o => o.correct);
+      const wrongChosen = chosenList(it).filter(o => !o.correct);
+      const missed = it.options.filter((o, i) => o.correct && !isSel(it, i));
+      const line = (o, mark) => `<p class="fb-answer lang-no">${mark} ${esc(o.text_no)}</p><p class="fb-answer lang-ru ${ru}">${esc(o.text_ru)}</p>`;
+      const rightBlock = `
+          <div class="fb-block fb-right">
+            <div class="fb-label">Riktige svar <span class="lang-ru ${ru}">· правильные ответы</span></div>
+            ${rightOnes.map(o => line(o, "✓")).join("")}
+            <p class="lang-no">${esc(q.explanation_no)}</p>
+            <p class="lang-ru ${ru}">${esc(q.explanation_ru)}</p>
+          </div>`;
+      if (ok) {
+        return `
+        <div class="feedback feedback-ok">
+          <div class="feedback-title">Riktig! — Верно!</div>
+          ${rightBlock}
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+        </div>`;
+      }
+      const wrongPart = wrongChosen.map(o => `
+            ${line(o, "✗")}
+            <p class="lang-no">${esc(o.why_no || "Dette alternativet er ikke riktig.")}</p>
+            <p class="lang-ru ${ru}">${esc(o.why_ru || "Этот вариант неверный.")}</p>`).join("");
+      const missedPart = missed.length ? `
+            <p class="lang-no"><strong>Du manglet:</strong> ${missed.map(o => esc(o.text_no)).join("; ")}</p>
+            <p class="lang-ru ${ru}"><strong>Ты не отметил:</strong> ${missed.map(o => esc(o.text_ru)).join("; ")}</p>` : "";
+      return `
+        <div class="feedback feedback-fail">
+          <div class="feedback-title">Feil — Неверно</div>
+          <div class="fb-block fb-wrong">
+            <div class="fb-label">Du svarte <span class="lang-ru ${ru}">· ты ответил</span></div>
+            ${wrongPart}${missedPart}
+            <p class="lang-no muted">På prøven må alle riktige svar være valgt, og ingen feil.</p>
+            <p class="lang-ru ${ru} muted">На экзамене нужно отметить все верные варианты и ни одного неверного.</p>
+          </div>
+          ${rightBlock}
+          ${q.tip_ru ? `<div class="tip lang-ru ${ru}"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+        </div>`;
+    }
+
     function finish() {
       if (session.finished) return;
       session.finished = true;
@@ -261,8 +325,7 @@
       session.items.forEach((it, i) => { item(i); });
       if (exam) {
         session.items.forEach(it => {
-          const ok = it.selected != null && !!it.options[it.selected].correct;
-          window.Storage.recordAnswer(it.base, ok);
+          window.Storage.recordAnswer(it.base, isOk(it));
         });
       }
       renderResult();
@@ -271,9 +334,11 @@
     function renderResult() {
       const total = session.items.length;
       const results = session.items.map(it => {
-        const chosen = it.selected != null ? it.options[it.selected] : null;
+        const chosenAll = chosenList(it);
+        const chosen = chosenAll[0] || null;
         const right = it.options.find(o => o.correct);
-        return { it, chosen, right, ok: !!(chosen && chosen.correct) };
+        const rightAll = it.options.filter(o => o.correct);
+        return { it, chosen, chosenAll, right, rightAll, ok: isOk(it) };
       });
       const correct = results.filter(r => r.ok).length;
       const wrong = total - correct;
@@ -318,7 +383,10 @@
               <div class="mistake-body">
                 <p class="lang-no"><strong>${esc(r.it.inst.prompt_no)}</strong></p>
                 <p class="lang-ru-always muted">${esc(r.it.inst.prompt_ru)}</p>
-                ${r.ok
+                ${r.it.inst.multi
+                  ? `<p class="mistake-line ${r.ok ? "right" : "wrong"}">Твой ответ: ${r.chosenAll.length ? r.chosenAll.map(o => `${esc(o.text_no)} (${esc(o.text_ru)})`).join("; ") : "без ответа"}</p>
+                     ${r.ok ? "" : `<p class="mistake-line right">Правильно: ${r.rightAll.map(o => `${esc(o.text_no)} (${esc(o.text_ru)})`).join("; ")}</p>`}`
+                  : r.ok
                   ? `<p class="mistake-line right">Твой ответ: ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`
                   : `<p class="mistake-line wrong">Твой ответ: ${r.chosen ? `${esc(r.chosen.text_no)} (${esc(r.chosen.text_ru)})` : "без ответа"}</p>
                      ${r.chosen && r.chosen.why_ru ? `<p class="mistake-why">${esc(r.chosen.why_ru)}</p>` : ""}

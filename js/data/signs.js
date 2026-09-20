@@ -141,9 +141,9 @@
   const marking = [
     q("m01", "Hva betyr en heltrukken gul midtlinje?", "Что означает сплошная жёлтая осевая линия?", [
       ["Du kan ikke krysse linjen for å kjøre forbi", "Нельзя пересекать линию для обгона"],
-      ["Du kan krysse linjen når det er trygt", "Можно пересекать, если безопасно"],
-      ["Linjen viser sykkelfelt", "Линия обозначает велополосу"],
-      ["Linjen markerer parkeringsplass", "Линия обозначает парковку"]
+      ["Du kan krysse linjen når det er trygt", "Можно пересекать, если безопасно", "Heltrukken linje er absolutt: den kan ikke krysses selv om det ser trygt ut. Det er stiplet linje som kan krysses.", "Сплошная — абсолютный запрет, даже если кажется безопасно. Пересекать можно только прерывистую."],
+      ["Linjen viser sykkelfelt", "Линия обозначает велополосу", "Sykkelfelt merkes med hvit linje og sykkelsymbol langs kanten, ikke med gul midtlinje.", "Велополоса обозначается белой линией и символом велосипеда у края, а не жёлтой осевой."],
+      ["Linjen markerer parkeringsplass", "Линия обозначает парковку", "Parkeringsplasser merkes med hvite linjer, og gul linje langs kanten betyr tvert imot stans- eller parkeringsforbud.", "Парковка размечается белыми линиями, а жёлтая линия у края, наоборот, означает запрет остановки или стоянки."]
     ],
     "Heltrukken gul midtlinje (sperrelinje) skal ikke krysses. Den brukes der forbikjøring er farlig.",
     "Сплошная жёлтая осевая (sperrelinje) — пересекать нельзя. Стоит там, где обгон опасен.",
@@ -151,9 +151,9 @@
 
     q("m02", "Hva betyr en stiplet gul midtlinje?", "Что означает прерывистая жёлтая осевая линия?", [
       ["Du kan krysse linjen for å kjøre forbi hvis det er trygt", "Можно пересекать для обгона, если безопасно"],
-      ["Forbikjøring forbudt", "Обгон запрещён"],
-      ["Linjen markerer busstopp", "Линия обозначает остановку автобуса"],
-      ["Du må stoppe ved linjen", "У линии нужно остановиться"]
+      ["Forbikjøring forbudt", "Обгон запрещён", "Forbud mot forbikjøring vises med heltrukken linje eller eget skilt. Stiplet linje tillater kryssing.", "Запрет обгона обозначают сплошной линией или знаком. Прерывистая линия пересекать разрешает."],
+      ["Linjen markerer busstopp", "Линия обозначает остановку автобуса", "Busstopp merkes med gul sikksakklinje langs kanten, ikke med stiplet midtlinje.", "Автобусная остановка размечается жёлтым зигзагом у края, а не прерывистой осевой."],
+      ["Du må stoppe ved linjen", "У линии нужно остановиться", "Midtlinjen skiller kjøreretningene og har ingenting med stopp å gjøre. Stopplinjen er en hvit tverrstripe.", "Осевая разделяет направления и к остановке отношения не имеет. Стоп-линия — белая поперечная полоса."]
     ],
     "Stiplet gul midtlinje (delelinje) kan krysses ved forbikjøring når det er trygt og lovlig.",
     "Прерывистая жёлтая осевая — можно пересекать при обгоне, если безопасно и разрешено.",
@@ -161,9 +161,9 @@
 
     q("m03", "Hva betyr en gul varsellinje (lange streker, korte mellomrom)?", "Что означает жёлтая предупреждающая линия (длинные штрихи, короткие промежутки)?", [
       ["Sikten er dårlig, forbikjøring er farlig, men ikke forbudt", "Плохая видимость: обгон опасен, но не запрещён"],
-      ["Forbikjøring er forbudt", "Обгон запрещён"],
-      ["Linjen er en stopplinje", "Это стоп-линия"],
-      ["Her begynner motorveg", "Здесь начинается автомагистраль"]
+      ["Forbikjøring er forbudt", "Обгон запрещён", "Varsellinjen forbyr ikke, den advarer. Forbudet kommer først med sperrelinjen (heltrukken).", "Varsellinje не запрещает, а предупреждает. Запрет начинается со сплошной (sperrelinje)."],
+      ["Linjen er en stopplinje", "Это стоп-линия", "Stopplinjen går på tvers av kjørefeltet, mens varsellinjen går langs midten av vegen.", "Стоп-линия идёт поперёк полосы, а varsellinje — вдоль середины дороги."],
+      ["Her begynner motorveg", "Здесь начинается автомагистраль", "Motorveg varsles med blått skilt, ikke med vegoppmerking. Motorveg har heller ingen gul midtlinje, siden retningene er fysisk skilt.", "Автомагистраль обозначается синим знаком, а не разметкой. На ней и жёлтой осевой нет — направления разделены физически."]
     ],
     "Varsellinje betyr at sikten er for kort til trygg forbikjøring. Den advarer før en sperrelinje.",
     "Varsellinje: видимость слишком короткая для безопасного обгона. Обычно предупреждает о скорой сплошной.",
@@ -171,9 +171,9 @@
 
     q("m04", "Hva betyr en bred hvit tverrstripe (stopplinje)?", "Что означает широкая белая поперечная полоса (стоп-линия)?", [
       ["Du skal stoppe før linjen når du må stoppe", "Останавливаться нужно перед линией"],
-      ["Linjen markerer gangfelt", "Линия обозначает пешеходный переход"],
-      ["Linjen kan ignoreres", "Линию можно игнорировать"],
-      ["Bare busser må stoppe her", "Останавливаться должны только автобусы"]
+      ["Linjen markerer gangfelt", "Линия обозначает пешеходный переход", "Gangfelt merkes med flere brede striper (sebrastriper), stopplinjen er én enkelt tverrstripe.", "Переход обозначают несколько широких полос (зебра), стоп-линия — одна поперечная полоса."],
+      ["Linjen kan ignoreres", "Линию можно игнорировать", "Stopplinjen viser nøyaktig hvor du skal stoppe ved stoppskilt eller rødt lys. Å kjøre over den er et brudd.", "Стоп-линия точно показывает, где остановиться при знаке STOP или красном свете. Пересечь её — нарушение."],
+      ["Bare busser må stoppe her", "Останавливаться должны только автобусы", "Stopplinjen gjelder alle kjørende, det finnes ingen egen regel for busser.", "Стоп-линия действует для всех водителей, отдельного правила для автобусов нет."]
     ],
     "Ved stoppskilt eller rødt lys stopper du foran stopplinjen.",
     "При знаке STOP или красном свете останавливаешься перед стоп-линией.",
@@ -181,9 +181,9 @@
 
     q("m05", "Hva betyr en rekke hvite trekanter (haitenner) på tvers av kjørefeltet?", "Что означает ряд белых треугольников («акульи зубы») поперёк полосы?", [
       ["Vikelinje: du har vikeplikt", "Линия «уступи дорогу»"],
-      ["Stopplinje: full stopp", "Стоп-линия: полная остановка"],
-      ["Gangfelt", "Пешеходный переход"],
-      ["Fartshump", "Лежачий полицейский"]
+      ["Stopplinje: full stopp", "Стоп-линия: полная остановка", "Trekantene betyr vikeplikt, ikke full stopp. Full stopp kreves bare ved stoppskilt og stopplinje.", "Треугольники означают «уступи», а не полную остановку. Полная остановка нужна только при знаке STOP и стоп-линии."],
+      ["Gangfelt", "Пешеходный переход", "Gangfelt har brede rektangulære striper, ikke trekanter.", "У перехода широкие прямоугольные полосы, а не треугольники."],
+      ["Fartshump", "Лежачий полицейский", "Fartshumper varsles med skilt og hvite trekanter som peker mot deg oppover humpen, men det er et annet mønster og en fysisk opphøyning i vegen.", "Лежачие полицейские обозначают знаком и другим рисунком на самом возвышении; vikelinje — это плоская разметка перед перекрёстком."]
     ],
     "Vikelinjen markerer hvor du skal vike. Den brukes sammen med vikepliktskiltet og i rundkjøringer.",
     "Vikelinje показывает, где уступать. Ставится вместе со знаком «уступи» и на кругах.",
@@ -191,9 +191,9 @@
 
     q("m06", "Hva betyr gul sperrelinje langs fortauskanten?", "Что означает жёлтая сплошная линия вдоль бордюра?", [
       ["Stans forbudt", "Остановка запрещена"],
-      ["Parkering tillatt", "Парковка разрешена"],
-      ["Sykkelfelt", "Велополоса"],
-      ["Busslomme", "Автобусный карман"]
+      ["Parkering tillatt", "Парковка разрешена", "Gul linje langs kanten betyr alltid et forbud, aldri tillatelse. Heltrukken = stans forbudt, stiplet = parkering forbudt.", "Жёлтая линия у края всегда означает запрет, а не разрешение. Сплошная — остановка запрещена, прерывистая — стоянка запрещена."],
+      ["Sykkelfelt", "Велополоса", "Sykkelfelt merkes med hvit linje og sykkelsymbol, ikke gul linje.", "Велополоса обозначается белой линией и символом велосипеда, а не жёлтой линией."],
+      ["Busslomme", "Автобусный карман", "Busslomme og holdeplass merkes med gul sikksakklinje, ikke rett heltrukken linje.", "Автобусный карман и остановка размечаются жёлтым зигзагом, а не ровной сплошной линией."]
     ],
     "Gul heltrukken linje langs kanten betyr stans forbudt. Stiplet gul betyr parkering forbudt.",
     "Жёлтая сплошная вдоль края — остановка запрещена. Жёлтая прерывистая — парковка запрещена.",
@@ -201,9 +201,9 @@
 
     q("m07", "Hva betyr hvite piler i kjørefeltet før et kryss?", "Что означают белые стрелки в полосе перед перекрёстком?", [
       ["Du må kjøre i pilens retning fra dette feltet", "Из этой полосы нужно ехать по стрелке"],
-      ["Anbefalt retning", "Рекомендуемое направление"],
-      ["Pilen gjelder bare busser", "Стрелка только для автобусов"],
-      ["Pilen viser envegskjøring", "Стрелка обозначает одностороннее движение"]
+      ["Anbefalt retning", "Рекомендуемое направление", "Kjørefeltpiler er påbud, ikke anbefaling. Har du valgt feltet, må du følge pilen.", "Стрелки в полосе — предписание, а не рекомендация. Выбрал полосу — обязан ехать по стрелке."],
+      ["Pilen gjelder bare busser", "Стрелка только для автобусов", "Pilene gjelder alle kjørende i feltet. Kollektivfelt merkes med eget skilt og teksten BUSS.", "Стрелки действуют для всех, кто в этой полосе. Полоса для автобусов обозначается отдельным знаком и надписью BUSS."],
+      ["Pilen viser envegskjøring", "Стрелка обозначает одностороннее движение", "Envegskjøring vises med blått skilt med hvit pil, ikke med piler i kjørefeltet.", "Одностороннее движение обозначается синим знаком с белой стрелкой, а не стрелками в полосе."]
     ],
     "Kjørefeltpiler er påbud: valgte du feltet, må du følge pilen.",
     "Стрелки в полосе — предписание: выбрал полосу, едешь по стрелке.",
