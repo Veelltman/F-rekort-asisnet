@@ -77,6 +77,7 @@
     }
 
     let lastTap = { idx: -1, at: 0 };
+    let checkedAt = 0;
     function renderQuestion() {
       const it = item(session.index);
       const q = it.inst;
@@ -161,7 +162,8 @@
       };
       container.querySelector("[data-action=toggle-ru]").onclick = toggleRu;
       const fbT = container.querySelector("[data-action=toggle-ru-fb]");
-      if (fbT) fbT.onclick = toggleRu;
+      /* защита от «призрачного» тапа: сразу после Sjekk кнопка перевода может оказаться под пальцем */
+      if (fbT) fbT.onclick = () => { if (Date.now() - checkedAt < 600) return; toggleRu(); };
       container.querySelectorAll("[data-action=select]").forEach(btn => {
         btn.onclick = () => {
           const idx = Number(btn.dataset.index);
@@ -198,6 +200,7 @@
       if (check) check.onclick = () => {
         if (!hasSel(it)) return;
         it.checked = true;
+        checkedAt = Date.now();
         session.showRu = false;
         window.Storage.recordAnswer(it.base, isOk(it));
         renderQuestion();
