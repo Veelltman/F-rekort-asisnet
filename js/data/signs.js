@@ -93,6 +93,11 @@
       topic: "signs", kind: "category",
       entry
     };
+    /* Знаки «Slutt på …» снимают запрет и выглядят как информация, но по skiltforskriften
+       это серия 300 = forbudsskilt. На экзамене спрашивают именно официальную категорию. */
+    const opphev = entry.cat === "forbud" && /^Slutt på|sone/i.test(entry.no);
+    const noteNo = opphev ? " Merk: soneskilt og «slutt på»-skilt er rektangulære og ligner opplysningsskilt, men i skiltforskriften hører de til forbudsskiltene (300-serien)." : "";
+    const noteRu = opphev ? " Важно: зональные знаки и знаки «slutt på …» прямоугольные и похожи на информационные, но по Skiltforskriften относятся к запрещающим (серия 300)." : "";
     base.fresh = () => {
       const keys = Object.keys(CATS).filter(k => k !== entry.cat).sort(() => Math.random() - 0.5).slice(0, 3);
       const opts = [entry.cat, ...keys];
@@ -102,11 +107,15 @@
         prompt_ru: "К какому типу относится этот знак?",
         image: img(entry),
         options: opts.map((k, i) => ({ text_no: CATS[k].no, text_ru: CATS[k].ru, correct: i === 0,
-          why_no: i === 0 ? null : `${CATS[k].no} ser annerledes ut. ${CATS[k].tip_no || ""}`.trim(),
-          why_ru: i === 0 ? null : `${CATS[k].ru} выглядит иначе. ${CATS[k].tip}` })),
-        explanation_no: `${entry.no} er et ${CATS[entry.cat].no.toLowerCase()}. ${entry.expl_no}`,
-        explanation_ru: `«${entry.ru}» — ${CATS[entry.cat].ru.toLowerCase()}. ${entry.expl_ru}`,
-        tip_ru: CATS[entry.cat].tip
+          why_no: i === 0 ? null : (opphev && k === "opplysning"
+            ? "Skiltet er rektangulært og ligner et opplysningsskilt, men soneskilt og «slutt på»-skilt er formelt forbudsskilt (300-serien i skiltforskriften)."
+            : `${CATS[k].no} ser annerledes ut. ${CATS[k].tip_no || ""}`.trim()),
+          why_ru: i === 0 ? null : (opphev && k === "opplysning"
+            ? "Знак прямоугольный и похож на информационный, но зональные знаки и «slutt på …» формально относятся к запрещающим (серия 300 в Skiltforskriften). На экзамене отвечай «Forbudsskilt»."
+            : `${CATS[k].ru} выглядит иначе. ${CATS[k].tip}`) })),
+        explanation_no: `${entry.no} er et ${CATS[entry.cat].no.toLowerCase()}. ${entry.expl_no}${noteNo}`,
+        explanation_ru: `«${entry.ru}» — ${CATS[entry.cat].ru.toLowerCase()}. ${entry.expl_ru}${noteRu}`,
+        tip_ru: opphev ? "Правило простое: серия 300 (запреты, зоны запретов и их отмена) = Forbudsskilt. Синий прямоугольник с реальной информацией о дороге = Opplysningsskilt." : CATS[entry.cat].tip
       };
     };
     return base;
