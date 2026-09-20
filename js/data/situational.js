@@ -185,9 +185,9 @@
       "Ты (A) едешь прямо через перекрёсток без знаков. Машина B едет справа. Кто должен уступить?",
       [
         ["Du (A) må vike for B — høyreregelen", "Ты (A) уступаешь B — правило правой руки"],
-        ["B må vike fordi du kjører rett fram", "B уступает, потому что ты едешь прямо"],
-        ["Den som kommer først kjører først", "Кто первый приехал, тот и едет"],
-        ["Ingen har vikeplikt", "Никто не обязан уступать"]
+        ["B må vike fordi du kjører rett fram", "B уступает, потому что ты едешь прямо", "Å kjøre rett fram gir ingen forrang i kryss uten skilt, høyreregelen avgjør uansett retning.", "Движение прямо не даёт приоритета на перекрёстке без знаков — решает правило правой руки, независимо от направления."],
+        ["Den som kommer først kjører først", "Кто первый приехал, тот и едет", "I Norge avgjør ikke ankomsttidspunktet, høyreregelen gjelder uansett hvem som kom først.", "В Норвегии очерёдность прибытия роли не играет — действует правило правой руки, кто бы ни подъехал первым."],
+        ["Ingen har vikeplikt", "Никто не обязан уступать", "I ethvert kryss uten skilt gjelder høyreregelen, noen har alltid vikeplikt.", "На любом перекрёстке без знаков действует правило правой руки — кто-то всегда обязан уступить."]
       ],
       "I kryss uten skilt eller lys gjelder høyreregelen: du har vikeplikt for trafikk fra høyre.",
       "На перекрёстке без знаков и светофора действует правило правой руки: уступаешь тем, кто справа.",
@@ -198,9 +198,9 @@
       "Перекрёсток без знаков. Машина B едет слева. Что делаешь?",
       [
         ["Kjører — B har vikeplikt for meg", "Еду — B должна уступить мне"],
-        ["Stopper og venter på B", "Останавливаюсь и жду B"],
-        ["Blinker og lar B kjøre først", "Мигаю фарами и пропускаю B"],
-        ["Kjører fortere for å komme foran", "Ускоряюсь, чтобы проехать первым"]
+        ["Stopper og venter på B", "Останавливаюсь и жду B", "Du har forrang siden du kommer fra høyre for B, det er ikke nødvendig å stoppe og vente.", "У тебя приоритет, ведь ты справа от B — останавливаться и ждать не нужно."],
+        ["Blinker og lar B kjøre først", "Мигаю фарами и пропускаю B", "Å blinke med lysene er ikke et offisielt signal og skaper bare forvirring, du har uansett forrang.", "Мигание фарами — не официальный сигнал и только сбивает с толку, у тебя и так приоритет."],
+        ["Kjører fortere for å komme foran", "Ускоряюсь, чтобы проехать первым", "Du trenger ikke skynde deg, du har allerede forrang etter høyreregelen.", "Спешить незачем — приоритет у тебя и так есть по правилу правой руки."]
       ],
       "Du er til høyre for B, så B må vike for deg. Men vær alltid klar til å bremse hvis B ikke viker.",
       "Ты справа от B, значит B уступает тебе. Но всегда будь готов затормозить, если B не уступит.",
@@ -211,9 +211,9 @@
       "У тебя (A) знак «уступи дорогу». Машина B едет справа по пересекаемой дороге. Что делаешь?",
       [
         ["Senker farten og viker for B", "Снижаю скорость и уступаю B"],
-        ["Kjører — jeg er allerede nær krysset", "Еду — я уже близко к перекрёстку"],
-        ["Stopper helt selv om ingen kommer", "Полностью останавливаюсь, даже если никого нет"],
-        ["Tuter for å varsle B", "Сигналю, чтобы предупредить B"]
+        ["Kjører — jeg er allerede nær krysset", "Еду — я уже близко к перекрёстку", "Nærhet til krysset endrer ikke vikeplikten, du må uansett vike for trafikk på kryssende vei.", "Близость к перекрёстку ничего не меняет — обязанность уступить действует в любом случае."],
+        ["Stopper helt selv om ingen kommer", "Полностью останавливаюсь, даже если никого нет", "Ved vikeplikt er det ikke krav om full stopp, det holder å senke farten hvis veien er fri.", "При знаке «уступи дорогу» полная остановка не обязательна — достаточно снизить скорость, если дорога свободна."],
+        ["Tuter for å varsle B", "Сигналю, чтобы предупредить B", "Signalhorn erstatter ikke vikeplikten, du skal senke farten og vike, ikke varsle med lyd.", "Гудок не заменяет обязанность уступить — нужно снизить скорость и уступить, а не сигналить."]
       ],
       "Vikeplikt betyr at du må vike for ALL trafikk på kryssende vei — både fra høyre og venstre. Du trenger ikke stoppe hvis veien er fri.",
       "«Уступи дорогу» означает: уступаешь ВСЕМ на пересекаемой дороге — и справа, и слева. Останавливаться не обязательно, если дорога свободна.",
@@ -224,9 +224,9 @@
       "Ты (A) на главной дороге. Машина B выезжает справа с второстепенной. Кто уступает?",
       [
         ["B må vike — jeg er på forkjørsvei", "B уступает — я на главной дороге"],
-        ["Jeg må vike — B kommer fra høyre", "Я уступаю — B справа"],
-        ["Den som er størst kjører først", "Кто больше, тот и едет"],
-        ["Begge må stoppe", "Оба должны остановиться"]
+        ["Jeg må vike — B kommer fra høyre", "Я уступаю — B справа", "På forkjørsvei gjelder ikke høyreregelen, det er B som må vike for deg.", "На главной дороге правило правой руки не действует — уступить должен B, а не ты."],
+        ["Den som er størst kjører først", "Кто больше, тот и едет", "Kjøretøyets størrelse har ingen betydning, forkjørsretten avgjøres av skiltingen.", "Размер машины тут ни при чём — приоритет определяется знаком."],
+        ["Begge må stoppe", "Оба должны остановиться", "Bare den som kommer fra sideveien har vikeplikt, du på forkjørsveien trenger ikke stoppe.", "Уступить обязан только тот, кто со второстепенной, тебе на главной останавливаться не нужно."]
       ],
       "På forkjørsvei gjelder ikke høyreregelen. Trafikk fra sideveier må vike for deg.",
       "На главной дороге правило правой руки не действует. Транспорт с боковых дорог уступает тебе.",
@@ -237,9 +237,9 @@
       "Ты (A) поворачиваешь налево. Машина B едет навстречу прямо. Кто уступает?",
       [
         ["Jeg viker — møtende trafikk rett fram har forrang", "Я уступаю — встречный, едущий прямо, имеет преимущество"],
-        ["B viker — jeg var først i krysset", "B уступает — я первый на перекрёстке"],
-        ["Jeg svinger raskt før B kommer", "Быстро поворачиваю до приезда B"],
-        ["Høyreregelen avgjør", "Решает правило правой руки"]
+        ["B viker — jeg var først i krysset", "B уступает — я первый на перекрёстке", "Rekkefølgen inn i krysset er ikke avgjørende, den som svinger til venstre skal alltid vike for møtende som kjører rett fram.", "Порядок въезда на перекрёсток тут не важен — поворачивающий налево всегда уступает встречному, едущему прямо."],
+        ["Jeg svinger raskt før B kommer", "Быстро поворачиваю до приезда B", "Å prøve å rekke unna før møtende trafikk er farlig og bryter med vikeplikten ved venstresving.", "Пытаться проскочить перед встречным опасно и нарушает обязанность уступить при повороте налево."],
+        ["Høyreregelen avgjør", "Решает правило правой руки", "Høyreregelen gjelder ikke her, det er den spesielle regelen om venstresving mot møtende trafikk som avgjør.", "Правило правой руки тут ни при чём — действует особое правило про поворот налево навстречу транспорту."]
       ],
       "Når du svinger til venstre, må du vike for møtende trafikk som kjører rett fram eller svinger til høyre.",
       "При повороте налево ты уступаешь встречному транспорту, который едет прямо или поворачивает направо.",
@@ -250,9 +250,9 @@
       "Ты (A) поворачиваешь направо. Встречная машина B поворачивает налево на ту же дорогу. У кого преимущество?",
       [
         ["Jeg — den som svinger til venstre må vike", "У меня — поворачивающий налево уступает"],
-        ["B — den som svinger til venstre har forrang", "У B — поворачивающий налево имеет преимущество"],
-        ["Vi må begge stoppe og avtale", "Оба останавливаемся и договариваемся"],
-        ["Den raskeste bilen", "У более быстрой машины"]
+        ["B — den som svinger til venstre har forrang", "У B — поворачивающий налево имеет преимущество", "Det er faktisk omvendt: høyresving går foran venstresving, ikke motsatt.", "На самом деле наоборот: поворот направо важнее поворота налево, а не наоборот."],
+        ["Vi må begge stoppe og avtale", "Оба останавливаемся и договариваемся", "Det finnes en fast regel for dette, dere trenger ikke stoppe og avtale seg imellom.", "Для этого есть чёткое правило, договариваться и останавливаться не нужно."],
+        ["Den raskeste bilen", "У более быстрой машины", "Farten på bilene avgjør ikke forrang, det er svingretningen som teller.", "Скорость машин тут ни при чём — важно направление поворота."]
       ],
       "Høyresving går foran venstresving. B må vente til du har svingt.",
       "Поворот направо важнее поворота налево. B ждёт, пока ты повернёшь.",
@@ -263,9 +263,9 @@
       "Ты (A) въезжаешь на круг. Машина B уже на кругу. Что делаешь?",
       [
         ["Viker for B — trafikk i rundkjøringen har forrang", "Уступаю B — те, кто на кругу, имеют преимущество"],
-        ["Kjører inn — B kommer fra venstre", "Въезжаю — B едет слева"],
-        ["Stopper alltid før rundkjøringen", "Всегда останавливаюсь перед кругом"],
-        ["Kjører inn og tuter", "Въезжаю и сигналю"]
+        ["Kjører inn — B kommer fra venstre", "Въезжаю — B едет слева", "I rundkjøring gjelder ikke høyreregelen, trafikk som allerede er inne har alltid forrang.", "На круге правило правой руки не действует — приоритет всегда у тех, кто уже на кругу."],
+        ["Stopper alltid før rundkjøringen", "Всегда останавливаюсь перед кругом", "Det er ikke krav om full stopp, det holder å vike hvis noen er i rundkjøringen.", "Полная остановка не обязательна — достаточно уступить, если на кругу кто-то есть."],
+        ["Kjører inn og tuter", "Въезжаю и сигналю", "Signalhorn erstatter ikke vikeplikten for trafikk som allerede er i rundkjøringen.", "Гудок не заменяет обязанность уступить тем, кто уже на кругу."]
       ],
       "Ved rundkjøring er det alltid vikeplikt for trafikk som allerede er i rundkjøringen, uansett hvor den kommer fra.",
       "На круговом движении всегда уступаешь тем, кто уже на кругу, откуда бы они ни ехали.",
@@ -276,9 +276,9 @@
       "Ты выезжаешь с круга на первом съезде (направо). Нужно ли включать поворотник?",
       [
         ["Ja — høyre blinklys når jeg skal ut", "Да — правый поворотник при выезде"],
-        ["Nei — blinklys brukes ikke i rundkjøring", "Нет — на кругу поворотники не используются"],
-        ["Ja — venstre blinklys", "Да — левый поворотник"],
-        ["Bare hvis det er andre biler", "Только если есть другие машины"]
+        ["Nei — blinklys brukes ikke i rundkjøring", "Нет — на кругу поворотники не используются", "Blinklys skal tvert imot brukes i rundkjøring, spesielt høyre blinklys ved utkjøring.", "Поворотник наоборот нужен на кругу, особенно правый при выезде."],
+        ["Ja — venstre blinklys", "Да — левый поворотник", "Venstre blinklys brukes ved innkjøring hvis du skal langt rundt, ved utkjøring skal du bruke høyre.", "Левый поворотник — для въезда, если едешь далеко по кругу, а при выезде нужен правый."],
+        ["Bare hvis det er andre biler", "Только если есть другие машины", "Regelen om blinklys gjelder uansett om det er andre biler til stede eller ikke.", "Правило про поворотник действует независимо от того, есть ли рядом другие машины."]
       ],
       "Du skal alltid gi tegn med høyre blinklys når du forlater rundkjøringen. Skal du langt rundt, bruker du venstre blinklys inn.",
       "Всегда включай правый поворотник при выезде с круга. Если едешь далеко по кругу (налево) — при въезде включи левый.",
@@ -289,9 +289,9 @@
       "У тебя (A) знак STOP. Дорога кажется пустой, но B приближается слева. Что делаешь?",
       [
         ["Stopper helt ved stopplinjen, ser, og viker for B", "Полностью останавливаюсь у стоп-линии, смотрю и уступаю B"],
-        ["Senker farten og kjører — veien er nesten tom", "Снижаю скорость и еду — дорога почти пустая"],
-        ["Kjører fordi B kommer fra venstre", "Еду, потому что B слева"],
-        ["Stopper midt i krysset", "Останавливаюсь посреди перекрёстка"]
+        ["Senker farten og kjører — veien er nesten tom", "Снижаю скорость и еду — дорога почти пустая", "Stoppskilt krever full stopp, det holder ikke å bare senke farten selv om veien virker tom.", "Знак STOP требует полной остановки — снизить скорость недостаточно, даже если дорога кажется пустой."],
+        ["Kjører fordi B kommer fra venstre", "Еду, потому что B слева", "Ved stoppskilt spiller det ingen rolle om trafikken kommer fra venstre eller høyre, du skal uansett stoppe og vike.", "У знака STOP не важно, справа или слева едет машина — в любом случае нужно остановиться и уступить."],
+        ["Stopper midt i krysset", "Останавливаюсь посреди перекрёстка", "Du skal stoppe ved stopplinjen før krysset, ikke midt i krysset.", "Останавливаться нужно у стоп-линии перед перекрёстком, а не посреди него."]
       ],
       "Stoppskilt krever full stopp uansett. Etter stoppet har du vikeplikt for all trafikk på kryssende vei.",
       "Знак STOP требует полной остановки в любом случае. После остановки уступаешь всем на пересекаемой дороге.",
@@ -302,9 +302,9 @@
       "Ты едешь прямо, для тебя зелёный. Машина B справа — на красный. Что действует?",
       [
         ["Jeg kjører — lyssignal går foran høyreregelen", "Еду — светофор важнее правила правой руки"],
-        ["Jeg viker for B fordi B er til høyre", "Уступаю B, потому что B справа"],
-        ["Jeg stopper for sikkerhets skyld", "Останавливаюсь на всякий случай"],
-        ["Grønt lys betyr bare at jeg KAN kjøre hvis B viker", "Зелёный значит, что я могу ехать только если B уступит"]
+        ["Jeg viker for B fordi B er til høyre", "Уступаю B, потому что B справа", "Høyreregelen gjelder ikke når det er trafikklys, lyset avgjør, og grønt betyr at du har forrang.", "Правило правой руки не действует при работающем светофоре — решает сигнал, и зелёный даёт тебе приоритет."],
+        ["Jeg stopper for sikkerhets skyld", "Останавливаюсь на всякий случай", "Grønt lys gir deg rett til å kjøre, unødvendig stopp kan forvirre trafikken bak deg.", "Зелёный даёт право ехать — ненужная остановка может запутать машины позади."],
+        ["Grønt lys betyr bare at jeg KAN kjøre hvis B viker", "Зелёный значит, что я могу ехать только если B уступит", "Grønt lys gir deg forrang direkte, det er ikke betinget av at B velger å vike.", "Зелёный сразу даёт приоритет, это не зависит от того, уступит ли B."]
       ],
       "Trafikklys går foran både skilt og høyreregelen. Grønt lys = du kan kjøre, men fortsatt med aktsomhet.",
       "Светофор важнее и знаков, и правила правой руки. Зелёный — можно ехать, но с осторожностью.",
@@ -315,9 +315,9 @@
       "Ты подъезжаешь к пешеходному переходу. Пешеход стоит на тротуаре и, похоже, хочет перейти. Что делаешь?",
       [
         ["Senker farten og stopper for å slippe fotgjengeren over", "Снижаю скорость и останавливаюсь, чтобы пропустить"],
-        ["Kjører — fotgjengeren er ikke i veien ennå", "Еду — пешеход ещё не на дороге"],
-        ["Tuter så fotgjengeren venter", "Сигналю, чтобы пешеход подождал"],
-        ["Kjører raskere for å passere før fotgjengeren går", "Ускоряюсь, чтобы проехать до него"]
+        ["Kjører — fotgjengeren er ikke i veien ennå", "Еду — пешеход ещё не на дороге", "Vikeplikten gjelder også for fotgjengere som er på vei ut i gangfeltet, ikke bare de som allerede står der.", "Обязанность уступить действует и для пешеходов, которые только собираются ступить на переход, а не только для тех, кто уже там."],
+        ["Tuter så fotgjengeren venter", "Сигналю, чтобы пешеход подождал", "Signalhorn skal ikke brukes for å presse fotgjengeren til å vente, du skal selv stoppe.", "Гудок нельзя использовать, чтобы заставить пешехода подождать — останавливаться должен ты сам."],
+        ["Kjører raskere for å passere før fotgjengeren går", "Ускоряюсь, чтобы проехать до него", "Å øke farten nær et gangfelt er farlig og bryter direkte med vikeplikten for fotgjengere.", "Ускоряться рядом с переходом опасно и прямо нарушает обязанность уступить пешеходу."]
       ],
       "Du har vikeplikt for fotgjengere som er i gangfeltet ELLER på vei ut i det. Vis tydelig at du stopper.",
       "Ты уступаешь пешеходу, который на переходе ИЛИ собирается ступить на него. Покажи явно, что останавливаешься.",
