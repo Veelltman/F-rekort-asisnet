@@ -649,7 +649,7 @@
         </section>
         <div class="grid modes">
           ${resumable ? `<div class="card mode-card"><h3>Продолжить</h3><p class="muted">Начатая колода: ${saved.index} из ${saved.ids.length} пройдено.</p><button class="btn btn-primary" onclick="go('vocab',{mode:'resume'})">Продолжить</button></div>` : ""}
-          <div class="card mode-card"><h3>Новые слова</h3><p class="muted">${groups.new.length ? "20 слов, которые ты ещё не видел." : "Все слова уже пройдены хотя бы раз."}</p><button class="btn ${resumable ? "" : "btn-primary"}" ${groups.new.length ? "" : "disabled"} onclick="go('vocab',{mode:'new'})">Начать</button></div>
+          <div class="card mode-card"><h3>Новые слова</h3><p class="muted">${groups.new.length ? `${Math.min(20, groups.new.length)} слов, которые ты ещё не видел (всего новых ${groups.new.length}).` : `Все ${all.length} слов уже пройдены хотя бы раз. Новые слова появляются каждые три дня, а пока повторяй незнакомые.`}</p><button class="btn ${resumable ? "" : "btn-primary"}" ${groups.new.length ? "" : "disabled"} onclick="go('vocab',{mode:'new'})">Начать</button></div>
           <div class="card mode-card"><h3>Повторить незнакомые</h3><p class="muted">${groups.weak.length ? groups.weak.length + " слов, которые ты отметил «не знаю»." : "Незнакомых слов нет."}</p><button class="btn" ${groups.weak.length ? "" : "disabled"} onclick="go('vocab',{mode:'weak'})">Начать</button></div>
           <div class="card mode-card"><h3>Все слова</h3><p class="muted">Вся колода в случайном порядке.</p><button class="btn" onclick="go('vocab',{mode:'all'})">Начать</button></div>
         </div>`;
@@ -779,7 +779,7 @@
             </div>
             <div class="result-actions">
               ${session.unknown.length ? `<button class="btn btn-primary" id="retry">Повторить незнакомые (${session.unknown.length})</button>` : ""}
-              <button class="btn" onclick="go('vocab')">Новый набор</button>
+              <button class="btn" onclick="go('vocab')">К лексике</button>
               <button class="btn btn-ghost" onclick="go('home')">Главная</button>
             </div>
           </div>

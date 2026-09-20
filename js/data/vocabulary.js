@@ -87,6 +87,76 @@
     w("065", "midtlinje", "осевая линия (разметка посередине дороги)", "Det er forbudt å krysse en heltrukket midtlinje uten grunn.", "Сплошную осевую пересекать нельзя.", "Приоритет"),
     w("066", "kollektivfelt", "полоса для общественного транспорта", "Kollektivfeltet er stort sett forbeholdt buss og taxi.", "Полоса для общественного транспорта — в основном для автобусов и такси.", "Приоритет"),
     w("067", "dekktrykk", "давление в шинах", "Sjekk dekktrykket når det blir kaldere ute.", "Похолодало — проверь давление в шинах.", "Машина"),
-    w("068", "fører / sjåfør", "водитель", "Føreren er ansvarlig for at bilen er i forsvarlig stand.", "За исправность машины отвечает водитель.", "Основное")
+    w("068", "fører / sjåfør", "водитель", "Føreren er ansvarlig for at bilen er i forsvarlig stand.", "За исправность машины отвечает водитель.", "Основное"),
+
+    /* ---------- Знаки и разметка ---------- */
+    w("069", "fareskilt", "предупреждающий знак", "Fareskilt er trekantede med rød kant.", "Предупреждающие знаки — треугольные с красной каймой.", "Знаки"),
+    w("070", "forbudsskilt", "запрещающий знак", "Forbudsskilt er runde og forbyr noe.", "Запрещающие знаки круглые, они что-то запрещают.", "Знаки"),
+    w("071", "påbudsskilt", "предписывающий знак", "Påbudsskilt er blå og sier hva du må gjøre.", "Предписывающие знаки синие — говорят, что нужно делать.", "Знаки"),
+    w("072", "opplysningsskilt", "информационный знак", "Motorveg-skiltet er et opplysningsskilt.", "Знак автомагистрали — информационный.", "Знаки"),
+    w("073", "underskilt", "дополнительная табличка", "Underskiltet forteller når forbudet gjelder.", "Табличка снизу говорит, когда действует запрет.", "Знаки"),
+    w("074", "vegoppmerking", "дорожная разметка", "Gul vegoppmerking skiller kjøreretningene.", "Жёлтая разметка разделяет направления движения.", "Знаки"),
+    w("075", "sperrelinje", "сплошная линия", "Du må ikke krysse en sperrelinje.", "Сплошную линию пересекать нельзя.", "Знаки"),
+    w("076", "varsellinje", "предупреждающая линия", "Varsellinje betyr at sikten er for kort til forbikjøring.", "Varsellinje значит: видимость слишком мала для обгона.", "Знаки"),
+    w("077", "stopplinje", "стоп-линия", "Stopp foran stopplinjen, ikke på den.", "Останавливайся перед стоп-линией, а не на ней.", "Знаки"),
+    w("078", "vikelinje", "линия «уступи дорогу»", "Vikelinjen består av små hvite trekanter.", "Линия «уступи» состоит из маленьких белых треугольников.", "Знаки"),
+    w("079", "kjørefeltpil", "стрелка в полосе", "Kjørefeltpilen viser hvor du kan kjøre fra dette feltet.", "Стрелка в полосе показывает, куда можно ехать из неё.", "Знаки"),
+    w("080", "innkjøring forbudt", "въезд запрещён", "Rødt skilt med hvit strek betyr innkjøring forbudt.", "Красный знак с белой полосой — въезд запрещён.", "Знаки"),
+    w("081", "stans forbudt", "остановка запрещена", "Ved stans forbudt kan du ikke stoppe i det hele tatt.", "Где остановка запрещена, стоять нельзя вообще.", "Знаки"),
+    w("082", "parkering forbudt", "стоянка запрещена", "Parkering forbudt: du kan stoppe kort for å slippe av noen.", "Стоянка запрещена, но коротко высадить пассажира можно.", "Знаки"),
+    w("083", "sone", "зона (действия знака)", "Fartsgrensesonen gjelder til du ser skiltet slutt på sone.", "Зона ограничения действует до знака «конец зоны».", "Знаки"),
+    w("084", "envegskjøring", "одностороннее движение", "I en gate med envegskjøring kan du parkere på begge sider.", "На односторонней улице можно парковаться с обеих сторон.", "Знаки"),
+
+    /* ---------- Дорога ---------- */
+    w("085", "motorveg", "автомагистраль", "På motorveg er det forbudt å stanse og snu.", "На автомагистрали запрещено останавливаться и разворачиваться.", "Дорога"),
+    w("086", "motortrafikkveg", "автодорога (без разделителя)", "Motortrafikkveg har ikke fysisk midtdeler.", "У motortrafikkveg нет физического разделителя.", "Дорога"),
+    w("087", "påkjøringsfelt / felt for fartsøkning", "полоса разгона", "Bruk hele påkjøringsfeltet til å komme opp i fart.", "Используй всю полосу разгона, чтобы набрать скорость.", "Дорога"),
+    w("088", "avkjøring", "съезд", "Ta neste avkjøring mot Lillestrøm.", "Съезжай на следующем съезде на Лиллестрём.", "Дорога"),
+    w("089", "vegskulder", "обочина", "Stans bare på vegskulderen ved nødstilfelle.", "Останавливайся на обочине только в крайнем случае.", "Дорога"),
+    w("090", "kjørebane", "проезжая часть", "Gående skal ikke gå i kjørebanen når det finnes fortau.", "Пешеходы не должны идти по проезжей части, если есть тротуар.", "Дорога"),
+    w("091", "gatetun", "жилая зона", "I gatetun kjører du i gangfart.", "В жилой зоне едешь со скоростью пешехода.", "Дорога"),
+    w("092", "gågate", "пешеходная улица", "Kjøring i gågate er som hovedregel forbudt.", "Езда по пешеходной улице, как правило, запрещена.", "Дорога"),
+    w("093", "planovergang", "железнодорожный переезд", "Stopp når det røde lyset blinker ved planovergangen.", "Останавливайся, когда на переезде мигает красный.", "Дорога"),
+    w("094", "møteplass", "разъезд (карман на узкой дороге)", "Den som har møteplassen på sin side, bruker den.", "Разъездом пользуется тот, у кого он на своей стороне.", "Дорога"),
+    w("095", "bakketopp", "вершина подъёма", "Forbikjøring er forbudt ved bakketopp.", "Обгон запрещён на вершине подъёма.", "Дорога"),
+    w("096", "sving", "поворот дороги", "Senk farten før svingen, ikke i den.", "Сбрось скорость перед поворотом, а не в нём.", "Дорога"),
+    w("097", "sikt", "видимость / обзор", "Dårlig sikt betyr lavere fart.", "Плохая видимость — значит ниже скорость.", "Дорога"),
+    w("098", "trafikkøy", "островок безопасности", "Trikken stopper ved en holdeplass uten trafikkøy.", "Трамвай стоит на остановке без островка безопасности.", "Дорога"),
+
+    /* ---------- Машина ---------- */
+    w("099", "bremselengde", "тормозной путь", "Bremselengden blir fire ganger så lang når farten dobles.", "Тормозной путь вырастает вчетверо при удвоении скорости.", "Машина"),
+    w("100", "reaksjonstid", "время реакции", "Reaksjonstiden er omtrent ett sekund.", "Время реакции — примерно одна секунда.", "Машина"),
+    w("101", "stopplengde", "остановочный путь", "Stopplengde er reaksjonslengde pluss bremselengde.", "Остановочный путь — это путь за время реакции плюс тормозной путь.", "Машина"),
+    w("102", "ABS-bremser", "система ABS", "Med ABS trykker du bremsen hardt og holder.", "С ABS жмёшь тормоз сильно и держишь.", "Машина"),
+    w("103", "tillatt totalvekt", "разрешённая полная масса", "Bil og henger kan ha tillatt totalvekt på 3 500 kg til sammen.", "Машина и прицеп могут иметь суммарную полную массу 3 500 кг.", "Машина"),
+    w("104", "vannplaning", "аквапланирование", "Ved vannplaning slipper du gassen rolig.", "При аквапланировании плавно отпускай газ.", "Машина"),
+    w("105", "kjettinger", "цепи противоскольжения", "Ha kjettinger i bilen om vinteren i fjellet.", "Зимой в горах вози в машине цепи.", "Машина"),
+    w("106", "vinterdekk", "зимние шины", "Vinterdekk uten pigger kan brukes hele året.", "Нешипованные зимние шины можно использовать круглый год.", "Машина"),
+    w("107", "tåkelys", "противотуманные фары", "Tåkelys brukes bare i tåke og snøvær.", "Противотуманки — только в туман и снегопад.", "Машина"),
+    w("108", "kjørelys", "дневные ходовые огни", "Kjørelys eller nærlys skal alltid være på.", "Ходовые огни или ближний свет должны быть всегда включены.", "Машина"),
+    w("109", "barnesikring / barnesete", "детское удерживающее устройство", "Barn under 135 cm skal sitte i godkjent barnesikring.", "Дети ниже 135 см сидят в одобренном детском кресле.", "Машина"),
+    w("110", "servostyring", "усилитель руля", "Slår du av motoren i fart, mister du servostyringen.", "Выключишь двигатель на ходу — потеряешь усилитель руля.", "Машина"),
+
+    /* ---------- Правила и санкции ---------- */
+    w("111", "forenklet forelegg", "штраф на месте (упрощённое постановление)", "Forenklet forelegg for mobilbruk er 10 750 kroner.", "Штраф за телефон за рулём — 10 750 крон.", "Правила"),
+    w("112", "tap av førerett", "лишение права управления", "26 km/t over i 50-sone gir tap av førerett.", "Превышение на 26 км/ч в зоне 50 — лишение прав.", "Правила"),
+    w("113", "prøveperiode", "испытательный срок", "I prøveperioden teller prikkene dobbelt.", "В испытательный срок баллы считаются вдвойне.", "Правила"),
+    w("114", "ruspåvirket", "в состоянии опьянения", "Å kjøre ruspåvirket er straffbart.", "Езда в состоянии опьянения наказуема.", "Правила"),
+    w("115", "aktsomhet", "осторожность / внимательность", "Gult blinksignal krever særlig aktsomhet.", "Мигающий жёлтый требует особой осторожности.", "Правила"),
+    w("116", "skademelding", "извещение о ДТП (бланк для страховой)", "Fyll ut skademelding sammen med den andre føreren.", "Заполни извещение о ДТП вместе с другим водителем.", "Правила"),
+    w("117", "personskade", "травма человека", "Ved personskade skal politiet varsles.", "При травмах нужно уведомить полицию.", "Правила"),
+    w("118", "materiell skade", "материальный ущерб", "Ved bare materiell skade trenger du ikke ringe politiet.", "Если только материальный ущерб, полицию можно не вызывать.", "Правила"),
+    w("119", "nødstans", "вынужденная остановка", "Ved nødstans tar du på refleksvest før du går ut.", "При вынужденной остановке надень жилет, прежде чем выходить.", "Правила"),
+    w("120", "fri veg", "свободный проезд (для спецтранспорта)", "Gi fri veg for utrykningskjøretøy med blålys.", "Освободи дорогу спецтранспорту с мигалкой.", "Правила"),
+    w("121", "lydsignal / horn", "звуковой сигнал", "Lydsignal skal bare brukes for å varsle om fare.", "Сигналить можно только чтобы предупредить об опасности.", "Правила"),
+    w("122", "hensetting", "оставление машины (стоянка)", "Parkering er enhver hensetting av kjøretøy.", "Стоянка — это любое оставление транспортного средства.", "Правила"),
+
+    /* ---------- Ситуации ---------- */
+    w("123", "fletting / glidelåsprinsippet", "перестроение «молнией»", "Ved fletting kjører annenhver bil fra hvert felt.", "При «молнии» едут по очереди из каждой полосы.", "Ситуации"),
+    w("124", "feltskifte", "смена полосы", "Ved feltskifte har du vikeplikt for dem som allerede er i feltet.", "При смене полосы уступаешь тем, кто уже в ней.", "Ситуации"),
+    w("125", "vending", "разворот", "Vending er forbudt på motorveg.", "Разворот на автомагистрали запрещён.", "Ситуации"),
+    w("126", "å blende", "слепить (светом)", "Fjernlys må ikke blende møtende.", "Дальний свет не должен слепить встречных.", "Ситуации"),
+    w("127", "tresekundersregelen", "правило трёх секунд", "Tresekundersregelen gir trygg avstand på tørr veg.", "Правило трёх секунд даёт безопасную дистанцию на сухой дороге.", "Ситуации"),
+    w("128", "mikrosøvn", "микросон за рулём", "Trøtthet kan gi mikrosøvn, stopp og hvil.", "Усталость приводит к микросну — остановись и отдохни.", "Ситуации")
   ];
 })();
