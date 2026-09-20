@@ -6,6 +6,12 @@
 (function () {
   "use strict";
 
+  const t = window.I18N.t;
+  /* Двуязычная подпись: в режиме NO — только норвежская часть */
+  const bi = (no, ru) => window.I18N.lang === "no" ? no : no + " — " + t(ru);
+  /* Кнопка перевода: в uk/en перевод пока русский — помечаем */
+  const ruBtn = show => t(show ? "Показать перевод" : "Скрыть перевод") + (window.I18N.fallbackRu() ? " (RU)" : "");
+
   function shuffle(arr) {
     const a = arr.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -89,7 +95,7 @@
       container.innerHTML = `
         <div class="quiz">
           <div class="quiz-head">
-            <button class="btn btn-ghost" data-action="exit">${esc(cfg.exitLabel || "Выйти")}</button>
+            <button class="btn btn-ghost" data-action="exit">${esc(cfg.exitLabel || t("Выйти"))}</button>
             <div class="quiz-meta">
               <span class="quiz-title">${esc(cfg.title || "")}</span>
               ${session.secondsLeft ? `<span class="quiz-timer ${session.secondsLeft < 300 ? "warn" : ""}">${fmtTime(session.secondsLeft)}</span>` : ""}
@@ -105,9 +111,9 @@
               <p class="lang-ru ${session.showRu ? "" : "hidden"}">${esc(q.prompt_ru)}</p>
             </div>
             <button class="btn btn-small btn-translate" data-action="toggle-ru">
-              ${session.showRu ? "Скрыть перевод" : "Показать перевод"}
+              ${ruBtn(!session.showRu)}
             </button>
-            ${q.multi ? `<div class="multi-hint">Velg alle riktige svar <span class="lang-ru ${session.showRu ? "" : "hidden"}">· выбери все верные</span></div>` : ""}
+            ${q.multi ? `<div class="multi-hint">Velg alle riktige svar <span class="lang-ru ${session.showRu ? "" : "hidden"}">· ${t("выбери все верные")}</span></div>` : ""}
 
             <div class="options ${q.imageOptions ? "options-images" : ""} ${revealed ? "revealed" : ""}">
               ${it.options.map((o, i) => {
@@ -127,23 +133,23 @@
 
             ${!exam && !it.checked ? `
               <div class="check-row">
-                <button class="btn btn-primary btn-check" data-action="check" ${hasSel(it) ? "" : "disabled"}>Sjekk <small>проверить</small></button>
+                <button class="btn btn-primary btn-check" data-action="check" ${hasSel(it) ? "" : "disabled"}>Sjekk${window.I18N.lang === "no" ? "" : ` <small>${t("проверить")}</small>`}</button>
               </div>` : ""}
 
             ${revealed ? feedbackHtml(it) : ""}
           </div>
 
           <div class="quiz-nav">
-            <button class="btn nav-btn" data-action="prev" ${session.index === 0 ? "disabled" : ""} aria-label="Предыдущий вопрос">${ARROW_L}</button>
-            <span class="nav-status">${exam ? `отвечено ${answered} из ${total}` : `${answered} из ${total} проверено`}</span>
+            <button class="btn nav-btn" data-action="prev" ${session.index === 0 ? "disabled" : ""} aria-label="${t("Предыдущий вопрос")}">${ARROW_L}</button>
+            <span class="nav-status">${exam ? `${t("отвечено")} ${answered} ${t("из")} ${total}` : `${answered} ${t("из")} ${total} ${t("проверено")}`}</span>
             ${exam && session.index === total - 1
-              ? `<button class="btn btn-primary" data-action="finish">Lever <small>сдать</small></button>`
+              ? `<button class="btn btn-primary" data-action="finish">Lever${window.I18N.lang === "no" ? "" : ` <small>${t("сдать")}</small>`}</button>`
               : !exam && session.index === total - 1
                 ? `<button class="btn btn-primary" data-action="finish" ${it.checked ? "" : "disabled"}>Resultat</button>`
-                : `<button class="btn nav-btn" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="Следующий вопрос">${ARROW_R}</button>`}
+                : `<button class="btn nav-btn" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="${t("Следующий вопрос")}">${ARROW_R}</button>`}
           </div>
-          ${exam ? `<p class="exam-hint muted">Ответы можно менять до сдачи. Кнопка «Lever» на последнем вопросе.</p>` : ""}
-          <p class="key-hint muted">Двойное нажатие по варианту — проверить. Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод, S — озвучить</p>
+          ${exam ? `<p class="exam-hint muted">${t("Ответы можно менять до сдачи. Кнопка «Lever» на последнем вопросе.")}</p>` : ""}
+          <p class="key-hint muted">${t("Двойное нажатие по варианту — проверить. Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод, S — озвучить")}</p>
         </div>`;
 
       if (window.Speech && Speech.available()) {
@@ -158,7 +164,7 @@
       const toggleRu = () => {
         session.showRu = !session.showRu;
         container.querySelectorAll(".lang-ru").forEach(el => el.classList.toggle("hidden", !session.showRu));
-        container.querySelectorAll("[data-action=toggle-ru], [data-action=toggle-ru-fb]").forEach(b => { b.textContent = session.showRu ? "Скрыть перевод" : "Показать перевод"; });
+        container.querySelectorAll("[data-action=toggle-ru], [data-action=toggle-ru-fb]").forEach(b => { b.textContent = ruBtn(!session.showRu); });
       };
       container.querySelector("[data-action=toggle-ru]").onclick = toggleRu;
       const fbT = container.querySelector("[data-action=toggle-ru-fb]");
@@ -191,7 +197,7 @@
           if (exam) {
             const st = container.querySelector(".nav-status");
             const n = session.items.filter(x => hasSel(x)).length;
-            if (st) st.textContent = `отвечено ${n} из ${total}`;
+            if (st) st.textContent = `${t("отвечено")} ${n} ${t("из")} ${total}`;
             container.querySelector(".progress-bar").style.width = Math.round((n / total) * 100) + "%";
           }
         };
@@ -215,7 +221,7 @@
       if (fin) fin.onclick = () => {
         if (exam) {
           const un = session.items.filter(x => !hasSel(x)).length;
-          if (un && !confirm(`Без ответа: ${un}. Они будут засчитаны как ошибки. Сдать?`)) return;
+          if (un && !confirm(`${t("Без ответа:")} ${un}. ${t("Они будут засчитаны как ошибки. Сдать?")}`)) return;
         }
         finish();
       };
@@ -261,33 +267,33 @@
       if (ok) {
         return `
         <div class="feedback feedback-ok">
-          <div class="feedback-title">Riktig! — Верно!</div>
+          <div class="feedback-title">${bi("Riktig!", "Верно!")}</div>
           <p class="lang-no">${esc(q.explanation_no)}</p>
           <p class="lang-ru ${ru}">${esc(q.explanation_ru)}</p>
-          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${ruBtn(!session.showRu)}</button>
         </div>`;
       }
       const whyNo = chosen.why_no || "Dette alternativet stemmer ikke med trafikkreglene.";
-      const whyRu = chosen.why_ru || "Этот вариант не соответствует правилам.";
+      const whyRu = chosen.why_ru || t("Этот вариант не соответствует правилам.");
       return `
         <div class="feedback feedback-fail">
-          <div class="feedback-title">Feil — Неверно</div>
+          <div class="feedback-title">${bi("Feil", "Неверно")}</div>
           <div class="fb-block fb-wrong">
-            <div class="fb-label">Du svarte <span class="lang-ru ${ru}">· ты ответил</span></div>
+            <div class="fb-label">Du svarte <span class="lang-ru ${ru}">· ${t("ты ответил")}</span></div>
             <p class="fb-answer lang-no">${esc(chosen.text_no)}</p>
             <p class="fb-answer lang-ru ${ru}">${esc(chosen.text_ru)}</p>
             <p class="lang-no">${esc(whyNo)}</p>
             <p class="lang-ru ${ru}">${esc(whyRu)}</p>
           </div>
           <div class="fb-block fb-right">
-            <div class="fb-label">Riktig svar <span class="lang-ru ${ru}">· правильный ответ</span></div>
+            <div class="fb-label">Riktig svar <span class="lang-ru ${ru}">· ${t("правильный ответ")}</span></div>
             <p class="fb-answer lang-no">${esc(right.text_no)}</p>
             <p class="fb-answer lang-ru ${ru}">${esc(right.text_ru)}</p>
             <p class="lang-no">${esc(q.explanation_no)}</p>
             <p class="lang-ru ${ru}">${esc(q.explanation_ru)}</p>
           </div>
-          ${q.tip_ru ? `<div class="tip lang-ru ${ru}"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
-          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+          ${q.tip_ru ? `<div class="tip lang-ru ${ru}"><strong>${t("Как исправить:")}</strong> ${esc(q.tip_ru)}</div>` : ""}
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${ruBtn(!session.showRu)}</button>
         </div>`;
     }
 
@@ -300,7 +306,7 @@
       const line = (o, mark) => `<p class="fb-answer lang-no">${mark} ${esc(o.text_no)}</p><p class="fb-answer lang-ru ${ru}">${esc(o.text_ru)}</p>`;
       const rightBlock = `
           <div class="fb-block fb-right">
-            <div class="fb-label">Riktige svar <span class="lang-ru ${ru}">· правильные ответы</span></div>
+            <div class="fb-label">Riktige svar <span class="lang-ru ${ru}">· ${t("правильные ответы")}</span></div>
             ${rightOnes.map(o => line(o, "✓")).join("")}
             <p class="lang-no">${esc(q.explanation_no)}</p>
             <p class="lang-ru ${ru}">${esc(q.explanation_ru)}</p>
@@ -308,30 +314,30 @@
       if (ok) {
         return `
         <div class="feedback feedback-ok">
-          <div class="feedback-title">Riktig! — Верно!</div>
+          <div class="feedback-title">${bi("Riktig!", "Верно!")}</div>
           ${rightBlock}
-          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${ruBtn(!session.showRu)}</button>
         </div>`;
       }
       const wrongPart = wrongChosen.map(o => `
             ${line(o, "✗")}
             <p class="lang-no">${esc(o.why_no || "Dette alternativet er ikke riktig.")}</p>
-            <p class="lang-ru ${ru}">${esc(o.why_ru || "Этот вариант неверный.")}</p>`).join("");
+            <p class="lang-ru ${ru}">${esc(o.why_ru || t("Этот вариант неверный."))}</p>`).join("");
       const missedPart = missed.length ? `
             <p class="lang-no"><strong>Du manglet:</strong> ${missed.map(o => esc(o.text_no)).join("; ")}</p>
-            <p class="lang-ru ${ru}"><strong>Ты не отметил:</strong> ${missed.map(o => esc(o.text_ru)).join("; ")}</p>` : "";
+            <p class="lang-ru ${ru}"><strong>${t("Ты не отметил:")}</strong> ${missed.map(o => esc(o.text_ru)).join("; ")}</p>` : "";
       return `
         <div class="feedback feedback-fail">
-          <div class="feedback-title">Feil — Неверно</div>
+          <div class="feedback-title">${bi("Feil", "Неверно")}</div>
           <div class="fb-block fb-wrong">
-            <div class="fb-label">Du svarte <span class="lang-ru ${ru}">· ты ответил</span></div>
+            <div class="fb-label">Du svarte <span class="lang-ru ${ru}">· ${t("ты ответил")}</span></div>
             ${wrongPart}${missedPart}
             <p class="lang-no muted">På prøven må alle riktige svar være valgt, og ingen feil.</p>
-            <p class="lang-ru ${ru} muted">На экзамене нужно отметить все верные варианты и ни одного неверного.</p>
+            <p class="lang-ru ${ru} muted">${t("На экзамене нужно отметить все верные варианты и ни одного неверного.")}</p>
           </div>
           ${rightBlock}
-          ${q.tip_ru ? `<div class="tip lang-ru ${ru}"><strong>Как исправить:</strong> ${esc(q.tip_ru)}</div>` : ""}
-          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${session.showRu ? "Скрыть перевод" : "Показать перевод"}</button>
+          ${q.tip_ru ? `<div class="tip lang-ru ${ru}"><strong>${t("Как исправить:")}</strong> ${esc(q.tip_ru)}</div>` : ""}
+          <button class="btn btn-small btn-translate fb-translate" data-action="toggle-ru-fb">${ruBtn(!session.showRu)}</button>
         </div>`;
     }
 
@@ -363,10 +369,10 @@
       const maxWrong = cfg.maxWrong != null ? cfg.maxWrong : null;
       const passed = maxWrong != null ? wrong <= maxWrong : pct >= 85;
       const grade = exam
-        ? (passed ? `Bestått! Ошибок ${wrong}, допускается ${maxWrong}.` : `Ikke bestått. Ошибок ${wrong}, допускается не больше ${maxWrong}.`)
-        : pct >= 85 ? "Отлично. На экзамене нужно не меньше 85% верных."
-        : pct >= 70 ? "Неплохо, но до экзаменационного порога (85%) ещё есть запас."
-        : "Тема пока слабая. Пройди ошибки ниже и повтори.";
+        ? (passed ? `Bestått! ${t("Ошибок")} ${wrong}, ${t("допускается")} ${maxWrong}.` : `Ikke bestått. ${t("Ошибок")} ${wrong}, ${t("допускается не больше")} ${maxWrong}.`)
+        : pct >= 85 ? t("Отлично. На экзамене нужно не меньше 85% верных.")
+        : pct >= 70 ? t("Неплохо, но до экзаменационного порога (85%) ещё есть запас.")
+        : t("Тема пока слабая. Пройди ошибки ниже и повтори.");
 
       document.onkeydown = null;
       if (cfg.onFinish) cfg.onFinish({ correct, total, passed });
@@ -375,22 +381,22 @@
       container.innerHTML = `
         <div class="quiz">
           <div class="card result-card">
-            <h2>${exam ? (passed ? "Bestått" : "Ikke bestått") : "Resultat — Результат"}</h2>
+            <h2>${exam ? (passed ? "Bestått" : "Ikke bestått") : bi("Resultat", "Результат")}</h2>
             <div class="result-score ${passed ? "good" : pct >= 70 ? "mid" : "bad"}">
               <span class="result-pct">${exam ? `${correct}/${total}` : `${pct}%`}</span>
-              <span class="result-sub">${correct} верно, ${wrong} ${wrong === 1 ? "ошибка" : wrong < 5 ? "ошибки" : "ошибок"}</span>
+              <span class="result-sub">${correct} ${t("верно,")} ${wrong} ${wrong === 1 ? t("ошибка") : wrong < 5 ? t("ошибки") : t("ошибок")}</span>
             </div>
             <p class="result-grade">${grade}</p>
             <div class="result-actions">
-              ${mistakes.length ? `<button class="btn btn-primary" data-action="retry-mistakes">Повторить ошибки (${mistakes.length})</button>` : ""}
-              ${cfg.noRestart ? "" : `<button class="btn" data-action="restart">${exam ? "Новый экзамен" : "Пройти ещё раз"}</button>`}
-              <button class="btn btn-ghost" data-action="exit">${esc(cfg.exitLabel || "Выйти")}</button>
+              ${mistakes.length ? `<button class="btn btn-primary" data-action="retry-mistakes">${t("Повторить ошибки (")}${mistakes.length})</button>` : ""}
+              ${cfg.noRestart ? "" : `<button class="btn" data-action="restart">${exam ? t("Новый экзамен") : t("Пройти ещё раз")}</button>`}
+              <button class="btn btn-ghost" data-action="exit">${esc(cfg.exitLabel || t("Выйти"))}</button>
             </div>
           </div>
 
           <div class="review-head">
-            <h3 class="section-title">Обзор всех вопросов</h3>
-            <label class="review-filter"><input type="checkbox" id="only-wrong" ${mistakes.length ? "" : "disabled"}> только ошибки</label>
+            <h3 class="section-title">${t("Обзор всех вопросов")}</h3>
+            <label class="review-filter"><input type="checkbox" id="only-wrong" ${mistakes.length ? "" : "disabled"}> ${t("только ошибки")}</label>
           </div>
           <div class="review-list">
           ${results.map((r, i) => `
@@ -401,15 +407,15 @@
                 <p class="lang-no"><strong>${esc(r.it.inst.prompt_no)}</strong></p>
                 <p class="lang-ru-always muted">${esc(r.it.inst.prompt_ru)}</p>
                 ${r.it.inst.multi
-                  ? `<p class="mistake-line ${r.ok ? "right" : "wrong"}">Твой ответ: ${r.chosenAll.length ? r.chosenAll.map(o => `${esc(o.text_no)} (${esc(o.text_ru)})`).join("; ") : "без ответа"}</p>
-                     ${r.ok ? "" : `<p class="mistake-line right">Правильно: ${r.rightAll.map(o => `${esc(o.text_no)} (${esc(o.text_ru)})`).join("; ")}</p>`}`
+                  ? `<p class="mistake-line ${r.ok ? "right" : "wrong"}">${t("Твой ответ:")} ${r.chosenAll.length ? r.chosenAll.map(o => `${esc(o.text_no)} (${esc(o.text_ru)})`).join("; ") : t("без ответа")}</p>
+                     ${r.ok ? "" : `<p class="mistake-line right">${t("Правильно:")} ${r.rightAll.map(o => `${esc(o.text_no)} (${esc(o.text_ru)})`).join("; ")}</p>`}`
                   : r.ok
-                  ? `<p class="mistake-line right">Твой ответ: ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`
-                  : `<p class="mistake-line wrong">Твой ответ: ${r.chosen ? `${esc(r.chosen.text_no)} (${esc(r.chosen.text_ru)})` : "без ответа"}</p>
+                  ? `<p class="mistake-line right">${t("Твой ответ:")} ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`
+                  : `<p class="mistake-line wrong">${t("Твой ответ:")} ${r.chosen ? `${esc(r.chosen.text_no)} (${esc(r.chosen.text_ru)})` : t("без ответа")}</p>
                      ${r.chosen && r.chosen.why_ru ? `<p class="mistake-why">${esc(r.chosen.why_ru)}</p>` : ""}
-                     <p class="mistake-line right">Правильно: ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`}
+                     <p class="mistake-line right">${t("Правильно:")} ${esc(r.right.text_no)} (${esc(r.right.text_ru)})</p>`}
                 <p class="lang-ru-always">${esc(r.it.inst.explanation_ru)}</p>
-                ${!r.ok && r.it.inst.tip_ru ? `<div class="tip"><strong>Как исправить:</strong> ${esc(r.it.inst.tip_ru)}</div>` : ""}
+                ${!r.ok && r.it.inst.tip_ru ? `<div class="tip"><strong>${t("Как исправить:")}</strong> ${esc(r.it.inst.tip_ru)}</div>` : ""}
               </div>
             </div>`).join("")}
           </div>
@@ -420,7 +426,7 @@
         container.querySelectorAll(".review-card").forEach(c => c.classList.toggle("hidden", only.checked && c.dataset.ok === "true"));
       };
       const retry = container.querySelector("[data-action=retry-mistakes]");
-      if (retry) retry.onclick = () => start(container, mistakes.map(r => r.it.base), Object.assign({}, cfg, { exam: false, timeLimit: 0, maxWrong: null, onFinish: null, noRestart: false, title: "Повторение ошибок" }));
+      if (retry) retry.onclick = () => start(container, mistakes.map(r => r.it.base), Object.assign({}, cfg, { exam: false, timeLimit: 0, maxWrong: null, onFinish: null, noRestart: false, title: t("Повторение ошибок") }));
       const restart = container.querySelector("[data-action=restart]");
       if (restart) restart.onclick = () => (cfg.onRestart ? cfg.onRestart() : start(container, questions, cfg));
       container.querySelector("[data-action=exit]").onclick = () => cfg.onExit && cfg.onExit();

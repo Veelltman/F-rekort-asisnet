@@ -4,6 +4,8 @@
 (function () {
   "use strict";
 
+  const t = window.I18N.t;
+
   const S = window.Storage;
   const D = window.QUESTION_DATA;
   const { TOPICS, ICONS, esc } = window.AppUI;
@@ -42,7 +44,7 @@
       return `<rect class="bar ${e.passed ? "good" : "bad"}" x="${x}" y="${padT + innerH - h}" width="${bw}" height="${h}" rx="2"><title>${e.correct}/${e.total}</title></rect>
         <text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle">${fmtDate(S.dateKey(new Date(e.at)))}</text>`;
     }).join("");
-    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Результаты экзаменов">
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("Результаты экзаменов")}">
       ${[0, 15, 30, 45].map(v => `<line class="grid-line" x1="${padL}" x2="${W - 4}" y1="${y(v)}" y2="${y(v)}"/><text x="${padL - 6}" y="${y(v) + 3}" text-anchor="end">${v}</text>`).join("")}
       <line class="pass-line" x1="${padL}" x2="${W - 4}" y1="${y(38)}" y2="${y(38)}"/>
       <text x="${W - 6}" y="${y(38) - 4}" text-anchor="end">bestått: 38</text>
@@ -63,7 +65,7 @@
     const path = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
     const area = `${path} L ${pts[pts.length - 1][0].toFixed(1)} ${padT + innerH} L ${pts[0][0].toFixed(1)} ${padT + innerH} Z`;
     const y85 = padT + innerH - 0.85 * innerH;
-    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Точность задания дня по дням">
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("Точность задания дня по дням")}">
       ${[0, 50, 100].map(v => `<line class="grid-line" x1="${padL}" x2="${W - padR}" y1="${padT + innerH - (v / 100) * innerH}" y2="${padT + innerH - (v / 100) * innerH}"/><text x="${padL - 6}" y="${padT + innerH - (v / 100) * innerH + 3}" text-anchor="end">${v}%</text>`).join("")}
       <line class="pass-line" x1="${padL}" x2="${W - padR}" y1="${y85}" y2="${y85}"/>
       <path class="area" d="${area}"/>
@@ -76,20 +78,20 @@
 
   /* ---------- Строки таблиц ---------- */
   function row(name, sub, st, acts) {
-    const pill = st.attempts ? `<span class="pill ${pillClass(st.accuracy)}">${st.accuracy}%</span>` : `<span class="muted small">не начато</span>`;
+    const pill = st.attempts ? `<span class="pill ${pillClass(st.accuracy)}">${st.accuracy}%</span>` : `<span class="muted small">${t("не начато")}</span>`;
     return `
       <div class="stats-row">
         <div><div class="name">${esc(name)}</div><div class="sub">${esc(sub)}</div></div>
         <div>${pill}</div>
         <div class="acts">${acts}</div>
-        <div class="meter" title="Пройдено ${st.seen} из ${st.total}"><i style="width:${st.coverage}%"></i></div>
+        <div class="meter" title="${t("Пройдено")} ${st.seen} ${t("из")} ${st.total}"><i style="width:${st.coverage}%"></i></div>
       </div>`;
   }
   function trainBtns(key, extra) {
     const st = extra.st;
     const q = (mode) => `go('quiz',{key:'${key}',mode:'${mode}'${extra.cat ? `,cat:'${extra.cat}'` : ""}})`;
-    return `<button class="btn btn-small" onclick="${q("quick")}">Тренировать</button>
-      ${st.weak ? `<button class="btn btn-small btn-primary" onclick="${q("weak")}">Ошибки (${st.weak})</button>` : ""}`;
+    return `<button class="btn btn-small" onclick="${q("quick")}">${t("Тренировать")}</button>
+      ${st.weak ? `<button class="btn btn-small btn-primary" onclick="${q("weak")}">${t("Ошибки (")}${st.weak})</button>` : ""}`;
   }
 
   window.ROUTES.stats = function () {
@@ -105,57 +107,57 @@
 
     /* знаки по категориям и типам заданий */
     const signsByCat = Object.keys(CATS).map(cat => ({ cat, st: aggregate(D.signs.filter(q => q.entry && q.entry.cat === cat)) })).filter(r => r.st.total);
-    const KINDS = { meaning: "Что означает знак", pick: "Найди знак по названию", category: "Тип знака", marking: "Разметка" };
+    const KINDS = { meaning: t("Что означает знак"), pick: t("Найди знак по названию"), category: t("Тип знака"), marking: t("Разметка") };
     const signsByKind = Object.keys(KINDS).map(kind => ({ kind, st: aggregate(D.signsByKind[kind]) }));
 
     view.innerHTML = `
-      <h1>Статистика</h1>
-      <p class="lead muted">Профиль: <strong>${esc(S.getCurrentProfile())}</strong>. Ошибки возвращаются на повторение через 1 → 3 → 7 → 14 → 30 дней: чем увереннее ответ, тем реже вопрос.</p>
+      <h1>${t("Статистика")}</h1>
+      <p class="lead muted">${t("Профиль:")} <strong>${esc(S.getCurrentProfile())}</strong>. ${t("Ошибки возвращаются на повторение через 1 → 3 → 7 → 14 → 30 дней: чем увереннее ответ, тем реже вопрос.")}</p>
 
       <div class="card stats-section">
         <div class="stats-grid">
-          <div class="stat-tile"><b>${all.attempts ? all.accuracy + "%" : "—"}</b><span>верных ответов</span></div>
-          <div class="stat-tile"><b>${all.seen}<span class="muted">/${all.total}</span></b><span>вопросов пройдено</span></div>
-          <div class="stat-tile"><b>${Object.keys(daily).length}</b><span>дней с заданием дня</span></div>
-          <div class="stat-tile"><b>${S.getStreak()}</b><span>дней подряд</span></div>
-          <div class="stat-tile"><b>${dueTotal}</b><span>к повторению сегодня</span></div>
-          <div class="stat-tile"><b>${vs.seen}<span class="muted">/${vs.total}</span></b><span>слов из лексики</span></div>
+          <div class="stat-tile"><b>${all.attempts ? all.accuracy + "%" : "—"}</b><span>${t("верных ответов")}</span></div>
+          <div class="stat-tile"><b>${all.seen}<span class="muted">/${all.total}</span></b><span>${t("вопросов пройдено")}</span></div>
+          <div class="stat-tile"><b>${Object.keys(daily).length}</b><span>${t("дней с заданием дня")}</span></div>
+          <div class="stat-tile"><b>${S.getStreak()}</b><span>${t("дней подряд")}</span></div>
+          <div class="stat-tile"><b>${dueTotal}</b><span>${t("к повторению сегодня")}</span></div>
+          <div class="stat-tile"><b>${vs.seen}<span class="muted">/${vs.total}</span></b><span>${t("слов из лексики")}</span></div>
         </div>
-        ${dueTotal ? `<p style="margin:14px 0 0"><button class="btn btn-cta" onclick="go('mistakes')">Повторить сегодняшние (${dueTotal})</button></p>` : ""}
+        ${dueTotal ? `<p style="margin:14px 0 0"><button class="btn btn-cta" onclick="go('mistakes')">${t("Повторить сегодняшние (")}${dueTotal})</button></p>` : ""}
       </div>
 
       <div class="card stats-section">
-        <h3>Пробные экзамены</h3>
+        <h3>${t("Пробные экзамены")}</h3>
         ${exams.length ? `
-          <p class="muted small">Сдано ${passed} из ${exams.length}. Проходной балл: 38 из 45 (не больше 7 ошибок).</p>
+          <p class="muted small">${t("Сдано")} ${passed} ${t("из")} ${exams.length}. ${t("Проходной балл: 38 из 45 (не больше 7 ошибок).")}</p>
           ${examChart(last20)}
           <div class="exam-list">
             ${last20.slice().reverse().slice(0, 5).map(e => `<div class="exam-row"><span>${new Date(e.at).toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric" })}</span><span>${e.correct}/${e.total}</span><span class="pill ${e.passed ? "good" : "bad"}">${e.passed ? "Bestått" : "Ikke bestått"}</span></div>`).join("")}
           </div>`
-        : `<p class="muted">Экзаменов ещё не было.</p><button class="btn btn-cta" onclick="go('exam')">Начать экзамен</button>`}
+        : `<p class="muted">${t("Экзаменов ещё не было.")}</p><button class="btn btn-cta" onclick="go('exam')">${t("Начать экзамен")}</button>`}
       </div>
 
       ${Object.keys(daily).length >= 2 ? `
       <div class="card stats-section">
-        <h3>Задание дня: точность по дням</h3>
-        <p class="muted small">Последние 30 дней. Пунктир — ориентир 85 %.</p>
+        <h3>${t("Задание дня: точность по дням")}</h3>
+        <p class="muted small">${t("Последние 30 дней. Пунктир — ориентир 85 %.")}</p>
         ${dailyChart(daily)}
       </div>` : ""}
 
       <div class="card stats-section">
-        <h3>По темам</h3>
-        ${topics.map(r => row(r.t.title_ru, `${r.st.seen} из ${r.st.total}${r.st.due ? ` · к повторению ${r.st.due}` : ""}`, r.st, trainBtns(r.key, { st: r.st }))).join("")}
-        ${row("Лексика", `${vs.seen} из ${vs.total} слов`, { attempts: vs.known + vs.unknown, accuracy: vs.accuracy, seen: vs.seen, total: vs.total, coverage: vs.coverage, weak: 0 }, `<button class="btn btn-small" onclick="go('vocab')">Карточки</button>`)}
+        <h3>${t("По темам")}</h3>
+        ${topics.map(r => row(r.t.title_ru, `${r.st.seen} ${t("из")} ${r.st.total}${r.st.due ? ` · ${t("к повторению")} ${r.st.due}` : ""}`, r.st, trainBtns(r.key, { st: r.st }))).join("")}
+        ${row(t("Лексика"), `${vs.seen} ${t("из")} ${vs.total} ${t("слов")}`, { attempts: vs.known + vs.unknown, accuracy: vs.accuracy, seen: vs.seen, total: vs.total, coverage: vs.coverage, weak: 0 }, `<button class="btn btn-small" onclick="go('vocab')">${t("Карточки")}</button>`)}
       </div>
 
       <div class="card stats-section">
-        <h3>Знаки по категориям</h3>
-        ${signsByCat.map(r => row(CATS[r.cat].no, `${CATS[r.cat].ru} · ${r.st.seen} из ${r.st.total}`, r.st, trainBtns("signs", { st: r.st, cat: r.cat }))).join("")}
+        <h3>${t("Знаки по категориям")}</h3>
+        ${signsByCat.map(r => row(CATS[r.cat].no, `${CATS[r.cat].ru} · ${r.st.seen} ${t("из")} ${r.st.total}`, r.st, trainBtns("signs", { st: r.st, cat: r.cat }))).join("")}
       </div>
 
       <div class="card stats-section">
-        <h3>Знаки по типу задания</h3>
-        ${signsByKind.map(r => row(KINDS[r.kind], `${r.st.seen} из ${r.st.total}`, r.st, `<button class="btn btn-small" onclick="go('quiz',{key:'signs',mode:'${r.kind}'})">Тренировать</button>`)).join("")}
+        <h3>${t("Знаки по типу задания")}</h3>
+        ${signsByKind.map(r => row(KINDS[r.kind], `${r.st.seen} ${t("из")} ${r.st.total}`, r.st, `<button class="btn btn-small" onclick="go('quiz',{key:'signs',mode:'${r.kind}'})">${t("Тренировать")}</button>`)).join("")}
       </div>`;
   };
 })();

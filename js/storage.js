@@ -26,7 +26,8 @@
 
   let profiles = read(PROFILES_KEY, { list: [], current: null });
   if (!profiles.list.length) {
-    profiles = { list: ["Я"], current: "Я" };
+    const me = { ru: "Я", uk: "Я", en: "Me", no: "Meg" }[(window.I18N && window.I18N.lang) || "ru"] || "Я";
+    profiles = { list: [me], current: me };
     write(PROFILES_KEY, profiles);
   }
 

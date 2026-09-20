@@ -628,3 +628,11 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 .offline-card { margin-top: 14px; }
 .offline-card summary { cursor: pointer; font-weight: 600; }
 .offline-card[open] summary { margin-bottom: 8px; }
+
+/* ---------- Язык интерфейса ---------- */
+.lang-select { font: inherit; font-weight: 600; font-size: 0.82rem; padding: 6px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+.lang-select:hover { background: var(--surface-2); }
+/* Режим NO: только норвежский, переводы заданий скрыты */
+body.no-translations .lang-ru, body.no-translations .lang-ru-always, body.no-translations .btn-translate,
+body.no-translations [data-action="toggle-ru"], body.no-translations [data-action="toggle-ru-fb"], body.no-translations .tip { display: none !important; }
+@media (max-width: 719px) { .lang-select { padding: 5px 6px; font-size: 0.78rem; } }

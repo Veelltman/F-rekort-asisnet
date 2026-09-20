@@ -4,6 +4,8 @@
 (function () {
   "use strict";
 
+  const t = window.I18N.t;
+
   const PWA = { installEvent: null, updateReady: null };
   window.PWA = PWA;
 
@@ -18,7 +20,7 @@
     const el = document.createElement("div");
     el.className = "toast" + (kind === "update" ? " toast-update" : "");
     if (kind !== "update") setTimeout(() => el.remove(), 4000);
-    el.innerHTML = `<span>${text}</span>${actionLabel ? `<button class="btn btn-small btn-primary">${actionLabel}</button>` : ""}<button class="toast-close" aria-label="Закрыть">×</button>`;
+    el.innerHTML = `<span>${text}</span>${actionLabel ? `<button class="btn btn-small btn-primary">${actionLabel}</button>` : ""}<button class="toast-close" aria-label="${t("Закрыть")}">×</button>`;
     document.body.appendChild(el);
     if (actionLabel) el.querySelector(".btn").onclick = () => { onAction(); el.remove(); };
     el.querySelector(".toast-close").onclick = () => el.remove();
@@ -30,7 +32,7 @@
   let reloading = false;
   function offerUpdate(reg) {
     PWA.updateReady = reg;
-    toast("Доступно обновление сайта", "Обновить", () => {
+    toast("Доступно обновление сайта", t("Обновить"), () => {
       if (window.ROUTE_GUARD && !window.ROUTE_GUARD()) return;
       if (reg.waiting) reg.waiting.postMessage({ type: "SKIP_WAITING" });
     }, "update");
@@ -79,17 +81,17 @@
   PWA.installCardHtml = () => {
     if (PWA.isStandalone()) return "";
     if (PWA.canInstall()) {
-      return `<div class="card install-card"><div><h3>Установить приложение</h3><p class="muted">Иконка на экране, полный экран, работа без интернета.</p></div><button class="btn btn-primary" onclick="PWA.install()">Установить</button></div>`;
+      return `<div class="card install-card"><div><h3>${t("Установить приложение")}</h3><p class="muted">${t("Иконка на экране, полный экран, работа без интернета.")}</p></div><button class="btn btn-primary" onclick="PWA.install()">${t("Установить")}</button></div>`;
     }
     if (PWA.isIOS()) {
-      return `<div class="card install-card"><div><h3>На экран «Домой»</h3><p class="muted">В Safari нажми «Поделиться» → «На экран “Домой”». Тогда сайт откроется как приложение и прогресс не удалится.</p></div></div>`;
+      return `<div class="card install-card"><div><h3>${t("На экран «Домой»")}</h3><p class="muted">${t("В Safari нажми «Поделиться» → «На экран “Домой”». Тогда сайт откроется как приложение и прогресс не удалится.")}</p></div></div>`;
     }
     return "";
   };
 
   /* ---------- Офлайн-пакет: знаки и звук ---------- */
   async function cacheList(urls, onProgress) {
-    if (!("caches" in window)) throw new Error("Кэш недоступен в этом браузере");
+    if (!("caches" in window)) throw new Error(t("Кэш недоступен в этом браузере"));
     const c = await caches.open("forerkort-assets");
     let done = 0;
     for (let i = 0; i < urls.length; i += 20) {
@@ -123,9 +125,9 @@
     const label = btn.textContent;
     btn.disabled = true;
     try {
-      await fn((d, n) => { btn.textContent = `Загружаю… ${d}/${n}`; });
-      btn.textContent = "Готово ✓";
-      toast(kind === "audio" ? "Озвучка сохранена для офлайна" : "Все знаки сохранены для офлайна");
+      await fn((d, n) => { btn.textContent = `${t("Загружаю…")} ${d}/${n}`; });
+      btn.textContent = t("Готово ✓");
+      toast(kind === "audio" ? t("Озвучка сохранена для офлайна") : t("Все знаки сохранены для офлайна"));
     } catch (e) {
       btn.textContent = label; btn.disabled = false;
       toast("Не удалось загрузить: " + (e.message || e));

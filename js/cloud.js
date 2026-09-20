@@ -11,6 +11,8 @@
 (function () {
   "use strict";
 
+  const t = window.I18N.t;
+
   const CLOUD_URL = "https://forerkort-trener.velltman.workers.dev";
   const SESSION_KEY = "forerkort-cloud-session";
   const DIRTY_KEY = "forerkort-cloud-dirty";
@@ -50,7 +52,7 @@
     try {
       res = await fetch(CLOUD_URL + path, { method: opts.method || "GET", headers, body: opts.body, keepalive: !!opts.keepalive });
     } catch (e) {
-      const err = new Error("Нет связи с сервером. Проверь интернет.");
+      const err = new Error(t("Нет связи с сервером. Проверь интернет."));
       err.network = true;
       throw err;
     }
@@ -58,7 +60,7 @@
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       if (res.status === 401 && session && path !== "/api/login") { logout(); }
-      const err = new Error(data.error || `Ошибка сервера (${res.status})`);
+      const err = new Error(data.error || `${t("Ошибка сервера (")}${res.status})`);
       err.status = res.status;
       err.data = data;
       throw err;
@@ -94,7 +96,7 @@
     let merged = remote.state || {};
     if (!window.StateMerge.isEmpty(local)) {
       const n = Object.keys(local.answers || {}).length;
-      const keep = window.StateMerge.isEmpty(remote.state) || confirm(`В этом браузере уже есть прогресс (${n} вопросов). Объединить его с аккаунтом «${data.name}»?`);
+      const keep = window.StateMerge.isEmpty(remote.state) || confirm(`${t("В этом браузере уже есть прогресс (")}${n} ${t("вопросов). Объединить его с аккаунтом «")}${data.name}»?`);
       if (keep) merged = window.StateMerge.merge(local, remote.state || {});
     }
     window.Storage.useCloudProfile(data.name, merged);

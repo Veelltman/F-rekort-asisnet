@@ -4,6 +4,8 @@
 (function () {
   "use strict";
 
+  const tr = window.I18N.t;
+
   const synth = window.speechSynthesis;
   let voice = null;
 
@@ -63,8 +65,8 @@
     const b = document.createElement("button");
     b.type = "button";
     b.className = "btn-speak " + (cls || "");
-    b.title = "Озвучить по-норвежски";
-    b.setAttribute("aria-label", "Озвучить");
+    b.title = tr("Озвучить по-норвежски");
+    b.setAttribute("aria-label", tr("Озвучить"));
     b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>`;
     b.onclick = e => {
       e.stopPropagation();
@@ -74,7 +76,7 @@
       if (f) { b.classList.add("speaking"); playFile(f, t).then(() => b.classList.remove("speaking")); return; }
       if (!hasNorwegian()) {
         b.classList.add("no-voice");
-        b.title = "В системе нет норвежского голоса. iPhone: Настройки → Универсальный доступ → Устный контент → Голоса → Norsk. Android: настройки Google TTS → установить норвежский.";
+        b.title = tr("В системе нет норвежского голоса. iPhone: Настройки → Универсальный доступ → Устный контент → Голоса → Norsk. Android: настройки Google TTS → установить норвежский.");
         speak(t);
         return;
       }
