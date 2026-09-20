@@ -76,6 +76,7 @@
       }, 1000);
     }
 
+    let lastTap = { idx: -1, at: 0 };
     function renderQuestion() {
       const it = item(session.index);
       const q = it.inst;
@@ -141,7 +142,7 @@
                 : `<button class="btn nav-btn" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="Следующий вопрос">${ARROW_R}</button>`}
           </div>
           ${exam ? `<p class="exam-hint muted">Ответы можно менять до сдачи. Кнопка «Lever» на последнем вопросе.</p>` : ""}
-          <p class="key-hint muted">Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод, S — озвучить</p>
+          <p class="key-hint muted">Двойное нажатие по варианту — проверить. Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод, S — озвучить</p>
         </div>`;
 
       if (window.Speech && Speech.available()) {
@@ -164,6 +165,18 @@
       container.querySelectorAll("[data-action=select]").forEach(btn => {
         btn.onclick = () => {
           const idx = Number(btn.dataset.index);
+          /* Двойное нажатие по тому же варианту = «Sjekk» (свой детектор: dblclick на iPhone ненадёжен) */
+          const now = Date.now();
+          const isDouble = lastTap.idx === idx && now - lastTap.at < 450;
+          lastTap = { idx, at: now };
+          if (isDouble && !exam) {
+            if (isMulti(it)) { if (!(it.selected || []).includes(idx)) it.selected = (it.selected || []).concat(idx); }
+            else it.selected = idx;
+            container.querySelectorAll("[data-action=select]").forEach((b, i) => b.classList.toggle("is-selected", isSel(it, i)));
+            const chk = container.querySelector("[data-action=check]");
+            if (chk) { chk.disabled = false; chk.click(); }
+            return;
+          }
           if (isMulti(it)) {
             const set = it.selected || [];
             it.selected = set.includes(idx) ? set.filter(x => x !== idx) : set.concat(idx);
