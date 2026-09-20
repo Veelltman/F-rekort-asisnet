@@ -328,9 +328,9 @@
       "Узкая дорога, карман для разъезда на твоей стороне. Машина B едет навстречу. Кто ждёт?",
       [
         ["Jeg — møteplassen er på min side", "Я — карман на моей стороне"],
-        ["B — jeg kom først", "B — я приехал первым"],
-        ["Den som har størst bil", "У кого машина больше"],
-        ["Ingen — vi klemmer oss forbi", "Никто — протискиваемся"]
+        ["B — jeg kom først", "B — я приехал первым", "Rekkefølgen er ikke avgjørende, det er hvem møteplassen befinner seg hos som bestemmer hvem som venter.", "Очерёдность прибытия тут не важна — решает, у кого из двоих находится карман."],
+        ["Den som har størst bil", "У кого машина больше", "Bilens størrelse avgjør ikke, det er plasseringen av møteplassen som bestemmer hvem som venter.", "Размер машины ни при чём — решает расположение кармана."],
+        ["Ingen — vi klemmer oss forbi", "Никто — протискиваемся", "Å presse seg forbi på en smal vei er farlig, den med møteplass på sin side skal bruke den.", "Протискиваться на узкой дороге опасно — тот, у кого карман на своей стороне, должен им воспользоваться."]
       ],
       "På smal vei bruker du møteplassen som er på din side. Du rygger ikke inn i møteplass på motsatt side.",
       "На узкой дороге используешь карман, который на твоей стороне. Задним ходом в карман на противоположной стороне не заезжают.",
@@ -341,9 +341,9 @@
       "Перекрёсток без знаков. B справа, C слева. В каком порядке все проезжают?",
       [
         ["B, så jeg (A), så C", "B, потом я (A), потом C"],
-        ["Jeg (A), så B, så C", "Я (A), потом B, потом C"],
-        ["C, så B, så jeg (A)", "C, потом B, потом я (A)"],
-        ["Alle kjører samtidig", "Все едут одновременно"]
+        ["Jeg (A), så B, så C", "Я (A), потом B, потом C", "Du har B til høyre for deg, så B kjører først, ikke du.", "Справа от тебя B, поэтому первым едет он, а не ты."],
+        ["C, så B, så jeg (A)", "C, потом B, потом я (A)", "Rekkefølgen er feil snudd, det er B som har ingen til høyre og derfor kjører først.", "Порядок перепутан наоборот — первым едет именно B, у которого справа никого нет."],
+        ["Alle kjører samtidig", "Все едут одновременно", "Høyreregelen setter opp en bestemt rekkefølge, dere kan ikke kjøre samtidig.", "Правило правой руки задаёт чёткую очерёдность, ехать одновременно нельзя."]
       ],
       "Høyreregelen i kjede: B har ingen til høyre og kjører først. Du viker for B, C viker for deg.",
       "Правило правой руки цепочкой: у B никого справа — едет первым. Ты уступаешь B, C уступает тебе.",
@@ -354,9 +354,9 @@
       "Ты выезжаешь с парковки на дорогу. Кто уступает?",
       [
         ["Jeg — den som kjører ut fra parkeringsplass, gårdsvei eller bensinstasjon viker for all trafikk", "Я — выезжающий с парковки, двора или заправки уступает всем"],
-        ["Trafikken på veien viker for meg", "Транспорт на дороге уступает мне"],
-        ["Høyreregelen gjelder", "Действует правило правой руки"],
-        ["Ingen har vikeplikt", "Никто не уступает"]
+        ["Trafikken på veien viker for meg", "Транспорт на дороге уступает мне", "Det er omvendt: den som kjører ut fra parkeringsplass har alltid vikeplikt for veitrafikken.", "Всё наоборот: выезжающий с парковки всегда уступает транспорту на дороге."],
+        ["Høyreregelen gjelder", "Действует правило правой руки", "Høyreregelen gjelder mellom likestilte veier, ikke ved utkjøring fra parkeringsplass, der du alltid viker.", "Правило правой руки действует между равнозначными дорогами, а не при выезде с парковки, где ты всегда уступаешь."],
+        ["Ingen har vikeplikt", "Никто не уступает", "Den som kjører ut fra parkeringsplass har alltid vikeplikt, det finnes ikke situasjon uten den.", "У выезжающего с парковки всегда есть обязанность уступить — ситуации без неё тут не бывает."]
       ],
       "Utkjøring fra parkeringsplass, gårdsvei, bensinstasjon o.l. gir alltid vikeplikt for trafikken på veien — også for fotgjengere på fortauet.",
       "Выезд с парковки, двора, заправки — ты всегда уступаешь транспорту на дороге и пешеходам на тротуаре.",
@@ -367,9 +367,9 @@
       "Автобус с поворотником показывает, что выезжает с остановки в зоне 50 км/ч. Что делаешь?",
       [
         ["Slipper bussen ut — den har forrang i 60-sone eller lavere", "Пропускаю автобус — он имеет преимущество в зоне до 60 км/ч"],
-        ["Kjører forbi — bussen må vente", "Проезжаю мимо — автобус ждёт"],
-        ["Tuter for å vise at jeg kommer", "Сигналю, что еду"],
-        ["Stopper helt bak bussen", "Полностью останавливаюсь за автобусом"]
+        ["Kjører forbi — bussen må vente", "Проезжаю мимо — автобус ждёт", "I 60-sone eller lavere er det du som skal slippe bussen fram, ikke omvendt.", "В зоне 60 и ниже именно ты обязан пропустить автобус, а не наоборот."],
+        ["Tuter for å vise at jeg kommer", "Сигналю, что еду", "Signalhorn erstatter ikke plikten til å slippe bussen fram, du skal senke farten og vente.", "Гудок не заменяет обязанность пропустить автобус — нужно снизить скорость и подождать."],
+        ["Stopper helt bak bussen", "Полностью останавливаюсь за автобусом", "Full stopp er ikke nødvendig, det holder å senke farten og la bussen kjøre ut.", "Полная остановка не обязательна, достаточно снизить скорость и дать автобусу выехать."]
       ],
       "Der fartsgrensen er 60 km/t eller lavere, skal du slippe fram buss som gir tegn om å kjøre ut fra holdeplass.",
       "Там, где ограничение 60 км/ч или ниже, ты обязан пропустить автобус, который показывает поворотником выезд с остановки.",
@@ -380,9 +380,9 @@
       "Слышишь сирену и видишь машину с мигалками справа. Что делаешь?",
       [
         ["Gir fri vei — stopper eller kjører til siden trygt", "Освобождаю дорогу — безопасно останавливаюсь или сдвигаюсь в сторону"],
-        ["Kjører videre — jeg hadde grønt lys", "Еду дальше — у меня был зелёный"],
-        ["Kjører fortere for å komme unna", "Ускоряюсь, чтобы уехать"],
-        ["Bremser hardt midt i krysset", "Резко торможу посреди перекрёстка"]
+        ["Kjører videre — jeg hadde grønt lys", "Еду дальше — у меня был зелёный", "Utrykningskjøretøy med blålys har forrang foran vanlig lyssignal, grønt lys fritar deg ikke fra å gi fri vei.", "У спецтранспорта с мигалками приоритет выше обычного светофора — зелёный не освобождает от обязанности уступить."],
+        ["Kjører fortere for å komme unna", "Ускоряюсь, чтобы уехать", "Å øke farten gjør situasjonen farligere i stedet for å gi utrykningskjøretøyet fri vei på en trygg måte.", "Ускорение делает ситуацию опаснее вместо того, чтобы безопасно освободить дорогу спецтранспорту."],
+        ["Bremser hardt midt i krysset", "Резко торможу посреди перекрёстка", "Brå bremsing midt i krysset skaper fare, du bør heller finne et trygt sted å stanse eller flytte deg til siden.", "Резкое торможение посреди перекрёстка опасно — лучше найти безопасное место, чтобы остановиться или сместиться в сторону."]
       ],
       "Utrykningskjøretøy med blålys og sirene har forrang foran alt annet. Gi fri vei, men ikke gjør noe farlig eller brått.",
       "Спецтранспорт с мигалками и сиреной имеет преимущество перед всем. Освободи дорогу, но без опасных резких манёвров.",
@@ -393,9 +393,9 @@
       "Т-образный перекрёсток без знаков. Ты едешь по сквозной дороге. Машина B выезжает с боковой справа. Кто уступает?",
       [
         ["Jeg viker: høyreregelen gjelder også i T-kryss", "Я уступаю: правило правой руки действует и на Т-перекрёстке"],
-        ["B viker: den gjennomgående vegen har forrang", "B уступает: у сквозной дороги приоритет"],
-        ["Den som kommer først", "Кто первый приехал"],
-        ["Ingen har vikeplikt", "Никто не уступает"]
+        ["B viker: den gjennomgående vegen har forrang", "B уступает: у сквозной дороги приоритет", "En gjennomgående veg gir ikke automatisk forrang i Norge, uten skilt gjelder høyreregelen selv i T-kryss.", "Сквозная дорога в Норвегии автоматически приоритета не даёт — без знаков и на Т-перекрёстке действует правило правой руки."],
+        ["Den som kommer først", "Кто первый приехал", "Ankomsttidspunktet avgjør ikke, høyreregelen bestemmer hvem som viker.", "Время прибытия роли не играет — кто уступает, решает правило правой руки."],
+        ["Ingen har vikeplikt", "Никто не уступает", "I ethvert kryss uten skilt gjelder høyreregelen, noen har alltid vikeplikt, også i T-kryss.", "На любом перекрёстке без знаков действует правило правой руки — кто-то всегда обязан уступить, в том числе на Т-образном."]
       ],
       "I Norge gir ikke en gjennomgående veg forrang av seg selv. Uten skilt gjelder høyreregelen også i T-kryss.",
       "В Норвегии сквозная дорога сама по себе не даёт приоритета. Без знаков правило правой руки действует и на Т-перекрёстке.",
