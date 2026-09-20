@@ -1,6 +1,6 @@
 {
-  "name": "Førerkort-trener",
-  "short_name": "Førerkort",
+  "name": "Teoriklar — teoriprøven klasse B",
+  "short_name": "Teoriklar",
   "description": "Тренажёр к теории на права класса B в Норвегии: знаки, ситуации, правила, экзамен.",
   "lang": "ru",
   "start_url": "./",
