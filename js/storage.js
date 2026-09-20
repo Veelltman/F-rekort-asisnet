@@ -101,12 +101,24 @@
     return read("forerkort-trener-v1:" + name, null) || emptyState();
   }
 
-  /* ---------- Ответы ---------- */
+  /* ---------- Ответы ----------
+     Интервальное повторение: box 0..4 → следующий показ через 1, 3, 7, 14, 30 дней.
+     Ошибка сбрасывает в box 0 (повтор завтра); каждый верный ответ поднимает на ступень. */
+  const DAY = 86400000;
+  const STEPS = [1, 3, 7, 14, 30];
+  function isWeak(a) { return !!a && (a.lastResult === "fail" || a.wrong > a.correct); }
+  function isDue(a, now) {
+    if (!a) return false;
+    if (a.due) return a.due <= (now || Date.now());
+    return isWeak(a);            /* старые записи без due: к повторению, если слабые */
+  }
   function recordAnswer(question, isCorrect) {
     const entry = state.answers[question.id] || { correct: 0, wrong: 0, last: null, topic: question.topic };
     if (isCorrect) entry.correct += 1; else entry.wrong += 1;
     entry.last = Date.now();
     entry.lastResult = isCorrect ? "ok" : "fail";
+    entry.box = isCorrect ? Math.min((entry.box || 0) + 1, STEPS.length - 1) : 0;
+    entry.due = entry.last + STEPS[entry.box] * DAY;
     state.answers[question.id] = entry;
     state.lastTopic = question.topic;
     save();
@@ -154,30 +166,41 @@
 
   function getTopicStats(topic, allQuestions) {
     const total = allQuestions.length;
-    let seen = 0, correct = 0, wrong = 0, weak = 0;
+    const now = Date.now();
+    let seen = 0, correct = 0, wrong = 0, weak = 0, due = 0;
     allQuestions.forEach(q => {
       const a = state.answers[q.id];
       if (!a) return;
       seen += 1;
       correct += a.correct;
       wrong += a.wrong;
-      if (a.lastResult === "fail" || a.wrong > a.correct) weak += 1;
+      if (isWeak(a)) weak += 1;
+      if (isDue(a, now)) due += 1;
     });
     const attempts = correct + wrong;
     return {
-      total, seen, correct, wrong, weak,
+      total, seen, correct, wrong, weak, due,
       accuracy: attempts ? Math.round((correct / attempts) * 100) : 0,
       coverage: total ? Math.round((seen / total) * 100) : 0
     };
   }
 
+  /* Слабые и просроченные: сначала самые просроченные, затем по числу ошибок */
   function getWeakQuestions(allQuestions) {
+    const now = Date.now();
     return allQuestions
       .map(q => ({ q, a: state.answers[q.id] }))
-      .filter(x => x.a && (x.a.lastResult === "fail" || x.a.wrong > x.a.correct))
-      .sort((x, y) => (y.a.wrong - y.a.correct) - (x.a.wrong - x.a.correct))
+      .filter(x => isWeak(x.a) || isDue(x.a, now))
+      .sort((x, y) => ((x.a.due || 0) - (y.a.due || 0)) || ((y.a.wrong - y.a.correct) - (x.a.wrong - x.a.correct)))
       .map(x => x.q);
   }
+  function getDueQuestions(allQuestions) {
+    const now = Date.now();
+    return allQuestions.filter(q => isDue(state.answers[q.id], now));
+  }
+  function getDueCount(allQuestions) { return getDueQuestions(allQuestions).length; }
+  function getDailyAll() { return Object.assign({}, state.daily); }
+  function getAnswersSnapshot() { return state.answers; }
 
   /* Вопросы, которые ещё не показывались или давно не повторялись: для режима «новое» */
   function getUnseenFirst(allQuestions) {
@@ -225,7 +248,7 @@
   window.Storage = {
     dateKey, todayKey,
     recordAnswer, recordVocab, recordDaily, getDaily, getStreak, recordExam, getExams,
-    getTopicStats, getWeakQuestions, getUnseenFirst,
+    getTopicStats, getWeakQuestions, getUnseenFirst, getDueQuestions, getDueCount, getDailyAll, getAnswersSnapshot, isWeak, isDue,
     getVocabStats, getWeakVocab, getAnswerEntry, getVocabEntry, getLastTopic, reset,
     getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile,
     exportState, useCloudProfile, useLocalProfile, isCloud, mergeInto

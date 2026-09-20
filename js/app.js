@@ -37,6 +37,7 @@
   }
   window.go = go;
   window.ROUTES = routes;
+  window.AppUI = { TOPICS, ICONS, statLine: (...a) => statLine(...a), esc };
 
   /* ---------- Профили ---------- */
   const C = window.Cloud;
@@ -355,6 +356,7 @@
     }).join("");
     const vs = S.getVocabStats(D.vocabulary);
     const totalWeak = Object.keys(TOPICS).reduce((n, k) => n + S.getWeakQuestions(D[k]).length, 0);
+    const dueTotal = Object.keys(TOPICS).reduce((n, k) => n + S.getDueCount(D[k]), 0);
 
     const allStats = Object.keys(TOPICS).map(k => S.getTopicStats(k, D[k]));
     const answered = allStats.reduce((n, s) => n + s.correct + s.wrong, 0);
@@ -367,6 +369,7 @@
         <div>
           <h1>Теория на права <span class="nowrap">по-норвежски</span></h1>
           <p class="lead">Вопросы как на экзамене, на норвежском. Перевод открывается по кнопке, чтобы сначала попробовать понять самому. Каждая ошибка разбирается и возвращается на повторение.</p>
+          ${dueTotal ? `<p class="due-line"><span class="pill mid">К повторению сегодня: ${dueTotal}</span> <a href="#" onclick="go('mistakes');return false;">открыть</a></p>` : ""}
           <div class="hero-actions">
             <button class="btn btn-primary" onclick="go('daily')">Задание дня</button>
             ${last && TOPICS[last] ? `<button class="btn" onclick="go('topic',{key:'${last}'})">Продолжить: ${TOPICS[last].title_ru}</button>` : ""}
@@ -377,7 +380,8 @@
             <div class="hero-stat"><b>${Math.round((correct / answered) * 100)}%</b><span>верных ответов</span></div>
             <div class="hero-stat"><b>${seen}/${totalQ}</b><span>вопросов пройдено</span></div>
             <div class="hero-stat"><b>${vs.seen}/${vs.total}</b><span>слов из лексики</span></div>
-          </div>` : ""}
+          </div>
+          <p class="hero-link"><a href="#" onclick="go('stats');return false;">Подробная статистика →</a></p>` : ""}
         </div>
       </section>
 
@@ -486,15 +490,20 @@
     const all = D[p.key];
     const k = D.signsByKind;
     let set, label = t.title_ru;
+    /* p.cat — категория знака (fare, forbud, …): тренировать только её */
+    const CATS = (window.SIGN_CATALOG || {}).CATS || {};
+    const byCat = list => p.cat ? list.filter(q => q.entry && q.entry.cat === p.cat) : list;
+    const catLabel = p.cat && CATS[p.cat] ? ": " + CATS[p.cat].ru : "";
     switch (p.mode) {
-      case "weak": set = S.getWeakQuestions(all); label = "Ошибки: " + t.title_ru; break;
-      case "new": set = S.getUnseenFirst(all).slice(0, 10); label = "Новое: " + t.title_ru; break;
-      case "all": set = all; break;
-      case "meaning": set = shuffle(k.meaning).slice(0, 15); label = "Что означает знак"; break;
-      case "pick": set = shuffle(k.pick).slice(0, 15); label = "Найди знак"; break;
-      case "category": set = shuffle(k.category).slice(0, 15); label = "Тип знака"; break;
+      case "weak": set = S.getWeakQuestions(byCat(all)); label = "Ошибки: " + t.title_ru + catLabel; break;
+      case "due": set = S.getDueQuestions(byCat(all)); label = "К повторению: " + t.title_ru + catLabel; break;
+      case "new": set = S.getUnseenFirst(byCat(all)).slice(0, 10); label = "Новое: " + t.title_ru + catLabel; break;
+      case "all": set = byCat(all); label = t.title_ru + catLabel; break;
+      case "meaning": set = shuffle(byCat(k.meaning)).slice(0, 15); label = "Что означает знак" + catLabel; break;
+      case "pick": set = shuffle(byCat(k.pick)).slice(0, 15); label = "Найди знак" + catLabel; break;
+      case "category": set = shuffle(byCat(k.category)).slice(0, 15); label = "Тип знака" + catLabel; break;
       case "marking": set = k.marking; label = "Разметка"; break;
-      default: set = shuffle(all).slice(0, 10);
+      default: set = shuffle(byCat(all)).slice(0, 10); label = t.title_ru + catLabel;
     }
     if (!set.length) { go("topic", { key: p.key }); return; }
 
@@ -522,7 +531,7 @@
             <div class="topic-icon">${r.t.icon}</div>
             <div class="topic-body">
               <h3>${esc(r.t.title_ru)}</h3>
-              <p class="muted">${r.weak.length} заданий с ошибками</p>
+              <p class="muted">${r.weak.length} заданий с ошибками${S.getDueCount(D[r.key]) ? `, к повторению сегодня: ${S.getDueCount(D[r.key])}` : ""}</p>
               <ul class="weak-list">
                 ${r.weak.slice(0, 5).map(q => {
                   const a = S.getAnswerEntry(q.id);

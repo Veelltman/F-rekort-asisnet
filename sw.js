@@ -7,7 +7,7 @@ const SHELL = [
   "./js/icons/signs-svg.js", "./js/data/signs-catalog.js", "./js/data/signs.js",
   "./js/data/situational.js", "./js/data/rules.js", "./js/data/generated.js",
   "./js/data/vocabulary.js", "./js/speech.js", "./js/merge.js", "./js/storage.js", "./js/cloud.js", "./js/quiz-engine.js",
-  "./js/app.js", "./js/teacher.js", "./js/teacher-ui.js"
+  "./js/app.js", "./js/stats.js", "./js/teacher.js", "./js/teacher-ui.js"
 ];
 
 self.addEventListener("install", e => {
