@@ -174,7 +174,7 @@
         <p class="topic-desc">20 вопросов, одинаковые для всех в этот день. Сравните результаты.</p>
         <div class="daily-rows">${rows}</div>
         <div class="daily-foot">
-          <button class="btn btn-primary" onclick="go('daily')">${mine ? "Пройти ещё раз" : "Начать задание дня"}</button>
+          <button class="btn ${mine ? "" : "btn-cta"}" onclick="go('daily')">${mine ? "Пройти ещё раз" : "Начать задание дня"}</button>
           ${streak > 1 ? `<span class="streak">${streak} дней подряд</span>` : ""}
         </div>
       </div>`;
@@ -312,7 +312,7 @@
         </div>
         <p class="topic-desc">45 вопросов, 90 минут, без подсказок по ходу. Сдано, если ошибок не больше 7. Как на настоящем экзамене.</p>
         <div class="daily-rows">${rows}</div>
-        <div class="daily-foot"><button class="btn btn-primary" onclick="go('exam')">Начать экзамен</button></div>
+        <div class="daily-foot"><button class="btn btn-cta" onclick="go('exam')">Начать экзамен</button></div>
       </div>`;
   }
 
@@ -379,7 +379,6 @@
             <div class="hero-stat"><b>${vs.seen}/${vs.total}</b><span>слов из лексики</span></div>
           </div>` : ""}
         </div>
-        <div class="hero-sign">${SW("diamond-yellow", "")}</div>
       </section>
 
       ${circleCard()}
