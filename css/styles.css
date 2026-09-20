@@ -110,6 +110,12 @@ p { margin: 0 0 0.6em; }
 }
 .profile-btn:hover { background: rgba(255,255,255,0.14); }
 .profile-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; }
+.profile-dot.is-synced { background: var(--ok); }
+.profile-dot.is-saving { background: var(--line); animation: sync-pulse 1s ease-in-out infinite; }
+.profile-dot.is-offline { background: var(--ink-3); }
+.profile-dot.is-error { background: var(--sign-red); }
+@keyframes sync-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.sync-line { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 0.85rem; color: var(--ink-2); border-top: 1px solid var(--border); }
 .profile-menu {
   position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 220px;
   background: var(--surface); color: var(--ink); border: 1px solid var(--border);

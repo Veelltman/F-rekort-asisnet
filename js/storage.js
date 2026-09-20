@@ -32,7 +32,7 @@
 
   let cloudName = null;
   function stateKey() { return cloudName ? "forerkort-trener-v1:cloud:" + cloudName : "forerkort-trener-v1:" + profiles.current; }
-  function emptyState() { return { answers: {}, vocab: {}, daily: {}, lastTopic: null }; }
+  function emptyState() { return { answers: {}, vocab: {}, daily: {}, exams: [], lastTopic: null, updatedAt: 0 }; }
 
   let state = read(stateKey(), null);
   if (!state) {
@@ -43,6 +43,7 @@
   }
 
   function save() {
+    state.updatedAt = Date.now();
     write(stateKey(), state);
     if (cloudName && window.Cloud) window.Cloud.schedulePush();
   }
@@ -53,6 +54,15 @@
     cloudName = name;
     state = Object.assign(emptyState(), remoteState || {});
     write(stateKey(), state);
+  }
+  /* Слить облачное состояние с текущим (без отправки в облако — иначе pull породил бы push-цикл).
+     Возвращает true, если у нас есть что-то, чего нет в облаке. */
+  function mergeInto(remoteState) {
+    const merged = window.StateMerge.merge(state, remoteState || {});
+    const changed = JSON.stringify(merged) !== JSON.stringify(window.StateMerge.merge(remoteState || {}, remoteState || {}));
+    state = merged;
+    write(stateKey(), state);
+    return changed;
   }
   function useLocalProfile() {
     cloudName = null;
@@ -207,7 +217,9 @@
 
   function reset() {
     state = emptyState();
+    state.resetAt = Date.now();
     save();
+    if (cloudName && window.Cloud) window.Cloud.pushNow({ replace: true });
   }
 
   window.Storage = {
@@ -216,6 +228,6 @@
     getTopicStats, getWeakQuestions, getUnseenFirst,
     getVocabStats, getWeakVocab, getAnswerEntry, getVocabEntry, getLastTopic, reset,
     getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile,
-    exportState, useCloudProfile, useLocalProfile, isCloud
+    exportState, useCloudProfile, useLocalProfile, isCloud, mergeInto
   };
 })();

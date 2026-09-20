@@ -131,6 +131,14 @@ export default {
       if (path === "/api/state" && request.method === "PUT") {
         const text = await request.text();
         if (text.length > 800000) return err("Слишком большой прогресс", 413, cors);
+        /* base = updatedAt, который клиент видел последним. Если на сервере уже новее
+           (другое устройство), не затираем, а отдаём серверное состояние: клиент сольёт и пришлёт снова.
+           Старые клиенты без base работают как раньше; replace=1 — при «сбросить прогресс». */
+        const base = url.searchParams.get("base");
+        const replace = url.searchParams.get("replace") === "1";
+        if (base !== null && !replace && user.updatedAt && Number(base) !== user.updatedAt) {
+          return json({ error: "Прогресс изменился с другого устройства", conflict: true, state: user.state || {}, updatedAt: user.updatedAt }, 409, cors);
+        }
         user.state = JSON.parse(text);
         user.updatedAt = Date.now();
         await putUser(env, user);

@@ -29,6 +29,7 @@
   const routes = {};
   function go(name, params) {
     window.CURRENT_ROUTE = name;
+    window.CURRENT_PARAMS = params || {};
     document.onkeydown = null;
     routes[name](params || {});
     window.scrollTo({ top: 0 });
@@ -50,8 +51,32 @@
     const cur = S.getCurrentProfile();
     el.innerHTML = `<button class="profile-btn" title="Профиль"><span class="profile-dot"></span>${esc(cur)}</button>`;
     el.querySelector(".profile-btn").onclick = openProfileMenu;
+    renderSyncStatus();
   }
   window.renderProfileSwitch = renderProfileSwitch;
+
+  /* Точка у имени показывает состояние облака: сохранено / сохраняю / нет сети / ошибка */
+  const SYNC_TITLE = { local: "Локальный профиль", synced: "Прогресс сохранён в облаке", saving: "Сохраняю…", offline: "Нет сети: сохраню, когда появится", error: "Ошибка сохранения" };
+  function renderSyncStatus() {
+    const dot = document.querySelector("#profile-switch .profile-dot");
+    if (!dot) return;
+    const st = C.status;
+    dot.className = "profile-dot is-" + st;
+    dot.parentElement.title = SYNC_TITLE[st] + (C.statusMsg ? ": " + C.statusMsg : "");
+    const line = document.querySelector(".profile-menu .sync-line");
+    if (line) line.innerHTML = syncLineHtml();
+  }
+  window.renderSyncStatus = renderSyncStatus;
+  function syncLineHtml() {
+    const st = C.status;
+    const retry = (st === "error" || st === "offline") ? ` <button class="btn btn-small" onclick="Cloud.pushNow()">Повторить</button>` : "";
+    return `<span class="profile-dot is-${st}"></span> ${esc(SYNC_TITLE[st])}${retry}`;
+  }
+
+  /* Перерисовать текущий «спокойный» экран после прихода данных из облака (никогда — во время теста) */
+  window.refreshView = () => {
+    if (["home", "stats", "mistakes", "topic"].includes(window.CURRENT_ROUTE)) go(window.CURRENT_ROUTE, window.CURRENT_PARAMS);
+  };
 
   function openProfileMenu() {
     const existing = document.querySelector(".profile-menu");
@@ -63,9 +88,10 @@
       menu.innerHTML = `
         <div class="profile-menu-title">Ты вошёл как</div>
         <button class="profile-item active">${esc(cur)}</button>
+        <div class="sync-line">${syncLineHtml()}</div>
         <button class="profile-item profile-add" data-act="logout">Выйти</button>`;
       document.getElementById("profile-switch").appendChild(menu);
-      menu.querySelector("[data-act=logout]").onclick = () => { C.logout(); menu.remove(); renderProfileSwitch(); go("home"); };
+      menu.querySelector("[data-act=logout]").onclick = async () => { menu.remove(); await C.logout(); renderProfileSwitch(); go("home"); };
     } else {
       menu.innerHTML = `
         <div class="profile-menu-title">Кто занимается?</div>
