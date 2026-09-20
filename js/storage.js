@@ -7,6 +7,12 @@
 
   const PROFILES_KEY = "forerkort-profiles";
 
+  /* Дата в локальном времени пользователя: YYYY-MM-DD. Один источник для daily и серии дней. */
+  function dateKey(d) {
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function todayKey() { return dateKey(new Date()); }
+
   function read(key, fallback) {
     try {
       const raw = localStorage.getItem(key);
@@ -128,7 +134,7 @@
     let n = 0;
     const d = new Date();
     for (;;) {
-      const key = d.toISOString().slice(0, 10);
+      const key = dateKey(d);
       if (!state.daily[key]) break;
       n += 1;
       d.setDate(d.getDate() - 1);
@@ -205,6 +211,7 @@
   }
 
   window.Storage = {
+    dateKey, todayKey,
     recordAnswer, recordVocab, recordDaily, getDaily, getStreak, recordExam, getExams,
     getTopicStats, getWeakQuestions, getUnseenFirst,
     getVocabStats, getWeakVocab, getAnswerEntry, getVocabEntry, getLastTopic, reset,

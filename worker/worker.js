@@ -46,10 +46,10 @@ async function isTeacherAllowed(env, user) {
   return list.split(",").map(s => s.trim().toLowerCase()).filter(Boolean).includes(user.name.toLowerCase());
 }
 
-function todayKey() {
-  const d = new Date();
-  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-}
+/* Дата по норвежскому времени (пользователи в Норвегии): YYYY-MM-DD */
+const OSLO_FMT = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Oslo", year: "numeric", month: "2-digit", day: "2-digit" });
+function osloKey(d) { return OSLO_FMT.format(d); }
+function todayKey() { return osloKey(new Date()); }
 
 function summarize(user) {
   const st = user.state || {};
@@ -61,11 +61,10 @@ function summarize(user) {
   const daily = st.daily || {};
   const days = Object.keys(daily).sort();
   let streak = 0;
-  const d = new Date();
-  for (;;) {
-    const k = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  for (let i = 0; ; i++) {
+    const k = osloKey(new Date(Date.now() - i * 86400000));
     if (!daily[k]) break;
-    streak += 1; d.setDate(d.getDate() - 1);
+    streak += 1;
   }
   return {
     name: user.name,

@@ -90,10 +90,7 @@
   }
 
   /* ---------- Задание дня ---------- */
-  function todayKey() {
-    const d = new Date();
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-  }
+  const todayKey = () => S.todayKey();
   function hashStr(str) {
     let h = 2166136261;
     for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
@@ -183,8 +180,8 @@
         </div>`;
       view.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
       const pinInput = document.getElementById("auth-pin");
-      pinInput.oninput = () => { pinInput.value = pinInput.value.replace(/D/g, "").slice(0, 6); };
-      pinInput.onkeydown = e => { if (e.key.length === 1 && !/d/.test(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); };
+      pinInput.oninput = () => { pinInput.value = pinInput.value.replace(/\D/g, "").slice(0, 6); };
+      pinInput.onkeydown = e => { if (e.key.length === 1 && !/\d/.test(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); };
       const form = document.getElementById("auth-form");
       form.onsubmit = async e => {
         e.preventDefault();
@@ -556,7 +553,7 @@
     if (!p.mode) {
       const resumable = saved && saved.index < saved.ids.length;
       view.innerHTML = `
-        <button class="btn btn-ghost" onclick="go(home)">Главная</button>
+        <button class="btn btn-ghost" onclick="go('home')">Главная</button>
         <section class="topic-hero">
           <div class="topic-icon big">${ICONS.vocab}</div>
           <div>
@@ -570,10 +567,10 @@
           </div>
         </section>
         <div class="grid modes">
-          ${resumable ? `<div class="card mode-card"><h3>Продолжить</h3><p class="muted">Начатая колода: ${saved.index} из ${saved.ids.length} пройдено.</p><button class="btn btn-primary" onclick="go(vocab,{mode:resume})">Продолжить</button></div>` : ""}
-          <div class="card mode-card"><h3>Новые слова</h3><p class="muted">${groups.new.length ? "20 слов, которые ты ещё не видел." : "Все слова уже пройдены хотя бы раз."}</p><button class="btn ${resumable ? "" : "btn-primary"}" ${groups.new.length ? "" : "disabled"} onclick="go(vocab,{mode:new})">Начать</button></div>
-          <div class="card mode-card"><h3>Повторить незнакомые</h3><p class="muted">${groups.weak.length ? groups.weak.length + " слов, которые ты отметил «не знаю»." : "Незнакомых слов нет."}</p><button class="btn" ${groups.weak.length ? "" : "disabled"} onclick="go(vocab,{mode:weak})">Начать</button></div>
-          <div class="card mode-card"><h3>Все слова</h3><p class="muted">Вся колода в случайном порядке.</p><button class="btn" onclick="go(vocab,{mode:all})">Начать</button></div>
+          ${resumable ? `<div class="card mode-card"><h3>Продолжить</h3><p class="muted">Начатая колода: ${saved.index} из ${saved.ids.length} пройдено.</p><button class="btn btn-primary" onclick="go('vocab',{mode:'resume'})">Продолжить</button></div>` : ""}
+          <div class="card mode-card"><h3>Новые слова</h3><p class="muted">${groups.new.length ? "20 слов, которые ты ещё не видел." : "Все слова уже пройдены хотя бы раз."}</p><button class="btn ${resumable ? "" : "btn-primary"}" ${groups.new.length ? "" : "disabled"} onclick="go('vocab',{mode:'new'})">Начать</button></div>
+          <div class="card mode-card"><h3>Повторить незнакомые</h3><p class="muted">${groups.weak.length ? groups.weak.length + " слов, которые ты отметил «не знаю»." : "Незнакомых слов нет."}</p><button class="btn" ${groups.weak.length ? "" : "disabled"} onclick="go('vocab',{mode:'weak'})">Начать</button></div>
+          <div class="card mode-card"><h3>Все слова</h3><p class="muted">Вся колода в случайном порядке.</p><button class="btn" onclick="go('vocab',{mode:'all'})">Начать</button></div>
         </div>`;
       return;
     }
