@@ -63,7 +63,7 @@
     /* ---------- Алкоголь, телефон, внимание ---------- */
     q("007", "Hva er promillegrensen for bilførere i Norge?",
       "Какой допустимый уровень алкоголя в крови для водителя в Норвегии?",
-      [["0,2 promille", "0,2 промилле"], ["0,5 promille", "0,5 промилле", "0,5 er grensen i mange andre land, men i Norge er den lavere, 0,2.", "0,5 — лимит во многих других странах, но в Норвегии он ниже — 0,2."], ["0,8 promille", "0,8 промилле", "0,8 er langt over den norske grensen og regnes som grovt ruspåvirket kjøring.", "0,8 намного выше норвежского лимита и считается тяжёлым опьянением за рулём."], ["0,0 promille", "0,0 промилле", "Grensen er ikke null, den er 0,2 promille.", "Лимит не нулевой, а 0,2 промилле."]],
+      [["0,2 promille", "0,2 промилле"], ["0,5 promille", "0,5 промилле", "0,5 er grensen i mange andre land, men i Norge er den lavere, 0,2.", "0,5 — лимит во многих других странах, но в Норвегии он ниже — 0,2."], ["0,8 promille", "0,8 промилле", "0,8 er fire ganger den norske grensen på 0,2. Over 0,5 promille gir normalt ubetinget fengsel, ikke bare bot.", "0,8 — это в четыре раза выше норвежского лимита 0,2. Свыше 0,5 промилле обычно грозит реальный тюремный срок, а не только штраф."], ["0,0 promille", "0,0 промилле", "Grensen er ikke null, den er 0,2 promille.", "Лимит не нулевой, а 0,2 промилле."]],
       "Promillegrensen er 0,2. I praksis betyr det at du ikke skal drikke alkohol i det hele tatt før du kjører.",
       "Допустимый предел 0,2 промилле. На практике это означает: перед вождением не пить вообще.",
       "0,2 — одно из самых строгих ограничений в Европе. Одна кружка пива уже риск потерять права."),
@@ -301,7 +301,7 @@
 
     q("040", "Hvilket nummer ringer du ved en alvorlig ulykke med personskade?",
       "По какому номеру звонить при серьёзной аварии с пострадавшими?",
-      [["113 (ambulanse)", "113 (скорая)"], ["112 (politi)", "112 (полиция)", "112 er politiet, ved personskade ringer du ambulansen på 113.", "112 — это полиция, при травмах нужно звонить скорой по 113."], ["110 (brann)", "110 (пожарные)", "110 er brannvesenet, ikke ambulansen, som har nummer 113.", "110 — это пожарные, а не скорая, у которой номер 113."], ["911", "911", "911 er det amerikanske nødnummeret og fungerer ikke i Norge.", "911 — американский номер экстренных служб, в Норвегии он не работает."]],
+      [["113 (ambulanse)", "113 (скорая)"], ["112 (politi)", "112 (полиция)", "112 er politiet, ved personskade ringer du ambulansen på 113.", "112 — это полиция, при травмах нужно звонить скорой по 113."], ["110 (brann)", "110 (пожарные)", "110 er brannvesenet, ikke ambulansen, som har nummer 113.", "110 — это пожарные, а не скорая, у которой номер 113."], ["911", "911", "911 er det amerikanske nødnummeret. Fra mobil blir det som regel koblet videre til 112, men i Norge skal du lære 110, 112 og 113, og ved personskade ringer du 113.", "911 — американский номер. С мобильного его обычно переадресуют на 112, но в Норвегии надо знать 110, 112 и 113, а при травмах звонить 113."]],
       "110 er brann, 112 er politi, 113 er ambulanse. Ved personskade ringer du 113; operatøren varsler de andre.",
       "110 — пожарные, 112 — полиция, 113 — скорая. При травмах звони 113, оператор вызовет остальных.",
       "Запомни: 110 огонь, 112 полиция, 113 медицина. Норвежский номер 911 не работает как в США."),
