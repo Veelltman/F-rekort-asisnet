@@ -276,7 +276,7 @@
       return {
         prompt_no: `Du nærmer deg et gangfelt. En fotgjenger ${st.no}. Hva gjør du?`,
         prompt_ru: `Ты подъезжаешь к пешеходному переходу. Пешеход ${st.ru}. Что делаешь?`,
-        image: scene({ you: { from: "south", to: "north" } }),
+        image: window.ROAD({ crossing: true }),
         options: [
           { text_no: "Senker farten og stopper om nødvendig for å slippe fotgjengeren over", text_ru: "Снижаю скорость и при необходимости останавливаюсь, чтобы пропустить", correct: true },
           { text_no: "Kjører: fotgjengeren er ikke foran bilen", text_ru: "Еду: пешеход не перед машиной", correct: false,

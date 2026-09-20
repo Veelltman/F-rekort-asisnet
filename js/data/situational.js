@@ -74,6 +74,31 @@
     return `<polygon points="0,-5 9,0 0,5" fill="${color}" transform="translate(${x} ${y}) rotate(${endAngle})"/>`;
   }
 
+  /* Корпус ТС: рисуется носом вверх, потом поворачивается на rot. kind: car | bus | truck | tram | emergency | bike */
+  function body(kind, label, color, rot) {
+    const lbl = (y, fill) => `<text x="0" y="${y}" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="${fill || "#fff"}" transform="rotate(${-rot})">${label}</text>`;
+    if (kind === "bike") return `<rect x="-4" y="-10" width="8" height="20" rx="4" fill="${color}"/><circle cx="0" cy="-6" r="3.8" fill="#fff"/>
+        <text x="0" y="24" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${color}" transform="rotate(${-rot})">${label}</text>`;
+    if (kind === "bus") return `<rect x="-9" y="-22" width="18" height="44" rx="3" fill="#f0a020"/>
+        <rect x="-7" y="-20" width="14" height="5" rx="1.5" fill="#fff" opacity="0.85"/>
+        ${[-12, -5, 9, 16].map(y => `<rect x="-9" y="${y}" width="2.5" height="4" fill="#fff" opacity="0.7"/><rect x="6.5" y="${y}" width="2.5" height="4" fill="#fff" opacity="0.7"/>`).join("")}
+        <rect x="-7" y="17" width="14" height="3" rx="1" fill="#fff" opacity="0.35"/>${lbl(4.5)}`;
+    if (kind === "truck") return `<rect x="-9" y="-10" width="18" height="34" rx="2" fill="#8a949c" stroke="#fff" stroke-width="1"/>
+        <rect x="-8" y="-25" width="16" height="13" rx="3" fill="${color}"/><rect x="-6" y="-23" width="12" height="4" rx="1.5" fill="#fff" opacity="0.85"/>${lbl(10)}`;
+    if (kind === "tram") return `<rect x="-8" y="-26" width="16" height="52" rx="6" fill="#2b62c9"/>
+        ${[-21, -13, 8, 16].map(y => `<rect x="-6" y="${y}" width="12" height="5" rx="1" fill="#fff" opacity="0.8"/>`).join("")}
+        <line x1="-5" y1="-4" x2="5" y2="-4" stroke="#111" stroke-width="1.2" opacity="0.6"/>${lbl(3.5)}`;
+    if (kind === "emergency") return `<rect x="-8" y="-14" width="16" height="28" rx="4" fill="#fff" stroke="#c9cfd6" stroke-width="1"/>
+        <rect x="-8" y="-1" width="16" height="4" fill="#d81e1e"/><rect x="-6" y="-11" width="12" height="6" rx="2" fill="#9fc8ff"/>
+        <rect x="-4" y="-16" width="8" height="3" rx="1.5" fill="#1d5fd6"/><circle cx="0" cy="-17" r="3.5" fill="#1d5fd6" opacity="0.35"/>${lbl(11.5, "#1d1f24")}`;
+    return `<rect x="-8" y="-14" width="16" height="28" rx="4" fill="${color}"/>
+        <rect x="-6" y="-11" width="12" height="6" rx="2" fill="#fff" opacity="0.75"/>
+        <rect x="-6" y="7" width="12" height="4" rx="1.5" fill="#fff" opacity="0.35"/>${lbl(4.5)}`;
+  }
+  function at(x, y, rot, kind, label, color) {
+    return `<g transform="translate(${x} ${y}) rotate(${rot})">${body(kind, label, color, rot)}</g>`;
+  }
+
   function vehicle(from, to, label, color, kind, roundabout) {
     const a = APPROACH[from];
     const traj = roundabout ? roundaboutPath(from, to) : trajectory(from, to, kind === "bike" ? 11 : 0);
@@ -82,21 +107,7 @@
     const [x, y] = pt(startCoord, lane, a.axis);
     const path = `<path d="${traj.d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
       ${arrowHead(traj.d, traj.endAngle, color)}`;
-    if (kind === "bike") {
-      return `${path}
-        <g transform="translate(${x} ${y}) rotate(${a.rot})">
-          <rect x="-3" y="-8" width="6" height="16" rx="3" fill="${color}"/>
-          <circle cx="0" cy="-5" r="3.2" fill="#fff"/>
-          <text x="0" y="24" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${color}" transform="rotate(${-a.rot})">${label}</text>
-        </g>`;
-    }
-    return `${path}
-      <g transform="translate(${x} ${y}) rotate(${a.rot})">
-        <rect x="-8" y="-14" width="16" height="28" rx="4" fill="${color}"/>
-        <rect x="-6" y="-11" width="12" height="6" rx="2" fill="#fff" opacity="0.75"/>
-        <rect x="-6" y="7" width="12" height="4" rx="1.5" fill="#fff" opacity="0.35"/>
-        <text x="0" y="4.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff" transform="rotate(${-a.rot})">${label}</text>
-      </g>`;
+    return `${path}${at(x, y, a.rot, kind, label, color)}`;
   }
 
   /* Знак стоит справа от подъезжающего, перед перекрёстком */
@@ -127,6 +138,12 @@
     (cfg.others || []).forEach((o, i) => cars.push(vehicle(o.from, o.to, o.label || String.fromCharCode(66 + i), o.kind === "bike" ? "#2aa46a" : palette[i % 3], o.kind, cfg.roundabout)));
     const signs = Object.keys(cfg.signs || {}).map(side => signMarker(side, cfg.signs[side])).join("");
     const lights = Object.keys(cfg.lights || {}).map(side => lightMarker(side, cfg.lights[side])).join("");
+    /* Зебра на указанном рукаве + пешеход, идущий через неё */
+    const PED = { east: { zebra: (i) => `<rect x="146" y="${72 + i * 10}" width="10" height="6"/>`, at: [151, 56], ang: 90 },
+                  west: { zebra: (i) => `<rect x="44" y="${72 + i * 10}" width="10" height="6"/>`, at: [49, 144], ang: -90 },
+                  north: { zebra: (i) => `<rect x="${72 + i * 10}" y="44" width="6" height="10"/>`, at: [144, 49], ang: 180 },
+                  south: { zebra: (i) => `<rect x="${72 + i * 10}" y="146" width="6" height="10"/>`, at: [56, 151], ang: 0 } };
+    const peds = (cfg.peds || []).map(side => { const p = PED[side]; return `<g fill="#fff" opacity="0.95">${[0, 1, 2, 3, 4, 5].map(p.zebra).join("")}</g>${person(p.at[0], p.at[1], p.ang)}`; }).join("");
 
     const centerLines = cfg.roundabout ? "" : `
       <g stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6">
@@ -163,6 +180,7 @@
       ${crossings}
       ${signs}
       ${lights}
+      ${peds}
       ${cars.join("")}
     </svg>`;
   }
@@ -174,35 +192,29 @@
      road({ narrow: true })           — узкая дорога с разъездом (møteplass) на стороне A, B навстречу
      road({ exit: "parking" })        — A выезжает с парковки справа на дорогу; exit: "gatetun" — из жилой зоны
      road({ tcross: true })           — T-перекрёсток: боковая дорога справа, B выезжает из неё
-     road({ bikeLane: true })         — велополоса справа, A поворачивает направо, велосипедист B едет прямо */
+     road({ bikeLane: true })         — велополоса справа, A поворачивает направо, велосипедист B едет прямо
+     road({ overtake: true })         — B впереди с левым поворотником объезжает велосипедиста S, A сзади
+     road({ night: true })            — ночь, пешеход в тёмном на левой обочине навстречу A
+     road({ truck: true, tcross: true }) — грузовик B впереди сместился влево перед правым поворотом
+     road({ tram: true })             — трамвай стоит на остановке, пассажиры переходят к тротуару
+     В scene(): others[].kind может быть "bike" | "bus" | "truck" | "tram" | "emergency"; peds: ["east"] — пешеход на переходе рукава */
 
-  function carAt(x, y, rot, label, color, long) {
-    const h = long ? 44 : 28, w = long ? 18 : 16;
-    return `<g transform="translate(${x} ${y}) rotate(${rot})">
-        <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="4" fill="${color}"/>
-        <rect x="${-w / 2 + 2}" y="${-h / 2 + 3}" width="${w - 4}" height="6" rx="2" fill="#fff" opacity="0.75"/>
-        <rect x="${-w / 2 + 2}" y="${h / 2 - 7}" width="${w - 4}" height="4" rx="1.5" fill="#fff" opacity="0.35"/>
-        <text x="0" y="4.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff" transform="rotate(${-rot})">${label}</text>
-      </g>`;
-  }
-  function bikeAt(x, y, rot, label, color) {
-    return `<g transform="translate(${x} ${y}) rotate(${rot})">
-        <rect x="-3" y="-8" width="6" height="16" rx="3" fill="${color}"/>
-        <circle cx="0" cy="-5" r="3.2" fill="#fff"/>
-        <text x="0" y="22" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${color}" transform="rotate(${-rot})">${label}</text>
-      </g>`;
-  }
+  function carAt(x, y, rot, label, color, long) { return at(x, y, rot, long ? "bus" : "car", label, color); }
+  function bikeAt(x, y, rot, label, color) { return at(x, y, rot, "bike", label, color); }
   function pathArrow(d, color) {
     const pts = d.match(/[\d.]+[ ,][\d.]+/g).map(s => s.split(/[ ,]/).map(Number));
     const [p, q] = [pts[pts.length - 2], pts[pts.length - 1]];
     return `<path d="${d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
       ${arrowHead(d, angleOf(p, q), color)}`;
   }
-  function person(x, y, dir) {
+  /* Пешеход. ang: направление стрелки движения (0 = вправо, 90 = вниз, 180 = влево, -90 = вверх). dir -1 = влево (старый вызов) */
+  function person(x, y, ang, color) {
+    if (ang === -1) ang = 180; else if (ang === 1) ang = 0;
+    const c = color || "#1d1f24";
     return `<g transform="translate(${x} ${y})">
-        <circle cx="0" cy="-9" r="4" fill="#1d1f24"/>
-        <path d="M -4 -4 L 4 -4 L 5 6 L 2 6 L 2 14 L -2 14 L -2 6 L -5 6 Z" fill="#1d1f24"/>
-        <polygon points="${dir * 8},0 ${dir * 16},0 ${dir * 16},-3 ${dir * 22},2 ${dir * 16},7 ${dir * 16},4 ${dir * 8},4" fill="#1d1f24" opacity="0.8"/>
+        <circle cx="0" cy="-9" r="4" fill="${c}"/>
+        <path d="M -4 -4 L 4 -4 L 5 6 L 2 6 L 2 14 L -2 14 L -2 6 L -5 6 Z" fill="${c}"/>
+        <polygon points="8,0 16,0 16,-3 22,2 16,7 16,4 8,4" fill="${c}" opacity="0.8" transform="rotate(${ang || 0})"/>
       </g>`;
   }
   function speedSign(x, y, n) {
@@ -213,8 +225,9 @@
 
   function road(cfg) {
     const A = "#1d5fd6", B = "#e0483a", BUS = "#f0a020", BIKE = "#2aa46a";
-    const narrow = !!cfg.narrow;
+    const narrow = !!cfg.narrow, night = !!cfg.night;
     const x0 = narrow ? 84 : 68, x1 = narrow ? 116 : 132;      /* асфальт */
+    const GRASS = night ? "#1e261e" : "#e4ede0", WALK = night ? "#3a4048" : "#cfd6dc", ASPH = night ? "#2b3138" : "#5d6770";
     let extra = "", vehicles = "";
 
     /* боковой въезд справа (T-перекрёсток, парковка, gatetun) */
@@ -274,11 +287,45 @@
         ${pathArrow(`M 116 172 L 116 150`, "#2aa46a")}
         ${carAt(116, 190, 0, "C", "#2aa46a")}`;
     }
-    if (cfg.tcross) {
+    if (cfg.tcross && !cfg.truck) {
       vehicles += `${pathArrow(`M 170 116 L 140 116 Q 116 116 116 92 L 116 40`, B)}
         ${carAt(182, 116, 270, "B", B)}
         ${pathArrow(`M ${x1 - 16} 166 L ${x1 - 16} 148`, A)}
         ${carAt(x1 - 16, 184, 0, "A", A)}`;
+    }
+    if (cfg.overtake) {
+      /* B впереди даёт левый поворотник и объезжает велосипедиста; A сзади */
+      vehicles += `${pathArrow("M 116 104 Q 116 88 102 82 L 102 44", B)}
+        ${at(116, 122, 0, "car", "B", B)}
+        <circle cx="108" cy="109" r="3" fill="#ffb300" stroke="#fff" stroke-width="1"/>
+        ${pathArrow(`M ${x1 - 5} 62 L ${x1 - 5} 40`, BIKE)}
+        ${at(x1 - 5, 76, 0, "bike", "S", BIKE)}
+        ${pathArrow("M 116 158 L 116 146", A)}
+        ${at(116, 178, 0, "car", "A", A)}`;
+    }
+    if (cfg.night) {
+      /* Ночь: пешеход в тёмной одежде идёт по левой обочине навстречу A */
+      extra += `<polygon points="106,164 84,56 148,56 126,164" fill="#fff6c8" opacity="0.22"/>`;
+      vehicles += `${person(x0 + 6, 96, 90, "#5a616b")}
+        ${pathArrow("M 116 158 L 116 140", A)}
+        ${at(116, 178, 0, "car", "A", A)}`;
+    }
+    if (cfg.truck) {
+      /* Длинный грузовик впереди сместился влево перед правым поворотом в боковую дорогу */
+      vehicles += `${pathArrow("M 106 96 Q 108 100 134 100 L 172 100", B)}
+        ${at(106, 122, 0, "truck", "B", B)}
+        <circle cx="114" cy="98" r="3" fill="#ffb300" stroke="#fff" stroke-width="1"/>
+        ${pathArrow("M 116 168 L 116 156", A)}
+        ${at(116, 186, 0, "car", "A", A)}`;
+    }
+    if (cfg.tram) {
+      /* Рельсы посередине, трамвай стоит с открытыми дверями, пассажиры идут к правому тротуару */
+      extra += `<g stroke="#9aa3ab" stroke-width="1.5"><line x1="95" y1="0" x2="95" y2="200"/><line x1="105" y1="0" x2="105" y2="200"/></g>`;
+      vehicles += `${at(100, 84, 0, "tram", "T", "#2b62c9")}
+        <g fill="#ffb300"><rect x="108" y="70" width="2.5" height="8"/><rect x="108" y="90" width="2.5" height="8"/></g>
+        ${person(120, 80, 0)}${person(122, 100, 0)}
+        ${pathArrow("M 116 158 L 116 144", A)}
+        ${at(116, 178, 0, "car", "A", A)}`;
     }
     if (cfg.bikeLane) {
       /* велополоса вдоль правого края, прерывается у бокового въезда */
@@ -293,10 +340,10 @@
     }
 
     return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
-      <rect width="200" height="200" fill="#e4ede0"/>
-      <rect x="${x0 - 6}" y="0" width="${x1 - x0 + 12}" height="200" fill="#cfd6dc"/>
+      <rect width="200" height="200" fill="${GRASS}"/>
+      <rect x="${x0 - 6}" y="0" width="${x1 - x0 + 12}" height="200" fill="${WALK}"/>
       ${sideRoad}
-      <rect x="${x0}" y="0" width="${x1 - x0}" height="200" fill="#5d6770"/>
+      <rect x="${x0}" y="0" width="${x1 - x0}" height="200" fill="${ASPH}"/>
       ${extra}
       <g stroke="#fff" stroke-width="1.5" opacity="0.85">
         <line x1="${x0}" y1="0" x2="${x0}" y2="200"/>
@@ -515,7 +562,7 @@
       "Там, где ограничение 60 км/ч или ниже, ты обязан пропустить автобус, который показывает поворотником выезд с остановки.",
       "Это прямое правило норвежских ПДД — автобус в городе имеет преимущество при выезде с остановки."),
 
-    q("016", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }] }),
+    q("016", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west", kind: "emergency" }] }),
       "Du hører sirene og ser en utrykningsbil med blålys komme fra høyre. Hva gjør du?",
       "Слышишь сирену и видишь машину с мигалками справа. Что делаешь?",
       [
@@ -567,7 +614,7 @@
       "Зелёный означает, что можно въехать на перекрёсток, но обязанность уступить встречным при повороте налево остаётся.",
       "Зелёный — не «мне все уступают». При левом повороте встречный прямо всегда первый."),
 
-    q("020", scene({ you: { from: "south", to: "east" } }),
+    q("020", scene({ you: { from: "south", to: "east" }, peds: ["east"] }),
       "Grønt lys, du svinger til høyre. Fotgjengere krysser på gangfeltet i gaten du svinger inn i, også på grønt. Hva gjør du?",
       "Зелёный, ты поворачиваешь направо. Пешеходы переходят по зебре на улице, куда ты сворачиваешь, тоже на зелёный. Что делаешь?",
       [
@@ -606,7 +653,7 @@
       "Въезжающий с полосы разгона уступает. Используй всю полосу, чтобы набрать скорость, и выбери просвет. Поток на магистрали при этом должен облегчать въезд.",
       "Не останавливайся в конце полосы разгона: набери скорость потока, иначе слияние станет опасным."),
 
-    q("023", null,
+    q("023", road({ overtake: true }),
       "Bilen foran deg gir tegn til venstre for å kjøre forbi en syklist. Du ville også kjørt forbi. Hva gjør du?",
       "Машина впереди включает левый поворотник, чтобы объехать велосипедиста. Ты тоже хотел обогнать. Что делаешь?",
       [
@@ -632,7 +679,7 @@
       "При повороте направо через велополосу ты уступаешь велосипедистам, едущим прямо, в том числе тем, кто догоняет сзади.",
       "Перед поворотом направо — правое зеркало и взгляд через плечо. Это проверяют на oppkjøring."),
 
-    q("025", null,
+    q("025", road({ night: true }),
       "Det er mørkt, og du ser en fotgjenger i mørke klær som går på venstre side av en veg uten fortau. Hva gjør du?",
       "Темно, ты видишь пешехода в тёмной одежде, идущего по левой стороне дороги без тротуара. Что делаешь?",
       [
@@ -749,7 +796,7 @@
       "Мигающий красный на переезде означает, что приближается поезд. Нужно остановиться и ждать, пока сигнал не погаснет, даже если шлагбаума или поезда ещё не видно.",
       "Тормозной путь поезда в разы длиннее, чем у машины. Никогда не пытайся проскочить на мигающий красный."),
 
-    q("034", null,
+    q("034", road({ truck: true, tcross: true }),
       "Et langt vogntog foran deg skal svinge til høyre, men beveger seg først til venstre i kjørefeltet. Hva bør du gjøre?",
       "Длинный грузовик с прицепом впереди тебя собирается повернуть направо, но сначала смещается влево в полосе. Что нужно сделать?",
       [
@@ -775,7 +822,7 @@
       "На круге действует та же обязанность уступать для велосипедистов, что и для машин: тот, кто уже на кругу, имеет преимущество — независимо от типа транспорта.",
       "Не думай, что раз это велосипедист, можно «проскочить». Правило приоритета на круге не зависит от размера транспорта."),
 
-    q("036", null,
+    q("036", road({ tram: true }),
       "En trikk har stoppet ved en holdeplass midt i gaten, uten trafikkøy mellom skinnene og fortauet. Dørene åpnes. Hva gjør du?",
       "Трамвай остановился на остановке посреди улицы, без островка безопасности между рельсами и тротуаром. Двери открылись. Что делаешь?",
       [
