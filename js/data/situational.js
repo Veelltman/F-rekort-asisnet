@@ -528,7 +528,7 @@
         ["Den som har størst bil", "У кого машина больше", "Bilens størrelse avgjør ikke, det er plasseringen av møteplassen som bestemmer hvem som venter.", "Размер машины ни при чём — решает расположение кармана."],
         ["Ingen — vi klemmer oss forbi", "Никто — протискиваемся", "Å presse seg forbi på en smal vei er farlig, den med møteplass på sin side skal bruke den.", "Протискиваться на узкой дороге опасно — тот, у кого карман на своей стороне, должен им воспользоваться."]
       ],
-      "På smal vei bruker du møteplassen som er på din side. Du rygger ikke inn i møteplass på motsatt side.",
+      "Trafikkreglene § 7 nr. 6: kjørende som møtes, skal i god tid vike tilstrekkelig til høyre og om nødvendig stanse. Møteplassen (skilt 524) brukes av den som har den på sin høyre side. Du rygger ikke inn i møteplass på motsatt side.",
       "На узкой дороге используешь карман, который на твоей стороне. Задним ходом в карман на противоположной стороне не заезжают.",
       "На норвежских узких дорогах (særlig på Vestlandet) знак «M» = møteplass. Кому он ближе, тот и ждёт."),
 
@@ -840,7 +840,7 @@
         ["Kjører forbi sakte samtidig som passasjerene krysser", "Медленно проезжаю мимо, пока пассажиры переходят", "Å kjøre forbi samtidig som passasjerene krysser er farlig, du skal stoppe helt til de er trygt over.", "Проезжать мимо, пока пассажиры переходят, опасно — нужно полностью остановиться, пока они не окажутся в безопасности."],
         ["Tuter for å få passasjerene til å skynde seg", "Сигналю, чтобы пассажиры поторопились", "Signalhorn skal ikke brukes for å presse passasjerene, du skal selv vente til de er over.", "Гудок нельзя использовать, чтобы поторопить пассажиров, — ждать должен ты сам, пока они не перейдут."]
       ],
-      "Når en trikk eller buss stopper uten trafikkøy og slipper av passasjerer, skal du stoppe og vente til de har kommet trygt over til fortauet.",
+      "Trafikkreglene § 9 nr. 3: den som vil kjøre forbi til høyre for sporvogn ved holdeplass uten trafikkøy, skal stanse og gi fri veg for passasjerer som stiger av eller på. For buss ved holdeplass gjelder § 13: hold liten fart og stans om nødvendig.",
       "Когда трамвай или автобус останавливается без островка безопасности и высаживает пассажиров, нужно остановиться и подождать, пока они безопасно дойдут до тротуара.",
       "Пассажиры трамвая выходят прямо на проезжую часть — это одна из самых опасных ситуаций в городе, всегда останавливайся полностью."),
 

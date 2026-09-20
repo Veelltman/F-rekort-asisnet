@@ -299,11 +299,15 @@
   }
 
   const FINES_LOW = [[5, 1250, 0], [10, 3350, 0], [15, 5950, 2], [20, 8650, 3], [25, 13450, 3]];
-  const FINES_HIGH = [[5, 1250, 0], [10, 3350, 0], [15, 5350, 0], [20, 7450, 2], [25, 10100, 3]];
+  /* 70 og høyere: til og med 30 = 13 450, til og med 35 = 16 050; på motorveg med 100/110: 36–40 = 16 700 */
+  const FINES_HIGH = [[5, 1250, 0], [10, 3350, 0], [15, 5350, 0], [20, 7450, 2], [25, 10100, 3], [30, 13450, 3], [35, 16050, 3]];
+  const FINES_MOTORVEG = FINES_HIGH.concat([[40, 16700, 3]]);
+  /* Tapsforskriften § 2-2: tap fra 26 over (≤60), 36 over (70–80), 41 over (100–110) */
   function reaction(zone, over) {
     const low = zone <= 60;
-    if ((low && over >= 26) || (!low && over >= 36)) return { kind: "tap", no: "Tap av førerkort og anmeldelse", ru: "Лишение прав и уголовное дело" };
-    const table = low ? FINES_LOW : FINES_HIGH;
+    const tapFra = low ? 26 : zone <= 80 ? 36 : 41;
+    if (over >= tapFra) return { kind: "tap", no: "Tap av førerkort og anmeldelse", ru: "Лишение прав и уголовное дело" };
+    const table = low ? FINES_LOW : zone >= 100 ? FINES_MOTORVEG : FINES_HIGH;
     const row = table.find(r => over <= r[0]);
     if (!row) return { kind: "big", no: "Forelegg over 13 000 kr, 3 prikker, mulig tap av førerkort", ru: "Штраф свыше 13 000 kr, 3 балла, возможно лишение" };
     const fmt = n => n.toLocaleString("nb-NO").replace(/ /g, " ");
@@ -317,7 +321,7 @@
   const RULES = [
 
     genR("fart", () => {
-      const zone = rnd([30, 40, 50, 60, 70, 80, 90, 100]);
+      const zone = rnd([30, 40, 50, 60, 70, 80, 100, 110]);
       const low = zone <= 60;
       const over = low ? rnd([3, 7, 9, 12, 14, 17, 19, 22, 24, 27, 30]) : rnd([4, 8, 12, 14, 18, 20, 23, 25, 37, 40]);
       const correct = reaction(zone, over);
@@ -337,10 +341,10 @@
           why_ru: i === 0 ? null : `Это ставка за другую ступень превышения. Здесь превышение ${over} км/ч в зоне ${zone}, и за него положено: ${correct.ru}.` })),
         explanation_no: low
           ? `I 60-sone eller lavere: til og med 5 over = 1 250 kr, 10 = 3 350, 15 = 5 950 og 2 prikker, 20 = 8 650 og 3 prikker, 25 = 13 450 og 3 prikker. Fra 26 over mister du førerkortet. Her: ${over} km/t over.`
-          : `I 70-sone eller høyere: til og med 5 over = 1 250 kr, 10 = 3 350, 15 = 5 350, 20 = 7 450 og 2 prikker, 25 = 10 100 og 3 prikker. Fra 36 over mister du førerkortet. Her: ${over} km/t over.`,
+          : `I 70-sone eller høyere: til og med 5 over = 1 250 kr, 10 = 3 350, 15 = 5 350, 20 = 7 450 og 2 prikker, 25 = 10 100, 30 = 13 450, 35 = 16 050 (3 prikker). Tap av førerkort fra 36 over ved 70–80, fra 41 over på motorveg med 100–110. Her: ${over} km/t over.`,
         explanation_ru: low
           ? `В зонах 60 и ниже: до 5 сверх = 1 250 kr, до 10 = 3 350, до 15 = 5 950 и 2 балла, до 20 = 8 650 и 3 балла, до 25 = 13 450 и 3 балла. От 26 сверх — лишение прав. Здесь превышение ${over} км/ч.`
-          : `В зонах 70 и выше: до 5 сверх = 1 250 kr, до 10 = 3 350, до 15 = 5 350, до 20 = 7 450 и 2 балла, до 25 = 10 100 и 3 балла. От 36 сверх — лишение прав. Здесь превышение ${over} км/ч.`,
+          : `В зонах 70 и выше: до 5 сверх = 1 250 kr, до 10 = 3 350, до 15 = 5 350, до 20 = 7 450 и 2 балла, до 25 = 10 100, до 30 = 13 450, до 35 = 16 050 (3 балла). Лишение: от 36 сверх при 70–80, от 41 на автомагистрали со 100–110. Здесь превышение ${over} км/ч.`,
         tip_ru: "Сначала посчитай, на сколько превысил, потом вспомни порог зоны: ≤60 или ≥70."
       };
     }),

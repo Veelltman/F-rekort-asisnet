@@ -46,8 +46,8 @@
     q("003", "Du kjører 26 km/t over fartsgrensen i en 60-sone. Hva risikerer du?",
       "Ты превысил скорость на 26 км/ч в зоне 60. Чем это грозит?",
       [["Tap av førerkort", "Лишением прав"], ["Bare et gebyr", "Только штрафом", "Ved så stort avvik holder det ikke med bare gebyr, du mister også førerkortet.", "При таком большом превышении одним штрафом не отделаешься — заберут ещё и права."], ["Én prikk", "Одним баллом", "Én prikk gjelder ved mindre overtredelser, ikke ved 26 km/t over i en lavfartssone.", "Один балл дают за меньшие превышения, а не за 26 км/ч сверх в зоне с низким лимитом."], ["Ingenting hvis vegen var tom", "Ничем, если дорога была пустая", "Fartsgrensen gjelder uansett trafikkmengde, det finnes ikke noe unntak for tom veg.", "Ограничение скорости действует независимо от трафика — исключения для пустой дороги нет."]],
-      "Der fartsgrensen er 60 km/t eller lavere, mister du normalt førerkortet ved 26 km/t eller mer over grensen. Der grensen er 70 eller høyere, er terskelen 36 km/t over.",
-      "Где ограничение 60 и ниже, права обычно отбирают при превышении на 26 км/ч и более. Где 70 и выше — при превышении на 36 км/ч.",
+      "Tapsforskriften § 2-2: der fartsgrensen er 60 km/t eller lavere, mister du normalt førerkortet ved 26 km/t eller mer over grensen. Ved 70 og 80 er terskelen 36 km/t over, og på motorveg med 100 eller 110 er den 41 km/t over.",
+      "Tapsforskriften § 2-2: где ограничение 60 и ниже, права обычно отбирают при превышении на 26 км/ч и более. При 70 и 80 порог — 36 км/ч, на автомагистрали со 100 или 110 — 41 км/ч.",
       "В зоне 30 превышение на 26 (то есть 56 км/ч) — уже лишение. Низкие зоны особенно опасны для прав."),
 
     q("004", "Hva er forelegget for å kjøre 10 km/t for fort i en 50-sone (2026)?",
@@ -165,12 +165,12 @@
       "Знак аварийной остановки обязателен, жилет должен лежать в зоне досягаемости водителя. Аптечка и огнетушитель рекомендуются, но для легковых не обязательны.",
       "Жилет — в салоне, не в багажнике: надеть его нужно до того, как выйдешь на дорогу."),
 
-    q("020", "Hvor langt bak bilen skal varseltrekanten settes ved stans på landeveg?",
-      "На каком расстоянии позади машины ставить знак аварийной остановки на загородной дороге?",
-      [["Minst 100 meter, lengre ved dårlig sikt", "Не менее 100 м, больше при плохой видимости"], ["10 meter", "10 метров", "10 meter er alt for kort avstand, kravet på landeveg er minst 100 meter.", "10 м — слишком мало, на загородной дороге нужно минимум 100 м."], ["30 meter", "30 метров", "30 meter er ikke nok på landeveg, der kreves minst 100 meter.", "30 м недостаточно на трассе, там требуется минимум 100 м."], ["Rett bak bilen", "Прямо за машиной", "Rett bak bilen gir ikke andre bilister tid til å reagere, trekanten skal stå langt unna.", "Прямо за машиной другим водителям не хватит времени среагировать — треугольник нужно ставить далеко."]],
-      "På landeveg og motorveg: minst 100 meter bak, gjerne 150–200 ved høy fart. Sett på nødblink og ta på refleksvest først.",
-      "На трассе и автомагистрали — минимум 100 м позади, лучше 150–200 при высокой скорости. Сначала аварийка и жилет.",
-      "Порядок: аварийка → жилет → треугольник → сам за отбойник."),
+    q("020", "Hvor langt bak bilen skal varseltrekanten settes ved nødstans på landeveg?",
+      "На каком расстоянии позади машины ставить знак аварийной остановки при вынужденной остановке на загородной дороге?",
+      [["I god avstand, om mulig minst 150 meter", "На хорошем расстоянии, по возможности не менее 150 м"], ["10 meter", "10 метров", "10 meter er alt for kort. Forskriften sier i god avstand, om mulig minst 150 meter.", "10 м — слишком мало. Предписание требует хорошего расстояния, по возможности не менее 150 м."], ["30 meter", "30 метров", "30 meter gir ikke andre tid til å reagere i høy fart. Kravet er om mulig minst 150 meter.", "30 м не дают другим времени среагировать на скорости. Требование — по возможности не менее 150 м."], ["Rett bak bilen", "Прямо за машиной", "Rett bak bilen ser ingen trekanten i tide. Den skal stå i god avstand, om mulig minst 150 meter.", "Прямо за машиной треугольник никто не увидит вовремя. Он должен стоять далеко, по возможности не менее 150 м."]],
+      "Forskrift om bruk av kjøretøy § 1-6: varseltrekanten skal plasseres i god avstand, om mulig minst 150 meter fra kjøretøyet, slik at andre kjørende ser den i tide. Sett på nødblink og ta på refleksvest først.",
+      "Forskrift om bruk av kjøretøy § 1-6: треугольник ставят на хорошем расстоянии, по возможности не менее 150 м от машины, чтобы другие увидели его вовремя. Сначала аварийка и жилет.",
+      "Порядок: аварийка → жилет → треугольник (150 м) → сам за отбойник."),
 
     /* ---------- Шины ---------- */
     q("021", "Hva er minste tillatte mønsterdybde på dekk om vinteren?",
@@ -182,10 +182,10 @@
 
     q("022", "Når er det lov å bruke piggdekk i Sør-Norge?",
       "Когда разрешены шипованные шины на юге Норвегии?",
-      [["Fra 1. november til første mandag etter 2. påskedag", "С 1 ноября до первого понедельника после второго дня Пасхи"], ["Fra 1. oktober til 1. mai", "С 1 октября до 1 мая", "Datoene er feil, piggdekk-perioden i Sør-Norge starter 1. november, ikke 1. oktober.", "Даты неверны, период шипов на юге начинается 1 ноября, а не 1 октября."], ["Hele året", "Круглый год", "Piggdekk er kun tillatt i en avgrenset periode, ikke hele året, utenom ved vinterføre.", "Шипы разрешены только в определённый период, а не круглый год, кроме случаев зимних условий."], ["Fra 1. desember til 1. mars", "С 1 декабря до 1 марта", "Perioden starter tidligere, fra 1. november, og slutter ved 2. påskedag, ikke 1. mars.", "Период начинается раньше, с 1 ноября, и заканчивается после второго дня Пасхи, а не 1 марта."]],
-      "I Sør-Norge: 1. november til første mandag etter 2. påskedag. I Nordland, Troms og Finnmark: 16. oktober til 30. april. Ved vinterføre er piggdekk lov også utenfor perioden.",
-      "На юге: с 1 ноября до первого понедельника после второго дня Пасхи. В Nordland, Troms и Finnmark: с 16 октября до 30 апреля. При зимних условиях шипы разрешены и вне периода.",
-      "В Oslo, Bergen и Trondheim за шипы платят piggdekkgebyr: дневной билет или сезонный абонемент. Stavanger отменил сбор в 2023 году."),
+      [["Fra 1. november til og med første søndag etter 2. påskedag", "С 1 ноября до первого воскресенья после второго дня Пасхи включительно"], ["Fra 1. oktober til 1. mai", "С 1 октября до 1 мая", "Datoene er feil, piggdekk-perioden i Sør-Norge starter 1. november, ikke 1. oktober.", "Даты неверны, период шипов на юге начинается 1 ноября, а не 1 октября."], ["Hele året", "Круглый год", "Piggdekk er forbudt fra første mandag etter 2. påskedag til 31. oktober, med mindre føret krever det.", "Шипы запрещены с первого понедельника после второго дня Пасхи до 31 октября, если только этого не требуют дорожные условия."], ["Fra 1. desember til 1. mars", "С 1 декабря до 1 марта", "Perioden starter tidligere, fra 1. november, og varer til søndagen etter 2. påskedag, ikke til 1. mars.", "Период начинается раньше, с 1 ноября, и длится до воскресенья после второго дня Пасхи, а не до 1 марта."]],
+      "Forskrift om bruk av kjøretøy § 1-4: piggdekk må ikke brukes fra og med første mandag etter 2. påskedag til og med 31. oktober, om ikke føreforholdene gjør det nødvendig. I Nordland, Troms og Finnmark er forbudsperioden 1. mai til 15. oktober.",
+      "Forskrift om bruk av kjøretøy § 1-4: шипы нельзя использовать с первого понедельника после второго дня Пасхи по 31 октября, если этого не требуют дорожные условия. В Nordland, Troms и Finnmark запрет — с 1 мая по 15 октября.",
+      "В Oslo, Bergen и Trondheim за шипы платят piggdekkgebyr: дневной билет или сезонный абонемент. Stavanger и Kristiansand отменили сбор в 2023 году."),
 
     q("023", "Er det påbudt med vinterdekk på personbil?",
       "Обязательны ли зимние шины на легковом автомобиле?",
@@ -223,19 +223,19 @@
       "Stans: кратковременная остановка для посадки, высадки или погрузки. Parkering: любое другое оставление машины, даже если водитель сидит внутри.",
       "Сидеть в машине и ждать друга 10 минут — это уже parkering, а не stans."),
 
-    q("028", "Kan du parkere på venstre side av vegen?",
-      "Можно ли парковаться на левой стороне дороги?",
-      [["Bare i envegskjørt gate", "Только на односторонней улице"], ["Ja, alltid", "Да, всегда", "På vanlig veg med trafikk i begge retninger skal du parkere på høyre side, venstre er ikke alltid lov.", "На обычной дороге с двусторонним движением паркуются справа — слева нельзя всегда."], ["Ja, hvis det er lite trafikk", "Да, если мало машин", "Trafikkmengden er ikke avgjørende, regelen om høyre side gjelder uansett.", "Количество машин на дороге тут ни при чём — правило про правую сторону действует всегда."], ["Nei, aldri", "Нет, никогда", "På envegskjørt gate er venstre side faktisk tillatt.", "На односторонней улице левая сторона как раз разрешена."]],
-      "På veg med trafikk i begge retninger skal du stanse og parkere på høyre side i kjøreretningen. I envegskjørt gate kan du bruke begge sider.",
-      "На дороге с двусторонним движением останавливаешься и паркуешься справа по ходу. На односторонней улице можно с обеих сторон.",
-      "Парковка «против шерсти» на двусторонней дороге — штраф, и это частая ошибка приезжих."),
+    q("028", "Kan du parkere på venstre side av en toveis veg, mot kjøreretningen?",
+      "Можно ли парковаться на левой стороне двусторонней дороги, против направления движения?",
+      [["Ja, det er ikke forbudt i Norge, så lenge det ikke er til fare eller hinder", "Да, в Норвегии это не запрещено, если не создаёт опасности или помехи"], ["Nei, bare på høyre side i kjøreretningen", "Нет, только справа по ходу движения", "Trafikkreglene § 17 har ingen regel om høyre side. Mange andre land forbyr det, men ikke Norge.", "В Trafikkreglene § 17 нет правила про правую сторону. Во многих странах это запрещено, но не в Норвегии."], ["Bare i envegskjørt gate", "Только на односторонней улице", "Det er lov også på toveis veg. Envegskjøring er ikke et vilkår i norske regler.", "Разрешено и на двусторонней дороге. Одностороннее движение — не условие по норвежским правилам."], ["Bare om natten", "Только ночью", "Tidspunktet spiller ingen rolle. Det avgjørende er at bilen ikke står til fare eller hinder.", "Время суток не имеет значения. Важно только, чтобы машина не создавала опасности или помехи."]],
+      "Norske trafikkregler forbyr ikke parkering mot kjøreretningen, og Parkeringsklagenemnda har slått fast at det ikke er ulovlig. Du må likevel krysse motgående felt inn og ut, så gjør det bare der det er trygt og oversiktlig, og følg skilt og de vanlige stansforbudene.",
+      "Норвежские правила не запрещают парковку против направления движения, и Parkeringsklagenemnda подтвердила, что это законно. Но при въезде и выезде придётся пересекать встречную полосу — делай это только там, где безопасно и хороший обзор, и соблюдай знаки и обычные запреты остановки.",
+      "Это одно из отличий Норвегии от Швеции и Дании: там парковка «против шерсти» запрещена, здесь — нет."),
 
     /* ---------- Обгон, дистанция, полосы ---------- */
     q("029", "Hva gjelder for forbikjøring rett foran et gangfelt?",
       "Что действует для обгона прямо перед пешеходным переходом?",
       [["Forbudt", "Запрещён"], ["Tillatt hvis ingen fotgjengere", "Разрешён, если нет пешеходов", "Forbudet gjelder uansett om du ser fotgjengere eller ikke, nettopp fordi sikten kan være skjult.", "Запрет действует независимо от того, видишь ли ты пешеходов — как раз потому, что обзор может быть закрыт."], ["Tillatt i 30-sone", "Разрешён в зоне 30", "Fartssonen har ingen betydning, forbudet mot forbikjøring ved gangfelt gjelder overalt.", "Зона скорости тут ни при чём — запрет обгона у перехода действует везде."], ["Tillatt for sykler", "Разрешён для велосипедов", "Forbudet gjelder alle kjøretøy, det finnes ikke noe unntak for sykler.", "Запрет касается всех транспортных средств, исключения для велосипедов нет."]],
-      "Det er forbudt å kjøre forbi rett foran eller i gangfelt. En bil som stopper kan skjule en fotgjenger for deg.",
-      "Обгон перед переходом или на нём запрещён. Остановившаяся машина может скрывать пешехода.",
+      "Trafikkreglene § 12 nr. 6: den som nærmer seg gangfelt, må ikke kjøre forbi kjøretøy som hindrer noen del av sikten til gangfeltet. I praksis er forbikjøring rett foran gangfelt forbudt: bilen du passerer skjuler nettopp den delen av feltet der fotgjengeren kan være.",
+      "Trafikkreglene § 12 nr. 6: подъезжая к переходу, нельзя обгонять машину, которая закрывает хоть часть обзора перехода. На практике обгон прямо перед переходом запрещён: обгоняемая машина как раз и скрывает ту часть зебры, где может быть пешеход.",
       "Классический сценарий ДТП: сосед притормозил у зебры, ты обгоняешь — и сбиваешь пешехода."),
 
     q("030", "Hva er tresekundersregelen?",
@@ -247,9 +247,9 @@
 
     q("031", "Hvor skal du kjøre på en veg med to felt i samme retning?",
       "В какой полосе ехать на дороге с двумя полосами в одну сторону?",
-      [["I høyre felt; venstre felt brukes til forbikjøring", "В правой; левая для обгона"], ["I venstre felt, det er raskest", "В левой, там быстрее", "Venstre felt skal brukes til forbikjøring, ikke som fast kjørefelt selv om det føles raskere.", "Левая полоса предназначена для обгона, а не для постоянной езды, даже если кажется быстрее."], ["Hvor som helst", "Где угодно", "Regelen krever at du holder til høyre, du kan ikke velge felt fritt utenom unntaket i lav fartssone.", "Правило требует держаться правой полосы, свободно выбирать нельзя, кроме исключения в зоне с низким лимитом."], ["I midten av begge", "Посередине", "Å kjøre midt mellom feltene er farlig og bryter med kravet om å holde til høyre.", "Ехать посередине между полосами опасно и нарушает требование держаться правой стороны."]],
-      "Hold til høyre. Venstre felt er for forbikjøring, og du skal tilbake til høyre etterpå. Unntak: i tettbygd strøk med fartsgrense 60 eller lavere kan du velge felt fritt.",
-      "Держись справа. Левая полоса для обгона, после обгона возвращайся направо. Исключение: в населённом пункте с ограничением 60 и ниже полосу можно выбирать свободно.",
+      [["I høyre felt; venstre felt brukes til forbikjøring", "В правой; левая для обгона"], ["I venstre felt, det er raskest", "В левой, там быстрее", "Venstre felt skal brukes til forbikjøring, ikke som fast kjørefelt selv om det føles raskere.", "Левая полоса предназначена для обгона, а не для постоянной езды, даже если кажется быстрее."], ["Hvor som helst", "Где угодно", "Trafikkreglene § 5 krever høyre felt. Fritt feltvalg gjelder bare der skilt 528 «Valgfritt kjørefelt» er satt opp.", "Trafikkreglene § 5 требуют правую полосу. Свободный выбор — только там, где стоит знак 528 «Valgfritt kjørefelt»."], ["I midten av begge", "Посередине", "Å kjøre midt mellom feltene er farlig og bryter med kravet om å holde til høyre.", "Ехать посередине между полосами опасно и нарушает требование держаться правой стороны."]],
+      "Trafikkreglene § 5: på veg med to eller flere felt i samme retning skal høyre felt brukes når ikke reglene påbyr eller tillater felt til venstre. Venstre felt er for forbikjøring, og du skal tilbake til høyre etterpå. Unntak: der skilt 528 «Valgfritt kjørefelt» står, og i tett kø der alle felt er fylt (§ 12).",
+      "Trafikkreglene § 5: на дороге с двумя и более полосами в одну сторону едут в правой, если правила не предписывают или не разрешают левую. Левая — для обгона, после него возвращайся направо. Исключения: знак 528 «Valgfritt kjørefelt» и плотная пробка, когда заняты все полосы (§ 12).",
       "«Висеть» в левой полосе на трассе — нарушение и раздражитель для всех."),
 
     q("032", "Hva er fletteregelen (glidelåsprinsippet)?",
@@ -269,9 +269,9 @@
 
     q("034", "Hva betyr blinkende gult lys i et trafikklys?",
       "Что означает мигающий жёлтый сигнал светофора?",
-      [["Lyset er ute av drift: følg skilt og vikepliktsregler", "Светофор не работает: следуй знакам и правилам приоритета"], ["Stopp og vent på grønt", "Остановись и жди зелёного", "Blinkende gult betyr at lyset ikke fungerer normalt, det kommer ikke noe grønt å vente på.", "Мигающий жёлтый значит, что светофор работает нештатно — зелёного, которого можно ждать, не будет."], ["Kjør, du har forrang", "Езжай, у тебя преимущество", "Blinkende gult gir ingen automatisk forrang, du må følge skilt eller høyreregelen.", "Мигающий жёлтый не даёт автоматического приоритета — нужно следовать знакам или правилу правой руки."], ["Kun for busser", "Только для автобусов", "Signalet gjelder alle trafikanter, ikke bare busser.", "Сигнал касается всех участников движения, а не только автобусов."]],
-      "Blinkende gult betyr at signalanlegget er ute av funksjon. Da gjelder skiltene i krysset, eller høyreregelen hvis det ikke er skilt.",
-      "Мигающий жёлтый — светофор отключён. Действуют знаки на перекрёстке, а если их нет — правило правой руки.",
+      [["Vis særlig aktsomhet: lyset regulerer ikke, så skilt og vikepliktsregler gjelder", "Особая осторожность: светофор не регулирует, действуют знаки и правила приоритета"], ["Stopp og vent på grønt", "Остановись и жди зелёного", "Blinkende gult betyr at lyset ikke fungerer normalt, det kommer ikke noe grønt å vente på.", "Мигающий жёлтый значит, что светофор работает нештатно — зелёного, которого можно ждать, не будет."], ["Kjør, du har forrang", "Езжай, у тебя преимущество", "Blinkende gult gir ingen automatisk forrang, du må følge skilt eller høyreregelen.", "Мигающий жёлтый не даёт автоматического приоритета — нужно следовать знакам или правилу правой руки."], ["Kun for busser", "Только для автобусов", "Signalet gjelder alle trafikanter, ikke bare busser.", "Сигнал касается всех участников движения, а не только автобусов."]],
+      "Skiltforskriften, signal 1098 gult blinksignal: trafikantene må vise særlig aktpågivenhet og varsomhet. Signalanlegget regulerer ikke krysset, så skiltene gjelder, eller høyreregelen hvis det ikke er skilt.",
+      "Skiltforskriften, сигнал 1098 (мигающий жёлтый): участники движения должны проявлять особую внимательность и осторожность. Светофор перекрёсток не регулирует — действуют знаки, а если их нет, правило правой руки.",
       "Мигающий жёлтый — не «можно ехать», а «думай сам»."),
 
     q("035", "Hva gjelder hvis politiet dirigerer trafikken og gir andre signaler enn lyset?",
@@ -317,11 +317,11 @@
       "110 — пожарные, 112 — полиция, 113 — скорая. При травмах звони 113, оператор вызовет остальных.",
       "Запомни: 110 огонь, 112 полиция, 113 медицина. Норвежский номер 911 не работает как в США."),
 
-    q("041", "Når skal du ringe politiet etter en ulykke?",
-      "Когда после аварии нужно вызывать полицию?",
-      [["Ved personskade, eller hvis noen er påvirket av alkohol, eller partene er uenige", "При травмах, если кто-то пьян, или стороны не согласны"], ["Alltid, uansett skade", "Всегда, при любом ущербе", "Ved små materielle skader holder det med skademelding, politiet trengs ikke alltid.", "При небольшом материальном ущербе достаточно skademelding, полиция нужна не всегда."], ["Aldri, det ordnes via forsikringen", "Никогда, всё через страховую", "Ved personskade, rus eller uenighet må politiet varsles, det er ikke nok med bare forsikringen.", "При травмах, опьянении или разногласиях полицию вызывать обязательно, одной страховой недостаточно."], ["Bare hvis en bil må slepes", "Только если нужен эвакуатор", "Behovet for sleping avgjør ikke om politiet skal varsles, det er andre kriterier som teller.", "Необходимость эвакуатора не определяет, вызывать ли полицию — важны другие критерии."]],
-      "Ved små materielle skader holder det å fylle ut skademelding. Politiet varsles ved personskade, rus, fører uten førerkort, eller uenighet om hendelsesforløpet.",
-      "При небольшом ущербе достаточно заполнить skademelding. Полицию вызывают при травмах, опьянении, отсутствии прав или разногласиях о случившемся.",
+    q("041", "Når har du plikt til å varsle politiet etter en trafikkulykke?",
+      "Когда после ДТП ты обязан уведомить полицию?",
+      [["Når noen er skadet, og skaden ikke er ubetydelig", "Когда кто-то пострадал и травма не пустяковая"], ["Alltid, uansett skade", "Всегда, при любом ущербе", "Ved bare materiell skade og enighet om det som skjedde holder det å fylle ut skademelding. Politiet må ikke varsles.", "При только материальном ущербе и согласии о случившемся достаточно заполнить skademelding. Уведомлять полицию не обязательно."], ["Aldri, det ordnes via forsikringen", "Никогда, всё через страховую", "Vegtrafikkloven § 12 pålegger å varsle politiet ved personskade som ikke er ubetydelig. Forsikringen erstatter ikke den plikten.", "Vegtrafikkloven § 12 обязывает уведомить полицию при травмах, которые не пустяковые. Страховая эту обязанность не заменяет."], ["Bare hvis en bil må slepes", "Только если нужен эвакуатор", "Behovet for sleping avgjør ikke plikten. Det avgjørende er om noen er skadet.", "Необходимость эвакуатора обязанность не определяет. Решает то, пострадал ли кто-то."]],
+      "Vegtrafikkloven § 12: har ulykken medført død eller personskade som ikke er ubetydelig, skal de innblandede sørge for at politiet varsles snarest mulig, og ikke forlate stedet uten samtykke. Har du skadet noe og ingen er til stede for å vareta eierens interesser, må du varsle eieren eller politiet. Ved små materielle skader holder det å fylle ut skademelding. Det er også lurt å ringe politiet ved mistanke om rus eller ved uenighet.",
+      "Vegtrafikkloven § 12: если авария повлекла смерть или травму, которая не пустяковая, участники обязаны как можно скорее уведомить полицию и не покидать место без её согласия. Если ты что-то повредил и рядом нет никого, кто представляет владельца, нужно уведомить владельца или полицию. При мелком материальном ущербе достаточно skademelding. Полицию также разумно вызвать при подозрении на опьянение или разногласиях.",
       "Держи бланк skademelding (или приложение страховой) в машине: заполнять его нужно на месте."),
 
     /* ---------- Прицеп и категория B ---------- */
@@ -406,8 +406,8 @@
     q("053", "Har en vanlig personbil med bare føreren om bord normalt lov til å kjøre i kollektivfelt?",
       "Имеет ли обычный легковой автомобиль, в котором едет только водитель, право ехать по полосе для общественного транспорта?",
       [["Nei, med mindre eget skilt sier noe annet", "Нет, если только отдельный знак не разрешает иное"], ["Ja, alltid, kollektivfelt er åpent for alle biler", "Да, всегда — полоса для общественного транспорта открыта для всех машин", "Kollektivfelt er forbeholdt bestemte kjøretøy, det er ikke åpent for alle biler.", "Полоса для общественного транспорта предназначена для определённых ТС, а не открыта для всех машин."], ["Ja, men bare etter klokken 18", "Да, но только после 18:00", "Adgangen avhenger av skilting, ikke av klokkeslettet.", "Разрешение зависит от знака, а не от времени суток."], ["Ja, hvis det ikke er buss i sikte", "Да, если поблизости не видно автобуса", "Om en buss er synlig eller ikke har ingen betydning, regelen gjelder uansett.", "Видно автобус или нет — не важно, правило действует в любом случае."]],
-      "Kollektivfelt er forbeholdt buss, taxi i visse tilfeller, motorsykkel og kjøretøy med flere passasjerer der det er skiltet. Vanlige personbiler med bare fører skal holde seg i det ordinære feltet, hvis ikke skiltingen sier noe annet.",
-      "Полоса для общественного транспорта предназначена для автобусов, в некоторых случаях такси, мотоциклов и машин с несколькими пассажирами там, где это указано знаком. Обычные легковушки с одним водителем должны оставаться в обычной полосе, если знак не говорит иначе.",
+      "Trafikkreglene § 5 nr. 2: kjøring i kollektivfelt er bare tillatt som angitt på skilt. Likevel kan elbil og hydrogenbil, tohjuls motorsykkel og moped, sykkel, liten elektrisk motorvogn og utrykningskjøretøy bruke feltet. En vanlig bensin- eller dieselbil med bare fører skal holde seg i det ordinære feltet, hvis ikke skiltet åpner for det (for eksempel med 2+ passasjerer).",
+      "Trafikkreglene § 5 nr. 2: ехать по kollektivfelt можно только так, как указано на знаке. Исключения: электромобили и водородные машины, двухколёсные мотоциклы и мопеды, велосипеды, электросамокаты и спецтранспорт. Обычная бензиновая или дизельная машина с одним водителем остаётся в обычной полосе, если знак не разрешает иное (например, при 2+ пассажирах).",
       "Проверяй знак под словом «Kollektivfelt» — там часто написано исключение, например для мотоциклов или машин с 2+ пассажирами."),
 
     q("054", "Du kjører ut av en rundkjøring, og fotgjengere står klare til å krysse gangfeltet ved utkjørselen. Hvem har vikeplikt?",
@@ -562,14 +562,14 @@
     "Система баллов: 8 баллов за 3 года — лишение на 6 месяцев. Новички первые 2 года получают двойные баллы. Баллы сгорают через 3 года.",
     "Цифры: 8 баллов, 3 года, 6 месяцев, ×2 первые 2 года."),
 
-    qm("m14", "Når må politiet varsles etter en trafikkulykke? Velg alle riktige.", "Когда после ДТП нужно вызывать полицию? Выбери все верные.", [
-      ["Når noen er skadet", "Когда есть пострадавшие", true],
-      ["Når du mistenker at en fører er påvirket av alkohol eller rus", "Когда есть подозрение, что водитель пьян или под веществами", true],
-      ["Når partene ikke blir enige om hva som skjedde", "Когда стороны не согласны в том, что произошло", true],
-      ["Alltid, også ved en liten bulk på parkeringsplass", "Всегда, даже при мелкой царапине на парковке", false, "Ved bare materiell skade og enighet holder det å fylle ut skademelding sammen. Politiet trengs ikke.", "При только материальном ущербе и согласии сторон достаточно вместе заполнить skademelding. Полиция не нужна."]
+    qm("m14", "Hva plikter du å gjøre hvis du er innblandet i en trafikkulykke? Velg alle riktige.", "Что ты обязан сделать, если попал в ДТП? Выбери все верные.", [
+      ["Stanse straks og hjelpe skadde", "Немедленно остановиться и помочь пострадавшим", true],
+      ["Oppgi navn og adresse til de andre involverte", "Сообщить другим участникам своё имя и адрес", true],
+      ["Varsle politiet hvis noen er skadet, og skaden ikke er ubetydelig", "Уведомить полицию, если кто-то пострадал и травма не пустяковая", true],
+      ["Kjøre videre hvis du mener skaden er liten", "Уехать, если считаешь, что ущерб небольшой", false, "Plikten til å stanse og utveksle opplysninger gjelder uansett hvor liten skaden virker. Å kjøre fra stedet er straffbart.", "Обязанность остановиться и обменяться данными действует при любом, даже пустяковом ущербе. Уехать с места — наказуемо."]
     ],
-    "Ved personskade skal politiet varsles. Det er også klokt ved mistanke om rus eller uenighet. Ved små materielle skader fyller partene ut skademelding.",
-    "При травмах полицию вызывать обязательно. Также разумно при подозрении на опьянение или разногласиях. При мелком материальном ущербе стороны заполняют skademelding.",
-    "Травма = полиция всегда. Царапина + согласие = skademelding без полиции.")
+    "Vegtrafikkloven § 12: alle som er innblandet skal straks stanse, hjelpe skadde, og oppgi navn og adresse. Ved personskade som ikke er ubetydelig skal politiet varsles, og du skal ikke forlate stedet uten samtykke. Ved bare materiell skade fyller partene ut skademelding.",
+    "Vegtrafikkloven § 12: все участники обязаны немедленно остановиться, помочь пострадавшим и сообщить имя и адрес. При травмах, которые не пустяковые, уведомляют полицию и не покидают место без её согласия. При только материальном ущербе стороны заполняют skademelding.",
+    "Три обязанности: остановиться, помочь, назваться. Травма — плюс полиция.")
   ];
 })();
