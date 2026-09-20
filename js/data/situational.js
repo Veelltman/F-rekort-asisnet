@@ -168,6 +168,146 @@
   }
   window.SCENE = scene;
 
+  /* ---------- Схемы на прямой дороге (без перекрёстка) ----------
+     road({ bus: true, limit: 50 })   — автобус выезжает с остановки, A сзади
+     road({ crossing: true })         — пешеходный переход, пешеход справа
+     road({ narrow: true })           — узкая дорога с разъездом (møteplass) на стороне A, B навстречу
+     road({ exit: "parking" })        — A выезжает с парковки справа на дорогу; exit: "gatetun" — из жилой зоны
+     road({ tcross: true })           — T-перекрёсток: боковая дорога справа, B выезжает из неё
+     road({ bikeLane: true })         — велополоса справа, A поворачивает направо, велосипедист B едет прямо */
+
+  function carAt(x, y, rot, label, color, long) {
+    const h = long ? 44 : 28, w = long ? 18 : 16;
+    return `<g transform="translate(${x} ${y}) rotate(${rot})">
+        <rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="4" fill="${color}"/>
+        <rect x="${-w / 2 + 2}" y="${-h / 2 + 3}" width="${w - 4}" height="6" rx="2" fill="#fff" opacity="0.75"/>
+        <rect x="${-w / 2 + 2}" y="${h / 2 - 7}" width="${w - 4}" height="4" rx="1.5" fill="#fff" opacity="0.35"/>
+        <text x="0" y="4.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff" transform="rotate(${-rot})">${label}</text>
+      </g>`;
+  }
+  function bikeAt(x, y, rot, label, color) {
+    return `<g transform="translate(${x} ${y}) rotate(${rot})">
+        <rect x="-3" y="-8" width="6" height="16" rx="3" fill="${color}"/>
+        <circle cx="0" cy="-5" r="3.2" fill="#fff"/>
+        <text x="0" y="22" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${color}" transform="rotate(${-rot})">${label}</text>
+      </g>`;
+  }
+  function pathArrow(d, color) {
+    const pts = d.match(/[\d.]+[ ,][\d.]+/g).map(s => s.split(/[ ,]/).map(Number));
+    const [p, q] = [pts[pts.length - 2], pts[pts.length - 1]];
+    return `<path d="${d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
+      ${arrowHead(d, angleOf(p, q), color)}`;
+  }
+  function person(x, y, dir) {
+    return `<g transform="translate(${x} ${y})">
+        <circle cx="0" cy="-9" r="4" fill="#1d1f24"/>
+        <path d="M -4 -4 L 4 -4 L 5 6 L 2 6 L 2 14 L -2 14 L -2 6 L -5 6 Z" fill="#1d1f24"/>
+        <polygon points="${dir * 8},0 ${dir * 16},0 ${dir * 16},-3 ${dir * 22},2 ${dir * 16},7 ${dir * 16},4 ${dir * 8},4" fill="#1d1f24" opacity="0.8"/>
+      </g>`;
+  }
+  function speedSign(x, y, n) {
+    return `<g transform="translate(${x} ${y})"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/>
+        <circle r="10" fill="#fff" stroke="#d81e1e" stroke-width="2.5"/>
+        <text y="3.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="#111">${n}</text></g>`;
+  }
+
+  function road(cfg) {
+    const A = "#1d5fd6", B = "#e0483a", BUS = "#f0a020", BIKE = "#2aa46a";
+    const narrow = !!cfg.narrow;
+    const x0 = narrow ? 84 : 68, x1 = narrow ? 116 : 132;      /* асфальт */
+    let extra = "", vehicles = "";
+
+    /* боковой въезд справа (T-перекрёсток, парковка, gatetun) */
+    const side = cfg.tcross || cfg.exit || cfg.bikeLane;
+    const sideRoad = side ? `
+      <rect x="${x1}" y="${cfg.exit ? 78 : 62}" width="${200 - x1}" height="${cfg.exit ? 44 : 76}" fill="#cfd6dc"/>
+      <rect x="${x1}" y="${cfg.exit ? 84 : 68}" width="${200 - x1}" height="${cfg.exit ? 32 : 64}" fill="${cfg.exit === "parking" ? "#8a949c" : "#5d6770"}"/>
+      ${cfg.exit ? "" : `<line x1="${x1}" y1="68" x2="200" y2="68" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
+      <line x1="${x1}" y1="132" x2="200" y2="132" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
+      <line x1="${x1 + 2}" y1="100" x2="200" y2="100" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`}` : "";
+
+    /* разметка основной дороги: центр прерывается напротив бокового въезда */
+    const gapTop = side ? (cfg.exit ? 78 : 62) : 0, gapBot = side ? (cfg.exit ? 122 : 138) : 0;
+    const center = narrow ? "" : (side
+      ? `<line x1="100" y1="0" x2="100" y2="${gapTop}" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/><line x1="100" y1="${gapBot}" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`
+      : `<line x1="100" y1="0" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`);
+    const rightEdge = side
+      ? `<line x1="${x1}" y1="0" x2="${x1}" y2="${gapTop}"/><line x1="${x1}" y1="${gapBot}" x2="${x1}" y2="200"/>`
+      : `<line x1="${x1}" y1="0" x2="${x1}" y2="200"/>`;
+
+    if (cfg.bus) {
+      /* остановка-карман справа, автобус с левым поворотником */
+      extra += `<path d="M ${x1} 60 Q ${x1 + 26} 64 ${x1 + 26} 84 L ${x1 + 26} 116 Q ${x1 + 26} 136 ${x1} 140 Z" fill="#5d6770"/>
+        <text x="${x1 + 13}" y="150" text-anchor="middle" font-family="Arial" font-weight="700" font-size="7" fill="#1d1f24">BUSS</text>
+        ${speedSign(x1 + 28, 30, cfg.limit || 50)}`;
+      vehicles += `${pathArrow(`M ${x1 + 13} 80 Q ${x1 + 13} 60 ${x1 - 16} 48 L ${x1 - 16} 20`, BUS)}
+        ${carAt(x1 + 13, 104, 0, "B", BUS, true)}
+        <circle cx="${x1 + 5}" cy="84" r="3" fill="#ffb300" stroke="#fff" stroke-width="1"/>
+        ${pathArrow(`M ${x1 - 16} 158 L ${x1 - 16} 144`, A)}
+        ${carAt(x1 - 16, 178, 0, "A", A)}`;
+    }
+    if (cfg.crossing) {
+      extra += `<g fill="#fff" opacity="0.95">${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${x0 + 4 + i * 10.5}" y="90" width="6" height="20"/>`).join("")}</g>`;
+      vehicles += `${person(154, 100, -1)}
+        ${pathArrow(`M ${x1 - 16} 158 L ${x1 - 16} 124`, A)}
+        ${carAt(x1 - 16, 178, 0, "A", A)}`;
+    }
+    if (cfg.narrow) {
+      /* разъезд на стороне A (справа по ходу) */
+      extra += `<rect x="${x1 - 2}" y="88" width="24" height="54" rx="8" fill="#5d6770"/>
+        <rect x="${x1 - 2}" y="88" width="24" height="54" rx="8" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
+        <text x="${x1 + 10}" y="152" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6.5" fill="#1d1f24">MØTEPLASS</text>`;
+      vehicles += `${pathArrow(`M 100 158 L 100 148 Q 100 130 ${x1 + 10} 126`, A)}
+        ${carAt(100, 178, 0, "A", A)}
+        ${pathArrow("M 100 40 L 100 96", B)}
+        ${carAt(100, 26, 180, "B", B)}`;
+    }
+    if (cfg.exit) {
+      extra += cfg.exit === "parking"
+        ? `<rect x="168" y="86" width="14" height="14" rx="2" fill="#1d5fd6"/><text x="175" y="97" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff">P</text>
+           <g stroke="#fff" stroke-width="1.2" opacity="0.6"><line x1="150" y1="86" x2="150" y2="114"/><line x1="185" y1="86" x2="185" y2="114"/></g>`
+        : `<rect x="168" y="84" width="16" height="16" rx="2" fill="#1d5fd6"/><text x="176" y="92" text-anchor="middle" font-family="Arial" font-weight="700" font-size="5" fill="#fff">GATE</text><text x="176" y="98" text-anchor="middle" font-family="Arial" font-weight="700" font-size="5" fill="#fff">TUN</text>`;
+      vehicles += `${pathArrow(`M 150 108 L 132 108 Q 116 108 116 90 L 116 50`, A)}
+        ${carAt(164, 108, 270, "A", A)}
+        ${pathArrow("M 84 40 L 84 140", B)}
+        ${carAt(84, 26, 180, "B", B)}
+        ${pathArrow(`M 116 172 L 116 150`, "#2aa46a")}
+        ${carAt(116, 190, 0, "C", "#2aa46a")}`;
+    }
+    if (cfg.tcross) {
+      vehicles += `${pathArrow(`M 170 116 L 140 116 Q 116 116 116 92 L 116 40`, B)}
+        ${carAt(182, 116, 270, "B", B)}
+        ${pathArrow(`M ${x1 - 16} 166 L ${x1 - 16} 148`, A)}
+        ${carAt(x1 - 16, 184, 0, "A", A)}`;
+    }
+    if (cfg.bikeLane) {
+      /* велополоса вдоль правого края, прерывается у бокового въезда */
+      const bl = `<rect x="${x1 - 10}" y="0" width="10" height="${gapTop}" fill="#b8503c" opacity="0.85"/><rect x="${x1 - 10}" y="${gapBot}" width="10" height="${200 - gapBot}" fill="#b8503c" opacity="0.85"/>
+        <line x1="${x1 - 10}" y1="0" x2="${x1 - 10}" y2="${gapTop}" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="${x1 - 10}" y1="${gapBot}" x2="${x1 - 10}" y2="200" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <g fill="none" stroke="#fff" stroke-width="1.2"><circle cx="${x1 - 7.5}" cy="30" r="2.2"/><circle cx="${x1 - 2.5}" cy="30" r="2.2"/><path d="M ${x1 - 7.5} 30 L ${x1 - 5} 25 L ${x1 - 2.5} 30 M ${x1 - 5} 25 L ${x1 - 4} 22"/></g>`;
+      extra += bl;
+      vehicles += `${pathArrow(`M 108 166 L 108 130 Q 108 100 140 100 L 172 100`, A)}
+        ${carAt(108, 184, 0, "A", A)}
+        ${pathArrow(`M ${x1 - 5} 158 L ${x1 - 5} 136`, BIKE)}
+        ${bikeAt(x1 - 5, 170, 0, "B", BIKE)}`;
+    }
+
+    return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
+      <rect width="200" height="200" fill="#e4ede0"/>
+      <rect x="${x0 - 6}" y="0" width="${x1 - x0 + 12}" height="200" fill="#cfd6dc"/>
+      ${sideRoad}
+      <rect x="${x0}" y="0" width="${x1 - x0}" height="200" fill="#5d6770"/>
+      ${extra}
+      <g stroke="#fff" stroke-width="1.5" opacity="0.85">
+        <line x1="${x0}" y1="0" x2="${x0}" y2="200"/>
+        ${rightEdge}
+      </g>
+      ${center}
+      ${vehicles}
+    </svg>`;
+  }
+  window.ROAD = road;
+
   function q(id, image, prompt_no, prompt_ru, opts, explanation_no, explanation_ru, tip_ru) {
     return {
       id: "sit-" + id, topic: "situational", type: "single-choice",
@@ -310,7 +450,7 @@
       "Светофор важнее и знаков, и правила правой руки. Зелёный — можно ехать, но с осторожностью.",
       "Иерархия: указания полицейского > светофор > знаки > правило правой руки."),
 
-    q("011", scene({ you: { from: "south", to: "north" } }),
+    q("011", road({ crossing: true }),
       "Du nærmer deg et gangfelt. En fotgjenger står på fortauet og ser ut til å ville krysse. Hva gjør du?",
       "Ты подъезжаешь к пешеходному переходу. Пешеход стоит на тротуаре и, похоже, хочет перейти. Что делаешь?",
       [
@@ -323,7 +463,7 @@
       "Ты уступаешь пешеходу, который на переходе ИЛИ собирается ступить на него. Покажи явно, что останавливаешься.",
       "В Норвегии нормально уступать пешеходу, который только собирается перейти. Так и на экзамене ожидают."),
 
-    q("012", scene({ you: { from: "south", to: "north" }, others: [{ from: "north", to: "south" }] }),
+    q("012", road({ narrow: true }),
       "Smal vei med møteplass på din side. Bil B kommer imot. Hvem skal vente?",
       "Узкая дорога, карман для разъезда на твоей стороне. Машина B едет навстречу. Кто ждёт?",
       [
@@ -349,7 +489,7 @@
       "Правило правой руки цепочкой: у B никого справа — едет первым. Ты уступаешь B, C уступает тебе.",
       "Найди того, у кого справа никого нет — он едет первым. Дальше по цепочке."),
 
-    q("014", scene({ you: { from: "south", to: "north" } }),
+    q("014", road({ exit: "parking" }),
       "Du kjører ut fra en parkeringsplass og inn på veien. Hvem har vikeplikt?",
       "Ты выезжаешь с парковки на дорогу. Кто уступает?",
       [
@@ -362,7 +502,7 @@
       "Выезд с парковки, двора, заправки — ты всегда уступаешь транспорту на дороге и пешеходам на тротуаре.",
       "Здесь правило правой руки НЕ работает. Выезжающий со «второстепенной территории» уступает всем."),
 
-    q("015", scene({ you: { from: "south", to: "north" }, others: [{ from: "north", to: "south" }] }),
+    q("015", road({ bus: true, limit: 50 }),
       "En buss med blinklys signaliserer at den vil kjøre ut fra holdeplass i 50-sone. Hva gjør du?",
       "Автобус с поворотником показывает, что выезжает с остановки в зоне 50 км/ч. Что делаешь?",
       [
@@ -388,7 +528,7 @@
       "Спецтранспорт с мигалками и сиреной имеет преимущество перед всем. Освободи дорогу, но без опасных резких манёвров.",
       "Не тормози резко посреди перекрёстка — лучше спокойно доехать до места, где можно безопасно уступить."),
 
-    q("017", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "north" }] }),
+    q("017", road({ tcross: true }),
       "T-kryss uten skilt. Du kjører på den gjennomgående vegen. Bil B kommer fra sidevegen til høyre. Hvem viker?",
       "Т-образный перекрёсток без знаков. Ты едешь по сквозной дороге. Машина B выезжает с боковой справа. Кто уступает?",
       [
@@ -479,7 +619,7 @@
       "Нельзя обгонять машину, которая показывает поворот налево или сама обгоняет. Дождись, пока ситуация прояснится.",
       "«Обгон обгоняющего» — один из самых опасных манёвров и прямое нарушение."),
 
-    q("024", scene({ you: { from: "south", to: "east" } }),
+    q("024", road({ bikeLane: true }),
       "Du skal svinge til høyre i et kryss. Det er sykkelfelt på høyre side, og en syklist bak deg kjører rett fram. Hva gjør du?",
       "Ты поворачиваешь направо на перекрёстке. Справа велополоса, велосипедист сзади едет прямо. Что делаешь?",
       [
@@ -505,7 +645,7 @@
       "Пешеходы без тротуара идут по левой стороне навстречу движению. Дальний свет слепит. Снизь скорость и держи дистанцию.",
       "Осенью и зимой в Норвегии темно большую часть дня. Пешеход без рефлекса виден с 25–30 м, с рефлексом — со 140 м."),
 
-    q("026", scene({ you: { from: "south", to: "north" } }),
+    q("026", road({ exit: "gatetun" }),
       "Du kjører ut fra et gatetun og inn på en vanlig gate. Hvem har vikeplikt?",
       "Ты выезжаешь из жилой зоны (gatetun) на обычную улицу. Кто уступает?",
       [
