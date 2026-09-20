@@ -423,7 +423,7 @@ main {
 .flashcard.flipped .flash-back { transform: rotateY(360deg); }
 .flash-group { position: absolute; top: 16px; left: 20px; font-size: 0.78rem; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 .flash-back .flash-group { color: rgba(255,255,255,0.7); }
-.flash-word { font-family: var(--display); font-size: clamp(1.5rem, 6vw, 2.1rem); font-weight: 700; margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.02em; }
+.flash-word { font-family: var(--display); font-size: clamp(1.5rem, 6vw, 2.1rem); font-weight: 700; margin-bottom: 12px; line-height: 1.3; padding-bottom: 2px; letter-spacing: -0.02em; }
 .flash-example { font-size: 1rem; margin-bottom: 4px; }
 .flash-back .flash-example { color: rgba(255,255,255,0.85); }
 .flash-hint { position: absolute; bottom: 16px; font-size: 0.8rem; color: var(--ink-3); }
