@@ -406,9 +406,9 @@
       "У тебя красный, ты поворачиваешь направо. Никого нет. Можно повернуть?",
       [
         ["Nei, rødt lys betyr stopp, også for høyresving", "Нет, красный означает стоп, в том числе для поворота направо"],
-        ["Ja, høyresving på rødt er lov hvis det er fritt", "Да, направо на красный можно, если свободно"],
-        ["Ja, hvis jeg stopper først", "Да, если сначала остановлюсь"],
-        ["Ja, men bare om natten", "Да, но только ночью"]
+        ["Ja, høyresving på rødt er lov hvis det er fritt", "Да, направо на красный можно, если свободно", "Norge har ingen regel om høyresving på rødt, i motsetning til enkelte andre land, rødt betyr stopp uansett retning.", "В Норвегии, в отличие от некоторых других стран, нет правила про поворот направо на красный — красный означает стоп в любом направлении."],
+        ["Ja, hvis jeg stopper først", "Да, если сначала остановлюсь", "Å stoppe først endrer ingenting, du skal fortsatt vente på grønt lys før du kjører.", "Остановка сначала ничего не меняет — всё равно нужно дождаться зелёного, прежде чем ехать."],
+        ["Ja, men bare om natten", "Да, но только ночью", "Tidspunktet på døgnet har ingen betydning, rødt lys gjelder likt hele døgnet.", "Время суток тут ни при чём — красный действует одинаково круглые сутки."]
       ],
       "I Norge finnes ikke «høyresving på rødt». Du venter på grønt eller grønn pil.",
       "В Норвегии нет «поворота направо на красный». Ждёшь зелёного или зелёной стрелки.",
@@ -419,9 +419,9 @@
       "Зелёный. Ты поворачиваешь налево, встречная B едет прямо, тоже на зелёный. Кто едет первым?",
       [
         ["B: jeg må vike for møtende trafikk selv om jeg har grønt", "B: я уступаю встречному, даже если у меня зелёный"],
-        ["Jeg: grønt lys gir meg forrang", "Я: зелёный даёт мне преимущество"],
-        ["Den som er raskest", "Кто быстрее"],
-        ["Vi stopper begge", "Оба останавливаемся"]
+        ["Jeg: grønt lys gir meg forrang", "Я: зелёный даёт мне преимущество", "Grønt lys lar deg kjøre inn i krysset, men fritar deg ikke fra vikeplikten for møtende ved venstresving.", "Зелёный разрешает въехать на перекрёсток, но не снимает обязанность уступить встречному при повороте налево."],
+        ["Den som er raskest", "Кто быстрее", "Farten avgjør ikke rekkefølgen, regelen om venstresving mot møtende gjør det.", "Скорость не определяет очерёдность — её определяет правило про поворот налево навстречу транспорту."],
+        ["Vi stopper begge", "Оба останавливаемся", "Det er ikke nødvendig at begge stopper, B kan kjøre rett fram mens du venter.", "Останавливаться обоим не нужно — B может ехать прямо, пока ты ждёшь."]
       ],
       "Grønt lys betyr at du kan kjøre inn i krysset, men vikeplikten for møtende trafikk ved venstresving gjelder fortsatt.",
       "Зелёный означает, что можно въехать на перекрёсток, но обязанность уступить встречным при повороте налево остаётся.",
@@ -432,9 +432,9 @@
       "Зелёный, ты поворачиваешь направо. Пешеходы переходят по зебре на улице, куда ты сворачиваешь, тоже на зелёный. Что делаешь?",
       [
         ["Stopper og slipper fotgjengerne over", "Останавливаюсь и пропускаю пешеходов"],
-        ["Kjører: jeg har grønt", "Еду: у меня зелёный"],
-        ["Tuter så de skynder seg", "Сигналю, чтобы поторопились"],
-        ["Kjører sakte mellom dem", "Медленно еду между ними"]
+        ["Kjører: jeg har grønt", "Еду: у меня зелёный", "Grønt lys for deg fritar deg ikke fra vikeplikten for gående som krysser vegen du svinger inn i.", "Твой зелёный не снимает обязанность уступить пешеходам, переходящим дорогу, на которую ты сворачиваешь."],
+        ["Tuter så de skynder seg", "Сигналю, чтобы поторопились", "Signalhorn skal ikke brukes for å presse fotgjengere, du skal selv vente.", "Гудок нельзя использовать, чтобы поторопить пешеходов — ждать должен ты сам."],
+        ["Kjører sakte mellom dem", "Медленно еду между ними", "Å kjøre mellom fotgjengerne er farlig, du skal stoppe helt til gangfeltet er fritt.", "Ехать между пешеходами опасно — нужно полностью остановиться, пока переход не освободится."]
       ],
       "Når du svinger, har du vikeplikt for gående og syklende som krysser den vegen du svinger inn i.",
       "При повороте ты уступаешь пешеходам и велосипедистам, пересекающим дорогу, на которую сворачиваешь.",
@@ -445,9 +445,9 @@
       "Круг с двумя полосами. Тебе нужен третий съезд (налево). Какую полосу выбрать при въезде?",
       [
         ["Venstre felt, med venstre blinklys på vei inn", "Левую, с левым поворотником при въезде"],
-        ["Høyre felt, det er alltid tryggest", "Правую, так всегда безопаснее"],
-        ["Spiller ingen rolle", "Не имеет значения"],
-        ["Midt mellom feltene", "Посередине между полосами"]
+        ["Høyre felt, det er alltid tryggest", "Правую, так всегда безопаснее", "Høyre felt er for første og andre avkjøring, til tredje avkjøring eller lenger skal du bruke venstre felt.", "Правая полоса — для первого и второго съезда, для третьего и дальше нужна левая."],
+        ["Spiller ingen rolle", "Не имеет значения", "Feltvalget har betydning for hvordan du skal svinge og gi tegn, det er ikke likegyldig.", "Выбор полосы важен для манёвра и сигналов поворота — это не всё равно."],
+        ["Midt mellom feltene", "Посередине между полосами", "Å kjøre midt mellom feltene er ikke lovlig, du skal velge ett av de to feltene tydelig.", "Ехать посередине между полосами нельзя — нужно чётко выбрать одну из двух."]
       ],
       "Skal du til venstre eller snu, bruker du venstre felt og gir tegn til venstre inn. Skift til høyre felt med høyre blinklys før avkjøringen.",
       "Если налево или разворот — левая полоса и левый поворотник при въезде. Перед съездом перестраивайся вправо с правым поворотником.",
@@ -458,9 +458,9 @@
       "Ты въезжаешь на автомагистраль по полосе разгона. Кто уступает?",
       [
         ["Jeg: trafikken på motorvegen har forrang, men de bør legge til rette", "Я: у потока на магистрали приоритет, но они должны помогать"],
-        ["Trafikken på motorvegen må slippe meg inn", "Поток на магистрали обязан меня пропустить"],
-        ["Fletteregelen: annenhver bil", "Правило молнии: через одного"],
-        ["Ingen, jeg kjører bare inn", "Никто, просто въезжаю"]
+        ["Trafikken på motorvegen må slippe meg inn", "Поток на магистрали обязан меня пропустить", "Det er omvendt, det er du som kjører inn fra påkjøringsfeltet som har vikeplikt.", "Наоборот: именно ты, въезжающий с полосы разгона, обязан уступить."],
+        ["Fletteregelen: annenhver bil", "Правило молнии: через одного", "Fletteregelen gjelder der to felt går sammen til ett, ikke ved påkjøring til motorveg, der du har vikeplikt.", "Правило молнии действует при слиянии двух полос в одну, а не при въезде на автомагистраль, где у тебя есть обязанность уступить."],
+        ["Ingen, jeg kjører bare inn", "Никто, просто въезжаю", "Du kan ikke bare kjøre inn uten å ta hensyn, du har vikeplikt for trafikken på motorvegen.", "Просто въехать без учёта обстановки нельзя — у тебя есть обязанность уступить потоку на магистрали."]
       ],
       "Den som kjører inn fra påkjøringsfelt har vikeplikt. Bruk hele feltet til å komme opp i fart, og velg en luke. Trafikken på motorvegen bør likevel gjøre det lett for deg.",
       "Въезжающий с полосы разгона уступает. Используй всю полосу, чтобы набрать скорость, и выбери просвет. Поток на магистрали при этом должен облегчать въезд.",
@@ -471,9 +471,9 @@
       "Машина впереди включает левый поворотник, чтобы объехать велосипедиста. Ты тоже хотел обогнать. Что делаешь?",
       [
         ["Venter: det er forbudt å kjøre forbi en bil som selv kjører forbi eller gir tegn til det", "Жду: запрещено обгонять машину, которая сама обгоняет или показывает намерение"],
-        ["Kjører forbi begge samtidig", "Обгоняю обоих сразу"],
-        ["Tuter og kjører forbi på høyre side", "Сигналю и обгоняю справа"],
-        ["Blinker med fjernlys", "Мигаю дальним"]
+        ["Kjører forbi begge samtidig", "Обгоняю обоих сразу", "Å kjøre forbi to kjøretøy samtidig i en slik situasjon er svært farlig og ulovlig her.", "Обгонять сразу оба ТС в такой ситуации очень опасно и запрещено."],
+        ["Tuter og kjører forbi på høyre side", "Сигналю и обгоняю справа", "Forbikjøring på høyre side er som hovedregel forbudt, og hornet endrer ikke på forbudet mot å kjøre forbi her.", "Обгон справа как правило запрещён, а гудок не отменяет запрет обгонять в этой ситуации."],
+        ["Blinker med fjernlys", "Мигаю дальним", "Å blinke med fjernlys gir deg ingen rett til å kjøre forbi, forbudet gjelder uansett.", "Мигание дальним не даёт права на обгон — запрет действует в любом случае."]
       ],
       "Du kan ikke kjøre forbi et kjøretøy som gir tegn til å svinge til venstre eller selv kjører forbi. Vent til situasjonen er klar.",
       "Нельзя обгонять машину, которая показывает поворот налево или сама обгоняет. Дождись, пока ситуация прояснится.",
