@@ -562,9 +562,9 @@
       "Ты едешь по загородной дороге в сумерках и проезжаешь знак с изображением лося. Что делаешь?",
       [
         ["Senker farten og er klar til å bremse, dyr kommer ofte flere sammen", "Снижаю скорость и готов тормозить — животные часто идут группами"],
-        ["Kjører som normalt, skiltet gjelder bare om natten", "Еду как обычно, знак действует только ночью"],
-        ["Blinker med fjernlys for å skremme bort dyr", "Мигаю дальним, чтобы отпугнуть животных"],
-        ["Øker farten for å passere risikoområdet raskt", "Увеличиваю скорость, чтобы быстрее проехать опасный участок"]
+        ["Kjører som normalt, skiltet gjelder bare om natten", "Еду как обычно, знак действует только ночью", "Skiltet gjelder hele døgnet, dyr kan krysse også i dagslys, ikke bare om natten.", "Знак действует круглые сутки — животные могут выходить и днём, а не только ночью."],
+        ["Blinker med fjernlys for å skremme bort dyr", "Мигаю дальним, чтобы отпугнуть животных", "Å blinke med fjernlys skremmer ikke dyr bort på en pålitelig måte og kan i stedet forvirre dem.", "Мигание дальним не гарантирует, что животное убежит, а может наоборот его запутать."],
+        ["Øker farten for å passere risikoområdet raskt", "Увеличиваю скорость, чтобы быстрее проехать опасный участок", "Høyere fart gir kortere reaksjonstid hvis et dyr dukker opp, det gjør situasjonen farligere.", "На большей скорости меньше времени на реакцию, если выйдет животное, — это только опаснее."]
       ],
       "Viltskilt varsler områder med mye viltkryssing, spesielt i skumring og grålysning. Senk farten og vær ekstra oppmerksom — kommer ett dyr, følger ofte flere etter.",
       "Знак с животным предупреждает об участках с частым переходом диких животных, особенно в сумерках. Снизь скорость и будь особенно внимателен — если появилось одно животное, за ним часто следуют другие.",
@@ -575,9 +575,9 @@
       "Тебе нужно сдать назад на машине с прицепом на узкую дорогу. Что важно помнить?",
       [
         ["Tilhengeren svinger motsatt vei av rattet, så styr rolig og bruk speilene", "Прицеп поворачивает в сторону, противоположную повороту руля, поэтому рули плавно и следи за зеркалами"],
-        ["Tilhengeren følger rattet på samme måte som bilen", "Прицеп следует за рулём так же, как сама машина"],
-        ["Det er forbudt å rygge med tilhenger", "Сдавать назад с прицепом запрещено"],
-        ["Be en passasjer dytte tilhengeren i riktig retning", "Попросить пассажира толкать прицеп в нужную сторону"]
+        ["Tilhengeren følger rattet på samme måte som bilen", "Прицеп следует за рулём так же, как сама машина", "Tilhengeren beveger seg faktisk motsatt vei av det bilen gjør ved rygging, ikke likt.", "На самом деле при движении задним ходом прицеп движется в противоположную сторону от машины, а не так же."],
+        ["Det er forbudt å rygge med tilhenger", "Сдавать назад с прицепом запрещено", "Det er ikke forbudt å rygge med tilhenger, det krever bare øvelse og forsiktig styring.", "Сдавать назад с прицепом не запрещено — просто нужны навык и аккуратное управление рулём."],
+        ["Be en passasjer dytte tilhengeren i riktig retning", "Попросить пассажира толкать прицеп в нужную сторону", "Å dytte tilhengeren fysisk er ikke en trygg eller praktisk løsning, du skal styre bilen rolig i stedet.", "Толкать прицеп руками — не безопасное и не практичное решение, нужно аккуратно управлять машиной."]
       ],
       "Når du rygger med tilhenger, svinger tilhengeren motsatt vei av det du dreier rattet. Styr i små bevegelser, bruk speilene aktivt, og be gjerne noen dirigere deg.",
       "При движении задним ходом с прицепом прицеп поворачивает в сторону, противоположную повороту руля. Работай рулём небольшими движениями, активно используй зеркала и, если можно, попроси кого-то направлять тебя.",
@@ -588,9 +588,9 @@
       "Холодное утро, ты приближаешься к мосту. Дорога перед мостом была сухой. О чём нужно помнить?",
       [
         ["Broer fryser først, det kan være is selv om resten av veien er tørr", "Мосты замерзают первыми — лёд может быть, даже если остальная дорога сухая"],
-        ["Broer er alltid varmere enn veien, så is er usannsynlig", "Мосты всегда теплее дороги, поэтому лёд маловероятен"],
-        ["Is dannes bare på veier med mye skygge", "Лёд появляется только на затенённых участках"],
-        ["Broer saltes automatisk, så de er alltid trygge", "Мосты автоматически солятся, поэтому всегда безопасны"]
+        ["Broer er alltid varmere enn veien, så is er usannsynlig", "Мосты всегда теплее дороги, поэтому лёд маловероятен", "Broer er tvert imot kaldere enn vanlig vei fordi de mister varme raskere, så is er mer sannsynlig der.", "Наоборот, мосты холоднее обычной дороги, потому что быстрее теряют тепло, — лёд там как раз более вероятен."],
+        ["Is dannes bare på veier med mye skygge", "Лёд появляется только на затенённых участках", "Is på bro dannes uavhengig av skygge, det handler om at broen mister varme raskt fra alle sider.", "Лёд на мосту образуется независимо от тени — дело в том, что мост быстро теряет тепло со всех сторон."],
+        ["Broer saltes automatisk, så de er alltid trygge", "Мосты автоматически солятся, поэтому всегда безопасны", "Det finnes ikke automatisk salting på alle broer, du kan ikke stole på at broen alltid er trygg.", "Автоматической подсыпки соли на всех мостах нет — полагаться на то, что мост всегда безопасен, нельзя."]
       ],
       "Broer er omgitt av kald luft på alle sider og mister varme raskere enn vanlig vei. De blir derfor ofte glatte og iskalde før resten av veien.",
       "Мосты окружены холодным воздухом со всех сторон и теряют тепло быстрее, чем обычная дорога. Поэтому они часто становятся скользкими раньше остальной трассы.",
@@ -601,9 +601,9 @@
       "Ты приближаешься к железнодорожному переезду без шлагбаума, мигает красный сигнал. Что делаешь?",
       [
         ["Stopper og venter til lyset slutter å blinke", "Останавливаюсь и жду, пока сигнал не перестанет мигать"],
-        ["Kjører raskt over før toget kommer", "Быстро проезжаю, пока поезд не подъехал"],
-        ["Kjører sakte over og ser meg for", "Медленно проезжаю, оглядываясь по сторонам"],
-        ["Tuter og kjører over", "Сигналю и проезжаю"]
+        ["Kjører raskt over før toget kommer", "Быстро проезжаю, пока поезд не подъехал", "Å prøve å rekke over før toget er ekstremt farlig, du skal stoppe når lyset blinker.", "Пытаться проскочить перед поездом крайне опасно — нужно остановиться, пока сигнал мигает."],
+        ["Kjører sakte over og ser meg for", "Медленно проезжаю, оглядываясь по сторонам", "Blinkende rødt lys krever full stopp, det holder ikke å bare kjøre sakte og se seg for.", "Мигающий красный требует полной остановки — ехать медленно и оглядываться недостаточно."],
+        ["Tuter og kjører over", "Сигналю и проезжаю", "Signalhorn endrer ingenting, blinkende rødt lys betyr stopp uansett.", "Гудок ничего не меняет — мигающий красный означает остановку в любом случае."]
       ],
       "Blinkende rødt lys ved planovergang betyr at tog nærmer seg. Du skal stoppe og vente til lyset slukker, selv om du ikke ser bom eller tog ennå.",
       "Мигающий красный на переезде означает, что приближается поезд. Нужно остановиться и ждать, пока сигнал не погаснет, даже если шлагбаума или поезда ещё не видно.",
@@ -614,9 +614,9 @@
       "Длинный грузовик с прицепом впереди тебя собирается повернуть направо, но сначала смещается влево в полосе. Что нужно сделать?",
       [
         ["Holde god avstand og ikke kjøre forbi på høyre side", "Держать дистанцию и не пытаться обогнать справа"],
-        ["Kjøre forbi på høyre side mens det er plass", "Обогнать справа, пока есть место"],
-        ["Tute for å få vogntoget til å svinge med en gang", "Посигналить, чтобы грузовик повернул сразу"],
-        ["Kjøre tett bak for å presse fram svingen", "Прижаться вплотную сзади, чтобы поторопить с поворотом"]
+        ["Kjøre forbi på høyre side mens det er plass", "Обогнать справа, пока есть место", "Plassen som åpner seg til høyre er nettopp der vogntoget trenger å svinge inn, å kjøre der er svært farlig.", "Место, освобождающееся справа, — как раз то, куда грузовик собирается повернуть, ехать туда очень опасно."],
+        ["Tute for å få vogntoget til å svinge med en gang", "Посигналить, чтобы грузовик повернул сразу", "Signalhorn hjelper ikke, føreren trenger plassen til venstre for å få svingradius, ikke et signal om å skynde seg.", "Гудок не поможет — водителю нужно место слева для радиуса поворота, а не сигнал поторопиться."],
+        ["Kjøre tett bak for å presse fram svingen", "Прижаться вплотную сзади, чтобы поторопить с поворотом", "Å ligge tett bak reduserer din egen reaksjonstid og hjelper ikke vogntoget med svingen.", "Ехать вплотную сзади сокращает твоё время на реакцию и никак не помогает грузовику повернуть."]
       ],
       "Lange kjøretøy må ofte svinge ut til motsatt side for å få plass til høyresvingen. Å kjøre forbi på høyre side da er svært farlig — bli liggende bak og vent.",
       "Длинным транспортным средствам часто нужно сместиться в противоположную сторону, чтобы вписаться в поворот направо. Обгонять справа в этот момент очень опасно — держись позади и жди.",
@@ -627,9 +627,9 @@
       "Ты (A) собираешься въехать на круг. Велосипедист (B) уже находится на кругу. Что делаешь?",
       [
         ["Venter og slipper syklisten fram — samme regel som for biler", "Жду и пропускаю велосипедиста — то же правило, что и для машин"],
-        ["Kjører inn med en gang, sykler har ikke forrang i rundkjøring", "Въезжаю сразу — у велосипедистов нет преимущества на кругу"],
-        ["Tuter for å varsle syklisten om at jeg kommer", "Сигналю, чтобы предупредить велосипедиста о своём въезде"],
-        ["Kjører inn fordi jeg er større og mer synlig", "Въезжаю, потому что я крупнее и заметнее"]
+        ["Kjører inn med en gang, sykler har ikke forrang i rundkjøring", "Въезжаю сразу — у велосипедистов нет преимущества на кругу", "Syklende har samme forrang som biler i rundkjøring, ikke mindre.", "У велосипедистов на кругу такой же приоритет, как у машин, а не меньше."],
+        ["Tuter for å varsle syklisten om at jeg kommer", "Сигналю, чтобы предупредить велосипедиста о своём въезде", "Signalhorn erstatter ikke vikeplikten, du skal vente uansett om du varsler eller ikke.", "Гудок не заменяет обязанность уступить — ждать нужно в любом случае, предупредил ты или нет."],
+        ["Kjører inn fordi jeg er større og mer synlig", "Въезжаю, потому что я крупнее и заметнее", "Kjøretøyets størrelse gir ingen forrang, reglene for rundkjøring gjelder likt for alle.", "Размер транспорта не даёт приоритета — правила круга действуют одинаково для всех."]
       ],
       "I rundkjøring gjelder samme vikeplikt for syklende som for biler: trafikk som allerede er inne i rundkjøringen har forrang, uansett kjøretøytype.",
       "На круге действует та же обязанность уступать для велосипедистов, что и для машин: тот, кто уже на кругу, имеет преимущество — независимо от типа транспорта.",
