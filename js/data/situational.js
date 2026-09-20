@@ -640,9 +640,9 @@
       "Трамвай остановился на остановке посреди улицы, без островка безопасности между рельсами и тротуаром. Двери открылись. Что делаешь?",
       [
         ["Stopper bak trikken og venter til passasjerene har krysset over til fortauet", "Останавливаюсь позади трамвая и жду, пока пассажиры перейдут на тротуар"],
-        ["Kjører forbi trikken i vanlig fart, jeg har ikke plikt til å stoppe", "Проезжаю мимо трамвая с обычной скоростью — останавливаться не обязан"],
-        ["Kjører forbi sakte samtidig som passasjerene krysser", "Медленно проезжаю мимо, пока пассажиры переходят"],
-        ["Tuter for å få passasjerene til å skynde seg", "Сигналю, чтобы пассажиры поторопились"]
+        ["Kjører forbi trikken i vanlig fart, jeg har ikke plikt til å stoppe", "Проезжаю мимо трамвая с обычной скоростью — останавливаться не обязан", "Du har faktisk plikt til å stoppe når passasjerer krysser til fortauet uten trafikkøy.", "На самом деле обязанность остановиться есть — когда пассажиры переходят к тротуару без островка безопасности."],
+        ["Kjører forbi sakte samtidig som passasjerene krysser", "Медленно проезжаю мимо, пока пассажиры переходят", "Å kjøre forbi samtidig som passasjerene krysser er farlig, du skal stoppe helt til de er trygt over.", "Проезжать мимо, пока пассажиры переходят, опасно — нужно полностью остановиться, пока они не окажутся в безопасности."],
+        ["Tuter for å få passasjerene til å skynde seg", "Сигналю, чтобы пассажиры поторопились", "Signalhorn skal ikke brukes for å presse passasjerene, du skal selv vente til de er over.", "Гудок нельзя использовать, чтобы поторопить пассажиров, — ждать должен ты сам, пока они не перейдут."]
       ],
       "Når en trikk eller buss stopper uten trafikkøy og slipper av passasjerer, skal du stoppe og vente til de har kommet trygt over til fortauet.",
       "Когда трамвай или автобус останавливается без островка безопасности и высаживает пассажиров, нужно остановиться и подождать, пока они безопасно дойдут до тротуара.",
@@ -653,9 +653,9 @@
       "Нужно припарковаться на склоне без бордюра (сбоку канава), машина направлена вниз по склону. Что сделать с передними колёсами?",
       [
         ["Vri hjulene mot grøften, slik at bilen ruller av veien og ikke ut i trafikken hvis den beveger seg", "Повернуть колёса в сторону канавы, чтобы машина при откате съехала с дороги, а не выехала на проезжую часть"],
-        ["Vri hjulene rett fram, det spiller ingen rolle når håndbrekket er på", "Оставить колёса прямо — не важно, ведь стояночный тормоз включён"],
-        ["Vri hjulene mot kjørebanen, slik at bilen står tettest mulig på veien", "Повернуть колёса в сторону дороги, чтобы машина стояла как можно ближе к проезжей части"],
-        ["Bruke gir i stedet for håndbrekk er alltid nok alene", "Достаточно только включить передачу, без ручника"]
+        ["Vri hjulene rett fram, det spiller ingen rolle når håndbrekket er på", "Оставить колёса прямо — не важно, ведь стояночный тормоз включён", "Håndbrekket kan svikte, og med hjulene rett fram vil bilen trille rett ut i veien hvis det skjer.", "Ручник может подвести, и при прямых колёсах машина при откате выедет прямо на дорогу."],
+        ["Vri hjulene mot kjørebanen, slik at bilen står tettest mulig på veien", "Повернуть колёса в сторону дороги, чтобы машина стояла как можно ближе к проезжей части", "Dette er farligere, for da vil bilen trille ut i kjørebanen og trafikken hvis bremsene svikter, ikke bort fra den.", "Это опаснее — при отказе тормозов машина съедет на проезжую часть, в поток машин, а не от него."],
+        ["Bruke gir i stedet for håndbrekk er alltid nok alene", "Достаточно только включить передачу, без ручника", "Gir alene er ikke nok som sikkerhet, du skal bruke håndbrekk i tillegg og vri hjulene riktig vei.", "Одной передачи недостаточно для безопасности — нужен ещё ручник и правильно повёрнутые колёса."]
       ],
       "Ved parkering i bakke uten fortauskant vrir du hjulene slik at bilen triller vekk fra vegen (mot grøften) hvis bremsene skulle svikte. I tillegg bruker du håndbrekk og legger i gir eller parkeringsposisjon.",
       "При парковке на склоне без бордюра поворачивай колёса так, чтобы при откате машина ушла от дороги (в сторону канавы). Дополнительно используй ручник и включи передачу или паркинг.",
@@ -666,9 +666,9 @@
       "Ты едешь в сильный дождь и вдруг чувствуешь, что руль стал «лёгким», а машина не реагирует на управление. Что это, и что делать?",
       [
         ["Vannplaning — slipp gassen forsiktig og hold rattet rett fram til dekkene får kontakt igjen", "Аквапланирование — плавно отпусти газ и держи руль прямо, пока шины снова не сцепятся с дорогой"],
-        ["Servostyringen har sviktet — trykk gassen i bunn for å få kontroll", "Отказал гидроусилитель руля — выжми газ до пола, чтобы вернуть контроль"],
-        ["Dette er normalt i regn — brems hardt med en gang", "Это нормально в дождь — резко затормози"],
-        ["Bilen er overopphetet — slå av motoren mens du kjører", "Машина перегрелась — заглуши двигатель на ходу"]
+        ["Servostyringen har sviktet — trykk gassen i bunn for å få kontroll", "Отказал гидроусилитель руля — выжми газ до пола, чтобы вернуть контроль", "Dette er vannplaning, ikke svikt i servostyringen, og å gi full gass forverrer situasjonen.", "Это аквапланирование, а не отказ гидроусилителя, — газ до пола только ухудшит ситуацию."],
+        ["Dette er normalt i regn — brems hardt med en gang", "Это нормально в дождь — резко затормози", "Hard bremsing ved vannplaning kan gjøre at bilen sklir enda mer ukontrollert.", "Резкое торможение при аквапланировании может сделать занос машины ещё более неконтролируемым."],
+        ["Bilen er overopphetet — slå av motoren mens du kjører", "Машина перегрелась — заглуши двигатель на ходу", "Å slå av motoren i fart fjerner servostyring og bremsekraft og gjør situasjonen mye farligere.", "Заглушить двигатель на ходу — значит потерять усилитель руля и тормозов, что делает ситуацию гораздо опаснее."]
       ],
       "Vannplaning oppstår når et vannlag løfter dekkene fra veibanen, og bilen mister kontakt med underlaget. Slipp gassen rolig, unngå bråbrems og bråe rattbevegelser til dekkene får grep igjen.",
       "Аквапланирование возникает, когда слой воды приподнимает шины над дорогой, и машина теряет сцепление с покрытием. Плавно отпусти газ, избегай резкого торможения и резких движений рулём, пока шины снова не «зацепятся» за дорогу.",
@@ -679,9 +679,9 @@
       "Ты въезжаешь в зону дорожных работ с жёлтыми (временными) знаками, показывающими ограничение скорости ниже обычного. Что действует?",
       [
         ["Den midlertidige (gule) fartsgrensen gjelder foran den faste skiltingen", "Действует временное (жёлтое) ограничение — оно важнее постоянных знаков"],
-        ["Den faste fartsgrensen gjelder alltid, gule skilt er bare informasjon", "Всегда действует постоянное ограничение, жёлтые знаки — просто информация"],
-        ["Du velger selv hvilken grense du følger", "Можно самому выбрать, какое ограничение соблюдать"],
-        ["Gule skilt gjelder bare for tunge kjøretøy", "Жёлтые знаки касаются только грузового транспорта"]
+        ["Den faste fartsgrensen gjelder alltid, gule skilt er bare informasjon", "Всегда действует постоянное ограничение, жёлтые знаки — просто информация", "Gule skilt er ikke bare informasjon, de er midlertidige og går foran den faste skiltingen.", "Жёлтые знаки — не просто информация, они временные и действуют вместо постоянных."],
+        ["Du velger selv hvilken grense du følger", "Можно самому выбрать, какое ограничение соблюдать", "Fartsgrensen er ikke valgfri, den midlertidige gule skiltingen er bindende.", "Ограничение скорости — не на выбор, временный жёлтый знак обязателен."],
+        ["Gule skilt gjelder bare for tunge kjøretøy", "Жёлтые знаки касаются только грузового транспорта", "Gule skilt gjelder alle kjøretøy i anleggsområdet, ikke bare tunge.", "Жёлтые знаки действуют для всех ТС в зоне работ, а не только для грузового транспорта."]
       ],
       "Gule skilt i anleggsområder er midlertidig skilting og går foran den faste (hvite) skiltingen. Vær ekstra oppmerksom på arbeidere og endret veibane.",
       "Жёлтые знаки в зоне дорожных работ — временные, и они важнее постоянных (белых) знаков. Будь особенно внимателен к рабочим и изменённой траектории дороги.",
@@ -692,9 +692,9 @@
       "Ты замечаешь в зеркале, что ребёнок на заднем сиденье отстегнул ремень во время движения по автомагистрали. Что делаешь?",
       [
         ["Finner et trygt sted å stoppe og fester beltet der, i stedet for å gjøre noe mens bilen er i fart", "Нахожу безопасное место для остановки и там пристёгиваю ремень, а не пытаюсь сделать это на ходу"],
-        ["Rekker meg bakover og fester beltet mens jeg fortsetter å kjøre", "Тянусь назад и пристёгиваю ремень, продолжая ехать"],
-        ["Ber en passasjer i forsetet klatre bak for å ordne beltet med en gang", "Прошу пассажира с переднего сиденья перелезть назад и сразу пристегнуть ремень"],
-        ["Ignorerer det, barnet sitter jo fortsatt i setet", "Не обращаю внимания — ребёнок ведь всё ещё в кресле"]
+        ["Rekker meg bakover og fester beltet mens jeg fortsetter å kjøre", "Тянусь назад и пристёгиваю ремень, продолжая ехать", "Å strekke seg bakover mens du kjører tar oppmerksomheten fra veien og er svært farlig i fart.", "Тянуться назад во время движения отвлекает от дороги и очень опасно на скорости."],
+        ["Ber en passasjer i forsetet klatre bak for å ordne beltet med en gang", "Прошу пассажира с переднего сиденья перелезть назад и сразу пристегнуть ремень", "Å klatre mellom setene mens bilen er i fart er farlig for alle involverte, vent til dere har stoppet.", "Перелезать между сиденьями на ходу опасно для всех — нужно дождаться остановки."],
+        ["Ignorerer det, barnet sitter jo fortsatt i setet", "Не обращаю внимания — ребёнок ведь всё ещё в кресле", "Et løsnet belte gir ingen beskyttelse ved kollisjon, dette må rettes opp så snart det er trygt.", "Отстёгнутый ремень не защитит при столкновении — это нужно исправить, как только будет безопасно."]
       ],
       "Å ta oppmerksomheten bort fra veien for å ordne noe i baksetet er svært farlig i fart. Finn et trygt sted å stanse, og løs problemet der.",
       "Отвлекаться от дороги, чтобы что-то сделать на заднем сиденье, очень опасно на скорости. Найди безопасное место для остановки и реши проблему там.",
@@ -705,9 +705,9 @@
       "Ты слегка столкнулся с другой машиной на парковке — только материальный ущерб. Другой водитель хочет просто уехать, не обменявшись данными. Что делаешь?",
       [
         ["Insisterer på å utveksle navn, adresse og forsikringsopplysninger før noen kjører fra stedet", "Настаиваю на обмене именем, адресом и данными страховки, прежде чем кто-то уедет"],
-        ["Lar den andre kjøre, det er bare en parkeringsplass", "Отпускаю его — это же просто парковка"],
-        ["Ringer bare eget forsikringsselskap uken etter, uten å snakke med den andre føreren", "Просто звоню в свою страховую через неделю, не разговаривая со вторым водителем"],
-        ["Tar bilde av skaden og drar, det holder", "Фотографирую повреждения и уезжаю — этого достаточно"]
+        ["Lar den andre kjøre, det er bare en parkeringsplass", "Отпускаю его — это же просто парковка", "Plikten til å utveksle opplysninger gjelder også på parkeringsplass, ikke bare på vanlig vei.", "Обязанность обменяться данными действует и на парковке, а не только на обычной дороге."],
+        ["Ringer bare eget forsikringsselskap uken etter, uten å snakke med den andre føreren", "Просто звоню в свою страховую через неделю, не разговаривая со вторым водителем", "Det er ikke nok å ringe forsikringen senere, du skal utveksle opplysninger med den andre føreren på stedet.", "Позвонить в страховую позже недостаточно — данными нужно обменяться со вторым водителем на месте."],
+        ["Tar bilde av skaden og drar, det holder", "Фотографирую повреждения и уезжаю — этого достаточно", "Bilder erstatter ikke plikten til å utveksle navn og adresse med den andre parten.", "Фотографии не заменяют обязанность обменяться именем и адресом с другой стороной."]
       ],
       "Alle involvert i en trafikkulykke plikter å oppgi navn og adresse, og bli på stedet til nødvendige opplysninger er utvekslet. Dette gjelder også ved kun materiell skade.",
       "Все участники ДТП обязаны сообщить имя и адрес и оставаться на месте, пока не обменяются необходимыми данными. Это касается и случаев только с материальным ущербом.",
@@ -718,9 +718,9 @@
       "Вчера вечером на ужине ты выпил пару бокалов вина и хорошо выспался. Сегодня чувствуешь себя бодрым и собираешься ехать на работу. О чём нужно помнить?",
       [
         ["Kroppen bryter ned alkohol sakte, og du kan fortsatt ha promille over grensen selv om du føler deg våken", "Организм расщепляет алкоголь медленно, и промилле всё ещё может быть выше нормы, даже если ты чувствуешь себя бодрым"],
-        ["Etter en natts søvn er all alkohol garantert borte fra kroppen", "После ночного сна алкоголь гарантированно полностью выводится из организма"],
-        ["Å føle seg våken betyr at promillen er under grensen", "Если чувствуешь бодрость, значит промилле уже в норме"],
-        ["Bare kaffe om morgenen er nok til å være sikker på å kjøre", "Достаточно выпить утром кофе, чтобы быть уверенным в возможности ехать"]
+        ["Etter en natts søvn er all alkohol garantert borte fra kroppen", "После ночного сна алкоголь гарантированно полностью выводится из организма", "Søvn fremskynder ikke nedbrytningen av alkohol, det er bare tiden som teller.", "Сон не ускоряет распад алкоголя, важно только прошедшее время."],
+        ["Å føle seg våken betyr at promillen er under grensen", "Если чувствуешь бодрость, значит промилле уже в норме", "Følelsen av å være våken sier ingenting sikkert om promillen, den kan fortsatt være over grensen.", "Ощущение бодрости ничего не говорит о промилле — оно всё ещё может быть выше нормы."],
+        ["Bare kaffe om morgenen er nok til å være sikker på å kjøre", "Достаточно выпить утром кофе, чтобы быть уверенным в возможности ехать", "Kaffe gjør deg bare mer våken, det senker ikke promillen i det hele tatt.", "Кофе лишь бодрит, на уровень промилле он никак не влияет."]
       ],
       "Kroppen bryter ned alkohol med omtrent 0,1–0,15 promille i timen. Etter en kveld med flere glass kan du fortsatt ligge over 0,2 promille neste morgen, selv om du føler deg uthvilt.",
       "Организм расщепляет алкоголь со скоростью примерно 0,1–0,15 промилле в час. После вечера с несколькими бокалами утром промилле всё ещё может быть выше 0,2, даже если чувствуешь себя выспавшимся.",
