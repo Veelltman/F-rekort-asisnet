@@ -26,15 +26,50 @@
     rules: { title: "Regler og sanksjoner", title_ru: "Правила и штрафы", icon: ICONS.rules, desc: "Скорость, алкоголь, ремни, баллы, парковка, ставки 2026." }
   };
 
+  /* ---------- Роутинг с адресом в URL (#/topic?key=signs): работают «назад» и обновление страницы ---------- */
   const routes = {};
-  function go(name, params) {
+  function hashFor(name, params) {
+    const q = new URLSearchParams();
+    Object.keys(params || {}).forEach(k => { if (params[k] != null && params[k] !== "") q.set(k, params[k]); });
+    const qs = q.toString();
+    return "#/" + name + (qs ? "?" + qs : "");
+  }
+  function parseHash() {
+    const m = (location.hash || "").match(/^#\/([a-z]+)(?:\?(.*))?$/);
+    if (!m || !routes[m[1]]) return { name: "home", params: {} };
+    const params = {};
+    new URLSearchParams(m[2] || "").forEach((v, k) => { params[k] = v; });
+    return { name: m[1], params };
+  }
+  /* Экран, который нельзя покинуть без подтверждения (экзамен) */
+  window.ROUTE_GUARD = null;
+  function render(name, params) {
     window.CURRENT_ROUTE = name;
     window.CURRENT_PARAMS = params || {};
+    window.ROUTE_GUARD = null;
     document.onkeydown = null;
     routes[name](params || {});
     window.scrollTo({ top: 0 });
     document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("active", a.dataset.route === name));
   }
+  function go(name, params, opts) {
+    opts = opts || {};
+    if (!opts.force && window.ROUTE_GUARD && !window.ROUTE_GUARD()) return;
+    const hash = hashFor(name, params);
+    if (location.hash !== hash) {
+      if (opts.replace) history.replaceState(null, "", hash); else history.pushState(null, "", hash);
+    }
+    render(name, params);
+  }
+  window.addEventListener("popstate", () => {
+    const target = parseHash();
+    if (window.ROUTE_GUARD && !window.ROUTE_GUARD()) {
+      /* отказ покидать экзамен: вернуть адрес назад */
+      history.pushState(null, "", hashFor(window.CURRENT_ROUTE, window.CURRENT_PARAMS));
+      return;
+    }
+    render(target.name, target.params);
+  });
   window.go = go;
   window.ROUTES = routes;
   window.AppUI = { TOPICS, ICONS, statLine: (...a) => statLine(...a), esc };
@@ -325,11 +360,11 @@
       exam: true,
       timeLimit: 90 * 60,
       maxWrong: 7,
-      confirmExit: "Прервать экзамен? Результат не сохранится.",
-      onExit: () => go("home"),
-      onRestart: () => go("exam"),
-      onFinish: res => S.recordExam(res)
+      onExit: () => { window.ROUTE_GUARD = null; go("home"); },
+      onRestart: () => { window.ROUTE_GUARD = null; go("exam", {}, { force: true }); },
+      onFinish: res => { window.ROUTE_GUARD = null; S.recordExam(res); }
     });
+    window.ROUTE_GUARD = () => confirm("Прервать экзамен? Результат не сохранится.");
   };
 
   routes.daily = function () {
@@ -386,6 +421,7 @@
       </section>
 
       ${circleCard()}
+      ${window.PWA ? PWA.installCardHtml() : ""}
       <div class="grid grid-2">
         ${dailyCard()}
         ${examCard()}
@@ -407,7 +443,18 @@
           </div>
         </div>
       </div>
+
+      <details class="card offline-card">
+        <summary>Работа без интернета</summary>
+        <p class="muted small">Сайт открывается офлайн после первого посещения. Чтобы и картинки знаков с озвучкой были доступны без сети, загрузи их заранее (знаки ≈ 3 МБ, озвучка ≈ 2 МБ).</p>
+        <div class="row">
+          <button class="btn btn-small" onclick="PWA.runDownload('signs', this)">Скачать знаки</button>
+          <button class="btn btn-small" onclick="PWA.runDownload('audio', this)">Скачать озвучку</button>
+          <span class="muted small" id="offline-status"></span>
+        </div>
+      </details>
 `;
+    if (window.PWA) PWA.offlineStatus().then(s => { const el = document.getElementById("offline-status"); if (el) el.textContent = `Сохранено: знаков ${s.signs}, файлов озвучки ${s.audio}`; }).catch(() => {});
   };
 
   function topicCard(key, t, st) {
@@ -505,7 +552,7 @@
       case "marking": set = k.marking; label = "Разметка"; break;
       default: set = shuffle(byCat(all)).slice(0, 10); label = t.title_ru + catLabel;
     }
-    if (!set.length) { go("topic", { key: p.key }); return; }
+    if (!set.length) { go("topic", { key: p.key }, { replace: true }); return; }
 
     view.innerHTML = "";
     window.QuizEngine.start(view, set, {
@@ -612,13 +659,13 @@
     let session;
     if (p.mode === "resume" && saved) {
       session = { cards: saved.ids.map(id => byId[id]).filter(Boolean), index: saved.index, known: saved.known || 0, unknown: (saved.unknown || []).map(id => byId[id]).filter(Boolean), flipped: false };
-      if (session.index >= session.cards.length) { clearVocabSession(); go("vocab"); return; }
+      if (session.index >= session.cards.length) { clearVocabSession(); go("vocab", {}, { replace: true }); return; }
     } else {
       let set;
       if (p.mode === "weak") set = groups.weak;
       else if (p.mode === "new") set = shuffle(groups.new).slice(0, 20);
       else set = all;
-      if (!set.length) { go("vocab"); return; }
+      if (!set.length) { go("vocab", {}, { replace: true }); return; }
       session = { cards: shuffle(set), index: 0, known: 0, unknown: [], flipped: false };
     }
     const mode = p.mode === "resume" ? (saved.mode || "all") : p.mode;
@@ -761,5 +808,7 @@
   });
 
   renderProfileSwitch();
-  go("home");
+  const start = parseHash();
+  history.replaceState(null, "", hashFor(start.name, start.params));
+  render(start.name, start.params);
 })();

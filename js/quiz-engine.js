@@ -42,7 +42,7 @@
 
     /* Вопрос с несколькими правильными ответами: it.selected — массив индексов.
        Засчитывается только точное совпадение набора, как на экзамене. */
-    function isMulti(it) { return !!it.inst.multi; }
+    function isMulti(it) { return !!(it.inst && it.inst.multi); }
     function hasSel(it) { return isMulti(it) ? !!(it.selected && it.selected.length) : it.selected != null; }
     function isSel(it, i) { return isMulti(it) ? !!(it.selected && it.selected.includes(i)) : it.selected === i; }
     function chosenList(it) { return isMulti(it) ? (it.selected || []).map(i => it.options[i]) : (it.selected != null ? [it.options[it.selected]] : []); }
@@ -149,6 +149,7 @@
         qt.appendChild(Speech.button(() => q.prompt_no, "q-speak"));
       }
       container.querySelector("[data-action=exit]").onclick = () => {
+        if (window.ROUTE_GUARD && !window.ROUTE_GUARD()) return;
         if (cfg.confirmExit && !confirm(cfg.confirmExit)) return;
         stopTimer(); cfg.onExit && cfg.onExit();
       };

@@ -611,3 +611,20 @@ footer { text-align: center; color: var(--ink-3); font-size: 0.84rem; padding: 2
 .exam-list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .exam-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 0.9rem; padding: 8px 12px; border-radius: var(--r-sm); background: var(--surface-2); font-variant-numeric: tabular-nums; }
 @media (max-width: 719px) { .stats-row { grid-template-columns: 1fr auto; } .stats-row .acts { grid-column: 1 / -1; } }
+
+/* ---------- PWA: тост, установка, офлайн ---------- */
+.toast { flex-wrap: wrap; }
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 60;
+  display: flex; align-items: center; gap: 12px; max-width: min(92vw, 520px);
+  background: var(--ink); color: var(--bg); padding: 10px 12px 10px 16px; border-radius: var(--r-md); box-shadow: var(--shadow-lg); font-size: 0.92rem;
+}
+@media (max-width: 719px) { .toast { bottom: calc(var(--tabbar-h) + 12px + env(safe-area-inset-bottom)); } }
+.toast .btn { flex: none; }
+.toast-close { background: transparent; border: 0; color: inherit; opacity: 0.7; font-size: 1.3rem; line-height: 1; cursor: pointer; padding: 4px; }
+.install-card { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; border-left: 4px solid var(--info); }
+.install-card h3 { margin-bottom: 2px; }
+.install-card p { margin: 0; }
+.offline-card { margin-top: 14px; }
+.offline-card summary { cursor: pointer; font-weight: 600; }
+.offline-card[open] summary { margin-bottom: 8px; }

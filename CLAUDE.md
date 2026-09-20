@@ -15,17 +15,21 @@
 
 ## Стек и запуск
 
-Статический сайт: vanilla JS, без сборки. Локально: `npx -y serve -l 5173 .` (конфиг в `.claude/launch.json`, имя `site`). Проверка данных: `node scripts/check-data.js` — запускать после любых правок в `js/data/`.
+Статический сайт: vanilla JS, без сборки. Локально: `npx -y serve -l 5173 .` (конфиг в `.claude/launch.json`, имя `site`). Проверка данных: `node scripts/check-data.js` — запускать после любых правок в `js/data/`. Перед каждым push: `node scripts/bump-version.js` (обновляет `?v=` в index.html и `APP_VERSION` в sw.js — иначе телефоны не увидят обновление). Worker деплоится отдельно: `cd worker && npx wrangler deploy`.
 
 Git identity не настроен глобально — коммитить так:
 `git -c core.autocrlf=false -c user.name="malet" -c user.email="malets239@gmail.com" commit -m "..."` затем `git push origin main`.
 
 ## Структура
 
-- `index.html`, `css/styles.css` — оболочка, дизайн (асфальт + жёлтая разметка, шрифты Unbounded/Golos Text, тёмная тема, мобильная нижняя навигация, PWA-манифест и `sw.js`)
+- `index.html`, `css/styles.css` — оболочка, дизайн: светлая «официальная» палитра (navy бренд, семантика ok/danger/warn/info как у знаков, жёлтый только для главного действия), шрифт Inter, тёмная тема по системе, мобильная нижняя навигация (Темы/Ошибки/Лексика/Статистика)
 - `js/quiz-engine.js` — движок: выбор → «Sjekk» → объяснение; стрелки ← →; обзор всех вопросов в конце; режим экзамена (`exam: true`, 45 вопросов, 90 мин, ≤7 ошибок)
 - `js/app.js` — экраны: главная (круг друзей, задание дня, экзамен, темы), тема, квиз, ошибки, лексика, вход
-- `js/storage.js` — localStorage, профили, облачный профиль; `js/cloud.js` — API сервера
+- `js/storage.js` — localStorage, профили, облачный профиль; интервальное повторение (`box`/`due`: 1→3→7→14→30 дней)
+- `js/merge.js` — слияние прогресса двух устройств (max счётчиков, union экзаменов, `resetAt`); `js/cloud.js` — синхронизация: pull/login сливают, PUT с `?base=` → 409 → merge → повтор; статус в шапке
+- `js/stats.js` — экран «Статистика» (экзамены, точность по дням, темы, знаки по категориям/типам)
+- `js/pwa.js` + `sw.js` — версионный кэш оболочки, тост «Обновить», установка, офлайн-загрузка знаков/звука
+- Роутинг через hash (`#/topic?key=signs`), `go(name, params, {replace, force})`, `window.ROUTE_GUARD` для экзамена
 - `js/data/signs-catalog.js` — 155 знаков (картинки в `img/signs/`), `signs.js` генерирует задания трёх типов
 - `js/data/situational.js` — ручные ситуации + функция `scene()` (схемы перекрёстков, правостороннее движение, круг против часовой)
 - `js/data/rules.js` — правила; ставки forenklet forelegg с 15.02.2026 (индексируются ежегодно в феврале — при смене года пересверить с tryggeveier.no / lovdata.no)
