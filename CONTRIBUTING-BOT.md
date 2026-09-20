@@ -113,6 +113,7 @@ w("057", "ord på norsk", "перевод", "Eksempelsetning på norsk.", "Пе�
 - Мигающий жёлтый (сигнал 1098) = «særlig aktpågivenhet og varsomhet», действуют знаки/høyreregelen.
 - Kollektivfelt по § 5 nr. 2 могут использовать elbil, hydrogenbil, двухколёсные MC и мопеды, велосипеды, электросамокаты и utrykningskjøretøy.
 - Знак «innkjøring forbudt» — красный круг с белой полосой (не белый с красной каймой).
+- Категории знаков строго по Skiltforskriften: 100 fareskilt, 200 vikeplikt (в т.ч. треугольный 210 Forkjørskryss), 300 forbud (в т.ч. зональные 366/376 и все «slutt på»), 400 påbud, 500 opplysning, 700 vegvisning, 800 underskilt. Отдельного «информационного» знака парковочной зоны нет — это 376 Parkeringssone. Названия: 114 Rasfare, 118 Bevegelig bru, 120 Kai/strand/ferjeleie, 140 Avstand til gangfelt, 146 Dyr, 150 Fly, 153 Trafikkulykke, 310 forbudt for motorvogn over angitt totalvekt (не только грузовики).
 
 ## Озвучка новых слов
 

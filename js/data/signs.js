@@ -98,6 +98,10 @@
     const opphev = entry.cat === "forbud" && /^Slutt på|sone/i.test(entry.no);
     const noteNo = opphev ? " Merk: soneskilt og «slutt på»-skilt er rektangulære og ligner opplysningsskilt, men i skiltforskriften hører de til forbudsskiltene (300-serien)." : "";
     const noteRu = opphev ? " Важно: зональные знаки и знаки «slutt på …» прямоугольные и похожи на информационные, но по Skiltforskriften относятся к запрещающим (серия 300)." : "";
+    /* Forkjørskryss (210) — треугольный, но серия 200 */
+    const forkj = entry.no === "Forkjørskryss";
+    const fNo = forkj ? " Merk: skilt 210 er trekantet som et fareskilt, men hører til vikeplikt- og forkjørsskiltene (200-serien)." : "";
+    const fRu = forkj ? " Важно: знак 210 треугольный, как предупреждающий, но относится к знакам приоритета (серия 200)." : "";
     base.fresh = () => {
       const keys = Object.keys(CATS).filter(k => k !== entry.cat).sort(() => Math.random() - 0.5).slice(0, 3);
       const opts = [entry.cat, ...keys];
@@ -109,12 +113,14 @@
         options: opts.map((k, i) => ({ text_no: CATS[k].no, text_ru: CATS[k].ru, correct: i === 0,
           why_no: i === 0 ? null : (opphev && k === "opplysning"
             ? "Skiltet er rektangulært og ligner et opplysningsskilt, men soneskilt og «slutt på»-skilt er formelt forbudsskilt (300-serien i skiltforskriften)."
+            : forkj && k === "fare" ? "Skiltet er trekantet som et fareskilt, men 210 «Forkjørskryss» står i skiltforskriftens kapittel om vikeplikt- og forkjørsskilt (200-serien)."
             : `${CATS[k].no} ser annerledes ut. ${CATS[k].tip_no || ""}`.trim()),
           why_ru: i === 0 ? null : (opphev && k === "opplysning"
             ? "Знак прямоугольный и похож на информационный, но зональные знаки и «slutt på …» формально относятся к запрещающим (серия 300 в Skiltforskriften). На экзамене отвечай «Forbudsskilt»."
+            : forkj && k === "fare" ? "Знак треугольный, как предупреждающий, но 210 «Forkjørskryss» стоит в главе Skiltforskriften о знаках приоритета (серия 200)."
             : `${CATS[k].ru} выглядит иначе. ${CATS[k].tip}`) })),
-        explanation_no: `${entry.no} er et ${CATS[entry.cat].no.toLowerCase()}. ${entry.expl_no}${noteNo}`,
-        explanation_ru: `«${entry.ru}» — ${CATS[entry.cat].ru.toLowerCase()}. ${entry.expl_ru}${noteRu}`,
+        explanation_no: `${entry.no} er et ${CATS[entry.cat].no.toLowerCase()}. ${entry.expl_no}${noteNo}${fNo}`,
+        explanation_ru: `«${entry.ru}» — ${CATS[entry.cat].ru.toLowerCase()}. ${entry.expl_ru}${noteRu}${fRu}`,
         tip_ru: opphev ? "Правило простое: серия 300 (запреты, зоны запретов и их отмена) = Forbudsskilt. Синий прямоугольник с реальной информацией о дороге = Opplysningsskilt." : CATS[entry.cat].tip
       };
     };
