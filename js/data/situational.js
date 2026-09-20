@@ -484,9 +484,9 @@
       "Ты поворачиваешь направо на перекрёстке. Справа велополоса, велосипедист сзади едет прямо. Что делаешь?",
       [
         ["Slipper syklisten fram før jeg svinger", "Пропускаю велосипедиста, потом поворачиваю"],
-        ["Svinger raskt før syklisten kommer", "Быстро поворачиваю до велосипедиста"],
-        ["Kjører inn i sykkelfeltet for å blokkere", "Въезжаю в велополосу, чтобы перекрыть"],
-        ["Tuter og svinger", "Сигналю и поворачиваю"]
+        ["Svinger raskt før syklisten kommer", "Быстро поворачиваю до велосипедиста", "Å prøve å rekke unna før syklisten er farlig og bryter med vikeplikten din.", "Пытаться проскочить перед велосипедистом опасно и нарушает твою обязанность уступить."],
+        ["Kjører inn i sykkelfeltet for å blokkere", "Въезжаю в велополосу, чтобы перекрыть", "Å blokkere sykkelfeltet er ikke tillatt og løser ikke vikeplikten din, du skal vente.", "Перекрывать велополосу нельзя, и это не отменяет твою обязанность уступить — нужно подождать."],
+        ["Tuter og svinger", "Сигналю и поворачиваю", "Signalhorn erstatter ikke vikeplikten, du skal la syklisten kjøre fram først.", "Гудок не заменяет обязанность уступить — сначала нужно пропустить велосипедиста."]
       ],
       "Ved høyresving over sykkelfelt har du vikeplikt for syklende som kjører rett fram, også de som kommer bakfra.",
       "При повороте направо через велополосу ты уступаешь велосипедистам, едущим прямо, в том числе тем, кто догоняет сзади.",
@@ -497,9 +497,9 @@
       "Темно, ты видишь пешехода в тёмной одежде, идущего по левой стороне дороги без тротуара. Что делаешь?",
       [
         ["Senker farten, holder god avstand og bruker nærlys", "Снижаю скорость, держу дистанцию, переключаюсь на ближний"],
-        ["Blinker med fjernlys så han flytter seg", "Мигаю дальним, чтобы отошёл"],
-        ["Kjører som normalt, han går riktig", "Еду как обычно, он идёт правильно"],
-        ["Tuter", "Сигналю"]
+        ["Blinker med fjernlys så han flytter seg", "Мигаю дальним, чтобы отошёл", "Fjernlys blender fotgjengeren i stedet for å hjelpe, bruk nærlys og senk farten.", "Дальний свет слепит пешехода вместо того, чтобы помочь — используй ближний и снизь скорость."],
+        ["Kjører som normalt, han går riktig", "Еду как обычно, он идёт правильно", "Selv om fotgjengeren går på riktig side, bør du fortsatt senke farten og holde avstand siden han er vanskelig å se i mørke klær.", "Даже если пешеход идёт правильно, всё равно стоит снизить скорость и держать дистанцию — в тёмной одежде его плохо видно."],
+        ["Tuter", "Сигналю", "Signalhorn er unødvendig og upassende her, riktig reaksjon er å senke farten og holde avstand.", "Гудок тут не нужен и неуместен — правильная реакция — снизить скорость и держать дистанцию."]
       ],
       "Fotgjengere skal gå på venstre side mot trafikken der det ikke er fortau. Fjernlys blender. Senk farten og pass avstanden.",
       "Пешеходы без тротуара идут по левой стороне навстречу движению. Дальний свет слепит. Снизь скорость и держи дистанцию.",
@@ -510,9 +510,9 @@
       "Ты выезжаешь из жилой зоны (gatetun) на обычную улицу. Кто уступает?",
       [
         ["Jeg: utkjøring fra gatetun gir vikeplikt for all trafikk", "Я: выезд из gatetun означает уступить всем"],
-        ["Høyreregelen gjelder", "Действует правило правой руки"],
-        ["Trafikken i gaten viker for meg", "Транспорт на улице уступает мне"],
-        ["Ingen har vikeplikt", "Никто не уступает"]
+        ["Høyreregelen gjelder", "Действует правило правой руки", "Høyreregelen gjelder mellom likestilte veier, ikke ved utkjøring fra gatetun, der du alltid viker.", "Правило правой руки действует между равнозначными дорогами, а не при выезде из gatetun, где ты всегда уступаешь."],
+        ["Trafikken i gaten viker for meg", "Транспорт на улице уступает мне", "Det er omvendt: den som kjører ut fra gatetun har alltid vikeplikt for trafikken i gaten.", "Всё наоборот: выезжающий из gatetun всегда уступает транспорту на улице."],
+        ["Ingen har vikeplikt", "Никто не уступает", "Den som kjører ut fra gatetun har alltid vikeplikt, det finnes ikke situasjon uten den.", "У выезжающего из gatetun всегда есть обязанность уступить — ситуации без неё не бывает."]
       ],
       "Utkjøring fra gatetun, gågate, parkeringsplass, bensinstasjon eller gårdsveg gir alltid vikeplikt for trafikken du kjører inn i.",
       "Выезд из gatetun, gågate, парковки, заправки или двора всегда означает уступить транспорту, в который ты вливаешься.",
@@ -523,9 +523,9 @@
       "Ты въезжаешь в длинный тоннель в солнечный день. Что нужно сделать?",
       [
         ["Ta av solbriller og senk farten litt til øynene venner seg til mørket", "Сними солнцезащитные очки и немного снизь скорость, пока глаза привыкают к темноте"],
-        ["Kjør som vanlig, tunnelen er godt opplyst", "Езжай как обычно, тоннель хорошо освещён"],
-        ["Blink med fjernlys for å varsle andre", "Мигни дальним, чтобы предупредить остальных"],
-        ["Øk farten for å komme fort ut", "Увеличь скорость, чтобы быстрее выехать"]
+        ["Kjør som vanlig, tunnelen er godt opplyst", "Езжай как обычно, тоннель хорошо освещён", "Selv en godt opplyst tunnel krever at øynene venner seg til mørket, du bør senke farten litt.", "Даже хорошо освещённый тоннель требует, чтобы глаза привыкли к темноте — скорость стоит немного снизить."],
+        ["Blink med fjernlys for å varsle andre", "Мигни дальним, чтобы предупредить остальных", "Fjernlysblink løser ikke problemet med at øynene dine må venne seg til mørket.", "Мигание дальним не решает проблему привыкания твоих глаз к темноте."],
+        ["Øk farten for å komme fort ut", "Увеличь скорость, чтобы быстрее выехать", "Å øke farten når synet er dårligere er farlig, du bør heller senke farten.", "Увеличивать скорость при ухудшенном зрении опасно — лучше её снизить."]
       ],
       "Øynene trenger tid til å venne seg til mørket etter sterkt sollys. Ta av solbriller, senk farten og hold god avstand de første sekundene.",
       "Глазам нужно время привыкнуть к темноте после яркого солнца. Сними очки, снизь скорость и держи увеличенную дистанцию первые секунды.",
@@ -536,9 +536,9 @@
       "Ты чувствуешь сильную усталость за рулём на автомагистрали. Как правильно поступить?",
       [
         ["Stoppe på en rasteplass og hvile eller sove litt", "Остановиться на зоне отдыха и отдохнуть или немного поспать"],
-        ["Skru opp musikken og åpne vinduet", "Включить музыку погромче и открыть окно"],
-        ["Kjøre litt fortere for å komme fram raskere", "Ехать чуть быстрее, чтобы скорее доехать"],
-        ["Fortsette, trøttheten går over av seg selv", "Продолжать ехать, усталость сама пройдёт"]
+        ["Skru opp musikken og åpne vinduet", "Включить музыку погромче и открыть окно", "Musikk og åpent vindu hjelper bare kort tid og løser ikke det underliggende problemet med trøtthet.", "Музыка и открытое окно помогают лишь недолго и не решают саму проблему усталости."],
+        ["Kjøre litt fortere for å komme fram raskere", "Ехать чуть быстрее, чтобы скорее доехать", "Høyere fart øker faren ved mikrosøvn i stedet for å redusere den.", "Более высокая скорость увеличивает опасность микросна, а не снижает её."],
+        ["Fortsette, trøttheten går over av seg selv", "Продолжать ехать, усталость сама пройдёт", "Trøtthet bak rattet går ikke over av seg selv og kan føre til mikrosøvn, du må stoppe og hvile.", "Усталость за рулём сама не проходит и может привести к микросну — нужно остановиться и отдохнуть."]
       ],
       "Trøtthet bak rattet er svært farlig og kan gi mikrosøvn. Musikk og åpent vindu hjelper bare kort tid. Riktig løsning er å stoppe og hvile.",
       "Усталость за рулём очень опасна и может вызвать микросон. Музыка и открытое окно помогают лишь ненадолго. Правильное решение — остановиться и отдохнуть.",
@@ -549,9 +549,9 @@
       "Ты припарковался у правого края оживлённой дороги. Ребёнок сидит на заднем сиденье. Как ребёнку выходить из машины?",
       [
         ["Gjennom døren mot fortauet, bort fra trafikken", "Через дверь со стороны тротуара, подальше от движения"],
-        ["Gjennom døren mot kjørebanen, det går fortest", "Через дверь со стороны проезжей части, так быстрее"],
-        ["Det spiller ingen rolle hvilken side", "Не важно, с какой стороны"],
-        ["Barnet kan hoppe ut mens bilen ruller sakte", "Ребёнок может выпрыгнуть, пока машина медленно катится"]
+        ["Gjennom døren mot kjørebanen, det går fortest", "Через дверь со стороны проезжей части, так быстрее", "Å gå ut mot kjørebanen er farlig, barnet kan bli truffet av forbikjørende trafikk.", "Выходить со стороны проезжей части опасно — ребёнка может задеть проезжающая машина."],
+        ["Det spiller ingen rolle hvilken side", "Не важно, с какой стороны", "Siden har stor betydning for sikkerheten, barnet bør alltid gå ut mot fortauet.", "Сторона выхода очень важна для безопасности — ребёнку нужно выходить к тротуару."],
+        ["Barnet kan hoppe ut mens bilen ruller sakte", "Ребёнок может выпрыгнуть, пока машина медленно катится", "Å gå ut av en bil i bevegelse er farlig uansett fart, bilen skal stå helt stille.", "Выходить из движущейся машины опасно при любой скорости — машина должна полностью остановиться."]
       ],
       "Barn (og voksne) bør alltid gå ut på siden bort fra trafikken, altså mot fortauet, for å unngå å bli truffet av forbikjørende kjøretøy.",
       "Выходить нужно всегда со стороны, противоположной движению, то есть к тротуару, чтобы не попасть под проезжающую машину.",
