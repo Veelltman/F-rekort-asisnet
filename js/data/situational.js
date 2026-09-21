@@ -568,7 +568,7 @@
       "При повороте налево ты уступаешь встречному транспорту, который едет прямо или поворачивает направо.",
       "Поворот налево — самый «слабый» манёвр на перекрёстке: уступаешь встречным, пешеходам, велосипедистам."),
 
-    q("006", scene({ you: { from: "south", to: "east" }, others: [{ from: "north", to: "west" }] }),
+    q("006", scene({ you: { from: "south", to: "east" }, others: [{ from: "north", to: "east" }] }),
       "Du (A) svinger til høyre. Møtende bil B svinger til venstre inn på samme vei. Hvem har forrang?",
       "Ты (A) поворачиваешь направо. Встречная машина B поворачивает налево на ту же дорогу. У кого преимущество?",
       [
@@ -763,7 +763,7 @@
       "При повороте ты уступаешь пешеходам и велосипедистам, пересекающим дорогу, на которую сворачиваешь.",
       "Пешеходы на зелёный и ты на зелёный одновременно — норма в Норвегии. Ты ждёшь."),
 
-    q("021", scene({ you: { from: "south", to: "north" }, roundabout: true }),
+    q("021", scene({ you: { from: "south", to: "west" }, roundabout: true }),
       "Rundkjøring med to felt. Du skal ta tredje avkjøring (til venstre). Hvilket felt velger du inn?",
       "Круг с двумя полосами. Тебе нужен третий съезд (налево). Какую полосу выбрать при въезде?",
       [
