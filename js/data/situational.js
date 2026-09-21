@@ -47,8 +47,8 @@
     return { d: `M ${p0} L ${p1} Q ${ctrl} ${p2} L ${p3}`, endAngle: angleOf(p2, p3) };
   }
 
-  function roundaboutPath(from, to) {
-    const R = 40;
+  function roundaboutPath(from, to, inner) {
+    const R = inner ? 34 : 40;
     const ang = { south: 90, east: 0, north: -90, west: 180 };
     /* Правая полоса подъезда входит в кольцо чуть «раньше» по ходу, выезд чуть «позже» */
     const inA = ang[from] - 22, outA = ang[to] + 22;
@@ -58,7 +58,7 @@
     for (let t = a1; t >= a2; t -= 8) pts.push([C + R * Math.cos(t * Math.PI / 180), C + R * Math.sin(t * Math.PI / 180)]);
     const a = APPROACH[from];
     const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
-    const p0 = pt(startCoord, a.lane, a.axis);
+    const p0 = pt(startCoord, a.lane + (inner ? -8 * laneSign(from) : 0), a.axis);
     const e = EXITLANE[to];
     const p3 = pt(e.end, e.lane, e.axis);
     const last = pts[pts.length - 1];
@@ -99,11 +99,14 @@
     return `<g transform="translate(${x} ${y}) rotate(${rot})">${body(kind, label, color, rot)}</g>`;
   }
 
-  function vehicle(from, to, label, color, kind, roundabout) {
+  /* +1 = сдвиг от осевой к обочине для этого направления подъезда */
+  function laneSign(from) { return from === "south" || from === "west" ? 1 : -1; }
+
+  function vehicle(from, to, label, color, kind, roundabout, inner) {
     const a = APPROACH[from];
-    const traj = roundabout ? roundaboutPath(from, to) : trajectory(from, to, kind === "bike" ? 11 : 0);
+    const traj = roundabout ? roundaboutPath(from, to, inner) : trajectory(from, to, kind === "bike" ? 11 : 0);
     const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
-    const lane = a.lane + (kind === "bike" ? 11 * (a.axis === "y" ? (from === "south" ? 1 : -1) : (from === "east" ? -1 : 1)) : 0);
+    const lane = a.lane + (kind === "bike" ? 11 * laneSign(from) : 0) + (inner ? -8 * laneSign(from) : 0);
     const [x, y] = pt(startCoord, lane, a.axis);
     const path = `<path d="${traj.d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
       ${arrowHead(traj.d, traj.endAngle, color)}`;
@@ -134,7 +137,8 @@
 
   function scene(cfg) {
     const palette = ["#e0483a", "#2aa46a", "#f0a020"];
-    const cars = [vehicle(cfg.you.from, cfg.you.to, "A", "#1d5fd6", null, cfg.roundabout)];
+    const twoLanes = cfg.roundabout && cfg.lanes === 2;
+    const cars = [vehicle(cfg.you.from, cfg.you.to, "A", "#1d5fd6", null, cfg.roundabout, twoLanes && cfg.you.lane === "left")];
     (cfg.others || []).forEach((o, i) => cars.push(vehicle(o.from, o.to, o.label || String.fromCharCode(66 + i), o.kind === "bike" ? "#2aa46a" : palette[i % 3], o.kind, cfg.roundabout)));
     const signs = Object.keys(cfg.signs || {}).map(side => signMarker(side, cfg.signs[side])).join("");
     const lights = Object.keys(cfg.lights || {}).map(side => lightMarker(side, cfg.lights[side])).join("");
@@ -155,8 +159,17 @@
       <circle cx="100" cy="100" r="26" fill="#cfd6dc"/>
       <circle cx="100" cy="100" r="20" fill="#7fb37a"/>
       <g fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.7">
-        <circle cx="100" cy="100" r="30"/>
+        <circle cx="100" cy="100" r="30"/>${twoLanes ? '<circle cx="100" cy="100" r="44"/>' : ""}
       </g>` : "";
+    /* Двухполосный подъезд: пунктир делит правую половину «своей» дороги на две полосы */
+    let laneSplit = "";
+    if (twoLanes) {
+      const a = APPROACH[cfg.you.from];
+      const near = a.from === 200 ? 136 : 64, far = a.from;
+      laneSplit = a.axis === "y"
+        ? `<line x1="${a.lane}" y1="${near}" x2="${a.lane}" y2="${far}" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.85"/>`
+        : `<line x1="${near}" y1="${a.lane}" x2="${far}" y2="${a.lane}" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.85"/>`;
+    }
     const crossings = cfg.roundabout ? "" : `
       <g stroke="#fff" stroke-width="1.6" opacity="0.9">
         <line x1="68" y1="134" x2="100" y2="134"/><line x1="100" y1="66" x2="132" y2="66"/>
@@ -177,6 +190,7 @@
       </g>
       ${centerLines}
       ${roundabout}
+      ${laneSplit}
       ${crossings}
       ${signs}
       ${lights}
@@ -763,7 +777,7 @@
       "При повороте ты уступаешь пешеходам и велосипедистам, пересекающим дорогу, на которую сворачиваешь.",
       "Пешеходы на зелёный и ты на зелёный одновременно — норма в Норвегии. Ты ждёшь."),
 
-    q("021", scene({ you: { from: "south", to: "west" }, roundabout: true }),
+    q("021", scene({ you: { from: "south", to: "west", lane: "left" }, roundabout: true, lanes: 2 }),
       "Rundkjøring med to felt. Du skal ta tredje avkjøring (til venstre). Hvilket felt velger du inn?",
       "Круг с двумя полосами. Тебе нужен третий съезд (налево). Какую полосу выбрать при въезде?",
       [
