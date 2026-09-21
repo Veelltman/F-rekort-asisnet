@@ -241,7 +241,9 @@
 
     /* разметка основной дороги: центр прерывается напротив бокового въезда */
     const gapTop = side ? (cfg.exit ? 78 : 62) : 0, gapBot = side ? (cfg.exit ? 122 : 138) : 0;
-    const center = narrow ? "" : (side
+    const center = (narrow || cfg.lot) ? "" : cfg.onramp
+      ? `<line x1="100" y1="0" x2="100" y2="200" stroke="#fff" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.9"/>`
+      : (side
       ? `<line x1="100" y1="0" x2="100" y2="${gapTop}" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/><line x1="100" y1="${gapBot}" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`
       : `<line x1="100" y1="0" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`);
     const rightEdge = side
@@ -327,6 +329,108 @@
         ${pathArrow("M 116 158 L 116 144", A)}
         ${at(116, 178, 0, "car", "A", A)}`;
     }
+    if (cfg.parkedChild) {
+      /* A припаркована у правого края; ребёнок выходит к тротуару, слева проезжает B */
+      vehicles += `${at(x1 - 10, 110, 0, "car", "A", A)}
+        ${person(x1 + 8, 112, 0)}
+        <path d="M ${x1 - 2} 104 L ${x1 + 4} 104" stroke="#1f7a4d" stroke-width="2.5" stroke-linecap="round"/>
+        ${pathArrow("M 84 40 L 84 150", B)}
+        ${at(84, 26, 180, "car", "B", B)}`;
+    }
+    if (cfg.onramp) {
+      /* автомагистраль: два ряда в одну сторону, полоса разгона справа вливается */
+      extra += `<path d="M ${x1} 200 L ${x1 + 30} 200 L ${x1 + 30} 120 Q ${x1 + 30} 90 ${x1} 60 Z" fill="${ASPH}"/>
+        <line x1="${x1 + 30}" y1="200" x2="${x1 + 30}" y2="120" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
+        <path d="M ${x1 + 30} 120 Q ${x1 + 30} 90 ${x1} 60" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <line x1="${x1}" y1="60" x2="${x1}" y2="200" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.9"/>
+        <g transform="translate(${x0 - 22} 36)"><rect x="-9" y="-9" width="18" height="18" rx="2" fill="#1b5bc7"/><path d="M -5 6 L 0 -6 L 5 6 M -3 1 L 3 1" stroke="#fff" stroke-width="2" fill="none"/></g>`;
+      vehicles += `${pathArrow(`M ${x1 + 15} 150 L ${x1 + 15} 118 Q ${x1 + 12} 90 ${x1 - 14} 66 L ${x1 - 14} 30`, A)}
+        ${at(x1 + 15, 172, 0, "car", "A", A)}
+        ${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 40`, B)}
+        ${at(x1 - 16, 190, 0, "car", "B", B)}
+        ${pathArrow(`M ${x0 + 16} 120 L ${x0 + 16} 20`, "#2aa46a")}
+        ${at(x0 + 16, 136, 0, "car", "C", "#2aa46a")}`;
+    }
+    if (cfg.rail) {
+      /* переезд без шлагбаума, мигающий красный */
+      extra += `<g stroke="#8a7a5a" stroke-width="3"><line x1="0" y1="92" x2="200" y2="92"/><line x1="0" y1="104" x2="200" y2="104"/></g>
+        <g stroke="#6b5f45" stroke-width="2">${[10, 30, 50, 150, 170, 190].map(x => `<line x1="${x}" y1="86" x2="${x}" y2="110"/>`).join("")}</g>
+        <g transform="translate(${x1 + 14} 126)"><line x1="0" y1="0" x2="0" y2="14" stroke="#555" stroke-width="2"/><path d="M -8 -12 L 8 4 M -8 4 L 8 -12" stroke="#fff" stroke-width="5"/><path d="M -8 -12 L 8 4 M -8 4 L 8 -12" stroke="#d81e1e" stroke-width="2.5"/><circle cx="-7" cy="-2" r="3.2" fill="#ff2a2a"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite"/></circle><circle cx="7" cy="-2" r="3.2" fill="#ff2a2a"><animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/></circle></g>
+        <rect x="${x0}" y="114" width="${x1 - x0}" height="3" fill="#fff"/>`;
+      vehicles += `${at(160, 98, 90, "tram", "T", "#2b62c9")}
+        ${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 132`, A)}
+        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
+    }
+    if (cfg.wild) {
+      /* знак «Dyr» и лось у обочины в сумерках */
+      extra += `<g transform="translate(${x1 + 16} 60)"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/><polygon points="0,-13 12,8 -12,8" fill="#fff" stroke="#d81e1e" stroke-width="2.5" stroke-linejoin="round"/><path d="M -5 6 L -5 -1 L -2 -4 L 2 -4 L 5 -1 L 5 6 M -4 -4 L -7 -8 M 4 -4 L 7 -8" stroke="#111" stroke-width="1.8" fill="none"/></g>
+        <g transform="translate(${x1 + 14} 118)" fill="#3a2e22"><path d="M -14 8 L -14 -4 L -8 -8 L 4 -8 L 12 -14 L 16 -12 L 12 -6 L 12 8 L 8 8 L 8 0 L -8 0 L -8 8 Z"/><path d="M 8 -14 L 6 -22 L 10 -18 L 12 -24 L 14 -16" stroke="#3a2e22" stroke-width="2" fill="none"/></g>
+        ${pathArrow(`M ${x1 + 2} 122 L ${x1 - 18} 122`, "#3a2e22")}`;
+      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 150`, A)}
+        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
+    }
+    if (cfg.bridge) {
+      /* мост через воду: настил и перила; иней на мосту */
+      extra += `<rect x="0" y="70" width="200" height="60" fill="#9fc4e8"/>
+        <rect x="${x0 - 8}" y="70" width="${x1 - x0 + 16}" height="60" fill="#8d97a1"/>
+        <rect x="${x0}" y="70" width="${x1 - x0}" height="60" fill="#c9d3dc"/>
+        <g stroke="#fff" stroke-width="1" opacity="0.9">${[76, 88, 100, 112, 124].map(y => `<line x1="${x0 + 6}" y1="${y}" x2="${x1 - 6}" y2="${y}" stroke-dasharray="2 6"/>`).join("")}</g>
+        <g stroke="#5d6770" stroke-width="3"><line x1="${x0 - 6}" y1="70" x2="${x0 - 6}" y2="130"/><line x1="${x1 + 6}" y1="70" x2="${x1 + 6}" y2="130"/></g>
+        <text x="${x1 + 12}" y="104" font-family="Arial" font-weight="700" font-size="7" fill="#1d1f24">-2°</text>`;
+      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 148`, A)}
+        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
+    }
+    if (cfg.rain) {
+      /* ливень: лужа на полосе, машина теряет сцепление */
+      extra += `<ellipse cx="${x1 - 16}" cy="96" rx="22" ry="14" fill="#7fb0e0" opacity="0.7"/>
+        <g stroke="#7fb0e0" stroke-width="1.5" opacity="0.8">${[0, 1, 2, 3, 4, 5, 6, 7].map(i => `<line x1="${12 + i * 24}" y1="${8 + (i % 3) * 6}" x2="${8 + i * 24}" y2="${20 + (i % 3) * 6}"/>`).join("")}</g>`;
+      vehicles += `${pathArrow(`M ${x1 - 16} 160 L ${x1 - 16} 118`, A)}
+        <path d="M ${x1 - 16} 118 Q ${x1 - 8} 100 ${x1 - 20} 84" stroke="${A}" stroke-width="2" stroke-dasharray="3 3" fill="none" opacity="0.6"/>
+        ${at(x1 - 16, 176, 0, "car", "A", A)}`;
+    }
+    if (cfg.roadwork) {
+      /* дорожные работы: жёлтый временный знак 50 рядом с постоянным 80, конусы, сужение */
+      extra += `<rect x="${x1 - 18}" y="40" width="18" height="70" fill="#8a949c" opacity="0.6"/>
+        <g fill="#f0a020">${[44, 60, 76, 92, 108].map(y => `<polygon points="${x1 - 18},${y + 8} ${x1 - 14},${y} ${x1 - 10},${y + 8}"/>`).join("")}</g>
+        <g transform="translate(${x1 + 14} 30)"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/><rect x="-12" y="-12" width="24" height="24" fill="#f5d800"/><circle r="9" fill="#f5d800" stroke="#d81e1e" stroke-width="2.5"/><text y="3.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="8" fill="#111">50</text></g>
+        ${speedSign(x1 + 14, 140, 80)}`;
+      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 120 Q ${x1 - 16} 112 ${x1 - 26} 108 L ${x1 - 26} 44`, A)}
+        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
+    }
+    if (cfg.tunnel) {
+      /* въезд в тоннель в солнечный день */
+      extra += `<rect x="0" y="0" width="200" height="90" fill="#8b8f93"/>
+        <path d="M ${x0 - 10} 90 L ${x0 - 10} 40 Q 100 -10 ${x1 + 10} 40 L ${x1 + 10} 90 Z" fill="#1b1e24"/>
+        <circle cx="176" cy="132" r="12" fill="#ffd54a"/><g stroke="#ffd54a" stroke-width="2">${[0, 45, 90, 135, 180, 225, 270, 315].map(a => `<line x1="${176 + 16 * Math.cos(a * Math.PI / 180)}" y1="${132 + 16 * Math.sin(a * Math.PI / 180)}" x2="${176 + 20 * Math.cos(a * Math.PI / 180)}" y2="${132 + 20 * Math.sin(a * Math.PI / 180)}"/>`).join("")}</g>`;
+      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 100`, A)}
+        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
+    }
+    if (cfg.rest) {
+      /* rasteplass: синий знак и карман справа */
+      extra += `<path d="M ${x1} 70 Q ${x1 + 30} 74 ${x1 + 30} 100 L ${x1 + 30} 130 Q ${x1 + 30} 150 ${x1} 154 Z" fill="${ASPH}"/>
+        <g transform="translate(${x1 + 15} 40)"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/><rect x="-11" y="-11" width="22" height="22" rx="2" fill="#1b5bc7"/><path d="M -7 4 L 7 4 M -5 4 L -5 -3 M 5 4 L 5 -3 M -8 -3 L 8 -3 M -3 -3 L -3 -7 M 3 -3 L 3 -7" stroke="#fff" stroke-width="1.6" fill="none"/></g>
+        <text x="${x1 + 15}" y="164" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6.5" fill="#1d1f24">RASTEPLASS</text>`;
+      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 150 Q ${x1 - 16} 120 ${x1 + 14} 112`, A)}
+        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
+    }
+    if (cfg.trailer) {
+      /* машина с прицепом сдаёт задом в узкий въезд справа: прицеп идёт в другую сторону, чем руль */
+      extra += `<rect x="${x1}" y="96" width="${200 - x1}" height="28" fill="${ASPH}"/>
+        <rect x="${x1}" y="90" width="${200 - x1}" height="6" fill="${WALK}"/><rect x="${x1}" y="124" width="${200 - x1}" height="6" fill="${WALK}"/>`;
+      vehicles += `${at(x1 - 16, 74, 0, "car", "A", A)}
+        <g transform="translate(${x1 - 10} 100) rotate(-35)"><rect x="-7" y="-14" width="14" height="24" rx="2" fill="#8a949c" stroke="#fff" stroke-width="1"/><line x1="0" y1="-14" x2="0" y2="-24" stroke="#555" stroke-width="2"/></g>
+        ${pathArrow(`M ${x1 - 4} 112 L ${x1 + 34} 110`, "#8a949c")}
+        <path d="M ${x1 - 16} 56 Q ${x1 - 30} 50 ${x1 - 34} 62" stroke="${A}" stroke-width="2" fill="none"/><polygon points="${x1 - 36},${58} ${x1 - 32},${66} ${x1 - 28},${60}" fill="${A}"/>`;
+    }
+    if (cfg.lot) {
+      /* парковка: A задела B, обе стоят */
+      extra += `<rect x="0" y="0" width="200" height="200" fill="#8a949c"/>
+        <g stroke="#fff" stroke-width="1.5" opacity="0.8">${[20, 56, 92, 128, 164].map(x => `<line x1="${x}" y1="30" x2="${x}" y2="90"/><line x1="${x}" y1="110" x2="${x}" y2="170"/>`).join("")}</g>
+        <rect x="150" y="12" width="14" height="14" rx="2" fill="#1d5fd6"/><text x="157" y="23" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff">P</text>
+        <g fill="#f5d800"><polygon points="70,86 74,80 78,86 82,80 86,86"/></g>`;
+      vehicles += `${at(74, 60, 0, "car", "B", B)}
+        <g transform="translate(88 92) rotate(20)">${body("car", "A", A, 20)}</g>`;
+    }
     if (cfg.bikeLane) {
       /* велополоса вдоль правого края, прерывается у бокового въезда */
       const bl = `<rect x="${x1 - 10}" y="0" width="10" height="${gapTop}" fill="#b8503c" opacity="0.85"/><rect x="${x1 - 10}" y="${gapBot}" width="10" height="${200 - gapBot}" fill="#b8503c" opacity="0.85"/>
@@ -345,15 +449,38 @@
       ${sideRoad}
       <rect x="${x0}" y="0" width="${x1 - x0}" height="200" fill="${ASPH}"/>
       ${extra}
-      <g stroke="#fff" stroke-width="1.5" opacity="0.85">
+      ${cfg.lot ? "" : `<g stroke="#fff" stroke-width="1.5" opacity="0.85">
         <line x1="${x0}" y1="0" x2="${x0}" y2="200"/>
         ${rightEdge}
-      </g>
+      </g>`}
       ${center}
       ${vehicles}
     </svg>`;
   }
   window.ROAD = road;
+
+  /* Вид сбоку: машина стоит на уклоне носом вниз, справа кювет, колёса повёрнуты к нему */
+  function hillScene() {
+    return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
+      <rect width="200" height="200" fill="#dfe9f5"/>
+      <path d="M 0 70 L 200 130 L 200 200 L 0 200 Z" fill="#6f7a52"/>
+      <path d="M 0 70 L 200 130 L 200 138 L 0 78 Z" fill="#5d6770"/>
+      <path d="M 150 118 L 176 150 L 200 156 L 200 130 Z" fill="#3e4a2c"/>
+      <text x="168" y="172" text-anchor="middle" font-family="Arial" font-weight="700" font-size="7" fill="#fff">GRØFT</text>
+      <g transform="translate(90 92) rotate(16.7)">
+        <rect x="-30" y="-14" width="60" height="16" rx="4" fill="#1d5fd6"/>
+        <rect x="-18" y="-24" width="30" height="12" rx="4" fill="#1d5fd6"/>
+        <rect x="-14" y="-22" width="10" height="8" rx="1" fill="#cfe4ff"/>
+        <circle cx="-18" cy="4" r="6" fill="#1d1f24"/><circle cx="18" cy="4" r="6" fill="#1d1f24"/>
+        <ellipse cx="18" cy="4" rx="3" ry="6" fill="#8a949c"/>
+        <text x="0" y="-2" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="#fff">A</text>
+      </g>
+      <path d="M 118 118 Q 140 122 152 140" stroke="#1f7a4d" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/>
+      <polygon points="148,132 156,144 144,144" fill="#1f7a4d"/>
+      <text x="30" y="40" font-family="Arial" font-weight="700" font-size="8" fill="#1d1f24">↓ nedover</text>
+    </svg>`;
+  }
+  window.HILL_SCENE = hillScene;
 
   function q(id, image, prompt_no, prompt_ru, opts, explanation_no, explanation_ru, tip_ru) {
     return {
@@ -649,7 +776,7 @@
       "Если налево или разворот — левая полоса и левый поворотник при въезде. Перед съездом перестраивайся вправо с правым поворотником.",
       "Правая полоса — для первого и второго съезда. Левая — для третьего и разворота."),
 
-    q("022", null,
+    q("022", road({ onramp: true }),
       "Du kjører inn på motorveg via påkjøringsfelt. Hvem har vikeplikt?",
       "Ты въезжаешь на автомагистраль по полосе разгона. Кто уступает?",
       [
@@ -714,7 +841,7 @@
       "Выезд из gatetun, gågate, парковки, заправки или двора всегда означает уступить транспорту, в который ты вливаешься.",
       "Все «выезды с территорий» работают одинаково: ты последний в очереди."),
 
-    q("027", null,
+    q("027", road({ tunnel: true }),
       "Du kjører inn i en lang tunnel på en solfylt dag. Hva bør du gjøre?",
       "Ты въезжаешь в длинный тоннель в солнечный день. Что нужно сделать?",
       [
@@ -727,7 +854,7 @@
       "Глазам нужно время привыкнуть к темноте после яркого солнца. Сними очки, снизь скорость и держи увеличенную дистанцию первые секунды.",
       "Переход свет-тьма — частая причина растерянности у тоннеля. Заранее сбавь скорость и сними очки."),
 
-    q("028", null,
+    q("028", road({ rest: true }),
       "Du kjenner deg svært trøtt mens du kjører på motorveien. Hva er riktig å gjøre?",
       "Ты чувствуешь сильную усталость за рулём на автомагистрали. Как правильно поступить?",
       [
@@ -740,7 +867,7 @@
       "Усталость за рулём очень опасна и может вызвать микросон. Музыка и открытое окно помогают лишь ненадолго. Правильное решение — остановиться и отдохнуть.",
       "Микросон длится всего пару секунд, но на скорости 80 км/ч машина за это время проезжает десятки метров без контроля."),
 
-    q("029", null,
+    q("029", road({ parkedChild: true }),
       "Du har parkert langs høyre side av en trafikkert vei. Barnet ditt sitter i baksetet. Hvordan skal barnet gå ut av bilen?",
       "Ты припарковался у правого края оживлённой дороги. Ребёнок сидит на заднем сиденье. Как ребёнку выходить из машины?",
       [
@@ -753,7 +880,7 @@
       "Выходить нужно всегда со стороны, противоположной движению, то есть к тротуару, чтобы не попасть под проезжающую машину.",
       "Это правило касается всех пассажиров, но особенно важно для детей — приучи их к этому с первой поездки."),
 
-    q("030", null,
+    q("030", road({ wild: true }),
       "Du kjører på landevei i skumringen og passerer et viltskilt med elg. Hva gjør du?",
       "Ты едешь по загородной дороге в сумерках и проезжаешь знак с изображением лося. Что делаешь?",
       [
@@ -766,7 +893,7 @@
       "Знак с животным предупреждает об участках с частым переходом диких животных, особенно в сумерках. Снизь скорость и будь особенно внимателен — если появилось одно животное, за ним часто следуют другие.",
       "Столкновение с лосем на скорости очень опасно из-за высоты животного. Лучше сбросить скорость заранее, чем экстренно тормозить."),
 
-    q("031", null,
+    q("031", road({ trailer: true }),
       "Du skal rygge en bil med tilhenger inn på en smal vei. Hva er viktig å huske?",
       "Тебе нужно сдать назад на машине с прицепом на узкую дорогу. Что важно помнить?",
       [
@@ -779,7 +906,7 @@
       "При движении задним ходом с прицепом прицеп поворачивает в сторону, противоположную повороту руля. Работай рулём небольшими движениями, активно используй зеркала и, если можно, попроси кого-то направлять тебя.",
       "Потренируйся на пустой площадке заранее — реакция прицепа на руль непривычна большинству новичков."),
 
-    q("032", null,
+    q("032", road({ bridge: true }),
       "Det er en kald morgen, og du nærmer deg en bro. Veien før broen var tørr. Hva bør du tenke på?",
       "Холодное утро, ты приближаешься к мосту. Дорога перед мостом была сухой. О чём нужно помнить?",
       [
@@ -792,7 +919,7 @@
       "Мосты окружены холодным воздухом со всех сторон и теряют тепло быстрее, чем обычная дорога. Поэтому они часто становятся скользкими раньше остальной трассы.",
       "Классическая ловушка теории: «мост сухой на вид» ≠ «мост не скользкий». Сбавляй скорость заранее."),
 
-    q("033", null,
+    q("033", road({ rail: true }),
       "Du nærmer deg en planovergang (jernbaneovergang) uten bom, og det røde lyset blinker. Hva gjør du?",
       "Ты приближаешься к железнодорожному переезду без шлагбаума, мигает красный сигнал. Что делаешь?",
       [
@@ -844,7 +971,7 @@
       "Когда трамвай или автобус останавливается без островка безопасности и высаживает пассажиров, нужно остановиться и подождать, пока они безопасно дойдут до тротуара.",
       "Пассажиры трамвая выходят прямо на проезжую часть — это одна из самых опасных ситуаций в городе, всегда останавливайся полностью."),
 
-    q("037", null,
+    q("037", hillScene(),
       "Du skal parkere i en bakke uten fortauskant (grøft på siden), og bilen peker nedover. Hva bør du gjøre med forhjulene?",
       "Нужно припарковаться на склоне без бордюра (сбоку канава), машина направлена вниз по склону. Что сделать с передними колёсами?",
       [
@@ -857,7 +984,7 @@
       "При парковке на склоне без бордюра поворачивай колёса так, чтобы при откате машина ушла от дороги (в сторону канавы). Дополнительно используй ручник и включи передачу или паркинг.",
       "Правило простое: колёса должны «уводить» машину от проезжей части, а не на неё, если тормоза подведут."),
 
-    q("038", null,
+    q("038", road({ rain: true }),
       "Du kjører i kraftig regn og merker plutselig at rattet føles lett og bilen ikke reagerer på styringen. Hva er dette, og hva gjør du?",
       "Ты едешь в сильный дождь и вдруг чувствуешь, что руль стал «лёгким», а машина не реагирует на управление. Что это, и что делать?",
       [
@@ -870,7 +997,7 @@
       "Аквапланирование возникает, когда слой воды приподнимает шины над дорогой, и машина теряет сцепление с покрытием. Плавно отпусти газ, избегай резкого торможения и резких движений рулём, пока шины снова не «зацепятся» за дорогу.",
       "Резкое торможение или руль в сторону во время аквапланирования — верный способ уйти в занос. Главное — не паниковать и ехать прямо."),
 
-    q("039", null,
+    q("039", road({ roadwork: true }),
       "Du kjører inn i et anleggsområde med gule (midlertidige) skilt som viser en lavere fartsgrense enn den faste skiltingen. Hva gjelder?",
       "Ты въезжаешь в зону дорожных работ с жёлтыми (временными) знаками, показывающими ограничение скорости ниже обычного. Что действует?",
       [
@@ -896,7 +1023,7 @@
       "Отвлекаться от дороги, чтобы что-то сделать на заднем сиденье, очень опасно на скорости. Найди безопасное место для остановки и реши проблему там.",
       "Правило простое: любая проблема с ребёнком в машине решается после безопасной остановки, а не за рулём на ходу."),
 
-    q("041", null,
+    q("041", road({ lot: true }),
       "Du kolliderer lett med en annen bil på en parkeringsplass — bare materiell skade. Den andre føreren vil bare kjøre videre uten å utveksle opplysninger. Hva gjør du?",
       "Ты слегка столкнулся с другой машиной на парковке — только материальный ущерб. Другой водитель хочет просто уехать, не обменявшись данными. Что делаешь?",
       [
