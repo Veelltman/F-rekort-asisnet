@@ -24,10 +24,39 @@
     return out;
   }
 
+  /* Похожесть двух знаков: общие слова в названии и общие части имени файла
+     («Planovergang med bom» ↔ «Planovergang uten bom», warning-curve-left ↔ warning-curve-right).
+     Служебные слова не считаются, чтобы «til», «for», «slutt på» не роднили всё подряд. */
+  const STOP = new Set(["til", "for", "med", "uten", "og", "på", "av", "fra", "i", "eller", "slutt", "underskilt", "forbudt", "påbudt", "fare", "farlig", "farlige", "warning", "prohibited", "information", "mandatory", "additional", "png", "action", "access", "direction", "directions", "cargo", "sign", "end", "zone"]);
+  function tokens(entry) {
+    const words = entry.no.toLowerCase().replace(/[^a-zæøå0-9 ]/g, " ").split(/s+/);
+    const parts = entry.file.toLowerCase().replace(/.png$/, "").split("-").filter(x => !/^[a-z]d{4}$/.test(x));
+    return new Set(words.concat(parts).filter(w => w.length >= 3 && !STOP.has(w)));
+  }
+  function similarity(a, b) {
+    const ta = tokens(a), tb = tokens(b);
+    let n = 0;
+    ta.forEach(w => { if (tb.has(w)) n++; });
+    return n;
+  }
+
+  /* Варианты ответа: сначала до двух самых похожих знаков (чтобы нельзя было угадать по первому слову),
+     остальное — случайно из той же категории, при нехватке — из всего каталога. */
   function distractors(entry, n) {
     const exclude = new Set([entry.group]);
-    const sameCat = LIST.filter(x => x.cat === entry.cat);
-    let d = pick(sameCat, n, exclude);
+    const scored = LIST.filter(x => !exclude.has(x.group)).map(x => ({ x, s: similarity(entry, x) + (x.cat === entry.cat ? 0.5 : 0), r: Math.random() }))
+      .filter(o => o.s >= 1).sort((a, b) => b.s - a.s || a.r - b.r);
+    let d = [];
+    for (const o of scored) {
+      if (d.length === Math.min(2, n)) break;
+      if (exclude.has(o.x.group)) continue;
+      exclude.add(o.x.group);
+      d.push(o.x);
+    }
+    if (d.length < n) {
+      const sameCat = LIST.filter(x => x.cat === entry.cat);
+      d = d.concat(pick(sameCat, n - d.length, exclude));
+    }
     if (d.length < n) {
       d.forEach(x => exclude.add(x.group));
       d = d.concat(pick(LIST, n - d.length, exclude));
