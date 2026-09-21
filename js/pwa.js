@@ -30,13 +30,21 @@
 
   /* ---------- Service worker и обновления ---------- */
   let reloading = false;
+  /* Кнопка «Обновить» в шапке: появляется, когда новая версия уже скачана и ждёт */
   function offerUpdate(reg) {
     PWA.updateReady = reg;
-    toast("Доступно обновление сайта", t("Обновить"), () => {
-      if (window.ROUTE_GUARD && !window.ROUTE_GUARD()) return;
-      if (reg.waiting) reg.waiting.postMessage({ type: "SKIP_WAITING" });
-    }, "update");
+    const btn = document.getElementById("update-btn");
+    if (!btn) return;
+    btn.title = t("Доступно обновление сайта");
+    btn.hidden = false;
   }
+  PWA.applyUpdate = () => {
+    const reg = PWA.updateReady;
+    if (!reg) return;
+    if (window.ROUTE_GUARD && !window.ROUTE_GUARD()) return;
+    if (reg.waiting) reg.waiting.postMessage({ type: "SKIP_WAITING" });
+    else location.reload();
+  };
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
     navigator.serviceWorker.register("sw.js").then(reg => {
       if (reg.waiting && navigator.serviceWorker.controller) offerUpdate(reg);

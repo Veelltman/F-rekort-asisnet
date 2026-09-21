@@ -132,6 +132,24 @@ p { margin: 0 0 0.6em; }
 .brand-mark { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; }
 .topbar-right { display: flex; align-items: center; gap: 10px; }
 
+/* Кнопка «Обновить» в шапке (видна только когда скачана новая версия) */
+.update-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: inherit; font-weight: 600; font-size: 0.82rem; cursor: pointer;
+  background: var(--warn); color: #12233a; border: 1px solid var(--warn);
+  padding: 6px 10px; border-radius: 999px; white-space: nowrap;
+  animation: update-pop 0.35s ease-out;
+}
+.update-btn[hidden] { display: none; }
+.update-btn svg { width: 16px; height: 16px; flex: none; }
+.update-btn:hover { background: #f2b61a; border-color: #f2b61a; }
+@keyframes update-pop { from { transform: scale(0.8); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (max-width: 719px) {
+  .update-btn { padding: 6px 8px; }
+  .update-btn span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .update-btn { animation: none; } }
+
 /* Профиль */
 .profile { position: relative; }
 .profile-btn {
