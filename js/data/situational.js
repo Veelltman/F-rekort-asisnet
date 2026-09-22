@@ -1063,6 +1063,97 @@
       "Организм расщепляет алкоголь со скоростью примерно 0,1–0,15 промилле в час. После вечера с несколькими бокалами утром промилле всё ещё может быть выше 0,2, даже если чувствуешь себя выспавшимся.",
       "«Чувствую себя нормально» — не показатель. Если сомневаешься, не садись за руль или используй алкотестер."),
 
+    q("043", scene({ you: { from: "south", to: "west" }, others: [{ from: "east", to: "west" }, { from: "west", to: "east" }], signs: { south: "yield" } }),
+      "Du (A) har vikepliktskilt og skal svinge til venstre inn på hovedveien. Biler kommer både fra venstre og fra høyre. Hva gjør du?",
+      "У тебя знак «уступи дорогу», и ты поворачиваешь налево на главную дорогу. Машины едут и слева, и справа. Что делать?",
+      [
+        ["Vente til begge retninger er fri, og svinge når det er trygt", "Подождать, пока обе стороны свободны, и повернуть, когда безопасно"],
+        ["Kjøre når bilen fra høyre har passert, uten å sjekke venstre", "Поехать, как только проедет машина справа, не проверив слева", "Du skal svinge inn foran begge retninger, så en bil fra venstre er like farlig som en fra høyre.", "Ты пересекаешь обе полосы, поэтому машина слева так же опасна, как и справа."],
+        ["Kjøre fort forbi begge bilene før de rekker fram", "Проскочить перед обеими машинами, пока они не подъехали", "Med vikeplikt skal du ikke presse deg inn, du vet ikke sikkert hvor fort de kommer til å kjøre.", "При знаке «уступи» нельзя пытаться проскочить — ты не знаешь точно, с какой скоростью едут те машины."],
+        ["Kjøre inn og stoppe midt i krysset til det blir fritt", "Выехать и остановиться прямо посреди перекрёстка, ждать, пока освободится", "Å stanse midt i krysset blokkerer begge kjøreretninger og er farlig.", "Остановка посреди перекрёстка перекрывает оба направления движения и опасна."]
+      ],
+      "Ved vikepliktskilt skal du gi fri vei for all trafikk på vegen du kjører inn på, uansett hvilken side den kommer fra. Ved venstresving krysser du i tillegg den ene kjøreretningen, så du må sjekke begge veier før du kjører.",
+      "Знак «уступи дорогу» означает уступить всему движению на дороге, куда ты въезжаешь, с любой стороны. При повороте налево ты ещё и пересекаешь одно из направлений, поэтому проверяй обе стороны, прежде чем ехать.",
+      "Поворот налево со второстепенной: смотри налево, направо и ещё раз налево, прежде чем трогаться."),
+
+    q("044", scene({ you: { from: "south", to: "west" }, lights: { south: "green" }, peds: ["west"] }),
+      "Du har grønt lys og skal svinge til venstre. Fotgjengere krysser gangfeltet i gaten du svinger inn i, også på grønt. Hva gjør du?",
+      "У тебя зелёный, поворачиваешь налево. Пешеходы переходят по переходу на той улице, куда ты поворачиваешь, — тоже на зелёный. Что делать?",
+      [
+        ["Vente og la fotgjengerne gå ferdig før du svinger", "Подождать, пока пешеходы закончат переход, и только потом повернуть"],
+        ["Svinge først, fotgjengerne får vente siden du har grønt lys", "Повернуть первым, пешеходы подождут, у тебя же зелёный", "Grønt lys for deg fjerner ikke vikeplikten for gående i gangfeltet du kjører inn i.", "Зелёный для тебя не отменяет обязанность уступить пешеходам на переходе, в который ты въезжаешь."],
+        ["Tute for å få fotgjengerne til å skynde seg", "Посигналить, чтобы пешеходы поторопились", "Lydsignal skal bare brukes for å varsle om fare, ikke for å presse gående til å haste.", "Сигнал — только для предупреждения об опасности, а не чтобы поторопить пешеходов."],
+        ["Kjøre sakte gjennom gangfeltet samtidig som fotgjengerne går", "Медленно проехать через переход, пока пешеходы ещё идут", "Selv i lav fart er det ikke lov å kjøre gjennom et gangfelt der noen fortsatt krysser.", "Даже на малой скорости нельзя ехать через переход, пока по нему ещё идут люди."]
+      ],
+      "Grønt lys gir deg rett til å kjøre, men ikke foran fotgjengere som lovlig krysser gangfeltet i gaten du svinger inn i. Vikeplikten for gående gjelder uansett hvilken vei du kommer fra.",
+      "Зелёный свет даёт право ехать, но не преимущество перед пешеходами, которые законно переходят по переходу на улице, куда ты поворачиваешь. Обязанность уступить пешеходам действует независимо от того, откуда ты едешь.",
+      "Поворот налево на зелёный — частая причина наезда на пешехода. Всегда проверяй переход перед въездом в улицу."),
+
+    q("045", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east" }], signs: { south: "priority" } }),
+      "Du kjører på forkjørsvei rett fram. Bil B kommer fra venstre fra en sidevei. Hvem har vikeplikt?",
+      "Ты едешь прямо по главной дороге. Машина B едет слева со второстепенной. Кто уступает?",
+      [
+        ["B har vikeplikt, uansett om den kommer fra høyre eller venstre", "B уступает, независимо от того, слева она или справа"],
+        ["Du må vike siden B kommer fra venstre og høyreregelen ikke gjelder da", "Ты уступаешь, раз B слева, а правило правой руки тут не работает", "Høyreregelen gjelder bare der det ikke finnes skilt. Her har du forkjørsskilt, som gir deg forrang uansett hvilken side den andre bilen kommer fra.", "Правило правой руки действует только там, где нет знаков. Здесь у тебя знак «главная дорога» — он даёт тебе преимущество независимо от того, с какой стороны едет другая машина."],
+        ["Dere må avtale det dere imellom med blinklys", "Нужно договориться друг с другом поворотниками", "Forkjørsskiltet avgjør vikeplikten automatisk, det er ikke noe å avtale.", "Знак приоритета сам решает, кто уступает — договариваться не о чем."],
+        ["B har forrang siden den kommer fra en vei som munner ut i din", "У B преимущество, потому что её дорога вливается в твою", "Det er skiltingen, ikke hvordan veiene møtes, som avgjør vikeplikten her.", "Здесь право проезда определяет знак, а не то, как дороги сходятся."]
+      ],
+      "Forkjørsskiltet (gult ruteskilt) betyr at du kjører på forkjørsvei og har vikerett for trafikk fra sideveier, uansett om de kommer fra høyre eller venstre.",
+      "Знак «главная дорога» (жёлтый ромб) означает, что ты едешь по главной дороге и у тебя приоритет перед машинами со второстепенных, независимо от того, справа они или слева.",
+      "Жёлтый ромб значит: ты главный на этой дороге. Сторона, откуда едет другая машина, тут не важна."),
+
+    q("046", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "south", kind: "truck" }], roundabout: true }),
+      "Du skal kjøre inn i rundkjøringen. Et vogntog (B) er allerede inne i rundkjøringen og skal svinge kort til høyre rett foran deg. Hva gjør du?",
+      "Ты въезжаешь на круг. Внутри уже едет фура (B), которая почти сразу поворачивает направо прямо перед тобой. Что делать?",
+      [
+        ["Vente og gi god plass, lange kjøretøy trenger mer plass og kan svinge litt bredt", "Подождать и дать побольше места — длинному транспорту нужно больше места, и он может слегка заезжать шире"],
+        ["Kjøre inn samtidig siden du rekker det før vogntoget passerer helt", "Въехать одновременно, ты успеешь проскочить, пока фура ещё не проехала полностью", "Kjøretøy som allerede er i rundkjøringen har alltid vikeplikt foran deg, uansett hvor fort du tror du rekker.", "Тот, кто уже на круге, всегда имеет преимущество перед тобой — не важно, кажется тебе, что ты успеешь, или нет."],
+        ["Blinke og kjøre inn for å vise vogntoget at du kommer", "Помигать поворотником и въехать, показав фуре, что ты едешь", "Blinklys endrer ikke vikeplikten. Trafikk inne i rundkjøringen har uansett forrang.", "Поворотник не меняет, кто уступает. У тех, кто уже на круге, преимущество в любом случае."],
+        ["Kjøre tett bak vogntoget med en gang det har begynt å svinge, uten å vente på at det er helt ute av veien", "Ехать вплотную за фурой, как только она начала поворачивать, не дожидаясь, пока она полностью освободит дорогу", "Et langt kjøretøy kan fortsatt svinge ut i din bane. Vent til det er tydelig fri plass.", "Длинная фура ещё может выехать на твою траекторию при повороте. Дожидайся, пока место точно освободится."]
+      ],
+      "I rundkjøring har trafikk som allerede er inne alltid vikeplikt foran deg som skal inn. Lange kjøretøy som vogntog trenger ofte mer plass og kan bevege seg litt bredt i svingen, så gi ekstra klaring.",
+      "На круге у тех, кто уже едет по нему, всегда преимущество перед теми, кто въезжает. Длинному транспорту вроде фуры часто нужно больше места на повороте, поэтому дай дополнительный запас.",
+      "Фура на круге — жди подольше: она может «гулять» по ширине на повороте."),
+
+    q("047", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west", kind: "bike" }] }),
+      "Kryss uten skilt. En syklist kommer fra høyre. Hvem har vikeplikt?",
+      "Нерегулируемый перекрёсток без знаков. Справа едет велосипедист. Кто уступает?",
+      [
+        ["Du har vikeplikt for syklisten, høyreregelen gjelder også for syklister", "Ты уступаешь велосипедисту — правило правой руки действует и для велосипедистов"],
+        ["Syklisten må alltid vike for bil, uansett side", "Велосипедист всегда уступает машине, независимо от стороны", "Syklister har samme vikeplikt-status som andre kjøretøy etter høyreregelen, det finnes ikke noe unntak for dem.", "У велосипедистов те же права по правилу правой руки, что и у остальных — исключения для них нет."],
+        ["Ingen har vikeplikt siden en av dere er syklist", "Никто никому не уступает, раз один из участников — велосипедист", "Høyreregelen gjelder for alt kjørende trafikk, sykkel inkludert. Det er alltid en som skal vike.", "Правило правой руки действует для любого движущегося транспорта, включая велосипед. Кто-то всегда уступает."],
+        ["Du kan kjøre fort forbi fordi sykler er lettere å stoppe enn biler", "Можно проехать быстро — велосипед легче остановить, чем машину", "Vikeplikten avhenger av retning, ikke av hvor lett et kjøretøy kan stoppe.", "Кто уступает, зависит от направления движения, а не от того, насколько легко кому-то остановиться."]
+      ],
+      "Høyreregelen gjelder likt for alle kjøretøy, også sykler. Kommer en syklist fra høyre i et kryss uten skilt, har du vikeplikt for den akkurat som for en bil.",
+      "Правило правой руки действует одинаково для всех участников движения, включая велосипедистов. Если велосипедист едет справа на нерегулируемом перекрёстке, ты уступаешь ему точно так же, как машине.",
+      "Велосипед на перекрёстке — это тоже «транспорт справа». Забыть про него — частая ошибка."),
+
+    q("048", road({ crossing: true }),
+      "Fotgjengeren har nesten krysset gangfeltet og har bare noen skritt igjen, lengst unna deg. Kan du kjøre nå?",
+      "Пешеход почти перешёл дорогу, ему осталось буквально пару шагов на дальней стороне. Можно ехать?",
+      [
+        ["Nei, vent til fotgjengeren er helt ute av gangfeltet", "Нет, подожди, пока пешеход полностью не покинет переход"],
+        ["Ja, siden fotgjengeren er langt unna bilen din", "Да, пешеход ведь далеко от твоей машины", "Vikeplikten gjelder hele gangfeltet, ikke bare den delen nærmest deg. Du skal vente til feltet er helt fritt.", "Обязанность уступить действует на весь переход целиком, а не только на ближнюю к тебе часть. Ждать нужно, пока переход полностью не освободится."],
+        ["Ja, du kan kjøre sakte forbi bak fotgjengeren", "Да, можно медленно проехать позади пешехода", "Å kjøre gjennom gangfeltet mens noen fortsatt er i det er ikke lov, uansett fart eller avstand.", "Ехать через переход, пока на нём ещё кто-то есть, нельзя, независимо от скорости и расстояния до него."],
+        ["Ja, men bare hvis du tuter først", "Да, но только если сначала посигналить", "Lydsignal gir deg ikke rett til å kjøre gjennom et gangfelt noen fortsatt bruker.", "Сигнал не даёт права проехать через переход, пока по нему ещё идёт человек."]
+      ],
+      "Vikeplikten for gående i gangfeltet varer helt til de har forlatt feltet, ikke bare til de har passert midten eller din side av veien.",
+      "Обязанность уступать пешеходу на переходе действует, пока он полностью не покинет переход, а не только пока не пройдёт середину или твою сторону дороги.",
+      "«Почти закончил» — не то же самое, что «закончил». Жди, пока переход будет полностью пуст."),
+
+    q("049", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }], lights: { south: "yellow", east: "yellow" } }),
+      "Trafikklyset blinker gult i alle retninger (ute av vanlig drift). Det finnes ingen andre skilt i krysset. Bil B kommer fra høyre. Hvem har vikeplikt?",
+      "Светофор мигает жёлтым во всех направлениях (работает в аварийном режиме). Других знаков на перекрёстке нет. Машина B едет справа. Кто уступает?",
+      [
+        ["Du har vikeplikt for B, høyreregelen gjelder som om lyset var slukket", "Ты уступаешь B — действует правило правой руки, как будто светофор выключен"],
+        ["Ingen har vikeplikt, blinkende gult betyr fri kjøring for alle", "Никто не уступает, мигающий жёлтый значит «можно всем ехать свободно»", "Blinkende gult betyr bare at lyset er satt ut av vanlig drift og krever særlig aktsomhet, det fjerner ikke vikepliktsreglene, det aktiverer dem.", "Мигающий жёлтый означает лишь, что светофор работает в особом режиме и требует повышенной осторожности — правила приоритета от этого не исчезают, наоборот, включаются."],
+        ["Du har forrang siden lyset uansett teller som grønt for deg", "У тебя преимущество, потому что мигающий свет всё равно считается зелёным для тебя", "Blinkende gult er ikke det samme som grønt lys, det betyr at lyssignalet ikke styrer krysset lenger.", "Мигающий жёлтый — это не то же самое, что зелёный, это значит, что светофор больше не управляет перекрёстком."],
+        ["Dere må begge stoppe helt og vente til den andre kjører først", "Обеим машинам нужно полностью остановиться и ждать, пока другая поедет первой", "Det er ikke krav om full stopp for begge, bare om å vise vikeplikt etter høyreregelen på vanlig måte.", "Полная остановка для обоих не требуется — нужно просто уступить по обычному правилу правой руки."]
+      ],
+      "Blinkende gult lys betyr at trafikklyset er ute av drift og krever særlig aktpågivenhet. Uten andre skilt gjelder høyreregelen som i et vanlig kryss uten lys.",
+      "Мигающий жёлтый означает, что светофор не регулирует перекрёсток и требует особой осторожности. Без других знаков действует правило правой руки, как на обычном нерегулируемом перекрёстке.",
+      "Мигающий жёлтый = светофора как бы нет. Смотри на знаки и на правило правой руки."),
+
     /* ---------- Несколько правильных ответов ---------- */
     qm("m01", road({ crossing: true }),
       "Du nærmer deg et gangfelt. Hva skal du gjøre? Velg alle riktige.", "Ты подъезжаешь к пешеходному переходу. Что нужно делать? Выбери все верные.", [
@@ -1095,6 +1186,17 @@
     ],
     "Trafikkreglene § 10: alle skal gi fri veg for utrykningskjøretøy med blålys og sirene, og om nødvendig stanse. Det gir ikke rett til å kjøre på rødt.",
     "Trafikkreglene § 10: все обязаны освободить дорогу спецтранспорту с мигалкой и сиреной и при необходимости остановиться. Права проезжать на красный это не даёт.",
-    "Прижмись вправо, остановись, не суетись. Красный остаётся красным.")
+    "Прижмись вправо, остановись, не суетись. Красный остаётся красным."),
+
+    qm("m04", scene({ you: { from: "south", to: "north" }, signs: { south: "stop" }, peds: ["north"] }),
+      "Du nærmer deg et stoppskilt. Hva må du gjøre? Velg alle riktige.", "Ты подъезжаешь к знаку «Стоп». Что нужно сделать? Выбери все верные.", [
+      ["Stoppe helt, ikke bare senke farten", "Полностью остановиться, а не просто притормозить", true],
+      ["Se til begge sider for kryssende trafikk før du kjører videre", "Посмотреть в обе стороны на перекрёстный трафик, прежде чем ехать дальше", true],
+      ["Sjekke om det er fotgjengere i gangfeltet på veien du skal kjøre ut på", "Проверить, нет ли пешеходов на переходе той дороги, куда ты выезжаешь", true],
+      ["Det holder å stoppe dersom veien virker tom", "Достаточно остановиться, если дорога выглядит пустой", false, "Stoppskiltet krever full stopp uansett hvor tom veien ser ut til å være, og du skal likevel forsikre deg om at den er fri.", "Знак «Стоп» требует полной остановки в любом случае, даже если дорога кажется пустой, и всё равно нужно убедиться, что она свободна."]
+    ],
+    "Ved stoppskilt skal du stoppe helt opp bak stopplinjen, forsikre deg om at krysset og eventuelt gangfelt er fritt, og først da kjøre videre.",
+    "У знака «Стоп» нужно полностью остановиться перед стоп-линией, убедиться, что перекрёсток и переход (если есть) свободны, и только потом ехать дальше.",
+    "Стоп значит стоп: колёса должны на мгновение полностью замереть, «почти ноль» не считается.")
   ];
 })();
