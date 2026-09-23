@@ -203,6 +203,7 @@
   /* ---------- Схемы на прямой дороге (без перекрёстка) ----------
      road({ bus: true, limit: 50 })   — автобус выезжает с остановки, A сзади
      road({ crossing: true })         — пешеходный переход, пешеход справа
+     road({ crossing: "far" })        — пешеход почти перешёл: на дальнем (левом) краю перехода
      road({ narrow: true })           — узкая дорога с разъездом (møteplass) на стороне A, B навстречу
      road({ exit: "parking" })        — A выезжает с парковки справа на дорогу; exit: "gatetun" — из жилой зоны
      road({ tcross: true })           — T-перекрёсток: боковая дорога справа, B выезжает из неё
@@ -277,7 +278,7 @@
     }
     if (cfg.crossing) {
       extra += `<g fill="#fff" opacity="0.95">${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${x0 + 4 + i * 10.5}" y="90" width="6" height="20"/>`).join("")}</g>`;
-      vehicles += `${person(154, 100, -1)}
+      vehicles += `${cfg.crossing === "far" ? person(x0 + 9, 100, -1) : person(154, 100, -1)}
         ${pathArrow(`M ${x1 - 16} 158 L ${x1 - 16} 124`, A)}
         ${carAt(x1 - 16, 178, 0, "A", A)}`;
     }
@@ -1098,7 +1099,7 @@
         ["Dere må avtale det dere imellom med blinklys", "Нужно договориться друг с другом поворотниками", "Forkjørsskiltet avgjør vikeplikten automatisk, det er ikke noe å avtale.", "Знак приоритета сам решает, кто уступает — договариваться не о чем."],
         ["B har forrang siden den kommer fra en vei som munner ut i din", "У B преимущество, потому что её дорога вливается в твою", "Det er skiltingen, ikke hvordan veiene møtes, som avgjør vikeplikten her.", "Здесь право проезда определяет знак, а не то, как дороги сходятся."]
       ],
-      "Forkjørsskiltet (gult ruteskilt) betyr at du kjører på forkjørsvei og har vikerett for trafikk fra sideveier, uansett om de kommer fra høyre eller venstre.",
+      "Forkjørsskiltet (gult ruteskilt) betyr at du kjører på forkjørsvei og har forkjørsrett overfor trafikk fra sideveier, uansett om de kommer fra høyre eller venstre.",
       "Знак «главная дорога» (жёлтый ромб) означает, что ты едешь по главной дороге и у тебя приоритет перед машинами со второстепенных, независимо от того, справа они или слева.",
       "Жёлтый ромб значит: ты главный на этой дороге. Сторона, откуда едет другая машина, тут не важна."),
 
@@ -1107,11 +1108,11 @@
       "Ты въезжаешь на круг. Внутри уже едет фура (B), которая почти сразу поворачивает направо прямо перед тобой. Что делать?",
       [
         ["Vente og gi god plass, lange kjøretøy trenger mer plass og kan svinge litt bredt", "Подождать и дать побольше места — длинному транспорту нужно больше места, и он может слегка заезжать шире"],
-        ["Kjøre inn samtidig siden du rekker det før vogntoget passerer helt", "Въехать одновременно, ты успеешь проскочить, пока фура ещё не проехала полностью", "Kjøretøy som allerede er i rundkjøringen har alltid vikeplikt foran deg, uansett hvor fort du tror du rekker.", "Тот, кто уже на круге, всегда имеет преимущество перед тобой — не важно, кажется тебе, что ты успеешь, или нет."],
+        ["Kjøre inn samtidig siden du rekker det før vogntoget passerer helt", "Въехать одновременно, ты успеешь проскочить, пока фура ещё не проехала полностью", "Du som skal inn, har vikeplikt for kjøretøy som allerede er i rundkjøringen, uansett hvor fort du tror du rekker.", "Тот, кто уже на круге, всегда имеет преимущество перед тобой — не важно, кажется тебе, что ты успеешь, или нет."],
         ["Blinke og kjøre inn for å vise vogntoget at du kommer", "Помигать поворотником и въехать, показав фуре, что ты едешь", "Blinklys endrer ikke vikeplikten. Trafikk inne i rundkjøringen har uansett forrang.", "Поворотник не меняет, кто уступает. У тех, кто уже на круге, преимущество в любом случае."],
         ["Kjøre tett bak vogntoget med en gang det har begynt å svinge, uten å vente på at det er helt ute av veien", "Ехать вплотную за фурой, как только она начала поворачивать, не дожидаясь, пока она полностью освободит дорогу", "Et langt kjøretøy kan fortsatt svinge ut i din bane. Vent til det er tydelig fri plass.", "Длинная фура ещё может выехать на твою траекторию при повороте. Дожидайся, пока место точно освободится."]
       ],
-      "I rundkjøring har trafikk som allerede er inne alltid vikeplikt foran deg som skal inn. Lange kjøretøy som vogntog trenger ofte mer plass og kan bevege seg litt bredt i svingen, så gi ekstra klaring.",
+      "Du som skal inn i rundkjøringen, har vikeplikt for trafikk som allerede er inne. Lange kjøretøy som vogntog trenger ofte mer plass og kan bevege seg litt bredt i svingen, så gi ekstra klaring.",
       "На круге у тех, кто уже едет по нему, всегда преимущество перед теми, кто въезжает. Длинному транспорту вроде фуры часто нужно больше места на повороте, поэтому дай дополнительный запас.",
       "Фура на круге — жди подольше: она может «гулять» по ширине на повороте."),
 
@@ -1128,17 +1129,17 @@
       "Правило правой руки действует одинаково для всех участников движения, включая велосипедистов. Если велосипедист едет справа на нерегулируемом перекрёстке, ты уступаешь ему точно так же, как машине.",
       "Велосипед на перекрёстке — это тоже «транспорт справа». Забыть про него — частая ошибка."),
 
-    q("048", road({ crossing: true }),
+    q("048", road({ crossing: "far" }),
       "Fotgjengeren har nesten krysset gangfeltet og har bare noen skritt igjen, lengst unna deg. Kan du kjøre nå?",
       "Пешеход почти перешёл дорогу, ему осталось буквально пару шагов на дальней стороне. Можно ехать?",
       [
         ["Nei, vent til fotgjengeren er helt ute av gangfeltet", "Нет, подожди, пока пешеход полностью не покинет переход"],
         ["Ja, siden fotgjengeren er langt unna bilen din", "Да, пешеход ведь далеко от твоей машины", "Vikeplikten gjelder hele gangfeltet, ikke bare den delen nærmest deg. Du skal vente til feltet er helt fritt.", "Обязанность уступить действует на весь переход целиком, а не только на ближнюю к тебе часть. Ждать нужно, пока переход полностью не освободится."],
-        ["Ja, du kan kjøre sakte forbi bak fotgjengeren", "Да, можно медленно проехать позади пешехода", "Å kjøre gjennom gangfeltet mens noen fortsatt er i det er ikke lov, uansett fart eller avstand.", "Ехать через переход, пока на нём ещё кто-то есть, нельзя, независимо от скорости и расстояния до него."],
+        ["Ja, du kan kjøre sakte forbi bak fotgjengeren", "Да, можно медленно проехать позади пешехода", "Så lenge fotgjengeren er i gangfeltet, har du vikeplikt. Å kjøre forbi mens han fortsatt går, kan skremme ham og gir ham ikke ro til å gå over.", "Пока пешеход на переходе, ты обязан уступать. Проезжать, пока он ещё идёт, — значит пугать его и не давать спокойно перейти."],
         ["Ja, men bare hvis du tuter først", "Да, но только если сначала посигналить", "Lydsignal gir deg ikke rett til å kjøre gjennom et gangfelt noen fortsatt bruker.", "Сигнал не даёт права проехать через переход, пока по нему ещё идёт человек."]
       ],
-      "Vikeplikten for gående i gangfeltet varer helt til de har forlatt feltet, ikke bare til de har passert midten eller din side av veien.",
-      "Обязанность уступать пешеходу на переходе действует, пока он полностью не покинет переход, а не только пока не пройдёт середину или твою сторону дороги.",
+      "Trafikkreglene § 9 nr 2: du har vikeplikt for gående som er på vei ut i eller befinner seg i gangfeltet. Den gjelder så lenge fotgjengeren er i feltet, ikke bare til han har passert din side av vegen.",
+      "Trafikkreglene § 9 nr 2: ты уступаешь пешеходам, которые вступают на переход или находятся на нём. Это действует, пока пешеход на переходе, а не только пока он не прошёл твою сторону дороги.",
       "«Почти закончил» — не то же самое, что «закончил». Жди, пока переход будет полностью пуст."),
 
     q("049", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }], lights: { south: "yellow", east: "yellow" } }),
