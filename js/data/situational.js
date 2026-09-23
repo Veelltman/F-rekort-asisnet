@@ -635,7 +635,7 @@
       "Знак STOP требует полной остановки в любом случае. После остановки уступаешь всем на пересекаемой дороге.",
       "У STOP «слева/справа» неважно — уступаешь всем. Твоя обязанность = остановиться + уступить."),
 
-    q("010", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }] }),
+    q("010", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }], lights: { south: "green", east: "red" } }),
       "Du kjører rett fram og kommer til et kryss der trafikklyset er grønt for deg. Bil B fra høyre har rødt. Hva gjelder?",
       "Ты едешь прямо, для тебя зелёный. Машина B справа — на красный. Что действует?",
       [
@@ -739,7 +739,7 @@
       "В Норвегии сквозная дорога сама по себе не даёт приоритета. Без знаков правило правой руки действует и на Т-перекрёстке.",
       "Ловушка для тех, кто учил ПДД в других странах: «прямая дорога главнее» здесь не работает. Ищи знак или уступай справа."),
 
-    q("018", scene({ you: { from: "south", to: "east" } }),
+    q("018", scene({ you: { from: "south", to: "east" }, lights: { south: "red" } }),
       "Du har rødt lys og skal svinge til høyre. Ingen kommer. Kan du svinge?",
       "У тебя красный, ты поворачиваешь направо. Никого нет. Можно повернуть?",
       [
@@ -752,7 +752,7 @@
       "В Норвегии нет «поворота направо на красный». Ждёшь зелёного или зелёной стрелки.",
       "Проезд на красный — 10 750 kr и 3 балла, даже если ты «только направо»."),
 
-    q("019", scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south" }] }),
+    q("019", scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south" }], lights: { south: "green", north: "green" } }),
       "Grønt lys. Du skal svinge til venstre, og møtende bil B skal rett fram, også på grønt. Hvem kjører først?",
       "Зелёный. Ты поворачиваешь налево, встречная B едет прямо, тоже на зелёный. Кто едет первым?",
       [
@@ -765,7 +765,7 @@
       "Зелёный означает, что можно въехать на перекрёсток, но обязанность уступить встречным при повороте налево остаётся.",
       "Зелёный — не «мне все уступают». При левом повороте встречный прямо всегда первый."),
 
-    q("020", scene({ you: { from: "south", to: "east" }, peds: ["east"] }),
+    q("020", scene({ you: { from: "south", to: "east" }, peds: ["east"], lights: { south: "green" } }),
       "Grønt lys, du svinger til høyre. Fotgjengere krysser på gangfeltet i gaten du svinger inn i, også på grønt. Hva gjør du?",
       "Зелёный, ты поворачиваешь направо. Пешеходы переходят по зебре на улице, куда ты сворачиваешь, тоже на зелёный. Что делаешь?",
       [
@@ -800,8 +800,8 @@
         ["Fletteregelen: annenhver bil", "Правило молнии: через одного", "Fletteregelen gjelder der to felt går sammen til ett, ikke ved påkjøring til motorveg, der du har vikeplikt.", "Правило молнии действует при слиянии двух полос в одну, а не при въезде на автомагистраль, где у тебя есть обязанность уступить."],
         ["Ingen, jeg kjører bare inn", "Никто, просто въезжаю", "Du kan ikke bare kjøre inn uten å ta hensyn, du har vikeplikt for trafikken på motorvegen.", "Просто въехать без учёта обстановки нельзя — у тебя есть обязанность уступить потоку на магистрали."]
       ],
-      "Den som kjører inn fra påkjøringsfelt har vikeplikt. Bruk hele feltet til å komme opp i fart, og velg en luke. Trafikken på motorvegen bør likevel gjøre det lett for deg.",
-      "Въезжающий с полосы разгона уступает. Используй всю полосу, чтобы набрать скорость, и выбери просвет. Поток на магистрали при этом должен облегчать въезд.",
+      "Trafikkreglene § 8: den som skifter felt, har vikeplikt, og i felt for fartsøkning skal du tilpasse farten til trafikken du skal inn i. Bruk hele feltet og velg en luke. De som kjører i feltet ved siden av, skal lette innkjøringen.",
+      "Trafikkreglene § 8: перестраивающийся уступает, а на полосе разгона нужно подстроить скорость под поток, в который вливаешься. Используй всю полосу и выбери просвет. Те, кто едет в соседней полосе, обязаны облегчить въезд.",
       "Не останавливайся в конце полосы разгона: набери скорость потока, иначе слияние станет опасным."),
 
     q("023", road({ overtake: true }),
@@ -813,8 +813,8 @@
         ["Tuter og kjører forbi på høyre side", "Сигналю и обгоняю справа", "Forbikjøring på høyre side er som hovedregel forbudt, og hornet endrer ikke på forbudet mot å kjøre forbi her.", "Обгон справа как правило запрещён, а гудок не отменяет запрет обгонять в этой ситуации."],
         ["Blinker med fjernlys", "Мигаю дальним", "Å blinke med fjernlys gir deg ingen rett til å kjøre forbi, forbudet gjelder uansett.", "Мигание дальним не даёт права на обгон — запрет действует в любом случае."]
       ],
-      "Du kan ikke kjøre forbi et kjøretøy som gir tegn til å svinge til venstre eller selv kjører forbi. Vent til situasjonen er klar.",
-      "Нельзя обгонять машину, которая показывает поворот налево или сама обгоняет. Дождись, пока ситуация прояснится.",
+      "Trafikkreglene § 12 nr 2 b: før du kjører forbi, skal du forvisse deg om at den forankjørende ikke har gitt tegn om forbikjøring. Vent til bilen foran har kjørt forbi syklisten og situasjonen er klar.",
+      "Trafikkreglene § 12 nr 2 b: перед обгоном нужно убедиться, что машина впереди не подала сигнал об обгоне. Дождись, пока она объедет велосипедиста и ситуация прояснится.",
       "«Обгон обгоняющего» — один из самых опасных манёвров и прямое нарушение."),
 
     q("024", road({ bikeLane: true }),
@@ -983,7 +983,7 @@
         ["Tuter for å få passasjerene til å skynde seg", "Сигналю, чтобы пассажиры поторопились", "Signalhorn skal ikke brukes for å presse passasjerene, du skal selv vente til de er over.", "Гудок нельзя использовать, чтобы поторопить пассажиров, — ждать должен ты сам, пока они не перейдут."]
       ],
       "Trafikkreglene § 9 nr. 3: den som vil kjøre forbi til høyre for sporvogn ved holdeplass uten trafikkøy, skal stanse og gi fri veg for passasjerer som stiger av eller på. For buss ved holdeplass gjelder § 13: hold liten fart og stans om nødvendig.",
-      "Когда трамвай или автобус останавливается без островка безопасности и высаживает пассажиров, нужно остановиться и подождать, пока они безопасно дойдут до тротуара.",
+      "Trafikkreglene § 9 nr 3: если объезжаешь трамвай справа у остановки без островка, нужно остановиться и пропустить пассажиров, которые выходят или садятся. Для автобуса у остановки действует § 13: ехать медленно и при необходимости остановиться.",
       "Пассажиры трамвая выходят прямо на проезжую часть — это одна из самых опасных ситуаций в городе, всегда останавливайся полностью."),
 
     q("037", hillScene(),
@@ -1084,7 +1084,7 @@
         ["Vente og la fotgjengerne gå ferdig før du svinger", "Подождать, пока пешеходы закончат переход, и только потом повернуть"],
         ["Svinge først, fotgjengerne får vente siden du har grønt lys", "Повернуть первым, пешеходы подождут, у тебя же зелёный", "Grønt lys for deg fjerner ikke vikeplikten for gående i gangfeltet du kjører inn i.", "Зелёный для тебя не отменяет обязанность уступить пешеходам на переходе, в который ты въезжаешь."],
         ["Tute for å få fotgjengerne til å skynde seg", "Посигналить, чтобы пешеходы поторопились", "Lydsignal skal bare brukes for å varsle om fare, ikke for å presse gående til å haste.", "Сигнал — только для предупреждения об опасности, а не чтобы поторопить пешеходов."],
-        ["Kjøre sakte gjennom gangfeltet samtidig som fotgjengerne går", "Медленно проехать через переход, пока пешеходы ещё идут", "Selv i lav fart er det ikke lov å kjøre gjennom et gangfelt der noen fortsatt krysser.", "Даже на малой скорости нельзя ехать через переход, пока по нему ещё идут люди."]
+        ["Kjøre sakte gjennom gangfeltet samtidig som fotgjengerne går", "Медленно проехать через переход, пока пешеходы ещё идут", "Du har vikeplikt så lenge fotgjengerne er i gangfeltet. Å kjøre inn mellom dem, selv sakte, hindrer og skremmer dem.", "Пока пешеходы на переходе, ты обязан уступать. Въезжать между ними, даже медленно, — значит мешать им и пугать."]
       ],
       "Grønt lys gir deg rett til å kjøre, men ikke foran fotgjengere som lovlig krysser gangfeltet i gaten du svinger inn i. Vikeplikten for gående gjelder uansett hvilken vei du kommer fra.",
       "Зелёный свет даёт право ехать, но не преимущество перед пешеходами, которые законно переходят по переходу на улице, куда ты поворачиваешь. Обязанность уступить пешеходам действует независимо от того, откуда ты едешь.",

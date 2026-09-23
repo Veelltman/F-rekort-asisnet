@@ -55,7 +55,7 @@
     w("037", "nærlys", "ближний свет", "Kjør med nærlys hele døgnet.", "Ближний свет — всегда, и днём тоже.", "Машина"),
     w("038", "fjernlys", "дальний свет", "Slå av fjernlyset ved møtende trafikk.", "Встречная машина — выключай дальний.", "Машина"),
     w("039", "nødblink", "аварийная сигнализация", "Sett på nødblink hvis du må stoppe.", "Пришлось остановиться — включи аварийку.", "Машина"),
-    w("040", "varseltrekant", "знак аварийной остановки", "Varseltrekanten settes 100 meter bak bilen.", "Треугольник ставят метров за сто позади машины.", "Машина"),
+    w("040", "varseltrekant", "знак аварийной остановки", "Varseltrekanten settes i god avstand, om mulig minst 150 meter bak bilen.", "Треугольник ставят подальше, по возможности не ближе 150 м позади машины.", "Машина"),
     w("041", "refleksvest", "светоотражающий жилет", "Refleksvesten skal ligge lett tilgjengelig.", "Жилет должен лежать под рукой, а не в багажнике.", "Машина"),
     w("042", "dekk", "шина / колесо (покрышка)", "Er dekkene dine gode nok til vinteren?", "Твои шины зиму выдержат?", "Машина"),
     w("043", "piggdekk", "шипованные шины", "Piggdekk er lov fra 1. november.", "Шипы можно ставить с 1 ноября.", "Машина"),
@@ -109,7 +109,7 @@
 
     /* ---------- Дорога ---------- */
     w("085", "motorveg", "автомагистраль", "På motorveg er det forbudt å stanse og snu.", "На автомагистрали запрещено останавливаться и разворачиваться.", "Дорога"),
-    w("086", "motortrafikkveg", "автодорога (без разделителя)", "Motortrafikkveg har ikke fysisk midtdeler.", "У motortrafikkveg нет физического разделителя.", "Дорога"),
+    w("086", "motortrafikkveg", "автодорога (без разделителя)", "Motortrafikkveg har ofte ikke fysisk midtdeler, slik motorveg har.", "У motortrafikkveg часто нет физического разделителя, как у автомагистрали.", "Дорога"),
     w("087", "påkjøringsfelt / felt for fartsøkning", "полоса разгона", "Bruk hele påkjøringsfeltet til å komme opp i fart.", "Используй всю полосу разгона, чтобы набрать скорость.", "Дорога"),
     w("088", "avkjøring", "съезд", "Ta neste avkjøring mot Lillestrøm.", "Съезжай на следующем съезде на Лиллестрём.", "Дорога"),
     w("089", "vegskulder", "обочина", "Stans bare på vegskulderen ved nødstilfelle.", "Останавливайся на обочине только в крайнем случае.", "Дорога"),

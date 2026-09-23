@@ -74,7 +74,7 @@
     /* ---------- Алкоголь, телефон, внимание ---------- */
     q("007", "Hva er promillegrensen for bilførere i Norge?",
       "Какой допустимый уровень алкоголя в крови для водителя в Норвегии?",
-      [["0,2 promille", "0,2 промилле"], ["0,5 promille", "0,5 промилле", "0,5 er grensen i mange andre land, men i Norge er den lavere, 0,2.", "0,5 — лимит во многих других странах, но в Норвегии он ниже — 0,2."], ["0,8 promille", "0,8 промилле", "0,8 er fire ganger den norske grensen på 0,2. Over 0,5 promille gir normalt ubetinget fengsel, ikke bare bot.", "0,8 — это в четыре раза выше норвежского лимита 0,2. Свыше 0,5 промилле обычно грозит реальный тюремный срок, а не только штраф."], ["0,0 promille", "0,0 промилле", "Grensen er ikke null, den er 0,2 promille.", "Лимит не нулевой, а 0,2 промилле."]],
+      [["0,2 promille", "0,2 промилле"], ["0,5 promille", "0,5 промилле", "0,5 er grensen i mange andre land, men i Norge er den lavere, 0,2.", "0,5 — лимит во многих других странах, но в Норвегии он ниже — 0,2."], ["0,8 promille", "0,8 промилле", "0,8 er fire ganger den norske grensen på 0,2. Over 0,5 promille mister du førerkortet og risikerer fengsel, ikke bare bot.", "0,8 — это в четыре раза выше норвежского лимита 0,2. Свыше 0,5 промилле обычно грозит реальный тюремный срок, а не только штраф."], ["0,0 promille", "0,0 промилле", "Grensen er ikke null, den er 0,2 promille.", "Лимит не нулевой, а 0,2 промилле."]],
       "Promillegrensen er 0,2. I praksis betyr det at du ikke skal drikke alkohol i det hele tatt før du kjører.",
       "Допустимый предел 0,2 промилле. На практике это означает: перед вождением не пить вообще.",
       "0,2 — одно из самых строгих ограничений в Европе. Одна кружка пива уже риск потерять права."),
@@ -263,8 +263,8 @@
     q("033", "Hvem må du alltid vike for, uansett skilt?",
       "Кому ты всегда должен уступать, независимо от знаков?",
       [["Sporvogn (trikk)", "Трамваю"], ["Busser", "Автобусам", "Busser har ikke automatisk forkjørsrett overalt, det er sporvogn som har spesialregelen.", "У автобусов нет автоматического приоритета везде — особое правило именно для трамвая."], ["Lastebiler", "Грузовикам", "Kjøretøyets størrelse gir ikke forkjørsrett, det er sporvognen som alltid har det.", "Размер машины не даёт приоритета — он всегда у трамвая."], ["Taxier", "Такси", "Taxier har ingen spesiell forkjørsrett, det gjelder sporvogn.", "У такси нет особого приоритета — он у трамвая."]],
-      "Sporvogn har alltid forkjørsrett. Den kan ikke svinge unna, og bremselengden er lang.",
-      "Трамвай всегда имеет преимущество. Он не может свернуть, а тормозной путь у него длинный.",
+      "Trafikkreglene § 10 nr 2: trafikanter skal gi fri veg og om nødvendig stanse for sporvogn og jernbanetog. Sporvognen kan ikke svinge unna, og bremselengden er lang.",
+      "Trafikkreglene § 10 nr 2: все участники движения обязаны уступать дорогу трамваю и поезду и при необходимости останавливаться. Трамвай не может свернуть, а тормозной путь у него длинный.",
       "Актуально в Oslo, Bergen и Trondheim: трамвай едет первым, даже если ты справа."),
 
     q("034", "Hva betyr blinkende gult lys i et trafikklys?",
@@ -286,7 +286,7 @@
       [["Nei, bare ved nødstilfelle på vegskulderen", "Нет, только в аварийной ситуации на обочине"], ["Ja, hvis du setter på nødblink", "Да, если включить аварийку", "Nødblink alene gjør ikke stans lovlig, forbudet gjelder uansett unntatt ved reell nødsituasjon.", "Одна аварийка не делает остановку законной — запрет действует, кроме реальной аварийной ситуации."], ["Ja, i inntil 5 minutter", "Да, до 5 минут", "Det finnes ikke noe unntak basert på tid, stans er forbudt uansett hvor kort.", "Исключения по времени нет — остановка запрещена, даже если совсем ненадолго."], ["Ja, for å ta bilder", "Да, чтобы сделать фото", "Å ta bilder er ikke en nødsituasjon og gir ikke rett til å stanse på motorveg.", "Фотографирование — не аварийная ситуация и не даёт права останавливаться на автомагистрали."]],
       "På motorveg er det forbudt å stanse, rygge, snu og å gå. Stans kun ved nød, og da så langt ut på skulderen som mulig.",
       "На автомагистрали запрещено останавливаться, сдавать назад, разворачиваться, ходить пешком. Остановка только при аварии, максимально на обочине.",
-      "Если остановился в нужде: аварийка, жилет, треугольник за 100+ м, и сам — за отбойник."),
+      "Если пришлось остановиться: аварийка, жилет, треугольник по возможности за 150 м, и сам — за отбойник."),
 
     q("037", "Hvilke kjøretøy har ikke lov på motorveg?",
       "Какому транспорту запрещено на автомагистраль?",
@@ -357,8 +357,8 @@
     q("046", "Når har du lov til å bruke horn (lydsignal) i trafikken?",
       "Когда разрешено использовать звуковой сигнал (клаксон) в дорожном движении?",
       [["Bare for å varsle om fare", "Только чтобы предупредить об опасности"], ["For å hilse på kjente", "Чтобы поприветствовать знакомых", "Lydsignal skal bare brukes for å varsle om fare, ikke som hilsen.", "Звуковой сигнал только для предупреждения об опасности, а не как приветствие."], ["For å få trafikken foran til å skynde seg", "Чтобы поторопить машину впереди", "Å tute av utålmodighet er ikke lovlig bruk av hornet.", "Гудеть от нетерпения — это не разрешённое использование клаксона."], ["Når som helst, det er ingen begrensning", "Когда угодно, ограничений нет", "Det finnes en klar begrensning: bare ved fare, ikke fritt.", "Ограничение есть, и чёткое: только при опасности, а не когда угодно."]],
-      "Lyd- og lyssignal skal bare brukes når det er nødvendig for å varsle om fare, ikke for å uttrykke irritasjon eller hilse.",
-      "Звуковой и световой сигнал используют только при необходимости предупредить об опасности, а не чтобы выразить раздражение или поприветствовать.",
+      "Trafikkreglene § 14 nr 1: unødig eller hensynsløs bruk av lyd- eller lyssignal er forbudt. I praksis bruker du hornet bare når det trengs for å varsle om fare, ikke for å uttrykke irritasjon eller hilse.",
+      "Trafikkreglene § 14 nr 1: ненужное или бесцеремонное использование звукового и светового сигнала запрещено. На практике сигналишь, только когда нужно предупредить об опасности, а не чтобы выразить раздражение или поздороваться.",
       "Гудеть от нетерпения в пробке — это не «предупреждение об опасности», такое использование сигнала не по правилам."),
 
     q("047", "Du oppdager en bilkø rett bak en sving på motorveien. Hva bør du gjøre for å varsle bilene bak deg?",
@@ -392,8 +392,8 @@
     q("051", "Hvor stor avstand bør du minst holde til en syklist når du kjører forbi?",
       "Какое минимальное расстояние нужно соблюдать при обгоне велосипедиста?",
       [["Minst 1,5 meter", "Не менее 1,5 метра"], ["Minst 0,5 meter", "Не менее 0,5 метра", "0,5 meter er for lite, anbefalingen er minst 1,5 meter.", "0,5 м слишком мало, рекомендация — минимум 1,5 м."], ["Det finnes ingen anbefalt avstand", "Рекомендованной дистанции не существует", "Det finnes en klar anbefaling på minst 1,5 meter fra Statens vegvesen og Trygg Trafikk.", "Чёткая рекомендация есть — минимум 1,5 м от Statens vegvesen и Trygg Trafikk."], ["Minst 3 meter", "Не менее 3 метров", "3 meter er mer enn den vanlige anbefalingen på 1,5 meter.", "3 м больше обычной рекомендации в 1,5 м."]],
-      "Trafikkreglene krever «god avstand» ved forbikjøring av syklende; Statens vegvesen og Trygg Trafikk anbefaler minst 1,5 meter, slik at syklisten ikke kommer i fare hvis vedkommende vingler eller vinden tar tak.",
-      "Правила требуют «достаточной дистанции» при обгоне велосипедиста; Statens vegvesen и Trygg Trafikk рекомендуют не менее 1,5 м, чтобы велосипедист не оказался в опасности, если его качнёт или подхватит ветер.",
+      "Trafikkreglene har ingen fast meteravstand, men du skal kjøre forbi uten å volde fare. Statens vegvesen og Trygg Trafikk anbefaler minst 1,5 meter, slik at syklisten ikke kommer i fare hvis vedkommende vingler eller vinden tar tak.",
+      "В правилах нет точного числа метров, но обгонять нужно, не создавая опасности. Statens vegvesen и Trygg Trafikk рекомендуют не менее 1,5 м, чтобы велосипедист не оказался в опасности, если его качнёт или подхватит ветер.",
       "Даже если дорога кажется широкой, не «срезай» рядом с велосипедистом — порыв ветра от твоей машины может его качнуть."),
 
     q("052", "Kan du krysse en heltrukket midtlinje for å kjøre forbi en syklist eller moped?",
@@ -510,8 +510,8 @@
       ["Syklende på sykkelveg langs vegen", "Велосипедистам на велодорожке вдоль дороги", true],
       ["Ingen: høyreregelen gjelder", "Никому: действует правило правой руки", false, "Høyreregelen gjelder ikke ved utkjøring fra parkeringsplass, gårdsveg eller lignende. Der viker du for alle.", "Правило правой руки не работает при выезде с парковки, двора и т.п. — там уступаешь всем."]
     ],
-    "Trafikkreglene § 7: den som kjører ut fra parkeringsplass, gårdsveg, bensinstasjon eller annen veg som ikke er åpen for alminnelig ferdsel, har vikeplikt for all trafikk, også gående og syklende.",
-    "Trafikkreglene § 7: выезжающий с парковки, двора, заправки и т.п. уступает всем — и машинам, и пешеходам, и велосипедистам.",
+    "Trafikkreglene § 7 nr 4: den som kommer fra parkeringsplass, eiendom, bensinstasjon, gårdsveg eller annen veg som ikke er åpen for alminnelig ferdsel, har vikeplikt for annen trafikant, også gående og syklende.",
+    "Trafikkreglene § 7 nr 4: выезжающий с парковки, участка, заправки, двора и т.п. уступает всем — и машинам, и пешеходам, и велосипедистам.",
     "Выезд с «не-дороги» = уступи всем без исключения."),
 
     qm("m05", "I hvilke situasjoner gjelder IKKE høyreregelen? Velg alle riktige.", "В каких случаях правило правой руки НЕ действует? Выбери все верные.", [

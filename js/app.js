@@ -497,6 +497,7 @@
 
   routes.topic = function (p) {
     const t = TOPICS[p.key];
+    if (!t || !D[p.key]) { go("home", {}, { replace: true }); return; }
     const all = D[p.key];
     const st = S.getTopicStats(p.key, all);
     const weak = S.getWeakQuestions(all);
@@ -536,6 +537,7 @@
   /* ---------- Квиз ---------- */
   routes.quiz = function (p) {
     const t = TOPICS[p.key];
+    if (!t || !D[p.key]) { go("home", {}, { replace: true }); return; }
     const all = D[p.key];
     const k = D.signsByKind;
     let set, label = t.title_ru;

@@ -49,13 +49,17 @@
     first: { no: "Den som kommer først til krysset kjører først", ru: "Кто первый приехал, тот и едет",
       why_no: "Trafikkreglene har ingen «førstemann»-regel. Rekkefølgen bestemmes av lys, skilt og høyreregelen.", why_ru: "В правилах нет принципа «кто первый». Порядок определяют светофор, знаки и правило правой руки." },
     big: { no: "Den største bilen kjører først", ru: "Едет тот, у кого машина больше",
-      why_no: "Størrelsen på kjøretøyet gir ingen forrang. Unntaket er sporvogn, som alltid har forkjørsrett.", why_ru: "Размер машины не даёт преимущества. Исключение — трамвай, у него приоритет всегда." },
+      why_no: "Størrelsen på kjøretøyet gir ingen forrang. Unntaket er sporvogn: alle skal gi den fri veg (trafikkreglene § 10 nr 2).", why_ru: "Размер машины не даёт преимущества. Исключение — трамвай: ему все обязаны уступать дорогу (trafikkreglene § 10 nr 2)." },
     left: { no: "Den som er til venstre kjører først", ru: "Едет тот, кто слева",
       why_no: "Høyreregelen sier det motsatte: du viker for trafikk fra høyre.", why_ru: "Правило правой руки говорит обратное: уступаешь тому, кто справа." }
   };
-  function whoOptions(correctKey) {
-    const wrong = shuffle(Object.keys(WHO).filter(k => k !== correctKey)).slice(0, 3);
-    return [correctKey, ...wrong].map((k, i) => ({ text_no: WHO[k].no, text_ru: WHO[k].ru, correct: i === 0, why_no: WHO[k].why_no, why_ru: WHO[k].why_ru }));
+  /* exclude — варианты, которые в этой ситуации не будут явной ошибкой
+     (например «кто слева, тот первый», когда B слева и действительно едет первой). */
+  function whoOptions(correctKey, exclude) {
+    const skip = new Set([correctKey].concat(exclude || []));
+    const wrong = shuffle(Object.keys(WHO).filter(k => !skip.has(k))).slice(0, 3);
+    return [correctKey, ...wrong].map((k, i) => ({ text_no: WHO[k].no, text_ru: WHO[k].ru, correct: i === 0,
+      why_no: i === 0 ? null : WHO[k].why_no, why_ru: i === 0 ? null : WHO[k].why_ru }));
   }
 
   function gen(id, fresh) {
@@ -126,7 +130,7 @@
         prompt_no: `Du (A) har vikepliktskilt og skal ${MAN_KEY[aMan].no}. Bil B kommer ${FROM[side].no} på den kryssende vegen og skal ${MAN_KEY[bMan].no}. Hvem har vikeplikt?`,
         prompt_ru: `У тебя (A) знак «уступи дорогу», едешь ${MAN_KEY[aMan].ru}. Машина B едет ${FROM[side].ru} по пересекаемой дороге. Кто уступает?`,
         image: scene({ you: { from: "south", to: toFor("south", aMan) }, others: [{ from: side, to: toFor(side, bMan) }], signs: { south: "yield" } }),
-        options: whoOptions("me"),
+        options: whoOptions("me", side === "west" ? ["left"] : []),
         explanation_no: `Vikeplikt betyr at du viker for all trafikk på kryssende veg, både fra høyre og venstre. Her kommer B ${FROM[side].no}: du venter.`,
         explanation_ru: `Знак «уступи» означает: уступаешь всем на пересекаемой дороге, и справа, и слева. B едет ${FROM[side].ru}: ты ждёшь.`,
         tip_ru: "При vikeplikt сторона не важна. Останавливаться не обязательно, если дорога свободна."
@@ -186,8 +190,8 @@
       return {
         prompt_no: `Du (A) skal inn i en rundkjøring. Bil B er allerede inne i rundkjøringen${from === "west" ? " og kommer fra venstre" : ""}. Hvem har vikeplikt?`,
         prompt_ru: `Ты (A) въезжаешь на круг. Машина B уже на кругу${from === "west" ? " и приближается слева" : ""}. Кто уступает?`,
-        image: scene({ you: { from: "south", to: "north" }, others: [{ from, to: from === "west" ? "east" : "east" }], roundabout: true }),
-        options: whoOptions("me"),
+        image: scene({ you: { from: "south", to: "north" }, others: [{ from, to: "east" }], roundabout: true }),
+        options: whoOptions("me", ["left"]),
         explanation_no: "Ved rundkjøring har du alltid vikeplikt for trafikk som allerede er i rundkjøringen, uansett hvor den kommer fra.",
         explanation_ru: "На круговом движении ты всегда уступаешь тем, кто уже на кругу, откуда бы они ни ехали.",
         tip_ru: "Круг — исключение из правила правой руки: уступаешь тем, кто слева, уже на кругу."
@@ -237,7 +241,7 @@
         prompt_no: `Du (A) kjører ut fra ${place.no} og inn på vegen. Bil B kommer ${FROM[side].no} på vegen. Hvem har vikeplikt?`,
         prompt_ru: `Ты (A) выезжаешь ${place.ru} на дорогу. Машина B едет по дороге ${FROM[side].ru}. Кто уступает?`,
         image: scene({ you: { from: "south", to: "north" }, others: [{ from: side, to: side === "east" ? "west" : "east" }] }),
-        options: whoOptions("me"),
+        options: whoOptions("me", side === "west" ? ["left"] : []),
         explanation_no: "Den som kjører ut fra parkeringsplass, gårdsveg, bensinstasjon, gatetun eller gågate har vikeplikt for all trafikk på vegen, også gående på fortauet.",
         explanation_ru: "Выезжающий с парковки, двора, заправки, gatetun или gågate уступает всему транспорту на дороге и пешеходам на тротуаре.",
         tip_ru: "Все «выезды с территорий» работают одинаково: ты последний в очереди, правило правой руки не действует."
@@ -246,22 +250,21 @@
 
     /* 11. Велосипедист справа при повороте направо */
     gen("sykkel-hoyre", () => {
-      const ctx = rnd(["sykkelfelt", "sykkelveg"]);
       return {
-        prompt_no: `Du (A) skal svinge til høyre. Det er ${ctx === "sykkelfelt" ? "sykkelfelt på høyre side" : "en sykkelveg langs vegen"}, og syklist S bak deg kjører rett fram. Hvem har vikeplikt?`,
-        prompt_ru: `Ты (A) поворачиваешь направо. Справа ${ctx === "sykkelfelt" ? "велополоса" : "велодорожка вдоль дороги"}, велосипедист S сзади едет прямо. Кто уступает?`,
+        prompt_no: "Du (A) skal svinge til høyre. Det er sykkelfelt på høyre side, og syklist S bak deg kjører rett fram. Hvem har vikeplikt?",
+        prompt_ru: "Ты (A) поворачиваешь направо. Справа велополоса, велосипедист S сзади едет прямо. Кто уступает?",
         image: scene({ you: { from: "south", to: "east" }, others: [{ from: "south", to: "north", label: "S", kind: "bike" }] }),
         options: [
           { text_no: "Jeg (A) må vike for syklisten", text_ru: "Я (A) уступаю велосипедисту", correct: true },
           { text_no: "Syklisten må vike for meg", text_ru: "Велосипедист уступает мне", correct: false,
-            why_no: "Syklisten i kjørebanen er kjørende på lik linje med deg, og kommer fra høyre. Høyreregelen gjelder også for sykler.", why_ru: "Велосипедист на проезжей части — такой же участник движения, и он справа. Правило правой руки действует и для велосипедов." },
+            why_no: "Den som svinger, har vikeplikt for syklende som skal rett fram på kjørebanen (trafikkreglene § 7 nr 3). Sykkelfeltet er en del av kjørebanen.", why_ru: "Поворачивающий уступает велосипедистам, которые едут прямо по проезжей части (trafikkreglene § 7 nr 3). Велополоса — часть проезжей части." },
           { text_no: "Ingen har vikeplikt", text_ru: "Никто не уступает", correct: false,
-            why_no: "Kjørebanene krysser hverandre, så én av dere må vike. Uten skilt gjelder høyreregelen.", why_ru: "Траектории пересекаются, значит кто-то должен уступить. Без знаков действует правило правой руки." },
+            why_no: "Du krysser sykkelfeltet der syklisten kjører, så én må vike, og det er den som svinger.", why_ru: "Ты пересекаешь велополосу, по которой едет велосипедист, значит кто-то уступает — и это поворачивающий." },
           { text_no: "Den som er raskest", text_ru: "Кто быстрее", correct: false,
-            why_no: "Fart gir aldri forkjørsrett. Vikeplikt bestemmes av skilt og høyreregelen.", why_ru: "Скорость никогда не даёт приоритета. Кто уступает — решают знаки и правило правой руки." }
+            why_no: "Fart gir aldri forkjørsrett. Den som svinger, viker for syklende som skal rett fram.", why_ru: "Скорость никогда не даёт приоритета. Поворачивающий уступает велосипедисту, который едет прямо." }
         ],
-        explanation_no: "Når du svinger og krysser sykkelfelt eller sykkelveg, har du vikeplikt for syklende som kjører rett fram, også de som kommer bakfra.",
-        explanation_ru: "При повороте через велополосу или велодорожку ты уступаешь велосипедистам, едущим прямо, в том числе догоняющим сзади.",
+        explanation_no: "Trafikkreglene § 7 nr 3: den som svinger, har vikeplikt for syklende som skal rett fram på kjørebanen, også de som kommer bakfra i sykkelfeltet.",
+        explanation_ru: "Trafikkreglene § 7 nr 3: поворачивающий уступает велосипедистам, которые едут прямо по проезжей части, в том числе догоняющим сзади по велополосе.",
         tip_ru: "Правое зеркало и взгляд через плечо перед каждым правым поворотом."
       };
     }),
@@ -350,29 +353,39 @@
     }),
 
     genR("prikker", () => {
+      /* 2 балла, 5 баллов, 21 балл */
+      const bRu = n => { const m10 = n % 10, m100 = n % 100; return n + " " + (m10 === 1 && m100 !== 11 ? "балл" : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? "балла" : "баллов"); };
       const nyFører = rnd([true, false]);
-      const gamle = rnd([0, 2, 3, 4, 5, 6]);
-      const alder = rnd([1, 2, 4]);
+      const gamle = rnd([2, 3, 4, 5, 6]);
+      /* у нового водителя (права меньше 2 лет) старые баллы могут быть только свежие */
+      const alder = nyFører ? 1 : rnd([1, 2, 4]);
       const nye = rnd([2, 3]);
       const gjeldende = alder > 3 ? 0 : gamle;
       const total = gjeldende + nye * (nyFører ? 2 : 1);
       const taper = total >= 8;
+      const jaNei = n => (n >= 8 ? "Ja" : "Nei");
+      const daNet = n => (n >= 8 ? "Да" : "Нет");
+      const wrongDouble = nyFører ? gjeldende + nye : gjeldende + nye * 2;
+      const wrongOld = gamle + nye * (nyFører ? 2 : 1);
       const opts = [
-        { text_no: taper ? `Ja: ${total} prikker, førerkortet ryker i 6 måneder` : `Nei: ${total} prikker, grensen er 8`, text_ru: taper ? `Да: ${total} баллов, права отбирают на 6 месяцев` : `Нет: ${total} баллов, порог 8`, correct: true },
-        { text_no: taper ? `Nei: ${total} prikker er under grensen` : `Ja: ${total} prikker er over grensen`, text_ru: taper ? `Нет: ${total} баллов ниже порога` : `Да: ${total} баллов выше порога`, correct: false,
-        why_no: `Regn på nytt: prikker som teller er ${total}, og grensen er 8.`, why_ru: `Пересчитай: засчитываемых баллов ${total}, порог — 8.` },
-        { text_no: nyFører ? `Nei: ${gjeldende + nye} prikker, prøveperioden spiller ingen rolle` : `Ja: ${gjeldende + nye * 2} prikker, alle prikker dobles`, text_ru: nyFører ? `Нет: ${gjeldende + nye} баллов, испытательный срок не важен` : `Да: ${gjeldende + nye * 2} баллов, все баллы удваиваются`, correct: false,
+        { text_no: taper ? `Ja: ${total} prikker, førerkortet ryker i 6 måneder` : `Nei: ${total} prikker, grensen er 8`, text_ru: taper ? `Да: ${bRu(total)}, права отбирают на 6 месяцев` : `Нет: ${bRu(total)}, порог 8`, correct: true },
+        { text_no: taper ? `Nei: ${total} prikker er under grensen` : `Ja: ${total} prikker er over grensen`, text_ru: taper ? `Нет: ${bRu(total)} — ниже порога` : `Да: ${bRu(total)} — выше порога`, correct: false,
+        why_no: `Regn på nytt: prikker som teller er ${total}, og grensen er 8.`, why_ru: `Пересчитай: засчитывается ${bRu(total)}, порог — 8.` },
+        { text_no: nyFører ? `${jaNei(wrongDouble)}: ${wrongDouble} prikker, prøveperioden spiller ingen rolle` : `${jaNei(wrongDouble)}: ${wrongDouble} prikker, alle nye prikker dobles`, text_ru: nyFører ? `${daNet(wrongDouble)}: ${bRu(wrongDouble)}, испытательный срок не важен` : `${daNet(wrongDouble)}: ${bRu(wrongDouble)}, новые баллы всегда удваиваются`, correct: false,
         why_no: nyFører ? "Feil: i prøveperioden (de første 2 årene) teller hver prikk dobbelt." : "Feil: prikkene dobles bare i prøveperioden, og den er over her.", why_ru: nyFører ? "Неверно: в испытательный срок (первые 2 года) каждый балл считается вдвое." : "Неверно: баллы удваиваются только в испытательный срок, а он здесь уже прошёл." },
-        { text_no: alder > 3 ? `Ja: gamle prikker teller alltid, ${gamle + nye * (nyFører ? 2 : 1)} totalt` : `Nei: prikker eldre enn 1 år teller ikke`, text_ru: alder > 3 ? `Да: старые баллы считаются всегда, всего ${gamle + nye * (nyFører ? 2 : 1)}` : `Нет: баллы старше 1 года не считаются`, correct: false,
-        why_no: "Prikker slettes etter 3 år, ikke 1 år, og de teller ikke evig.", why_ru: "Баллы сгорают через 3 года, а не через 1, и не считаются вечно." }
+        alder > 3
+          ? { text_no: `${jaNei(wrongOld)}: gamle prikker teller alltid, ${wrongOld} totalt`, text_ru: `${daNet(wrongOld)}: старые баллы считаются всегда, всего ${bRu(wrongOld)}`, correct: false,
+              why_no: "Prikker slettes 3 år etter overtredelsen. Prikkene fra 4 år siden teller ikke lenger.", why_ru: "Баллы сгорают через 3 года после нарушения. Баллы 4-летней давности уже не считаются." }
+          : { text_no: `${jaNei(nye * (nyFører ? 2 : 1))}: bare de nye prikkene teller`, text_ru: `${daNet(nye * (nyFører ? 2 : 1))}: считаются только новые баллы`, correct: false,
+              why_no: "De gamle prikkene er under 3 år gamle og teller fortsatt. Prikker slettes først 3 år etter overtredelsen.", why_ru: "Старым баллам меньше 3 лет, они ещё считаются. Баллы сгорают только через 3 года после нарушения." }
       ];
       return {
-        prompt_no: `Du ${nyFører ? "er i prøveperioden (fikk førerkort for under 2 år siden)" : "har hatt førerkort i 5 år"}. Du har ${gamle} prikker fra ${alder} år siden og får nå ${nye} nye. Mister du førerkortet?`,
-        prompt_ru: `Ты ${nyFører ? "в испытательном периоде (права меньше 2 лет)" : "с правами 5 лет"}. У тебя ${gamle} баллов ${alder}-летней давности, и сейчас ты получаешь ${nye} новых. Лишат ли прав?`,
+        prompt_no: `Du ${nyFører ? "er i prøveperioden (fikk førerkort for under 2 år siden)" : "har hatt førerkort i 5 år"}. Du har ${gamle} prikker fra ${alder === 1 ? "ett år siden" : alder + " år siden"} og får nå ${nye} nye. Mister du førerkortet?`,
+        prompt_ru: `Ты ${nyFører ? "в испытательном периоде (права меньше 2 лет)" : "с правами 5 лет"}. У тебя ${bRu(gamle)} за нарушение ${alder === 1 ? "годичной" : alder + "-летней"} давности, и сейчас ты получаешь ещё ${nye}. Лишат ли прав?`,
         image: null,
         options: opts,
-        explanation_no: `Prikker slettes etter 3 år (${alder > 3 ? "de gamle teller ikke lenger" : "de gamle teller fortsatt"}). ${nyFører ? "I prøveperioden dobles nye prikker: " + nye + " blir " + nye * 2 + "." : ""} Totalt ${total}; grensen for tap er 8.`,
-        explanation_ru: `Баллы стираются через 3 года (${alder > 3 ? "старые уже не считаются" : "старые ещё считаются"}). ${nyFører ? "В испытательный период новые баллы удваиваются: " + nye + " становятся " + nye * 2 + "." : ""} Итого ${total}; порог лишения 8.`,
+        explanation_no: `Prikker slettes 3 år etter overtredelsen (${alder > 3 ? "de gamle teller ikke lenger" : "de gamle teller fortsatt"}). ${nyFører ? "I prøveperioden dobles nye prikker: " + nye + " blir " + nye * 2 + "." : ""} Totalt ${total}; grensen for tap er 8.`,
+        explanation_ru: `Баллы сгорают через 3 года после нарушения (${alder > 3 ? "старые уже не считаются" : "старые ещё считаются"}). ${nyFører ? "В испытательный период новые баллы удваиваются: " + nye + " → " + nye * 2 + "." : ""} Итого ${bRu(total)}; порог лишения — 8.`,
         tip_ru: "Две проверки: не старше ли баллы 3 лет, и не удваиваются ли новые (первые 2 года с правами)."
       };
     }),
@@ -392,7 +405,7 @@
         { text_no: `${ok ? "Nei" : "Ja"}, grensen er ${ctx.limit === 5 ? 20 : 5} meter`, text_ru: `${ok ? "Нет" : "Да"}, предел ${ctx.limit === 5 ? 20 : 5} м`, correct: false,
         why_no: `Feil avstand: ${ctx.limit === 5 ? "5 meter gjelder gangfelt og vegkryss, 20 meter gjelder holdeplasser" : "20 meter gjelder holdeplasser, 5 meter gjelder gangfelt og vegkryss"}.`, why_ru: `Перепутан предел: ${ctx.limit === 5 ? "5 м — переход и перекрёсток, 20 м — остановка транспорта" : "20 м — остановка транспорта, 5 м — переход и перекрёсток"}.` },
         { text_no: "Ja, hvis det er lite trafikk", text_ru: "Да, если мало машин", correct: false,
-        why_no: "Avstandsreglene for parkering gjelder alltid, uavhengig av trafikkmengde.", why_ru: "Правила дистанции при парковке действуют всегда, независимо от плотности движения." }
+        why_no: "Stansforbudet i trafikkreglene § 17 gjelder alltid, uavhengig av trafikkmengde.", why_ru: "Запрет остановки по trafikkreglene § 17 действует всегда, независимо от плотности движения." }
       ];
       return {
         prompt_no: `Kan du stanse ${x} meter ${ctx.no}?`,
@@ -445,8 +458,8 @@
         prompt_ru: `Ты едешь ${v} км/ч по ${vaat ? "мокрой" : "сухой"} дороге. Какая примерно дистанция до машины впереди соответствует ${need} секундам?`,
         image: null,
         options: uniq.map((m, i) => ({ text_no: `Omtrent ${m} meter`, text_ru: `Примерно ${m} м`, correct: i === 0,
-          why_no: i === 0 ? null : `${m} meter tilsvarer omtrent ${(m / mps).toFixed(1)} sekunder i ${v} km/t, ikke ${need}.`,
-          why_ru: i === 0 ? null : `${m} м при ${v} км/ч — это примерно ${(m / mps).toFixed(1)} с, а не ${need}.` })),
+          why_no: i === 0 ? null : `${m} meter tilsvarer omtrent ${(m / mps).toFixed(1).replace(".", ",")} sekunder i ${v} km/t, ikke ${need}.`,
+          why_ru: i === 0 ? null : `${m} м при ${v} км/ч — это примерно ${(m / mps).toFixed(1).replace(".", ",")} с, а не ${need}.` })),
         explanation_no: `${v} km/t er ${Math.round(mps)} m/s. ${need} sekunder gir ${correct} meter. Tresekundersregelen gjelder tørr veg; på våt eller glatt veg bør du øke til 4–5 sekunder.`,
         explanation_ru: `${v} км/ч это ${Math.round(mps)} м/с. ${need} секунды дают ${correct} м. Правило трёх секунд для сухой дороги; на мокрой или скользкой увеличивай до 4–5.`,
         tip_ru: "Быстрый счёт: скорость в км/ч разделить на 3,6 — это метры в секунду. 90 км/ч = 25 м каждую секунду."

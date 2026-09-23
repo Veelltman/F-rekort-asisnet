@@ -178,7 +178,7 @@
       ["Du kan ikke krysse linjen for å kjøre forbi", "Нельзя пересекать линию для обгона"],
       ["Du kan krysse linjen når det er trygt", "Можно пересекать, если безопасно", "Heltrukken linje er absolutt: den kan ikke krysses selv om det ser trygt ut. Det er stiplet linje som kan krysses.", "Сплошная — абсолютный запрет, даже если кажется безопасно. Пересекать можно только прерывистую."],
       ["Linjen viser sykkelfelt", "Линия обозначает велополосу", "Sykkelfelt merkes med hvit linje og sykkelsymbol langs kanten, ikke med gul midtlinje.", "Велополоса обозначается белой линией и символом велосипеда у края, а не жёлтой осевой."],
-      ["Linjen markerer parkeringsplass", "Линия обозначает парковку", "Parkeringsplasser merkes med hvite linjer, og gul linje langs kanten betyr tvert imot stans- eller parkeringsforbud.", "Парковка размечается белыми линиями, а жёлтая линия у края, наоборот, означает запрет остановки или стоянки."]
+      ["Linjen markerer parkeringsplass", "Линия обозначает парковку", "Parkeringsplasser merkes med hvite linjer. En gul midtlinje skiller kjøreretningene og har ingenting med parkering å gjøre.", "Парковочные места размечают белыми линиями. Жёлтая осевая разделяет встречные направления и к парковке отношения не имеет."]
     ],
     "Heltrukken gul midtlinje er sperrelinje (oppmerking 1004): det må ikke kjøres på eller over den, eller til venstre for den. Den brukes der forbikjøring er farlig.",
     "Сплошная жёлтая осевая (sperrelinje) — пересекать нельзя. Стоит там, где обгон опасен.",
@@ -187,7 +187,7 @@
     q("m02", "Hva betyr en stiplet gul midtlinje?", "Что означает прерывистая жёлтая осевая линия?", [
       ["Du kan krysse linjen for å kjøre forbi hvis det er trygt", "Можно пересекать для обгона, если безопасно"],
       ["Forbikjøring forbudt", "Обгон запрещён", "Forbud mot forbikjøring vises med heltrukken linje eller eget skilt. Stiplet linje tillater kryssing.", "Запрет обгона обозначают сплошной линией или знаком. Прерывистая линия пересекать разрешает."],
-      ["Linjen markerer busstopp", "Линия обозначает остановку автобуса", "Busstopp merkes med gul sikksakklinje langs kanten, ikke med stiplet midtlinje.", "Автобусная остановка размечается жёлтым зигзагом у края, а не прерывистой осевой."],
+      ["Linjen markerer busstopp", "Линия обозначает остановку автобуса", "Holdeplass for buss vises med skilt 512, ikke med stiplet midtlinje.", "Автобусная остановка обозначается знаком 512, а не прерывистой осевой."],
       ["Du må stoppe ved linjen", "У линии нужно остановиться", "Midtlinjen skiller kjøreretningene og har ingenting med stopp å gjøre. Stopplinjen er en hvit tverrstripe.", "Осевая разделяет направления и к остановке отношения не имеет. Стоп-линия — белая поперечная полоса."]
     ],
     "Stiplet gul kjørefeltlinje (oppmerking 1000) kan krysses når det skjer i samsvar med trafikkreglene, for eksempel ved forbikjøring når det er trygt.",
@@ -218,7 +218,7 @@
       ["Vikelinje: du har vikeplikt", "Линия «уступи дорогу»"],
       ["Stopplinje: full stopp", "Стоп-линия: полная остановка", "Trekantene betyr vikeplikt, ikke full stopp. Full stopp kreves bare ved stoppskilt og stopplinje.", "Треугольники означают «уступи», а не полную остановку. Полная остановка нужна только при знаке STOP и стоп-линии."],
       ["Gangfelt", "Пешеходный переход", "Gangfelt har brede rektangulære striper, ikke trekanter.", "У перехода широкие прямоугольные полосы, а не треугольники."],
-      ["Fartshump", "Лежачий полицейский", "Fartshumper varsles med skilt og hvite trekanter som peker mot deg oppover humpen, men det er et annet mønster og en fysisk opphøyning i vegen.", "Лежачие полицейские обозначают знаком и другим рисунком на самом возвышении; vikelinje — это плоская разметка перед перекрёстком."]
+      ["Fartshump", "Лежачий полицейский", "En fartshump er en fysisk opphøyning i vegen og varsles med fareskilt 109. Haitenner på tvers betyr vikeplikt.", "Лежачий полицейский — это физическая неровность на дороге, о ней предупреждает знак 109. «Зубы» поперёк полосы означают «уступи дорогу»."]
     ],
     "Vikelinjen markerer hvor du skal vike. Den brukes sammen med vikepliktskiltet og i rundkjøringer.",
     "Vikelinje показывает, где уступать. Ставится вместе со знаком «уступи» и на кругах.",
