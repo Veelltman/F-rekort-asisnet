@@ -1155,6 +1155,97 @@
       "Мигающий жёлтый означает, что светофор не регулирует перекрёсток и требует особой осторожности. Без других знаков действует правило правой руки, как на обычном нерегулируемом перекрёстке.",
       "Мигающий жёлтый = светофора как бы нет. Смотри на знаки и на правило правой руки."),
 
+    q("050", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "north", kind: "bike" }] }),
+      "En syklist kommer ut fra en sykkelvei og skal inn på vegen din, i samme retning som deg. Det er ikke skilt eller lys. Hvem har vikeplikt?",
+      "Велосипедист выезжает с велодорожки на твою дорогу, в том же направлении, что и ты. Знаков и светофора нет. Кто уступает?",
+      [
+        ["Syklisten har vikeplikt for deg", "Велосипедист уступает тебе"],
+        ["Du har vikeplikt for syklisten, syklister har alltid forrang i trafikken", "Ты уступаешь велосипедисту — у велосипедистов всегда преимущество", "Syklister har ikke automatisk forrang. Den som forlater en sykkelvei og skal ut på vanlig veg, skal selv vike for trafikken der.", "У велосипедистов нет автоматического преимущества. Тот, кто съезжает с велодорожки на обычную дорогу, сам обязан уступить транспорту на ней."],
+        ["Høyreregelen avgjør, siden syklisten kommer fra venstre", "Решает правило правой руки — велосипедист слева", "Høyreregelen gjelder i kryss mellom veger, ikke når noen forlater en sykkelvei. Der gjelder en egen regel: syklisten viker.", "Правило правой руки действует на перекрёстках дорог, а не там, где кто-то съезжает с велодорожки. Там своё правило: уступает велосипедист."],
+        ["Den som kommer først har forrang", "Преимущество у того, кто подъехал первым", "Ankomsttidspunktet har ingen betydning her. Regelen er entydig: syklisten som forlater sykkelveien, skal vike.", "Момент прибытия тут роли не играет. Правило однозначное: велосипедист, съезжающий с велодорожки, обязан уступить."]
+      ],
+      "Trafikkreglene § 7 nr. 4: den som kjører ut fra sykkelveg, gangveg, fortau eller lignende, skal vike for trafikk på vegen han kjører ut på. Dette gjelder selv om syklisten skal samme vei som deg.",
+      "Trafikkreglene § 7 nr. 4: тот, кто выезжает с велодорожки, тротуара или похожего пути, обязан уступить транспорту на дороге, куда он выезжает. Это действует, даже если велосипедист едет туда же, куда и ты.",
+      "Запомни исключение: велосипедист на велодорожке не «главный». Съезжая на дорогу, он уступает сам."),
+
+    q("051", scene({ you: { from: "south", to: "east" }, others: [{ from: "north", to: "south", kind: "bike" }], peds: ["east"] }),
+      "Du skal svinge til høyre. En syklist kommer rett fram og krysser der du skal svinge, og en fotgjenger er på veg over gangfeltet på veien du svinger inn på. Hva gjør du?",
+      "Ты собираешься повернуть направо. Велосипедист едет прямо и пересекает твой путь, а пешеход переходит по зебре ту дорогу, на которую ты поворачиваешь. Что делаешь?",
+      [
+        ["Vike for både syklisten og fotgjengeren før jeg svinger", "Уступить и велосипедисту, и пешеходу, прежде чем повернуть"],
+        ["Vike bare for fotgjengeren, syklisten må passe seg selv", "Уступить только пешеходу — велосипедист пусть сам смотрит", "Trafikkreglene § 7 nr. 3 gir syklende samme beskyttelse som gående ved svinging. Du skal vike for begge.", "Trafikkreglene § 7 nr. 3 даёт велосипедистам ту же защиту, что и пешеходам, при повороте. Уступить нужно обоим."],
+        ["Svinge raskt forbi syklisten før fotgjengeren rekker fram", "Быстро проскочить мимо велосипедиста, пока пешеход не дошёл", "Å skynde seg forbi en syklist som kommer rett fram er nettopp det vikeplikten skal hindre, dette er farlig og feil.", "Спешить, чтобы проскочить перед велосипедистом, едущим прямо, — именно то, что должна предотвращать обязанность уступить. Это опасно и неверно."],
+        ["Vike bare for syklisten, fotgjengeren har ikke gått ut i feltet ennå", "Уступить только велосипедисту — пешеход ещё не вышел на переход", "Fotgjengeren er allerede i ferd med å krysse gangfeltet du svinger inn på, du skal vike for ham også.", "Пешеход уже переходит зебру той дороги, куда ты поворачиваешь, — ему тоже нужно уступить."]
+      ],
+      "Trafikkreglene § 7 nr. 3: den som svinger, skal vike for gående som er i ferd med å krysse den vegen svingen fører inn på, og for syklende som kjører rett fram. Begge skal sjekkes før du fullfører svingen.",
+      "Trafikkreglene § 7 nr. 3: поворачивающий водитель обязан уступить пешеходам, переходящим ту дорогу, куда ведёт поворот, и велосипедистам, едущим прямо. Перед завершением поворота нужно проверить и тех, и других.",
+      "Поворот направо — это два взгляда: назад-вправо (велосипед) и вперёд (пешеход на переходе)."),
+
+    q("052", null,
+      "Du har nettopp parkert bilen langs en gate der det er sykkelfelt rett ved siden av bilen. Hva bør du gjøre før du åpner bildøren?",
+      "Ты только что припарковался вдоль улицы, где прямо рядом с машиной проходит велополоса. Что нужно сделать, прежде чем открыть дверь?",
+      [
+        ["Se deg over skulderen og sjekke om det kommer en syklist, før du åpner døren forsiktig", "Оглянуться через плечо и проверить, не едет ли велосипедист, прежде чем аккуратно открыть дверь"],
+        ["Åpne døren raskt, syklister har plikt til å se opp for dører", "Быстро открыть дверь — велосипедисты сами обязаны следить за дверями", "Det er føreren som må sjekke for syklister før døren åpnes, ikke omvendt. En syklist rekker ofte ikke å reagere på en dør som åpnes brått.", "Именно водитель должен проверить, нет ли велосипедистов, прежде чем открыть дверь, а не наоборот. Велосипедист часто просто не успевает среагировать на резко открывшуюся дверь."],
+        ["Bruke høyre hånd til å åpne døren fra førersetet, det er nok", "Открыть дверь правой рукой с водительского места — этого достаточно", "Å bruke motsatt hånd hjelper deg å snu overkroppen og se bakover, men det erstatter ikke å faktisk sjekke om det kommer noen.", "Открывание дальней рукой помогает развернуть корпус и посмотреть назад, но само по себе не заменяет реальную проверку — велосипедиста всё равно нужно высматривать."],
+        ["Det er ikke noe å tenke på, sykkelfeltet er syklistens eget ansvar", "Тут не о чем думать — велополоса — это забота самого велосипедиста", "Å åpne en bildør rett foran en syklist kan forårsake en alvorlig ulykke. Ansvaret for å sjekke ligger hos deg som åpner døren.", "Открыть дверь прямо перед велосипедистом — это может привести к серьёзной аварии. Ответственность за проверку лежит на том, кто открывает дверь."]
+      ],
+      "Å åpne bildøren uten å se seg for («dooring») er en vanlig årsak til alvorlige sykkelulykker. Sjekk alltid i speilet og over skulderen for syklister før du åpner døren mot et sykkelfelt eller en kjørebane.",
+      "Открывание двери без проверки («дуринг») — частая причина серьёзных аварий с велосипедистами. Перед тем как открыть дверь в сторону велополосы или проезжей части, всегда проверяй зеркало и оглядывайся через плечо.",
+      "Правило «голландской ручки»: открывай дверь дальней от улицы рукой — тело само развернётся, и ты увидишь велосипедиста."),
+
+    q("053", null,
+      "Du har kjørt lenge på motorveien og merker at du blir søvnig og øynene faller igjen. Hva er tryggest å gjøre?",
+      "Ты долго едешь по автомагистрали и чувствуешь, что засыпаешь — глаза сами закрываются. Что безопаснее всего сделать?",
+      [
+        ["Finne nærmeste rasteplass eller parkeringsplass og stoppe for å hvile", "Найти ближайшую площадку отдыха или парковку и остановиться отдохнуть"],
+        ["Skru opp musikken og åpne vinduet, det holder deg våken lenge nok", "Включить музыку погромче и открыть окно — этого хватит, чтобы не заснуть", "Slike triks gir bare en kortvarig effekt. De fjerner ikke den underliggende trøttheten, og mikrosøvn kan komme uansett.", "Такие трюки дают лишь кратковременный эффект. Настоящая усталость никуда не девается, и микросон всё равно может наступить."],
+        ["Kjøre litt saktere enn normalt, så rekker du å reagere selv om du blir trøtt", "Ехать чуть медленнее обычного — так успеешь среагировать, даже если заснёшь", "Lavere fart reduserer ikke faren for mikrosøvn. Selv i lav fart mister du kontrollen fullstendig hvis du sovner.", "Меньшая скорость не снижает риск микросна. Даже на небольшой скорости, если заснуть, контроль над машиной теряется полностью."],
+        ["Fortsette til du kommer fram, korte pauser hjelper ikke uansett", "Ехать до конца пути — короткие остановки всё равно не помогут", "Korte pauser og hvile hjelper faktisk mye mot trøtthet. Å fortsette å kjøre trøtt er svært farlig og en vanlig årsak til utforkjøringsulykker.", "Короткие остановки и отдых реально помогают от усталости. Продолжать ехать сонным очень опасно и часто становится причиной съезда с дороги."]
+      ],
+      "Trøtthet bak rattet er en av de vanligste årsakene til alvorlige ulykker, spesielt på motorvei om natten. Eneste effektive tiltak er å stoppe og hvile, gjerne med en kort lur på 15–20 minutter.",
+      "Усталость за рулём — одна из самых частых причин тяжёлых аварий, особенно ночью на автомагистрали. Единственная действенная мера — остановиться и отдохнуть, желательно вздремнуть 15–20 минут.",
+      "Если веки тяжелеют — это уже не «я потерплю», это сигнал ехать на ближайшую стоянку."),
+
+    q("054", null,
+      "Du kjører nedover en lang, bratt bakke om vinteren på snø og is. Hva er lurest for å holde kontroll på farten?",
+      "Зимой ты едешь вниз по длинному крутому спуску по снегу и льду. Как разумнее всего контролировать скорость?",
+      [
+        ["Kjøre i et lavt gir og bruke motorbremsing, i tillegg til lette bremsetrykk", "Ехать на пониженной передаче, используя торможение двигателем, и слегка подтормаживать"],
+        ["Sette inn kraftig og lang bremsing hele veien ned", "Всю дорогу вниз тормозить сильно и долго", "Lang, kraftig bremsing på glatt føre øker faren for at hjulene mister grepet og bilen sklir ukontrollert.", "Долгое сильное торможение на скользком покрытии повышает риск, что колёса потеряют сцепление, и машину понесёт."],
+        ["Kjøre i fri (nøytral) for å spare drivstoff", "Ехать на нейтральной передаче, чтобы сэкономить топливо", "I fri gir mister du motorbremsingen og må stole helt på fotbremsen, det gir dårligere kontroll i bakken.", "На нейтральной передаче ты теряешь торможение двигателем и полагаешься только на педаль тормоза — контроль в спуске хуже."],
+        ["Øke farten litt for å komme fortere gjennom bakken", "Слегка увеличить скорость, чтобы быстрее проехать спуск", "Høyere fart i en bratt bakke på glatt føre gjør det enda vanskeligere å stoppe i tide hvis noe skjer.", "Более высокая скорость на скользком крутом спуске ещё больше усложняет остановку вовремя, если что-то случится."]
+      ],
+      "På glatt føre i bakker bør du bruke et lavt gir og la motorbremsingen ta mye av jobben, med forsiktige, lette bremsetrykk i tillegg. Det gir jevnere fartskontroll enn kraftig fotbremsing alene.",
+      "На скользком спуске стоит ехать на пониженной передаче и использовать торможение двигателем, слегка подтормаживая педалью. Это даёт более плавный контроль скорости, чем резкое торможение педалью само по себе.",
+      "Правило зимнего спуска: вниз — на той же передаче, на которой поднимался бы в эту горку."),
+
+    q("055", scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south", kind: "tram" }] }),
+      "Du skal svinge til venstre, og en sporvogn (trikk) kommer rett fram i samme kryss. Hvem har vikeplikt?",
+      "Ты поворачиваешь налево, и трамвай едет прямо через тот же перекрёсток. Кто уступает?",
+      [
+        ["Du har vikeplikt for trikken, uansett hva som ellers gjelder i krysset", "Ты уступаешь трамваю — независимо от прочих правил на этом перекрёстке"],
+        ["Trikken må vike siden du svinger og den kjører rett fram på skinner", "Уступает трамвай, раз ты поворачиваешь, а он просто едет по рельсам", "Sporvogn har vikeplikt foran seg fra alle andre trafikanter etter § 10, uansett om den kjører rett fram eller du svinger.", "У трамвая приоритет перед всеми остальными участниками движения по § 10, независимо от того, едет он прямо или ты поворачиваешь."],
+        ["Det avhenger av hvem som kom først til krysset", "Зависит от того, кто подъехал к перекрёстку первым", "Ankomsttidspunktet spiller ingen rolle her, trikken har forrang etter en egen regel, ikke etter høyreregelen.", "Момент прибытия тут ни при чём — у трамвая приоритет по отдельному правилу, а не по правилу правой руки."],
+        ["Høyreregelen avgjør, siden trikken kommer fra din venstre", "Решает правило правой руки — трамвай едет слева от тебя", "Høyreregelen gjelder ikke overfor sporvogn. Trikken har alltid forrang, uansett hvilken side den kommer fra.", "Правило правой руки не применяется к трамваю. У него приоритет всегда, независимо от того, с какой стороны он едет."]
+      ],
+      "Trafikkreglene § 10 nr. 2: kjørende skal vike for sporvogn. Dette gjelder foran alle andre vikepliktsregler, også når du svinger og trikken kjører rett fram.",
+      "Trafikkreglene § 10 nr. 2: водители обязаны уступать трамваю. Это действует прежде всех остальных правил приоритета — даже когда ты поворачиваешь, а трамвай едет прямо.",
+      "Трамвай — как король на шахматной доске: ему уступают всегда, никакие другие правила его не перебивают."),
+
+    q("056", scene({ you: { from: "south", to: "north" }, lights: { south: "red" } }),
+      "Du står i kø for rødt lys og telefonen din pipir med en melding. Har du lov til å lese eller skrive på håndholdt mobil nå?",
+      "Ты стоишь в очереди на красный свет, и телефон пикнул с сообщением. Можно ли читать или писать в телефоне прямо сейчас?",
+      [
+        ["Nei, kortvarig stans i kø eller ved rødt lys regnes som kjøring, håndholdt mobil er forbudt", "Нет, короткая остановка в пробке или на красный считается движением — телефон в руках запрещён"],
+        ["Ja, siden bilen står stille akkurat nå", "Да, ведь машина сейчас стоит на месте", "Bilen står bare midlertidig, ikke parkert. Kjøring omfatter også slike korte stopp, så håndholdt mobilbruk er fortsatt forbudt.", "Машина стоит лишь временно, а не припаркована. Понятие «за рулём» включает и такие короткие остановки, так что телефон в руках всё равно под запретом."],
+        ["Ja, så lenge du legger den fra deg igjen før lyset blir grønt", "Да, главное — отложить телефон до того, как загорится зелёный", "Det er ikke lov i det hele tatt å holde telefonen mens du kjører, uansett hvor raskt du legger den fra deg.", "Держать телефон в руке во время движения нельзя вообще — неважно, как быстро потом его отложить."],
+        ["Ja, men bare for å lese, ikke for å skrive", "Да, но только читать, не набирать текст", "Forbudet mot håndholdt mobil skiller ikke mellom å lese og å skrive, begge deler er ulovlig når bilen ikke er trygt parkert.", "Запрет на телефон в руках не различает чтение и набор текста — и то, и другое запрещено, пока машина не припаркована как следует."]
+      ],
+      "Håndholdt mobiltelefon er forbudt under kjøring, og det inkluderer korte stopp som kø eller rødt lys. Du kan bare bruke den håndholdt når bilen er trygt parkert.",
+      "Телефон в руках запрещён во время движения, и это включает короткие остановки — пробку или красный свет. Пользоваться им в руках можно только когда машина по-настоящему припаркована.",
+      "«Стоим на красном» — это ещё «за рулём», а не «припарковались». Телефон подождёт до настоящей стоянки."),
+
     /* ---------- Несколько правильных ответов ---------- */
     qm("m01", road({ crossing: true }),
       "Du nærmer deg et gangfelt. Hva skal du gjøre? Velg alle riktige.", "Ты подъезжаешь к пешеходному переходу. Что нужно делать? Выбери все верные.", [
@@ -1198,6 +1289,17 @@
     ],
     "Ved stoppskilt skal du stoppe helt opp bak stopplinjen, forsikre deg om at krysset og eventuelt gangfelt er fritt, og først da kjøre videre.",
     "У знака «Стоп» нужно полностью остановиться перед стоп-линией, убедиться, что перекрёсток и переход (если есть) свободны, и только потом ехать дальше.",
-    "Стоп значит стоп: колёса должны на мгновение полностью замереть, «почти ноль» не считается.")
+    "Стоп значит стоп: колёса должны на мгновение полностью замереть, «почти ноль» не считается."),
+
+    qm("m05", scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south" }], peds: ["west"] }),
+      "Du skal svinge til venstre i et kryss uten lys. Velg alle riktige.", "Ты поворачиваешь налево на перекрёстке без светофора. Выбери все верные.", [
+      ["Du viker for møtende bil som kjører rett fram", "Уступаешь встречной машине, едущей прямо", true],
+      ["Du viker for fotgjengere og syklister som krysser vegen du svinger inn på", "Уступаешь пешеходам и велосипедистам, переходящим дорогу, на которую поворачиваешь", true],
+      ["Du gir tegn til venstre i god tid før svingen", "Заранее включаешь левый поворотник", true],
+      ["Du har forrang fordi du kom fram til krysset først", "У тебя преимущество, потому что ты подъехал первым", false, "Ankomsttidspunktet gir ingen forrang ved venstresving. Du viker uansett for møtende trafikk og kryssende gående/syklende.", "Момент прибытия не даёт преимущества при повороте налево. Ты в любом случае уступаешь встречным и переходящим дорогу пешеходам/велосипедистам."]
+    ],
+    "Venstresving er den svakeste manøveren i et kryss: du viker for møtende trafikk som kjører rett fram eller svinger til høyre, og for gående og syklende som krysser vegen du svinger inn på. Gi tegn i god tid.",
+    "Поворот налево — самый «слабый» манёвр на перекрёстке: уступаешь встречному транспорту, едущему прямо или поворачивающему направо, и пешеходам с велосипедистами, переходящим дорогу, на которую поворачиваешь. Заранее включай поворотник.",
+    "При повороте налево ты в долгу у всех: и у встречных, и у пешеходов на переходе.")
   ];
 })();

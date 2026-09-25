@@ -473,6 +473,41 @@
       "Trafikkreglene § 15 nr 4: стояночные огни включаются при остановке или стоянке на дороге, когда освещение или видимость этого требуют, чтобы машину было видно. На тёмной загородной дороге без фонарей это обязательно.",
       "За городом в темноте припаркованная машина без света — ловушка для встречных. Включай стояночные огни."),
 
+    q("063", "Du dobler farten, fra 40 til 80 km/t. Hva skjer omtrent med reaksjonslengden (strekningen du kjører før du rekker å bremse)?",
+      "Ты удваиваешь скорость — с 40 до 80 км/ч. Что примерно происходит с длиной реакции (расстоянием, которое проезжаешь, прежде чем успеваешь затормозить)?",
+      [["Den dobles omtrent, siden reaksjonstiden er den samme uansett fart", "Она примерно удваивается, потому что время реакции одинаковое независимо от скорости"], ["Den firedobles, akkurat som bremselengden", "Она увеличивается вчетверо — так же, как тормозной путь", "Det er bremselengden som firedobles ved dobbel fart, ikke reaksjonslengden. Reaksjonslengden følger farten rett fram, ikke i annen potens.", "Вчетверо увеличивается именно тормозной путь при удвоении скорости, а не длина реакции. Длина реакции растёт прямо пропорционально скорости, а не в квадрате."], ["Den er uendret, reaksjonstiden justerer seg etter farten", "Она не меняется — время реакции подстраивается под скорость", "Reaksjonstiden er omtrent den samme (rundt ett sekund) uansett fart, derfor øker reaksjonslengden når farten øker.", "Время реакции примерно одинаковое (около секунды) при любой скорости, поэтому с ростом скорости растёт и длина реакции."], ["Den halveres, fordi du rekker å reagere raskere i høy fart", "Она уменьшается вдвое, потому что на высокой скорости реагируешь быстрее", "Høyere fart gjør deg ikke raskere til å reagere, reaksjonstiden er den samme, så lengden du rekker å kjøre øker.", "На высокой скорости реакция быстрее не становится — время реакции то же самое, поэтому и расстояние, которое успеваешь проехать, растёт."]],
+      "Reaksjonslengden er farten multiplisert med reaksjonstiden (omtrent ett sekund), så den øker rett proporsjonalt med farten. Bremselengden, derimot, øker med farten i annen potens og firedobles når farten dobles.",
+      "Длина реакции — это скорость, умноженная на время реакции (около секунды), поэтому она растёт прямо пропорционально скорости. А вот тормозной путь растёт пропорционально квадрату скорости и увеличивается вчетверо при удвоении скорости.",
+      "Запомни разницу: длина реакции растёт линейно (×2), тормозной путь — квадратично (×4)."),
+
+    q("064", "I en gitt fart er reaksjonslengden 14 meter og bremselengden 14 meter. Hvor lang er stopplengden?",
+      "На определённой скорости длина реакции — 14 метров, а тормозной путь — тоже 14 метров. Чему равен остановочный путь?",
+      [["28 meter, siden stopplengde er reaksjonslengde pluss bremselengde", "28 метров, ведь остановочный путь — это длина реакции плюс тормозной путь"], ["14 meter, det er den lengste av de to", "14 метров — это наибольшее из двух значений", "Stopplengden er ikke den lengste enkeltstrekningen, den er summen av begge strekningene til sammen.", "Остановочный путь — это не наибольший из отрезков по отдельности, а сумма обоих отрезков вместе."], ["7 meter, gjennomsnittet av de to", "7 метров — среднее из двух значений", "Stopplengden er ikke et gjennomsnitt, bilen kjører gjennom begge strekningene etter hverandre, så de legges sammen.", "Остановочный путь — не среднее значение: машина проезжает оба отрезка один за другим, поэтому их складывают."], ["196 meter, de to strekningene multipliseres", "196 метров — отрезки нужно перемножить", "Reaksjonslengde og bremselengde er to strekninger etter hverandre, de skal legges sammen, ikke multipliseres.", "Длина реакции и тормозной путь — это два отрезка друг за другом, их нужно складывать, а не перемножать."]],
+      "Stopplengde = reaksjonslengde + bremselengde. Bilen kjører først reaksjonslengden mens du oppfatter faren og flytter foten til bremsen, deretter bremselengden mens bilen bremser ned til stopp.",
+      "Остановочный путь = длина реакции + тормозной путь. Сначала машина проезжает длину реакции, пока ты замечаешь опасность и переносишь ногу на тормоз, затем — тормозной путь, пока машина тормозит до полной остановки.",
+      "Стоппленгде — это сумма, а не среднее и не максимум. Складывай оба числа."),
+
+    q("065", "Hva kjennetegner et påbudsskilt?",
+      "Что характерно для предписывающего знака (påbudsskilt)?",
+      [["Det er rundt og blått, og viser noe du er pålagt å gjøre", "Он круглый и синий, показывает то, что тебе предписано сделать"], ["Det er trekantet med rød kant", "Он треугольный с красной каймой", "Trekantet med rød kant er formen på et fareskilt, ikke et påbudsskilt.", "Треугольная форма с красной каймой — это предупреждающий знак, а не предписывающий."], ["Det viser bare et forslag, ikke noe du må følge", "Он только предлагает, а не обязывает", "Påbudsskilt er bindende, ikke en anbefaling. Du er pålagt å følge det.", "Предписывающий знак обязателен, а не рекомендация — его нужно выполнять."], ["Det er likt et opplysningsskilt, bare med en annen farge", "Он такой же, как информационный знак, просто другого цвета", "Opplysningsskilt gir bare informasjon uten plikt, mens påbudsskilt pålegger deg noe konkret.", "Информационный знак просто информирует без обязательства, а предписывающий требует конкретного действия."]],
+      "Påbudsskilt er runde med blå bunnfarge, for eksempel pil som viser påbudt kjøreretning eller påbudt sykkelfelt. De forteller hva du MÅ gjøre, i motsetning til fareskilt (advarsel) og forbudsskilt (forbud).",
+      "Предписывающие знаки круглые с синим фоном, например стрелка, показывающая обязательное направление, или обязательная велополоса. Они говорят, что ты ОБЯЗАН сделать — в отличие от предупреждающих (предупреждение) и запрещающих (запрет) знаков.",
+      "Синий круг — делай. Белый круг с красным — не делай. Треугольник — берегись."),
+
+    q("066", "Hvilken form og farge har et typisk opplysningsskilt, for eksempel skiltet for motorveg?",
+      "Какая форма и цвет у типичного информационного знака, например у знака автомагистрали?",
+      [["Firkantet (rektangulært), ofte blått eller hvitt, uten forbud eller påbud", "Прямоугольный, часто синий или белый, без запретов и предписаний"], ["Trekantet med rød kant, som varsler en fare", "Треугольный с красной каймой, предупреждает об опасности", "Det er fareskilt, ikke opplysningsskilt. Opplysningsskilt er firkantet og gir bare informasjon.", "Это предупреждающий знак, а не информационный. Информационный знак прямоугольный и просто информирует."], ["Rundt med rød kant og hvit bunn, som forbyr noe", "Круглый с красной каймой и белым фоном — что-то запрещает", "Det beskriver et forbudsskilt. Opplysningsskilt forbyr ingenting, det bare informerer.", "Это описание запрещающего знака. Информационный ничего не запрещает — он просто сообщает информацию."], ["Det finnes ikke noen egen skiltform for informasjon, alt slås sammen med påbudsskilt", "Отдельной формы для информационных знаков нет, всё объединено с предписывающими", "Opplysningsskilt er en egen kategori (500) med egen firkantet form, atskilt fra de runde påbudsskiltene.", "Информационные знаки — отдельная категория (500) со своей прямоугольной формой, отдельно от круглых предписывающих."]],
+      "Opplysningsskilt (kategori 500) er som regel firkantede og gir informasjon, for eksempel om motorveg, parkering eller stedsnavn. De forbyr eller påbyr ingenting i seg selv, i motsetning til forbuds- og påbudsskilt.",
+      "Информационные знаки (категория 500) обычно прямоугольные и дают информацию — например про автомагистраль, парковку или название места. Сами по себе они ничего не запрещают и не предписывают, в отличие от запрещающих и предписывающих знаков.",
+      "Форма — главная подсказка: круг решает (запрет/предписание), треугольник предупреждает, прямоугольник просто информирует."),
+
+    q("067", "Er det lov å bruke tåkelys sammen med nærlys?",
+      "Можно ли использовать противотуманные фары одновременно с ближним светом?",
+      [["Nei, tåkelys skal ikke brukes sammen med nærlys", "Нет, противотуманки нельзя использовать вместе с ближним светом"], ["Ja, det er alltid greit å kombinere dem", "Да, их всегда можно сочетать", "Trafikkreglene § 15 nr. 5 tillater ikke at tåkelys brukes sammen med nærlys.", "Trafikkreglene § 15 nr. 5 не разрешает использовать противотуманные фары вместе с ближним светом."], ["Ja, men bare om vinteren", "Да, но только зимой", "Årstiden endrer ikke regelen, kombinasjonen er ikke tillatt uansett sesong.", "Время года тут ни при чём — сочетание не разрешено в любой сезон."], ["Nei, tåkelys er forbudt å bruke i det hele tatt", "Нет, противотуманки вообще запрещено использовать", "Tåkelys er lov å bruke i tåke eller kraftig nedbør, det er kombinasjonen med nærlys som ikke er tillatt.", "Противотуманки разрешено использовать в тумане или сильных осадках — не разрешено именно сочетать их с ближним светом."]],
+      "Trafikkreglene § 15 nr. 5: tåkelys skal ikke brukes sammen med nærlys. De er ment som et alternativ ved dårlig sikt, ikke som en kombinasjon.",
+      "Trafikkreglene § 15 nr. 5: противотуманные фары нельзя использовать вместе с ближним светом. Они задуманы как альтернатива при плохой видимости, а не как дополнение к ближнему.",
+      "Туманки — это «или/или» с ближним, а не «плюс» к нему."),
+
     /* ---------- Несколько правильных ответов ---------- */
     qm("m01", "Hvilket utstyr er lovpålagt å ha i en personbil? Velg alle riktige.", "Какое оборудование обязательно по закону в легковой машине? Выбери все верные.", [
       ["Varseltrekant", "Знак аварийной остановки", true],
@@ -612,7 +647,17 @@
     ],
     "Vegtrafikkloven § 12: alle som er innblandet skal straks stanse, hjelpe skadde, og oppgi navn og adresse. Ved personskade som ikke er ubetydelig skal politiet varsles, og du skal ikke forlate stedet uten samtykke. Ved bare materiell skade fyller partene ut skademelding.",
     "Vegtrafikkloven § 12: все участники обязаны немедленно остановиться, помочь пострадавшим и сообщить имя и адрес. При травмах, которые не пустяковые, уведомляют полицию и не покидают место без её согласия. При только материальном ущербе стороны заполняют skademelding.",
-    "Три обязанности: остановиться, помочь, назваться. Травма — плюс полиция.")
+    "Три обязанности: остановиться, помочь, назваться. Травма — плюс полиция."),
+
+    qm("m15", "Hvor er forbikjøring forbudt, uansett fartsgrense? Velg alle riktige.", "Где обгон запрещён независимо от ограничения скорости? Выбери все верные.", [
+      ["Ved uoversiktlig bakketopp", "На вершине подъёма с плохим обзором", true],
+      ["I uoversiktlig sving", "В повороте с плохим обзором", true],
+      ["Rett foran eller i et gangfelt", "Прямо перед или на пешеходном переходе", true],
+      ["I en 30-sone, selv om vegen er rett og oversiktlig", "В зоне 30, даже если дорога прямая и просматривается", false, "En lav fartsgrense alene forbyr ikke forbikjøring, det er sikten og situasjonen som avgjør.", "Само по себе низкое ограничение не запрещает обгон — решает видимость и ситуация."]
+    ],
+    "Forbikjøring er forbudt der sikten er for dårlig til å vurdere om det er trygt, for eksempel ved bakketopp og uoversiktlig sving, og rett foran eller i gangfelt der fotgjengere kan komme til syne. Fartsgrensen alene avgjør ikke dette.",
+    "Обгон запрещён там, где видимость слишком плохая, чтобы оценить безопасность — например на вершине подъёма, в непросматриваемом повороте и прямо перед переходом или на нём, где могут появиться пешеходы. Само по себе ограничение скорости на это не влияет.",
+    "Спроси себя: вижу ли я достаточно далеко вперёд? Если нет — обгона нет, независимо от знака скорости.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

@@ -164,6 +164,14 @@
     w("131", "sikkerhetsavstand", "безопасная дистанция", "Hold sikkerhetsavstand til bilen foran, spesielt i høy fart.", "Держи безопасную дистанцию до машины впереди, особенно на высокой скорости.", "Приоритет"),
     w("132", "brøytebil", "снегоуборочная машина", "Vær forsiktig med å kjøre forbi en brøytebil, sikten framover er dårlig.", "Осторожно с обгоном снегоуборочной машины — за ней плохо видно дорогу впереди.", "Условия"),
     w("133", "kjettingpåbud", "обязательное использование цепей", "Kjettingpåbud gjelder på enkelte fjelloverganger om vinteren.", "На некоторых горных перевалах зимой обязательны цепи противоскольжения.", "Условия"),
-    w("134", "møtende trafikk", "встречное движение", "Blend ned for møtende trafikk i god tid.", "Заранее переключайся на ближний свет для встречного движения.", "Приоритет")
+    w("134", "møtende trafikk", "встречное движение", "Blend ned for møtende trafikk i god tid.", "Заранее переключайся на ближний свет для встречного движения.", "Приоритет"),
+
+    /* ---------- Дорога и знаки ---------- */
+    w("135", "fartshump", "лежачий полицейский", "Senk farten når du ser en fartshump i veien.", "Снизь скорость, когда видишь лежачего полицейского.", "Дорога"),
+    w("136", "autovern", "дорожное ограждение (отбойник)", "Autovernet hindrer bilen i å kjøre ut i grøfta.", "Отбойник не даёт машине съехать в кювет.", "Дорога"),
+    w("137", "vegarbeid", "дорожные работы", "Ved vegarbeid skal du senke farten og følge midlertidig skilting.", "На дорожных работах нужно снизить скорость и следовать временным знакам.", "Дорога"),
+    w("138", "midtdeler", "физический разделитель полос", "Motorveg har vanligvis en fysisk midtdeler mellom kjøreretningene.", "На автомагистрали обычно есть физический разделитель между направлениями движения.", "Дорога"),
+    w("139", "blålys", "синий проблесковый маячок", "Utrykningskjøretøy bruker blålys og sirene for å varsle at de kommer.", "Спецтранспорт включает синюю мигалку и сирену, чтобы предупредить о своём приближении.", "Приоритет"),
+    w("140", "refleks", "светоотражатель (для пешеходов)", "Fotgjengere bør bruke refleks når de går langs mørk vei uten fortau.", "Пешеходам стоит носить светоотражатель, когда они идут по тёмной дороге без тротуара.", "Условия")
   ];
 })();
