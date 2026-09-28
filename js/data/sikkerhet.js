@@ -463,6 +463,57 @@
        ["Reservehjul", "Запасное колесо", false, "Mange biler har reparasjonssett i stedet. Reservehjul er ikke påbudt.", "У многих машин вместо запаски ремкомплект. Запаска не обязательна."]],
       "Forskrift om bruk av kjøretøy § 1-6: i bil skal det være minst én varseltrekant og minst én refleksvest som ligger lett tilgjengelig for føreren.",
       "Forskrift om bruk av kjøretøy § 1-6: в машине должны быть минимум один треугольник и минимум один жилет, лежащий под рукой у водителя.",
-      "На экзамене попросят найти жилет и треугольник — знай, где они лежат в учебной машине.")
+      "На экзамене попросят найти жилет и треугольник — знай, где они лежат в учебной машине."),
+
+    /* ---------- Дополнение по листовке ---------- */
+    q("041", "vognkort", "Hvilke konsekvenser kan det få å kjøre med en tilhenger som har for stor tillatt totalvekt for bilen eller førerkortet ditt?",
+      "Чем грозит прицеп, разрешённая масса которого больше, чем допускают машина или твои права?",
+      [["Det er ulovlig, og hvis hengeren er tung, får du dårligere veigrep på forhjulene, dårligere kursstabilitet, lengre bremselengde og blending", "Это незаконно, а если прицеп тяжёлый — хуже сцепление передних колёс, устойчивость, длиннее тормозной путь и ослепление встречных"],
+       ["Ingenting, så lenge hengeren er tom", "Ничем, пока прицеп пустой", "Det er tillatt totalvekt i vognkortet som teller, ikke hvor mye som ligger i hengeren akkurat nå.", "Считается разрешённая полная масса по документам, а не то, сколько сейчас лежит в прицепе."],
+       ["Bare et lite gebyr, det påvirker ikke kjøringen", "Только небольшой штраф, на езду не влияет", "En for tung henger gjør bilen ustabil og øker bremselengden. Det er en trafikkfare, ikke bare en formalitet.", "Слишком тяжёлый прицеп делает машину неустойчивой и удлиняет торможение. Это опасность, а не формальность."],
+       ["Det er lov hvis du kjører under 60 km/t", "Можно, если ехать медленнее 60 км/ч", "Vektgrensene gjelder uansett fart.", "Ограничения по массе действуют при любой скорости."]],
+      "Grensene i vognkortet og førerkortet gjelder tillatt totalvekt. Bryter du dem, kjører du ulovlig, og er hengeren faktisk tung, blir bilen vanskeligere å styre og stoppe.",
+      "Ограничения из vognkort и прав относятся к разрешённой полной массе. Превысил — едешь незаконно, а если прицеп действительно тяжёлый, машиной труднее управлять и тормозить.",
+      "Ответ для экзамена: «Ulovlig» — и дальше те же четыре слова: veigrep, kursstabilitet, bremselengde, blending."),
+
+    q("042", "dekk", "Hvordan kontrollerer du at lufttrykket i forhjulene er riktig?",
+      "Как проверить, что давление в передних шинах правильное?",
+      [["Mål med en lufttrykkmåler, helst når dekkene er kalde, og sammenlign med tallet for bilen", "Измерить манометром, лучше на холодных шинах, и сравнить с цифрой для этой машины"],
+       ["Sparke på dekket — kjennes det hardt, er trykket riktig", "Пнуть колесо — если твёрдое, давление в норме", "Et dekk kan mangle mye luft og likevel kjennes hardt. Bare en måler viser trykket sikkert.", "Шина может быть сильно недокачана и всё равно казаться твёрдой. Точно покажет только манометр."],
+       ["Se om dekket er like høyt som de andre", "Посмотреть, такой же ли высоты шина, как остальные", "Visuelt ser du bare svært lavt trykk. Små avvik krever måler.", "На глаз видно только сильно спущенную шину. Небольшую разницу покажет только манометр."],
+       ["Det kan bare gjøres på verksted", "Это можно сделать только в сервисе", "Lufttrykkmåler finnes på de fleste bensinstasjoner, og du kan måle selv.", "Манометр есть почти на каждой заправке — можно измерить самому."]],
+      "Visuelt ser du bare et dekk som er nesten flatt. Riktig kontroll gjøres med lufttrykkmåler når dekkene er kalde. Riktig trykk står i instruksjonsboka, i døråpningen eller på tanklokket.",
+      "На глаз видно только почти спущенное колесо. Правильная проверка — манометром на холодных шинах. Нужное давление указано в инструкции, в проёме двери или на лючке бака.",
+      "После поездки шины тёплые и давление выше — мерь до поездки или сделай поправку."),
+
+    q("043", "styring", "Hvordan kontrollerer du om bilen er retningsstabil når du prøvekjører?",
+      "Как проверить на ходу, держит ли машина прямую?",
+      [["Kjør rett fram på jevn veg i ca. 30 km/t og løsne grepet på rattet — bilen skal gå rett fram", "Ехать прямо по ровной дороге около 30 км/ч и ослабить хват руля — машина должна ехать прямо"],
+       ["Slipp rattet helt i 80 km/t", "Полностью отпустить руль на 80 км/ч", "I høy fart er det farlig å slippe rattet. Kontrollen gjøres i lav fart med løst grep.", "На высокой скорости отпускать руль опасно. Проверяют на малой скорости, слегка ослабив хват."],
+       ["Se om rattet står rett når bilen er parkert", "Посмотреть, ровно ли стоит руль у припаркованной машины", "Retningsstabilitet kjennes i fart, ikke når bilen står.", "Устойчивость на прямой проверяют на ходу, а не на стоянке."],
+       ["Sving brått fra side til side", "Резко вилять из стороны в сторону", "Det tester ikke om bilen holder retningen og er farlig.", "Это не проверяет, держит ли машина прямую, и опасно."]],
+      "Med løst rattgrep i lav fart på rett, jevn veg skal bilen holde retningen. Drar den til en side, kan lufttrykket i forhjulene være ulikt, eller forstillingen feil.",
+      "С ослабленным хватом на малой скорости по ровной прямой машина должна ехать прямо. Если тянет в сторону — разное давление в передних шинах или неправильный развал-схождение.",
+      "Та же проверка, что и для тормозов: 30 км/ч и «лёгкие руки» на руле."),
+
+    q("044", "sikt", "Hvordan stiller du inn varmeapparatet slik du vil ha det under vanlig kjøring om vinteren?",
+      "Как настроить печку для обычной езды зимой?",
+      [["Passe varme, luft fordelt mot frontruta og føttene, og friskluft slik at rutene ikke dugger", "Умеренное тепло, поток на лобовое стекло и в ноги, свежий воздух — чтобы стёкла не запотевали"],
+       ["Resirkulering hele turen, så blir det varmest", "Рециркуляция всю поездку — так теплее всего", "Med resirkulering blir fuktigheten fra pusten værende i bilen, og rutene dugger.", "При рециркуляции влага от дыхания остаётся в салоне, и стёкла запотевают."],
+       ["All luft mot føttene og ingenting mot ruta", "Весь воздух в ноги, на стекло ничего", "Uten luft mot ruta kan den dugge eller fryse til under kjøring.", "Без обдува стекло может запотеть или обмёрзнуть прямо на ходу."],
+       ["Slå av varmen for å spare drivstoff", "Выключить печку, чтобы сэкономить топливо", "Uten varme dugger og ises rutene, og sikten blir dårlig.", "Без печки стёкла запотевают и обмерзают, обзор пропадает."]],
+      "Under kjøring vil du ha god sikt hele tiden: noe av lufta mot frontruta, resten mot føttene, friskluft inn og gjerne AC for å tørke lufta.",
+      "Во время езды нужен постоянный обзор: часть воздуха на лобовое, остальное в ноги, свежий воздух снаружи и по возможности кондиционер, чтобы сушить воздух.",
+      "Разница с заданием «как можно быстрее»: там всё на максимум, а для езды — умеренно, но без рециркуляции."),
+
+    q("045", "bremser", "Bilen trekker skjevt når du bremser. Hva kan årsaken være?",
+      "Машину уводит в сторону при торможении. В чём может быть причина?",
+      [["Feil med bremsene: de bremser ulikt på venstre og høyre side", "Неисправность тормозов: слева и справа они тормозят по-разному"],
+       ["For mye drivstoff i tanken", "Слишком много топлива в баке", "Drivstoffmengden gir ikke skjevtrekk ved bremsing.", "Количество топлива не вызывает увод при торможении."],
+       ["At du bremset for mykt", "Слишком мягко тормозил", "Hvor hardt du bremser, gir ikke skjevtrekk når bremsene er i orden.", "Сила нажатия не вызывает увод, если тормоза исправны."],
+       ["At ABS virker som den skal", "ABS работает как надо", "En ABS som virker, gir ikke skjevtrekk. Den hindrer at hjulene låser seg.", "Исправная ABS не уводит машину — она не даёт колёсам заблокироваться."]],
+      "Skjevtrekk ved bremsing betyr at bremsene virker ulikt på hver side, for eksempel på grunn av slitte eller skadde deler. Det må repareres på verksted.",
+      "Увод при торможении значит, что тормоза с разных сторон работают неодинаково — например, из-за изношенных или повреждённых деталей. Это чинят в сервисе.",
+      "Не путай: тянет всё время — давление или развал-схождение; тянет только при торможении — тормоза.")
   ];
 })();

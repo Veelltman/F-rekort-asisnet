@@ -198,6 +198,13 @@ main {
   padding: 24px var(--gutter) 72px;
 }
 
+/* Планшет: верхнее меню со словами не помещалось рядом с языком и профилем — оставляем значки
+   (подпись скрыта визуально, но читается экранным диктором) */
+@media (min-width: 720px) and (max-width: 1023px) {
+  .nav a { padding: 8px 10px; }
+  .nav a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
 /* Мобильная нижняя панель */
 @media (max-width: 719px) {
   .topbar-inner { height: 54px; }
