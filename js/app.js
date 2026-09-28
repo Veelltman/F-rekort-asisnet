@@ -523,6 +523,8 @@
         modeCard(tr("Вся тема"), `${tr("Все")} ${all.length} ${tr("вопросов в случайном порядке.")}`, p.key, "all"),
         modeCard(tr("Только мои ошибки"), weak.length ? `${weak.length} ${tr("вопросов, где ты ошибался.")}` : tr("Пока нет ошибок в этой теме."), p.key, "weak", false, !weak.length)
       ];
+      /* Проверка машины: ещё и все пункты по порядку, как в листовке trafikkstasjonen */
+      if (all.some(q => q.n)) modes.splice(3, 0, modeCard(tr("По порядку листовки"), `${all.length} ${tr("вопросов в том же порядке, что и в листовке с trafikkstasjonen.")}`, p.key, "ordered"));
     }
     view.innerHTML = `
       <button class="btn btn-ghost" onclick="go('home')">${tr("Главная")}</button>
@@ -553,6 +555,7 @@
       case "due": set = S.getDueQuestions(byCat(all)); label = tr("К повторению:") + " " + t.title_ru + catLabel; break;
       case "new": set = S.getUnseenFirst(byCat(all)).slice(0, 10); label = tr("Новое:") + " " + t.title_ru + catLabel; break;
       case "all": set = byCat(all); label = t.title_ru + catLabel; break;
+      case "ordered": set = all.slice().sort((a, b) => (a.n || 999) - (b.n || 999)); label = t.title_ru; break;
       case "meaning": set = shuffle(byCat(k.meaning)).slice(0, 15); label = tr("Что означает знак") + catLabel; break;
       case "pick": set = shuffle(byCat(k.pick)).slice(0, 15); label = tr("Найди знак") + catLabel; break;
       case "category": set = shuffle(byCat(k.category)).slice(0, 15); label = tr("Тип знака") + catLabel; break;
@@ -564,6 +567,7 @@
     view.innerHTML = "";
     window.QuizEngine.start(view, set, {
       title: label,
+      keepOrder: p.mode === "ordered",
       exitLabel: tr("К теме"),
       onExit: () => go("topic", { key: p.key })
     });

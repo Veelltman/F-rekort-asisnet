@@ -37,7 +37,7 @@ Git identity не настроен глобально — коммитить т�
 - `js/data/situational.js` — ручные ситуации + функция `scene()` (схемы перекрёстков, правостороннее движение, круг против часовой)
 - `js/data/rules.js` — правила; ставки forenklet forelegg с 15.02.2026 (индексируются ежегодно в феврале — при смене года пересверить с tryggeveier.no / lovdata.no)
 - `js/data/generated.js` — генераторы: движок приоритета для перекрёстков и числовые задачи (штрафы, баллы, дистанции, прицеп)
-- `js/data/sikkerhet.js` — тема «Sikkerhetskontroll» (48 вопросов к практическому экзамену: vognkort, шины, свет, тормоза, руль, обзор, под капотом, снаряжение; по листовке trafikkskole от друга). В экзамен teoriprøven и «Задание дня» не входит — только отдельная тема. Робот её не пополняет.
+- `js/data/sikkerhet.js` — тема «Sikkerhetskontroll» (72 вопроса — ровно пункты листовки «Sikkerhetskontroll av bil» с trafikkstasjonen, поле `n` = номер пункта; режим «По порядку листовки» = mode ordered). В экзамен teoriprøven и «Задание дня» не входит — только отдельная тема. Робот её не пополняет.
 - `js/data/vocabulary.js` — лексика (официальные термины: trafikkskole, trafikklærer, tettbygd strøk)
 - `CONTRIBUTING-BOT.md` — формат данных и требования к контенту (для робота и для людей)
 

@@ -96,6 +96,8 @@
     "Все знаки Норвегии: значение, поиск по названию, тип знака, разметка.": { uk: "Усі знаки Норвегії: значення, пошук за назвою, тип знака, розмітка.", en: "All Norwegian signs: meaning, find by name, sign type, road markings.", no: "Alle norske skilt: betydning, finn etter navn, skilttype, oppmerking." },
     "Ситуационные задачи": { uk: "Ситуаційні задачі", en: "Traffic situations", no: "Trafikksituasjoner" },
     "Кто кому уступает: перекрёстки, круг, повороты, автомагистраль.": { uk: "Хто кому поступається: перехрестя, кільце, повороти, автомагістраль.", en: "Who yields to whom: junctions, roundabouts, turns, motorways.", no: "Hvem viker for hvem: kryss, rundkjøring, svinger, motorveg." },
+    "По порядку листовки": { uk: "За порядком листівки", en: "In handout order", no: "I rekkefølge som arket" },
+    "вопросов в том же порядке, что и в листовке с trafikkstasjonen.": { uk: "питань у тому ж порядку, що й у листівці з trafikkstasjonen.", en: "questions in the same order as the trafikkstasjon handout.", no: "spørsmål i samme rekkefølge som arket fra trafikkstasjonen." },
     "Проверка машины": { uk: "Перевірка авто", en: "Vehicle safety check", no: "Sikkerhetskontroll" },
     "Вопросы экзаменатора на практическом экзамене: шины, свет, тормоза, руль, под капотом.": { uk: "Питання екзаменатора на практичному іспиті: шини, світло, гальма, кермо, під капотом.", en: "Examiner questions at the driving test: tyres, lights, brakes, steering, under the bonnet.", no: "Spørsmål fra sensor på oppkjøringen: dekk, lys, bremser, styring, motorrom." },
     "Правила и штрафы": { uk: "Правила і штрафи", en: "Rules and fines", no: "Regler og sanksjoner" },
