@@ -508,6 +508,76 @@
       "Trafikkreglene § 15 nr. 5: противотуманные фары нельзя использовать вместе с ближним светом. Они задуманы как альтернатива при плохой видимости, а не как дополнение к ближнему.",
       "Туманки — это «или/или» с ближним, а не «плюс» к нему."),
 
+    q("068", "Gjelder plikten til å bruke refleksvest ved nødstans bare utenfor tettbygd strøk?",
+      "Обязанность надевать светоотражающий жилет при вынужденной остановке действует только за пределами населённого пункта?",
+      [
+        ["Nei, plikten gjelder for alle som går ut av bilen ved nødstans, uansett hvilken vei det er", "Нет, обязанность касается всех, кто выходит из машины при вынужденной остановке, независимо от того, какая это дорога"],
+        ["Ja, i tettbygd strøk er det ikke nødvendig siden det er gatelys", "Да, в населённом пункте это не нужно — там есть уличное освещение", "Bruksforskriften § 1-6 skiller ikke på gatelys eller ikke, plikten gjelder på alle veier, også i tettbygd strøk.", "Bruksforskriften § 1-6 не делает исключений из-за уличного освещения — обязанность действует на всех дорогах, включая населённые пункты."],
+        ["Ja, kun på motorveg er det påbudt", "Да, обязательно только на автомагистрали", "Regelen er ikke begrenset til motorveg, den gjelder ved nødstans langs enhver veg.", "Правило не ограничено автомагистралью — оно действует при вынужденной остановке на любой дороге."],
+        ["Nei, det gjelder bare føreren, ikke passasjerene", "Нет, это касается только водителя, а не пассажиров", "Plikten gjelder alle som går ut av kjøretøyet ved nødstans, ikke bare føreren.", "Обязанность касается всех, кто выходит из машины при вынужденной остановке, а не только водителя."]
+      ],
+      "Bruksforskriften § 1-6: enhver som går ut av kjøretøyet ved nødstans langs vei, skal bruke refleksvest. Regelen gjelder på alle veier, ikke bare utenfor tettbygd strøk.",
+      "Bruksforskriften § 1-6: каждый, кто выходит из машины при вынужденной остановке на дороге, обязан надеть светоотражающий жилет. Правило действует на всех дорогах, а не только за пределами населённого пункта.",
+      "Жилет — правило «для любой дороги», не только для «глухой трассы за городом»."),
+
+    q("069", "Hva bør du være ekstra oppmerksom på når du kjører forbi et vogntog i sterk sidevind?",
+      "На что стоит обратить особое внимание, обгоняя фуру в сильный боковой ветер?",
+      [
+        ["Bilen kan bli utsatt for et kraftig vindkast idet du passerer forbi eller ut av le for vogntoget, hold godt i rattet", "Машину может резко качнуть порывом ветра, когда ты проезжаешь мимо фуры или выходишь из-под её защиты от ветра, — крепко держи руль"],
+        ["Vogntoget skjermer deg fullstendig for vinden under hele forbikjøringen", "Фура полностью защищает от ветра на протяжении всего обгона", "Le-sonen bak og ved siden av vogntoget forsvinner brått idet du kommer forbi det, og da kan vinden treffe bilen din med full kraft.", "Зона затишья за фурой и рядом с ней резко исчезает, как только ты её обгоняешь, и тогда ветер может ударить в машину в полную силу."],
+        ["Sidevind påvirker bare vogntoget, ikke en vanlig personbil", "Боковой ветер влияет только на фуру, а не на обычную легковушку", "En lettere personbil kan faktisk bli mer påvirket av et vindkast enn det tunge vogntoget, nettopp fordi den veier mindre.", "Более лёгкая легковая машина может пострадать от порыва ветра даже сильнее тяжёлой фуры — именно из-за меньшего веса."],
+        ["Det er trygt å kjøre nærmere vogntoget for å redusere luftmotstanden", "Безопаснее держаться ближе к фуре, чтобы снизить сопротивление воздуха", "Å ligge tett inntil et stort kjøretøy gir dårligere sikt og mindre tid til å reagere på vindkast eller bevegelser fra vogntoget.", "Держаться близко к крупной машине означает худший обзор и меньше времени на реакцию при порыве ветра или манёврах фуры."]
+      ],
+      "Store kjøretøy skjermer for vind. Når du kommer ut av le-sonen ved forbikjøring, kan bilen din plutselig bli truffet av et kraftig sidevindkast. Hold godt i rattet og vær forberedt på å korrigere retningen.",
+      "Крупные машины создают зону затишья от ветра. Когда при обгоне ты выходишь из этой зоны, машину может внезапно качнуть сильным порывом бокового ветра. Крепко держи руль и будь готов подправить направление.",
+      "Готовься к рывку ветра ЗАРАНЕЕ — как только нос твоей машины выходит за кабину фуры."),
+
+    q("070", "Frontruta dugger innvendig mens du kjører. Hva er riktig å gjøre?",
+      "Лобовое стекло запотевает изнутри во время движения. Как правильно поступить?",
+      [
+        ["Skru på defrosteren/klimaanlegget mot frontruta og senk farten til sikten er god igjen", "Включить обдув/кондиционер на лобовое стекло и снизить скорость, пока видимость не восстановится"],
+        ["Tørker ruta med hånden mens du fortsetter å se framover", "Протереть стекло рукой, продолжая смотреть вперёд", "Å tørke ruta med hånden tar oppmerksomheten og en hånd bort fra kjøringen akkurat når sikten allerede er dårlig.", "Протирание рукой отвлекает внимание и убирает руку от управления именно тогда, когда видимость и так плохая."],
+        ["Åpner alle vinduene helt og kjører i samme fart", "Полностью открыть все окна и продолжать ехать с той же скоростью", "Full åpning av alle vinduer i fart gir liten og treg effekt på dugg og løser ikke det umiddelbare sikt-problemet raskt nok.", "Полностью открытые окна на скорости слабо и медленно влияют на запотевание — они не решают проблему с видимостью достаточно быстро."],
+        ["Ignorerer det siden dugg forsvinner av seg selv etter noen minutter", "Не обращать внимания — запотевание само пройдёт через пару минут", "Å kjøre videre med dårlig sikt i påvente av at det løser seg selv, er farlig, du bør aktivt bedre sikten med det samme.", "Ехать дальше с плохой видимостью в ожидании, что всё само пройдёт, опасно — видимость нужно улучшать сразу же."]
+      ],
+      "Dårlig sikt gjennom frontruta er farlig. Bruk defrosteren eller klimaanlegget rettet mot ruta, og senk farten eller finn et trygt sted å stoppe til sikten er god nok til å fortsette.",
+      "Плохая видимость через лобовое стекло опасна. Направь обдув или кондиционер на стекло и снизь скорость или найди безопасное место для остановки, пока видимость не станет достаточной, чтобы продолжать движение.",
+      "Сначала верни себе обзор, потом уже думай о скорости — не наоборот."),
+
+    q("071", "Tresekundersregelen brukes for å måle trygg avstand i tørt vær. Hva bør du gjøre i regn eller på vinterføre?",
+      "Правило трёх секунд используется для оценки безопасной дистанции в сухую погоду. Что делать в дождь или на зимней дороге?",
+      [
+        ["Øke avstanden betydelig, siden bremselengden blir mye lengre på vått eller glatt føre", "Значительно увеличить дистанцию, ведь тормозной путь на мокрой или скользкой дороге намного длиннее"],
+        ["Holde nøyaktig samme avstand, tre sekunder er alltid nok", "Держать точно такую же дистанцию — трёх секунд всегда достаточно", "Tre sekunder er beregnet for tørr vei. På vått eller glatt føre trenger bilen mye lengre tid og strekning på å stoppe.", "Три секунды рассчитаны на сухую дорогу. На мокрой или скользкой машине требуется гораздо больше времени и расстояния, чтобы остановиться."],
+        ["Redusere avstanden fordi lavere fart uansett gjør stopplengden kortere", "Сократить дистанцию — ведь на меньшей скорости тормозной путь и так короче", "Selv i lavere fart er bremselengden på glatt eller vått føre lengre enn på tørr vei ved samme fart, så avstanden bør økes, ikke reduseres.", "Даже на меньшей скорости тормозной путь на скользкой или мокрой дороге длиннее, чем на сухой при той же скорости, поэтому дистанцию нужно увеличивать, а не сокращать."],
+        ["Bruke tresekundersregelen bare på motorvei, ikke på andre veier i dårlig vær", "Применять правило трёх секунд только на автомагистрали, а не на других дорогах в плохую погоду", "Prinsippet om økt avstand i dårlig føre gjelder på alle typer vei, ikke bare motorvei.", "Принцип увеличенной дистанции в плохих условиях действует на любых дорогах, а не только на автомагистрали."]
+      ],
+      "Tresekundersregelen er et minimum for tørr vei. På vått føre, snø eller is øker bremselengden mye, så du bør øke avstanden tilsvarende, gjerne til dobbelt så mange sekunder eller mer.",
+      "Правило трёх секунд — это минимум для сухой дороги. На мокром покрытии, снегу или льду тормозной путь сильно увеличивается, поэтому дистанцию стоит соразмерно увеличить — например, вдвое или больше.",
+      "Плохая погода — это сигнал считать не «тысяча один, тысяча два, тысяча три», а гораздо дольше."),
+
+    q("073", "Du nærmer deg et vegkryss om vinteren der brøytet snø har lagt seg i høye hauger langs sidene, uten at krysset har skilt eller lys. Hva bør du tenke på?",
+      "Зимой ты подъезжаешь к перекрёстку без знаков и светофора, где по краям навалены высокие сугробы от уборки снега. О чём стоит помнить?",
+      [
+        ["Snøhaugene kan skjule sikten til kryssende trafikk, så jeg senker farten ekstra og er forberedt på å stoppe", "Сугробы могут закрывать обзор на перекрёстное движение, поэтому я снижаю скорость сильнее и готов остановиться"],
+        ["Snøhauger endrer ikke noe, jeg kjører i vanlig fart siden høyreregelen uansett avgjør", "Сугробы ничего не меняют, еду с обычной скоростью — правило правой руки всё равно решит", "Selv om høyreregelen avgjør hvem som viker, hjelper den ikke hvis du ikke rekker å se trafikken i tide på grunn av dårlig sikt fra snøhaugene.", "Даже если правило правой руки определяет, кто уступает, оно не поможет, если из-за сугробов ты просто не успеешь вовремя заметить машину."],
+        ["Kjører nærmere midten av krysset for å se bedre rundt haugene", "Еду ближе к середине перекрёстка, чтобы лучше видеть в объезд сугробов", "Å kjøre unormalt langt ut i krysset for å se bedre, øker faren for kollisjon med kryssende trafikk i stedet for å redusere den.", "Заезжать необычно далеко на перекрёсток ради лучшего обзора увеличивает риск столкновения с перекрёстным движением, а не снижает его."],
+        ["Regner med at andre bilister automatisk kjører saktere på grunn av snøhaugene", "Рассчитываю, что другие водители сами поедут медленнее из-за сугробов", "Du kan ikke være sikker på at andre reduserer farten, det er din egen aktsomhet og fart du har kontroll over.", "Нельзя быть уверенным, что другие снизят скорость, — контролировать можно только собственную осторожность и скорость."]
+      ],
+      "Brøytekanter og snøhauger kan blokkere sikten i kryss selv om det ikke er noe formelt skilt om det. Senk farten, vær klar til å stoppe, og krype forsiktig fram til du har fri sikt før du kjører videre.",
+      "Снежные брустверы от уборки могут перекрывать обзор на перекрёстке, даже если формально знаков про это нет. Снизь скорость, будь готов остановиться и аккуратно продвигайся вперёд, пока не появится свободный обзор, прежде чем ехать дальше.",
+      "Не видишь дорогу за сугробом — веди себя так, будто там точно кто-то есть."),
+
+    qm("m16", "Hvem har normalt lov til å kjøre i kollektivfelt, i tillegg til buss og taxi? Velg alle riktige.", "Кому, помимо автобусов и такси, обычно разрешено ехать по полосе для общественного транспорта? Выбери все верные.", [
+      ["Elbil (elektrisk bil)", "Электромобиль", true],
+      ["Motorsykkel og moped", "Мотоцикл и мопед", true],
+      ["Utrykningskjøretøy med blålys i tjeneste", "Спецтранспорт с включённой мигалкой при исполнении", true],
+      ["Vanlig bensin- eller dieselbil med bare føreren om bord", "Обычная бензиновая или дизельная машина только с водителем", false, "En vanlig bensin- eller dieselbil uten passasjerer har ikke generell adgang til kollektivfelt, med mindre lokal skilting sier noe annet.", "Обычная бензиновая или дизельная машина без пассажиров по умолчанию не имеет права ехать по полосе для общественного транспорта, если местные знаки не разрешают иное."]
+    ],
+    "Trafikkreglene § 5 nr. 2 åpner kollektivfeltet, i tillegg til buss og taxi, også for elbil, hydrogenbil, motorsykkel og moped, vanlig sykkel, elsparkesykkel og utrykningskjøretøy i tjeneste. En vanlig fossilbil med bare føreren har ikke generell adgang.",
+    "Trafikkreglene § 5 nr. 2, помимо автобусов и такси, разрешает ехать по полосе для общественного транспорта электромобилям, машинам на водороде, мотоциклам и мопедам, обычным велосипедам, электросамокатам и спецтранспорту при исполнении. Обычная машина на бензине или дизеле только с водителем такого права не имеет.",
+    "Запоминай списком: элбиль, водород, мото/мопед, велосипед/самокат, спецслужбы — и автобус с такси, конечно."),
+
     /* ---------- Несколько правильных ответов ---------- */
     qm("m01", "Hvilket utstyr er lovpålagt å ha i en personbil? Velg alle riktige.", "Какое оборудование обязательно по закону в легковой машине? Выбери все верные.", [
       ["Varseltrekant", "Знак аварийной остановки", true],

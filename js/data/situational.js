@@ -1246,6 +1246,97 @@
       "Телефон в руках запрещён во время движения, и это включает короткие остановки — пробку или красный свет. Пользоваться им в руках можно только когда машина по-настоящему припаркована.",
       "«Стоим на красном» — это ещё «за рулём», а не «припарковались». Телефон подождёт до настоящей стоянки."),
 
+    q("057", null,
+      "Du kjører sakte forbi et fortau. En syklist kommer ut fra fortauet og skal ut i kjørebanen rett foran deg. Hvem har vikeplikt?",
+      "Ты медленно едешь мимо тротуара. Велосипедист съезжает с тротуара на проезжую часть прямо перед тобой. Кто уступает?",
+      [
+        ["Syklisten har vikeplikt for meg, siden han kommer fra fortau/sykkelveg ut i kjørebanen", "Уступает велосипедист — он выезжает с тротуара/велодорожки на проезжую часть"],
+        ["Jeg må vike, syklister har alltid forrang i trafikken", "Уступаю я — у велосипедистов всегда преимущество", "Syklister har ikke automatisk forrang overalt. Den som kjører ut fra fortau eller sykkelveg til kjørebanen, skal selv vike for trafikken der.", "У велосипедистов нет автоматического преимущества везде. Тот, кто выезжает с тротуара или велодорожки на проезжую часть, сам обязан уступить транспорту на ней."],
+        ["Høyreregelen avgjør, siden syklisten kommer fra høyre", "Решает правило правой руки, ведь велосипедист справа", "Høyreregelen gjelder mellom veier i et kryss, ikke når noen kjører ut fra fortau eller sykkelveg til kjørebanen.", "Правило правой руки действует между дорогами на перекрёстке, а не когда кто-то выезжает с тротуара или велодорожки на проезжую часть."],
+        ["Den som kommer først til stedet, kjører først", "Первым едет тот, кто раньше подъехал", "Ankomsttidspunkt er ikke avgjørende her. Regelen er klar: den som kommer fra fortau eller sykkelveg, har vikeplikt uansett.", "Момент прибытия тут роли не играет. Правило чёткое: выезжающий с тротуара или велодорожки уступает в любом случае."]
+      ],
+      "Trafikkreglene § 7 nr. 4: den som kjører ut fra fortau, gangveg eller sykkelveg til kjørebanen, har vikeplikt for trafikken der. Dette gjelder også syklister.",
+      "Trafikkreglene § 7 nr. 4: тот, кто выезжает с тротуара, пешеходной или велодорожки на проезжую часть, уступает движению на ней. Это касается и велосипедистов.",
+      "Съезжаешь с тротуара или велодорожки на дорогу — сам уступаешь, кем бы ты ни был, хоть на велосипеде, хоть пешком."),
+
+    q("058", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east" }], roundabout: true, lights: { south: "red" } }),
+      "Du nærmer deg en rundkjøring der det også står et trafikklys, og lyset er rødt. Hva gjør du?",
+      "Ты подъезжаешь к кругу, на котором есть светофор, и горит красный. Что делаешь?",
+      [
+        ["Stopper for det røde lyset, selv om det ikke er andre biler i rundkjøringen", "Останавливаюсь на красный, даже если на круге никого нет"],
+        ["Kjører inn som vanlig, i rundkjøring er det bare vikeplikt, ikke stopplikt", "Еду как обычно — на круге действует только уступание, а не остановка", "Der en rundkjøring er signalregulert, går lyset foran den vanlige vikeplikten. Rødt lys betyr stopp, akkurat som i et vanlig kryss.", "Там, где круг регулируется светофором, сигнал важнее обычного правила уступания. Красный значит стоп, точно как на обычном перекрёстке."],
+        ["Senker bare farten litt og kjører videre", "Просто немного сбрасываю скорость и еду дальше", "Rødt lys krever full stopp, ikke bare fartsreduksjon, selv i en rundkjøring.", "Красный требует полной остановки, а не просто снижения скорости, даже на круге."],
+        ["Ser bort fra lyset fordi rundkjøringer alltid styres av vikeplikt", "Игнорирую светофор — круги всегда регулируются уступанием", "Noen rundkjøringer er signalregulerte nettopp for å styre stor trafikkmengde, og da gjelder lyset, ikke den vanlige vikeplikten.", "Некоторые круги как раз регулируются светофором, чтобы справляться с большим потоком — тогда действует сигнал, а не обычное правило уступания."]
+      ],
+      "Noen rundkjøringer har trafikklys, ofte for å regulere tungt trafikkert innkjøring. Da går lyssignalet foran den vanlige regelen om å vike for trafikk i rundkjøringen — rødt betyr stopp.",
+      "У некоторых кругов есть светофор — обычно там, где нужно регулировать плотный поток на въезде. Тогда сигнал светофора важнее обычного правила уступания на круге — красный значит стоп.",
+      "Если на круге есть светофор — забудь про обычное «уступи тем, кто на круге»: работает обычная логика светофора."),
+
+    q("059", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east", kind: "truck" }] }),
+      "Kryss uten skilt. Et vogntog kommer fra venstre. Hvem kjører først?",
+      "Перекрёсток без знаков. Слева едет фура. Кто едет первым?",
+      [
+        ["Jeg kjører først, vogntoget kommer fra venstre og må vike for meg", "Первым еду я — фура слева и должна уступить мне"],
+        ["Vogntoget kjører først, det er størst og trenger mer plass", "Первой едет фура — она больше и ей нужно больше места", "Størrelsen på kjøretøyet har ingen betydning for vikeplikten. Høyreregelen avgjør ut fra retning, ikke ut fra hvor stort kjøretøyet er.", "Размер машины никак не влияет на обязанность уступить. Правило правой руки решает по направлению, а не по габаритам."],
+        ["Vi må begge stoppe og vinke hverandre fram", "Мы оба должны остановиться и жестами пропустить друг друга", "Høyreregelen gir et klart svar uten at dere trenger å avtale noe med tegn.", "Правило правой руки даёт чёткий ответ без необходимости договариваться жестами."],
+        ["Det er tryggest at vogntoget kjører først siden det bremser saktere", "Безопаснее, если фура поедет первой — она медленнее тормозит", "Bremseevne er ikke en del av vikepliktreglene. Det er retningen kjøretøyet kommer fra som avgjør, ikke hvor fort det kan stoppe.", "Тормозные свойства не входят в правила уступания. Решает направление, откуда едет машина, а не то, как быстро она может остановиться."]
+      ],
+      "Høyreregelen gjelder likt for alle kjøretøy, uansett størrelse. Kommer et kjøretøy fra venstre for deg i et kryss uten skilt eller lys, er det det som skal vike, enten det er en sykkel eller et vogntog.",
+      "Правило правой руки действует одинаково для всех, независимо от размера. Если машина едет слева от тебя на перекрёстке без знаков и светофора, уступать должна именно она — хоть велосипед, хоть фура.",
+      "Забудь про размер машины — на перекрёстке без знаков решает только направление: «слева» всегда уступает."),
+
+    q("060", scene({ you: { from: "south", to: "north" }, peds: ["north"], lights: { south: "yellow" } }),
+      "Du nærmer deg et gangfelt der det henger et blinkende gult lys over veien, uten rødt eller grønt. En fotgjenger står klar til å krysse. Hva gjør du?",
+      "Ты подъезжаешь к пешеходному переходу, над которым мигает жёлтый сигнал — без красного и зелёного. Пешеход готов переходить дорогу. Что делаешь?",
+      [
+        ["Senker farten, viser ekstra aktsomhet og slipper fotgjengeren fram i gangfeltet", "Снижаю скорость, проявляю особую осторожность и пропускаю пешехода на переходе"],
+        ["Kjører som normalt, blinkende gult betyr at jeg har forrang", "Еду как обычно — мигающий жёлтый значит, что у меня преимущество", "Blinkende gult gir ingen forrang til noen, det er bare et varsel om å vise særlig aktsomhet. Fotgjengeren i gangfeltet har fortsatt rett til å gå, og du skal slippe ham fram.", "Мигающий жёлтый никому не даёт преимущества — это просто сигнал проявить особую осторожность. Пешеход на переходе всё равно имеет право пройти, а ты его пропускаешь."],
+        ["Stopper helt opp foran gangfeltet i alle tilfeller", "В любом случае полностью останавливаюсь перед переходом", "Blinkende gult krever ikke alltid full stopp, men aktsomhet og at du faktisk slipper fram fotgjengere som skal krysse.", "Мигающий жёлтый не всегда требует полной остановки — важна осторожность и то, что пешехода на переходе действительно пропускают."],
+        ["Kjører forbi fordi lyset ikke er rødt", "Проезжаю, ведь сигнал не красный", "Fraværet av rødt lys fritar deg ikke for vikeplikten overfor fotgjengere som allerede står klare i gangfeltet.", "Отсутствие красного не освобождает от обязанности уступить пешеходам, которые уже готовы перейти на переходе."]
+      ],
+      "Blinkende gult lys betyr «særlig aktpågivenhet og varsomhet» — det gir ingen automatisk forrang. Ved et gangfelt har fotgjengere som skal krysse, uansett rett til å gå, og du skal senke farten og slippe dem fram.",
+      "Мигающий жёлтый значит «особая внимательность и осторожность» — сам по себе он никому не даёт автоматического преимущества. На пешеходном переходе пешеход, который переходит, в любом случае имеет право пройти, и ты обязан снизить скорость и пропустить его.",
+      "Мигающий жёлтый — это не «зелёный без обязательств», это «думай сам, но пешехода на переходе пропусти»."),
+
+    q("061", scene({ you: { from: "south", to: "east" }, signs: { south: "priority" }, peds: ["east"] }),
+      "Du kjører på forkjørsvei og skal svinge til høyre. En fotgjenger går i gangfeltet på veien du svinger inn på. Har forkjørsretten din noe å si her?",
+      "Ты едешь по главной дороге и поворачиваешь направо. По переходу на дороге, куда ты поворачиваешь, идёт пешеход. Имеет ли значение твой приоритет по главной дороге?",
+      [
+        ["Nei, forkjørsrett gjelder bare mot andre kjøretøy — jeg skal uansett vike for fotgjengeren i gangfeltet", "Нет, приоритет по главной действует только относительно других машин — пешехода на переходе я всё равно пропускаю"],
+        ["Ja, forkjørsveien gir meg forrang over alle, også fotgjengere", "Да, главная дорога даёт преимущество надо всеми, включая пешеходов", "Forkjørsrett regulerer bare forholdet mellom kjøretøy på ulike veier. Den fritar deg aldri for vikeplikten overfor fotgjengere i gangfelt.", "Приоритет по главной дороге регулирует только отношения между машинами на разных дорогах. От обязанности уступить пешеходам на переходе он никогда не освобождает."],
+        ["Bare hvis fotgjengeren allerede er over halvveis", "Только если пешеход уже прошёл больше половины перехода", "Vikeplikten for svingende trafikk overfor fotgjengere i gangfelt gjelder uansett hvor langt fotgjengeren har kommet.", "Обязанность уступить пешеходу на переходе при повороте действует независимо от того, как далеко он прошёл."],
+        ["Nei, men bare fordi det ikke er gangfelt, det er vanlig fortau", "Нет, но только потому что это не переход, а обычный тротуар", "Spørsmålet gjelder nettopp et gangfelt, ikke et vanlig fortau — og selv om det var et fortau, skal du fortsatt vike der du krysser det.", "В вопросе речь именно о пешеходном переходе, а не обычном тротуаре — но даже пересекая тротуар, ты всё равно обязан уступить."]
+      ],
+      "Skilting om forkjørsvei regulerer bare rekkefølgen mellom kjøretøy. Når du svinger og krysser et gangfelt, har fotgjengere som går der, alltid rett til å gå ferdig — det gjelder uansett om du kommer fra en forkjørsvei eller ikke.",
+      "Знак главной дороги регулирует только очерёдность между машинами. Когда ты поворачиваешь и пересекаешь пешеходный переход, идущие по нему пешеходы всегда имеют право закончить переход — независимо от того, едешь ли ты по главной дороге.",
+      "Главная дорога решает спор с другими машинами, а не с пешеходами. Пешеход на переходе побеждает всегда."),
+
+    q("062", null,
+      "Du ligger bak en traktor som kjører sakte. Midtlinjen er brutt (stiplet), men rett foran ser du at den blir heltrukket idet veien går over en bakketopp. Hva gjør du?",
+      "Ты едешь за трактором, который тащится медленно. Осевая прерывистая, но впереди видно, что она становится сплошной прямо перед вершиной подъёма. Что делаешь?",
+      [
+        ["Avbryter planen om forbikjøring der, og venter til jeg har bedre sikt og lovlig linje", "Отменяю обгон именно там и жду, пока не будет лучше видимость и разрешающая разметка"],
+        ["Rekker forbikjøringen akkurat før den heltrukne linjen begynner", "Успеваю обогнать как раз перед началом сплошной линии", "En uoversiktlig bakketopp er farlig for forbikjøring uansett hvor linjen begynner, og du vet ikke sikkert at du rekker det trygt før linjen eller bakketoppen.", "Непросматриваемая вершина подъёма опасна для обгона независимо от того, где начинается линия, и ты не можешь быть уверен, что успеешь безопасно до линии или вершины."],
+        ["Kjører forbi likevel, stiplet linje der jeg starter gjør det lovlig", "Всё равно обгоняю — раз начал на прерывистой, значит можно", "Det er hele forbikjøringen, ikke bare starten, som må skje på stiplet linje og med god sikt. Fullføres den over en heltrukket linje eller uoversiktlig bakketopp, er det ulovlig.", "На прерывистой линии и при хорошей видимости должен проходить весь обгон целиком, а не только его начало. Если он завершается на сплошной линии или у непросматриваемого подъёма — это нарушение."],
+        ["Tuter og kjører forbi i høy fart for å bli fort ferdig", "Сигналю и обгоняю на большой скорости, чтобы быстрее закончить", "Høyere fart øker faren ved en uoversiktlig bakketopp i stedet for å redusere den, og signalhorn endrer ikke på at sikten er for dårlig.", "Более высокая скорость у непросматриваемого подъёма только увеличивает опасность, а не снижает её, а гудок никак не улучшает видимость."]
+      ],
+      "Forbikjøring er forbudt der sikten er for dårlig, som ved en uoversiktlig bakketopp, og hele forbikjøringen må gjennomføres på strekning med stiplet linje. Ser du at linjen blir heltrukket eller sikten forsvinner, avbryter du planen i tide.",
+      "Обгон запрещён там, где видимость недостаточна, например у непросматриваемого подъёма, и весь обгон целиком должен пройти на участке с прерывистой линией. Если видишь, что линия становится сплошной или видимость пропадает, — заранее откажись от манёвра.",
+      "Не начинай обгон, если не уверен, что успеешь ЗАКОНЧИТЬ его на прерывистой линии и с хорошим обзором."),
+
+    q("063", null,
+      "Du vil bruke tresekundersregelen for å sjekke avstanden til bilen foran på tørr motorvei. Hvordan gjør du det riktig?",
+      "Ты хочешь применить правило трёх секунд, чтобы проверить дистанцию до машины впереди на сухой автомагистрали. Как сделать это правильно?",
+      [
+        ["Merker deg et fast punkt langs veien, teller sekunder fra bilen foran passerer det til du selv passerer det samme punktet", "Замечаю неподвижную точку у дороги и считаю секунды от момента, когда её проезжает машина впереди, до момента, когда её проезжаю я сам"],
+        ["Anslår avstanden i meter med øyemål, sekunder er ikke nødvendig", "Оцениваю дистанцию в метрах на глаз — секунды тут ни при чём", "Å bedømme avstand i meter i høy fart er upresist. Tresekundersregelen bruker tid, ikke meter, nettopp fordi det er lettere å vurdere riktig.", "Оценивать дистанцию в метрах на высокой скорости неточно. Правило трёх секунд основано на времени, а не на метрах, именно потому что время оценить легче и точнее."],
+        ["Teller sekunder fra du selv passerer punktet til bilen foran passerer det", "Считаю секунды с момента, когда точку проезжаю я, до момента, когда её проезжает машина впереди", "Rekkefølgen er snudd. Du skal telle fra bilen foran passerer punktet til du selv når det samme punktet, ikke omvendt.", "Порядок перепутан. Считать нужно от момента, когда точку проезжает машина впереди, до момента, когда до неё доезжаешь ты сам, а не наоборот."],
+        ["Bruker regelen bare når det er kø, ellers er den unødvendig", "Использую правило только в пробке, в остальных случаях оно не нужно", "Regelen er mest nyttig nettopp i fri flyt med høyere fart, der det er lettere å ligge for tett uten å merke det. I kø er avstanden uansett kort og farten lav.", "Правило особенно полезно как раз при свободном потоке на высокой скорости, где легко незаметно подъехать слишком близко. В пробке дистанция и так короткая, а скорость низкая."]
+      ],
+      "Velg et merke langs veien, som et skilt eller en bro. Når bilen foran passerer merket, begynn å telle «tusen og en, tusen og to, tusen og tre». Passerer du merket før du er ferdig å telle, ligger du for tett og bør øke avstanden.",
+      "Выбери ориентир у дороги — например знак или мост. Когда его проезжает машина впереди, начинай считать «тысяча один, тысяча два, тысяча три». Если ты доезжаешь до ориентира раньше, чем закончил считать, — дистанция слишком мала, нужно отступить дальше.",
+      "Три секунды — это минимум на сухой дороге. На мокрой или зимой мысленно удваивай счёт."),
+
     /* ---------- Несколько правильных ответов ---------- */
     qm("m01", road({ crossing: true }),
       "Du nærmer deg et gangfelt. Hva skal du gjøre? Velg alle riktige.", "Ты подъезжаешь к пешеходному переходу. Что нужно делать? Выбери все верные.", [
@@ -1300,6 +1391,17 @@
     ],
     "Venstresving er den svakeste manøveren i et kryss: du viker for møtende trafikk som kjører rett fram eller svinger til høyre, og for gående og syklende som krysser vegen du svinger inn på. Gi tegn i god tid.",
     "Поворот налево — самый «слабый» манёвр на перекрёстке: уступаешь встречному транспорту, едущему прямо или поворачивающему направо, и пешеходам с велосипедистами, переходящим дорогу, на которую поворачиваешь. Заранее включай поворотник.",
-    "При повороте налево ты в долгу у всех: и у встречных, и у пешеходов на переходе.")
+    "При повороте налево ты в долгу у всех: и у встречных, и у пешеходов на переходе."),
+
+    qm("m06", null,
+      "Du kjører på en fylkesvei om sommeren, og en flokk med sau går løs midt i kjørebanen. Velg alle riktige.", "Ты едешь летом по региональной дороге, и посреди проезжей части идёт стадо овец, пасущихся без присмотра. Выбери все верные.", [
+      ["Senker farten kraftig og er forberedt på å stoppe helt", "Резко снижаю скорость и готов полностью остановиться", true],
+      ["Holder god avstand og lar sauene få tid til å bevege seg unna i eget tempo", "Держу дистанцию и даю овцам самим спокойно уйти с дороги", true],
+      ["Tuter kraftig for å jage dem raskt unna veien", "Сильно сигналю, чтобы быстро согнать их с дороги", false, "Kraftig tuting skremmer dyrene og gjør dem uforutsigbare, de kan løpe rett ut i veien eller mot bilen i stedet for å roe seg unna.", "Резкий гудок пугает животных и делает их непредсказуемыми — они могут броситься прямо на дорогу или на машину, вместо того чтобы спокойно уйти."],
+      ["Kjører sakte gjennom flokken siden sau uansett flytter seg unna dekkene", "Медленно еду прямо через стадо, ведь овцы всё равно уходят из-под колёс", false, "Sau kan oppføre seg uforutsigbart og løpe feil vei i stedet for å flytte seg unna, det er tryggest å vente til de har gått av veien selv.", "Овцы могут вести себя непредсказуемо и побежать не в ту сторону, а не просто уйти с дороги — безопаснее подождать, пока они сами её освободят."]
+    ],
+    "Løsgående dyr som sau, geit eller elg kan oppføre seg helt uforutsigbart. Senk farten i god tid, hold avstand, unngå å tute unødig, og vent tålmodig til dyrene har flyttet seg unna av seg selv.",
+    "Свободно пасущиеся животные — овцы, козы, лоси — могут вести себя совершенно непредсказуемо. Заранее снижай скорость, держи дистанцию, не сигналь без нужды и терпеливо жди, пока животные сами не уйдут с дороги.",
+    "С животными на дороге торопиться нельзя — она их территория в этот момент, а не твоя.")
   ];
 })();

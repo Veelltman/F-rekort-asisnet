@@ -172,6 +172,13 @@
     w("137", "vegarbeid", "дорожные работы", "Ved vegarbeid skal du senke farten og følge midlertidig skilting.", "На дорожных работах нужно снизить скорость и следовать временным знакам.", "Дорога"),
     w("138", "midtdeler", "физический разделитель полос", "Motorveg har vanligvis en fysisk midtdeler mellom kjøreretningene.", "На автомагистрали обычно есть физический разделитель между направлениями движения.", "Дорога"),
     w("139", "blålys", "синий проблесковый маячок", "Utrykningskjøretøy bruker blålys og sirene for å varsle at de kommer.", "Спецтранспорт включает синюю мигалку и сирену, чтобы предупредить о своём приближении.", "Приоритет"),
-    w("140", "refleks", "светоотражатель (для пешеходов)", "Fotgjengere bør bruke refleks når de går langs mørk vei uten fortau.", "Пешеходам стоит носить светоотражатель, когда они идут по тёмной дороге без тротуара.", "Условия")
+    w("140", "refleks", "светоотражатель (для пешеходов)", "Fotgjengere bør bruke refleks når de går langs mørk vei uten fortau.", "Пешеходам стоит носить светоотражатель, когда они идут по тёмной дороге без тротуара.", "Условия"),
+
+    w("141", "sidevind", "боковой ветер", "Vær forberedt på sidevind når du kjører forbi et vogntog.", "Готовься к боковому ветру, обгоняя фуру.", "Условия"),
+    w("142", "dugg (på ruta)", "запотевание (стекла)", "Dugg på frontruta gjør det vanskelig å se, skru på defrosteren.", "Запотевшее лобовое стекло мешает видеть — включи обдув.", "Машина"),
+    w("143", "skumring", "сумерки", "I skumringen er fotgjengere langs veien vanskelige å oppdage.", "В сумерках пешеходов у дороги трудно заметить.", "Условия"),
+    w("144", "brøytekant", "снежный бруствер (вал от уборки снега)", "En høy brøytekant kan skjule syklister i et kryss.", "Высокий снежный бруствер может скрывать велосипедистов на перекрёстке.", "Дорога"),
+    w("145", "sau (på beite)", "овца (на выпасе)", "Om sommeren kan det stå sau midt i veien i utmarka.", "Летом на дороге в глубинке могут стоять овцы.", "Условия"),
+    w("146", "kjøreforhold", "дорожные условия", "Tilpass farten etter kjøreforholdene, ikke bare fartsgrensen.", "Подстраивай скорость под условия движения, а не только под знак ограничения.", "Условия")
   ];
 })();
