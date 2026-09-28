@@ -16,6 +16,7 @@
     signs: SW("triangle-warning", `<text x="50" y="76" text-anchor="middle" font-family="Arial" font-weight="800" font-size="44" fill="#1a1a1a">!</text>`),
     situational: SW("circle-blue", SI.roundabout()),
     rules: SW("circle-red", `<text x="50" y="66" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="46" fill="#1a1a1a">§</text>`),
+    sikkerhet: SW("square-blue", `<path d="M27 52l15 15 31-33" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`),
     vocab: SW("diamond-yellow", `<text x="50" y="60" text-anchor="middle" font-family="Arial" font-weight="800" font-size="26" fill="#1a1a1a">Aa</text>`),
     daily: SW("square-blue", `<text x="50" y="64" text-anchor="middle" font-family="Arial" font-weight="800" font-size="40" fill="#fff">1</text>`),
     exam: SW("octagon-red", `<text x="50" y="62" text-anchor="middle" font-family="Arial" font-weight="800" font-size="30" fill="#fff">45</text>`),
@@ -25,7 +26,8 @@
   const TOPICS = {
     signs: { title: "Skilt og oppmerking", get title_ru() { return tr("Знаки и разметка"); }, icon: ICONS.signs, get desc() { return tr("Все знаки Норвегии: значение, поиск по названию, тип знака, разметка."); } },
     situational: { title: "Trafikksituasjoner", get title_ru() { return tr("Ситуационные задачи"); }, icon: ICONS.situational, get desc() { return tr("Кто кому уступает: перекрёстки, круг, повороты, автомагистраль."); } },
-    rules: { title: "Regler og sanksjoner", get title_ru() { return tr("Правила и штрафы"); }, icon: ICONS.rules, get desc() { return tr("Скорость, алкоголь, ремни, баллы, парковка, ставки 2026."); } }
+    rules: { title: "Regler og sanksjoner", get title_ru() { return tr("Правила и штрафы"); }, icon: ICONS.rules, get desc() { return tr("Скорость, алкоголь, ремни, баллы, парковка, ставки 2026."); } },
+    sikkerhet: { title: "Sikkerhetskontroll", get title_ru() { return tr("Проверка машины"); }, icon: ICONS.sikkerhet, get desc() { return tr("Вопросы экзаменатора на практическом экзамене: шины, свет, тормоза, руль, под капотом."); } }
   };
 
   /* ---------- Роутинг с адресом в URL (#/topic?key=signs): работают «назад» и обновление страницы ---------- */

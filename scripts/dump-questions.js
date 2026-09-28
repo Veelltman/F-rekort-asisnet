@@ -10,7 +10,7 @@ const vm = require("vm");
 
 const root = path.join(__dirname, "..");
 const ctx = { window: {}, console }; ctx.window.window = ctx.window; vm.createContext(ctx);
-["signs-catalog", "signs", "situational", "rules", "generated", "vocabulary"]
+["signs-catalog", "signs", "situational", "rules", "generated", "sikkerhet", "vocabulary"]
   .forEach(f => vm.runInContext(fs.readFileSync(path.join(root, "js/data", f + ".js"), "utf8"), ctx));
 const D = ctx.window.QUESTION_DATA;
 

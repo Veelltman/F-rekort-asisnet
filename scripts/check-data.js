@@ -17,6 +17,7 @@ const files = [
   "js/data/situational.js",
   "js/data/rules.js",
   "js/data/generated.js",
+  "js/data/sikkerhet.js",
   "js/data/vocabulary.js"
 ];
 for (const f of files) {
@@ -53,7 +54,7 @@ function checkQuestion(q, where) {
   if (!inst.explanation_no || !inst.explanation_ru) errors.push(`${where} ${q.id}: нет объяснения`);
 }
 
-["situational", "rules", "signs"].forEach(t => D[t].forEach(q => checkQuestion(q, t)));
+["situational", "rules", "signs", "sikkerhet"].forEach(t => D[t].forEach(q => checkQuestion(q, t)));
 D.vocabulary.forEach(w => {
   if (!w.id || !w.word_no || !w.translation_ru || !w.example_no || !w.example_ru) errors.push(`vocabulary ${w.id}: неполная карточка`);
   if (ids.has(w.id)) errors.push(`vocabulary: дубликат id ${w.id}`);
@@ -68,4 +69,4 @@ if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);
 }
-console.log(`OK: ситуаций ${D.situational.length}, правил ${D.rules.length}, заданий по знакам ${D.signs.length}, слов ${D.vocabulary.length}`);
+console.log(`OK: ситуаций ${D.situational.length}, правил ${D.rules.length}, заданий по знакам ${D.signs.length}, проверка машины ${D.sikkerhet.length}, слов ${D.vocabulary.length}`);
