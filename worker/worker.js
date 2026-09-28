@@ -61,7 +61,8 @@ function summarize(user) {
   const daily = st.daily || {};
   const days = Object.keys(daily).sort();
   let streak = 0;
-  for (let i = 0; ; i++) {
+  /* сегодня ещё не проходил — серия не рвётся, считаем от вчера */
+  for (let i = daily[todayKey()] ? 0 : 1; ; i++) {
     const k = osloKey(new Date(Date.now() - i * 86400000));
     if (!daily[k]) break;
     streak += 1;

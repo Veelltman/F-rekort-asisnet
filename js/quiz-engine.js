@@ -34,7 +34,21 @@
     return `${m}:${String(s).padStart(2, "0")}`;
   }
 
+  /* Остановка активной сессии при уходе с экрана (нижнее меню, «Назад»):
+     иначе таймер экзамена продолжал идти и через 90 минут рисовал результат поверх другого экрана. */
+  let activeStop = null;
+  function stopActive() { if (activeStop) { activeStop(); activeStop = null; } }
+
+  /* 1 ошибка, 2 ошибки, 5 ошибок, 21 ошибка; в en/no — только ед./мн. число */
+  function mistakesWord(n) {
+    const lang = window.I18N.lang;
+    if (lang === "en" || lang === "no") return t(n === 1 ? "ошибка" : "ошибок");
+    const m10 = n % 10, m100 = n % 100;
+    return t(m10 === 1 && m100 !== 11 ? "ошибка" : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? "ошибки" : "ошибок");
+  }
+
   function start(container, questions, cfg) {
+    stopActive();
     cfg = cfg || {};
     const exam = !!cfg.exam;
     const session = {
@@ -45,6 +59,7 @@
       timer: null,
       secondsLeft: cfg.timeLimit || 0
     };
+    activeStop = () => { stopTimer(); session.finished = true; document.onkeydown = null; };
 
     /* Вопрос с несколькими правильными ответами: it.selected — массив индексов.
        Засчитывается только точное совпадение набора, как на экзамене. */
@@ -72,6 +87,7 @@
     function startTimer() {
       if (!session.secondsLeft || session.timer) return;
       session.timer = setInterval(() => {
+        if (session.finished) { stopTimer(); return; }
         session.secondsLeft -= 1;
         const el = container.querySelector(".quiz-timer");
         if (el) {
@@ -384,7 +400,7 @@
             <h2>${exam ? (passed ? "Bestått" : "Ikke bestått") : bi("Resultat", "Результат")}</h2>
             <div class="result-score ${passed ? "good" : pct >= 70 ? "mid" : "bad"}">
               <span class="result-pct">${exam ? `${correct}/${total}` : `${pct}%`}</span>
-              <span class="result-sub">${correct} ${t("верно,")} ${wrong} ${wrong === 1 ? t("ошибка") : wrong < 5 ? t("ошибки") : t("ошибок")}</span>
+              <span class="result-sub">${correct} ${t("верно,")} ${wrong} ${mistakesWord(wrong)}</span>
             </div>
             <p class="result-grade">${grade}</p>
             <div class="result-actions">
@@ -436,5 +452,5 @@
     renderQuestion();
   }
 
-  window.QuizEngine = { start, shuffle, esc };
+  window.QuizEngine = { start, stopActive, shuffle, esc };
 })();

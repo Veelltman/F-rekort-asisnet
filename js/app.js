@@ -51,6 +51,7 @@
     window.CURRENT_ROUTE = name;
     window.CURRENT_PARAMS = params || {};
     window.ROUTE_GUARD = null;
+    window.QuizEngine.stopActive();
     document.onkeydown = null;
     routes[name](params || {});
     window.scrollTo({ top: 0 });
@@ -143,7 +144,7 @@
         b.onclick = () => { S.switchProfile(b.dataset.name); menu.remove(); renderProfileSwitch(); go("home"); };
       });
       menu.querySelector(".profile-add").onclick = () => {
-        const name = prompt("Имя (как будет отображаться):");
+        const name = prompt(tr("Имя (как будет отображаться):"));
         if (name && S.addProfile(name)) { renderProfileSwitch(); go("home"); }
         menu.remove();
       };
@@ -303,11 +304,11 @@
             const t = r.today ? `${Math.round((r.today.correct / r.today.total) * 100)}%` : "—";
             const ex = r.exams ? `${r.examsPassed}/${r.exams}` : "—";
             return `<div class="circle-row ${r.name === data.me ? "me" : ""}">
-              <span class="circle-name">${esc(r.name)}${r.name === data.owner ? ' <span class="crown" title="${tr("владелец")}">★</span>' : ""}</span>
+              <span class="circle-name">${esc(r.name)}${r.name === data.owner ? ` <span class="crown" title="${tr("владелец")}">★</span>` : ""}</span>
               <span class="${r.today ? (t.replace("%", "") >= 85 ? "good-text" : "") : "muted"}">${t}</span>
               <span>${r.accuracy != null ? r.accuracy + "%" : "—"}</span>
               <span>${ex}</span>
-              <span>${r.streak ? r.streak + " подряд" : r.dailyCount || "—"}</span>
+              <span>${r.streak ? r.streak + " " + tr("подряд") : r.dailyCount || "—"}</span>
             </div>`;
           }).join("")}
         </div>
@@ -611,8 +612,12 @@
           </div>` : ""}
       </div>
       <div class="danger-zone">
-        <button class="btn btn-ghost" onclick="if(confirm('${tr("Стереть весь прогресс профиля «")}${esc(S.getCurrentProfile())}»?')){Storage.reset();go('home');}">${tr("Сбросить прогресс этого профиля")}</button>
+        <button class="btn btn-ghost" id="reset-progress">${tr("Сбросить прогресс этого профиля")}</button>
       </div>`;
+    /* обработчик в JS, а не в onclick="…": кавычка в имени профиля ломала строку */
+    document.getElementById("reset-progress").onclick = () => {
+      if (confirm(`${tr("Стереть весь прогресс профиля «")}${S.getCurrentProfile()}»?`)) { S.reset(); go("home"); }
+    };
   };
 
   /* ---------- Лексика (флеш-карточки) ---------- */
@@ -773,6 +778,7 @@
     }
 
     function renderResult() {
+      document.onkeydown = null;   /* карточки больше нет — пробел/стрелки не должны её искать */
       const total = session.cards.length;
       const pct = Math.round((session.known / total) * 100);
       view.innerHTML = `

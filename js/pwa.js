@@ -73,7 +73,7 @@
   });
   window.addEventListener("appinstalled", () => {
     PWA.installEvent = null;
-    toast("Приложение установлено");
+    toast(t("Приложение установлено"));
     if (window.refreshView) window.refreshView();
   });
   PWA.install = async () => {
@@ -138,7 +138,7 @@
       toast(kind === "audio" ? t("Озвучка сохранена для офлайна") : t("Все знаки сохранены для офлайна"));
     } catch (e) {
       btn.textContent = label; btn.disabled = false;
-      toast("Не удалось загрузить: " + (e.message || e));
+      toast(t("Не удалось загрузить:") + " " + (e.message || e));
     }
   };
 })();

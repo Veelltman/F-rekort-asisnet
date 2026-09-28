@@ -233,7 +233,7 @@
     "и ещё": { uk: "і ще", en: "and", no: "og" },
     "слов, которые ты отметил как «не знаю»": { uk: "слів, які ти позначив як «не знаю»", en: "words you marked “don't know”", no: "ord du merket som «vet ikke»" },
     "Сбросить прогресс этого профиля": { uk: "Скинути прогрес цього профілю", en: "Reset this profile's progress", no: "Nullstill framgangen for denne profilen" },
-    "Стереть весь прогресс профиля «": { uk: "Стерти весь прогрес профілю «", en: "Erase all progress for profile “", no: "Slette all framgang for profilen «" },
+    "Стереть весь прогресс профиля «": { uk: "Стерти весь прогрес профілю «", en: "Erase all progress for profile «", no: "Slette all framgang for profilen «" },
 
     /* ---------- лексика ---------- */
     "К лексике": { uk: "До лексики", en: "Back to vocabulary", no: "Til ordforrådet" },

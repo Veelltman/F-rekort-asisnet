@@ -153,9 +153,12 @@
     return (s.exams || []).slice();
   }
 
+  /* Серия дней подряд. Если сегодняшнее задание ещё не сделано, серия не рвётся с утра:
+     считаем от вчерашнего дня. */
   function getStreak() {
     let n = 0;
     const d = new Date();
+    if (!state.daily[dateKey(d)]) d.setDate(d.getDate() - 1);
     for (;;) {
       const key = dateKey(d);
       if (!state.daily[key]) break;
