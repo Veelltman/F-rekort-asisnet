@@ -1168,9 +1168,9 @@
       "Trafikkreglene § 7 nr. 4: тот, кто выезжает с велодорожки, тротуара или похожего пути, обязан уступить транспорту на дороге, куда он выезжает. Это действует, даже если велосипедист едет туда же, куда и ты.",
       "Запомни исключение: велосипедист на велодорожке не «главный». Съезжая на дорогу, он уступает сам."),
 
-    q("051", scene({ you: { from: "south", to: "east" }, others: [{ from: "north", to: "south", kind: "bike" }], peds: ["east"] }),
-      "Du skal svinge til høyre. En syklist kommer rett fram og krysser der du skal svinge, og en fotgjenger er på veg over gangfeltet på veien du svinger inn på. Hva gjør du?",
-      "Ты собираешься повернуть направо. Велосипедист едет прямо и пересекает твой путь, а пешеход переходит по зебре ту дорогу, на которую ты поворачиваешь. Что делаешь?",
+    q("051", scene({ you: { from: "south", to: "east" }, others: [{ from: "south", to: "north", kind: "bike" }], peds: ["east"] }),
+      "Du skal svinge til høyre. En syklist på høyre side av deg skal rett fram, og en fotgjenger er på veg over gangfeltet på veien du svinger inn på. Hva gjør du?",
+      "Ты собираешься повернуть направо. Велосипедист справа от тебя едет прямо, а пешеход переходит по зебре ту дорогу, на которую ты поворачиваешь. Что делаешь?",
       [
         ["Vike for både syklisten og fotgjengeren før jeg svinger", "Уступить и велосипедисту, и пешеходу, прежде чем повернуть"],
         ["Vike bare for fotgjengeren, syklisten må passe seg selv", "Уступить только пешеходу — велосипедист пусть сам смотрит", "Trafikkreglene § 7 nr. 3 gir syklende samme beskyttelse som gående ved svinging. Du skal vike for begge.", "Trafikkreglene § 7 nr. 3 даёт велосипедистам ту же защиту, что и пешеходам, при повороте. Уступить нужно обоим."],
@@ -1224,13 +1224,13 @@
       "Du skal svinge til venstre, og en sporvogn (trikk) kommer rett fram i samme kryss. Hvem har vikeplikt?",
       "Ты поворачиваешь налево, и трамвай едет прямо через тот же перекрёсток. Кто уступает?",
       [
-        ["Du har vikeplikt for trikken, uansett hva som ellers gjelder i krysset", "Ты уступаешь трамваю — независимо от прочих правил на этом перекрёстке"],
-        ["Trikken må vike siden du svinger og den kjører rett fram på skinner", "Уступает трамвай, раз ты поворачиваешь, а он просто едет по рельсам", "Sporvogn har vikeplikt foran seg fra alle andre trafikanter etter § 10, uansett om den kjører rett fram eller du svinger.", "У трамвая приоритет перед всеми остальными участниками движения по § 10, независимо от того, едет он прямо или ты поворачиваешь."],
+        ["Du skal gi trikken fri veg: alle trafikanter skal vike for sporvogn", "Ты уступаешь трамваю: все участники движения обязаны пропускать трамвай"],
+        ["Trikken må vike siden du svinger og den kjører rett fram på skinner", "Уступает трамвай, раз ты поворачиваешь, а он просто едет по рельсам", "Det er omvendt: trafikkreglene § 10 nr 2 sier at alle skal gi sporvogn fri veg, uansett om den kjører rett fram eller du svinger.", "У трамвая приоритет перед всеми остальными участниками движения по § 10, независимо от того, едет он прямо или ты поворачиваешь."],
         ["Det avhenger av hvem som kom først til krysset", "Зависит от того, кто подъехал к перекрёстку первым", "Ankomsttidspunktet spiller ingen rolle her, trikken har forrang etter en egen regel, ikke etter høyreregelen.", "Момент прибытия тут ни при чём — у трамвая приоритет по отдельному правилу, а не по правилу правой руки."],
-        ["Høyreregelen avgjør, siden trikken kommer fra din venstre", "Решает правило правой руки — трамвай едет слева от тебя", "Høyreregelen gjelder ikke overfor sporvogn. Trikken har alltid forrang, uansett hvilken side den kommer fra.", "Правило правой руки не применяется к трамваю. У него приоритет всегда, независимо от того, с какой стороны он едет."]
+        ["Høyreregelen avgjør", "Решает правило правой руки", "Høyreregelen gjelder ikke overfor sporvogn. Alle skal gi trikken fri veg, uansett hvilken side den kommer fra.", "Правило правой руки не применяется к трамваю. У него приоритет всегда, независимо от того, с какой стороны он едет."]
       ],
-      "Trafikkreglene § 10 nr. 2: kjørende skal vike for sporvogn. Dette gjelder foran alle andre vikepliktsregler, også når du svinger og trikken kjører rett fram.",
-      "Trafikkreglene § 10 nr. 2: водители обязаны уступать трамваю. Это действует прежде всех остальных правил приоритета — даже когда ты поворачиваешь, а трамвай едет прямо.",
+      "Trafikkreglene § 10 nr. 2: trafikanter skal gi fri veg og om nødvendig stanse for sporvogn. Det gjelder også når du svinger og trikken kjører rett fram.",
+      "Trafikkreglene § 10 nr. 2: все участники движения обязаны уступать дорогу трамваю и при необходимости останавливаться. Это действует и тогда, когда ты поворачиваешь, а трамвай едет прямо.",
       "Трамвай — как король на шахматной доске: ему уступают всегда, никакие другие правила его не перебивают."),
 
     q("056", scene({ you: { from: "south", to: "north" }, lights: { south: "red" } }),
