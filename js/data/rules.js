@@ -727,7 +727,77 @@
     ],
     "Forbikjøring er forbudt der sikten er for dårlig til å vurdere om det er trygt, for eksempel ved bakketopp og uoversiktlig sving, (trafikkreglene § 12 nr 5), og forbi et kjøretøy som skjuler sikten til et gangfelt (§ 12 nr 6). Fartsgrensen alene avgjør ikke dette.",
     "Обгон запрещён там, где видимость слишком плохая, чтобы оценить безопасность — например на вершине подъёма, в непросматриваемом повороте (trafikkreglene § 12 nr 5), а также обгон машины, которая закрывает обзор перехода (§ 12 nr 6). Само по себе ограничение скорости на это не влияет.",
-    "Спроси себя: вижу ли я достаточно далеко вперёд? Если нет — обгона нет, независимо от знака скорости.")
+    "Спроси себя: вижу ли я достаточно далеко вперёд? Если нет — обгона нет, независимо от знака скорости."),
+
+    q("074", "Du kjører ut fra en bensinstasjon og må krysse et sykkelfelt for å komme ut på vegen. En syklist kommer langs sykkelfeltet i vanlig fart. Hvem har vikeplikt?",
+      "Ты выезжаешь с заправки и должен пересечь велополосу, чтобы попасть на дорогу. Велосипедист едет по велополосе с обычной скоростью. Кто уступает?",
+      [
+        ["Du har vikeplikt for syklisten", "Уступаю я — водитель, выезжающий с заправки"],
+        ["Syklisten har vikeplikt for deg, siden du kommer fra en bensinstasjon", "Уступает велосипедист, раз я еду с заправки", "Det er motsatt: den som kjører ut fra en bensinstasjon, parkeringsplass eller lignende sted har vikeplikt for dem som allerede er på vegen eller sykkelfeltet.", "Наоборот: тот, кто выезжает с заправки, парковки и подобного места, уступает тем, кто уже едет по дороге или велополосе."],
+        ["De har lik rett, så den som kommer først bestemmer", "У нас равные права, кто первый — тот и едет", "Ved utkjøring fra en bensinstasjon gjelder ikke rekkefølgen, det er den som kjører ut som har vikeplikt uansett.", "При выезде с заправки очерёдность роли не играет — уступает именно выезжающий, независимо от того, кто подъехал первым."],
+        ["Vikeplikten avhenger av hvem som har høyest fart", "Кто уступает, зависит от того, у кого скорость выше", "Farten til de involverte avgjør ikke hvem som har vikeplikt her, det er selve situasjonen (utkjøring fra bensinstasjon) som avgjør.", "Скорость участников тут ни при чём — кто уступает, определяет сама ситуация выезда с заправки, а не скорость."]
+      ],
+      "Trafikkreglene § 7 nr 4: den som kjører ut fra en bensinstasjon, parkeringsplass, gårdsplass, gatetun eller lignende sted, har vikeplikt for all trafikk på vegen og sykkelfeltet, inkludert syklister som kjører langs det.",
+      "Trafikkreglene § 7 nr 4: тот, кто выезжает с заправки, парковки, двора, из жилой зоны или похожего места, обязан уступить всему транспорту на дороге и велополосе, включая велосипедистов, которые по ней едут.",
+      "Заправка, двор, парковка — отовсюду, откуда ты выезжаешь на дорогу, уступать должен ты."),
+
+    q("075", "Du parkerer bilen langs en vei i mørket, utenfor tettbygd strøk, uten gatelys i nærheten. Hva sier reglene om lys på bilen mens den står parkert?",
+      "Ты паркуешь машину вдоль дороги в темноте, за городом, без уличного освещения поблизости. Что говорят правила про свет на машине, пока она стоит?",
+      [
+        ["Bilen skal ha parkeringslys tent, siden sikten uten gatelys er for dårlig", "Должны гореть стояночные огни — без уличного освещения видимость слишком плохая"],
+        ["Det holder at refleksene bak lyser opp i møtende lys, lys trengs ikke", "Достаточно, что светоотражатели сзади отражают свет фар — огни не нужны", "Refleksene alene er ikke nok i mørket uten gatelys, da kreves det tent parkeringslys for at bilen skal være synlig i god tid.", "Одних отражателей в темноте без уличного освещения недостаточно — нужны включённые стояночные огни, чтобы машину было видно заранее."],
+        ["Lys er bare påkrevd om natten etter klokken 24, ikke tidligere på kvelden", "Свет нужен только после полуночи, не раньше вечером", "Kravet avhenger av siktforholdene der du parkerer, ikke av et bestemt klokkeslett.", "Требование зависит от условий видимости на месте стоянки, а не от конкретного времени суток."],
+        ["Det holder med nærlys slått på mens bilen står parkert", "Достаточно включить ближний свет, пока машина стоит", "Nærlys er beregnet på kjøring og vil blende møtende trafikk når bilen står stille, riktig løsning er svakere parkeringslys.", "Ближний свет рассчитан на движение и будет слепить встречных, пока машина стоит — правильное решение именно слабые стояночные огни."]
+      ],
+      "Trafikkreglene § 15 nr 4: en parkert bil skal ha parkeringslys tent når sikten er dårlig, for eksempel i mørket uten gatelys. Er det godt gatelys eller lyst nok, trengs det ikke.",
+      "Trafikkreglene § 15 nr 4: у припаркованной машины должны гореть стояночные огни, если видимость плохая — например, в темноте без уличного освещения. Если освещение хорошее или светло, огни не нужны.",
+      "Правило простое: видно тебя и так — огни не нужны, темно и глухо — включай стояночные."),
+
+    q("076", "Bilen foran deg har lagt seg til venstre i kjørefeltet og blinker til venstre for å svinge inn på en sidevei. Vegen er bred nok, og det er ikke sperrelinje. Hvordan kjører du forbi?",
+      "Машина впереди сместилась влево в своей полосе и включила левый поворотник, чтобы свернуть на боковую дорогу. Дорога достаточно широкая, сплошной линии нет. Как её обгонять?",
+      [
+        ["Kjører forbi på høyre side, med forsvarlig avstand", "Обгоняю справа, на безопасной дистанции"],
+        ["Kjører forbi på venstre side, som ved vanlig forbikjøring", "Обгоняю слева, как при обычном обгоне", "Når bilen foran tydelig skal svinge til venstre, skal du kjøre forbi på høyre side, ikke venstre, siden den ikke kommer til å krysse din bane til høyre.", "Когда машина впереди явно собирается повернуть налево, обгонять нужно справа, а не слева — она не пересечёт твою полосу справа."],
+        ["Venter bak til bilen har svingt ferdig, siden forbikjøring her er helt forbudt", "Жду сзади, пока машина не закончит поворот — обгон здесь вообще запрещён", "Forbikjøring på høyre side av en venstresvingende bil er tillatt når det er plass og forsvarlig, det er ikke forbudt i denne situasjonen.", "Обгон справа машины, поворачивающей налево, разрешён, если есть место и это безопасно — в этой ситуации он не запрещён."],
+        ["Blinker venstre og legger meg tett inntil bilen foran før jeg kjører forbi til høyre", "Включаю левый поворотник и прижимаюсь к машине впереди перед обгоном справа", "Å blinke venstre når du skal forbi på høyre side gir feil signal om hvor du skal, og å legge deg tett inntil øker faren unødig.", "Включать левый поворотник, когда обгоняешь справа, даёт неверный сигнал другим о твоих намерениях, а слишком плотное сближение без нужды повышает риск."]
+      ],
+      "Trafikkreglene § 12 nr 1 a: en bil som har lagt seg til venstre og tydelig skal svinge til venstre, kan kjøres forbi på høyre side, forutsatt at det er plass og forsvarlig.",
+      "Trafikkreglene § 12 nr 1 a: машину, которая сместилась влево и явно собирается повернуть налево, можно обгонять справа, если есть место и это безопасно.",
+      "Левый поворотник впереди — значит обгоняй справа, а не слева."),
+
+    q("077", "Du blir stoppet i en kontroll og blåser 0,3 i promille, altså over grensen på 0,2 men under 0,5. Hva er riktig om dette?",
+      "Тебя остановили на проверке, и промилле у тебя 0,3 — выше лимита 0,2, но ниже 0,5. Что здесь верно?",
+      [
+        ["Det er uansett straffbart å kjøre, selv om promillen er under 0,5", "Это всё равно наказуемо, даже если промилле ниже 0,5"],
+        ["Det er helt lovlig å kjøre så lenge promillen er under 0,5", "Это совершенно законно, пока промилле ниже 0,5", "Promillegrensen for å kjøre lovlig er 0,2, ikke 0,5. Alt over 0,2 er straffbart, uansett hvor mye under 0,5 det er.", "Законный предел для вождения — 0,2, а не 0,5. Всё, что выше 0,2, наказуемо, даже если это намного ниже 0,5."],
+        ["Det straffes bare med en muntlig advarsel fra politiet", "За это только устно предупреждают — и всё", "Kjøring i alkoholpåvirket tilstand er straffbart etter vegtrafikkloven, ikke noe som avgjøres med en muntlig advarsel alene.", "Вождение в состоянии опьянения наказуемо по vegtrafikkloven — это не вопрос устного предупреждения."],
+        ["Det har ingen konsekvenser så lenge du kjører pent og ikke lager ulykke", "Это не влечёт последствий, если ты едешь аккуратно и не попал в ДТП", "Straffbarheten avhenger av promillen i blodet på kjøretidspunktet, ikke av hvordan du kjørte eller om det skjedde en ulykke.", "Наказуемость зависит от уровня промилле в момент вождения, а не от того, как ты ехал и случилось ли ДТП."]
+      ],
+      "Promillegrensen i Norge er 0,2. Alt fra 0,2 og oppover er straffbart og medfører reaksjon fra politiet. Fra rundt 0,5 og oppover blir reaksjonen normalt strengere, med tap av førerkort og risiko for fengsel, avhengig av promillenivået.",
+      "Лимит промилле в Норвегии — 0,2. Всё, что выше 0,2, наказуемо и влечёт реакцию со стороны полиции. Примерно от 0,5 и выше реакция обычно строже — лишение прав и риск тюрьмы, в зависимости от уровня промилле.",
+      "0,2 — это уже красная черта, а не «ещё чуть-чуть можно»."),
+
+    q("078", "Du skal kjøre inn på motorveien via påkjøringsfeltet. Trafikken på motorveien er tett, men det er fortsatt luker du kan bruke. Hva er riktig fremgangsmåte?",
+      "Ты выезжаешь на автомагистраль по полосе разгона. Движение плотное, но просветы всё же есть. Как правильно действовать?",
+      [
+        ["Bruker hele påkjøringsfeltet til å øke farten og flette inn i en luke uten å stoppe", "Использую всю полосу разгона, чтобы набрать скорость и влиться в просвет, не останавливаясь"],
+        ["Stopper ved slutten av påkjøringsfeltet og venter til veien er helt fri", "Останавливаюсь в конце полосы разгона и жду, пока дорога не станет совсем свободной", "Å stoppe i påkjøringsfeltet er farlig og unødvendig, feltet er laget for at du skal øke farten og flette inn, ikke for å vente stillestående.", "Останавливаться на полосе разгона опасно и не нужно — она сделана для разгона и слияния с потоком, а не для стоянки в ожидании."],
+        ["Kjører inn i lav fart med en gang og lar bilene på motorveien bremse for meg", "Сразу выезжаю на низкой скорости и жду, что машины на магистрали притормозят ради меня", "Trafikken på motorveien har som regel forkjørsrett, og lav fart ved innkjøring tvinger andre til brå oppbremsing, noe som øker faren.", "У транспорта на магистрали, как правило, преимущество, а низкая скорость при въезде вынуждает остальных резко тормозить — это повышает риск."],
+        ["Krysser rett over i venstre felt med en gang for å unngå å flette inn i høyre felt", "Сразу пересекаю в левую полосу, чтобы не вливаться в правую", "Du skal flette inn i feltet nærmest påkjøringsfeltet først, ikke krysse rett over flere felt uten å forsikre deg om at det er trygt.", "Сначала нужно влиться в ближайшую к полосе разгона полосу, а не сразу пересекать несколько полос, не убедившись, что это безопасно."]
+      ],
+      "Bruk hele påkjøringsfeltet til å tilpasse farten din til trafikken på motorveien, og flett inn i en luke i feltet nærmest deg uten å stoppe. Å stoppe i påkjøringsfeltet skaper fare for bilene bak deg.",
+      "Используй всю полосу разгона, чтобы подстроить скорость под поток на магистрали, и влейся в просвет в ближайшей полосе, не останавливаясь. Остановка на полосе разгона создаёт опасность для машин позади тебя.",
+      "Полоса разгона существует, чтобы ты подстроился под поток, а не чтобы упираться и ждать в ней."),
+
+    qm("m17", "Du kjører i tett tåke. Velg alle riktige.", "Ты едешь в густом тумане. Выбери все верные.", [
+      ["Senker farten tydelig, siden du ser kortere enn vanlig", "Заметно снижаю скорость — видимость короче обычной", true],
+      ["Bruker nærlys eller kjørelys, ikke fjernlys", "Использую ближний или ходовой свет, не дальний", true],
+      ["Kan bruke tåkelys sammen med nærlys for bedre sikt nær bakken", "Могу использовать противотуманки вместе с ближним светом для лучшей видимости у земли", true],
+      ["Slår på fjernlys for å se lengst mulig fremover", "Включаю дальний свет, чтобы видеть как можно дальше", false, "Fjernlys reflekteres i tåkedråpene og blender deg selv, det gir dårligere sikt, ikke bedre.", "Дальний свет отражается от капель тумана и слепит самого водителя — видимость от этого становится хуже, а не лучше."]
+    ],
+    "I tett tåke skal du senke farten, kjøre med nærlys eller kjørelys og eventuelt tåkelys i tillegg til nærlys. Fjernlys skal du unngå, det reflekteres i tåken og blender deg selv (trafikkreglene § 15).",
+    "В густом тумане снижай скорость, езжай с ближним или ходовым светом и при необходимости добавляй противотуманки к ближнему свету. Дальнего света избегай — он отражается в тумане и слепит тебя самого (trafikkreglene § 15).",
+    "В тумане дальний свет — это свет самому себе в глаза.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

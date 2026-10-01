@@ -1402,6 +1402,108 @@
     ],
     "Løsgående dyr som sau, geit eller elg kan oppføre seg helt uforutsigbart. Senk farten i god tid, hold avstand, unngå å tute unødig, og vent tålmodig til dyrene har flyttet seg unna av seg selv.",
     "Свободно пасущиеся животные — овцы, козы, лоси — могут вести себя совершенно непредсказуемо. Заранее снижай скорость, держи дистанцию, не сигналь без нужды и терпеливо жди, пока животные сами не уйдут с дороги.",
-    "С животными на дороге торопиться нельзя — она их территория в этот момент, а не твоя.")
+    "С животными на дороге торопиться нельзя — она их территория в этот момент, а не твоя."),
+
+    q("064", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east", kind: "truck" }] }),
+      "Kryss uten skilt. En lastebil kommer fra venstre. Hva gjør du?",
+      "Перекрёсток без знаков. Грузовик едет слева. Что делаешь?",
+      [
+        ["Kjører videre, lastebilen fra venstre har vikeplikt for deg", "Еду дальше — у грузовика слева обязанность уступить мне"],
+        ["Stopper og vinker lastebilen fram, fordi den er stor og tung", "Останавливаюсь и машу грузовику проехать первым — он большой и тяжёлый", "Størrelsen på kjøretøyet avgjør ikke vikeplikten, det er høyreregelen som gjelder: fra venstre skal den andre vike.", "Размер машины не влияет на то, кто уступает — решает правило правой руки: тот, кто слева, должен уступить."],
+        ["Vurderer at tunge kjøretøy alltid har forkjørsrett i kryss", "Решаю, что тяжёлый транспорт всегда имеет преимущество на перекрёстке", "Det finnes ingen regel om at tunge kjøretøy alltid har forkjørsrett, vikeplikten følger av skilt eller høyreregelen.", "Общего правила «тяжёлый транспорт всегда главный» нет — приоритет определяют знаки или правило правой руки."],
+        ["Senker farten kraftig og lar lastebilen bestemme hvem som kjører først", "Резко сбрасываю скорость и даю грузовику самому решить, кто поедет первым", "Når du har forkjørsrett, skal du kjøre normalt videre i stedet for å skape usikkerhet for den andre føreren.", "Когда преимущество у тебя, нужно ехать как обычно, а не создавать неразбериху нерешительностью."]
+      ],
+      "Uten skilt gjelder høyreregelen: du skal vike for kjøretøy som kommer fra høyre, mens et kjøretøy fra venstre skal vike for deg, uansett hvor stort det er.",
+      "Без знаков действует правило правой руки: ты уступаешь тем, кто едет справа, а тем, кто едет слева, уступаешь не ты — независимо от размера машины.",
+      "Главное — с какой стороны едет другой, а не какой он величины."),
+
+    q("065", scene({ you: { from: "south", to: "east" }, roundabout: true, others: [{ from: "west", to: "north" }] }),
+      "Du kjører i rundkjøringen og skal ta av på neste avkjøring, til høyre. Når skal du blinke høyre?",
+      "Ты едешь по кругу и выезжаешь на следующем съезде, направо. Когда включать правый поворотник?",
+      [
+        ["Rett før avkjøringen du skal ta", "Прямо перед нужным съездом"],
+        ["Med en gang jeg kjører inn i rundkjøringen", "Сразу, как только въезжаю в круг", "Hvis du blinker høyre allerede ved innkjøring, signaliserer du feil retning til dem som venter på å kjøre inn, de tror du skal ut med en gang.", "Если включить правый поворотник уже на въезде, другие подумают, что ты сразу съезжаешь, — это введёт их в заблуждение."],
+        ["Trenger ikke å blinke, siden det er tydelig at jeg tar første avkjøring", "Не нужно включать — и так понятно, что я еду на первый съезд", "Du skal alltid varsle retningsendring i rundkjøringen, selv ved første avkjøring, slik at andre vet hva du planlegger.", "В круге нужно всегда сигнализировать манёвр, даже на первом съезде — чтобы остальные понимали твои планы."],
+        ["Blinker venstre for å vise at jeg blir værende i rundkjøringen litt lenger", "Включаю левый поворотник, чтобы показать, что остаюсь в круге подольше", "Venstreblink før avkjøring sier det motsatte av det du skal gjøre, og kan forvirre bilister som venter på å kjøre inn.", "Левый поворотник перед съездом говорит обратное тому, что ты делаешь, и может запутать тех, кто ждёт въезда в круг."]
+      ],
+      "I rundkjøring blinker du høyre rett før du skal kjøre ut, ikke ved innkjøringen. Det gir andre trafikanter riktig informasjon om når du forlater ringen.",
+      "В круге правый поворотник включают непосредственно перед своим съездом, а не на въезде — так остальные понимают, когда именно ты выезжаешь.",
+      "Поворотник на круге значит «вот тут я съезжаю», а не «я в круге»."),
+
+    q("066", road({ tcross: true }),
+      "Du kjører på en vei med forkjørsrett. En bil fra sideveien til høyre ser ikke ut til å bremse, og kan kjøre rett ut foran deg. Hva gjør du, selv om du formelt har forkjørsrett?",
+      "Ты едешь по дороге с преимуществом. Машина с боковой дороги справа не тормозит и может выехать прямо перед тобой. Что делаешь, хотя формально преимущество у тебя?",
+      [
+        ["Senker farten og er klar til å bremse, selv om jeg har forkjørsrett", "Снижаю скорость и готов тормозить, хотя у меня формальное преимущество"],
+        ["Fortsetter i samme fart, fordi jeg har forkjørsrett og den andre må stoppe", "Еду в том же темпе — у меня преимущество, пусть он тормозит", "Å stole blindt på forkjørsretten når den andre bilen tydelig ikke bremser, kan føre til en unngåelig ulykke. Forkjørsrett fritar deg ikke for aktsomhetsplikten.", "Слепо полагаться на формальное преимущество, когда другая машина явно не тормозит, может привести к ДТП. Преимущество не снимает обязанности быть внимательным."],
+        ["Tuter kraftig og kjører forbi i høy fart for å komme unna", "Сильно сигналю и проезжаю на высокой скорости, чтобы проскочить", "Høy fart øker faren hvis den andre bilen likevel kjører ut, og gir deg mindre tid til å reagere.", "Высокая скорость увеличивает риск, если машина всё же выедет, и оставляет меньше времени на реакцию."],
+        ["Svinger brått ut i motsatt kjørefelt for å unngå kollisjon", "Резко ухожу на встречную полосу, чтобы избежать столкновения", "Brå svingning over i møtende kjørefelt kan skape en ny, enda farligere kollisjon med møtende trafikk.", "Резкий уход на встречную полосу может привести к новой, ещё более опасной аварии со встречным транспортом."]
+      ],
+      "Forkjørsrett gir deg ikke beskyttelse mot en ulykke, du har alltid plikt til å kjøre aktsomt. Ser du at en annen fører ikke ser ut til å overholde sin vikeplikt, skal du senke farten og være klar til å bremse.",
+      "Формальное преимущество не защищает от аварии — ты всегда обязан быть внимательным. Если видишь, что другой водитель не собирается уступать, снижай скорость и будь готов затормозить.",
+      "Право проезда — не щит. Лучше затормозить, чем доказывать, кто был прав."),
+
+    q("067", road({ overtake: true }),
+      "Bilen foran deg (B) har lagt seg ut til venstre med blinklys for å kjøre forbi en syklist. Du kjører rett bak B. Hva gjør du?",
+      "Машина впереди (B) сместилась влево с поворотником, чтобы обогнать велосипедиста. Ты едешь прямо за B. Что делаешь?",
+      [
+        ["Holder avstand og venter til B er ferdig med forbikjøringen før jeg vurderer min egen", "Держу дистанцию и жду, пока B закончит обгон, прежде чем думать о своём"],
+        ["Kjører forbi både B og syklisten samtidig i én bevegelse", "Обгоняю сразу и B, и велосипедиста одним манёвром", "Å kjøre forbi to kjøretøy samtidig gir deg mye dårligere oversikt og margin, og er svært farlig hvis noe uventet skjer.", "Обгон сразу двух участников одним манёвром резко снижает обзор и запас безопасности — это очень опасно при любой неожиданности."],
+        ["Ligger tett bak B for å få bedre fart til egen forbikjøring etterpå", "Прижимаюсь к B вплотную, чтобы разогнаться для своего обгона", "Kort avstand bak en bil som kjører forbi gir deg mindre tid til å reagere hvis B må bremse eller avbryte forbikjøringen.", "Короткая дистанция за обгоняющей машиной оставляет меньше времени на реакцию, если B придётся тормозить или прервать обгон."],
+        ["Tuter for å få B til å skynde seg forbi syklisten", "Сигналю, чтобы B поторопился с обгоном велосипедиста", "Tuting for å presse en annen fører til å skynde seg under forbikjøring øker faren og kan gi en hastig, dårlig vurdert manøver.", "Сигналить, чтобы поторопить другого водителя во время обгона, опасно — это может привести к поспешному и необдуманному манёвру."]
+      ],
+      "Når bilen foran deg kjører forbi noen, holder du avstand og venter til manøveren er ferdig før du planlegger din egen forbikjøring.",
+      "Когда машина впереди кого-то обгоняет, держи дистанцию и жди, пока манёвр завершится, прежде чем планировать свой собственный обгон.",
+      "Два обгона разом — это не экономия времени, а риск."),
+
+    q("068", road({ bus: true, limit: 50 }),
+      "En skolebuss har stoppet med blinkende varsellys ved en holdeplass uten fortau. Du nærmer deg bakfra. Hva bør du spesielt tenke på?",
+      "Школьный автобус остановился с мигающими аварийками на остановке без тротуара. Ты подъезжаешь сзади. На что обратить особое внимание?",
+      [
+        ["Senker farten kraftig, siden barn kan løpe ut fra foran eller bak bussen uten å se seg for", "Сильно снижаю скорость — дети могут выбежать из-за автобуса, не посмотрев по сторонам"],
+        ["Kjører forbi i vanlig fart, siden bussen uansett har stoppet helt", "Еду в обычном темпе — автобус же полностью остановился", "At bussen har stoppet, sier ingenting om hvor barna beveger seg, faren for at et barn løper ut i veien er like stor.", "Остановка автобуса никак не говорит о том, куда побегут дети — риск, что ребёнок выскочит на дорогу, остаётся высоким."],
+        ["Tuter for å varsle barna om at jeg kommer", "Сигналю, чтобы предупредить детей о своём приближении", "Tuting skremmer og forvirrer barn mer enn det hjelper, lav fart og god oppmerksomhet er tryggere.", "Сигнал скорее пугает и путает детей, чем помогает — надёжнее низкая скорость и внимательность."],
+        ["Kjører forbi på den siden der det er mest plass, uten å senke farten", "Проезжаю с той стороны, где больше места, не снижая скорость", "Å prioritere god plass fremfor lav fart hjelper ikke hvis et barn plutselig løper ut, farten er det viktigste du kan justere.", "Думать о запасе места важнее скорости не поможет, если ребёнок внезапно выбежит — главное именно снизить скорость."]
+      ],
+      "Barn er uforutsigbare og kan løpe ut i veien uten å se seg for, spesielt rundt en skolebuss. Senk farten kraftig og vær klar til å stoppe til bussen har kjørt videre og barna er i sikkerhet.",
+      "Дети непредсказуемы и могут выбежать на дорогу, не посмотрев по сторонам, особенно у школьного автобуса. Сильно снижай скорость и будь готов остановиться, пока автобус не уедет, а дети не окажутся в безопасности.",
+      "Школьный автобус с мигалками — сигнал «рядом дети», а не просто препятствие на дороге."),
+
+    q("069", scene({ you: { from: "south", to: "north" }, lights: { south: "yellow" } }),
+      "Lyset skifter fra grønt til gult akkurat idet du nærmer deg stopplinjen, og du kan fortsatt stoppe trygt og rolig. Hva gjør du?",
+      "Свет меняется с зелёного на жёлтый прямо когда ты подъезжаешь к стоп-линии, и ты ещё можешь спокойно и безопасно остановиться. Что делаешь?",
+      [
+        ["Stopper rolig ved stopplinjen", "Спокойно останавливаюсь у стоп-линии"],
+        ["Gir gass og kjører raskt gjennom krysset før det blir rødt", "Жму на газ и быстро проезжаю перекрёсток, пока не стало красным", "Når du fortsatt kan stoppe trygt, skal du stoppe. Å gi gass for å rekke gult øker faren og er ofte det som fører til kjøring på rødt.", "Если ты ещё можешь спокойно остановиться, нужно остановиться. Газ в пол ради жёлтого увеличивает риск и часто превращается в проезд на красный."],
+        ["Fortsetter i samme fart, siden gult bare er en advarsel uten betydning for hva jeg skal gjøre", "Еду в том же темпе — жёлтый просто предупреждение, ни на что не влияющее", "Gult betyr at du skal stoppe hvis det er mulig på en trygg måte, det er ikke bare en advarsel uten betydning.", "Жёлтый значит «остановись, если можешь сделать это безопасно» — это не просто предупреждение без последствий."],
+        ["Bremser brått midt i krysset for å være føre var", "Резко торможу прямо на перекрёстке на всякий случай", "Brå bremsing midt i krysset er farligere enn å fullføre kjøringen gjennom, vurderingen skal gjøres før krysset, ikke inni det.", "Резкое торможение прямо на перекрёстке опаснее, чем доехать до конца, — решение нужно принимать до перекрёстка, а не на нём."]
+      ],
+      "Gult lys betyr at du skal stoppe dersom du kan gjøre det på en trygg og kontrollert måte. Kan du ikke stoppe trygt, fullfører du kjøringen gjennom i stedet for å bråbremse.",
+      "Жёлтый свет значит: остановись, если можешь сделать это безопасно и спокойно. Если безопасно остановиться уже нельзя — доезжай до конца, а не тормози резко.",
+      "Если успеваешь безопасно затормозить — тормози. Жёлтый — не разрешение проехать, а последний шанс остановиться."),
+
+    q("070", null,
+      "Du har fått et reseptbelagt legemiddel som har en rød varseltrekant på pakningen, og kjenner deg trøtt etter å ha tatt det. Kan du kjøre bil?",
+      "Тебе выписали рецептурное лекарство, на упаковке — красный предупреждающий треугольник, и после приёма тебя клонит в сон. Можно ли садиться за руль?",
+      [
+        ["Nei, kjøreevnen kan være nedsatt selv om legemidlet er lovlig og foreskrevet av lege", "Нет — способность управлять машиной может быть снижена, даже если лекарство законное и выписано врачом"],
+        ["Ja, siden legemidlet er foreskrevet av lege og dermed alltid lovlig å kjøre med", "Да, лекарство выписано врачом, значит с ним всегда можно за руль", "At et legemiddel er foreskrevet og lovlig å bruke, betyr ikke at det er trygt å kjøre når det faktisk påvirker kjøreevnen din.", "То, что лекарство выписано и его приём законен, не означает, что безопасно садиться за руль, если оно реально влияет на твои способности."],
+        ["Ja, varseltrekanten gjelder bare for maskiner på jobb, ikke for bilkjøring", "Да, треугольник касается только работы с техникой, не вождения", "Varseltrekanten på legemidler advarer nettopp mot bilkjøring og annen aktivitet som krever årvåkenhet.", "Предупреждающий треугольник на лекарствах как раз предупреждает об опасности вождения и другой деятельности, требующей внимания."],
+        ["Ja, så lenge du ikke har drukket alkohol i tillegg", "Да, если вдобавок не пил алкоголь", "Fravær av alkohol endrer ikke på at legemidlet alene kan nedsette kjøreevnen din, det er selve påvirkningen som avgjør.", "Отсутствие алкоголя не меняет того, что само лекарство может снижать способность управлять машиной — важно само состояние, а не алкоголь."]
+      ],
+      "Det er forbudt å kjøre når kjøreevnen er nedsatt, uansett årsak, legemidler inkludert. Rød varseltrekant på pakningen advarer om at legemidlet kan påvirke kjøreevnen, og du må selv vurdere om du er i stand til å kjøre trygt.",
+      "Садиться за руль с ослабленной способностью управлять машиной запрещено независимо от причины, включая лекарства. Красный треугольник на упаковке — прямое предупреждение, что лекарство может повлиять на вождение, и тебе нужно самому оценить, можешь ли ты безопасно ехать.",
+      "Треугольник на упаковке — не формальность, а прямой сигнал: сегодня за руль не стоит."),
+
+    qm("m07", scene({ you: { from: "south", to: "north" }, roundabout: true, others: [{ from: "west", to: "south" }] }),
+      "Du skal inn i en rundkjøring. Velg alle riktige.", "Ты въезжаешь в круговое движение. Выбери все верные.", [
+      ["Du viker for trafikk som allerede er inne i rundkjøringen", "Уступаешь тем, кто уже едет по кругу", true],
+      ["Syklister i rundkjøringen kan sykle enten i kjørefeltet eller på eget sykkelfelt rundt, avhengig av hvordan rundkjøringen er bygd", "Велосипедисты в круге могут ехать либо в полосе движения, либо по отдельной велополосе вокруг — зависит от устройства круга", true],
+      ["Du trenger normalt ikke å blinke venstre ved innkjøring hvis du skal rett fram", "Обычно не нужно включать левый поворотник при въезде, если едешь прямо", true],
+      ["Du har alltid forkjørsrett over biler som allerede sirkulerer i rundkjøringen", "У тебя всегда преимущество перед машинами, уже едущими по кругу", false, "Det er tvert imot: trafikken inne i rundkjøringen har forkjørsrett, de som skal inn har vikeplikt.", "На самом деле наоборот: преимущество у тех, кто уже в круге, а въезжающие обязаны уступить."]
+    ],
+    "I en rundkjøring har trafikken som allerede sirkulerer forkjørsrett, de som skal inn har vikeplikt. Ved innkjøring trenger du normalt ikke blinke dersom du skal rett fram, mens syklister avhengig av utforming kan sykle i selve rundkjøringen eller på eget sykkelfelt rundt den.",
+    "В круге преимущество у тех, кто уже едет по кольцу, въезжающие уступают. При въезде обычно не сигналят поворотником, если едешь прямо, а велосипедисты в зависимости от устройства круга могут ехать прямо по кругу или по отдельной велополосе вокруг него.",
+    "Главное правило круга: кто внутри — тот главный.")
   ];
 })();

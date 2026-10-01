@@ -179,6 +179,13 @@
     w("143", "skumring", "сумерки", "I skumringen er fotgjengere langs veien vanskelige å oppdage.", "В сумерках пешеходов у дороги трудно заметить.", "Условия"),
     w("144", "brøytekant", "снежный бруствер (вал от уборки снега)", "En høy brøytekant kan skjule syklister i et kryss.", "Высокий снежный бруствер может скрывать велосипедистов на перекрёстке.", "Дорога"),
     w("145", "sau (på beite)", "овца (на выпасе)", "Om sommeren kan det stå sau midt i veien i utmarka.", "Летом на дороге в глубинке могут стоять овцы.", "Условия"),
-    w("146", "kjøreforhold", "дорожные условия", "Tilpass farten etter kjøreforholdene, ikke bare fartsgrensen.", "Подстраивай скорость под условия движения, а не только под знак ограничения.", "Условия")
+    w("146", "kjøreforhold", "дорожные условия", "Tilpass farten etter kjøreforholdene, ikke bare fartsgrensen.", "Подстраивай скорость под условия движения, а не только под знак ограничения.", "Условия"),
+
+    w("147", "kjøretøy", "транспортное средство", "Et kjøretøy er alt som brukes til transport på vei, som bil, moped eller sykkel.", "Транспортное средство — это всё, что используется для передвижения по дороге: машина, мопед или велосипед.", "Основное"),
+    w("148", "trafikant", "участник дорожного движения", "Alle trafikanter skal vise hensyn til hverandre.", "Все участники движения должны проявлять уважение друг к другу.", "Основное"),
+    w("149", "Statens vegvesen", "Государственное дорожное управление Норвегии", "Statens vegvesen har ansvar for skilting og vegvedlikehold.", "Statens vegvesen отвечает за дорожные знаки и содержание дорог.", "Основное"),
+    w("150", "trafikksikkerhet", "безопасность дорожного движения", "Lav fart og god avstand er viktig for trafikksikkerheten.", "Низкая скорость и хорошая дистанция важны для безопасности дорожного движения.", "Правила"),
+    w("151", "rasteplass", "площадка отдыха (rasteplass)", "Ta en pause på en rasteplass hvis du blir trøtt.", "Если устал за рулём — сделай паузу на площадке отдыха.", "Дорога"),
+    w("152", "bompenger / bomstasjon", "плата за проезд / пункт оплаты", "Du betaler bompenger automatisk når du passerer en bomstasjon.", "Плата за проезд списывается автоматически, когда проезжаешь пункт оплаты.", "Дорога")
   ];
 })();
