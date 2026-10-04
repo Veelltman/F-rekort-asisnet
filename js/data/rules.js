@@ -791,12 +791,12 @@
 
     qm("m17", "Du kjører i tett tåke. Velg alle riktige.", "Ты едешь в густом тумане. Выбери все верные.", [
       ["Senker farten tydelig, siden du ser kortere enn vanlig", "Заметно снижаю скорость — видимость короче обычной", true],
-      ["Bruker nærlys eller kjørelys, ikke fjernlys", "Использую ближний или ходовой свет, не дальний", true],
-      ["Kan bruke tåkelys sammen med nærlys for bedre sikt nær bakken", "Могу использовать противотуманки вместе с ближним светом для лучшей видимости у земли", true],
+      ["Bruker nærlys, ikke fjernlys", "Использую ближний свет, не дальний", true],
+      ["Kan bruke tåkelys foran i stedet for nærlys, og tåkelys bak", "Могу включить передние противотуманки вместо ближнего и задний противотуманный", true],
       ["Slår på fjernlys for å se lengst mulig fremover", "Включаю дальний свет, чтобы видеть как можно дальше", false, "Fjernlys reflekteres i tåkedråpene og blender deg selv, det gir dårligere sikt, ikke bedre.", "Дальний свет отражается от капель тумана и слепит самого водителя — видимость от этого становится хуже, а не лучше."]
     ],
-    "I tett tåke skal du senke farten, kjøre med nærlys eller kjørelys og eventuelt tåkelys i tillegg til nærlys. Fjernlys skal du unngå, det reflekteres i tåken og blender deg selv (trafikkreglene § 15).",
-    "В густом тумане снижай скорость, езжай с ближним или ходовым светом и при необходимости добавляй противотуманки к ближнему свету. Дальнего света избегай — он отражается в тумане и слепит тебя самого (trafikkreglene § 15).",
+    "I tett tåke skal du senke farten og kjøre med nærlys, eller med tåkelys foran i stedet for nærlys — trafikkreglene § 15 nr 5 tillater ikke tåkelys sammen med nærlys. Tåkebaklys gjør deg synlig bakfra. Fjernlys reflekteres i tåken og blender deg selv.",
+    "В густом тумане снижай скорость и езжай с ближним светом или с передними противотуманками вместо ближнего — trafikkreglene § 15 nr 5 не разрешает включать их вместе. Задний противотуманный делает тебя заметным сзади. Дальний отражается в тумане и слепит тебя самого.",
     "В тумане дальний свет — это свет самому себе в глаза."),
 
     q("079", "Du kjører på landevei og kolliderer med en elg som springer ut i vegen. Elgen blir skadd og springer inn i skogen. Hva er du pliktig til å gjøre?",

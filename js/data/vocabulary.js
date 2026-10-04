@@ -189,10 +189,10 @@
     w("152", "bompenger / bomstasjon", "плата за проезд / пункт оплаты", "Du betaler bompenger automatisk når du passerer en bomstasjon.", "Плата за проезд списывается автоматически, когда проезжаешь пункт оплаты.", "Дорога"),
 
     w("153", "elsparkesykkel", "электросамокат", "Elsparkesykler kan kjøre i sykkelfeltet eller i vegbanen.", "Электросамокаты могут ехать по велополосе или по проезжей части.", "Машина"),
-    w("154", "skolepatrulje", "школьный патруль", "Skolepatruljen holder opp et stoppskilt ved gangfeltet.", "Школьный патруль поднимает знак «стоп» у перехода.", "Ситуации"),
+    w("154", "skolepatrulje", "школьный патруль", "Skolepatruljen hjelper barna over gangfeltet.", "Школьный патруль помогает детям перейти дорогу.", "Ситуации"),
     w("155", "hjortevilt", "копытный дикий зверь (лось, олень, косуля)", "Ved påkjørsel av hjortevilt skal du varsle politiet.", "При сбитом копытном звере нужно уведомить полицию.", "Условия"),
     w("156", "håndfri (utstyr)", "устройство hands-free", "Bruk håndfri-utstyr hvis du må snakke i telefonen mens du kjører.", "Используй hands-free, если нужно говорить по телефону за рулём.", "Машина"),
     w("157", "glatt føre", "скользкая дорога, гололёд", "Senk farten og hold god avstand ved glatt føre.", "Снижай скорость и держи большую дистанцию на скользкой дороге.", "Условия"),
-    w("158", "hjelpeplikt", "обязанность помочь при ДТП", "Hjelpeplikten gjelder ikke hvis nødvendig hjelp allerede er gitt.", "Обязанность помочь не действует, если необходимая помощь уже оказана.", "Правила")
+    w("158", "hjelpeplikt", "обязанность помочь при ДТП", "Ved en ulykke har du hjelpeplikt: stans og hjelp skadde.", "При аварии у тебя обязанность помочь: остановись и помоги пострадавшим.", "Правила")
   ];
 })();

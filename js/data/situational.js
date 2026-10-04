@@ -1417,18 +1417,18 @@
       "Без знаков действует правило правой руки: ты уступаешь тем, кто едет справа, а тем, кто едет слева, уступаешь не ты — независимо от размера машины.",
       "Главное — с какой стороны едет другой, а не какой он величины."),
 
-    q("065", scene({ you: { from: "south", to: "east" }, roundabout: true, others: [{ from: "west", to: "north" }] }),
-      "Du kjører i rundkjøringen og skal ta av på neste avkjøring, til høyre. Når skal du blinke høyre?",
-      "Ты едешь по кругу и выезжаешь на следующем съезде, направо. Когда включать правый поворотник?",
+    q("065", scene({ you: { from: "south", to: "north" }, roundabout: true, others: [{ from: "west", to: "north" }] }),
+      "Du skal ta andre avkjøring (rett fram) i rundkjøringen. Når blinker du til høyre?",
+      "Тебе нужен второй съезд с круга (прямо). Когда включаешь правый поворотник?",
       [
-        ["Rett før avkjøringen du skal ta", "Прямо перед нужным съездом"],
-        ["Med en gang jeg kjører inn i rundkjøringen", "Сразу, как только въезжаю в круг", "Hvis du blinker høyre allerede ved innkjøring, signaliserer du feil retning til dem som venter på å kjøre inn, de tror du skal ut med en gang.", "Если включить правый поворотник уже на въезде, другие подумают, что ты сразу съезжаешь, — это введёт их в заблуждение."],
-        ["Trenger ikke å blinke, siden det er tydelig at jeg tar første avkjøring", "Не нужно включать — и так понятно, что я еду на первый съезд", "Du skal alltid varsle retningsendring i rundkjøringen, selv ved første avkjøring, slik at andre vet hva du planlegger.", "В круге нужно всегда сигнализировать манёвр, даже на первом съезде — чтобы остальные понимали твои планы."],
-        ["Blinker venstre for å vise at jeg blir værende i rundkjøringen litt lenger", "Включаю левый поворотник, чтобы показать, что остаюсь в круге подольше", "Venstreblink før avkjøring sier det motsatte av det du skal gjøre, og kan forvirre bilister som venter på å kjøre inn.", "Левый поворотник перед съездом говорит обратное тому, что ты делаешь, и может запутать тех, кто ждёт въезда в круг."]
+        ["Når jeg har passert avkjøringen før min, rett før jeg skal ut", "Когда проехал съезд перед своим — прямо перед выездом"],
+        ["Med en gang jeg kjører inn i rundkjøringen", "Сразу при въезде на круг", "Blinker du høyre allerede ved innkjøring, tror de som venter ved første avkjøring at du skal ut der.", "Если включить правый уже на въезде, те, кто ждёт у первого съезда, решат, что ты выезжаешь там."],
+        ["Jeg trenger ikke blinke når jeg kjører rett fram", "Не нужно включать, раз еду прямо", "Du skal alltid gi tegn til høyre før du forlater rundkjøringen, også når du skal rett fram.", "Перед выездом с круга правый поворотник включают всегда, даже если едешь прямо."],
+        ["Jeg blinker venstre hele veien rundt", "Всю дорогу по кругу мигаю левым", "Venstre blinklys brukes ved innkjøring bare når du skal langt rundt, og aldri når du skal ut.", "Левый включают на въезде, только если едешь далеко по кругу, и никогда — при выезде."]
       ],
-      "I rundkjøring blinker du høyre rett før du skal kjøre ut, ikke ved innkjøringen. Det gir andre trafikanter riktig informasjon om når du forlater ringen.",
-      "В круге правый поворотник включают непосредственно перед своим съездом, а не на въезде — так остальные понимают, когда именно ты выезжаешь.",
-      "Поворотник на круге значит «вот тут я съезжаю», а не «я в круге»."),
+      "Skal du ut i første avkjøring, blinker du høyre allerede før innkjøringen. Skal du lenger, blinker du høyre når du har passert avkjøringen før din, slik at andre ser hvor du skal ut.",
+      "Если нужен первый съезд — правый поворотник включаешь ещё до въезда. Если дальше — после того, как проехал съезд перед своим, чтобы остальные видели, где ты выедешь.",
+      "Первый съезд — правый сразу; дальше — правый после предыдущего съезда."),
 
     q("066", road({ tcross: true }),
       "Du kjører på en vei med forkjørsrett. En bil fra sideveien til høyre ser ikke ut til å bremse, og kan kjøre rett ut foran deg. Hva gjør du, selv om du formelt har forkjørsrett?",
@@ -1515,8 +1515,8 @@
         ["Stopper midt i krysset for å se bedre til begge sider", "Останавливаюсь посреди перекрёстка, чтобы лучше осмотреться по сторонам", "Du skal stoppe ved stopplinjen før krysset, ikke inni krysset der du er i vegen for annen trafikk.", "Останавливаться нужно у стоп-линии перед перекрёстком, а не внутри него, где ты мешаешь другому движению."],
         ["Stopper bare hvis det er andre kjøretøy synlig i krysset", "Останавливаюсь только если в перекрёстке видны другие машины", "Plikten til å stoppe ved stoppskilt gjelder alltid, den er ikke avhengig av om du ser andre kjøretøy der og da.", "Обязанность остановиться у знака «Stopp» действует всегда, она не зависит от того, видишь ли ты в этот момент другие машины."]
       ],
-      "Stoppskilt (skilt 202) krever at du stopper helt ved stopplinjen hver gang, uavhengig av om vegen ser tom ut. Du kjører videre først når du har forsikret deg om at det er trygt.",
-      "Знак «Stopp» (знак 202) требует полной остановки у стоп-линии каждый раз, независимо от того, насколько пустой выглядит дорога. Ехать дальше можно только убедившись, что это безопасно.",
+      "Stoppskilt (skilt 204) krever at du stopper helt ved stopplinjen hver gang, uavhengig av om vegen ser tom ut. Du kjører videre først når du har forsikret deg om at det er trygt.",
+      "Знак «Stopp» (знак 204) требует полной остановки у стоп-линии каждый раз, независимо от того, насколько пустой выглядит дорога. Ехать дальше можно только убедившись, что это безопасно.",
       "«Stopp» значит именно стоп, а не «притормози, если что»."),
 
     q("072", null,
@@ -1546,16 +1546,16 @@
       "Знак с цепями — это почти всегда про грузовики и автобусы, а не про твою легковушку."),
 
     q("074", road({ bikeLane: true }),
-      "Du skal svinge til høyre over et sykkelfelt. En elsparkesykkel kommer rett fram i sykkelfeltet i vanlig fart. Hvem har vikeplikt?",
-      "Тебе нужно повернуть направо через велополосу. По велополосе навстречу прямо едет электросамокат на обычной скорости. Кто уступает?",
+      "Du skal svinge til høyre over et sykkelfelt. En elsparkesykkel kommer bakfra i sykkelfeltet og skal rett fram. Hvem har vikeplikt?",
+      "Тебе нужно повернуть направо через велополосу. Сзади по велополосе едет электросамокат, ему прямо. Кто уступает?",
       [
         ["Jeg har vikeplikt for elsparkesykkelen, siden den kjører rett fram i sykkelfeltet", "Уступаю я — электросамокат едет прямо по велополосе"],
         ["Elsparkesykkelen har vikeplikt for meg siden den er mindre enn en bil", "Уступает электросамокат — он меньше машины", "Størrelsen på kjøretøyet avgjør ikke vikeplikten, det avgjørende er at føreren som svinger skal vike for den som kjører rett fram.", "Размер транспортного средства не определяет, кто уступает — важно то, что поворачивающий уступает едущему прямо."],
         ["Ingen har vikeplikt, vi må bare avpasse farten etter hverandre", "Никто не уступает, просто подстраиваем скорость друг под друга", "Her gjelder en klar vikepliktregel, det er ikke en situasjon der dere bare skal avpasse farten uten en avklart vikeplikt.", "Здесь действует чёткое правило уступки, это не ситуация, где просто подстраивают скорость без определённого приоритета."],
         ["Elsparkesykkelen må stoppe helt siden den kjører i sykkelfeltet", "Электросамокат обязан полностью остановиться, потому что едет по велополосе", "Den som kjører rett fram i sykkelfeltet trenger ikke stoppe, det er bilen som svinger som skal vike og eventuelt stoppe.", "Тому, кто едет прямо по велополосе, останавливаться не нужно — уступить и при необходимости остановиться должна поворачивающая машина."]
       ],
-      "Når du svinger over et sykkelfelt, har du vikeplikt for syklister og elsparkesykler som kjører rett fram, uansett om de kommer fra høyre eller venstre (trafikkreglene § 7 nr 3).",
-      "Когда поворачиваешь через велополосу, ты уступаешь велосипедистам и электросамокатам, едущим прямо, независимо от того, с какой стороны они едут (trafikkreglene § 7 nr 3).",
+      "Når du svinger over et sykkelfelt, har du vikeplikt for syklister og førere av liten elektrisk motorvogn som skal rett fram, også dem som kommer bakfra (trafikkreglene § 7 nr 3).",
+      "Когда поворачиваешь через велополосу, ты уступаешь велосипедистам и электросамокатам, которые едут прямо, в том числе догоняющим сзади (trafikkreglene § 7 nr 3).",
       "Поворачиваешь через велополосу — уступаешь всем, кто едет по ней прямо, будь то велосипед или самокат."),
 
     q("075", null,
@@ -1585,17 +1585,17 @@
       "Прицеп закачало — газ отпускаем плавно, руки спокойные, резких движений нет."),
 
     q("077", road({ crossing: true }),
-      "En skolepatrulje med stoppskilt i hånden står ved et gangfelt og holder skiltet opp mot deg, mens barna krysser. Hva gjør du?",
-      "Школьный патруль с ручным знаком «Stopp» стоит у перехода и держит знак в твою сторону, пока дети переходят. Что делаешь?",
+      "En skolepatrulje står ved et gangfelt og hjelper barn over vegen. Barna er på vei ut i gangfeltet. Hva gjør du?",
+      "У перехода стоит школьный патруль и помогает детям перейти дорогу. Дети выходят на переход. Что делаешь?",
       [
-        ["Stopper og venter til skolepatruljen senker skiltet, selv om det ikke er rødt lys", "Останавливаюсь и жду, пока школьный патруль не опустит знак, даже если светофора на красном нет"],
-        ["Kjører videre siden skolepatruljen ikke har samme myndighet som politiet", "Еду дальше — у школьного патруля нет таких полномочий, как у полиции", "Et hevet stoppskilt fra skolepatrulje skal respekteres som et stopp-signal, selv om patruljen ikke er politi.", "Поднятый знак «Stopp» от школьного патруля нужно соблюдать как сигнал остановки, даже если патруль — не полиция."],
-        ["Senker bare farten og kjører forsiktig forbi barna", "Просто снижаю скорость и осторожно проезжаю мимо детей", "Et hevet stoppskilt betyr full stopp, ikke bare lavere fart, du skal vente til skiltet senkes.", "Поднятый знак «Stopp» означает полную остановку, а не просто снижение скорости — нужно дождаться, когда знак опустят."],
-        ["Stopper, men blinker med lysene for å få patruljen til å skynde seg", "Останавливаюсь, но мигаю фарами, чтобы патруль поторопился", "Å signalisere utålmodighet mot en skolepatrulje er respektløst og unødvendig, du skal bare vente rolig.", "Сигналить нетерпение школьному патрулю — неуважительно и ни к чему, нужно просто спокойно подождать."]
+        ["Stopper og lar barna gå over, og kjører først når gangfeltet er fritt", "Останавливаюсь, пропускаю детей и еду, только когда переход свободен"],
+        ["Kjører videre, skolepatruljen er ikke politi", "Еду дальше — школьный патруль не полиция", "Du har vikeplikt for gående som er på vei ut i gangfeltet (§ 9 nr 2), og ved skolepatrulje skal du holde særlig liten fart og stanse om nødvendig (§ 13 nr 2 b).", "Ты уступаешь пешеходам, которые выходят на переход (§ 9 nr 2), а у школьного патруля обязан ехать особенно медленно и при необходимости остановиться (§ 13 nr 2 b)."],
+        ["Senker bare farten og kjører forsiktig forbi barna", "Только сбавляю скорость и осторожно проезжаю мимо детей", "Barna er på vei ut i gangfeltet. Da skal du stanse og la dem gå over, ikke kjøre forbi.", "Дети выходят на переход — нужно остановиться и пропустить их, а не проезжать мимо."],
+        ["Blinker med lysene så patruljen skynder seg", "Мигаю фарами, чтобы патруль поторопился", "Lyssignal brukt for å presse andre er unødig bruk og forbudt (§ 14 nr 1).", "Световой сигнал, чтобы поторопить других, — ненужное использование, оно запрещено (§ 14 nr 1)."]
       ],
-      "Et hevet stoppskilt fra skolepatrulje er et bindende stopp-signal. Du skal stoppe og vente til skiltet senkes, selv uten rødt lys eller politi til stede.",
-      "Поднятый знак «Stopp» от школьного патруля — это обязательный сигнал остановки. Нужно остановиться и подождать, пока знак не опустят, даже без красного света и без полиции.",
-      "Поднятый знак у школьного патруля — такой же стоп, как красный свет."),
+      "Trafikkreglene § 13 nr 2 b: ved passering av skolepatrulje skal du holde særlig liten fart og om nødvendig stanse. § 9 nr 2: du har vikeplikt for gående som er i eller på vei ut i gangfeltet. Skolepatruljen dirigerer barna, ikke bilene.",
+      "Trafikkreglene § 13 nr 2 b: проезжая мимо школьного патруля, едешь особенно медленно и при необходимости останавливаешься. § 9 nr 2: ты уступаешь пешеходам на переходе и тем, кто на него выходит. Патруль управляет детьми, а не машинами.",
+      "Патруль — не регулировщик, но дети на переходе — значит, ты стоишь."),
 
     qm("m08", null, "Du kjenner at du blir svært trøtt mens du kjører på motorveg. Velg alle riktige.", "Ты чувствуешь, что сильно устаёшь за рулём на автомагистрали. Выбери все верные.", [
       ["Stopper på en rasteplass eller bensinstasjon for å hvile", "Останавливаюсь на площадке отдыха или заправке, чтобы отдохнуть", true],
