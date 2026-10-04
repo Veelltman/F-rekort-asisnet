@@ -186,6 +186,13 @@
     w("149", "Statens vegvesen", "Государственное дорожное управление Норвегии", "Statens vegvesen har ansvar for skilting og vegvedlikehold.", "Statens vegvesen отвечает за дорожные знаки и содержание дорог.", "Основное"),
     w("150", "trafikksikkerhet", "безопасность дорожного движения", "Lav fart og god avstand er viktig for trafikksikkerheten.", "Низкая скорость и хорошая дистанция важны для безопасности дорожного движения.", "Правила"),
     w("151", "rasteplass", "площадка отдыха (rasteplass)", "Ta en pause på en rasteplass hvis du blir trøtt.", "Если устал за рулём — сделай паузу на площадке отдыха.", "Дорога"),
-    w("152", "bompenger / bomstasjon", "плата за проезд / пункт оплаты", "Du betaler bompenger automatisk når du passerer en bomstasjon.", "Плата за проезд списывается автоматически, когда проезжаешь пункт оплаты.", "Дорога")
+    w("152", "bompenger / bomstasjon", "плата за проезд / пункт оплаты", "Du betaler bompenger automatisk når du passerer en bomstasjon.", "Плата за проезд списывается автоматически, когда проезжаешь пункт оплаты.", "Дорога"),
+
+    w("153", "elsparkesykkel", "электросамокат", "Elsparkesykler kan kjøre i sykkelfeltet eller i vegbanen.", "Электросамокаты могут ехать по велополосе или по проезжей части.", "Машина"),
+    w("154", "skolepatrulje", "школьный патруль", "Skolepatruljen holder opp et stoppskilt ved gangfeltet.", "Школьный патруль поднимает знак «стоп» у перехода.", "Ситуации"),
+    w("155", "hjortevilt", "копытный дикий зверь (лось, олень, косуля)", "Ved påkjørsel av hjortevilt skal du varsle politiet.", "При сбитом копытном звере нужно уведомить полицию.", "Условия"),
+    w("156", "håndfri (utstyr)", "устройство hands-free", "Bruk håndfri-utstyr hvis du må snakke i telefonen mens du kjører.", "Используй hands-free, если нужно говорить по телефону за рулём.", "Машина"),
+    w("157", "glatt føre", "скользкая дорога, гололёд", "Senk farten og hold god avstand ved glatt føre.", "Снижай скорость и держи большую дистанцию на скользкой дороге.", "Условия"),
+    w("158", "hjelpeplikt", "обязанность помочь при ДТП", "Hjelpeplikten gjelder ikke hvis nødvendig hjelp allerede er gitt.", "Обязанность помочь не действует, если необходимая помощь уже оказана.", "Правила")
   ];
 })();

@@ -797,7 +797,79 @@
     ],
     "I tett tåke skal du senke farten, kjøre med nærlys eller kjørelys og eventuelt tåkelys i tillegg til nærlys. Fjernlys skal du unngå, det reflekteres i tåken og blender deg selv (trafikkreglene § 15).",
     "В густом тумане снижай скорость, езжай с ближним или ходовым светом и при необходимости добавляй противотуманки к ближнему свету. Дальнего света избегай — он отражается в тумане и слепит тебя самого (trafikkreglene § 15).",
-    "В тумане дальний свет — это свет самому себе в глаза.")
+    "В тумане дальний свет — это свет самому себе в глаза."),
+
+    q("079", "Du kjører på landevei og kolliderer med en elg som springer ut i vegen. Elgen blir skadd og springer inn i skogen. Hva er du pliktig til å gjøre?",
+      "Ты едешь по дороге, и в машину выбегает лось — ты сталкиваешься с ним. Лось получает травму и убегает в лес. Что ты обязан сделать?",
+      [
+        ["Varsler politiet og merker stedet der elgen forsvant inn i skogen, slik at den kan bli funnet", "Уведомляю полицию и отмечаю место, где лось скрылся в лесу, чтобы его смогли найти"],
+        ["Kjører videre siden elgen selv løp ut i vegen og det ikke er mitt ansvar", "Еду дальше — лось сам выбежал на дорогу, это не моя ответственность", "Plikten til å varsle og merke stedet gjelder uansett hvem sin «feil» sammenstøtet var, det handler om dyrevelferd, ikke skyld.", "Обязанность уведомить и отметить место действует независимо от того, чья «вина» в столкновении — дело в благополучии животного, а не в виновности."],
+        ["Ringer bare veterinær, politiet trenger ikke varsles ved viltpåkjørsel", "Звоню только ветеринару, полицию при сбитом звере уведомлять не нужно", "Politiet skal alltid varsles ved påkjørsel av hjortevilt som elg, slik at ettersøk kan settes i gang, en veterinær alene er ikke nok.", "При сбитом копытном звере, таком как лось, всегда уведомляют полицию, чтобы организовать поиск, одного ветеринара недостаточно."],
+        ["Trenger bare å merke stedet dersom elgen døde på stedet med en gang", "Отмечать место нужно только если лось погиб на месте сразу", "Plikten til å merke stedet og varsle gjelder også når dyret er skadd og springer videre, ikke bare når det dør med en gang.", "Обязанность отметить место и уведомить действует и когда зверь ранен и убегает, а не только когда он умирает сразу на месте."]
+      ],
+      "Ved påkjørsel av hjortevilt som elg, hjort eller rådyr skal du varsle politiet (02800) og om mulig merke stedet der dyret forsvant, slik at ettersøkspersonell kan finne og avlive det skadde dyret.",
+      "При столкновении с копытным зверем — лосем, оленем или косулей — нужно уведомить полицию (02800) и, если возможно, отметить место, где зверь скрылся, чтобы поисковая группа могла найти и, если нужно, усыпить раненое животное.",
+      "Сбил лося — звони в полицию и отмечай место, даже если зверь убежал сам."),
+
+    q("080", "Du kjører på en vanlig vei. Bak deg nærmer et utrykningskjøretøy seg raskt med blålys og sirene. Vegen er ikke bred nok til at det kan kjøre forbi deg der du er nå. Hva gjør du?",
+      "Ты едешь по обычной дороге. Сзади быстро приближается спецтранспорт с мигалкой и сиреной. Дорога там, где ты сейчас, недостаточно широка, чтобы он мог тебя объехать. Что делаешь?",
+      [
+        ["Kjører mot siden av vegen så snart det er trygt og senker farten, eventuelt stopper, for å gi fri veg", "Как только безопасно, прижимаюсь к краю дороги и снижаю скорость, при необходимости останавливаюсь, чтобы дать дорогу"],
+        ["Øker farten for å finne et sted å svinge av raskere", "Увеличиваю скорость, чтобы быстрее найти место для съезда", "Å øke farten med et utrykningskjøretøy tett bak øker faren, du skal heller senke farten og gi plass så snart det er trygt.", "Увеличивать скорость, когда спецтранспорт едет прямо за тобой, повышает риск — нужно, наоборот, снизить скорость и уступить место, как только это безопасно."],
+        ["Bremser brått rett der jeg er, siden jeg har forkjørsrett i eget felt", "Резко торможу прямо на месте — у меня преимущество в своей полосе", "Utrykningskjøretøy med blålys og sirene har forkjørsrett over deg, og brå bremsing uten å flytte deg til siden gir det ikke plass til å passere.", "У спецтранспорта с мигалкой и сиреной преимущество перед тобой, а резкое торможение без смещения к краю не даёт ему места для проезда."],
+        ["Fortsetter i samme fart og felt, siden det er utrykningskjøretøyets ansvar å finne en vei forbi", "Продолжаю ехать в том же темпе и той же полосе — найти способ объехать это задача спецтранспорта", "Alle andre trafikanter skal aktivt gi fri veg for utrykningskjøretøy, det er ikke bare opp til dem å finne en løsning selv.", "Все остальные участники движения обязаны активно уступать дорогу спецтранспорту — найти проезд не только его собственная задача."]
+      ],
+      "Når et utrykningskjøretøy nærmer seg med blålys og sirene, skal du gi fri veg: kjør mot siden så snart det er trygt, senk farten og stopp om nødvendig, uten brå oppbremsing.",
+      "Когда приближается спецтранспорт с мигалкой и сиреной, нужно уступить дорогу: как только это безопасно — прижаться к краю, снизить скорость и при необходимости остановиться, без резкого торможения.",
+      "Мигалка сзади — сигнал прижаться и сбросить скорость, а не искать запасной выход на бегу."),
+
+    q("081", "Du holder mobiltelefonen i hånden mens du kjører, men ser bare raskt på skjermen for å sjekke klokken, uten å ringe eller skrive. Er dette lovlig?",
+      "Ты держишь телефон в руке за рулём, но лишь быстро смотришь на экран, чтобы узнать время, не звонишь и не пишешь. Это законно?",
+      [
+        ["Nei, det er forbudt å holde mobiltelefonen i hånden mens du kjører, uansett hva du bruker den til", "Нет, держать телефон в руке за рулём запрещено независимо от того, для чего ты его используешь"],
+        ["Ja, forbudet gjelder bare å ringe eller skrive meldinger, ikke å bare se på skjermen", "Да, запрет касается только звонков и сообщений, а не просто взгляда на экран", "Forbudet gjelder å holde telefonen i hånden, uavhengig av om du ringer, skriver eller bare sjekker klokken på skjermen.", "Запрет касается самого факта держания телефона в руке, независимо от того, звонишь ты, пишешь или просто смотришь на время."],
+        ["Ja, så lenge bilen står i ro et kort sekund i kø", "Да, если машина на секунду остановилась в пробке", "Så lenge du kjører bilen, altså er en del av trafikken og ikke har parkert, gjelder forbudet mot å holde telefonen også i korte stopp i kø.", "Пока ты ведёшь машину, то есть участвуешь в движении и не припарковался, запрет на держание телефона действует и в короткие остановки в пробке."],
+        ["Ja, det er bare forbudt dersom det fører til at du kjører uforsvarlig", "Да, запрет действует только если это приводит к неосторожному вождению", "Forbudet mot å holde kommunikasjonsutstyr i hånden gjelder i seg selv, det er ikke avhengig av om kjøringen din faktisk blir uforsvarlig av det.", "Запрет на держание средства связи в руке действует сам по себе, независимо от того, стала ли твоя езда из-за этого реально неосторожной."]
+      ],
+      "Det er forbudt å holde mobiltelefon eller annet kommunikasjonsutstyr i hånden mens du kjører, uansett om du ringer, skriver eller bare ser på skjermen. Bruk håndfri-utstyr i stedet.",
+      "Держать телефон или другое устройство связи в руке за рулём запрещено независимо от того, звонишь ты, пишешь или просто смотришь на экран. Используй устройства hands-free.",
+      "Телефон в руке за рулём — запрещено само по себе, даже если ты просто смотришь время."),
+
+    q("082", "Du kommer til stedet for en trafikkulykke. Politi og ambulanse er allerede der og har full kontroll, og det er ikke behov for flere hjelpere. Er du pliktig til å stoppe og hjelpe?",
+      "Ты подъезжаешь к месту ДТП. Полиция и скорая уже на месте и всё контролируют, помощников больше не нужно. Обязан ли ты остановиться и помогать?",
+      [
+        ["Nei, hjelpeplikten gjelder ikke når nødvendig hjelp allerede er gitt, men jeg kjører forsiktig forbi", "Нет, обязанность помогать не действует, если необходимая помощь уже оказана, но мимо я проезжаю осторожно"],
+        ["Ja, alle som passerer en ulykke er alltid pliktig til å stoppe og bistå", "Да, все, кто проезжает мимо ДТП, всегда обязаны остановиться и помочь", "Plikten til å stoppe og hjelpe gjelder når det er behov for hjelp, ikke når nødvendig hjelp allerede er gitt av politi og ambulanse.", "Обязанность остановиться и помочь действует, когда помощь нужна, а не когда необходимая помощь уже оказана полицией и скорой."],
+        ["Nei, og da kan jeg kjøre forbi i vanlig fart uten å ta ekstra hensyn", "Нет, и значит мимо можно проезжать в обычном темпе без особой осторожности", "Selv uten hjelpeplikt skal du senke farten og være ekstra oppmerksom forbi en ulykkessted, blant annet for utrykningspersonell og andre som beveger seg der.", "Даже без обязанности помогать, мимо места ДТП нужно проезжать медленнее и внимательнее — там могут находиться спасатели и другие люди."],
+        ["Ja, men bare dersom jeg kjenner noen av de involverte i ulykken", "Да, но только если я знаю кого-то из участников ДТП", "Hjelpeplikten, der den gjelder, er ikke avhengig av om du kjenner de involverte eller ikke.", "Обязанность помочь, когда она действует, не зависит от того, знаком ли ты с участниками ДТП."]
+      ],
+      "Plikten til å stanse og hjelpe ved en trafikkulykke gjelder ikke dersom nødvendig hjelp allerede er gitt av andre, for eksempel politi og ambulanse. Du skal likevel kjøre forsiktig forbi.",
+      "Обязанность остановиться и помочь при ДТП не действует, если необходимая помощь уже оказана другими, например полицией и скорой. Но мимо всё равно нужно проезжать осторожно.",
+      "Если место ДТП уже под контролем спасателей — твоя задача просто аккуратно проехать, а не обязательно останавливаться."),
+
+    q("083", "Hvordan påvirker alkohol og sterk trøtthet reaksjonstiden din bak rattet?",
+      "Как алкоголь и сильная усталость влияют на время твоей реакции за рулём?",
+      [
+        ["Begge gjør reaksjonstiden lengre og svekker vurderingsevnen, selv i lave mengder eller moderat trøtthet", "И то и другое увеличивает время реакции и ухудшает оценку ситуации, даже при небольших дозах или умеренной усталости"],
+        ["Bare alkohol påvirker reaksjonstiden, trøtthet påvirker bare konsentrasjonen", "На время реакции влияет только алкоголь, усталость влияет только на концентрацию", "Sterk trøtthet gir også lengre reaksjonstid, ikke bare dårligere konsentrasjon, effekten kan være like stor som ved alkohol.", "Сильная усталость тоже увеличивает время реакции, а не только снижает концентрацию — эффект может быть не меньше, чем от алкоголя."],
+        ["Reaksjonstiden påvirkes merkbart bare ved promille over 0,5", "Время реакции заметно страдает только при промилле выше 0,5", "Reaksjonstiden kan påvirkes allerede ved lave promillenivåer, ikke først ved 0,5, det er derfor grensen i Norge er satt så lavt som 0,2.", "Время реакции может ухудшаться уже при небольшом уровне промилле, не только с 0,5, именно поэтому в Норвегии лимит установлен таким низким — 0,2."],
+        ["Trøtthet gjør deg tregere, men gjør samtidig vurderingene dine sikrere og mer nøye", "Усталость делает тебя медленнее, но зато делает твои решения более надёжными и обдуманными", "Trøtthet svekker både reaksjonstid og vurderingsevne samtidig, den gjør deg ikke mer nøye eller sikker i avgjørelser.", "Усталость одновременно ухудшает и время реакции, и качество принятия решений — она не делает решения более надёжными."]
+      ],
+      "Alkohol og sterk trøtthet gir begge lengre reaksjonstid og dårligere vurderingsevne, selv ved lave promillenivåer eller moderat trøtthet. Derfor er promillegrensen lav og det er viktig å stoppe og hvile ved trøtthet.",
+      "Алкоголь и сильная усталость оба увеличивают время реакции и ухудшают способность оценивать ситуацию, даже при небольшом промилле или умеренной усталости. Поэтому лимит промилле такой низкий, а при усталости важно вовремя остановиться и отдохнуть.",
+      "Алкоголь и усталость бьют по реакции одинаково опасно — скидок ни тому, ни другому нет."),
+
+    q("084", "Du kjører i mørket utenfor tettbygd strøk, og nærlyset slukner plutselig på begge sider. Hva bør du gjøre?",
+      "Ты едешь в темноте за городом, и ближний свет вдруг гаснет с обеих сторон. Что тебе следует сделать?",
+      [
+        ["Senker farten, slår på varsellysene og kjører forsiktig til et trygt sted å stoppe og sjekke feilen", "Снижаю скорость, включаю аварийку и осторожно доезжаю до безопасного места, чтобы остановиться и проверить неисправность"],
+        ["Fortsetter i samme fart til neste tettbygde strøk hvor det er gatelys", "Продолжаю ехать в том же темпе до следующего населённого пункта, где есть уличное освещение", "Å fortsette i vanlig fart uten lys i mørket er svært farlig, du ser ikke vegen og andre ser ikke deg, du må senke farten og stoppe trygt så snart som mulig.", "Продолжать ехать в обычном темпе без света в темноте очень опасно — ты не видишь дорогу, а тебя не видят другие, нужно снизить скорость и как можно скорее безопасно остановиться."],
+        ["Stopper med en gang midt i kjørebanen siden det er tryggest å stå helt stille", "Сразу останавливаюсь прямо на проезжей части, потому что стоять на месте безопаснее всего", "Å stoppe midt i kjørebanen uten lys i mørket gjør deg til en skjult hindring for andre, du skal heller kjøre forsiktig til siden eller et trygt sted.", "Останавливаться прямо на проезжей части без света в темноте делает тебя невидимым препятствием для других — лучше осторожно доехать до края или безопасного места."],
+        ["Slår på fjernlyset i stedet, siden det er sterkere enn nærlyset", "Включаю дальний свет вместо ближнего — он сильнее", "Hvis nærlyset har sluknet, er det usikkert om fjernlyset virker i det hele tatt, og uansett løser det ikke at bilen er uten lovpålagt lys, du må stoppe og sjekke feilen.", "Если погас ближний свет, неизвестно, работает ли дальний вообще, и в любом случае это не решает проблему отсутствия обязательного света — нужно остановиться и проверить неисправность."]
+      ],
+      "Slukner lysene i mørket, er bilen ikke lenger forsvarlig å kjøre. Senk farten, bruk varsellys om nødvendig, og kjør forsiktig til et trygt sted å stoppe og undersøke feilen før du fortsetter.",
+      "Если свет гаснет в темноте, машина перестаёт быть безопасной для движения. Снизь скорость, при необходимости включи аварийку и осторожно доедь до безопасного места, чтобы остановиться и проверить неисправность, прежде чем продолжать путь.",
+      "Погас свет в темноте — это сигнал остановиться и проверить, а не ехать на ощупь до следующего города.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

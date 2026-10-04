@@ -1504,6 +1504,107 @@
     ],
     "I en rundkjøring har trafikken som allerede sirkulerer forkjørsrett, de som skal inn har vikeplikt. Ved innkjøring trenger du normalt ikke blinke dersom du skal rett fram, mens syklister avhengig av utforming kan sykle i selve rundkjøringen eller på eget sykkelfelt rundt den.",
     "В круге преимущество у тех, кто уже едет по кольцу, въезжающие уступают. При въезде обычно не сигналят поворотником, если едешь прямо, а велосипедисты в зависимости от устройства круга могут ехать прямо по кругу или по отдельной велополосе вокруг него.",
-    "Главное правило круга: кто внутри — тот главный.")
+    "Главное правило круга: кто внутри — тот главный."),
+
+    q("071", scene({ you: { from: "south", to: "north" }, signs: { south: "stop" } }),
+      "Du kommer til et kryss med stoppskilt. Vegen til høyre og venstre ser helt tom ut så langt du kan se. Hva gjør du?",
+      "Подъезжаешь к перекрёстку со знаком «Stopp». Дорога слева и справа выглядит совсем пустой, насколько видно. Что делаешь?",
+      [
+        ["Stopper helt ved stopplinjen, selv om vegen ser tom ut, og kjører videre når det er klart", "Полностью останавливаюсь у стоп-линии, даже если дорога выглядит пустой, и еду дальше, когда убедился, что чисто"],
+        ["Senker bare farten og kjører videre siden jeg ikke ser noen biler", "Просто снижаю скорость и еду дальше, раз машин не видно", "Stoppskilt krever full stopp ved stopplinjen uansett om vegen virker klar, det er ikke nok å senke farten.", "Знак «Stopp» требует полной остановки у стоп-линии независимо от того, кажется ли дорога свободной — просто притормозить недостаточно."],
+        ["Stopper midt i krysset for å se bedre til begge sider", "Останавливаюсь посреди перекрёстка, чтобы лучше осмотреться по сторонам", "Du skal stoppe ved stopplinjen før krysset, ikke inni krysset der du er i vegen for annen trafikk.", "Останавливаться нужно у стоп-линии перед перекрёстком, а не внутри него, где ты мешаешь другому движению."],
+        ["Stopper bare hvis det er andre kjøretøy synlig i krysset", "Останавливаюсь только если в перекрёстке видны другие машины", "Plikten til å stoppe ved stoppskilt gjelder alltid, den er ikke avhengig av om du ser andre kjøretøy der og da.", "Обязанность остановиться у знака «Stopp» действует всегда, она не зависит от того, видишь ли ты в этот момент другие машины."]
+      ],
+      "Stoppskilt (skilt 202) krever at du stopper helt ved stopplinjen hver gang, uavhengig av om vegen ser tom ut. Du kjører videre først når du har forsikret deg om at det er trygt.",
+      "Знак «Stopp» (знак 202) требует полной остановки у стоп-линии каждый раз, независимо от того, насколько пустой выглядит дорога. Ехать дальше можно только убедившись, что это безопасно.",
+      "«Stopp» значит именно стоп, а не «притормози, если что»."),
+
+    q("072", null,
+      "Du kjører forbi noen ryttere på hest langs vegkanten. Hestene ser urolige ut. Hva bør du gjøre?",
+      "Ты обгоняешь всадников на лошадях у края дороги. Лошади выглядят беспокойными. Что тебе следует сделать?",
+      [
+        ["Senker farten kraftig, holder god avstand og kjører forbi i rolig tempo", "Сильно снижаю скорость, держу хорошую дистанцию и обгоняю в спокойном темпе"],
+        ["Tuter kort for å varsle rytterne om at jeg kommer", "Коротко сигналю, чтобы предупредить всадников о своём приближении", "Lydsignal kan skremme hesten enda mer og gjøre situasjonen farligere, ikke tryggere.", "Звуковой сигнал может ещё сильнее испугать лошадь и сделать ситуацию опаснее, а не безопаснее."],
+        ["Kjører forbi i vanlig fart siden hest og rytter har samme plikter som andre trafikanter", "Обгоняю на обычной скорости — у всадника те же обязанности, что у других участников движения", "Selv om rytteren følger vanlige regler, er hester levende dyr som kan reagere uforutsigbart, derfor må du ta ekstra hensyn.", "Хотя всадник следует общим правилам, лошадь — живое животное, которое может реагировать непредсказуемо, поэтому нужна дополнительная осторожность."],
+        ["Stopper helt og venter til rytterne har forlatt vegen", "Полностью останавливаюсь и жду, пока всадники не покинут дорогу", "En full stopp er ikke nødvendig og kan virke uventet for hesten, lav fart med god avstand er vanligvis nok.", "Полная остановка не нужна и может быть неожиданной для лошади — обычно достаточно низкой скорости и хорошей дистанции."]
+      ],
+      "Hester kan bli skremt av biler, lyd og fart. Vis ekstra hensyn ved å senke farten tydelig og holde god avstand når du kjører forbi ryttere.",
+      "Лошади могут испугаться машин, звука и скорости. Проявляй особую осторожность: заметно снижай скорость и держи хорошую дистанцию, обгоняя всадников.",
+      "Лошадь — не машина с правилами, а живое существо: главное — медленно и без резких сигналов."),
+
+    q("073", null,
+      "Du skal kjøre over et fjellovergang om vinteren der det er skiltet kjettingpåbud for tunge kjøretøy. Du kjører personbil med gode vinterdekk uten kjetting. Gjelder påbudet for deg?",
+      "Ты едешь через горный перевал зимой, где установлен знак об обязательных цепях противоскольжения для тяжёлых машин. Ты на легковой машине с хорошими зимними шинами без цепей. Касается ли тебя этот запрет?",
+      [
+        ["Nei, kjettingpåbudet gjelder som regel bare tunge kjøretøy, men jeg bør likevel kjøre etter forholdene", "Нет, требование цепей обычно касается только тяжёлых машин, но мне всё равно нужно ехать по обстановке"],
+        ["Ja, kjettingpåbud gjelder alle kjøretøy uten unntak når det er skiltet", "Да, требование цепей касается всех машин без исключений, если есть знак", "Skiltet kjettingpåbud retter seg normalt mot tunge kjøretøy, personbiler er vanligvis ikke omfattet selv om skiltet står der.", "Знак об обязательных цепях обычно адресован тяжёлым машинам, легковые обычно не подпадают под него, даже если знак стоит."],
+        ["Nei, og da kan jeg kjøre i vanlig fart som på sommeren", "Нет, и значит я могу ехать в обычном летнем темпе", "At påbudet ikke gjelder deg, betyr ikke at vegen er trygg å kjøre i sommerfart, du må uansett tilpasse farten til vinterforholdene.", "То, что запрет не касается тебя, не значит, что по дороге можно ехать в летнем темпе — скорость всё равно нужно подстраивать под зимние условия."],
+        ["Ja, men bare hvis jeg kjører med tilhenger", "Да, но только если я еду с прицепом", "Kjettingpåbudet avhenger av kjøretøyets vekt og type, ikke av om du trekker tilhenger eller ikke.", "Требование цепей зависит от веса и типа машины, а не от того, едешь ли ты с прицепом."]
+      ],
+      "Kjettingpåbud på fjelloverganger gjelder normalt tunge kjøretøy som lastebil og buss, ikke vanlige personbiler. Du må likevel alltid kjøre etter kjøreforholdene, uansett skilt.",
+      "Требование цепей противоскольжения на горных перевалах обычно касается тяжёлых машин — грузовиков и автобусов, а не обычных легковых. Но скорость всё равно нужно подстраивать под дорожные условия, независимо от знака.",
+      "Знак с цепями — это почти всегда про грузовики и автобусы, а не про твою легковушку."),
+
+    q("074", road({ bikeLane: true }),
+      "Du skal svinge til høyre over et sykkelfelt. En elsparkesykkel kommer rett fram i sykkelfeltet i vanlig fart. Hvem har vikeplikt?",
+      "Тебе нужно повернуть направо через велополосу. По велополосе навстречу прямо едет электросамокат на обычной скорости. Кто уступает?",
+      [
+        ["Jeg har vikeplikt for elsparkesykkelen, siden den kjører rett fram i sykkelfeltet", "Уступаю я — электросамокат едет прямо по велополосе"],
+        ["Elsparkesykkelen har vikeplikt for meg siden den er mindre enn en bil", "Уступает электросамокат — он меньше машины", "Størrelsen på kjøretøyet avgjør ikke vikeplikten, det avgjørende er at føreren som svinger skal vike for den som kjører rett fram.", "Размер транспортного средства не определяет, кто уступает — важно то, что поворачивающий уступает едущему прямо."],
+        ["Ingen har vikeplikt, vi må bare avpasse farten etter hverandre", "Никто не уступает, просто подстраиваем скорость друг под друга", "Her gjelder en klar vikepliktregel, det er ikke en situasjon der dere bare skal avpasse farten uten en avklart vikeplikt.", "Здесь действует чёткое правило уступки, это не ситуация, где просто подстраивают скорость без определённого приоритета."],
+        ["Elsparkesykkelen må stoppe helt siden den kjører i sykkelfeltet", "Электросамокат обязан полностью остановиться, потому что едет по велополосе", "Den som kjører rett fram i sykkelfeltet trenger ikke stoppe, det er bilen som svinger som skal vike og eventuelt stoppe.", "Тому, кто едет прямо по велополосе, останавливаться не нужно — уступить и при необходимости остановиться должна поворачивающая машина."]
+      ],
+      "Når du svinger over et sykkelfelt, har du vikeplikt for syklister og elsparkesykler som kjører rett fram, uansett om de kommer fra høyre eller venstre (trafikkreglene § 7 nr 3).",
+      "Когда поворачиваешь через велополосу, ты уступаешь велосипедистам и электросамокатам, едущим прямо, независимо от того, с какой стороны они едут (trafikkreglene § 7 nr 3).",
+      "Поворачиваешь через велополосу — уступаешь всем, кто едет по ней прямо, будь то велосипед или самокат."),
+
+    q("075", null,
+      "Du kjører rett mot en lav sol som gjør det nesten umulig å se vegen tydelig. Hva bør du gjøre?",
+      "Ты едешь прямо навстречу низкому солнцу, которое почти не даёт разглядеть дорогу. Что тебе следует сделать?",
+      [
+        ["Senker farten, bruker solskjerm/solbriller og er forberedt på å stoppe om nødvendig", "Снижаю скорость, использую солнцезащитный козырёк или очки и готов остановиться, если понадобится"],
+        ["Kjører som vanlig siden lav sol ikke regnes som et trafikkfarlig forhold", "Еду как обычно — низкое солнце не считается опасным дорожным фактором", "Lav sol kan blende like mye som mørke eller tåke og må tas like seriøst, det er ikke et ufarlig forhold.", "Низкое солнце может слепить не меньше, чем темнота или туман, и к нему нужно относиться так же серьёзно — это не безобидный фактор."],
+        ["Blinker med fjernlys for å varsle møtende om at jeg nesten ikke ser", "Мигаю дальним светом, чтобы предупредить встречных, что почти не вижу дорогу", "Fjernlys mot møtende i dagslys gir ikke bedre sikt for deg og kan virke forvirrende eller unødig for andre.", "Дальний свет встречным днём не улучшает твою видимость и может только сбить с толку или быть неуместным для других."],
+        ["Lukker øynene et kort øyeblikk for å unngå å bli blendet", "На короткое время закрываю глаза, чтобы не слепило", "Å kjøre med lukkede øyne, selv et kort øyeblikk, gjør at du ikke ser vegen i det hele tatt og er svært farlig.", "Вождение с закрытыми глазами, даже на мгновение, означает, что ты вообще не видишь дорогу — это очень опасно."]
+      ],
+      "Lav sol kan blende like mye som mørke. Senk farten, bruk solskjerm eller solbriller, og vær forberedt på å stoppe dersom du ikke ser vegen tydelig.",
+      "Низкое солнце может слепить не хуже темноты. Снижай скорость, используй козырёк или очки и будь готов остановиться, если дорогу не видно чётко.",
+      "Если солнце слепит так, что дороги не видно, — это сигнал притормозить, а не зажмуриться."),
+
+    q("076", null,
+      "Du kjører med tilhenger på motorveg i høy fart, og tilhengeren begynner å slingre fra side til side. Hva gjør du?",
+      "Ты едешь с прицепом по автомагистрали на высокой скорости, и прицеп начинает раскачиваться из стороны в сторону. Что делаешь?",
+      [
+        ["Slipper gassen rolig og lar farten synke gradvis, uten å bremse brått eller styre mye", "Плавно отпускаю газ и даю скорости снизиться постепенно, не тормозя резко и не крутя руль"],
+        ["Bremser hardt med en gang for å få kontroll før det blir verre", "Сразу резко торможу, чтобы взять ситуацию под контроль, пока не стало хуже", "Hard bremsing ved slingring kan forsterke svingningene og gjøre at du mister kontrollen helt.", "Резкое торможение при раскачивании может усилить колебания и привести к полной потере контроля."],
+        ["Øker farten litt for å stramme opp koblingen mellom bil og henger", "Слегка увеличиваю скорость, чтобы «подтянуть» сцепку между машиной и прицепом", "Høyere fart forsterker slingringen i stedet for å dempe den, det er stikk i strid med hva som hjelper her.", "Увеличение скорости усиливает раскачивание, а не гасит его, — это прямо противоположно тому, что нужно делать."],
+        ["Styrer kraftig mot siden hengeren svinger for å rette den opp", "Резко выворачиваю руль в сторону, куда качнулся прицеп, чтобы его выровнять", "Kraftig motstyring forsterker ofte slingringen videre, det beste er å styre minimalt og la farten synke.", "Резкое противоруление часто только усиливает раскачивание дальше, лучше минимально работать рулём и дать скорости упасть."]
+      ],
+      "Ved slingring skal du slippe gassen rolig og la farten synke gradvis, uten å bremse hardt eller styre mye. Brå inngrep forsterker som regel slingringen.",
+      "При раскачивании прицепа нужно плавно отпустить газ и дать скорости снижаться постепенно, не тормозя резко и не делая резких движений рулём. Резкие действия обычно только усиливают раскачивание.",
+      "Прицеп закачало — газ отпускаем плавно, руки спокойные, резких движений нет."),
+
+    q("077", road({ crossing: true }),
+      "En skolepatrulje med stoppskilt i hånden står ved et gangfelt og holder skiltet opp mot deg, mens barna krysser. Hva gjør du?",
+      "Школьный патруль с ручным знаком «Stopp» стоит у перехода и держит знак в твою сторону, пока дети переходят. Что делаешь?",
+      [
+        ["Stopper og venter til skolepatruljen senker skiltet, selv om det ikke er rødt lys", "Останавливаюсь и жду, пока школьный патруль не опустит знак, даже если светофора на красном нет"],
+        ["Kjører videre siden skolepatruljen ikke har samme myndighet som politiet", "Еду дальше — у школьного патруля нет таких полномочий, как у полиции", "Et hevet stoppskilt fra skolepatrulje skal respekteres som et stopp-signal, selv om patruljen ikke er politi.", "Поднятый знак «Stopp» от школьного патруля нужно соблюдать как сигнал остановки, даже если патруль — не полиция."],
+        ["Senker bare farten og kjører forsiktig forbi barna", "Просто снижаю скорость и осторожно проезжаю мимо детей", "Et hevet stoppskilt betyr full stopp, ikke bare lavere fart, du skal vente til skiltet senkes.", "Поднятый знак «Stopp» означает полную остановку, а не просто снижение скорости — нужно дождаться, когда знак опустят."],
+        ["Stopper, men blinker med lysene for å få patruljen til å skynde seg", "Останавливаюсь, но мигаю фарами, чтобы патруль поторопился", "Å signalisere utålmodighet mot en skolepatrulje er respektløst og unødvendig, du skal bare vente rolig.", "Сигналить нетерпение школьному патрулю — неуважительно и ни к чему, нужно просто спокойно подождать."]
+      ],
+      "Et hevet stoppskilt fra skolepatrulje er et bindende stopp-signal. Du skal stoppe og vente til skiltet senkes, selv uten rødt lys eller politi til stede.",
+      "Поднятый знак «Stopp» от школьного патруля — это обязательный сигнал остановки. Нужно остановиться и подождать, пока знак не опустят, даже без красного света и без полиции.",
+      "Поднятый знак у школьного патруля — такой же стоп, как красный свет."),
+
+    qm("m08", null, "Du kjenner at du blir svært trøtt mens du kjører på motorveg. Velg alle riktige.", "Ты чувствуешь, что сильно устаёшь за рулём на автомагистрали. Выбери все верные.", [
+      ["Stopper på en rasteplass eller bensinstasjon for å hvile", "Останавливаюсь на площадке отдыха или заправке, чтобы отдохнуть", true],
+      ["Lufter ut bilen og tar en kort pause med en kopp kaffe hvis det hjelper", "Проветриваю машину и делаю короткую паузу, возможно с чашкой кофе, если это помогает", true],
+      ["Tar en kort powerlur (10–20 minutter) hvis jeg kan stoppe trygt", "Делаю короткий сон (10–20 минут), если могу безопасно остановиться", true],
+      ["Skrur opp musikken og åpner vinduet, det er like bra som å stoppe", "Включаю музыку громче и открываю окно — это не хуже, чем остановиться", false, "Musikk og åpent vindu kan virke oppkvikkende et kort øyeblikk, men det hindrer ikke mikrosøvn, bare en pause eller søvn hjelper reelt.", "Музыка и открытое окно могут ненадолго взбодрить, но не предотвращают микросон — реально помогает только остановка и отдых или сон."]
+    ],
+    "Ved sterk trøtthet hjelper bare en reell pause: stopp og hvil, eventuelt en kort powerlur. Kaffe og lufting kan være et tillegg, men musikk og vind alene stopper ikke mikrosøvn.",
+    "При сильной усталости реально помогает только настоящая остановка и отдых, возможно короткий сон. Кофе и свежий воздух могут быть дополнением, но музыка и ветер сами по себе микросон не остановят.",
+    "Если клонит в сон за рулём, единственное надёжное лекарство — остановиться, а не громче музыка.")
   ];
 })();
