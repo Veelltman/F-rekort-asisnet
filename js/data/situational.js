@@ -1605,6 +1605,107 @@
     ],
     "Ved sterk trøtthet hjelper bare en reell pause: stopp og hvil, eventuelt en kort powerlur. Kaffe og lufting kan være et tillegg, men musikk og vind alene stopper ikke mikrosøvn.",
     "При сильной усталости реально помогает только настоящая остановка и отдых, возможно короткий сон. Кофе и свежий воздух могут быть дополнением, но музыка и ветер сами по себе микросон не остановят.",
-    "Если клонит в сон за рулём, единственное надёжное лекарство — остановиться, а не громче музыка.")
+    "Если клонит в сон за рулём, единственное надёжное лекарство — остановиться, а не громче музыка."),
+
+    q("078", road({ narrow: true }),
+      "Vinteren har lagt høye brøytekanter langs begge sider av en smal vei, og det er en møteplass (utvidelse) på din side. En møtende bil (B) har allerede begynt å kjøre inn på den smale, innsnevrede delen av veien forover. Hva gjør du?",
+      "Зимой вдоль узкой дороги намело высокие снежные брустверы, и на твоей стороне есть разъезд (møteplass). Встречная машина (B) уже начала въезжать на суженный из-за снега участок впереди. Что делаешь?",
+      [
+        ["Kjører inn på møteplassen på min side og venter til B har passert den smale delen", "Заезжаю в разъезд на своей стороне и жду, пока B проедет суженный участок"],
+        ["Fortsetter rett fram i vanlig fart, siden jeg kom til møteplassen først", "Продолжаю ехать в обычном темпе — я подъехал к разъезду первым", "Det avgjør ikke hvem som kom først, det avgjørende er at innsnevringen og møteplassen er på din side, så du skal bruke den og vike.", "Кто первый приехал — не важно, решает то, что сужение и разъезд именно на твоей стороне, поэтому именно тебе нужно воспользоваться разъездом и уступить."],
+        ["Blinker med lysene for å signalisere at B skal rygge tilbake", "Мигаю фарами, чтобы заставить B сдать назад", "Lyssignal for å presse en annen fører til å rygge er unødig bruk av lys og løser ikke situasjonen, det er du som har møteplassen og bør vike.", "Мигать фарами, чтобы заставить другого водителя сдать назад, — ненужное использование света и не решает ситуацию: разъезд на твоей стороне, значит уступать тебе."],
+        ["Kjører forbi B i det innsnevrede partiet, siden begge bilene uansett passer der", "Проезжаю мимо B прямо в сужении — обе машины там всё равно пройдут", "Brøytekantene gjør veien smalere enn vanlig, å tvinge begge bilene gjennom samtidig der øker risikoen for kollisjon eller fastkjøring i snøen.", "Снежные брустверы делают дорогу уже обычного, пытаться протиснуть обе машины там одновременно увеличивает риск столкновения или застревания в снегу."]
+      ],
+      "Når veien er innsnevret på din side, for eksempel av brøytekanter, og det finnes en møteplass der, skal du bruke den og vike for møtende trafikk, uansett hvem som kom først.",
+      "Когда дорога сужена именно на твоей стороне — например, снежными брустверами — и там есть разъезд, нужно воспользоваться им и уступить встречному транспорту, независимо от того, кто подъехал первым.",
+      "Сужение на твоей стороне = разъезд твой, но уступать тоже тебе."),
+
+    q("079", road({ exit: "parking" }),
+      "Du kjører ut fra en parkeringsplass ved et kjøpesenter og skal ut på hovedveien. Bil B kommer fra venstre i nærmeste kjørefelt, og bil C kommer fra høyre i det andre kjørefeltet. Hvem har vikeplikt?",
+      "Ты выезжаешь с парковки у торгового центра на главную дорогу. Машина B едет слева по ближней полосе, а машина C — справа по дальней. Кто уступает?",
+      [
+        ["Jeg har vikeplikt for både B og C, uansett hvilken retning de kommer fra", "Уступаю я — и B, и C, независимо от того, с какой стороны они едут"],
+        ["Bare for B, siden C er lengst unna og i det andre kjørefeltet", "Только B, потому что C дальше и едет по другой полосе", "Utkjøring fra en parkeringsplass gir vikeplikt for all trafikk på vegen du kjører ut på, uavhengig av avstand eller kjørefelt.", "Выезд с парковки означает уступить всему транспорту на дороге, куда ты выезжаешь, независимо от дистанции или полосы."],
+        ["Ingen, siden høyreregelen avgjør og C kommer fra høyre", "Никому — тут решает правило правой руки, а C едет справа", "Høyreregelen gjelder ikke ved utkjøring fra parkeringsplass, der har du alltid vikeplikt for trafikken på vegen, uansett side.", "При выезде с парковки правило правой руки не действует — там ты всегда уступаешь транспорту на дороге, с какой бы стороны он ни ехал."],
+        ["Bare hvis B eller C blinker med lysene", "Только если B или C мигнут фарами", "Vikeplikten din ved utkjøring fra parkeringsplass gjelder uansett om de andre bilene gir et lyssignal eller ikke.", "Твоя обязанность уступить при выезде с парковки действует независимо от того, подают ли другие машины световой сигнал."]
+      ],
+      "Utkjøring fra en parkeringsplass, gårdsveg, bensinstasjon eller lignende sted gir alltid vikeplikt for trafikken på vegen du kjører ut på, uansett hvilken retning den kommer fra.",
+      "Выезд с парковки, двора, заправки и подобных мест всегда означает уступить движению на дороге, куда ты выезжаешь, независимо от того, с какой стороны оно едет.",
+      "Выезжаешь «не с дороги» на дорогу — уступаешь всем, кто уже на ней, слева и справа."),
+
+    q("080", scene({ you: { from: "south", to: "north" }, roundabout: true, lanes: 2 }),
+      "Du kjører inn i en rundkjøring med to felt og skal ta andre avkjøring, rett fram. Hvilket felt bør du som regel velge inn i rundkjøringen?",
+      "Ты въезжаешь в круговое движение с двумя полосами и должен взять второй съезд, то есть проехать прямо. Какую полосу обычно нужно выбрать при въезде?",
+      [
+        ["Det høyre feltet, siden jeg skal ut relativt tidlig og ikke langt rundt", "Правую полосу, потому что съезжаю относительно рано и не еду далеко по кругу"],
+        ["Det venstre feltet, fordi jeg skal rett fram og ikke til høyre", "Левую полосу, потому что я еду прямо, а не направо", "Venstre felt brukes når du skal langt rundt eller til venstre, ikke når du bare skal rett fram ved andre avkjøring.", "Левая полоса нужна, когда едешь далеко вокруг или налево, а не когда просто проезжаешь прямо на втором съезде."],
+        ["Det er likegyldig hvilket felt jeg velger, så lenge jeg blinker riktig", "Не важно, какую полосу выбрать, главное — правильно включить поворотник", "Feltvalget har betydning for hvordan du beveger deg trygt gjennom rundkjøringen og ut, det er ikke likegyldig selv med riktig blinklys.", "Выбор полосы важен для безопасного движения по кругу и выезда — это не всё равно, даже если поворотник включён правильно."],
+        ["Det felt som har minst trafikk i øyeblikket, uavhengig av hvilken avkjøring jeg skal ta", "Полосу, где в данный момент меньше машин, независимо от того, какой съезд мне нужен", "Hvilket felt du skal velge, avgjøres av hvor langt du skal rundt, ikke av hvor mye trafikk det er i feltet akkurat da.", "Нужную полосу определяет то, насколько далеко ты едешь по кругу, а не то, где в данный момент меньше машин."]
+      ],
+      "I en rundkjøring med to felt bruker du som regel høyre felt når du skal ta en av de første avkjøringene (rett fram eller tidligere), og venstre felt når du skal langt rundt eller til venstre. Følg likevel oppmerking og skilt der de finnes.",
+      "В круговом движении с двумя полосами обычно используют правую полосу для одного из первых съездов (прямо или раньше), а левую — когда едешь далеко по кругу или налево. Но всегда следуй разметке и знакам, если они есть.",
+      "Едешь недалеко по кругу — держись правой полосы; едешь далеко или налево — левой."),
+
+    q("081", road({ tunnel: true }),
+      "Du kjører i en lang tunnel, og bilen din tar plutselig fyr. Hva er riktig fremgangsmåte?",
+      "Ты едешь по длинному тоннелю, и в машине внезапно начинается пожар. Как правильно действовать?",
+      [
+        ["Kjører bilen ut av tunnelen hvis det fortsatt er mulig, ellers kjører jeg helt til siden, slår av motoren, går ut og beveger meg til nærmeste nødutgang mens jeg varsler nødetatene", "Если ещё возможно, выезжаю на машине из тоннеля; если нет — съезжаю максимально к краю, выключаю двигатель, выхожу и иду к ближайшему эвакуационному выходу, вызывая спасателей"],
+        ["Blir sittende i bilen med dørene låst til brannvesenet kommer", "Остаюсь в машине с заблокированными дверями, пока не приедут пожарные", "Å bli sittende i en brennende bil i en tunnel er livsfarlig, du skal komme deg ut og bort fra bilen så raskt som trygt mulig.", "Оставаться в горящей машине в тоннеле опасно для жизни — нужно как можно быстрее безопасно выйти и отойти от машины."],
+        ["Snur bilen og kjører tilbake mot møtende kjøreretning for å komme ut raskere", "Разворачиваюсь и еду назад против движения, чтобы быстрее выехать", "Å snu og kjøre mot kjøreretningen i en tunnel skaper stor fare for kollisjon med andre bilister og er ikke tillatt.", "Разворачиваться и ехать против движения в тоннеле создаёт большую опасность столкновения с другими машинами и запрещено."],
+        ["Prøver først å slukke brannen selv før jeg varsler noen", "Сначала пытаюсь сам потушить пожар, прежде чем кого-то вызывать", "Du skal varsle nødetatene og komme deg i sikkerhet først, å bruke tid på selv å slukke en bilbrann kan koste liv.", "Сначала нужно вызвать спасателей и обеспечить свою безопасность — тратить время на самостоятельное тушение пожара в машине может стоить жизни."]
+      ],
+      "Ved brann i tunnel skal du om mulig kjøre bilen ut. Går ikke det, kjør helt til siden, slå av motoren, kom deg ut av bilen og gå til nærmeste nødutgang eller sikkert sted, og varsle nødetatene så raskt som mulig.",
+      "При пожаре в тоннеле нужно, если возможно, выехать из него на машине. Если нет — съехать максимально к краю, выключить двигатель, выйти из машины и дойти до ближайшего эвакуационного выхода или безопасного места, как можно быстрее вызвав спасателей.",
+      "В тоннеле при пожаре: если можешь — выезжай; если нет — к краю, мотор выключил, сам к выходу, и звонок спасателям."),
+
+    q("082", hillScene(),
+      "Du parkerer i en bakke der bilen peker oppover, og det er fortauskant (kantstein) på høyre side av veien. Hvordan bør du vri forhjulene?",
+      "Ты паркуешься на подъёме, машина смотрит вверх по склону, и справа есть бордюр. Как нужно повернуть передние колёса?",
+      [
+        ["Vrir forhjulene bort fra kantsteinen, slik at bilen ruller bakover mot kantsteinen og blir stoppet av den hvis den skulle trille", "Поворачиваю колёса в сторону от бордюра, чтобы при скатывании назад машина покатилась к бордюру и была остановлена им"],
+        ["Vrir forhjulene inn mot kantsteinen, akkurat som i en bakke uten fortauskant", "Поворачиваю колёса к бордюру — как на подъёме без бордюра", "I en bakke MED fortauskant skal hjulene vris bort fra kanten i oppoverbakke, ikke mot den, slik at bilen uansett trygt stoppes av kanten hvis den triller.", "На подъёме С бордюром колёса поворачивают от бордюра, а не к нему — тогда, если машина скатится, бордюр её безопасно остановит."],
+        ["Lar forhjulene stå rett fram, siden håndbrekket uansett holder bilen", "Оставляю колёса прямо — ручник всё равно удержит машину", "Håndbrekk og gir skal alltid brukes i tillegg, men hjulvinkelen er en ekstra sikring hvis bremsene likevel skulle svikte.", "Ручник и передача должны использоваться всегда в дополнение, но угол поворота колёс — это дополнительная страховка на случай, если тормоза всё же откажут."],
+        ["Vrir forhjulene bort fra kantsteinen uansett om bilen peker oppover eller nedover bakken", "Поворачиваю колёса от бордюра независимо от того, смотрит машина вверх или вниз по склону", "Riktig hjulvinkel avhenger av om bilen peker oppover eller nedover og om det finnes fortauskant, det er ikke samme svar i alle bakker.", "Правильный угол поворота колёс зависит от того, смотрит машина вверх или вниз по склону и есть ли бордюр — ответ не одинаковый для всех случаев."]
+      ],
+      "Parkerer du i oppoverbakke med fortauskant, vrir du forhjulene bort fra kantsteinen. Da vil bilen, hvis den triller bakover, bli stoppet av kantsteinen. Bruk alltid håndbrekk og legg i gir eller parkeringsposisjon i tillegg.",
+      "Если паркуешься на подъёме с бордюром, поворачивай передние колёса в сторону от бордюра. Тогда, если машина покатится назад, бордюр её остановит. Обязательно дополнительно используй ручник и передачу или паркинг.",
+      "Подъём + бордюр — колёса от бордюра. Спуск без бордюра — колёса в сторону кювета/края."),
+
+    q("083", road({ roadwork: true }),
+      "Ved et vegarbeid står det en person med et stoppskilt («dirigent») som viser «kjør» til deg, selv om du ser et rødt lys fra et provisorisk lyssignal lenger fremme. Hva gjelder?",
+      "На дорожных работах стоит регулировщик со знаком «стоп/иди» и показывает тебе «можно ехать», хотя дальше видно красный сигнал временного светофора. Что действует?",
+      [
+        ["Jeg følger dirigentens signal, siden anvisninger fra en person som regulerer trafikken går foran lyssignal og skilt", "Следую сигналу регулировщика — указания человека, направляющего движение, важнее светофора и знаков"],
+        ["Jeg stopper for det røde lyset, siden lyssignal alltid går foran andre anvisninger", "Останавливаюсь на красный — светофор всегда важнее других указаний", "Det er motsatt: anvisning fra en person som dirigerer trafikken, for eksempel ved vegarbeid, går foran både lyssignal og skilt.", "Наоборот: указание человека, регулирующего движение, например на дорожных работах, важнее и светофора, и знаков."],
+        ["Jeg velger selv om jeg vil følge dirigenten eller lyset, etter hva som virker tryggest", "Сам решаю, следовать за регулировщиком или за светофором — как кажется безопаснее", "Det er ikke et fritt valg, rangordningen er fast: dirigentens anvisning går foran det provisoriske lyssignalet.", "Это не свободный выбор — порядок приоритета фиксированный: указание регулировщика важнее временного светофора."],
+        ["Jeg kjører forbi dirigenten og venter på at lyset skal bli grønt, siden det er lyset som egentlig styrer vegarbeidet", "Проезжаю мимо регулировщика и жду зелёного — ведь работами управляет именно светофор", "Dirigenten er satt til å styre trafikken på stedet akkurat da, det er ikke riktig å ignorere personen og vente på lyset i stedet.", "Регулировщик поставлен управлять движением именно в этот момент — неправильно игнорировать его и ждать смены сигнала светофора."]
+      ],
+      "Anvisninger fra en person som dirigerer trafikken, for eksempel ved vegarbeid, går foran både lyssignal, skilt og vegoppmerking. Følg alltid dirigentens tegn først.",
+      "Указания человека, регулирующего движение, например на дорожных работах, важнее и светофора, и знаков, и разметки. Всегда сначала следуй сигналам регулировщика.",
+      "Живой человек с жестом главнее любого светофора и знака."),
+
+    qm("m09", null, "Du kjører forbi et trekantet varselskilt med symbolet for barn, nær en skole og en barnehage. Velg alle riktige.", "Ты проезжаешь мимо треугольного предупреждающего знака с силуэтом детей, рядом со школой и детским садом. Выбери все верные.", [
+      ["Senker farten og er forberedt på at barn kan komme ut i vegen uventet", "Снижаю скорость и готов к тому, что ребёнок может неожиданно выбежать на дорогу", true],
+      ["Er spesielt oppmerksom i tidsrom med mye gange til og fra skolen", "Особенно внимателен в часы, когда много детей идёт в школу и из неё", true],
+      ["Holder god avstand til fortau og vegkant der barn kan oppholde seg", "Держу бо́льшую дистанцию от тротуара и края дороги, где могут быть дети", true],
+      ["Kjører i vanlig fart siden skiltet bare er en generell påminnelse uten praktisk betydning", "Еду в обычном темпе — знак ведь просто формальное напоминание без практического значения", false, "Skiltet varsler en konkret økt risiko for at barn dukker opp i vegen, det er ikke bare en formell påminnelse uten betydning for farten din.", "Знак предупреждает о реальном повышенном риске появления детей на дороге — это не просто формальное напоминание, которое не должно влиять на твою скорость."]
+    ],
+    "Et varselskilt med barn varsler at du kjører forbi et sted, som en skole eller barnehage, der barn ofte beveger seg nær vegen. Senk farten, vær ekstra oppmerksom og hold avstand til fortau og vegkant.",
+    "Предупреждающий знак с детьми говорит о том, что ты проезжаешь место — школу или детский сад — где дети часто находятся рядом с дорогой. Снижай скорость, будь особенно внимателен и держи дистанцию от тротуара и края дороги.",
+    "Знак с детьми — это не формальность: тут реально могут выбежать на дорогу."),
+
+    q("085", null,
+      "Du skal ta neste avkjøring fra motorveien. Når bør du redusere farten din?",
+      "Тебе нужно съехать с автомагистрали на следующем съезде. Когда нужно снижать скорость?",
+      [
+        ["Først etter at jeg har kommet inn i selve fartsreduksjonsfeltet (avkjøringsfeltet), ikke mens jeg fortsatt er i de vanlige kjørefeltene", "Только после того, как я уже въехал в саму полосу торможения (съездную полосу), а не пока я ещё в основных полосах"],
+        ["Så tidlig som mulig, allerede et par hundre meter før avkjøringen, mens jeg fortsatt er i det vanlige kjørefeltet", "Как можно раньше, за пару сотен метров до съезда, ещё находясь в обычной полосе", "Å bremse ned i det ordinære kjørefeltet på motorveien skaper fare for trafikken bak deg, farten skal reduseres inne i avkjøringsfeltet.", "Снижать скорость в обычной полосе на магистрали создаёт опасность для машин позади — тормозить нужно именно внутри съездной полосы."],
+        ["Rett før avkjøringsskiltet, uansett om jeg er i avkjøringsfeltet eller ikke", "Прямо перед знаком съезда, независимо от того, в съездной я полосе или нет", "Det avgjørende er ikke skiltet, men om du allerede har flyttet deg inn i avkjøringsfeltet der fartsreduksjon er trygt.", "Важно не само появление знака, а то, перешёл ли ты уже в съездную полосу, где тормозить безопасно."],
+        ["Det er ikke nødvendig å redusere farten før jeg er helt ute av motorveien og på den nye vegen", "Снижать скорость не нужно, пока я не полностью съехал с магистрали на новую дорогу", "Avkjøringsfeltet er nettopp laget for at du skal redusere farten gradvis før du kommer ut på den nye vegen, å vente til du er helt av motorveien er for sent og farlig.", "Съездная полоса специально сделана для того, чтобы постепенно сбросить скорость до выезда на новую дорогу — ждать полного выезда с магистрали поздно и опасно."]
+      ],
+      "Du skal holde samme fart som trafikken på motorveien til du er inne i avkjøringsfeltet, og redusere farten der. Å bremse i de ordinære kjørefeltene tvinger trafikken bak deg til brå oppbremsing.",
+      "Нужно держать скорость потока на магистрали, пока не окажешься в самой съездной полосе, и снижать скорость уже там. Торможение в обычных полосах вынуждает машины позади резко тормозить.",
+      "Тормози только внутри съездной полосы — она для этого и сделана.")
   ];
 })();

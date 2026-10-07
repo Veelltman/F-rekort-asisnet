@@ -193,6 +193,13 @@
     w("155", "hjortevilt", "копытный дикий зверь (лось, олень, косуля)", "Ved påkjørsel av hjortevilt skal du varsle politiet.", "При сбитом копытном звере нужно уведомить полицию.", "Условия"),
     w("156", "håndfri (utstyr)", "устройство hands-free", "Bruk håndfri-utstyr hvis du må snakke i telefonen mens du kjører.", "Используй hands-free, если нужно говорить по телефону за рулём.", "Машина"),
     w("157", "glatt føre", "скользкая дорога, гололёд", "Senk farten og hold god avstand ved glatt føre.", "Снижай скорость и держи большую дистанцию на скользкой дороге.", "Условия"),
-    w("158", "hjelpeplikt", "обязанность помочь при ДТП", "Ved en ulykke har du hjelpeplikt: stans og hjelp skadde.", "При аварии у тебя обязанность помочь: остановись и помоги пострадавшим.", "Правила")
+    w("158", "hjelpeplikt", "обязанность помочь при ДТП", "Ved en ulykke har du hjelpeplikt: stans og hjelp skadde.", "При аварии у тебя обязанность помочь: остановись и помоги пострадавшим.", "Правила"),
+
+    w("159", "parkeringsplass", "стоянка, парковочная площадка", "Det er ledig plass på parkeringsplassen ved butikken.", "На парковке у магазина есть свободное место.", "Дорога"),
+    w("160", "lastebil", "грузовик", "En lastebil trenger mer plass til å svinge enn en personbil.", "Грузовику нужно больше места для поворота, чем легковой машине.", "Машина"),
+    w("161", "buss", "автобус", "Bussen stopper ved holdeplassen for å slippe av passasjerer.", "Автобус останавливается на остановке, чтобы высадить пассажиров.", "Машина"),
+    w("162", "moped", "мопед", "En moped kan kjøre i kollektivfeltet sammen med motorsykkel og sykkel.", "Мопед может ехать по полосе для общественного транспорта вместе с мотоциклом и велосипедом.", "Машина"),
+    w("163", "nødnummer", "номер экстренной службы", "Ring nødnummeret 112 ved en alvorlig trafikkulykke med personskade.", "Звони на номер экстренной службы 112 при серьёзном ДТП с травмами.", "Правила"),
+    w("164", "trafikkdirigent", "регулировщик (человек, направляющий движение)", "Følg tegnene fra trafikkdirigenten ved vegarbeid, selv om lyset viser noe annet.", "Следуй жестам регулировщика на дорожных работах, даже если светофор показывает другое.", "Правила")
   ];
 })();

@@ -869,7 +869,79 @@
       ],
       "Slukner lysene i mørket, er bilen ikke lenger forsvarlig å kjøre. Senk farten, bruk varsellys om nødvendig, og kjør forsiktig til et trygt sted å stoppe og undersøke feilen før du fortsetter.",
       "Если свет гаснет в темноте, машина перестаёт быть безопасной для движения. Снизь скорость, при необходимости включи аварийку и осторожно доедь до безопасного места, чтобы остановиться и проверить неисправность, прежде чем продолжать путь.",
-      "Погас свет в темноте — это сигнал остановиться и проверить, а не ехать на ощупь до следующего города.")
+      "Погас свет в темноте — это сигнал остановиться и проверить, а не ехать на ощупь до следующего города."),
+
+    q("085", "Du ser skiltet 210 Forkjørskryss, et trekantet varselskilt i vikepliktkategorien. Hva betyr det?",
+      "Ты видишь треугольный знак 210 Forkjørskryss из категории знаков приоритета. Что он означает?",
+      [
+        ["Det varsler at du nærmer deg et kryss der du fortsatt har forkjørsrett, men du bør likevel være oppmerksom", "Он предупреждает, что ты приближаешься к перекрёстку, где у тебя всё ещё есть преимущество, но будь внимателен"],
+        ["Det betyr at du må stoppe helt opp før krysset, som ved et stoppskilt", "Это значит, что нужно полностью остановиться перед перекрёстком, как у знака «Стоп»", "Skiltet varsler bare om et forkjørskryss som kommer, det krever ikke full stopp slik som skilt 204 Stopp.", "Этот знак только предупреждает о приближении перекрёстка с преимуществом, он не требует полной остановки, как знак 204 «Стоп»."],
+        ["Det betyr at du nå har vikeplikt for trafikk fra sideveien", "Это значит, что теперь ты уступаешь транспорту с боковой дороги", "Det er stikk motsatt, skiltet varsler at du har forkjørsrett i krysset som kommer, ikke at du skal vike.", "Это ровно наоборот — знак предупреждает, что именно у тебя преимущество на следующем перекрёстке, а не что ты должен уступать."],
+        ["Det er et forbudsskilt som betyr at krysset er stengt for gjennomkjøring", "Это запрещающий знак, означающий, что перекрёсток закрыт для проезда", "Skilt 210 hører til vikepliktkategorien (200-serien), ikke forbudsskilt (300-serien), og har ingenting med stengt vei å gjøre.", "Знак 210 относится к категории знаков приоритета (серия 200), а не к запрещающим знакам (серия 300), и никак не связан с закрытой дорогой."]
+      ],
+      "Skilt 210 Forkjørskryss er et trekantet skilt i vikepliktkategorien (200-serien). Det varsler at forkjørsveien din fortsetter gjennom et kryss der du formelt har forkjørsrett, men du må likevel kjøre aktsomt.",
+      "Знак 210 Forkjørskryss — треугольный знак из категории приоритета (серия 200). Он предупреждает, что главная дорога продолжается через перекрёсток, где у тебя формально есть преимущество, но ехать нужно всё равно внимательно.",
+      "210 — это не «уступи», а «у тебя всё ещё приоритет, но смотри в оба»."),
+
+    q("086", "Du kjører forbi skiltet 376 Parkeringssone ved innkjøringen til et boligområde. Hva betyr dette skiltet?",
+      "Ты проезжаешь мимо знака 376 Parkeringssone на въезде в жилой район. Что означает этот знак?",
+      [
+        ["Reglene på skiltet, for eksempel tidsbegrensning eller avgift, gjelder for all parkering i hele området, til jeg ser skiltet for slutt på sonen", "Правила на знаке, например ограничение по времени или плата, действуют для всей стоянки по всей зоне, пока не появится знак окончания зоны"],
+        ["Skiltet gjelder bare der det akkurat står, ikke resten av gatene i området", "Знак действует только в том самом месте, где он стоит, а не на остальных улицах района", "Et sonekilt gjelder nettopp motsatt, det setter reglene for hele området inntil et skilt viser slutt på sonen.", "Знак зоны действует ровно наоборот — он задаёт правила для всей территории, пока не встретится знак окончания зоны."],
+        ["Skiltet betyr at parkering er helt forbudt i hele området", "Знак означает полный запрет стоянки по всему району", "376 er et opplysningsskilt om en parkeringssone med egne regler, for eksempel avgift eller tid, ikke et forbudsskilt mot parkering generelt.", "376 — информационный знак о зоне стоянки со своими правилами (например, плата или время), а не общий запрет парковки."],
+        ["Skiltet gjelder bare for kjøretøy over 3 500 kg", "Знак действует только для транспорта тяжелее 3 500 кг", "Sonen gjelder generelt for parkering i området, det er ikke knyttet til en bestemt kjøretøyvekt.", "Зона распространяется на парковку в целом по территории, она не привязана к какой-то конкретной массе транспорта."]
+      ],
+      "Skilt 376 Parkeringssone markerer at du kjører inn i et område der bestemte parkeringsregler, for eksempel avgift eller tidsbegrensning, gjelder for all parkering, helt til du passerer skiltet for slutt på sonen.",
+      "Знак 376 Parkeringssone показывает, что ты въезжаешь в зону, где определённые правила стоянки — например, плата или ограничение по времени — действуют для всей парковки, до тех пор, пока не встретится знак окончания зоны.",
+      "Знак зоны действует «по всей территории», а не только в точке, где ты его увидел."),
+
+    q("087", "Under et skilt for parkering forbudt henger et ekstra, mindre skilt med klokkeslett og ukedager. Hva kaller vi denne typen tilleggsskilt, og hva gjør det?",
+      "Под знаком «стоянка запрещена» висит маленькая дополнительная табличка с временем и днями недели. Как называется такая дополнительная табличка и что она делает?",
+      [
+        ["Det er et underskilt (800-serien), det presiserer eller avgrenser hovedskiltet, for eksempel når forbudet faktisk gjelder", "Это underskilt (серия 800), она уточняет или сужает действие основного знака — например, когда именно действует запрет"],
+        ["Det er et eget opplysningsskilt som gjelder helt uavhengig av skiltet over", "Это отдельный информационный знак, действующий совершенно независимо от знака над ним", "Et underskilt står aldri alene, det hører sammen med og presiserer hovedskiltet det er montert under.", "Underskilt никогда не стоит сам по себе — он всегда относится к основному знаку над ним и уточняет его."],
+        ["Det er et vikepliktskilt som gjelder i tillegg til forbudet", "Это знак приоритета, действующий в дополнение к запрету", "Underskiltet tilhører 800-serien og presiserer hovedskiltet, det er ikke en egen vikepliktkategori (200-serien).", "Underskilt относится к серии 800 и уточняет основной знак, это не отдельная категория знаков приоритета (серия 200)."],
+        ["Det betyr at forbudet bare gjelder for tunge kjøretøy", "Это значит, что запрет действует только для тяжёлого транспорта", "Et underskilt med klokkeslett og dager presiserer tidspunktet forbudet gjelder, ikke hvilken kjøretøytype det gjelder for.", "Табличка с временем и днями уточняет, когда действует запрет, а не для каких типов транспорта он действует."]
+      ],
+      "Underskilt (800-serien) henger sammen med skiltet over og presiserer eller avgrenser det, for eksempel tidsrom, dager, kjøretøytype eller avstand. Et klokkeslett- og dagsskilt under et parkeringsforbud viser nøyaktig når forbudet gjelder.",
+      "Underskilt (серия 800) всегда связан со знаком над ним и уточняет или ограничивает его действие — например, по времени, дням, типу транспорта или расстоянию. Табличка с часами и днями под знаком запрета стоянки показывает, когда именно он действует.",
+      "Если под знаком висит табличка — читай её, она меняет смысл знака сверху."),
+
+    q("088", "Du ser varselskiltet 118 Bevegelig bru før en bro. Hva varsler dette skiltet?",
+      "Перед мостом ты видишь предупреждающий знак 118 Bevegelig bru. О чём он предупреждает?",
+      [
+        ["At broen kan åpnes eller heves for båttrafikk, så jeg må være forberedt på at bommen er nede eller broen ikke er på plass", "О том, что мост может открываться или подниматься для прохода судов, так что надо быть готовым к опущенному шлагбауму или разведённому мосту"],
+        ["At brua er svak og bare tåler lette kjøretøy", "О том, что мост слабый и выдерживает только лёгкий транспорт", "Skiltet handler om at broen kan bevege seg for å slippe båter forbi, ikke om vektbegrensning.", "Знак говорит о том, что мост может двигаться, пропуская суда, а не об ограничении по весу."],
+        ["At brua svinger i vinden og jeg bør senke farten på grunn av dette", "О том, что мост раскачивается на ветру, и из-за этого нужно снизить скорость", "«Bevegelig» viser til at selve brukonstruksjonen kan åpnes mekanisk for skipstrafikk, ikke at den svaier i vinden.", "«Подвижный» означает, что сама конструкция моста механически открывается для судов, а не что мост раскачивается от ветра."],
+        ["At det er planovergang med jernbane rett etter brua", "О том, что сразу за мостом железнодорожный переезд", "Jernbaneovergang har sitt eget skilt, 118 Bevegelig bru handler spesifikt om en bro som kan åpnes for båter.", "У железнодорожного переезда свой отдельный знак, а 118 Bevegelig bru именно про мост, который может открываться для судов."]
+      ],
+      "Skilt 118 Bevegelig bru varsler om en bro som kan åpnes eller heves for å slippe skip og båter forbi. Vær forberedt på stans, bom eller at broen ikke er lagt ned igjen.",
+      "Знак 118 Bevegelig bru предупреждает о мосте, который может открываться или подниматься, пропуская корабли и лодки. Нужно быть готовым к остановке, шлагбауму или тому, что мост ещё не опущен обратно.",
+      "«Bevegelig» — значит мост сам двигается (открывается), а не просто качается на ветру."),
+
+    q("089", "Du ser forbudsskiltet 310 med teksten «7,5 t» ved innkjøringen til en smal bygate. Du kjører en vanlig personbil med campingvogn, og campingvognens vekt gjør at total vekt kommer over 7,5 tonn. Gjelder forbudet for deg?",
+      "На въезде в узкую городскую улицу висит запрещающий знак 310 с цифрой «7,5 t». Ты едешь на обычной легковой машине с кемпером, и общая масса превышает 7,5 тонны. Распространяется ли запрет на тебя?",
+      [
+        ["Ja, skiltet gjelder for enhver motorvogn, inkludert bil med tilhenger, som har en faktisk totalvekt over den angitte grensen, ikke bare lastebiler", "Да, знак относится к любому автотранспорту, включая машину с прицепом, чья фактическая полная масса превышает указанный предел, а не только к грузовикам"],
+        ["Nei, skiltet gjelder bare lastebiler og busser, ikke personbiler med tilhenger", "Нет, знак действует только для грузовиков и автобусов, а не для легковых с прицепом", "Skiltet angir en vektgrense for «motorvogn», det skiller ikke mellom lastebil og personbil, det som avgjør er den faktiske totalvekten.", "Знак указывает предел массы для «автотранспорта» в целом, он не различает грузовик и легковую машину — важна фактическая полная масса."],
+        ["Nei, campingvognens vekt teller ikke med, bare bilens egen vekt", "Нет, масса кемпера не считается, важен только вес самой машины", "Totalvekten som skiltet viser til, omfatter kjøretøyet og det det eventuelt trekker, ikke bare bilens egenvekt alene.", "Полная масса, на которую указывает знак, включает и то, что тянет машина, а не только собственный вес автомобиля."],
+        ["Ja, men bare hvis bilen er dieseldrevet", "Да, но только если машина на дизеле", "Forbudet knytter seg til vekten, ikke til hvilken drivstofftype eller motortype kjøretøyet har.", "Запрет связан с массой, а не с типом двигателя или топлива."]
+      ],
+      "Skilt 310 forbyr motorvogn, som bil, lastebil eller buss, med faktisk totalvekt over den angitte grensen å kjøre inn, uansett kjøretøytype. En personbil med tilhenger regnes med vekten av bil pluss tilhenger.",
+      "Знак 310 запрещает въезд автотранспорту — легковым, грузовикам, автобусам — с фактической полной массой выше указанного предела, независимо от типа транспорта. У легковой машины с прицепом считается масса машины плюс прицепа.",
+      "Знак 310 смотрит на фактическую массу «машина + то, что она тянет», а не на то, грузовик это или нет."),
+
+    q("090", "Du nærmer deg et skilt med symbolet for kai, strand eller ferjeleie (skilt 120). Hva bør du være spesielt oppmerksom på her?",
+      "Ты подъезжаешь к знаку с символом «причал, пляж или паромная пристань» (знак 120). На что здесь стоит обратить особое внимание?",
+      [
+        ["At vegen kan ende rett ut i vannet, så jeg senker farten og er forberedt på å stoppe i god tid", "На то, что дорога может прямо обрываться в воду, поэтому я снижаю скорость и готов остановиться заранее"],
+        ["At det er forbudt å kjøre forbi andre kjøretøy her", "На то, что здесь запрещён обгон", "Skiltet handler om faren for å kjøre rett ut i vannet ved kai eller ferjeleie, ikke om et forbikjøringsforbud.", "Знак про риск съехать прямо в воду у причала или паромной пристани, а не про запрет обгона."],
+        ["At vegen blir smalere og bare har plass til ett kjøretøy", "На то, что дорога сужается и там проедет только одна машина", "Det er en annen type skilt (vegen blir smalere), skiltet for kai, strand eller ferjeleie varsler spesifikt om vann rett ved eller på vegen.", "Это другой знак (сужение дороги), а знак причала, пляжа или паромной пристани специально предупреждает о воде прямо у дороги или на ней."],
+        ["At det er en brattkant med stup ned i en dal", "На то, что там крутой обрыв в долину", "Skiltet gjelder spesifikt nærhet til vann, som kai, strand eller ferjeleie, ikke stup eller skrenter i terrenget generelt.", "Знак именно про близость воды — причал, пляж, паромную пристань — а не про обрывы или скалы в рельефе в целом."]
+      ],
+      "Skilt 120 Kai, strand eller ferjeleie varsler at vegen går nær eller rett ut i vann, for eksempel ved en kai eller et ferjeleie. Senk farten og vær forberedt på å stoppe, slik at du ikke kjører rett ut i vannet.",
+      "Знак 120 Kai, strand eller ferjeleie предупреждает, что дорога проходит рядом с водой или прямо к ней выходит — например, у причала или паромной пристани. Снижай скорость и будь готов остановиться, чтобы не съехать прямо в воду.",
+      "Если видишь этот знак — впереди может быть вода прямо на пути, тормози заранее.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */
