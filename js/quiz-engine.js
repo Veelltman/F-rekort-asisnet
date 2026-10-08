@@ -26,8 +26,7 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  const ARROW_L = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`;
-  const ARROW_R = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>`;
+  const icon = (name) => window.UI.icon(name);
 
   function fmtTime(sec) {
     const m = Math.floor(sec / 60), s = sec % 60;
@@ -100,6 +99,7 @@
 
     let lastTap = { idx: -1, at: 0 };
     let checkedAt = 0;
+    let shownIndex = -1;   /* анимация карточки — только при смене вопроса, не при проверке */
     function renderQuestion() {
       const it = item(session.index);
       const q = it.inst;
@@ -107,11 +107,14 @@
       const answered = session.items.filter(x => exam ? hasSel(x) : x.checked).length;
       const pct = Math.round((answered / total) * 100);
       const revealed = !exam && it.checked;
+      const fresh = shownIndex !== session.index;
+      shownIndex = session.index;
+      const exitLabel = cfg.exitLabel || t("Выйти");
 
       container.innerHTML = `
         <div class="quiz">
           <div class="quiz-head">
-            <button class="btn btn-ghost" data-action="exit">${esc(cfg.exitLabel || t("Выйти"))}</button>
+            <button class="quiz-exit" data-action="exit" aria-label="${esc(exitLabel)}">${icon("close")}<span>${esc(exitLabel)}</span></button>
             <div class="quiz-meta">
               <span class="quiz-title">${esc(cfg.title || "")}</span>
               ${session.secondsLeft ? `<span class="quiz-timer ${session.secondsLeft < 300 ? "warn" : ""}">${fmtTime(session.secondsLeft)}</span>` : ""}
@@ -120,7 +123,7 @@
           </div>
           <div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>
 
-          <div class="card question-card">
+          <div class="card question-card ${fresh ? "q-enter" : ""}">
             ${q.image ? `<div class="question-image">${q.image}</div>` : ""}
             <div class="question-text">
               <p class="lang-no">${esc(q.prompt_no)}</p>
@@ -147,22 +150,19 @@
               }).join("")}
             </div>
 
-            ${!exam && !it.checked ? `
-              <div class="check-row">
-                <button class="btn btn-primary btn-check" data-action="check" ${hasSel(it) ? "" : "disabled"}>Sjekk${window.I18N.lang === "no" ? "" : ` <small>${t("проверить")}</small>`}</button>
-              </div>` : ""}
-
             ${revealed ? feedbackHtml(it) : ""}
           </div>
 
           <div class="quiz-nav">
-            <button class="btn nav-btn" data-action="prev" ${session.index === 0 ? "disabled" : ""} aria-label="${t("Предыдущий вопрос")}">${ARROW_L}</button>
-            <span class="nav-status">${exam ? `${t("отвечено")} ${answered} ${t("из")} ${total}` : `${answered} ${t("из")} ${total} ${t("проверено")}`}</span>
+            <button class="btn nav-btn" data-action="prev" ${session.index === 0 ? "disabled" : ""} aria-label="${t("Предыдущий вопрос")}">${icon("chevron-left")}</button>
+            ${!exam && !it.checked
+              ? `<button class="btn btn-primary btn-check" data-action="check" ${hasSel(it) ? "" : "disabled"}>Sjekk${window.I18N.lang === "no" ? "" : ` <small>${t("проверить")}</small>`}</button>`
+              : `<span class="nav-status">${exam ? `${t("отвечено")} ${answered} ${t("из")} ${total}` : `${answered} ${t("из")} ${total} ${t("проверено")}`}</span>`}
             ${exam && session.index === total - 1
               ? `<button class="btn btn-primary" data-action="finish">Lever${window.I18N.lang === "no" ? "" : ` <small>${t("сдать")}</small>`}</button>`
               : !exam && session.index === total - 1
                 ? `<button class="btn btn-primary" data-action="finish" ${it.checked ? "" : "disabled"}>Resultat</button>`
-                : `<button class="btn nav-btn" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="${t("Следующий вопрос")}">${ARROW_R}</button>`}
+                : `<button class="btn nav-btn ${!exam && it.checked ? "btn-primary" : ""}" data-action="next" ${(!exam && !it.checked) ? "disabled" : ""} aria-label="${t("Следующий вопрос")}">${icon("chevron-right")}</button>`}
           </div>
           ${exam ? `<p class="exam-hint muted">${t("Ответы можно менять до сдачи. Кнопка «Lever» на последнем вопросе.")}</p>` : ""}
           <p class="key-hint muted">${t("Двойное нажатие по варианту — проверить. Клавиатура: 1–4 или A–D — выбрать, Enter — проверить / дальше, ← → — переход, T — перевод, S — озвучить")}</p>
@@ -399,7 +399,7 @@
           <div class="card result-card">
             <h2>${exam ? (passed ? "Bestått" : "Ikke bestått") : bi("Resultat", "Результат")}</h2>
             <div class="result-score ${passed ? "good" : pct >= 70 ? "mid" : "bad"}">
-              <span class="result-pct">${exam ? `${correct}/${total}` : `${pct}%`}</span>
+              ${exam ? `<span class="result-pct">${correct}/${total}</span>` : window.UI.ring(pct, 132, passed ? "good" : pct >= 70 ? "mid" : "bad")}
               <span class="result-sub">${correct} ${t("верно,")} ${wrong} ${mistakesWord(wrong)}</span>
             </div>
             <p class="result-grade">${grade}</p>
@@ -417,7 +417,7 @@
           <div class="review-list">
           ${results.map((r, i) => `
             <div class="card review-card ${r.ok ? "review-ok" : "review-fail"}" data-ok="${r.ok}">
-              <div class="review-mark">${r.ok ? "✓" : "✗"}<span>${i + 1}</span></div>
+              <div class="review-mark">${icon(r.ok ? "check" : "x")}<span>${i + 1}</span></div>
               ${r.it.inst.image ? `<div class="mistake-image">${r.it.inst.image}</div>` : r.right.image ? `<div class="mistake-image">${r.right.image}</div>` : ""}
               <div class="mistake-body">
                 <p class="lang-no"><strong>${esc(r.it.inst.prompt_no)}</strong></p>

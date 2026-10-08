@@ -10,6 +10,7 @@
   const esc = window.QuizEngine.esc;
   const shuffle = window.QuizEngine.shuffle;
   const view = document.getElementById("view");
+  const { icon, pageHead, listRow, ring } = window.UI;
 
   const { shapeWrapper: SW, icon: SI } = window.SIGN_ICONS;
   const ICONS = {
@@ -53,7 +54,10 @@
     window.ROUTE_GUARD = null;
     window.QuizEngine.stopActive();
     document.onkeydown = null;
+    /* Тест и карточки — режим «фокуса»: на телефоне прячем нижние вкладки */
+    document.body.classList.toggle("focus-mode", ["quiz", "exam", "daily"].includes(name) || (name === "vocab" && !!(params && params.mode)));
     routes[name](params || {});
+    window.UI.enter(view);
     window.scrollTo({ top: 0 });
     document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("active", a.dataset.route === name));
   }
@@ -130,7 +134,8 @@
         <div class="profile-menu-title">${tr("Ты вошёл как")}</div>
         <button class="profile-item active">${esc(cur)}</button>
         <div class="sync-line">${syncLineHtml()}</div>
-        <button class="profile-item profile-add" data-act="logout">${tr("Выйти")}</button>`;
+        <button class="profile-item" data-act="help">${icon("help")}${tr("Как пользоваться")}</button>
+        <button class="profile-item profile-add" data-act="logout">${icon("logout")}${tr("Выйти")}</button>`;
       document.getElementById("profile-switch").appendChild(menu);
       menu.querySelector("[data-act=logout]").onclick = async () => { menu.remove(); await C.logout(); renderProfileSwitch(); go("home"); };
     } else {
@@ -138,7 +143,8 @@
         <div class="profile-menu-title">${tr("Кто занимается?")}</div>
         ${S.getProfiles().map(p => `
           <button class="profile-item ${p === cur ? "active" : ""}" data-name="${esc(p)}">${esc(p)}</button>`).join("")}
-        <button class="profile-item profile-add">${tr("Добавить человека")}</button>`;
+        <button class="profile-item" data-act="help">${icon("help")}${tr("Как пользоваться")}</button>
+        <button class="profile-item profile-add">${icon("plus")}${tr("Добавить человека")}</button>`;
       document.getElementById("profile-switch").appendChild(menu);
       menu.querySelectorAll(".profile-item[data-name]").forEach(b => {
         b.onclick = () => { S.switchProfile(b.dataset.name); menu.remove(); renderProfileSwitch(); go("home"); };
@@ -149,6 +155,7 @@
         menu.remove();
       };
     }
+    menu.querySelector("[data-act=help]").onclick = () => { menu.remove(); if (window.Onboarding) window.Onboarding.show(); };
     setTimeout(() => {
       document.addEventListener("click", function close(e) {
         if (!menu.contains(e.target) && !e.target.closest(".profile-btn")) { menu.remove(); document.removeEventListener("click", close); }
@@ -206,7 +213,7 @@
     return `
       <div class="card daily-card">
         <div class="daily-head">
-          <div class="topic-icon">${ICONS.daily}</div>
+          <div class="tile-icon">${ICONS.daily}</div>
           <div>
             <h3>Dagens økt</h3>
             <p class="topic-sub">${tr("Задание дня,")} ${key.split("-").reverse().join(".")}</p>
@@ -215,8 +222,8 @@
         <p class="topic-desc">20 ${tr("вопросов, одинаковые для всех в этот день. Сравните результаты.")}</p>
         <div class="daily-rows">${rows}</div>
         <div class="daily-foot">
-          <button class="btn ${mine ? "" : "btn-cta"}" onclick="go('daily')">${mine ? tr("Пройти ещё раз") : tr("Начать задание дня")}</button>
-          ${streak > 1 ? `<span class="streak">${streak} ${tr("дней подряд")}</span>` : ""}
+          <button class="btn ${mine ? "" : "btn-primary"}" onclick="go('daily')">${mine ? tr("Пройти ещё раз") : tr("Начать задание дня")}</button>
+          ${streak > 1 ? `<span class="streak">${icon("flame")}${streak} ${tr("дней подряд")}</span>` : ""}
         </div>
       </div>`;
   }
@@ -226,23 +233,22 @@
     let tab = p.tab || "login";
     function render(error) {
       view.innerHTML = `
-        <div class="quiz">
-          <h1>${tab === "login" ? tr("Вход") : tr("Регистрация")}</h1>
-          <p class="lead">${tr("Прогресс хранится на сервере: войди с любого телефона, и всё будет на месте. Результаты видны друзьям из круга.")}</p>
-          <div class="tabs">
-            <button class="tab ${tab === "login" ? "active" : ""}" data-tab="login">${tr("Войти")}</button>
-            <button class="tab ${tab === "register" ? "active" : ""}" data-tab="register">${tr("Регистрация")}</button>
+        <div class="auth-wrap">
+          ${pageHead({ back: { label: tr("Главная"), action: "go('home')" }, title: tab === "login" ? tr("Вход") : tr("Регистрация"), sub: tr("Прогресс хранится на сервере: войди с любого телефона, и всё будет на месте. Результаты видны друзьям из круга.") })}
+          <div class="tabs" role="tablist">
+            <button class="tab ${tab === "login" ? "active" : ""}" data-tab="login" role="tab">${tr("Войти")}</button>
+            <button class="tab ${tab === "register" ? "active" : ""}" data-tab="register" role="tab">${tr("Регистрация")}</button>
           </div>
           <form class="card" id="auth-form" autocomplete="off">
             <label class="field"><span>${tr("Имя (как тебя увидят друзья)")}</span><input type="text" id="auth-name" maxlength="24" required autocomplete="username"></label>
             <label class="field"><span>PIN (4–6 ${tr("цифр)")}</span><input type="password" id="auth-pin" inputmode="numeric" pattern="\\d{4,6}" maxlength="6" required autocomplete="current-password"></label>
             ${tab === "register" ? `<label class="field"><span>${tr("Код приглашения")}</span><input type="text" id="auth-invite" required autocomplete="off" placeholder="${tr("спроси у того, кто дал ссылку")}"></label>` : ""}
             ${error ? `<p class="form-error">${esc(error)}</p>` : ""}
-            <div class="row">
+            <div class="form-actions">
               <button class="btn btn-primary" type="submit">${tab === "login" ? tr("Войти") : tr("Создать аккаунт")}</button>
               <button class="btn btn-ghost" type="button" onclick="go('home')">${tr("Без входа")}</button>
             </div>
-            ${tab === "register" ? `<p class="muted small">${tr("Прогресс, который уже есть в этом браузере, перенесётся в новый аккаунт.")}</p>` : ""}
+            ${tab === "register" ? `<p class="muted small form-note">${tr("Прогресс, который уже есть в этом браузере, перенесётся в новый аккаунт.")}</p>` : ""}
           </form>
         </div>`;
       view.querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; render(); });
@@ -273,7 +279,7 @@
       return `
         <div class="card daily-card circle-card">
           <div class="daily-head">
-            <div class="topic-icon">${ICONS.circle}</div>
+            <div class="tile-icon">${ICONS.circle}</div>
             <div><h3>Vennekretsen</h3><p class="topic-sub">${tr("Круг друзей")}</p></div>
           </div>
           <p class="topic-desc">${tr("Войди, чтобы прогресс сохранялся на сервере и было видно, кто как занимается.")}</p>
@@ -284,7 +290,7 @@
     return `
       <div class="card daily-card circle-card" id="circle-card">
         <div class="daily-head">
-          <div class="topic-icon">${ICONS.circle}</div>
+          <div class="tile-icon">${ICONS.circle}</div>
           <div><h3>Vennekretsen</h3><p class="topic-sub">${tr("Круг друзей")}</p></div>
         </div>
         <div class="daily-rows" id="circle-rows"><div class="busy"><span class="spinner"></span> ${tr("загружаю…")}</div></div>
@@ -345,7 +351,7 @@
     return `
       <div class="card daily-card exam-card">
         <div class="daily-head">
-          <div class="topic-icon">${ICONS.exam}</div>
+          <div class="tile-icon">${ICONS.exam}</div>
           <div>
             <h3>Teoriprøve</h3>
             <p class="topic-sub">${tr("Пробный экзамен")}</p>
@@ -353,7 +359,7 @@
         </div>
         <p class="topic-desc">45 ${tr("вопросов, 90 минут, без подсказок по ходу. Сдано, если ошибок не больше 7. Как на настоящем экзамене.")}</p>
         <div class="daily-rows">${rows}</div>
-        <div class="daily-foot"><button class="btn btn-cta" onclick="go('exam')">${tr("Начать экзамен")}</button></div>
+        <div class="daily-foot"><button class="btn" onclick="go('exam')">${tr("Начать экзамен")}</button></div>
       </div>`;
   }
 
@@ -387,97 +393,103 @@
   };
 
   /* ---------- Главная ---------- */
+  /* Готовность к экзамену: доля вопросов, на которые последний ответ верный,
+     с весами как в пробном экзамене (знаки 23, ситуации 12, правила 10 из 45) */
+  function readiness() {
+    const k = D.signsByKind;
+    const parts = [
+      { w: 23, m: S.getMastery([].concat(k.meaning, k.pick, k.category)) },
+      { w: 12, m: S.getMastery(D.situational) },
+      { w: 10, m: S.getMastery(D.rules) }
+    ];
+    const pct = parts.reduce((n, p) => n + p.w * (p.m.total ? p.m.mastered / p.m.total : 0), 0) / 45 * 100;
+    const mastered = parts.reduce((n, p) => n + p.m.mastered, 0);
+    const total = parts.reduce((n, p) => n + p.m.total, 0);
+    return { pct: Math.round(pct), mastered, total };
+  }
+
   routes.home = function () {
     const last = S.getLastTopic();
-    const cards = Object.keys(TOPICS).map(key => {
-      const t = TOPICS[key];
-      const st = S.getTopicStats(key, D[key]);
-      return topicCard(key, t, st);
-    }).join("");
     const vs = S.getVocabStats(D.vocabulary);
-    const totalWeak = Object.keys(TOPICS).reduce((n, k) => n + S.getWeakQuestions(D[k]).length, 0);
     const dueTotal = Object.keys(TOPICS).reduce((n, k) => n + S.getDueCount(D[k]), 0);
-
     const allStats = Object.keys(TOPICS).map(k => S.getTopicStats(k, D[k]));
     const answered = allStats.reduce((n, s) => n + s.correct + s.wrong, 0);
-    const correct = allStats.reduce((n, s) => n + s.correct, 0);
-    const totalQ = allStats.reduce((n, s) => n + s.total, 0);
-    const seen = allStats.reduce((n, s) => n + s.seen, 0);
+    const ready = readiness();
+    const exams = S.getExams();
+    const lastExam = exams[exams.length - 1];
+    const passedAny = exams.some(e => e.passed);
+    const dailyDone = !!S.getDaily(todayKey());
+
+    const status = !answered ? tr("Теория на права по-норвежски")
+      : ready.pct >= 85 ? (passedAny ? tr("Готов(а) к экзамену") : tr("Осталось сдать пробный экзамен"))
+      : ready.pct >= 60 ? tr("Почти готов(а)")
+      : ready.pct >= 30 ? tr("Хороший темп")
+      : tr("Начало пути");
+    const ringCls = ready.pct >= 85 ? "good" : "";
+
+    const topicRows = Object.keys(TOPICS).map(key => {
+      const t = TOPICS[key];
+      const st = S.getTopicStats(key, D[key]);
+      return listRow({
+        icon: t.icon, title: t.title, action: `go('topic',{key:'${key}'})`,
+        sub: `${esc(t.title_ru)} · ${st.seen ? `${tr("пройдено")} ${st.seen} ${tr("из")} ${st.total}` : `${st.total} ${tr("заданий")}`}`,
+        badge: st.weak ? `<span class="badge badge-danger">${st.weak} ${tr("ошибок")}</span>` : "",
+        meta: st.seen ? `<span class="pill ${st.accuracy >= 85 ? "good" : st.accuracy >= 70 ? "mid" : "bad"}">${st.accuracy}%</span>` : "",
+        progress: st.coverage
+      });
+    }).join("") + listRow({
+      icon: ICONS.vocab, title: "Ordforråd", action: "go('vocab')",
+      sub: `${tr("Лексика")} · ${vs.seen ? `${vs.seen} ${tr("из")} ${vs.total} ${tr("слов")}` : `${vs.total} ${tr("слов")}`}`,
+      meta: vs.seen ? `<span class="pill ${vs.accuracy >= 85 ? "good" : vs.accuracy >= 70 ? "mid" : "bad"}">${vs.accuracy}%</span>` : "",
+      progress: vs.coverage
+    });
 
     view.innerHTML = `
-      <section class="hero">
-        <div>
-          <h1>${tr("Теория на права")} <span class="nowrap">${tr("по-норвежски")}</span></h1>
-          <p class="lead">${tr("Вопросы как на экзамене, на норвежском. Перевод открывается по кнопке, чтобы сначала попробовать понять самому. Каждая ошибка разбирается и возвращается на повторение.")}</p>
-          ${dueTotal ? `<p class="due-line"><span class="pill mid">${tr("К повторению сегодня:")} ${dueTotal}</span> <a href="#" onclick="go('mistakes');return false;">${tr("открыть")}</a></p>` : ""}
-          <div class="hero-actions">
-            <button class="btn btn-primary" onclick="go('daily')">${tr("Задание дня")}</button>
-            ${last && TOPICS[last] ? `<button class="btn" onclick="go('topic',{key:'${last}'})">${tr("Продолжить:")} ${TOPICS[last].title_ru}</button>` : ""}
-            ${totalWeak ? `<button class="btn" onclick="go('mistakes')">${tr("Повторить ошибки (")}${totalWeak})</button>` : ""}
+      <section class="card ready-card">
+        <div class="ready-top">
+          ${ring(ready.pct, 96, ringCls)}
+          <div class="ready-text">
+            <p class="eyebrow">${tr("Готовность к экзамену")}</p>
+            <h1 class="ready-title">${status}</h1>
+            <p class="muted">${answered
+              ? `${tr("Освоено")} ${ready.mastered} ${tr("из")} ${ready.total} ${tr("вопросов экзамена.")}`
+              : tr("Вопросы как на экзамене, на норвежском. Начни с задания дня: 20 вопросов из всех тем.")}</p>
+            ${lastExam ? `<p class="ready-exam">${icon("trophy")}${tr("Последний экзамен:")} <b>${lastExam.correct}/${lastExam.total}</b> <span class="pill ${lastExam.passed ? "good" : "bad"}">${lastExam.passed ? "bestått" : "ikke bestått"}</span></p>` : ""}
           </div>
-          ${answered ? `
-          <div class="hero-stats">
-            <div class="hero-stat"><b>${Math.round((correct / answered) * 100)}%</b><span>${tr("верных ответов")}</span></div>
-            <div class="hero-stat"><b>${seen}/${totalQ}</b><span>${tr("вопросов пройдено")}</span></div>
-            <div class="hero-stat"><b>${vs.seen}/${vs.total}</b><span>${tr("слов из лексики")}</span></div>
-          </div>
-          <p class="hero-link"><a href="#" onclick="go('stats');return false;">${tr("Подробная статистика →")}</a></p>` : ""}
         </div>
+        <div class="ready-actions">
+          ${dailyDone ? "" : `<button class="btn btn-cta" onclick="go('daily')">${icon("calendar")}${tr("Задание дня")}</button>`}
+          ${last && TOPICS[last] ? `<button class="btn ${dailyDone ? "btn-primary" : ""}" onclick="go('topic',{key:'${last}'})">${tr("Продолжить:")} ${esc(TOPICS[last].title_ru)}</button>` : ""}
+          ${dailyDone && !(last && TOPICS[last]) ? `<button class="btn btn-primary" onclick="go('exam')">${tr("Начать экзамен")}</button>` : ""}
+        </div>
+        ${dueTotal ? `<button class="ready-due" onclick="go('mistakes')">${icon("repeat")}<span>${tr("К повторению сегодня:")} ${dueTotal}</span>${icon("chevron-right")}</button>` : ""}
       </section>
 
-      ${circleCard()}
-      ${window.PWA ? PWA.installCardHtml() : ""}
-      <div class="grid grid-2">
+      <div class="section-head"><h2>${tr("Сегодня")}</h2></div>
+      <div class="grid">
         ${dailyCard()}
         ${examCard()}
       </div>
 
-      <h2 class="section-title">${tr("Темы")}</h2>
-      <div class="grid">
-        ${cards}
-        <div class="card topic-card">
-          <div class="topic-icon">${ICONS.vocab}</div>
-          <div class="topic-body">
-            <h3>Ordforråd</h3>
-            <p class="topic-sub">${tr("Лексика")}</p>
-            <p class="topic-desc">${tr("Слова и фразы, без которых не понять вопросы на экзамене.")}</p>
-            ${statLine(vs.accuracy, vs.coverage, vs.seen, vs.total, tr("слов"))}
-          </div>
-          <div class="topic-actions">
-            <button class="btn btn-primary" onclick="go('vocab')">${tr("Открыть карточки")}</button>
-          </div>
-        </div>
-      </div>
+      <div class="section-head"><h2>${tr("Темы")}</h2>${answered ? `<a href="#" onclick="go('stats');return false;">${tr("Статистика")}${icon("chevron-right")}</a>` : ""}</div>
+      <div class="list">${topicRows}</div>
+
+      <div class="stack">${circleCard()}</div>
+      ${window.PWA ? PWA.installCardHtml() : ""}
 
       <details class="card offline-card">
-        <summary>${tr("Работа без интернета")}</summary>
+        <summary>${icon("wifi-off")}${tr("Работа без интернета")}</summary>
         <p class="muted small">${tr("Сайт открывается офлайн после первого посещения. Чтобы и картинки знаков с озвучкой были доступны без сети, загрузи их заранее (знаки ≈ 3 МБ, озвучка ≈ 2 МБ).")}</p>
         <div class="row">
-          <button class="btn btn-small" onclick="PWA.runDownload('signs', this)">${tr("Скачать знаки")}</button>
-          <button class="btn btn-small" onclick="PWA.runDownload('audio', this)">${tr("Скачать озвучку")}</button>
+          <button class="btn btn-small" onclick="PWA.runDownload('signs', this)">${icon("download")}${tr("Скачать знаки")}</button>
+          <button class="btn btn-small" onclick="PWA.runDownload('audio', this)">${icon("download")}${tr("Скачать озвучку")}</button>
           <span class="muted small" id="offline-status"></span>
         </div>
       </details>
+      <p class="home-foot"><button type="button" class="section-link" data-act="help" onclick="window.Onboarding && Onboarding.show()">${icon("help")}${tr("Как пользоваться")}</button></p>
 `;
     if (window.PWA) PWA.offlineStatus().then(s => { const el = document.getElementById("offline-status"); if (el) el.textContent = `${tr("Сохранено: знаков")} ${s.signs}, ${tr("файлов озвучки")} ${s.audio}`; }).catch(() => {});
   };
-
-  function topicCard(key, t, st) {
-    return `
-      <div class="card topic-card">
-        <div class="topic-icon">${t.icon}</div>
-        <div class="topic-body">
-          <h3>${esc(t.title)}</h3>
-          <p class="topic-sub">${esc(t.title_ru)}</p>
-          <p class="topic-desc">${esc(t.desc)}</p>
-          ${statLine(st.accuracy, st.coverage, st.seen, st.total, tr("заданий"))}
-          ${st.weak ? `<p class="weak-line">${tr("Ошибок:")} ${st.weak}. <a href="#" onclick="go('quiz',{key:'${key}',mode:'weak'});return false;">${tr("Тренировать")}</a></p>` : ""}
-        </div>
-        <div class="topic-actions">
-          <button class="btn btn-primary" onclick="go('topic',{key:'${key}'})">${tr("Открыть")}</button>
-        </div>
-      </div>`;
-  }
 
   function statLine(acc, cov, seen, total, unit) {
     if (!seen) return `<p class="stat-line">${total} ${unit}, ${tr("ещё не начато")}</p>`;
@@ -488,14 +500,24 @@
       </div>`;
   }
 
-  /* ---------- Экран темы ---------- */
-  function modeCard(title, desc, key, mode, primary, disabled) {
+  /* Сводка темы под заголовком: полоска пройденного и точность */
+  function topicSummary(acc, seen, total, unit) {
+    if (!seen) return `<div class="topic-summary"><span>${total} ${unit}, ${tr("ещё не начато")}</span></div>`;
     return `
-      <div class="card mode-card">
-        <h3>${esc(title)}</h3>
-        <p class="muted">${esc(desc)}</p>
-        <button class="btn ${primary ? "btn-primary" : ""}" ${disabled ? "disabled" : ""} onclick="go('quiz',{key:'${key}',mode:'${mode}'})">${tr("Начать")}</button>
+      <div class="topic-summary">
+        <span class="meter"><i style="width:${Math.round((seen / total) * 100)}%"></i></span>
+        <span>${tr("пройдено")} ${seen} ${tr("из")} ${total}</span>
+        <span class="pill ${acc >= 85 ? "good" : acc >= 70 ? "mid" : "bad"}">${acc}% ${tr("верно")}</span>
       </div>`;
+  }
+
+  /* ---------- Экран темы ---------- */
+  const MODE_ICON = { quick: "play", new: "plus", all: "book", ordered: "check", weak: "repeat", meaning: "help", pick: "target", category: "topics", marking: "chart" };
+  function modeCard(title, desc, key, mode, primary, disabled) {
+    return listRow({
+      icon: icon(MODE_ICON[mode] || "play"), title, sub: esc(desc), primary, disabled,
+      action: `go('quiz',{key:'${key}',mode:'${mode}'})`
+    });
   }
 
   routes.topic = function (p) {
@@ -527,16 +549,9 @@
       if (all.some(q => q.n)) modes.splice(3, 0, modeCard(tr("По порядку листовки"), `${all.length} ${tr("вопросов в том же порядке, что и в листовке с trafikkstasjonen.")}`, p.key, "ordered"));
     }
     view.innerHTML = `
-      <button class="btn btn-ghost" onclick="go('home')">${tr("Главная")}</button>
-      <section class="topic-hero">
-        <div class="topic-icon big">${t.icon}</div>
-        <div>
-          <h1>${esc(t.title)}</h1>
-          <p class="lead muted">${esc(t.title_ru)}</p>
-          ${statLine(st.accuracy, st.coverage, st.seen, st.total, tr("заданий"))}
-        </div>
-      </section>
-      <div class="grid modes">${modes.join("")}</div>`;
+      ${pageHead({ back: { label: tr("Главная"), action: "go('home')" }, icon: t.icon, title: t.title, sub: esc(t.title_ru) })}
+      ${topicSummary(st.accuracy, st.seen, st.total, tr("заданий"))}
+      <div class="list">${modes.join("")}</div>`;
   };
 
   /* ---------- Квиз ---------- */
@@ -580,38 +595,46 @@
     const total = rows.reduce((n, r) => n + r.weak.length, 0);
 
     view.innerHTML = `
-      <h1>${tr("Мои ошибки")}</h1>
-      <p class="lead">${tr("Профиль:")} <strong>${esc(S.getCurrentProfile())}</strong>. ${tr("Здесь собраны задания, на которые ты отвечал неверно. Тренируй их, пока ответ не станет уверенным.")}</p>
-      ${total || weakVocab.length ? "" : `<div class="card"><p>${tr("Ошибок пока нет. Пройди задание дня или пару тренировок, и здесь появится список для повторения.")}</p></div>`}
+      ${pageHead({ title: tr("Мои ошибки"), sub: `${tr("Профиль:")} <strong>${esc(S.getCurrentProfile())}</strong>. ${tr("Здесь собраны задания, на которые ты отвечал неверно. Тренируй их, пока ответ не станет уверенным.")}` })}
+      ${total || weakVocab.length ? "" : `
+        <div class="card empty-state">
+          <div class="empty-ic">${icon("check")}</div>
+          <h3>${tr("Ошибок нет")}</h3>
+          <p>${tr("Ошибок пока нет. Пройди задание дня или пару тренировок, и здесь появится список для повторения.")}</p>
+          <button class="btn btn-cta" onclick="go('daily')">${tr("Задание дня")}</button>
+        </div>`}
       <div class="grid">
-        ${rows.filter(r => r.weak.length).map(r => `
-          <div class="card topic-card">
-            <div class="topic-icon">${r.t.icon}</div>
-            <div class="topic-body">
-              <h3>${esc(r.t.title_ru)}</h3>
-              <p class="muted">${r.weak.length} ${tr("заданий с ошибками")}${S.getDueCount(D[r.key]) ? `, ${tr("к повторению сегодня:")} ${S.getDueCount(D[r.key])}` : ""}</p>
-              <ul class="weak-list">
-                ${r.weak.slice(0, 5).map(q => {
-                  const a = S.getAnswerEntry(q.id);
-                  const label = q.entry ? `${q.entry.no} (${q.entry.ru})` : (q.label || q.prompt_no);
-                  return `<li><span class="lang-no">${esc(label)}</span><span class="muted"> — ${tr("ошибок")} ${a.wrong}, ${tr("верно")} ${a.correct}</span></li>`;
-                }).join("")}
-                ${r.weak.length > 5 ? `<li class="muted">…${tr("и ещё")} ${r.weak.length - 5}</li>` : ""}
-              </ul>
+        ${rows.filter(r => r.weak.length).map(r => {
+          const due = S.getDueCount(D[r.key]);
+          return `
+          <div class="card mistake-topic">
+            <div class="mistake-topic-head">
+              <div class="tile-icon">${r.t.icon}</div>
+              <div class="grow">
+                <h3>${esc(r.t.title_ru)}</h3>
+                <p class="topic-sub">${r.weak.length} ${tr("заданий с ошибками")}${due ? ` · ${tr("к повторению сегодня:")} ${due}` : ""}</p>
+              </div>
+              <button class="btn btn-primary btn-small" onclick="go('quiz',{key:'${r.key}',mode:'weak'})">${tr("Тренировать")}</button>
             </div>
-            <div class="topic-actions">
-              <button class="btn btn-primary" onclick="go('quiz',{key:'${r.key}',mode:'weak'})">${tr("Тренировать")}</button>
-            </div>
-          </div>`).join("")}
+            <ul class="weak-list">
+              ${r.weak.slice(0, 5).map(q => {
+                const a = S.getAnswerEntry(q.id);
+                const label = q.entry ? `${q.entry.no} (${q.entry.ru})` : (q.label || q.prompt_no);
+                return `<li><span class="lang-no">${esc(label)}</span><span class="muted"> — ${tr("ошибок")} ${a.wrong}, ${tr("верно")} ${a.correct}</span></li>`;
+              }).join("")}
+              ${r.weak.length > 5 ? `<li class="muted">…${tr("и ещё")} ${r.weak.length - 5}</li>` : ""}
+            </ul>
+          </div>`;
+        }).join("")}
         ${weakVocab.length ? `
-          <div class="card topic-card">
-            <div class="topic-icon">${ICONS.vocab}</div>
-            <div class="topic-body">
-              <h3>${tr("Лексика")}</h3>
-              <p class="muted">${weakVocab.length} ${tr("слов, которые ты отметил как «не знаю»")}</p>
-            </div>
-            <div class="topic-actions">
-              <button class="btn btn-primary" onclick="go('vocab',{mode:'weak'})">${tr("Повторить")}</button>
+          <div class="card mistake-topic">
+            <div class="mistake-topic-head">
+              <div class="tile-icon">${ICONS.vocab}</div>
+              <div class="grow">
+                <h3>${tr("Лексика")}</h3>
+                <p class="topic-sub">${weakVocab.length} ${tr("слов, которые ты отметил как «не знаю»")}</p>
+              </div>
+              <button class="btn btn-primary btn-small" onclick="go('vocab',{mode:'weak'})">${tr("Повторить")}</button>
             </div>
           </div>` : ""}
       </div>
@@ -648,25 +671,20 @@
 
     if (!p.mode) {
       const resumable = saved && saved.index < saved.ids.length;
+      const known = groups.known.length, wk = groups.weak.length;
       view.innerHTML = `
-        <button class="btn btn-ghost" onclick="go('home')">${tr("Главная")}</button>
-        <section class="topic-hero">
-          <div class="topic-icon big">${ICONS.vocab}</div>
-          <div>
-            <h1>Ordforråd</h1>
-            <p class="lead muted">${tr("Лексика:")} ${all.length} ${tr("слов")}</p>
-            <div class="stat-line">
-              <span class="pill good">${tr("знаю")} ${groups.known.length}</span>
-              <span class="pill bad">${tr("повторить")} ${groups.weak.length}</span>
-              <span class="pill">${tr("новых")} ${groups.new.length}</span>
-            </div>
-          </div>
-        </section>
-        <div class="grid modes">
-          ${resumable ? `<div class="card mode-card"><h3>${tr("Продолжить")}</h3><p class="muted">${tr("Начатая колода:")} ${saved.index} ${tr("из")} ${saved.ids.length} ${tr("пройдено.")}</p><button class="btn btn-primary" onclick="go('vocab',{mode:'resume'})">${tr("Продолжить")}</button></div>` : ""}
-          <div class="card mode-card"><h3>${tr("Новые слова")}</h3><p class="muted">${groups.new.length ? `${Math.min(20, groups.new.length)} ${tr("слов, которые ты ещё не видел (всего новых")} ${groups.new.length}).` : `${tr("Все")} ${all.length} ${tr("слов уже пройдены хотя бы раз. Новые слова появляются каждые три дня, а пока повторяй незнакомые.")}`}</p><button class="btn ${resumable ? "" : "btn-primary"}" ${groups.new.length ? "" : "disabled"} onclick="go('vocab',{mode:'new'})">${tr("Начать")}</button></div>
-          <div class="card mode-card"><h3>${tr("Повторить незнакомые")}</h3><p class="muted">${groups.weak.length ? groups.weak.length + " " + tr("слов, которые ты отметил «не знаю».") : tr("Незнакомых слов нет.")}</p><button class="btn" ${groups.weak.length ? "" : "disabled"} onclick="go('vocab',{mode:'weak'})">${tr("Начать")}</button></div>
-          <div class="card mode-card"><h3>${tr("Все слова")}</h3><p class="muted">${tr("Вся колода в случайном порядке.")}</p><button class="btn" onclick="go('vocab',{mode:'all'})">${tr("Начать")}</button></div>
+        ${pageHead({ back: { label: tr("Главная"), action: "go('home')" }, icon: ICONS.vocab, title: "Ordforråd", sub: `${tr("Лексика:")} ${all.length} ${tr("слов")}` })}
+        <div class="topic-summary">
+          <span class="meter"><i style="width:${Math.round(((known + wk) / all.length) * 100)}%"></i></span>
+          <span class="pill good">${tr("знаю")} ${known}</span>
+          <span class="pill bad">${tr("повторить")} ${wk}</span>
+          <span class="pill">${tr("новых")} ${groups.new.length}</span>
+        </div>
+        <div class="list">
+          ${resumable ? listRow({ icon: icon("play"), primary: true, title: tr("Продолжить"), sub: `${tr("Начатая колода:")} ${saved.index} ${tr("из")} ${saved.ids.length} ${tr("пройдено.")}`, action: "go('vocab',{mode:'resume'})" }) : ""}
+          ${listRow({ icon: icon("plus"), primary: !resumable, disabled: !groups.new.length, title: tr("Новые слова"), sub: groups.new.length ? `${Math.min(20, groups.new.length)} ${tr("слов, которые ты ещё не видел (всего новых")} ${groups.new.length}).` : `${tr("Все")} ${all.length} ${tr("слов уже пройдены хотя бы раз. Новые слова появляются каждые три дня, а пока повторяй незнакомые.")}`, action: "go('vocab',{mode:'new'})" })}
+          ${listRow({ icon: icon("repeat"), disabled: !wk, title: tr("Повторить незнакомые"), sub: wk ? wk + " " + tr("слов, которые ты отметил «не знаю».") : tr("Незнакомых слов нет."), action: "go('vocab',{mode:'weak'})" })}
+          ${listRow({ icon: icon("cards"), title: tr("Все слова"), sub: tr("Вся колода в случайном порядке."), action: "go('vocab',{mode:'all'})" })}
         </div>`;
       return;
     }
@@ -692,7 +710,7 @@
       view.innerHTML = `
         <div class="quiz">
           <div class="quiz-head">
-            <button class="btn btn-ghost" onclick="go('vocab')">${tr("К лексике")}</button>
+            <button class="quiz-exit" onclick="go('vocab')" aria-label="${tr("К лексике")}">${icon("close")}<span>${tr("К лексике")}</span></button>
             <div class="quiz-meta">
               <span class="quiz-title">${mode === "weak" ? tr("Повторение") : mode === "new" ? tr("Новые слова") : tr("Лексика")}</span>
               <span class="quiz-counter">${session.index + 1} / ${session.cards.length}</span>
@@ -741,7 +759,7 @@
       const copyBtn = (side) => {
         const b = document.createElement("button");
         b.type = "button"; b.className = "btn-speak flash-copy"; b.title = tr("Скопировать слово"); b.setAttribute("aria-label", tr("Скопировать"));
-        b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>`;
+        b.innerHTML = icon("copy");
         b.onclick = e => {
           e.stopPropagation(); e.preventDefault();
           const text = side === "back" ? c.translation_ru : c.word_no;

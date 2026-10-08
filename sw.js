@@ -4,7 +4,7 @@
    - Картинки знаков и звук — отдельный долгоживущий кэш: отдаём из кэша, при промахе тянем из сети.
    - Новая версия не подменяет старую молча: ждёт сообщения SKIP_WAITING от страницы (тост «Обновить»). */
 
-const APP_VERSION = "muza374d";
+const APP_VERSION = "muzb6hz1";
 const SHELL_CACHE = "forerkort-shell-" + APP_VERSION;
 const ASSET_CACHE = "forerkort-assets";
 
@@ -13,13 +13,19 @@ const SHELL_FILES = [
   "./js/i18n.js", "./js/icons/signs-svg.js", "./js/data/signs-catalog.js", "./js/data/signs.js",
   "./js/data/situational.js", "./js/data/rules.js", "./js/data/generated.js", "./js/data/sikkerhet.js",
   "./js/data/vocabulary.js", "./js/speech.js", "./js/merge.js", "./js/storage.js", "./js/cloud.js",
-  "./js/quiz-engine.js", "./js/app.js", "./js/stats.js", "./js/pwa.js", "./js/teacher.js", "./js/teacher-ui.js"
+  "./js/ui.js", "./js/quiz-engine.js", "./js/app.js", "./js/stats.js", "./js/pwa.js", "./js/teacher.js", "./js/teacher-ui.js",
+  "./js/onboarding.js"
 ];
-const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png"]
+/* Шрифты и логотип не меняются от версии к версии — лежат в долгоживущем кэше */
+const STATIC_ASSETS = ["./fonts/inter-latin.woff2", "./fonts/inter-cyrillic.woff2", "./icons/logo.svg?i=2"];
+const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png?i=2"]
   .concat(SHELL_FILES.map(f => f + "?v=" + APP_VERSION));
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(SHELL_CACHE).then(c => c.addAll(SHELL)));
+  e.waitUntil(Promise.all([
+    caches.open(SHELL_CACHE).then(c => c.addAll(SHELL)),
+    caches.open(ASSET_CACHE).then(c => c.addAll(STATIC_ASSETS)).catch(() => {})
+  ]));
 });
 
 self.addEventListener("activate", e => {
@@ -35,7 +41,7 @@ self.addEventListener("message", e => {
 });
 
 function isAsset(url) {
-  return /\/(img|audio|icons)\//.test(url.pathname);
+  return /\/(img|audio|icons|fonts)\//.test(url.pathname);
 }
 
 self.addEventListener("fetch", e => {
