@@ -111,8 +111,7 @@
     const signsByKind = Object.keys(KINDS).map(kind => ({ kind, st: aggregate(D.signsByKind[kind]) }));
 
     view.innerHTML = `
-      <h1>${t("Статистика")}</h1>
-      <p class="lead muted">${t("Профиль:")} <strong>${esc(S.getCurrentProfile())}</strong>. ${t("Ошибки возвращаются на повторение через 1 → 3 → 7 → 14 → 30 дней: чем увереннее ответ, тем реже вопрос.")}</p>
+      ${window.UI.pageHead({ title: t("Статистика"), sub: `${t("Профиль:")} <strong>${esc(S.getCurrentProfile())}</strong>. ${t("Ошибки возвращаются на повторение через 1 → 3 → 7 → 14 → 30 дней: чем увереннее ответ, тем реже вопрос.")}` })}
 
       <div class="card stats-section">
         <div class="stats-grid">

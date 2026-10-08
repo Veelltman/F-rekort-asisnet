@@ -304,6 +304,32 @@
     "Озвучка сохранена для офлайна": { uk: "Озвучку збережено для офлайну", en: "Audio saved for offline use", no: "Lyden er lagret for bruk uten nett" },
     "Не удалось загрузить:": { uk: "Не вдалося завантажити:", en: "Could not download:", no: "Kunne ikke laste ned:" },
 
+    /* ---------- главная-панель, приветствие ---------- */
+    "Как пользоваться": { uk: "Як користуватися", en: "How it works", no: "Slik bruker du appen" },
+    "Теория на права по-норвежски": { uk: "Теорія на права норвезькою", en: "Driving theory in Norwegian", no: "Teori til førerkortet på norsk" },
+    "Готовность к экзамену": { uk: "Готовність до іспиту", en: "Exam readiness", no: "Klar for prøven" },
+    "Готов(а) к экзамену": { uk: "Готовий(а) до іспиту", en: "Ready for the test", no: "Klar for teoriprøven" },
+    "Осталось сдать пробный экзамен": { uk: "Залишилось скласти пробний іспит", en: "Now pass a practice test", no: "Nå gjenstår en bestått prøveeksamen" },
+    "Почти готов(а)": { uk: "Майже готовий(а)", en: "Almost ready", no: "Nesten klar" },
+    "Хороший темп": { uk: "Гарний темп", en: "Good progress", no: "God fremgang" },
+    "Начало пути": { uk: "Початок шляху", en: "Getting started", no: "I gang" },
+    "Освоено": { uk: "Опановано", en: "Mastered", no: "Mestret" },
+    "вопросов экзамена.": { uk: "питань іспиту.", en: "exam questions.", no: "eksamensspørsmål." },
+    "Вопросы как на экзамене, на норвежском. Начни с задания дня: 20 вопросов из всех тем.": { uk: "Питання як на іспиті, норвезькою. Почни із завдання дня: 20 питань з усіх тем.", en: "Exam-style questions in Norwegian. Start with today's set: 20 questions from all topics.", no: "Spørsmål som på prøven, på norsk. Start med dagens økt: 20 spørsmål fra alle emner." },
+    "Последний экзамен:": { uk: "Останній іспит:", en: "Last test:", no: "Siste prøve:" },
+    "Ошибок нет": { uk: "Помилок немає", en: "No mistakes", no: "Ingen feil" },
+    "Добро пожаловать в Teoriklar": { uk: "Ласкаво просимо до Teoriklar", en: "Welcome to Teoriklar", no: "Velkommen til Teoriklar" },
+    "Тренажёр к теории на права класса B в Норвегии: знаки, ситуации на дороге, правила и пробный экзамен, как на trafikkstasjonen.": { uk: "Тренажер до теорії на права категорії B у Норвегії: знаки, ситуації на дорозі, правила й пробний іспит, як на trafikkstasjonen.", en: "Practice for the Norwegian class B theory test: signs, traffic situations, rules and a practice test like the one at the trafikkstasjon.", no: "Øv til teoriprøven klasse B: skilt, trafikksituasjoner, regler og prøveeksamen som på trafikkstasjonen." },
+    "Как это работает": { uk: "Як це працює", en: "How it works", no: "Slik fungerer det" },
+    "Читай вопрос на норвежском. Перевод открывается по кнопке.": { uk: "Читай питання норвезькою. Переклад відкривається кнопкою.", en: "Read the question in Norwegian. The translation opens with a button.", no: "Les spørsmålet på norsk." },
+    "Выбери ответ и нажми «Sjekk» — сразу увидишь разбор.": { uk: "Обери відповідь і натисни «Sjekk» — одразу побачиш розбір.", en: "Pick an answer and press “Sjekk” to see the explanation right away.", no: "Velg svar og trykk «Sjekk» – da får du forklaringen med en gang." },
+    "Ошибки вернутся на повторение через 1, 3, 7, 14 и 30 дней.": { uk: "Помилки повернуться на повторення через 1, 3, 7, 14 і 30 днів.", en: "Mistakes come back for review after 1, 3, 7, 14 and 30 days.", no: "Feil kommer tilbake til repetisjon etter 1, 3, 7, 14 og 30 dager." },
+    "Язык интерфейса": { uk: "Мова інтерфейсу", en: "Interface language", no: "Språk" },
+    "Задания всегда на норвежском, как на экзамене. Выбери язык меню и подсказок.": { uk: "Завдання завжди норвезькою, як на іспиті. Обери мову меню та підказок.", en: "Questions are always in Norwegian, like on the test. Choose the language for menus and hints.", no: "Oppgavene er alltid på norsk, som på prøven. Velg språk for menyer og hjelpetekster." },
+    "Пропустить": { uk: "Пропустити", en: "Skip", no: "Hopp over" },
+    "Далее": { uk: "Далі", en: "Next", no: "Neste" },
+    "У меня есть аккаунт — войти": { uk: "У мене є акаунт — увійти", en: "I have an account — log in", no: "Jeg har konto – logg inn" },
+
     /* ---------- пометки о языке содержания ---------- */
     "Перевод заданий пока на русском.": { uk: "Переклад завдань поки російською.", en: "Task translations are in Russian for now.", no: "" }
   };

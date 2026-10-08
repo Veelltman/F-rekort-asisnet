@@ -89,10 +89,10 @@
   PWA.installCardHtml = () => {
     if (PWA.isStandalone()) return "";
     if (PWA.canInstall()) {
-      return `<div class="card install-card"><div><h3>${t("Установить приложение")}</h3><p class="muted">${t("Иконка на экране, полный экран, работа без интернета.")}</p></div><button class="btn btn-primary" onclick="PWA.install()">${t("Установить")}</button></div>`;
+      return `<div class="card install-card"><div class="tile-icon">${window.UI.icon("phone")}</div><div class="grow"><h3>${t("Установить приложение")}</h3><p class="muted">${t("Иконка на экране, полный экран, работа без интернета.")}</p></div><button class="btn btn-primary" onclick="PWA.install()">${t("Установить")}</button></div>`;
     }
     if (PWA.isIOS()) {
-      return `<div class="card install-card"><div><h3>${t("На экран «Домой»")}</h3><p class="muted">${t("В Safari нажми «Поделиться» → «На экран “Домой”». Тогда сайт откроется как приложение и прогресс не удалится.")}</p></div></div>`;
+      return `<div class="card install-card"><div class="tile-icon">${window.UI.icon("phone")}</div><div class="grow"><h3>${t("На экран «Домой»")}</h3><p class="muted">${t("В Safari нажми «Поделиться» → «На экран “Домой”». Тогда сайт откроется как приложение и прогресс не удалится.")}</p></div></div>`;
     }
     return "";
   };

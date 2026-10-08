@@ -189,6 +189,13 @@
     };
   }
 
+  /* Освоено: вопросы, на которые последний ответ был верным (для «Готовности к экзамену») */
+  function getMastery(allQuestions) {
+    let mastered = 0;
+    allQuestions.forEach(q => { const a = state.answers[q.id]; if (a && a.lastResult === "ok") mastered += 1; });
+    return { mastered, total: allQuestions.length };
+  }
+
   /* Слабые и просроченные: сначала самые просроченные, затем по числу ошибок */
   function getWeakQuestions(allQuestions) {
     const now = Date.now();
@@ -252,7 +259,7 @@
   window.Storage = {
     dateKey, todayKey,
     recordAnswer, recordVocab, recordDaily, getDaily, getStreak, recordExam, getExams,
-    getTopicStats, getWeakQuestions, getUnseenFirst, getDueQuestions, getDueCount, getDailyAll, getAnswersSnapshot, isWeak, isDue,
+    getTopicStats, getMastery, getWeakQuestions, getUnseenFirst, getDueQuestions, getDueCount, getDailyAll, getAnswersSnapshot, isWeak, isDue,
     getVocabStats, getWeakVocab, getAnswerEntry, getVocabEntry, getLastTopic, reset,
     getProfiles, getCurrentProfile, switchProfile, addProfile, removeProfile,
     exportState, useCloudProfile, useLocalProfile, isCloud, mergeInto
