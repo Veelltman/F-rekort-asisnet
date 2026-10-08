@@ -1612,13 +1612,13 @@
       "Зимой вдоль узкой дороги намело высокие снежные брустверы, и на твоей стороне есть разъезд (møteplass). Встречная машина (B) уже начала въезжать на суженный из-за снега участок впереди. Что делаешь?",
       [
         ["Kjører inn på møteplassen på min side og venter til B har passert den smale delen", "Заезжаю в разъезд на своей стороне и жду, пока B проедет суженный участок"],
-        ["Fortsetter rett fram i vanlig fart, siden jeg kom til møteplassen først", "Продолжаю ехать в обычном темпе — я подъехал к разъезду первым", "Det avgjør ikke hvem som kom først, det avgjørende er at innsnevringen og møteplassen er på din side, så du skal bruke den og vike.", "Кто первый приехал — не важно, решает то, что сужение и разъезд именно на твоей стороне, поэтому именно тебе нужно воспользоваться разъездом и уступить."],
+        ["Fortsetter rett fram i vanlig fart, siden jeg kom til møteplassen først", "Продолжаю ехать в обычном темпе — я подъехал к разъезду первым", "Det avgjør ikke hvem som kom først. Møteplassen er på din side, og B er allerede inne på den smale strekningen, så det er du som skal bruke møteplassen og vente.", "Кто первый приехал — не важно. Разъезд на твоей стороне, а B уже въехал на узкий участок, поэтому именно тебе нужно заехать в разъезд и подождать."],
         ["Blinker med lysene for å signalisere at B skal rygge tilbake", "Мигаю фарами, чтобы заставить B сдать назад", "Lyssignal for å presse en annen fører til å rygge er unødig bruk av lys og løser ikke situasjonen, det er du som har møteplassen og bør vike.", "Мигать фарами, чтобы заставить другого водителя сдать назад, — ненужное использование света и не решает ситуацию: разъезд на твоей стороне, значит уступать тебе."],
-        ["Kjører forbi B i det innsnevrede partiet, siden begge bilene uansett passer der", "Проезжаю мимо B прямо в сужении — обе машины там всё равно пройдут", "Brøytekantene gjør veien smalere enn vanlig, å tvinge begge bilene gjennom samtidig der øker risikoen for kollisjon eller fastkjøring i snøen.", "Снежные брустверы делают дорогу уже обычного, пытаться протиснуть обе машины там одновременно увеличивает риск столкновения или застревания в снегу."]
+        ["Kjører forbi B i det innsnevrede partiet, vi klemmer oss forbi hverandre", "Проезжаю мимо B прямо в сужении — как-нибудь протиснемся", "Brøytekantene gjør veien smalere enn vanlig, å tvinge begge bilene gjennom samtidig der øker risikoen for kollisjon eller fastkjøring i snøen.", "Снежные брустверы делают дорогу уже обычного, пытаться протиснуть обе машины там одновременно увеличивает риск столкновения или застревания в снегу."]
       ],
-      "Når veien er innsnevret på din side, for eksempel av brøytekanter, og det finnes en møteplass der, skal du bruke den og vike for møtende trafikk, uansett hvem som kom først.",
-      "Когда дорога сужена именно на твоей стороне — например, снежными брустверами — и там есть разъезд, нужно воспользоваться им и уступить встречному транспорту, независимо от того, кто подъехал первым.",
-      "Сужение на твоей стороне = разъезд твой, но уступать тоже тебе."),
+      "Om vinteren gjør brøytekantene smale veger enda smalere. Kjørende som møtes, skal i god tid vike til høyre og om nødvendig stanse. Den som har møteplassen på sin side, bruker den og venter, uansett hvem som kom først.",
+      "Зимой снежные брустверы делают узкие дороги ещё уже. Встречные водители должны заранее принять вправо и при необходимости остановиться. Тот, у кого разъезд на его стороне, заезжает в него и ждёт — неважно, кто подъехал первым.",
+      "Разъезд на твоей стороне — значит, ждёшь ты. Снег это правило не меняет, только делает дорогу уже."),
 
     q("079", road({ exit: "parking" }),
       "Du kjører ut fra en parkeringsplass ved et kjøpesenter og skal ut på hovedveien. Bil B kommer fra venstre i nærmeste kjørefelt, og bil C kommer fra høyre i det andre kjørefeltet. Hvem har vikeplikt?",
@@ -1672,14 +1672,14 @@
       "Если паркуешься на подъёме с бордюром, поворачивай передние колёса в сторону от бордюра. Тогда, если машина покатится назад, бордюр её остановит. Обязательно дополнительно используй ручник и передачу или паркинг.",
       "Подъём + бордюр — колёса от бордюра. Спуск без бордюра — колёса в сторону кювета/края."),
 
-    q("083", road({ roadwork: true }),
-      "Ved et vegarbeid står det en person med et stoppskilt («dirigent») som viser «kjør» til deg, selv om du ser et rødt lys fra et provisorisk lyssignal lenger fremme. Hva gjelder?",
-      "На дорожных работах стоит регулировщик со знаком «стоп/иди» и показывает тебе «можно ехать», хотя дальше видно красный сигнал временного светофора. Что действует?",
+    q("083", null,
+      "Ved et vegarbeid viser det midlertidige lyssignalet rødt for deg. En vegarbeider som dirigerer trafikken, står ved siden av lyset og vinker deg tydelig fram. Hva gjelder?",
+      "На дорожных работах временный светофор показывает тебе красный. Рядом со светофором стоит рабочий, который регулирует движение, и чётко машет тебе: проезжай. Что действует?",
       [
         ["Jeg følger dirigentens signal, siden anvisninger fra en person som regulerer trafikken går foran lyssignal og skilt", "Следую сигналу регулировщика — указания человека, направляющего движение, важнее светофора и знаков"],
         ["Jeg stopper for det røde lyset, siden lyssignal alltid går foran andre anvisninger", "Останавливаюсь на красный — светофор всегда важнее других указаний", "Det er motsatt: anvisning fra en person som dirigerer trafikken, for eksempel ved vegarbeid, går foran både lyssignal og skilt.", "Наоборот: указание человека, регулирующего движение, например на дорожных работах, важнее и светофора, и знаков."],
         ["Jeg velger selv om jeg vil følge dirigenten eller lyset, etter hva som virker tryggest", "Сам решаю, следовать за регулировщиком или за светофором — как кажется безопаснее", "Det er ikke et fritt valg, rangordningen er fast: dirigentens anvisning går foran det provisoriske lyssignalet.", "Это не свободный выбор — порядок приоритета фиксированный: указание регулировщика важнее временного светофора."],
-        ["Jeg kjører forbi dirigenten og venter på at lyset skal bli grønt, siden det er lyset som egentlig styrer vegarbeidet", "Проезжаю мимо регулировщика и жду зелёного — ведь работами управляет именно светофор", "Dirigenten er satt til å styre trafikken på stedet akkurat da, det er ikke riktig å ignorere personen og vente på lyset i stedet.", "Регулировщик поставлен управлять движением именно в этот момент — неправильно игнорировать его и ждать смены сигнала светофора."]
+        ["Jeg venter til både lyset er grønt og dirigenten vinker, for sikkerhets skyld", "Жду, пока и светофор станет зелёным, и регулировщик махнёт, — на всякий случай", "Dirigenten styrer trafikken på stedet akkurat nå. Blir du stående, kan du sperre for kø eller for trafikken dirigenten slipper fram. Følg dirigentens tegn.", "Регулировщик управляет движением прямо сейчас. Если стоять, можно перекрыть путь колонне или тем, кого он пропускает. Следуй его сигналу."]
       ],
       "Anvisninger fra en person som dirigerer trafikken, for eksempel ved vegarbeid, går foran både lyssignal, skilt og vegoppmerking. Følg alltid dirigentens tegn først.",
       "Указания человека, регулирующего движение, например на дорожных работах, важнее и светофора, и знаков, и разметки. Всегда сначала следуй сигналам регулировщика.",

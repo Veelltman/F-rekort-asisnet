@@ -199,7 +199,7 @@
     w("160", "lastebil", "грузовик", "En lastebil trenger mer plass til å svinge enn en personbil.", "Грузовику нужно больше места для поворота, чем легковой машине.", "Машина"),
     w("161", "buss", "автобус", "Bussen stopper ved holdeplassen for å slippe av passasjerer.", "Автобус останавливается на остановке, чтобы высадить пассажиров.", "Машина"),
     w("162", "moped", "мопед", "En moped kan kjøre i kollektivfeltet sammen med motorsykkel og sykkel.", "Мопед может ехать по полосе для общественного транспорта вместе с мотоциклом и велосипедом.", "Машина"),
-    w("163", "nødnummer", "номер экстренной службы", "Ring nødnummeret 112 ved en alvorlig trafikkulykke med personskade.", "Звони на номер экстренной службы 112 при серьёзном ДТП с травмами.", "Правила"),
+    w("163", "nødnummer", "номер экстренной службы", "Ved en trafikkulykke med personskade ringer du nødnummeret 113 (ambulanse).", "При ДТП с пострадавшими звони на номер экстренной службы 113 (скорая).", "Правила"),
     w("164", "trafikkdirigent", "регулировщик (человек, направляющий движение)", "Følg tegnene fra trafikkdirigenten ved vegarbeid, selv om lyset viser noe annet.", "Следуй жестам регулировщика на дорожных работах, даже если светофор показывает другое.", "Правила")
   ];
 })();
