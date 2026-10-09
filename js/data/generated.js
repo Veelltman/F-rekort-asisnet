@@ -404,7 +404,9 @@
         why_no: `Grensen er riktig, men konklusjonen er feil: ${x} meter er ${ok ? "utenfor" : "innenfor"} ${ctx.limit} meter.`, why_ru: `Предел назван верно, но вывод неверный: ${x} м — это ${ok ? "дальше" : "ближе"} ${ctx.limit} м.` },
         { text_no: `${ok ? "Nei" : "Ja"}, grensen er ${ctx.limit === 5 ? 20 : 5} meter`, text_ru: `${ok ? "Нет" : "Да"}, предел ${ctx.limit === 5 ? 20 : 5} м`, correct: false,
         why_no: `Feil avstand: ${ctx.limit === 5 ? "5 meter gjelder gangfelt og vegkryss, 20 meter gjelder holdeplasser" : "20 meter gjelder holdeplasser, 5 meter gjelder gangfelt og vegkryss"}.`, why_ru: `Перепутан предел: ${ctx.limit === 5 ? "5 м — переход и перекрёсток, 20 м — остановка транспорта" : "20 м — остановка транспорта, 5 м — переход и перекрёсток"}.` },
-        { text_no: "Ja, hvis det er lite trafikk", text_ru: "Да, если мало машин", correct: false,
+        ok ? { text_no: "Bare hvis det er lite trafikk", text_ru: "Только если мало машин", correct: false,
+        why_no: `Trafikkmengden spiller ingen rolle her: ${x} meter er utenfor grensen på ${ctx.limit} meter, så stans er tillatt.`, why_ru: `Плотность движения тут ни при чём: ${x} м — дальше предела ${ctx.limit} м, так что остановка разрешена.` }
+        : { text_no: "Ja, hvis det er lite trafikk", text_ru: "Да, если мало машин", correct: false,
         why_no: "Stansforbudet i trafikkreglene § 17 gjelder alltid, uavhengig av trafikkmengde.", why_ru: "Запрет остановки по trafikkreglene § 17 действует всегда, независимо от плотности движения." }
       ];
       return {
@@ -423,12 +425,17 @@
       const henger = rnd([500, 750, 900, 1200, 1500]);
       const ok = henger <= 750 || bil + henger <= 3500;
       const opts = [
-        { text_no: ok ? (henger <= 750 ? "Ja: hengeren er under 750 kg" : `Ja: ${bil} + ${henger} = ${bil + henger} kg, under 3 500 kg`) : `Nei: ${bil} + ${henger} = ${bil + henger} kg, over 3 500 kg. Trenger kode 96 eller BE`,
-          text_ru: ok ? (henger <= 750 ? "Да: прицеп легче 750 кг" : `Да: ${bil} + ${henger} = ${bil + henger} кг, меньше 3 500`) : `Нет: ${bil} + ${henger} = ${bil + henger} кг, больше 3 500. Нужен код 96 или BE`, correct: true },
+        { text_no: ok ? (henger <= 750 ? "Ja: hengeren er ikke tyngre enn 750 kg" : `Ja: ${bil} + ${henger} = ${bil + henger} kg, ikke over 3 500 kg`) : `Nei: ${bil} + ${henger} = ${bil + henger} kg, over 3 500 kg. Trenger kode 96 eller BE`,
+          text_ru: ok ? (henger <= 750 ? "Да: прицеп не тяжелее 750 кг" : `Да: ${bil} + ${henger} = ${bil + henger} кг, не больше 3 500`) : `Нет: ${bil} + ${henger} = ${bil + henger} кг, больше 3 500. Нужен код 96 или BE`, correct: true },
         { text_no: ok ? "Nei: klasse B tillater bare henger under 500 kg" : "Ja: klasse B tillater alle hengere under 3 500 kg", text_ru: ok ? "Нет: категория B только до 500 кг" : "Да: категория B допускает любой прицеп до 3 500 кг", correct: false,
         why_no: ok ? "Grensen for henger uten vilkår er 750 kg, ikke 500 kg." : "Feil: det er summen av bil og henger som ikke kan overstige 3 500 kg, ikke hengeren alene.", why_ru: ok ? "Предел для прицепа без условий — 750 кг, а не 500." : "Неверно: 3 500 кг — это предел суммы масс машины и прицепа, а не прицепа отдельно." },
         { text_no: ok ? "Nei: totalvekten er over 3 500 kg" : "Ja: hengeren er under 3 500 kg", text_ru: ok ? "Нет: полная масса больше 3 500" : "Да: прицеп легче 3 500 кг", correct: false,
-        why_no: ok ? `Regn på nytt: ${bil} + ${henger} = ${bil + henger} kg, og det er innenfor 3 500 kg.` : `Regn på nytt: ${bil} + ${henger} = ${bil + henger} kg, og det er over 3 500 kg.`, why_ru: ok ? `Пересчитай: ${bil} + ${henger} = ${bil + henger} кг, это в пределах 3 500.` : `Пересчитай: ${bil} + ${henger} = ${bil + henger} кг, это больше 3 500.` },
+        why_no: !ok ? `Regn på nytt: ${bil} + ${henger} = ${bil + henger} kg, og det er over 3 500 kg.`
+          : bil + henger > 3500 ? `Summen ${bil} + ${henger} = ${bil + henger} kg er riktignok over 3 500 kg, men det spiller ingen rolle: henger på inntil 750 kg er alltid tillatt med klasse B.`
+          : `Regn på nytt: ${bil} + ${henger} = ${bil + henger} kg, og det er innenfor 3 500 kg.`,
+        why_ru: !ok ? `Пересчитай: ${bil} + ${henger} = ${bil + henger} кг, это больше 3 500.`
+          : bil + henger > 3500 ? `Сумма ${bil} + ${henger} = ${bil + henger} кг действительно больше 3 500, но это неважно: прицеп до 750 кг с категорией B можно всегда.`
+          : `Пересчитай: ${bil} + ${henger} = ${bil + henger} кг, это в пределах 3 500.` },
         { text_no: "Bare hvis hengeren har egne bremser", text_ru: "Только если у прицепа свои тормоза", correct: false,
         why_no: "Bremser på hengeren endrer ikke vektgrensene for klasse B.", why_ru: "Тормоза на прицепе не меняют весовые пределы категории B." }
       ];
