@@ -1,0 +1,31 @@
+name: Озвучка новых слов
+
+on:
+  push:
+    branches: [main]
+    paths: ["js/data/vocabulary.js"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save msedge-tts
+      - run: node scripts/make-audio.js
+      - name: Commit new audio
+        run: |
+          if [ -z "$(git status --porcelain audio/vocab)" ]; then echo "Новых файлов нет"; exit 0; fi
+          node scripts/bump-version.js
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/vocab index.html sw.js
+          git commit -m "Звук для новых слов (автоматически)"
+          git pull --rebase origin main
+          git push origin main
