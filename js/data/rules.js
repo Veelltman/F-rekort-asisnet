@@ -941,7 +941,77 @@
       ],
       "Skilt 120 Kai, strand eller ferjeleie varsler at vegen går nær eller rett ut i vann, for eksempel ved en kai eller et ferjeleie. Senk farten og vær forberedt på å stoppe, slik at du ikke kjører rett ut i vannet.",
       "Знак 120 Kai, strand eller ferjeleie предупреждает, что дорога проходит рядом с водой или прямо к ней выходит — например, у причала или паромной пристани. Снижай скорость и будь готов остановиться, чтобы не съехать прямо в воду.",
-      "Если видишь этот знак — впереди может быть вода прямо на пути, тормози заранее.")
+      "Если видишь этот знак — впереди может быть вода прямо на пути, тормози заранее."),
+
+    q("091", "Du kjører i en by der fartsgrensen er 50, og vegen har to kjørefelt i din retning uten noe spesielt skilt om kjørefelt. Kan du fritt velge hvilket av de to feltene du vil kjøre i?",
+      "Ты едешь по городу с ограничением 50, на дороге две полосы в твоём направлении, никакого специального знака про полосы нет. Можно ли свободно выбирать, по какой из двух полос ехать?",
+      [
+        ["Nei, fri valgfrihet mellom kjørefelt gjelder bare der skilt 528 Valgfritt kjørefelt er satt opp, ikke automatisk i byer med lav fartsgrense", "Нет, свободный выбор полосы действует только там, где стоит знак 528 «Valgfritt kjørefelt», а не автоматически в городах с низким ограничением скорости"],
+        ["Ja, i tettbygd strøk med fartsgrense 50 eller lavere har du alltid fri valgfrihet mellom kjørefelt", "Да, в населённом пункте с ограничением 50 или ниже у тебя всегда свободный выбор полосы", "Det finnes ingen generell regel om fri valgfrihet basert på fartsgrense, dette gjelder bare der skilt 528 står.", "Общего правила про свободный выбор полосы в зависимости от ограничения скорости нет — это действует только там, где стоит знак 528."],
+        ["Ja, siden begge feltene går i samme retning, kan du bytte fritt når du vil, uansett skilting", "Да, обе полосы ведут в одну сторону, так что можно перестраиваться свободно в любой момент, независимо от знаков", "Å kjøre i samme retning i to felt betyr ikke automatisk fri valgfrihet, vanlige regler for feltbytte og filvalg gjelder uten skilt 528.", "То, что обе полосы ведут в одном направлении, не даёт автоматического свободного выбора — без знака 528 действуют обычные правила перестроения и выбора полосы."],
+        ["Nei, fordi det alltid er forbudt å bruke venstre kjørefelt i by uten eget skilt", "Нет, потому что левую полосу в городе всегда запрещено использовать без отдельного знака", "Det er ikke forbudt å bruke venstre felt i by, du kan bruke det til forbikjøring eller venstresving, det handler bare ikke om fri valgfrihet uten skilt 528.", "Левую полосу в городе использовать не запрещено — её можно использовать для обгона или поворота налево, просто без знака 528 это не «свободный выбор», а обычные правила."]
+      ],
+      "Fri valgfrihet mellom kjørefelt som går samme vei, krever skilt 528 Valgfritt kjørefelt. Uten dette skiltet gjelder vanlige regler for kjørefelt og forbikjøring, uavhengig av fartsgrensen.",
+      "Свободный выбор между полосами, идущими в одном направлении, возможен только там, где стоит знак 528 «Valgfritt kjørefelt». Без этого знака действуют обычные правила выбора полосы и обгона — независимо от ограничения скорости.",
+      "Низкая скорость в городе не даёт права выбора полосы — ищи именно знак 528."),
+
+    q("092", "Bilen foran deg har lagt seg ut og blinket til venstre for å kjøre forbi en annen bil. Kan du kjøre forbi denne bilen akkurat nå?",
+      "Машина перед тобой уже выехала и включила левый поворотник, чтобы обогнать другую машину впереди. Можешь ли ты в этот момент обогнать эту машину?",
+      [
+        ["Nei, jeg kan ikke kjøre forbi en bil som selv har varslet at den skal kjøre forbi en annen, jeg må vente", "Нет, нельзя обгонять машину, которая сама только что показала, что собирается обгонять другую — нужно подождать"],
+        ["Ja, siden den andre bilen uansett skal flytte seg ut i mitt felt, kan jeg presse forbi på innsiden", "Да, та машина всё равно выезжает в мою полосу, так что можно проскочить мимо с внутренней стороны", "Å presse forbi på innsiden mens bilen foran manøvrerer ut for forbikjøring, er nettopp det regelen skal forhindre, det er svært farlig.", "Проскакивать мимо, пока машина впереди выезжает для обгона, — именно то, что это правило запрещает: это очень опасно."],
+        ["Ja, hvis jeg rekker å kjøre forbi før den andre bilen fullfører forbikjøringen sin", "Да, если успею обогнать до того, как та машина закончит свой обгон", "Det er ikke et spørsmål om å være rask nok, det er direkte forbudt å kjøre forbi et kjøretøy som selv har signalisert forbikjøring.", "Дело не в скорости реакции — обгонять машину, которая сама сигнализировала обгон, прямо запрещено, независимо от того, успеешь ли ты."],
+        ["Ja, men bare dersom jeg bruker lyshorn for å varsle at jeg kommer", "Да, но только если я подам световой сигнал, предупреждая о себе", "Lyshorn endrer ikke regelen, det er fortsatt forbudt å kjøre forbi en bil som har varslet forbikjøring av en annen.", "Световой сигнал ничего не меняет — обгонять машину, которая сама сигнализировала обгон другой, всё равно запрещено."]
+      ],
+      "Du har ikke lov til å kjøre forbi et kjøretøy som selv har varslet at det skal kjøre forbi et annet kjøretøy. Vent til forbikjøringen foran deg er fullført før du eventuelt kjører forbi selv.",
+      "Нельзя обгонять машину, которая сама только что показала, что собирается обгонять другую машину впереди. Дождись, пока обгон перед тобой закончится, и только потом думай о своём обгоне.",
+      "Машина впереди уже обгоняет кого-то — жди, не лезь мимо неё тоже."),
+
+    q("093", "Du kjører med et barn på 8 år og en passasjer på 16 år i baksetet. Hvem har ansvaret for at de bruker riktig sikkerhetsutstyr (barnesete, boostersete eller bilbelte)?",
+      "Ты везёшь в машине восьмилетнего ребёнка и 16-летнего пассажира на заднем сиденье. Кто отвечает за то, что они используют нужное оборудование (детское кресло, бустер или ремень)?",
+      [
+        ["Jeg som fører er ansvarlig for barnet under 15 år, mens 16-åringen selv har ansvar for å bruke bilbeltet riktig", "Я как водитель отвечаю за ребёнка младше 15 лет, а 16-летний сам отвечает за то, чтобы правильно пристегнуться"],
+        ["Jeg som fører er ansvarlig for begge, uansett alder, så lenge de er i min bil", "Я как водитель отвечаю за обоих, независимо от возраста, пока они в моей машине", "Ansvaret for beltebruk deles etter alder, fra og med 15 år er passasjeren selv ansvarlig, ikke føreren.", "Ответственность за ремень делится по возрасту: с 15 лет пассажир сам отвечает за себя, а не водитель."],
+        ["Foreldrene til begge ungdommene er juridisk ansvarlige, ikke jeg som fører", "Юридически отвечают родители обоих детей, а не я как водитель", "Ansvaret ligger på føreren for barn under 15 år og på passasjeren selv fra 15 år, ikke på foreldrene som ikke er i bilen.", "Ответственность лежит на водителе за детей младше 15 лет и на самом пассажире с 15 лет — а не на родителях, которых в машине нет."],
+        ["Ingen av oss har et formelt ansvar, det er bare en anbefaling å bruke sikkerhetsutstyr", "Формально ни у кого из нас нет обязанности — использование оборудования это просто рекомендация", "Bruk av bilbelte og egnet sikkerhetsutstyr for barn er en lovpålagt plikt, ikke bare en anbefaling.", "Использование ремня и детского удерживающего устройства — это обязанность по закону, а не просто рекомендация."]
+      ],
+      "Føreren er ansvarlig for at barn under 15 år bruker riktig sikkerhetsutstyr, som barnesete eller boostersete under 135 cm. Fra og med 15 år er passasjeren selv ansvarlig for å bruke bilbeltet.",
+      "Водитель отвечает за то, чтобы дети младше 15 лет использовали нужное удерживающее устройство — кресло или бустер, если рост меньше 135 см. С 15 лет пассажир сам отвечает за то, что пристёгнут.",
+      "До 15 лет — ответственность на водителе, с 15 лет — каждый сам за свой ремень."),
+
+    q("094", "Du blir stoppet i en kontroll med mobiltelefonen i hånden mens du snakket i den under kjøring, uten håndfri. Hva blir reaksjonen?",
+      "Тебя останавливают на проверке — ты держал телефон в руке и разговаривал по нему во время движения, без hands-free. Что тебе грозит?",
+      [
+        ["Forenklet forelegg på 10 750 kroner og 3 prikker i førerkortet", "Упрощённый штраф 10 750 крон и 3 штрафных балла в права"],
+        ["Bare en muntlig advarsel første gang, boten kommer først ved gjentakelse", "Только устное предупреждение в первый раз, штраф будет только при повторе", "Bruk av mobiltelefon i hånden under kjøring gir forelegg og prikker allerede første gang, det finnes ikke noe unntak for «første gang».", "Использование телефона в руке во время движения карается штрафом и баллами сразу, с первого раза — никакого исключения для «первого раза» нет."],
+        ["En bot på 4 100 kroner, samme som for kjøring uten lys", "Штраф 4 100 крон, как за езду без света", "4 100 kroner er boten for å kjøre uten påbudt lys, mobilbruk i hånden har en egen og høyere sats på 10 750 kroner.", "4 100 крон — это штраф за езду без обязательного света, а за телефон в руке своя, более высокая ставка — 10 750 крон."],
+        ["En bot på 10 750 kroner, men ingen prikker, siden det ikke er en fartsovertredelse", "Штраф 10 750 крон, но без баллов, ведь это не превышение скорости", "Mobilbruk i hånden gir prikker i tillegg til boten, akkurat som kjøring mot rødt lys eller brudd på vikeplikt, ikke bare fartsovertredelser gir prikker.", "Использование телефона в руке даёт баллы в дополнение к штрафу, точно как проезд на красный или нарушение уступки дороги — баллы начисляются не только за скорость."]
+      ],
+      "Å bruke mobiltelefonen i hånden under kjøring, for eksempel for å snakke uten håndfri, gir forenklet forelegg på 10 750 kroner og 3 prikker i førerkortet, på linje med rødt lys eller brudd på vikeplikt.",
+      "Использование телефона в руке во время движения, например разговор без hands-free, карается упрощённым штрафом 10 750 крон и 3 баллами в права — так же, как проезд на красный свет или нарушение уступки дороги.",
+      "Телефон в руке за рулём — это те же 10 750 крон и 3 балла, что и за красный свет."),
+
+    q("095", "Du kjører 15 km/t for fort. I en sone med fartsgrense 50 gir dette 2 prikker i førerkortet, men i en sone med fartsgrense 80 gir samme overtredelse ingen prikker. Hvorfor er det slik?",
+      "Ты едешь на 15 км/ч быстрее разрешённого. В зоне с ограничением 50 за это дают 2 балла, а в зоне с ограничением 80 за то же превышение баллов не дают. Почему так?",
+      [
+        ["Satsene for bot og prikker er bygget opp forskjellig for lave fartsgrenser (opp til 60) og høyere fartsgrenser (fra 70), ikke bare etter hvor mange km/t du kjørte for fort", "Таблицы штрафов и баллов для низких ограничений (до 60) и более высоких (от 70) построены по-разному — зависит не только от того, на сколько км/ч ты превысил"],
+        ["Det er en feil i systemet, egentlig skal samme overtredelse alltid gi samme reaksjon uansett fartsgrense", "Это ошибка в системе — на самом деле одно и то же нарушение всегда должно давать одну реакцию независимо от ограничения", "Dette er ikke en feil, det er et bevisst system der lave og høye fartsgrenser har hver sin skala for bot og prikker.", "Это не ошибка — так и задумано: для низких и высоких ограничений действуют разные таблицы штрафов и баллов."],
+        ["Det kommer av at du kjørte i tettbygd strøk i det første tilfellet, og det er alltid strengere der enn utenfor", "Это потому, что первый случай был в населённом пункте, а там всегда строже, чем за городом", "Det avgjørende her er selve fartsgrensen (opp til 60 mot fra 70), ikke om stedet er tettbygd eller ikke.", "Решающий фактор здесь — само ограничение скорости (до 60 или от 70), а не то, в населённом пункте это место или нет."],
+        ["Prikker gis bare ved fartsovertredelser i fartsgrense 50, aldri ved høyere fartsgrenser", "Баллы начисляются только при превышении в зоне с ограничением 50, никогда при более высоких ограничениях", "Også i høyere fartsgrenser gir større overtredelser prikker, for eksempel +20 km/t i en 70-sone gir 2 prikker, det er bare terskelen som ligger høyere.", "И при высоких ограничениях крупные превышения дают баллы — например, +20 км/ч в зоне 70 даёт 2 балла, просто порог там выше."]
+      ],
+      "Bøtesatsene for fart er delt i to skalaer: en for fartsgrenser opp til 60, der +15 km/t allerede gir 2 prikker, og en for fartsgrenser fra 70, der prikker først starter ved +20 km/t. Det er derfor samme antall km/t for fort kan gi forskjellig reaksjon.",
+      "Таблица штрафов за скорость разделена на две шкалы: для ограничений до 60, где уже +15 км/ч даёт 2 балла, и для ограничений от 70, где баллы начинаются только с +20 км/ч. Поэтому одно и то же превышение в км/ч может давать разную реакцию.",
+      "До 60 и от 70 — разные таблицы штрафов, не только разные числа."),
+
+    qm("m18", "Hva er riktig om forenklet forelegg og prikker i 2026? Velg alle riktige.", "Что верно про упрощённые штрафы и баллы в 2026 году? Выбери все верные.", [
+      ["Bruk av mobiltelefon i hånden under kjøring gir 10 750 kroner og 3 prikker", "Использование телефона в руке за рулём даёт 10 750 крон и 3 балла", true],
+      ["Kjøring uten påbudt lys gir en bot, men ingen prikker", "Езда без обязательного света даёт штраф, но без баллов", true],
+      ["De to første årene etter at du fikk førerkortet, telles prikker dobbelt", "Первые два года после получения прав баллы считаются в двойном размере", true],
+      ["Åtte prikker på tre år gir permanent tap av førerkortet", "Восемь баллов за три года дают навсегда лишение прав", false, "Åtte prikker på tre år gir tap av førerkortet i 6 måneder, ikke permanent, du får det tilbake etter perioden.", "Восемь баллов за три года дают лишение прав на 6 месяцев, а не навсегда — права возвращаются после этого срока."]
+    ],
+    "Mobilbruk i hånden gir 10 750 kroner og 3 prikker, mens kjøring uten lys bare gir bot uten prikker. De første to årene telles prikker dobbelt, og åtte prikker på tre år gir tap av førerkortet i 6 måneder, ikke for alltid.",
+    "Телефон в руке даёт 10 750 крон и 3 балла, а езда без света — только штраф без баллов. Первые два года баллы считаются вдвое, а восемь баллов за три года дают лишение прав на 6 месяцев, а не навсегда.",
+    "8 баллов за 3 года — это пауза на полгода, а не прощание с правами навсегда.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

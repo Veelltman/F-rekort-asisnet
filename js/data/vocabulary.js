@@ -200,6 +200,13 @@
     w("161", "buss", "автобус", "Bussen stopper ved holdeplassen for å slippe av passasjerer.", "Автобус останавливается на остановке, чтобы высадить пассажиров.", "Машина"),
     w("162", "moped", "мопед", "En moped kan kjøre i kollektivfeltet sammen med motorsykkel og sykkel.", "Мопед может ехать по полосе для общественного транспорта вместе с мотоциклом и велосипедом.", "Машина"),
     w("163", "nødnummer", "номер экстренной службы", "Ved en trafikkulykke med personskade ringer du nødnummeret 113 (ambulanse).", "При ДТП с пострадавшими звони на номер экстренной службы 113 (скорая).", "Правила"),
-    w("164", "trafikkdirigent", "регулировщик (человек, направляющий движение)", "Følg tegnene fra trafikkdirigenten ved vegarbeid, selv om lyset viser noe annet.", "Следуй жестам регулировщика на дорожных работах, даже если светофор показывает другое.", "Правила")
+    w("164", "trafikkdirigent", "регулировщик (человек, направляющий движение)", "Følg tegnene fra trafikkdirigenten ved vegarbeid, selv om lyset viser noe annet.", "Следуй жестам регулировщика на дорожных работах, даже если светофор показывает другое.", "Правила"),
+
+    w("165", "trafikklys", "светофор", "Du skal stoppe for rødt trafikklys, selv om du ikke ser noen andre bilister.", "Нужно остановиться на красный сигнал светофора, даже если вокруг не видно других машин.", "Основное"),
+    w("166", "sikkerhetsbelte", "ремень безопасности", "Alle i bilen skal bruke sikkerhetsbelte, både foran og i baksetet.", "Все в машине должны быть пристёгнуты ремнём безопасности — и спереди, и на заднем сиденье.", "Машина"),
+    w("167", "bremselys", "стоп-сигналы (задние фонари торможения)", "Bremselysene varsler bilen bak deg at du senker farten.", "Стоп-сигналы предупреждают машину позади, что ты снижаешь скорость.", "Машина"),
+    w("168", "fotgjengerfelt", "пешеходный переход (зебра)", "Du skal senke farten når du nærmer deg et fotgjengerfelt.", "Нужно снижать скорость, подъезжая к пешеходному переходу.", "Приоритет"),
+    w("169", "kryss", "перекрёсток", "I et kryss uten skilt gjelder høyreregelen.", "На перекрёстке без знаков действует правило правой руки.", "Дорога"),
+    w("170", "promillekjøring", "вождение в состоянии опьянения", "Promillekjøring kan gi både bot, tap av førerkort og fengsel.", "Вождение в состоянии опьянения может привести к штрафу, лишению прав и тюремному сроку.", "Правила")
   ];
 })();

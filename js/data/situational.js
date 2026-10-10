@@ -1706,6 +1706,107 @@
       ],
       "Du skal holde samme fart som trafikken på motorveien til du er inne i avkjøringsfeltet, og redusere farten der. Å bremse i de ordinære kjørefeltene tvinger trafikken bak deg til brå oppbremsing.",
       "Нужно держать скорость потока на магистрали, пока не окажешься в самой съездной полосе, и снижать скорость уже там. Торможение в обычных полосах вынуждает машины позади резко тормозить.",
-      "Тормози только внутри съездной полосы — она для этого и сделана.")
+      "Тормози только внутри съездной полосы — она для этого и сделана."),
+
+    q("086", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "north", kind: "truck" }], roundabout: true }),
+      "Du kjører inn i en rundkjøring. Et vogntog i feltet til venstre for deg skal ta samme avkjøring og svinger bredt for å få plass. Hva gjør du?",
+      "Ты въезжаешь в круговое движение. Фура в полосе слева от тебя едет на тот же съезд и забирает широко, чтобы хватило места на повороте. Что делаешь?",
+      [
+        ["Jeg holder tilbake og lar vogntoget få plassen det trenger til å svinge, i stedet for å presse meg forbi", "Придерживаю и даю фуре место, которое ей нужно для поворота, а не пытаюсь проскочить рядом"],
+        ["Jeg legger meg tett opp til vogntoget på innsiden, siden jeg har like mye rett til feltet som det", "Прижимаюсь к фуре с внутренней стороны — у меня такое же право на полосу, как у неё", "Et vogntog må svinge bredt for å få plass til henger eller kasse, og kan ikke se eller ta hensyn til en bil som ligger tett innpå i blindsonen.", "Фура должна поворачивать широко, чтобы прицеп или кузов прошли, и просто не видит и не может учесть машину, которая прижалась рядом в слепой зоне."],
+        ["Jeg kjører fort forbi vogntoget før det får svingt bredt, siden jeg kom inn i rundkjøringen samtidig", "Проскакиваю мимо фуры, пока она не успела забрать широко — мы ведь въехали в круг одновременно", "Å presse forbi et kjøretøy som trenger bredere svingradius er farlig, uansett hvem som kom inn i rundkjøringen først.", "Пытаться проскочить мимо транспорта, которому нужен широкий радиус поворота, опасно — независимо от того, кто первым въехал в круг."],
+        ["Jeg stopper helt i rundkjøringen og venter til vogntoget har kjørt helt ut", "Полностью останавливаюсь в кругу и жду, пока фура не выедет совсем", "Å stoppe midt i rundkjøringen er ikke nødvendig og skaper fare for trafikken bak deg, det er nok å holde avstand og la vogntoget svinge.", "Останавливаться прямо в кругу не нужно и опасно для машин позади — достаточно держать дистанцию и дать фуре повернуть."]
+      ],
+      "Store kjøretøy som vogntog må ofte svinge bredt, også inn mot ditt kjørefelt, for å få plass til henger eller kasse. Hold avstand og gi dem rom, press deg aldri inn på innsiden.",
+      "Большим машинам вроде фур часто приходится забирать широко, даже заезжая в твою полосу, чтобы прицеп или кузов прошли поворот. Держи дистанцию и дай им место, не лезь внутрь.",
+      "Фура поворачивает широко — держись дальше, не пытайся проскочить рядом."),
+
+    q("087", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "south" }], signs: { east: "yield" } }),
+      "Du nærmer deg et kryss uten skilt for din egen retning. Bilen fra sidevegen, som har vikeplikt, senker farten, men virker ikke til å stoppe helt. Hva gjør du?",
+      "Ты подъезжаешь к перекрёстку — у твоей стороны нет знака. Машина с боковой дороги, у которой обязанность уступить, снижает скорость, но не похоже, что остановится полностью. Что делаешь?",
+      [
+        ["Jeg fortsetter i min fart, men er klar til å bremse hvis den andre bilen faktisk ikke stopper", "Продолжаю ехать в обычном темпе, но готов притормозить, если машина всё-таки не остановится"],
+        ["Jeg bremser kraftig ned til gangfart, siden jeg uansett ikke kan være sikker på at den andre bilen stopper", "Резко тормозю почти до шага — я ведь не могу быть уверен, что машина остановится", "Du har forkjørsrett her og skal holde normal fart, ikke bremse ned som om du selv hadde vikeplikt, det skaper unødig usikkerhet for trafikken bak deg.", "У тебя здесь приоритет, и нужно ехать в обычном темпе, а не тормозить, как будто уступаешь ты сам — это создаёт лишнюю неопределённость для машин позади."],
+        ["Jeg stopper helt opp for sikkerhets skyld, selv om jeg har vikeplikt til min fordel", "Полностью останавливаюсь на всякий случай, хотя приоритет у меня", "Å stoppe helt når du har forkjørsrett er ikke nødvendig og kan forvirre den andre sjåføren om hvem som skal kjøre først.", "Полностью останавливаться, когда приоритет у тебя, не нужно — это может сбить с толку другого водителя насчёт того, кому ехать первым."],
+        ["Jeg øker farten for å komme meg forbi krysset før den andre bilen når fram", "Увеличиваю скорость, чтобы проскочить перекрёсток раньше, чем подъедет та машина", "Å øke farten gir deg mindre tid til å reagere hvis den andre bilen likevel ikke stopper, det er tryggere å holde jevn fart og være forberedt.", "Увеличение скорости оставляет меньше времени на реакцию, если машина всё-таки не остановится — безопаснее держать обычную скорость и быть готовым."]
+      ],
+      "Forkjørsrett betyr at du kan kjøre videre i normal fart, men den fritar deg ikke for å være oppmerksom. Hold blikket på den andre bilen og vær forberedt på å bremse hvis den ikke stopper som den skal.",
+      "Приоритет означает, что можно ехать дальше в обычном темпе, но это не освобождает от внимательности. Следи за машиной с боковой дороги и будь готов притормозить, если она всё же не остановится, как должна.",
+      "Приоритет — не повод терять внимательность: следи, остановится ли другая машина на самом деле."),
+
+    q("088", road({ bikeLane: true }),
+      "Du skal svinge til høyre ved et kryss. I sykkelfeltet til høyre for deg kommer en syklist som skal rett fram. Du har blinket til høyre i god tid. Hva må du gjøre før du svinger?",
+      "Ты поворачиваешь направо на перекрёстке. В велополосе справа едет велосипедист, который поедет прямо. Поворотник ты включил заранее. Что нужно сделать перед поворотом?",
+      [
+        ["Sjekke i sidespeilet og over skulderen om det faktisk er en syklist i blindsonen, ikke bare stole på blinklyset mitt", "Проверить боковое зеркало и оглянуться через плечо, есть ли на самом деле велосипедист в слепой зоне, а не просто понадеяться на поворотник"],
+        ["Stole på at blinklyset har varslet syklisten, siden jeg har signalisert i god tid", "Понадеяться, что поворотник уже предупредил велосипедиста — ведь я включил его заранее", "Blinklyset varsler andre bilister, men en syklist i blindsonen kan likevel være vanskelig å se, det fritar deg ikke fra å sjekke selv.", "Поворотник предупреждает других водителей, но велосипедиста в слепой зоне всё равно может быть не видно — сам поворотник не освобождает тебя от проверки."],
+        ["Svinge raskt før syklisten når fram til krysset, siden jeg kom til krysset først", "Быстро повернуть, пока велосипедист не доехал до перекрёстка — я ведь подъехал первым", "Den som kommer først til krysset er ikke avgjørende her, syklisten som skal rett fram i sykkelfeltet har vikeplikt framfor deg som svinger.", "Кто первым подъехал к перекрёстку — здесь не главное: у велосипедиста, который едет прямо по велополосе, приоритет перед тем, кто поворачивает."],
+        ["Kjøre inntil kantsteinen tidlig for å stenge sykkelfeltet, slik at syklisten må stoppe for meg", "Прижаться к бордюру заранее, перекрыв велополосу, чтобы велосипедист остановился из-за меня", "Å blokkere sykkelfeltet for å tvinge syklisten til å stoppe er feil og farlig, det er du som svinger som skal vike for syklisten.", "Перекрывать велополосу, чтобы заставить велосипедиста остановиться, — неправильно и опасно: это ты, поворачивающий, должен уступить велосипедисту."]
+      ],
+      "Når du svinger over et sykkelfelt, har syklisten som kjører rett fram vikeplikt framfor deg. Blinklyset er ikke nok, du må faktisk se etter syklisten i sidespeil og blindsone før du svinger.",
+      "Когда поворачиваешь через велополосу, у велосипедиста, едущего прямо, приоритет перед тобой. Одного поворотника недостаточно — нужно реально посмотреть в зеркало и слепую зону перед поворотом.",
+      "Поворотник только предупреждает, зеркало за тебя он не проверяет — это дорога велосипедиста."),
+
+    q("089", road({ tunnel: true }),
+      "Du kjører inn i en lang tunnel og ser etter noen sekunder at du skulle ha tatt en avkjøring du nå har kjørt forbi. Hva gjør du?",
+      "Ты въезжаешь в длинный тоннель и через несколько секунд понимаешь, что проехал нужный тебе съезд. Что делаешь?",
+      [
+        ["Jeg fortsetter i vanlig fart til jeg kommer ut av tunnelen, og finner en ny vei derfra", "Продолжаю ехать в обычном темпе до выезда из тоннеля, а дальше нахожу новый путь"],
+        ["Jeg snur bilen midt i tunnelen så snart det er en lomme å bruke", "Разворачиваюсь прямо в тоннеле, как только появляется карман для этого", "Det er forbudt å snu eller rygge i en tunnel, selv om det finnes en nødlomme, en nødlomme er til nødstopp, ikke til å vende.", "В тоннеле запрещено разворачиваться или сдавать назад, даже если есть карман для аварийной остановки — он для вынужденной остановки, а не для разворота."],
+        ["Jeg bremser kraftig ned og rygger tilbake til riktig avkjøring", "Резко тормозю и сдаю назад до нужного съезда", "Å rygge i en tunnel er svært farlig og forbudt, trafikken bak har ikke tid til å reagere på det.", "Сдавать назад в тоннеле очень опасно и запрещено — у машин позади просто нет времени среагировать."],
+        ["Jeg stopper midt i kjørefeltet for å tenke meg om før jeg kjører videre", "Останавливаюсь прямо в полосе, чтобы подумать, прежде чем ехать дальше", "Å stoppe i kjørefeltet inne i en tunnel er farlig og forbudt utenom nødstopp, du skal kjøre videre til utgangen.", "Останавливаться в полосе движения внутри тоннеля опасно и запрещено, если это не вынужденная остановка — нужно доехать до выезда."]
+      ],
+      "I en tunnel er det forbudt å snu, rygge eller stoppe uten grunn, uansett om du har kjørt forbi avkjøringen din. Fortsett i vanlig fart til du kommer ut, og finn en ny vei derfra.",
+      "В тоннеле запрещено разворачиваться, сдавать назад или останавливаться без причины — даже если ты проехал свой съезд. Продолжай ехать в обычном темпе до выезда, а дальше найдёшь новый путь.",
+      "Пропустил съезд в тоннеле — просто доезжай до выезда, разворот и реверс там запрещены всегда."),
+
+    q("090", null,
+      "Om morgenen er alle rutene på bilen din dekket av rim, bortsett fra en liten flekk på frontruta du har skrapt fri. Kan du kjøre slik?",
+      "Утром все стёкла машины покрыты инеем, кроме маленького очищенного пятачка на лобовом стекле. Можно ехать в таком виде?",
+      [
+        ["Nei, alle ruter må være skrapt fri for rim og is, slik at jeg har fullt sikt til alle sider, før jeg kjører", "Нет, все стёкла нужно очистить от инея и льда, чтобы был полный обзор во все стороны, прежде чем ехать"],
+        ["Ja, det er nok at frontruta er delvis fri, siden jeg ser rett fram", "Да, достаточно, что лобовое частично очищено — вперёд ведь я вижу", "En liten flekk gir ikke nok sikt til sidene og i speilene, du må ha fri sikt gjennom hele frontruta og sideruter for å oppdage fotgjengere og annen trafikk.", "Маленький пятачок не даёт обзора по сторонам и в зеркала — нужен свободный обзор через всё лобовое и боковые стёкла, чтобы заметить пешеходов и другие машины."],
+        ["Ja, så lenge jeg kjører sakte og forsiktig de første minuttene", "Да, если первые минуты ехать медленно и осторожно", "Lav fart kompenserer ikke for at du ikke ser sidene eller bakover, sikten må være fri uansett hvor sakte du kjører.", "Низкая скорость не заменяет отсутствие обзора по бокам и назад — обзор должен быть чистым независимо от того, насколько медленно едешь."],
+        ["Nei, men det er greit å kjøre med vinduet åpent og hodet ut for å se, i stedet for å skrape", "Нет, но можно ехать с открытым окном, высунув голову для обзора, вместо того чтобы чистить стёкла", "Å kjøre med hodet ut av vinduet gir ikke forsvarlig sikt eller kontroll over bilen, ruter skal skrapes fri før du kjører.", "Ехать, высунув голову из окна, не даёт нормального обзора и контроля над машиной — стёкла нужно очистить перед поездкой, а не заменять это таким способом."]
+      ],
+      "Du har ikke lov til å kjøre før alle ruter, speil og lys er fri for rim, is eller snø, slik at du har full sikt til alle kanter. En liten skrapt flekk er ikke nok.",
+      "Нельзя ехать, пока все стёкла, зеркала и фонари не очищены от инея, льда или снега — нужен полный обзор во все стороны. Маленького очищенного пятачка недостаточно.",
+      "Инеем покрыты все стёкла — чисти все, а не только «дырочку» для обзора вперёд."),
+
+    q("091", road({ lot: true }),
+      "Du rygger ut fra en parkeringsplass og kjenner et lite smell. Du ser at du har skrapt opp en parkert bil som står uten fører. Ingen har sett det. Hva er du pliktig til å gjøre?",
+      "Ты сдаёшь назад с парковки и чувствуешь лёгкий толчок. Оказывается, ты поцарапал припаркованную машину, в которой никого нет. Никто этого не видел. Что ты обязан сделать?",
+      [
+        ["Jeg forsøker å finne eieren, og hvis det ikke går, legger jeg igjen en lapp med navn og telefonnummer på bilen", "Пытаюсь найти владельца, а если не получается — оставляю на машине записку со своим именем и номером телефона"],
+        ["Jeg kjører videre, siden skaden er liten og ingen har sett det", "Уезжаю — повреждение маленькое, и никто этого не видел", "Skadens størrelse og at ingen har sett det, endrer ikke meldeplikten, du skal forsøke å varsle den skadelidte uansett.", "Размер повреждения и то, что никто не видел, не меняют обязанность сообщить — попытаться уведомить потерпевшего нужно всё равно."],
+        ["Jeg venter til eieren kommer tilbake, uansett hvor lenge det tar", "Жду, пока вернётся владелец, сколько бы это ни заняло", "Du har ikke plikt til å vente ubegrenset, det er nok å legge igjen kontaktinformasjon hvis eieren ikke er å finne.", "Нет обязанности ждать бесконечно — достаточно оставить контактные данные, если владельца не найти на месте."],
+        ["Jeg ringer bare forsikringsselskapet mitt neste dag, og lar være å gjøre noe ved bilen nå", "Просто звоню в свою страховую на следующий день, а сейчас у машины ничего не делаю", "Å varsle forsikringen senere er ikke nok i seg selv, på stedet skal du forsøke å finne eieren eller legge igjen kontaktinfo.", "Сообщить страховой на следующий день — само по себе не достаточно: на месте нужно попытаться найти владельца или оставить контакты."]
+      ],
+      "Ved skade på et ubetjent kjøretøy skal du forsøke å finne eieren. Hvis det ikke er mulig, legger du igjen navn og telefonnummer, slik at eieren kan kontakte deg og forsikringen.",
+      "При повреждении машины без водителя нужно попытаться найти владельца. Если не получается — оставить имя и телефон, чтобы владелец мог связаться с тобой и со страховой.",
+      "Нет владельца на месте — не значит «можно уехать»: записка с контактами обязательна."),
+
+    q("092", null,
+      "På en fest drikker du et glass du trodde var alkoholfritt, men det viser seg å inneholde litt alkohol. Du kjenner deg helt normal og skal kjøre hjem etter festen. Er det greit å kjøre?",
+      "На вечеринке ты выпил стакан, который считал безалкогольным, но оказалось, что в нём немного алкоголя. Ты чувствуешь себя совершенно нормально и собираешься ехать домой после вечеринки. Можно ли садиться за руль?",
+      [
+        ["Nei, promillegrensen på 0,2 gjelder uansett hvordan jeg kjenner meg, og jeg vet ikke sikkert hvor mye alkohol jeg faktisk har fått i meg", "Нет, предел 0,2 промилле действует независимо от того, как я себя чувствую, а сколько алкоголя я выпил на самом деле — я точно не знаю"],
+        ["Ja, siden jeg kjenner meg helt normal og ikke har drukket med vilje", "Да, я ведь чувствую себя совершенно нормально и не пил алкоголь сознательно", "Promillegrensen handler om alkoholmengden i blodet, ikke om hvordan du subjektivt kjenner deg eller om du drakk med vilje.", "Предел по промилле — это про количество алкоголя в крови, а не про то, как ты себя чувствуешь и выпил ли случайно."],
+        ["Ja, siden det bare var et glass og ikke mer", "Да, ведь это был всего один стакан, не больше", "Selv en liten mengde alkohol kan være nok til å komme over grensen på 0,2, mengden i et glass sier ikke noe sikkert om promillen din.", "Даже небольшое количество алкоголя может превысить предел 0,2 — объём одного стакана сам по себе ничего не говорит о твоём промилле."],
+        ["Ja, så lenge jeg venter en halvtime før jeg kjører", "Да, если подождать полчаса перед тем, как сесть за руль", "En halv time er for lite tid til at kroppen bryter ned alkohol, og uten å vite promillen din kan du ikke være sikker på at du er under grensen.", "Полчаса — слишком мало времени, чтобы организм расщепил алкоголь, и без знания своего промилле нельзя быть уверенным, что ты уложился в предел."]
+      ],
+      "Promillegrensen i Norge er 0,2, og den gjelder uansett om du kjenner deg påvirket eller ikke, eller om alkoholen var tilsiktet. Når du ikke vet sikkert hvor mye du har fått i deg, bør du ikke kjøre.",
+      "Предел промилле в Норвегии — 0,2, и он действует независимо от того, чувствуешь ли ты опьянение, и выпил ли ты случайно. Если точно не знаешь, сколько алкоголя попало в организм — за руль садиться не стоит.",
+      "«Чувствую себя нормально» не считается — важен только промилле, а его на глаз не определить."),
+
+    qm("m10", null, "Bilen din får motorstopp midt på en vanlig vei utenfor tettbygd strøk, og du må gjøre en nødstans i kjørebanen. Velg alle riktige.", "Твоя машина внезапно сломалась прямо на обычной дороге за городом, и тебе нужно сделать вынужденную остановку прямо на проезжей части. Выбери все верные.", [
+      ["Jeg setter på nødblinklysene så snart bilen stopper", "Включаю аварийку, как только машина останавливается", true],
+      ["Alle som går ut av bilen, tar på seg refleksvest, uansett om det er mørkt eller lyst", "Все, кто выходит из машины, надевают светоотражающий жилет — независимо от времени суток", true],
+      ["Jeg setter varseltrekanten i god avstand bak bilen, om mulig minst 150 meter", "Ставлю аварийный треугольник подальше позади машины, по возможности не ближе 150 метров", true],
+      ["Refleksvest er bare nødvendig her fordi vi er utenfor tettbygd strøk", "Жилет нужен только потому, что мы за городом", false, "Plikten til å bruke refleksvest ved nødstans gjelder langs alle veier, også inne i tettbygd strøk, ikke bare utenfor.", "Обязанность надевать жилет при вынужденной остановке действует на любой дороге, в том числе в населённом пункте, а не только за городом."]
+    ],
+    "Ved nødstans setter du på nødblinklys umiddelbart, alle som går ut bruker refleksvest uansett sted, og varseltrekanten settes i god avstand bak bilen, om mulig minst 150 meter.",
+    "При вынужденной остановке сразу включи аварийку, все, кто выходит — надевают жилет независимо от места, а треугольник ставится подальше позади машины, по возможности не ближе 150 метров.",
+    "Жилет — для всех и везде при nødstans, не только «в чистом поле».")
   ];
 })();
