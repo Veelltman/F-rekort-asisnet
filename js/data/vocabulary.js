@@ -205,15 +205,15 @@
     w("165", "trafikklys", "светофор", "Du skal stoppe for rødt trafikklys, selv om du ikke ser noen andre bilister.", "Нужно остановиться на красный сигнал светофора, даже если вокруг не видно других машин.", "Основное"),
     w("166", "sikkerhetsbelte", "ремень безопасности", "Alle i bilen skal bruke sikkerhetsbelte, både foran og i baksetet.", "Все в машине должны быть пристёгнуты ремнём безопасности — и спереди, и на заднем сиденье.", "Машина"),
     w("167", "bremselys", "стоп-сигналы (задние фонари торможения)", "Bremselysene varsler bilen bak deg at du senker farten.", "Стоп-сигналы предупреждают машину позади, что ты снижаешь скорость.", "Машина"),
-    w("168", "fotgjengerfelt", "пешеходный переход (зебра)", "Du skal senke farten når du nærmer deg et fotgjengerfelt.", "Нужно снижать скорость, подъезжая к пешеходному переходу.", "Приоритет"),
+    w("168", "fotgjengerfelt", "пешеходный переход (разговорное; в законе и на экзамене — gangfelt)", "Du skal senke farten når du nærmer deg et fotgjengerfelt.", "Нужно снижать скорость, подъезжая к пешеходному переходу.", "Приоритет"),
     w("169", "kryss", "перекрёсток", "I et kryss uten skilt gjelder høyreregelen.", "На перекрёстке без знаков действует правило правой руки.", "Дорога"),
     w("170", "promillekjøring", "вождение в состоянии опьянения", "Promillekjøring kan gi både bot, tap av førerkort og fengsel.", "Вождение в состоянии опьянения может привести к штрафу, лишению прав и тюремному сроку.", "Правила"),
 
     w("171", "lastsikring", "крепление груза", "Lastsikring er førerens ansvar, selv om en annen har pakket bilen.", "Крепление груза — ответственность водителя, даже если грузил кто-то другой.", "Машина"),
     w("172", "kantstein", "бордюр (край тротуара)", "Vri forhjulene mot kantsteinen når du parkerer nedover en bakke.", "Поворачивай передние колёса к бордюру, когда паркуешься на спуске.", "Дорога"),
-    w("173", "å flette (inn i trafikken)", "перестраиваться, вливаться (в поток)", "Flett inn i det åpne feltet i god tid før kjørefeltet stenger.", "Перестраивайся в открытую полосу заблаговременно, до того как полоса закроется.", "Действия"),
+    w("173", "å flette (inn i trafikken)", "перестраиваться, вливаться (в поток)", "Der to felt går sammen til ett, fletter bilene vekselvis.", "Там, где две полосы сливаются в одну, машины встраиваются поочерёдно.", "Действия"),
     w("174", "tilleggsskilt", "дополнительная табличка (под знаком)", "Et tilleggsskilt under et forbudsskilt kan vise klokkeslett og ukedager.", "Дополнительная табличка под запрещающим знаком может показывать время и дни недели.", "Правила"),
     w("175", "kjegle", "дорожный конус", "Kjegler viser hvor kjørefeltet er stengt ved vegarbeid.", "Конусы показывают, где полоса закрыта на дорожных работах.", "Дорога"),
-    w("176", "trikk", "трамвай", "Trikken har alltid forrang foran annen trafikk i kryss.", "У трамвая на перекрёстке всегда преимущество перед остальным транспортом.", "Машина")
+    w("176", "trikk", "трамвай", "Du skal gi fri veg for trikken, også når du kjører på forkjørsveg.", "Трамваю нужно уступить дорогу, даже если ты едешь по главной.", "Машина")
   ];
 })();

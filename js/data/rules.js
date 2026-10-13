@@ -979,18 +979,6 @@
       "Водитель отвечает за то, чтобы дети младше 15 лет использовали нужное удерживающее устройство — кресло или бустер, если рост меньше 135 см. С 15 лет пассажир сам отвечает за то, что пристёгнут.",
       "До 15 лет — ответственность на водителе, с 15 лет — каждый сам за свой ремень."),
 
-    q("094", "Du blir stoppet i en kontroll med mobiltelefonen i hånden mens du snakket i den under kjøring, uten håndfri. Hva blir reaksjonen?",
-      "Тебя останавливают на проверке — ты держал телефон в руке и разговаривал по нему во время движения, без hands-free. Что тебе грозит?",
-      [
-        ["Forenklet forelegg på 10 750 kroner og 3 prikker i førerkortet", "Упрощённый штраф 10 750 крон и 3 штрафных балла в права"],
-        ["Bare en muntlig advarsel første gang, boten kommer først ved gjentakelse", "Только устное предупреждение в первый раз, штраф будет только при повторе", "Bruk av mobiltelefon i hånden under kjøring gir forelegg og prikker allerede første gang, det finnes ikke noe unntak for «første gang».", "Использование телефона в руке во время движения карается штрафом и баллами сразу, с первого раза — никакого исключения для «первого раза» нет."],
-        ["En bot på 4 100 kroner, samme som for kjøring uten lys", "Штраф 4 100 крон, как за езду без света", "4 100 kroner er boten for å kjøre uten påbudt lys, mobilbruk i hånden har en egen og høyere sats på 10 750 kroner.", "4 100 крон — это штраф за езду без обязательного света, а за телефон в руке своя, более высокая ставка — 10 750 крон."],
-        ["En bot på 10 750 kroner, men ingen prikker, siden det ikke er en fartsovertredelse", "Штраф 10 750 крон, но без баллов, ведь это не превышение скорости", "Mobilbruk i hånden gir prikker i tillegg til boten, akkurat som kjøring mot rødt lys eller brudd på vikeplikt, ikke bare fartsovertredelser gir prikker.", "Использование телефона в руке даёт баллы в дополнение к штрафу, точно как проезд на красный или нарушение уступки дороги — баллы начисляются не только за скорость."]
-      ],
-      "Å bruke mobiltelefonen i hånden under kjøring, for eksempel for å snakke uten håndfri, gir forenklet forelegg på 10 750 kroner og 3 prikker i førerkortet, på linje med rødt lys eller brudd på vikeplikt.",
-      "Использование телефона в руке во время движения, например разговор без hands-free, карается упрощённым штрафом 10 750 крон и 3 баллами в права — так же, как проезд на красный свет или нарушение уступки дороги.",
-      "Телефон в руке за рулём — это те же 10 750 крон и 3 балла, что и за красный свет."),
-
     q("095", "Du kjører 15 km/t for fort. I en sone med fartsgrense 50 gir dette 2 prikker i førerkortet, men i en sone med fartsgrense 80 gir samme overtredelse ingen prikker. Hvorfor er det slik?",
       "Ты едешь на 15 км/ч быстрее разрешённого. В зоне с ограничением 50 за это дают 2 балла, а в зоне с ограничением 80 за то же превышение баллов не дают. Почему так?",
       [
@@ -1037,29 +1025,17 @@
       "Запрещено обгонять машину, которая закрывает тебе обзор на пешеходный переход. Правило действует, потому что в этом случае ты не можешь увидеть, не начал ли кто-то переходить дорогу.",
       "Не видишь переход целиком — не обгоняй, что бы тебе ни казалось."),
 
-    q("098", "Hvor stort er kravet til mønsterdybde på vinterdekk, og i hvilken periode gjelder vinterdekk-kravet i Sør-Norge?",
-      "Какая минимальная глубина протектора требуется для зимних шин, и в какой период в Южной Норвегии действует требование зимних шин?",
+    q("098", "I hvilken periode gjelder kravet om minst 3 mm mønsterdybde på dekkene i Sør-Norge?",
+      "В какой период в Южной Норвегии действует требование минимум 3 мм протектора на шинах?",
       [
-        ["Minst 3 mm mønsterdybde, og kravet gjelder normalt fra 1. november til første søndag etter 2. påskedag", "Не менее 3 мм глубины протектора, и требование обычно действует с 1 ноября до первого воскресенья после второго пасхального дня"],
-        ["Minst 1,6 mm, som for vanlige sommerdekk", "Не менее 1,6 мм, как для обычных летних шин", "1,6 mm er minstekravet for sommerdekk, vinterdekk krever mer mønsterdybde, minst 3 mm, for å fungere i snø og is.", "1,6 мм — минимум для летних шин, а зимние требуют больше протектора, не менее 3 мм, чтобы работать в снегу и на льду."],
-        ["Minst 3 mm, men kravet gjelder hele året i hele Norge", "Не менее 3 мм, но требование действует весь год по всей Норвегии", "Vinterdekk-kravet er knyttet til en bestemt periode om vinteren, ikke hele året, perioden varierer også mellom Sør-Norge og Nord-Norge.", "Требование зимних шин привязано к определённому зимнему периоду, а не ко всему году, и этот период в Южной и Северной Норвегии разный."],
-        ["Minst 5 mm, fra 1. oktober til 1. mai", "Не менее 5 мм, с 1 октября по 1 мая", "5 mm og disse datoene er ikke riktig, kravet er 3 mm mønsterdybde og perioden starter 1. november i Sør-Norge, ikke 1. oktober.", "5 мм и эти даты не подходят — требование 3 мм протектора, а период в Южной Норвегии начинается 1 ноября, а не 1 октября."]
+        ["Fra 1. november til og med første søndag etter 2. påskedag", "С 1 ноября до первого воскресенья после второго пасхального дня включительно"],
+        ["Hele året, i hele Norge", "Круглый год по всей Норвегии", "3 mm-kravet gjelder bare i vinterperioden. Resten av året er minstekravet 1,6 mm.", "Требование 3 мм действует только в зимний период. В остальное время года минимум — 1,6 мм."],
+        ["Fra 1. oktober til 1. mai", "С 1 октября по 1 мая", "Datoene stemmer ikke. I Sør-Norge starter perioden 1. november og varer til første søndag etter 2. påskedag.", "Даты неверные. В Южной Норвегии период начинается 1 ноября и длится до первого воскресенья после второго пасхального дня."],
+        ["Fra 16. oktober til 30. april", "С 16 октября по 30 апреля", "Dette er perioden i Nordland, Troms og Finnmark, ikke i Sør-Norge.", "Это период для Nordland, Troms и Finnmark, а не для Южной Норвегии."]
       ],
-      "Vinterdekk skal ha minst 3 mm mønsterdybde. I Sør-Norge gjelder kravet normalt fra 1. november til første søndag etter 2. påskedag, mens det i nord gjelder fra 16. oktober til 30. april.",
-      "Зимние шины должны иметь минимум 3 мм глубины протектора. В Южной Норвегии требование обычно действует с 1 ноября до первого воскресенья после второго пасхального дня, а на севере — с 16 октября по 30 апреля.",
-      "3 мм — цифра для зимней резины, не путай её с 1,6 мм летней."),
-
-    q("099", "Er det tillatt å kjøre uten nærlys på dagtid i Norge, for eksempel på en solfylt motorveg?",
-      "Можно ли в Норвегии ехать днём без ближнего света, например по солнечной автомагистрали?",
-      [
-        ["Nei, nærlys (eller kjørelys) skal være på hele tiden du kjører, uansett tid på døgnet eller lysforhold", "Нет, ближний свет (или ходовые огни) должны быть включены всё время движения, независимо от времени суток и освещённости"],
-        ["Ja, på dagtid i godt vær er det valgfritt å bruke lys", "Да, днём в хорошую погоду свет можно включать по желанию", "Lyskravet er ikke knyttet til vær eller lysforhold, lys skal brukes under all kjøring, også i strålende sol midt på dagen.", "Требование по свету не привязано к погоде и освещённости — свет нужен при любой поездке, даже в яркое солнце среди дня."],
-        ["Ja, men bare på motorveg, der andre bilister ser deg uansett", "Да, но только на автомагистрали, где тебя видно и так", "Regelen gjelder likt på alle typer veier, motorveg gir ikke noe unntak fra kravet om lys.", "Правило действует одинаково на любых дорогах — автомагистраль не даёт исключения из требования по свету."],
-        ["Ja, hvis bilen har kjørelys (dagslys) som lyser automatisk uten at du trenger å slå på noe", "Да, если у машины есть дневные ходовые огни, которые светят автоматически без твоего участия", "Dette er riktig bare hvis kjørelysene faktisk er på og fungerer, det er ikke et unntak fra lyskravet, det er en måte å oppfylle det på.", "Это верно только если ходовые огни реально горят и работают — это не исключение из требования по свету, а один из способов его выполнить."]
-      ],
-      "I Norge skal du bruke nærlys eller kjørelys under all kjøring, hele året og hele døgnet, uansett om det er lyst eller mørkt, sol eller skya. Det finnes ikke noe unntak for dagtid.",
-      "В Норвегии ближний свет или ходовые огни должны быть включены при любой поездке, круглый год и в любое время суток, независимо от освещённости и погоды. Исключения для дневного времени нет.",
-      "Свет в Норвегии — не «для темноты», а просто всегда, без исключений."),
+      "I vinterperioden må dekkene ha minst 3 mm mønsterdybde: i Sør-Norge fra 1. november til og med første søndag etter 2. påskedag, i Nordland, Troms og Finnmark fra 16. oktober til 30. april. Vinterdekk er ikke påbudt for personbil, men dekkene må passe føret.",
+      "В зимний период протектор должен быть не меньше 3 мм: в Южной Норвегии с 1 ноября до первого воскресенья после второго пасхального дня включительно, в Nordland, Troms и Finnmark — с 16 октября по 30 апреля. Зимние шины для легковой машины не обязательны, но шины должны подходить к дорожным условиям.",
+      "Юг: 1 ноября — Пасха. Север: 16 октября — 30 апреля. Требование — к протектору (3 мм), а не к «зимней резине»."),
 
     q("100", "Kan en skolepatrulje stoppe bilen din ved et gangfelt?",
       "Может ли школьный патруль остановить твою машину у пешеходного перехода?",

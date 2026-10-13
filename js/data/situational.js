@@ -1659,7 +1659,7 @@
       "При пожаре в тоннеле нужно, если возможно, выехать из него на машине. Если нет — съехать максимально к краю, выключить двигатель, выйти из машины и дойти до ближайшего эвакуационного выхода или безопасного места, как можно быстрее вызвав спасателей.",
       "В тоннеле при пожаре: если можешь — выезжай; если нет — к краю, мотор выключил, сам к выходу, и звонок спасателям."),
 
-    q("082", hillScene(),
+    q("082", null,
       "Du parkerer i en bakke der bilen peker oppover, og det er fortauskant (kantstein) på høyre side av veien. Hvordan bør du vri forhjulene?",
       "Ты паркуешься на подъёме, машина смотрит вверх по склону, и справа есть бордюр. Как нужно повернуть передние колёса?",
       [
@@ -1708,7 +1708,7 @@
       "Нужно держать скорость потока на магистрали, пока не окажешься в самой съездной полосе, и снижать скорость уже там. Торможение в обычных полосах вынуждает машины позади резко тормозить.",
       "Тормози только внутри съездной полосы — она для этого и сделана."),
 
-    q("086", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "north", kind: "truck" }], roundabout: true }),
+    q("086", null,
       "Du kjører inn i en rundkjøring. Et vogntog i feltet til venstre for deg skal ta samme avkjøring og svinger bredt for å få plass. Hva gjør du?",
       "Ты въезжаешь в круговое движение. Фура в полосе слева от тебя едет на тот же съезд и забирает широко, чтобы хватило места на повороте. Что делаешь?",
       [
@@ -1722,43 +1722,30 @@
       "Фура поворачивает широко — держись дальше, не пытайся проскочить рядом."),
 
     q("087", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "south" }], signs: { east: "yield" } }),
-      "Du nærmer deg et kryss uten skilt for din egen retning. Bilen fra sidevegen, som har vikeplikt, senker farten, men virker ikke til å stoppe helt. Hva gjør du?",
-      "Ты подъезжаешь к перекрёстку — у твоей стороны нет знака. Машина с боковой дороги, у которой обязанность уступить, снижает скорость, но не похоже, что остановится полностью. Что делаешь?",
+      "Du nærmer deg et kryss uten skilt for din egen retning. Bilen fra sidevegen har skilt Vikeplikt. Den senker farten, men du er ikke sikker på om føreren har sett deg. Hva gjør du?",
+      "Ты подъезжаешь к перекрёстку — у твоей стороны нет знака. У машины с боковой дороги знак «Уступи дорогу». Она снижает скорость, но ты не уверен, что водитель тебя заметил. Что делаешь?",
       [
-        ["Jeg fortsetter i min fart, men er klar til å bremse hvis den andre bilen faktisk ikke stopper", "Продолжаю ехать в обычном темпе, но готов притормозить, если машина всё-таки не остановится"],
-        ["Jeg bremser kraftig ned til gangfart, siden jeg uansett ikke kan være sikker på at den andre bilen stopper", "Резко тормозю почти до шага — я ведь не могу быть уверен, что машина остановится", "Du har forkjørsrett her og skal holde normal fart, ikke bremse ned som om du selv hadde vikeplikt, det skaper unødig usikkerhet for trafikken bak deg.", "У тебя здесь приоритет, и нужно ехать в обычном темпе, а не тормозить, как будто уступаешь ты сам — это создаёт лишнюю неопределённость для машин позади."],
-        ["Jeg stopper helt opp for sikkerhets skyld, selv om jeg har vikeplikt til min fordel", "Полностью останавливаюсь на всякий случай, хотя приоритет у меня", "Å stoppe helt når du har forkjørsrett er ikke nødvendig og kan forvirre den andre sjåføren om hvem som skal kjøre først.", "Полностью останавливаться, когда приоритет у тебя, не нужно — это может сбить с толку другого водителя насчёт того, кому ехать первым."],
-        ["Jeg øker farten for å komme meg forbi krysset før den andre bilen når fram", "Увеличиваю скорость, чтобы проскочить перекрёсток раньше, чем подъедет та машина", "Å øke farten gir deg mindre tid til å reagere hvis den andre bilen likevel ikke stopper, det er tryggere å holde jevn fart og være forberedt.", "Увеличение скорости оставляет меньше времени на реакцию, если машина всё-таки не остановится — безопаснее держать обычную скорость и быть готовым."]
+        ["Jeg fortsetter i normal fart, men holder øye med bilen og er klar til å bremse hvis den likevel kjører ut", "Еду дальше в обычном темпе, но слежу за машиной и готов затормозить, если она всё-таки выедет"],
+        ["Jeg bremser kraftig ned til gangfart, siden jeg uansett ikke kan være sikker på at den andre bilen venter", "Резко торможу почти до шага — я ведь не могу быть уверен, что машина подождёт", "Du har forkjørsrett her og skal holde normal fart, ikke bremse ned som om du selv hadde vikeplikt, det skaper unødig usikkerhet for trafikken bak deg.", "У тебя здесь приоритет, и нужно ехать в обычном темпе, а не тормозить, как будто уступаешь ты сам — это создаёт лишнюю неопределённость для машин позади."],
+        ["Jeg stopper helt opp for sikkerhets skyld, selv om det er jeg som har forkjørsrett", "Полностью останавливаюсь на всякий случай, хотя приоритет у меня", "Å stoppe helt når du har forkjørsrett er ikke nødvendig og kan forvirre den andre sjåføren om hvem som skal kjøre først.", "Полностью останавливаться, когда приоритет у тебя, не нужно — это может сбить с толку другого водителя насчёт того, кому ехать первым."],
+        ["Jeg øker farten for å komme meg forbi krysset før den andre bilen når fram", "Увеличиваю скорость, чтобы проскочить перекрёсток раньше, чем подъедет та машина", "Å øke farten gir deg mindre tid til å reagere hvis den andre bilen likevel kjører ut, det er tryggere å holde jevn fart og være forberedt.", "Увеличение скорости оставляет меньше времени на реакцию, если машина всё-таки выедет — безопаснее держать обычную скорость и быть готовым."]
       ],
-      "Forkjørsrett betyr at du kan kjøre videre i normal fart, men den fritar deg ikke for å være oppmerksom. Hold blikket på den andre bilen og vær forberedt på å bremse hvis den ikke stopper som den skal.",
-      "Приоритет означает, что можно ехать дальше в обычном темпе, но это не освобождает от внимательности. Следи за машиной с боковой дороги и будь готов притормозить, если она всё же не остановится, как должна.",
-      "Приоритет — не повод терять внимательность: следи, остановится ли другая машина на самом деле."),
-
-    q("088", road({ bikeLane: true }),
-      "Du skal svinge til høyre ved et kryss. I sykkelfeltet til høyre for deg kommer en syklist som skal rett fram. Du har blinket til høyre i god tid. Hva må du gjøre før du svinger?",
-      "Ты поворачиваешь направо на перекрёстке. В велополосе справа едет велосипедист, который поедет прямо. Поворотник ты включил заранее. Что нужно сделать перед поворотом?",
-      [
-        ["Sjekke i sidespeilet og over skulderen om det faktisk er en syklist i blindsonen, ikke bare stole på blinklyset mitt", "Проверить боковое зеркало и оглянуться через плечо, есть ли на самом деле велосипедист в слепой зоне, а не просто понадеяться на поворотник"],
-        ["Stole på at blinklyset har varslet syklisten, siden jeg har signalisert i god tid", "Понадеяться, что поворотник уже предупредил велосипедиста — ведь я включил его заранее", "Blinklyset varsler andre bilister, men en syklist i blindsonen kan likevel være vanskelig å se, det fritar deg ikke fra å sjekke selv.", "Поворотник предупреждает других водителей, но велосипедиста в слепой зоне всё равно может быть не видно — сам поворотник не освобождает тебя от проверки."],
-        ["Svinge raskt før syklisten når fram til krysset, siden jeg kom til krysset først", "Быстро повернуть, пока велосипедист не доехал до перекрёстка — я ведь подъехал первым", "Den som kommer først til krysset er ikke avgjørende her, syklisten som skal rett fram i sykkelfeltet har vikeplikt framfor deg som svinger.", "Кто первым подъехал к перекрёстку — здесь не главное: у велосипедиста, который едет прямо по велополосе, приоритет перед тем, кто поворачивает."],
-        ["Kjøre inntil kantsteinen tidlig for å stenge sykkelfeltet, slik at syklisten må stoppe for meg", "Прижаться к бордюру заранее, перекрыв велополосу, чтобы велосипедист остановился из-за меня", "Å blokkere sykkelfeltet for å tvinge syklisten til å stoppe er feil og farlig, det er du som svinger som skal vike for syklisten.", "Перекрывать велополосу, чтобы заставить велосипедиста остановиться, — неправильно и опасно: это ты, поворачивающий, должен уступить велосипедисту."]
-      ],
-      "Når du svinger over et sykkelfelt, har syklisten som kjører rett fram vikeplikt framfor deg. Blinklyset er ikke nok, du må faktisk se etter syklisten i sidespeil og blindsone før du svinger.",
-      "Когда поворачиваешь через велополосу, у велосипедиста, едущего прямо, приоритет перед тобой. Одного поворотника недостаточно — нужно реально посмотреть в зеркало и слепую зону перед поворотом.",
-      "Поворотник только предупреждает, зеркало за тебя он не проверяет — это дорога велосипедиста."),
+      "Forkjørsrett betyr at du kan kjøre videre i normal fart, men den fritar deg ikke for å være oppmerksom. Ved skilt Vikeplikt (202) trenger den andre ikke å stanse helt, men den må la deg passere. Hold blikket på bilen og vær forberedt på å bremse hvis den ikke overholder vikeplikten.",
+      "Приоритет означает, что можно ехать дальше в обычном темпе, но это не освобождает от внимательности. У знака «Уступи дорогу» (202) полностью останавливаться не обязательно, но пропустить тебя водитель обязан. Следи за машиной и будь готов притормозить, если она всё же не уступит.",
+      "Приоритет — не повод терять внимательность: следи, уступит ли другая машина на самом деле."),
 
     q("089", road({ tunnel: true }),
       "Du kjører inn i en lang tunnel og ser etter noen sekunder at du skulle ha tatt en avkjøring du nå har kjørt forbi. Hva gjør du?",
       "Ты въезжаешь в длинный тоннель и через несколько секунд понимаешь, что проехал нужный тебе съезд. Что делаешь?",
       [
         ["Jeg fortsetter i vanlig fart til jeg kommer ut av tunnelen, og finner en ny vei derfra", "Продолжаю ехать в обычном темпе до выезда из тоннеля, а дальше нахожу новый путь"],
-        ["Jeg snur bilen midt i tunnelen så snart det er en lomme å bruke", "Разворачиваюсь прямо в тоннеле, как только появляется карман для этого", "Det er forbudt å snu eller rygge i en tunnel, selv om det finnes en nødlomme, en nødlomme er til nødstopp, ikke til å vende.", "В тоннеле запрещено разворачиваться или сдавать назад, даже если есть карман для аварийной остановки — он для вынужденной остановки, а не для разворота."],
-        ["Jeg bremser kraftig ned og rygger tilbake til riktig avkjøring", "Резко тормозю и сдаю назад до нужного съезда", "Å rygge i en tunnel er svært farlig og forbudt, trafikken bak har ikke tid til å reagere på det.", "Сдавать назад в тоннеле очень опасно и запрещено — у машин позади просто нет времени среагировать."],
-        ["Jeg stopper midt i kjørefeltet for å tenke meg om før jeg kjører videre", "Останавливаюсь прямо в полосе, чтобы подумать, прежде чем ехать дальше", "Å stoppe i kjørefeltet inne i en tunnel er farlig og forbudt utenom nødstopp, du skal kjøre videre til utgangen.", "Останавливаться в полосе движения внутри тоннеля опасно и запрещено, если это не вынужденная остановка — нужно доехать до выезда."]
+        ["Jeg snur bilen midt i tunnelen så snart det er en lomme å bruke", "Разворачиваюсь прямо в тоннеле, как только появляется карман для этого", "Havarilommen er for nødstans, ikke for å vende. Å snu i en tunnel er svært farlig: sikten er dårlig, og den som vender, har vikeplikt for all annen trafikk (§ 11 nr 1).", "Карман — для вынужденной остановки, а не для разворота. Разворачиваться в тоннеле очень опасно: обзор плохой, а тот, кто разворачивается, уступает всем (§ 11 nr 1)."],
+        ["Jeg bremser kraftig ned og rygger tilbake til riktig avkjøring", "Резко торможу и сдаю назад до нужного съезда", "Å rygge i en tunnel er livsfarlig: trafikken bak deg regner ikke med det og har ikke tid til å reagere. På motorveg og motortrafikkveg er rygging dessuten forbudt (§ 11 nr 2).", "Сдавать назад в тоннеле смертельно опасно: машины сзади этого не ждут и не успеют среагировать. А на motorveg и motortrafikkveg задний ход вообще запрещён (§ 11 nr 2)."],
+        ["Jeg stopper midt i kjørefeltet for å tenke meg om før jeg kjører videre", "Останавливаюсь прямо в полосе, чтобы подумать, прежде чем ехать дальше", "Det er forbudt å stanse i tunnel (trafikkreglene § 17 nr 1 a), bortsett fra nødstans. Du skal kjøre videre til utgangen.", "Останавливаться в тоннеле запрещено (trafikkreglene § 17 nr 1 a), кроме вынужденной остановки. Нужно ехать дальше до выезда."]
       ],
-      "I en tunnel er det forbudt å snu, rygge eller stoppe uten grunn, uansett om du har kjørt forbi avkjøringen din. Fortsett i vanlig fart til du kommer ut, og finn en ny vei derfra.",
-      "В тоннеле запрещено разворачиваться, сдавать назад или останавливаться без причины — даже если ты проехал свой съезд. Продолжай ехать в обычном темпе до выезда, а дальше найдёшь новый путь.",
-      "Пропустил съезд в тоннеле — просто доезжай до выезда, разворот и реверс там запрещены всегда."),
+      "Har du kjørt forbi avkjøringen din i en tunnel, fortsetter du i vanlig fart til du kommer ut, og finner en ny vei derfra. Det er forbudt å stanse i tunnel (§ 17 nr 1 a), og å snu eller rygge der er livsfarlig.",
+      "Если проехал свой съезд в тоннеле, продолжай ехать в обычном темпе до выезда, а дальше ищи новый путь. Останавливаться в тоннеле запрещено (§ 17 nr 1 a), а разворот или задний ход там смертельно опасны.",
+      "Пропустил съезд в тоннеле — просто доезжай до выезда: стоять там нельзя, а разворот и задний ход — смертельный риск."),
 
     q("090", null,
       "Om morgenen er alle rutene på bilen din dekket av rim, bortsett fra en liten flekk på frontruta du har skrapt fri. Kan du kjøre slik?",
@@ -1777,13 +1764,13 @@
       "Du rygger ut fra en parkeringsplass og kjenner et lite smell. Du ser at du har skrapt opp en parkert bil som står uten fører. Ingen har sett det. Hva er du pliktig til å gjøre?",
       "Ты сдаёшь назад с парковки и чувствуешь лёгкий толчок. Оказывается, ты поцарапал припаркованную машину, в которой никого нет. Никто этого не видел. Что ты обязан сделать?",
       [
-        ["Jeg forsøker å finne eieren, og hvis det ikke går, legger jeg igjen en lapp med navn og telefonnummer på bilen", "Пытаюсь найти владельца, а если не получается — оставляю на машине записку со своим именем и номером телефона"],
+        ["Jeg forsøker å finne eieren, og hvis det ikke går, legger jeg igjen en lapp med navn og telefonnummer på bilen eller varsler politiet", "Пытаюсь найти владельца, а если не получается — оставляю на машине записку со своим именем и номером телефона или сообщаю в полицию"],
         ["Jeg kjører videre, siden skaden er liten og ingen har sett det", "Уезжаю — повреждение маленькое, и никто этого не видел", "Skadens størrelse og at ingen har sett det, endrer ikke meldeplikten, du skal forsøke å varsle den skadelidte uansett.", "Размер повреждения и то, что никто не видел, не меняют обязанность сообщить — попытаться уведомить потерпевшего нужно всё равно."],
         ["Jeg venter til eieren kommer tilbake, uansett hvor lenge det tar", "Жду, пока вернётся владелец, сколько бы это ни заняло", "Du har ikke plikt til å vente ubegrenset, det er nok å legge igjen kontaktinformasjon hvis eieren ikke er å finne.", "Нет обязанности ждать бесконечно — достаточно оставить контактные данные, если владельца не найти на месте."],
         ["Jeg ringer bare forsikringsselskapet mitt neste dag, og lar være å gjøre noe ved bilen nå", "Просто звоню в свою страховую на следующий день, а сейчас у машины ничего не делаю", "Å varsle forsikringen senere er ikke nok i seg selv, på stedet skal du forsøke å finne eieren eller legge igjen kontaktinfo.", "Сообщить страховой на следующий день — само по себе не достаточно: на месте нужно попытаться найти владельца или оставить контакты."]
       ],
-      "Ved skade på et ubetjent kjøretøy skal du forsøke å finne eieren. Hvis det ikke er mulig, legger du igjen navn og telefonnummer, slik at eieren kan kontakte deg og forsikringen.",
-      "При повреждении машины без водителя нужно попытаться найти владельца. Если не получается — оставить имя и телефон, чтобы владелец мог связаться с тобой и со страховой.",
+      "Vegtrafikkloven § 12: har du voldt materiell skade og ingen er til stede for skadelidte, skal du snarest mulig underrette skadelidte eller politiet. I praksis: let etter eieren, ellers legg igjen navn og telefonnummer på bilen eller ring politiet.",
+      "Vegtrafikkloven § 12: если ты причинил материальный ущерб, а рядом нет никого со стороны потерпевшего, нужно как можно скорее сообщить потерпевшему или полиции. На практике: поищи владельца, а если не нашёл — оставь на машине имя и телефон или позвони в полицию.",
       "Нет владельца на месте — не значит «можно уехать»: записка с контактами обязательна."),
 
     q("092", null,
@@ -1840,39 +1827,39 @@
       "Ты едешь по главной дороге со знаком приоритета. Слева с боковой улицы к перекрёстку приближается трамвай. Кто уступает?",
       [
         ["Jeg har vikeplikt for trikken, trikk har forrang foran all annen trafikk uansett forkjørsskilt", "Я уступаю трамваю — у трамвая преимущество перед любым транспортом, даже если у меня знак приоритета"],
-        ["Trikken har vikeplikt siden jeg kjører på forkjørsvei", "Уступает трамвай, ведь я на главной дороге", "Forkjørsskiltet gjelder for vanlige kjøretøy fra sideveien, trikk er et unntak og har alltid forrang foran annen trafikk.", "Знак приоритета действует для обычных машин со второстепенной дороги — трамвай исключение, у него всегда преимущество перед остальным транспортом."],
+        ["Trikken har vikeplikt siden jeg kjører på forkjørsvei", "Уступает трамвай, ведь я на главной дороге", "Forkjørsskiltet gjelder for vanlige kjøretøy fra sidevegen. For trikk gjelder § 10 nr 2: alle skal gi den fri veg, også på forkjørsveg.", "Знак приоритета действует для обычных машин с боковой дороги. Для трамвая действует § 10 nr 2: ему уступают все, даже на главной дороге."],
         ["Ingen av oss har vikeplikt, trikken må følge vanlige vikepliktregler som biler", "Никто не уступает — трамвай подчиняется тем же правилам, что и машины", "Trikk følger egne regler og har forrang foran alle andre kjøretøy, det er ikke samme regel som for biler.", "У трамвая свои правила — он имеет приоритет перед всеми, это не те же правила, что у машин."],
         ["Jeg har bare vikeplikt for trikken hvis den ringer med klokken sin", "Уступаю трамваю только если он звонит в звонок", "Trikkens forrang gjelder uansett om den varsler med lyd eller ikke, det er ingen slik betingelse.", "Преимущество трамвая действует независимо от того, подаёт он звуковой сигнал или нет — такого условия нет."]
       ],
-      "Trikk og tog har forrang foran all annen trafikk i kryss, uansett om du har forkjørsskilt eller ikke. Forkjørsskiltet gir deg bare forrang foran vanlige kjøretøy fra sideveiene, ikke foran trikken.",
-      "У трамвая и поезда преимущество перед любым другим транспортом на перекрёстке — даже если у тебя знак приоритета. Этот знак даёт преимущество только перед обычными машинами со второстепенных дорог, но не перед трамваем.",
-      "Трамвай — это как светофор, который всегда «горит зелёным» только для него самого."),
+      "Trafikkreglene § 10 nr 2: trafikant skal gi fri veg og om nødvendig stanse for sporvogn og jernbanetog. Det gjelder også når du kjører på forkjørsveg: skiltet gir deg forrang bare foran vanlige kjøretøy fra sidevegene. (Står det trafikklys i krysset, følger alle lyset.)",
+      "Trafikkreglene § 10 nr 2: трамваю и поезду нужно уступить дорогу и при необходимости остановиться. Это действует и на главной дороге: знак приоритета даёт преимущество только перед обычными машинами с боковых дорог. (Если на перекрёстке светофор — все едут по светофору.)",
+      "Трамваю уступают все — даже если у тебя знак главной дороги."),
 
-    q("096", road({ rail: true }),
-      "Du nærmer deg en planovergang uten bom der det blinker rødt. Det står allerede en bilkø foran deg, og det er usikkert om det er plass til bilen din helt over på den andre siden av skinnene. Hva gjør du?",
-      "Ты подъезжаешь к железнодорожному переезду без шлагбаума, мигает красный. Перед тобой уже стоит очередь машин, и непонятно, хватит ли места, чтобы твоя машина полностью проехала за рельсы на той стороне. Что делаешь?",
+    q("096", null,
+      "Du nærmer deg en planovergang. Bommene er oppe, og lyset blinker ikke. Det står en bilkø på andre siden, og det er usikkert om det er plass til bilen din helt over skinnene. Hva gjør du?",
+      "Ты подъезжаешь к железнодорожному переезду. Шлагбаумы подняты, сигнал не мигает. За переездом стоит очередь машин, и непонятно, хватит ли места, чтобы твоя машина полностью проехала за рельсы. Что делаешь?",
       [
         ["Jeg stopper før overgangen og venter til det er plass nok til å kjøre helt over skinnene uten å stanse på dem", "Останавливаюсь перед переездом и жду, пока не будет места проехать полностью за рельсы без остановки на них"],
-        ["Jeg kjører fram og stopper med bilen delvis på skinnene, siden lyset ikke viser tog ennå", "Проезжаю вперёд и останавливаюсь частично на рельсах — поезда пока не видно", "Du skal aldri stanse med bilen på selve skinnegangen, uansett om toget er synlig eller ikke, det er for farlig hvis det kommer likevel.", "Нельзя останавливаться прямо на рельсах никогда, даже если поезда не видно — слишком опасно, если он всё же появится."],
+        ["Jeg kjører fram og stopper med bilen delvis på skinnene, siden lyset ikke blinker og det ikke kommer noe tog", "Проезжаю вперёд и останавливаюсь частично на рельсах — сигнал не мигает, поезда нет", "Du skal aldri stanse med bilen på selve skinnegangen. Bommene kan gå ned når som helst, og da står du fast i sporet.", "Нельзя останавливаться прямо на рельсах никогда. Шлагбаумы могут опуститься в любой момент, и машина окажется запертой на путях."],
         ["Jeg følger tett bak bilen foran, så presser jeg meg over sammen med køen", "Держусь близко к машине впереди и проезжаю вместе с очередью", "Å følge tett på andre uten å sjekke om det er plass for din egen bil, kan føre til at du blir stående fast på skinnene.", "Если просто жаться к другим и не проверить, хватит ли места именно твоей машине, можно застрять прямо на рельсах."],
-        ["Jeg rygger unna og venter til lyset slutter å blinke før jeg nærmer meg igjen", "Сдаю назад и жду, пока сигнал не перестанет мигать, прежде чем снова подъехать", "Det er ikke nødvendig å rygge bort, det er nok å stoppe i god avstand før overgangen og vente på plass, uten å rygge unødig i trafikken.", "Сдавать назад не нужно — достаточно остановиться на безопасном расстоянии перед переездом и подождать места, без лишнего маневрирования в потоке."]
+        ["Jeg kjører inn på overgangen, køen begynner sikkert å rulle før et tog kommer", "Въезжаю на переезд — очередь наверняка тронется раньше, чем подойдёт поезд", "Du kan ikke vite når neste tog kommer. Kjør aldri inn på planovergangen før det er plass til hele bilen på andre siden.", "Ты не знаешь, когда придёт следующий поезд. Не въезжай на переезд, пока на той стороне нет места для всей машины."]
       ],
-      "Du skal aldri kjøre inn på en planovergang hvis du ikke er sikker på at det er plass til bilen din helt på den andre siden. Å bli stående fast på skinnene er svært farlig, selv om lyset ikke viser et tog akkurat nå.",
-      "Нельзя выезжать на переезд, если нет уверенности, что хватит места проехать полностью на другую сторону. Застрять прямо на рельсах крайне опасно, даже если поезда в этот момент не видно.",
+      "Du skal aldri kjøre inn på en planovergang hvis du ikke er sikker på at det er plass til bilen din helt på den andre siden. Å bli stående fast på skinnene er svært farlig, selv om det ikke kommer tog akkurat nå. Blinker det rødt eller går bommene ned, skal du alltid stanse.",
+      "Нельзя выезжать на переезд, если нет уверенности, что хватит места проехать полностью на другую сторону. Застрять прямо на рельсах крайне опасно, даже если поезда в этот момент нет. А если мигает красный или опускаются шлагбаумы — останавливаться нужно всегда.",
       "Правило простое: не видишь свободного места за переездом — не въезжаешь, очередь или нет."),
 
     q("097", road({ roadwork: true }),
       "Et kjørefelt er stengt på grunn av vegarbeid, og kjeglene tvinger trafikken til å flette sammen til ett felt. Du kjører i feltet som blir stengt. Hva er riktig fremgangsmåte?",
       "Из-за дорожных работ одна полоса закрыта, конусы заставляют поток слиться в одну полосу. Ты едешь по закрывающейся полосе. Как правильно поступить?",
       [
-        ["Jeg blinker tidlig, finner en egnet luke og fletter rolig inn i det åpne feltet i god tid før kjeglene", "Включаю поворотник заранее, нахожу удобный промежуток и спокойно перестраиваюсь в открытую полосу заблаговременно, до конусов"],
-        ["Jeg kjører i mitt felt så langt som mulig og presser meg inn helt ved kjeglene, siden feltet er like lovlig å bruke til da", "Еду по своей полосе до последнего и втискиваюсь прямо у конусов — полоса-то до самого конца разрешена", "Selv om feltet formelt er åpent til kjeglene, er det tryggere og mer forutsigbart for andre å flette inn i god tid, ikke i siste sekund.", "Хотя формально полоса открыта до самых конусов, безопаснее и предсказуемее для других перестроиться заранее, а не в последний момент."],
-        ["Jeg stopper helt og venter på at en annen bil skal vinke meg inn i det åpne feltet", "Полностью останавливаюсь и жду, когда другая машина махнёт мне, пропуская в открытую полосу", "Du skal ikke stoppe midt i kjørefeltet og vente på et tegn, du skal selv finne en luke og flette inn mens du kjører.", "Нельзя останавливаться посреди полосы и ждать знака — нужно самому найти промежуток и перестроиться на ходу."],
-        ["Jeg øker farten for å komme forbi flest mulig biler før feltet stenger helt", "Увеличиваю скорость, чтобы обогнать как можно больше машин, пока полоса не закрылась окончательно", "Å øke farten for å kjøre forbi andre her øker risikoen for kollisjon ved selve sammenflettingen, du skal senke farten, ikke øke den.", "Увеличивать скорость, чтобы обогнать других перед слиянием, повышает риск столкновения в самый момент сужения — скорость нужно снижать, а не разгоняться."]
+        ["Jeg blinker, tilpasser farten og fletter inn vekselvis med bilene i det åpne feltet der feltene går sammen", "Включаю поворотник, подстраиваю скорость и встраиваюсь поочерёдно с машинами из открытой полосы там, где полосы сливаются"],
+        ["Jeg har vikeplikt for alle i det åpne feltet og må vente til det er helt tomt før jeg kjører inn", "Я обязан уступить всем в открытой полосе и должен ждать, пока она полностью не опустеет", "Når antallet kjørefelt reduseres, gjelder ikke den vanlige vikeplikten ved feltskifte (§ 8 nr 1). Farten skal tilpasses gjensidig, så bilene kjører inn vekselvis.", "Когда число полос сокращается, обычная обязанность уступать при перестроении не действует (§ 8 nr 1). Скорость подстраивают обе стороны, и машины встраиваются поочерёдно."],
+        ["Jeg stopper helt og venter på at en annen bil skal vinke meg inn i det åpne feltet", "Полностью останавливаюсь и жду, когда другая машина махнёт мне, пропуская в открытую полосу", "Du skal ikke stoppe i kjørefeltet og vente på et tegn. Tilpass farten mens du kjører, og flett inn vekselvis.", "Не нужно останавливаться в полосе и ждать знака. Подстрой скорость на ходу и встраивайся поочерёдно."],
+        ["Jeg øker farten for å komme forbi flest mulig biler før feltet stenger helt", "Увеличиваю скорость, чтобы обогнать как можно больше машин, пока полоса не закрылась окончательно", "Å øke farten for å kjøre forbi andre øker risikoen for kollisjon ved selve sammenflettingen. Farten skal tilpasses trafikken i det andre feltet.", "Разгон, чтобы обогнать других перед слиянием, повышает риск столкновения в самом месте сужения. Скорость нужно подстраивать под соседнюю полосу."]
       ],
-      "Ved vegarbeid med feltstenging skal du flette inn i det åpne feltet i god tid, med lav fart og tydelig blinklys, i stedet for å kjøre helt fram til kjeglene og presse deg inn der.",
-      "При дорожных работах с закрытием полосы нужно перестроиться в открытую полосу заранее, на невысокой скорости и с заметным поворотником — а не ехать до самых конусов и втискиваться там.",
-      "Раньше перестроился — меньше шансов, что кто-то «зажмёт» у самых конусов."),
+      "Trafikkreglene § 8 nr 1: når antallet kjørefelt i samme retning reduseres, gjelder ikke vikeplikten ved feltskifte. Farten skal gjensidig tilpasses slik at de kjørende vekselvis kan fortsette (glidelåsprinsippet). I kø bruker man begge feltene helt fram til der de går sammen.",
+      "Trafikkreglene § 8 nr 1: когда число полос в одном направлении сокращается, обязанность уступать при перестроении не действует. Обе стороны подстраивают скорость так, чтобы машины проезжали поочерёдно («молния», glidelåsprinsippet). В пробке обе полосы используют до самого места слияния.",
+      "Сужение полосы — это «молния»: по одной машине из каждой полосы, а не «кто раньше втиснулся»."),
 
     q("098", road({ trailer: true }),
       "Du skal rygge en bil med tilhenger inn på en smal vei, men ser dårlig bakover i speilene på grunn av tilhengerens størrelse. Hva er tryggest å gjøre?",
@@ -1887,13 +1874,13 @@
       "Когда обзор назад с прицепом плохой, безопаснее остановиться и проверить самому, а также воспользоваться помощником снаружи машины, который даёт понятные сигналы — а не сдавать назад «на глазок».",
       "Не видишь — не едешь. Останавливайся и проверяй, а не угадывай."),
 
-    q("099", hillScene(),
+    q("099", null,
       "Du parkerer i en bakke der bilen peker nedover, og det er fortauskant (kantstein) på høyre side av veien. Hvordan bør du vri forhjulene?",
       "Ты паркуешься на спуске, машина смотрит вниз по склону, и справа есть бордюр. Как нужно повернуть передние колёса?",
       [
         ["Vrir forhjulene mot kantsteinen, slik at bilen ruller mot kanten og blir stoppet av den hvis den skulle trille framover", "Поворачиваю колёса к бордюру, чтобы при скатывании вперёд машина покатилась к бордюру и была остановлена им"],
         ["Vrir forhjulene bort fra kantsteinen, akkurat som i en bakke der bilen peker oppover", "Поворачиваю колёса от бордюра — как на подъёме, когда машина смотрит вверх", "Det er motsatt her, siden bilen peker nedover, skal hjulene vris mot kantsteinen, ikke bort fra den, for at kanten skal stoppe bilen.", "Здесь всё наоборот: машина смотрит вниз, поэтому колёса поворачивают к бордюру, а не от него, — только так бордюр остановит машину."],
-        ["Lar forhjulene stå rett fram, siden kantsteinen stopper bilen uansett vinkel", "Оставляю колёса прямо — бордюр остановит машину при любом угле", "Med hjulene rett fram vil bilen trille rett ut i kjørebanen langs kantsteinen i stedet for inn mot den, det er ikke like trygt.", "С прямыми колёсами машина при откате поедет вдоль бордюра прямо на проезжую часть, а не к нему — это не так безопасно."],
+        ["Lar forhjulene stå rett fram, siden kantsteinen stopper bilen uansett vinkel", "Оставляю колёса прямо — бордюр остановит машину при любом угле", "Med hjulene rett fram ruller bilen langs kantsteinen nedover bakken, og kanten stopper den ikke.", "С прямыми колёсами машина покатится вдоль бордюра вниз по склону, и бордюр её не остановит."],
         ["Vrir forhjulene mot kjørebanen i stedet for mot kantsteinen, for å stå lengst unna fortauet", "Поворачиваю колёса в сторону проезжей части, а не к бордюру, — чтобы стоять подальше от тротуара", "Dette er den farligste løsningen, da vil bilen trille rett ut i trafikken hvis den begynner å bevege seg, i stedet for mot kantsteinen.", "Это самый опасный вариант — машина при скатывании покатится прямо в поток машин, а не к бордюру."]
       ],
       "Peker bilen nedover og det finnes fortauskant, vrir du forhjulene mot kantsteinen. Da blir bilen stoppet av kanten hvis den skulle trille framover. Bruk alltid håndbrekk og gir i tillegg.",
@@ -1903,11 +1890,11 @@
     qm("m11", null, "Hva er riktig om kjøring i rundkjøring? Velg alle riktige.", "Что верно про движение в кольце (rundkjøring)? Выбери все верные.", [
       ["Biler som allerede er inne i rundkjøringen, har forrang foran biler som skal kjøre inn", "У машин, которые уже в кольце, приоритет перед тем, кто въезжает", true],
       ["Du skal blinke til høyre like før du kjører ut av rundkjøringen", "Перед выездом из кольца нужно включить правый поворотник", true],
-      ["Fotgjengere som venter på å krysse gangfeltet ved utkjørselen, har vanligvis forkjørsrett foran deg", "Пешеходы, ожидающие перехода на выезде из кольца, обычно имеют преимущество перед тобой", true],
+      ["Du har vikeplikt for gående som er i eller på vei ut i gangfeltet ved utkjøringen", "Ты уступаешь пешеходам, которые идут по переходу на выезде из кольца или вот-вот на него ступят", true],
       ["Du må alltid blinke til høyre allerede før du kjører inn i rundkjøringen, uansett hvilken avkjørsel du skal ta", "Нужно всегда включать правый поворотник ещё до въезда в кольцо, независимо от того, какой выезд нужен", false, "Du blinker til høyre før innkjøring bare hvis du skal ta første avkjørsel, ikke uansett hvilken utkjørsel du skal ta.", "Поворотник перед въездом включают только если нужен первый выезд — не при любом выезде из кольца."]
     ],
-    "I en rundkjøring har trafikken som allerede sirkulerer forrang foran de som kjører inn, og fotgjengere på gangfeltet ved utkjørselen har normalt forkjørsrett. Du blinker til høyre før innkjøring bare ved første avkjørsel, men alltid før du kjører ut.",
-    "В кольце уже движущийся по кругу транспорт имеет приоритет перед въезжающими, а пешеходы на переходе у выезда обычно имеют преимущество. Правый поворотник перед въездом включают только для первого выезда, а перед выездом — всегда.",
+    "I en rundkjøring har trafikken som allerede sirkulerer forrang foran de som kjører inn, og gående som er i eller på vei ut i gangfeltet ved utkjøringen, skal du slippe over (§ 9 nr 2). Du blinker til høyre før innkjøring bare ved første avkjørsel, men alltid før du kjører ut.",
+    "В кольце уже движущийся по кругу транспорт имеет приоритет перед въезжающими, а пешеходов, которые идут или вот-вот ступят на переход у выезда, нужно пропустить (§ 9 nr 2). Правый поворотник перед въездом включают только для первого выезда, а перед выездом — всегда.",
     "Главное в кольце: кто уже внутри — главный, а поворотник перед выездом — всегда обязателен.")
   ];
 })();
