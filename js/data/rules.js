@@ -1011,7 +1011,79 @@
     ],
     "Mobilbruk i hånden gir 10 750 kroner og 3 prikker, mens kjøring uten lys bare gir bot uten prikker. De første to årene telles prikker dobbelt, og åtte prikker på tre år gir tap av førerkortet i 6 måneder, ikke for alltid.",
     "Телефон в руке даёт 10 750 крон и 3 балла, а езда без света — только штраф без баллов. Первые два года баллы считаются вдвое, а восемь баллов за три года дают лишение прав на 6 месяцев, а не навсегда.",
-    "8 баллов за 3 года — это пауза на полгода, а не прощание с правами навсегда.")
+    "8 баллов за 3 года — это пауза на полгода, а не прощание с правами навсегда."),
+
+    q("096", "Hvor nær et gangfelt eller vegkryss kan du stanse eller parkere bilen?",
+      "На каком расстоянии от пешеходного перехода или перекрёстка можно останавливаться или парковаться?",
+      [
+        ["Minst 5 meter fra gangfeltet eller krysset (målt fra der kantsteinen begynner å krumme), og minst 20 meter fra skilt for buss-, taxi- eller trikkeholdeplass", "Не ближе 5 метров от перехода или перекрёстка (считая от начала закругления бордюра) и не ближе 20 метров от знака остановки автобуса, такси или трамвая"],
+        ["Minst 10 meter fra gangfeltet eller krysset, og 5 meter fra holdeplassen", "Не ближе 10 метров от перехода или перекрёстка и 5 метров от остановки", "Avstandene er motsatt av det som gjelder, kryss og gangfelt krever 5 meter, mens holdeplasser krever mer, 20 meter.", "Расстояния перепутаны: у перехода и перекрёстка требуется 5 метров, а у остановки — больше, 20 метров."],
+        ["Det finnes ingen fast avstand, det er nok at du ikke sperrer for annen trafikk", "Фиксированного расстояния нет, достаточно не мешать другому движению", "Det finnes faste minsteavstander i forskriften, 5 meter til gangfelt og kryss og 20 meter til holdeplasskilt, ikke bare en vurdering fra sak til sak.", "Фиксированные минимальные расстояния есть в правилах — 5 метров до перехода и перекрёстка и 20 метров до знака остановки, а не просто «на глаз, чтобы не мешать»."],
+        ["Avstanden gjelder bare for kryss, ikke for gangfelt", "Расстояние действует только для перекрёстков, а не для переходов", "5-metersregelen gjelder begge steder, både ved vegkryss og ved gangfelt, ikke bare ved kryss.", "Правило 5 метров действует в обоих случаях — и на перекрёстке, и у перехода, а не только на перекрёстке."]
+      ],
+      "Du skal ikke stanse eller parkere nærmere enn 5 meter fra et gangfelt eller vegkryss, og ikke nærmere enn 20 meter fra et skilt som viser holdeplass for buss, taxi eller trikk.",
+      "Нельзя останавливаться или стоять ближе 5 метров от пешеходного перехода или перекрёстка, и ближе 20 метров от знака остановки автобуса, такси или трамвая.",
+      "Запомни пару чисел: 5 метров — переход и перекрёсток, 20 метров — остановка транспорта."),
+
+    q("097", "Bilen foran deg nærmer seg et gangfelt og skjuler utsikten din til det. Har du lov til å kjøre forbi den akkurat nå?",
+      "Машина впереди приближается к пешеходному переходу и закрывает тебе обзор на него. Можно ли её обгонять прямо сейчас?",
+      [
+        ["Nei, det er forbudt å kjøre forbi en bil som skjuler utsikten din til et gangfelt", "Нет, запрещено обгонять машину, которая закрывает тебе обзор на пешеходный переход"],
+        ["Ja, så lenge jeg ikke ser noen fotgjengere fra min egen posisjon", "Да, если я сам не вижу пешеходов со своего места", "Poenget er nettopp at du ikke kan se godt nok når en annen bil skjuler gangfeltet, loven forbyr forbikjøring her uansett hva du tror du ser.", "Суть именно в том, что ты не можешь увидеть достаточно, когда другая машина закрывает переход — закон запрещает обгон тут независимо от того, что тебе кажется, что ты видишь."],
+        ["Ja, hvis jeg tuter først for å varsle eventuelle fotgjengere", "Да, если сначала посигналить, чтобы предупредить возможных пешеходов", "Et hornsignal endrer ikke forbudet mot å kjøre forbi her, og unødig bruk av horn er dessuten ikke tillatt.", "Сигнал клаксоном не отменяет запрет на обгон здесь, а ещё и необязательное использование клаксона само по себе не разрешено."],
+        ["Ja, men bare dersom jeg kjører svært sakte forbi", "Да, но только если обгонять очень медленно", "Lav fart løser ikke problemet med at sikten til gangfeltet er sperret, forbudet gjelder uavhengig av farten din.", "Низкая скорость не решает проблему закрытого обзора на переход — запрет действует независимо от твоей скорости."]
+      ],
+      "Du har ikke lov til å kjøre forbi et kjøretøy som sperrer utsikten din til et gangfelt. Regelen gjelder fordi du da ikke kan se om noen er i gang med å krysse.",
+      "Запрещено обгонять машину, которая закрывает тебе обзор на пешеходный переход. Правило действует, потому что в этом случае ты не можешь увидеть, не начал ли кто-то переходить дорогу.",
+      "Не видишь переход целиком — не обгоняй, что бы тебе ни казалось."),
+
+    q("098", "Hvor stort er kravet til mønsterdybde på vinterdekk, og i hvilken periode gjelder vinterdekk-kravet i Sør-Norge?",
+      "Какая минимальная глубина протектора требуется для зимних шин, и в какой период в Южной Норвегии действует требование зимних шин?",
+      [
+        ["Minst 3 mm mønsterdybde, og kravet gjelder normalt fra 1. november til første søndag etter 2. påskedag", "Не менее 3 мм глубины протектора, и требование обычно действует с 1 ноября до первого воскресенья после второго пасхального дня"],
+        ["Minst 1,6 mm, som for vanlige sommerdekk", "Не менее 1,6 мм, как для обычных летних шин", "1,6 mm er minstekravet for sommerdekk, vinterdekk krever mer mønsterdybde, minst 3 mm, for å fungere i snø og is.", "1,6 мм — минимум для летних шин, а зимние требуют больше протектора, не менее 3 мм, чтобы работать в снегу и на льду."],
+        ["Minst 3 mm, men kravet gjelder hele året i hele Norge", "Не менее 3 мм, но требование действует весь год по всей Норвегии", "Vinterdekk-kravet er knyttet til en bestemt periode om vinteren, ikke hele året, perioden varierer også mellom Sør-Norge og Nord-Norge.", "Требование зимних шин привязано к определённому зимнему периоду, а не ко всему году, и этот период в Южной и Северной Норвегии разный."],
+        ["Minst 5 mm, fra 1. oktober til 1. mai", "Не менее 5 мм, с 1 октября по 1 мая", "5 mm og disse datoene er ikke riktig, kravet er 3 mm mønsterdybde og perioden starter 1. november i Sør-Norge, ikke 1. oktober.", "5 мм и эти даты не подходят — требование 3 мм протектора, а период в Южной Норвегии начинается 1 ноября, а не 1 октября."]
+      ],
+      "Vinterdekk skal ha minst 3 mm mønsterdybde. I Sør-Norge gjelder kravet normalt fra 1. november til første søndag etter 2. påskedag, mens det i nord gjelder fra 16. oktober til 30. april.",
+      "Зимние шины должны иметь минимум 3 мм глубины протектора. В Южной Норвегии требование обычно действует с 1 ноября до первого воскресенья после второго пасхального дня, а на севере — с 16 октября по 30 апреля.",
+      "3 мм — цифра для зимней резины, не путай её с 1,6 мм летней."),
+
+    q("099", "Er det tillatt å kjøre uten nærlys på dagtid i Norge, for eksempel på en solfylt motorveg?",
+      "Можно ли в Норвегии ехать днём без ближнего света, например по солнечной автомагистрали?",
+      [
+        ["Nei, nærlys (eller kjørelys) skal være på hele tiden du kjører, uansett tid på døgnet eller lysforhold", "Нет, ближний свет (или ходовые огни) должны быть включены всё время движения, независимо от времени суток и освещённости"],
+        ["Ja, på dagtid i godt vær er det valgfritt å bruke lys", "Да, днём в хорошую погоду свет можно включать по желанию", "Lyskravet er ikke knyttet til vær eller lysforhold, lys skal brukes under all kjøring, også i strålende sol midt på dagen.", "Требование по свету не привязано к погоде и освещённости — свет нужен при любой поездке, даже в яркое солнце среди дня."],
+        ["Ja, men bare på motorveg, der andre bilister ser deg uansett", "Да, но только на автомагистрали, где тебя видно и так", "Regelen gjelder likt på alle typer veier, motorveg gir ikke noe unntak fra kravet om lys.", "Правило действует одинаково на любых дорогах — автомагистраль не даёт исключения из требования по свету."],
+        ["Ja, hvis bilen har kjørelys (dagslys) som lyser automatisk uten at du trenger å slå på noe", "Да, если у машины есть дневные ходовые огни, которые светят автоматически без твоего участия", "Dette er riktig bare hvis kjørelysene faktisk er på og fungerer, det er ikke et unntak fra lyskravet, det er en måte å oppfylle det på.", "Это верно только если ходовые огни реально горят и работают — это не исключение из требования по свету, а один из способов его выполнить."]
+      ],
+      "I Norge skal du bruke nærlys eller kjørelys under all kjøring, hele året og hele døgnet, uansett om det er lyst eller mørkt, sol eller skya. Det finnes ikke noe unntak for dagtid.",
+      "В Норвегии ближний свет или ходовые огни должны быть включены при любой поездке, круглый год и в любое время суток, независимо от освещённости и погоды. Исключения для дневного времени нет.",
+      "Свет в Норвегии — не «для темноты», а просто всегда, без исключений."),
+
+    q("100", "Kan en skolepatrulje stoppe bilen din ved et gangfelt?",
+      "Может ли школьный патруль остановить твою машину у пешеходного перехода?",
+      [
+        ["Nei, en skolepatrulje har ikke rett til å stoppe biler, men du skal kjøre spesielt sakte og stoppe om nødvendig for fotgjengerne på gangfeltet", "Нет, школьный патруль не имеет права останавливать машины, но ты обязан ехать особенно медленно и остановиться при необходимости — ради пешеходов на переходе"],
+        ["Ja, skiltet eller tegnet fra skolepatruljen fungerer juridisk akkurat som rødt lys", "Да, знак или сигнал школьного патруля юридически действует точно как красный свет", "Skolepatruljen har ikke en slik formell myndighet som et lyssignal, plikten din følger av at du skal vike for fotgjengere på gangfeltet, ikke av at patruljen «stopper» deg som et lys.", "У школьного патруля нет такой же формальной силы, как у светофора — твоя обязанность вытекает из уступки пешеходам на переходе, а не из того, что патруль «останавливает» тебя как светофор."],
+        ["Ja, men bare hvis patruljemedlemmet er en voksen, ikke et barn", "Да, но только если в патруле стоит взрослый, а не ребёнок", "Det spiller ingen rolle om patruljemedlemmet er barn eller voksen, ingen av dem har formell myndighet til å stoppe biler, plikten din gjelder uansett.", "Не важно, ребёнок там или взрослый — ни у кого из них нет формального права останавливать машины, твоя обязанность действует в любом случае."],
+        ["Nei, skolepatruljen har ingen rolle i trafikken, du kan kjøre som normalt forbi", "Нет, школьный патруль вообще не играет роли в движении, можно ехать как обычно", "Skolepatruljen har en viktig rolle, du skal kjøre ekstra sakte og være forberedt på å stoppe for barna, selv om patruljen ikke formelt kan stoppe deg.", "У школьного патруля важная роль — нужно ехать особенно осторожно и быть готовым остановиться ради детей, хотя формально патруль не может тебя «остановить»."]
+      ],
+      "En skolepatrulje kan ikke stoppe trafikken med formell myndighet, slik et lyssignal eller politiet kan. Men du har plikt til å kjøre spesielt sakte forbi skolepatruljer og stoppe hvis det er nødvendig, siden du uansett skal vike for fotgjengere på gangfeltet.",
+      "Школьный патруль не может формально останавливать движение, как светофор или полиция. Но ты обязан проезжать мимо школьного патруля особенно медленно и останавливаться при необходимости — ведь ты всё равно уступаешь пешеходам на переходе.",
+      "Патруль не «командует» тобой официально, но пешеходов на переходе ты всё равно обязан пропустить."),
+
+    q("101", "Hvem er ansvarlig for at lasten i og på bilen er sikret, slik at den ikke flytter seg eller faller av under kjøring?",
+      "Кто отвечает за то, чтобы груз в машине и на ней был закреплён и не сдвигался или не выпадал во время движения?",
+      [
+        ["Føreren er ansvarlig for at lasten er sikret forsvarlig, uansett om det er føreren selv som har lastet bilen", "Водитель отвечает за то, чтобы груз был надёжно закреплён — независимо от того, сам он грузил машину или нет"],
+        ["Bare den som fysisk lastet bilen er ansvarlig, ikke føreren hvis det er en annen person", "Отвечает только тот, кто физически грузил машину, а не водитель, если это был другой человек", "Ansvaret for sikker last ligger hos føreren når bilen kjører, uavhengig av hvem som pakket den.", "Ответственность за безопасный груз лежит на водителе во время движения, независимо от того, кто его укладывал."],
+        ["Det er bare et problem hvis lasten er synlig fra utsiden av bilen", "Это проблема только если груз виден снаружи машины", "Usikret last inni bilen, for eksempel løse gjenstander i bagasjerommet, kan også bli farlig ved bråbrems eller kollisjon, ikke bare last som er synlig utenpå.", "Незакреплённый груз внутри машины, например вещи в багажнике, тоже может стать опасным при резком торможении или столкновении — не только видимый снаружи груз."],
+        ["Lastesikring er bare pålagt for lastebiler og vogntog, ikke for personbiler", "Крепление груза обязательно только для грузовиков и фур, а не для легковых машин", "Kravet om sikret last gjelder alle kjøretøy som frakter last, også personbiler, ikke bare tyngre kjøretøy.", "Требование закреплять груз действует для любых машин с грузом, включая легковые, а не только для тяжёлого транспорта."]
+      ],
+      "Føreren har ansvaret for at all last, både inni og utenpå bilen, er sikret så den ikke flytter seg, faller av eller påvirker kjøreegenskapene og bremselengden under kjøring.",
+      "Водитель отвечает за то, чтобы весь груз — и внутри, и снаружи машины — был закреплён так, чтобы он не сдвигался, не выпадал и не влиял на управляемость и тормозной путь во время движения.",
+      "Груз в багажнике при торможении может «полететь» вперёд не хуже камня — закрепляй всё, не только то, что видно снаружи.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

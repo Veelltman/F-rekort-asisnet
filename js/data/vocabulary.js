@@ -207,6 +207,13 @@
     w("167", "bremselys", "стоп-сигналы (задние фонари торможения)", "Bremselysene varsler bilen bak deg at du senker farten.", "Стоп-сигналы предупреждают машину позади, что ты снижаешь скорость.", "Машина"),
     w("168", "fotgjengerfelt", "пешеходный переход (зебра)", "Du skal senke farten når du nærmer deg et fotgjengerfelt.", "Нужно снижать скорость, подъезжая к пешеходному переходу.", "Приоритет"),
     w("169", "kryss", "перекрёсток", "I et kryss uten skilt gjelder høyreregelen.", "На перекрёстке без знаков действует правило правой руки.", "Дорога"),
-    w("170", "promillekjøring", "вождение в состоянии опьянения", "Promillekjøring kan gi både bot, tap av førerkort og fengsel.", "Вождение в состоянии опьянения может привести к штрафу, лишению прав и тюремному сроку.", "Правила")
+    w("170", "promillekjøring", "вождение в состоянии опьянения", "Promillekjøring kan gi både bot, tap av førerkort og fengsel.", "Вождение в состоянии опьянения может привести к штрафу, лишению прав и тюремному сроку.", "Правила"),
+
+    w("171", "lastsikring", "крепление груза", "Lastsikring er førerens ansvar, selv om en annen har pakket bilen.", "Крепление груза — ответственность водителя, даже если грузил кто-то другой.", "Машина"),
+    w("172", "kantstein", "бордюр (край тротуара)", "Vri forhjulene mot kantsteinen når du parkerer nedover en bakke.", "Поворачивай передние колёса к бордюру, когда паркуешься на спуске.", "Дорога"),
+    w("173", "å flette (inn i trafikken)", "перестраиваться, вливаться (в поток)", "Flett inn i det åpne feltet i god tid før kjørefeltet stenger.", "Перестраивайся в открытую полосу заблаговременно, до того как полоса закроется.", "Действия"),
+    w("174", "tilleggsskilt", "дополнительная табличка (под знаком)", "Et tilleggsskilt under et forbudsskilt kan vise klokkeslett og ukedager.", "Дополнительная табличка под запрещающим знаком может показывать время и дни недели.", "Правила"),
+    w("175", "kjegle", "дорожный конус", "Kjegler viser hvor kjørefeltet er stengt ved vegarbeid.", "Конусы показывают, где полоса закрыта на дорожных работах.", "Дорога"),
+    w("176", "trikk", "трамвай", "Trikken har alltid forrang foran annen trafikk i kryss.", "У трамвая на перекрёстке всегда преимущество перед остальным транспортом.", "Машина")
   ];
 })();
