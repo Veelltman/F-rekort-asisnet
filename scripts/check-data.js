@@ -61,6 +61,39 @@ D.vocabulary.forEach(w => {
   ids.add(w.id);
 });
 
+/* Ловушки на ошибки, которые робот уже делал. Каждая — с объяснением, что не так. */
+const HILL = ctx.window.HILL_SCENE && ctx.window.HILL_SCENE();
+D.situational.forEach(q => {
+  if (HILL && q.image === HILL && /oppover|kantstein|fortauskant/i.test(q.prompt_no.replace(/uten fortauskant/i, "")))
+    errors.push(`situational ${q.id}: hillScene() рисует СПУСК БЕЗ бордюра (канава), а в вопросе подъём или бордюр — поставь null`);
+});
+const TRAPS = [
+  [/vinterdekk-?krav|påbudt med vinterdekk|krav om vinterdekk/i, "зимние шины для легковой не обязательны — обязательны 3 мм протектора зимой"],
+  [/forbudt å (snu|vende|rygge)[^.]*tunnel|tunnel[^.]*forbudt å (snu|vende|rygge)/i, "в тоннеле запрещено стоять (§ 17 nr 1 a); разворот запрещён только на motorveg/motortrafikkveg (§ 11 nr 2)"],
+  [/(syklist|gående|fotgjenger)[^.]*har vikeplikt (framfor|for) deg som svinger/i, "поворачивающий уступает велосипедисту и пешеходу, едущим прямо (§ 7 nr 3), а не наоборот"],
+  [/(trikk|sporvogn)[^.]*alltid (forrang|forkjørsrett)/i, "трамваю уступают по § 10 nr 2, но на перекрёстке со светофором действует светофор — не пиши «всегда»"],
+  [/flett\w* (inn )?[^.]*i god tid før/i, "при сужении полос — поочерёдно («молния», § 8 nr 1), а не «перестройся заранее»"],
+  [/ring\w* (nødnummer\w* )?112[^.]*(skade|personskade|ulykke)/i, "при пострадавших — 113 (скорая), 112 — полиция"],
+  [/gul (kant)?linje[^.]*(parkering|stans)/i, "жёлтой линии у бордюра в норвежской разметке нет"],
+  [/fritt? (valg|valgfrihet)[^.]*(tettbygd|60)/i, "свободный выбор полосы — только со знаком 528"],
+  [/tåkelys[^.]*sammen med nærlys[^.]*(tillatt|lov|kan)/i, "противотуманки нельзя вместе с ближним (§ 15 nr 5)"]
+];
+const textsOf = q => {
+  const inst = q.fresh ? q.fresh() : q;
+  // сам вопрос может спрашивать про миф — проверяем то, что сайт утверждает: правильный ответ и объяснения
+  return [inst.explanation_no, ...(inst.options || []).flatMap(o => o.correct ? [o.text_no] : [o.why_no])].filter(Boolean);
+};
+// предложение с отрицанием опровергает миф («gul linje finnes ikke») — это не ошибка
+const sentenceOf = (txt, re) => {
+  const m = txt.match(re), i = txt.lastIndexOf(".", m.index) + 1, j = txt.indexOf(".", m.index + m[0].length);
+  return txt.slice(i, j < 0 ? undefined : j);
+};
+const denies = s => /\b(ikke|ingen|aldri|ikkje)\b/i.test(s);
+["situational", "rules"].forEach(t => D[t].forEach(q => {
+  textsOf(q).forEach(txt => TRAPS.forEach(([re, msg]) => { if (re.test(txt) && !denies(sentenceOf(txt, re))) errors.push(`${t} ${q.id}: «${txt.match(re)[0]}» — ${msg}`); }));
+}));
+D.vocabulary.forEach(w => TRAPS.forEach(([re, msg]) => { if (re.test(w.example_no) && !denies(sentenceOf(w.example_no, re))) errors.push(`vocabulary ${w.id}: ${msg}`); }));
+
 const imgDir = path.join(root, "img/signs");
 const imgs = new Set(fs.readdirSync(imgDir));
 ctx.window.SIGN_CATALOG.LIST.forEach(e => { if (!imgs.has(e.file)) errors.push(`signs-catalog: нет файла img/signs/${e.file}`); });

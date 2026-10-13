@@ -231,11 +231,14 @@
       "Это одно из отличий Норвегии от Швеции и Дании: там парковка «против шерсти» запрещена, здесь — нет."),
 
     /* ---------- Обгон, дистанция, полосы ---------- */
-    q("029", "Hva gjelder for forbikjøring rett foran et gangfelt?",
-      "Что действует для обгона прямо перед пешеходным переходом?",
-      [["Forbudt", "Запрещён"], ["Tillatt hvis ingen fotgjengere", "Разрешён, если нет пешеходов", "Forbudet gjelder uansett om du ser fotgjengere eller ikke, nettopp fordi sikten kan være skjult.", "Запрет действует независимо от того, видишь ли ты пешеходов — как раз потому, что обзор может быть закрыт."], ["Tillatt i 30-sone", "Разрешён в зоне 30", "Fartssonen har ingen betydning, forbudet mot forbikjøring ved gangfelt gjelder overalt.", "Зона скорости тут ни при чём — запрет обгона у перехода действует везде."], ["Tillatt for sykler", "Разрешён для велосипедов", "Forbudet gjelder alle kjøretøy, det finnes ikke noe unntak for sykler.", "Запрет касается всех транспортных средств, исключения для велосипедов нет."]],
-      "Trafikkreglene § 12 nr. 6: den som nærmer seg gangfelt, må ikke kjøre forbi kjøretøy som hindrer noen del av sikten til gangfeltet. I praksis er forbikjøring rett foran gangfelt forbudt: bilen du passerer skjuler nettopp den delen av feltet der fotgjengeren kan være.",
-      "Trafikkreglene § 12 nr. 6: подъезжая к переходу, нельзя обгонять машину, которая закрывает хоть часть обзора перехода. На практике обгон прямо перед переходом запрещён: обгоняемая машина как раз и скрывает ту часть зебры, где может быть пешеход.",
+    q("029", "Du nærmer deg et gangfelt. Bilen foran deg har bremset ned og skjuler en del av gangfeltet. Kan du kjøre forbi den?",
+      "Ты подъезжаешь к пешеходному переходу. Машина впереди притормозила и закрывает часть перехода. Можно её обогнать?",
+      [["Nei, det er forbudt å kjøre forbi et kjøretøy som hindrer noe av sikten til gangfeltet", "Нет: запрещено обгонять машину, которая закрывает хоть часть обзора перехода"],
+       ["Ja, hvis jeg ikke ser noen fotgjengere", "Да, если я не вижу пешеходов", "Poenget er at du ikke kan se alt: bilen skjuler nettopp den delen av gangfeltet der en fotgjenger kan være.", "В том и дело, что всё ты не видишь: машина закрывает именно ту часть перехода, где может быть пешеход."],
+       ["Ja, i 30-sone er farten så lav at det er greit", "Да, в зоне 30 скорость низкая, так что можно", "Fartsgrensen spiller ingen rolle: forbudet i § 12 nr 6 gjelder overalt der et kjøretøy skjuler gangfeltet.", "Ограничение скорости тут ни при чём: запрет из § 12 nr 6 действует везде, где машина закрывает переход."],
+       ["Ja, hvis det er to kjørefelt i min retning", "Да, если в моём направлении две полосы", "Nettopp på veg med flere felt er faren størst: bilen som har stanset i nabofeltet, kan skjule en fotgjenger. Forbudet gjelder også der.", "Именно на дороге с несколькими полосами опаснее всего: остановившаяся в соседнем ряду машина может закрывать пешехода. Запрет действует и там."]],
+      "Trafikkreglene § 12 nr 6: den som nærmer seg gangfelt, må ikke kjøre forbi kjøretøy eller sporvogn som hindrer noen del av sikten til gangfeltet.",
+      "Trafikkreglene § 12 nr 6: подъезжая к переходу, нельзя обгонять машину или трамвай, которые закрывают хоть часть обзора перехода.",
       "Классический сценарий ДТП: сосед притормозил у зебры, ты обгоняешь — и сбиваешь пешехода."),
 
     q("030", "Hva er tresekundersregelen?",
@@ -1000,30 +1003,6 @@
     "Mobilbruk i hånden gir 10 750 kroner og 3 prikker, mens kjøring uten lys bare gir bot uten prikker. De første to årene telles prikker dobbelt, og åtte prikker på tre år gir tap av førerkortet i 6 måneder, ikke for alltid.",
     "Телефон в руке даёт 10 750 крон и 3 балла, а езда без света — только штраф без баллов. Первые два года баллы считаются вдвое, а восемь баллов за три года дают лишение прав на 6 месяцев, а не навсегда.",
     "8 баллов за 3 года — это пауза на полгода, а не прощание с правами навсегда."),
-
-    q("096", "Hvor nær et gangfelt eller vegkryss kan du stanse eller parkere bilen?",
-      "На каком расстоянии от пешеходного перехода или перекрёстка можно останавливаться или парковаться?",
-      [
-        ["Minst 5 meter fra gangfeltet eller krysset (målt fra der kantsteinen begynner å krumme), og minst 20 meter fra skilt for buss-, taxi- eller trikkeholdeplass", "Не ближе 5 метров от перехода или перекрёстка (считая от начала закругления бордюра) и не ближе 20 метров от знака остановки автобуса, такси или трамвая"],
-        ["Minst 10 meter fra gangfeltet eller krysset, og 5 meter fra holdeplassen", "Не ближе 10 метров от перехода или перекрёстка и 5 метров от остановки", "Avstandene er motsatt av det som gjelder, kryss og gangfelt krever 5 meter, mens holdeplasser krever mer, 20 meter.", "Расстояния перепутаны: у перехода и перекрёстка требуется 5 метров, а у остановки — больше, 20 метров."],
-        ["Det finnes ingen fast avstand, det er nok at du ikke sperrer for annen trafikk", "Фиксированного расстояния нет, достаточно не мешать другому движению", "Det finnes faste minsteavstander i forskriften, 5 meter til gangfelt og kryss og 20 meter til holdeplasskilt, ikke bare en vurdering fra sak til sak.", "Фиксированные минимальные расстояния есть в правилах — 5 метров до перехода и перекрёстка и 20 метров до знака остановки, а не просто «на глаз, чтобы не мешать»."],
-        ["Avstanden gjelder bare for kryss, ikke for gangfelt", "Расстояние действует только для перекрёстков, а не для переходов", "5-metersregelen gjelder begge steder, både ved vegkryss og ved gangfelt, ikke bare ved kryss.", "Правило 5 метров действует в обоих случаях — и на перекрёстке, и у перехода, а не только на перекрёстке."]
-      ],
-      "Du skal ikke stanse eller parkere nærmere enn 5 meter fra et gangfelt eller vegkryss, og ikke nærmere enn 20 meter fra et skilt som viser holdeplass for buss, taxi eller trikk.",
-      "Нельзя останавливаться или стоять ближе 5 метров от пешеходного перехода или перекрёстка, и ближе 20 метров от знака остановки автобуса, такси или трамвая.",
-      "Запомни пару чисел: 5 метров — переход и перекрёсток, 20 метров — остановка транспорта."),
-
-    q("097", "Bilen foran deg nærmer seg et gangfelt og skjuler utsikten din til det. Har du lov til å kjøre forbi den akkurat nå?",
-      "Машина впереди приближается к пешеходному переходу и закрывает тебе обзор на него. Можно ли её обгонять прямо сейчас?",
-      [
-        ["Nei, det er forbudt å kjøre forbi en bil som skjuler utsikten din til et gangfelt", "Нет, запрещено обгонять машину, которая закрывает тебе обзор на пешеходный переход"],
-        ["Ja, så lenge jeg ikke ser noen fotgjengere fra min egen posisjon", "Да, если я сам не вижу пешеходов со своего места", "Poenget er nettopp at du ikke kan se godt nok når en annen bil skjuler gangfeltet, loven forbyr forbikjøring her uansett hva du tror du ser.", "Суть именно в том, что ты не можешь увидеть достаточно, когда другая машина закрывает переход — закон запрещает обгон тут независимо от того, что тебе кажется, что ты видишь."],
-        ["Ja, hvis jeg tuter først for å varsle eventuelle fotgjengere", "Да, если сначала посигналить, чтобы предупредить возможных пешеходов", "Et hornsignal endrer ikke forbudet mot å kjøre forbi her, og unødig bruk av horn er dessuten ikke tillatt.", "Сигнал клаксоном не отменяет запрет на обгон здесь, а ещё и необязательное использование клаксона само по себе не разрешено."],
-        ["Ja, men bare dersom jeg kjører svært sakte forbi", "Да, но только если обгонять очень медленно", "Lav fart løser ikke problemet med at sikten til gangfeltet er sperret, forbudet gjelder uavhengig av farten din.", "Низкая скорость не решает проблему закрытого обзора на переход — запрет действует независимо от твоей скорости."]
-      ],
-      "Du har ikke lov til å kjøre forbi et kjøretøy som sperrer utsikten din til et gangfelt. Regelen gjelder fordi du da ikke kan se om noen er i gang med å krysse.",
-      "Запрещено обгонять машину, которая закрывает тебе обзор на пешеходный переход. Правило действует, потому что в этом случае ты не можешь увидеть, не начал ли кто-то переходить дорогу.",
-      "Не видишь переход целиком — не обгоняй, что бы тебе ни казалось."),
 
     q("098", "I hvilken periode gjelder kravet om minst 3 mm mønsterdybde på dekkene i Sør-Norge?",
       "В какой период в Южной Норвегии действует требование минимум 3 мм протектора на шинах?",

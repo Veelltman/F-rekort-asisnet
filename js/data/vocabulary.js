@@ -23,7 +23,7 @@
     w("009", "vikeplikt", "обязанность уступить дорогу", "Du har vikeplikt for trafikk fra høyre.", "Ты уступаешь тем, кто едет справа.", "Приоритет"),
     w("010", "å vike", "уступать", "Jeg viker for bussen.", "Я пропускаю автобус.", "Приоритет"),
     w("011", "forkjørsvei (forkjørsveg)", "главная дорога", "På forkjørsvei har du forrang.", "На главной дороге ты едешь первым.", "Приоритет"),
-    w("012", "forkjørsrett / forrang", "преимущество (право первым проехать)", "Sporvognen har alltid forkjørsrett.", "У трамвая всегда преимущество.", "Приоритет"),
+    w("012", "forkjørsrett / forrang", "преимущество (право первым проехать)", "Den som kjører på forkjørsvegen, har forkjørsrett.", "У того, кто едет по главной дороге, преимущество.", "Приоритет"),
     w("013", "høyreregelen", "правило правой руки", "Uten skilt gjelder høyreregelen.", "Нет знаков — работает правило правой руки.", "Приоритет"),
     w("014", "vegkryss / kryss", "перекрёсток", "Senk farten før krysset.", "Сбавь скорость перед перекрёстком.", "Приоритет"),
     w("015", "rundkjøring", "круговое движение", "I rundkjøringen har du vikeplikt for dem som allerede er inne.", "На кругу пропускаешь тех, кто уже едет по нему.", "Приоритет"),
