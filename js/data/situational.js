@@ -1895,6 +1895,58 @@
     ],
     "I en rundkjøring har trafikken som allerede sirkulerer forrang foran de som kjører inn, og gående som er i eller på vei ut i gangfeltet ved utkjøringen, skal du slippe over (§ 9 nr 2). Du blinker til høyre før innkjøring bare ved første avkjørsel, men alltid før du kjører ut.",
     "В кольце уже движущийся по кругу транспорт имеет приоритет перед въезжающими, а пешеходов, которые идут или вот-вот ступят на переход у выезда, нужно пропустить (§ 9 nr 2). Правый поворотник перед въездом включают только для первого выезда, а перед выездом — всегда.",
-    "Главное в кольце: кто уже внутри — главный, а поворотник перед выездом — всегда обязателен.")
+    "Главное в кольце: кто уже внутри — главный, а поворотник перед выездом — всегда обязателен."),
+
+    q("100", null,
+      "Du kjører med campingvogn opp en smal og svingete bakke, langt under fartsgrensen. Det er møtende trafikk, og en lang kø har samlet seg bak deg. Hva bør du gjøre?",
+      "Ты едешь с жилым прицепом (campingvogn) вверх по узкой извилистой дороге, гораздо медленнее лимита. Есть встречные машины, а за тобой собралась длинная очередь. Как правильно поступить?",
+      [
+        ["Holde godt til høyre, og ved behov sette ned farten eller stanse på et egnet sted, for eksempel en lomme, så køen kommer forbi", "Держаться как можно правее и при необходимости сбросить скорость или остановиться в подходящем месте, например в кармане, чтобы очередь могла проехать"],
+        ["Kjøre videre som før, det er de bak som må vente til vegen blir bredere", "Ехать дальше как ехал — пусть те, кто сзади, ждут, пока дорога станет шире", "Når du kjører sakte, tar stor plass og vegen er uoversiktlig eller har møtende trafikk, skal du om nødvendig vike til høyre og sette ned farten eller stanse (§ 12 nr 4).", "Если ты едешь медленно, занимаешь много места, а дорога плохо просматривается или есть встречные, закон требует при необходимости прижаться вправо, сбросить скорость или остановиться (§ 12 nr 4)."],
+        ["Blinke til høyre for å vise bilene bak at det er trygt å kjøre forbi", "Включить правый поворотник, чтобы показать машинам сзади, что обгонять безопасно", "Blinklys viser at du selv skal svinge eller flytte deg til høyre, ikke at vegen foran er fri. Den som kjører forbi, må selv forvisse seg om at det er trygt (§ 12 nr 2).", "Поворотник значит, что ты сам поворачиваешь или смещаешься вправо, а не что впереди свободно. Обгоняющий сам обязан убедиться, что это безопасно (§ 12 nr 2)."],
+        ["Øke farten litt over fartsgrensen et kort stykke, så køen blir mindre", "Ненадолго немного превысить лимит, чтобы очередь стала короче", "Fartsgrensen gjelder uansett kø bak deg. Med tilhenger er det i tillegg ekstra farlig å kjøre fort i svinger.", "Лимит скорости действует независимо от очереди сзади. А с прицепом быстро входить в повороты ещё и особенно опасно."]
+      ],
+      "Trafikkreglene § 12 nr 4: når kjøretøyet går sakte eller tar stor plass, og vegen er uoversiktlig eller har møtende trafikk, skal føreren om nødvendig vike til høyre og sette ned farten eller stanse, slik at andre kan kjøre forbi.",
+      "Trafikkreglene § 12 nr 4: если машина едет медленно или занимает много места, а дорога плохо просматривается или есть встречные, водитель при необходимости должен уйти вправо, сбросить скорость или остановиться, чтобы другие могли обогнать.",
+      "Медленный и широкий — значит ты помогаешь себя обогнать: прижмись вправо и пропусти очередь в кармане."),
+
+    q("101", null,
+      "I et boligområde ser du en person med hvit stokk som står ved kanten av vegen og ser ut til å ville gå over. Det er ikke noe gangfelt her. Hva gjør du?",
+      "В жилом районе ты видишь человека с белой тростью: он стоит у края дороги и, похоже, хочет перейти. Пешеходного перехода здесь нет. Что делаешь?",
+      [
+        ["Senker farten mye og er klar til å stanse med en gang", "Сильно снижаю скорость и готов сразу остановиться"],
+        ["Holder vanlig fart, siden plikten til å vike for gående bare gjelder ved gangfelt", "Еду с обычной скоростью: уступать пешеходам нужно только на переходе", "Plikten til å kjøre sakte og om nødvendig stanse for en person med hvit stokk gjelder overalt, ikke bare ved gangfelt (§ 13 nr 2 c).", "Обязанность ехать медленно и при необходимости остановиться перед человеком с белой тростью действует везде, а не только у перехода (§ 13 nr 2 c)."],
+        ["Tuter kort for at personen skal høre at en bil kommer, og kjører videre i samme fart", "Коротко сигналю, чтобы человек услышал машину, и еду дальше с той же скоростью", "Et tut kan skremme og forvirre, og det fjerner ikke plikten din til å senke farten. Unødig bruk av lydsignal er dessuten forbudt (§ 14 nr 1).", "Сигнал может напугать и сбить с толку, и он не снимает с тебя обязанность сбавить скорость. К тому же ненужный звуковой сигнал запрещён (§ 14 nr 1)."],
+        ["Kjører raskt forbi før personen går ut, så du ikke blir stående i vegen", "Быстро проезжаю, пока человек не вышел на дорогу, чтобы не мешать", "Å øke farten forbi en blind person er det motsatte av det loven krever: du skal holde særlig liten fart.", "Разгоняться мимо незрячего человека — прямо противоположно тому, что требует закон: скорость должна быть особенно низкой."]
+      ],
+      "Trafikkreglene § 13 nr 2 c: kjørende skal i særlig grad holde liten fart og om nødvendig stanse straks når de passerer en person som bruker hvit stokk eller førerhund for blinde. Det gjelder også der det ikke er gangfelt.",
+      "Trafikkreglene § 13 nr 2 c: проезжая мимо человека с белой тростью или собакой-поводырём, водитель обязан держать особенно низкую скорость и при необходимости сразу остановиться. Это действует и там, где перехода нет.",
+      "Белая трость или собака-поводырь — сигнал «тормози»: человек может не видеть машину."),
+
+    q("102", null,
+      "Du kjører på en veg med ett felt i hver retning. Foran ligger et kryss uten skilt og uten trafikklys. Bilen foran deg kjører litt sakte. Kan du kjøre forbi den like foran eller i krysset?",
+      "Ты едешь по дороге с одной полосой в каждую сторону. Впереди перекрёсток без знаков и без светофора. Машина перед тобой едет немного медленно. Можно обогнать её прямо перед перекрёстком или на нём?",
+      [
+        ["Nei, forbikjøring like foran eller i et slikt kryss er forbudt", "Нет, обгон прямо перед таким перекрёстком или на нём запрещён"],
+        ["Ja, hvis du ser at det ikke kommer noen fra sidevegene", "Да, если видно, что с боковых дорог никто не едет", "Forbudet gjelder selv om sidevegene ser tomme ut. Unntakene i § 12 nr 5 handler om flere felt, lys, politi eller vikepliktskilt for kryssende veg, ikke om at du ikke ser noen.", "Запрет действует, даже если боковые дороги выглядят пустыми. Исключения в § 12 nr 5 — это несколько полос, светофор, регулировщик или знак уступи на пересекаемой дороге, а не «никого не видно»."],
+        ["Ja, forbikjøring i kryss er bare forbudt når krysset har trafikklys", "Да, обгон на перекрёстке запрещён, только если там светофор", "Det er motsatt: i et kryss med trafikklys er forbikjøring tillatt (§ 12 nr 5 c). Forbudet gjelder kryss uten lys, politi eller vikepliktskilt.", "Наоборот: на перекрёстке со светофором обгон разрешён (§ 12 nr 5 c). Запрет касается перекрёстков без светофора, регулировщика и знака уступи."],
+        ["Ja, hvis bilen foran kjører under fartsgrensen", "Да, если машина впереди едет медленнее лимита", "Farten til bilen foran gir ikke noe unntak fra forbudet mot forbikjøring i kryss.", "Скорость машины впереди не даёт исключения из запрета обгона на перекрёстке."]
+      ],
+      "Trafikkreglene § 12 nr 5: forbikjøring er forbudt like foran eller i vegkryss. Unntak er blant annet kjørebane med to eller flere felt i din retning, kryss med trafikklys eller politi, og når kryssende veg har vikeplikt ved skilt. I et kryss med høyreregel gjelder forbudet.",
+      "Trafikkreglene § 12 nr 5: обгон запрещён прямо перед перекрёстком и на нём. Исключения: две и больше полос в твою сторону, перекрёсток со светофором или регулировщиком, а также когда пересекаемая дорога уступает по знаку. На перекрёстке с правилом правой руки запрет действует.",
+      "На перекрёстке, где действует правило правой руки, справа может выехать машина, которую ты не ждёшь, — поэтому там не обгоняют."),
+
+    q("103", null,
+      "Du skal levere en tung pakke i en smal gate. For ikke å sperre kjørebanen vil du stanse et par minutter med to hjul oppe på fortauet. Det er ingen skilt. Er det lov?",
+      "Тебе нужно занести тяжёлую посылку на узкой улице. Чтобы не перегораживать проезжую часть, хочешь на пару минут встать двумя колёсами на тротуар. Знаков нет. Так можно?",
+      [
+        ["Nei, det er forbudt å stanse helt eller delvis på fortau", "Нет, останавливаться полностью или частично на тротуаре запрещено"],
+        ["Ja, når det bare er kort stans for å losse, er det ikke parkering", "Да, если это короткая остановка для выгрузки, это не парковка", "Det stemmer at kort lossing ikke er parkering, men på fortau er selve stansen forbudt (§ 17 nr 1 c).", "Короткая выгрузка — действительно не парковка, но на тротуаре запрещена сама остановка (§ 17 nr 1 c)."],
+        ["Ja, så lenge du har nødblinken på", "Да, если включена аварийка", "Nødblink gjør ikke en ulovlig stans lovlig. Den er for å varsle fare, ikke for å stanse der det er forbudt.", "Аварийка не делает запрещённую остановку разрешённой. Она нужна, чтобы предупредить об опасности, а не чтобы стоять там, где нельзя."],
+        ["Ja, forbudet gjelder bare når alle fire hjulene står på fortauet", "Да, запрет действует, только если на тротуаре все четыре колеса", "Loven sier «helt eller delvis» på fortau, så også to hjul på fortauet er forbudt.", "В законе сказано «полностью или частично», так что два колеса на тротуаре — тоже нарушение."]
+      ],
+      "Trafikkreglene § 17 nr 1 c: det er forbudt å stanse helt eller delvis på fortau, gangveg eller sykkelveg. Fortauet er for gående, og en bil der tvinger for eksempel folk med barnevogn eller rullestol ut i kjørebanen.",
+      "Trafikkreglene § 17 nr 1 c: запрещено останавливаться полностью или частично на тротуаре, пешеходной или велосипедной дорожке. Тротуар для пешеходов, а машина на нём выталкивает, например, людей с коляской или в инвалидном кресле на проезжую часть.",
+      "Тротуар — ни одним колесом: даже «на минутку» и даже двумя колёсами нельзя.")
   ];
 })();

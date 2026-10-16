@@ -1038,7 +1038,41 @@
       ],
       "Føreren har ansvaret for at all last, både inni og utenpå bilen, er sikret så den ikke flytter seg, faller av eller påvirker kjøreegenskapene og bremselengden under kjøring.",
       "Водитель отвечает за то, чтобы весь груз — и внутри, и снаружи машины — был закреплён так, чтобы он не сдвигался, не выпадал и не влиял на управляемость и тормозной путь во время движения.",
-      "Груз в багажнике при торможении может «полететь» вперёд не хуже камня — закрепляй всё, не только то, что видно снаружи.")
+      "Груз в багажнике при торможении может «полететь» вперёд не хуже камня — закрепляй всё, не только то, что видно снаружи."),
+
+    q("102", "Du kjører på en forkjørsveg utenfor byen med fartsgrense 80 km/t. Kan du parkere bilen på kjørebanen?",
+      "Ты едешь по главной дороге (forkjørsveg) за городом, лимит 80 км/ч. Можно поставить машину на парковку прямо на проезжей части?",
+      [
+        ["Nei, på forkjørsveg med fartsgrense over 50 km/t er det forbudt å parkere på kjørebanen", "Нет, на главной дороге с лимитом выше 50 км/ч парковаться на проезжей части запрещено"],
+        ["Ja, hvis du slår på parkeringslys", "Да, если включить стояночные огни", "Parkeringslys gjør bilen synlig, men endrer ikke forbudet i § 17 nr 3.", "Стояночные огни делают машину заметной, но запрет из § 17 nr 3 не отменяют."],
+        ["Ja, forbudet mot å parkere på kjørebanen gjelder bare på motorveg", "Да, запрет парковки на проезжей части действует только на автомагистрали", "På motorveg er det til og med forbudt å stanse, men også på forkjørsveg med fartsgrense over 50 km/t er parkering på kjørebanen forbudt (§ 17 nr 3).", "На автомагистрали запрещена даже остановка, но и на главной дороге с лимитом выше 50 км/ч парковка на проезжей части запрещена (§ 17 nr 3)."],
+        ["Ja, forbudet gjelder bare når fartsgrensen er 90 km/t eller mer", "Да, запрет действует только при лимите 90 км/ч и выше", "Grensen i loven er «høyere fartsgrense enn 50 km i timen», så den gjelder allerede fra 60 km/t.", "В законе граница — «лимит выше 50 км/ч», то есть запрет действует уже с 60 км/ч."]
+      ],
+      "Trafikkreglene § 17 nr 3: på forkjørsveg med høyere fartsgrense enn 50 km/t er det forbudt å parkere på kjørebanen. Kortest mulig stans for av- eller påstigning er ikke parkering (§ 1 k).",
+      "Trafikkreglene § 17 nr 3: на главной дороге (forkjørsveg) с лимитом выше 50 км/ч парковаться на проезжей части запрещено. Кратчайшая остановка для посадки или высадки — это не парковка (§ 1 k).",
+      "Главная + быстрее 50 = машину на проезжей части не оставляешь. Ищи карман или парковку."),
+
+    q("103", "Du kjører personbil med tilhenger som ikke er godkjent for 100 km/t (ikke Tempo 100). Vegen har fartsgrense 90 km/t. Hvor fort kan du kjøre?",
+      "Ты едешь на легковой машине с прицепом, который не допущен к 100 км/ч (не Tempo 100). Лимит на дороге — 90 км/ч. С какой скоростью можно ехать?",
+      [
+        ["Høyst 80 km/t", "Не быстрее 80 км/ч"],
+        ["90 km/t, det som står på skiltet", "90 км/ч — сколько написано на знаке", "Med tilhenger gjelder en egen grense på 80 km/t der skiltet viser mer enn 80 (§ 13 nr 4), så du kan ikke følge skiltet her.", "С прицепом действует свой предел 80 км/ч там, где знак разрешает больше 80 (§ 13 nr 4), так что ехать по знаку нельзя."],
+        ["100 km/t, så lenge bilen er en vanlig personbil", "100 км/ч, раз машина обычная легковая", "100 km/t med tilhenger krever at både bil og tilhenger oppfyller kravene til Tempo 100, og fartsgrensen her er uansett 90.", "100 км/ч с прицепом можно, только если и машина, и прицеп отвечают требованиям Tempo 100 — а лимит на этой дороге и так 90."],
+        ["Høyst 60 km/t", "Не быстрее 60 км/ч", "60 km/t er ikke grensen i trafikkreglene for personbil med tilhenger. Grensen er 80 km/t.", "60 км/ч — не тот предел, что в trafikkreglene для легковой машины с прицепом. Предел — 80 км/ч."]
+      ],
+      "Trafikkreglene § 13 nr 4: der fartsgrensen er høyere enn 80 km/t, må motorvogn med tilhenger ikke kjøres fortere enn 80 km/t. Unntak: når både bil og tilhenger oppfyller kravene i bruksforskriften § 4-4 og § 4-5 (Tempo 100), da høyst 100 km/t.",
+      "Trafikkreglene § 13 nr 4: там, где лимит выше 80 км/ч, машина с прицепом не должна ехать быстрее 80 км/ч. Исключение — если и машина, и прицеп отвечают требованиям bruksforskriften § 4-4 и § 4-5 (Tempo 100): тогда до 100 км/ч.",
+      "С прицепом — 80, даже если знак показывает 90 или 110. 100 — только с допуском Tempo 100."),
+
+    qm("m19", "Hvor er det forbudt å parkere? Velg alle riktige.", "Где запрещено парковаться? Выбери все верные.", [
+      ["Foran en inn- eller utkjørsel", "Перед въездом или выездом (например, во двор или гараж)", true],
+      ["På en møteplass på en smal veg", "На разъезде (møteplass) узкой дороги", true],
+      ["I en gågate", "На пешеходной улице (gågate)", true],
+      ["10 meter foran et gangfelt, når det ikke er noe skilt", "В 10 метрах перед пешеходным переходом, если знаков нет", false, "Den faste avstanden ved gangfelt er 5 meter (§ 17 nr 1 d). 10 meter foran er ikke forbudt hvis ikke et skilt sier det.", "Установленное расстояние у перехода — 5 метров (§ 17 nr 1 d). В 10 метрах парковаться можно, если знак не запрещает."]
+    ],
+    "Trafikkreglene § 17 nr 2: det er forbudt å parkere foran inn- eller utkjørsel, på møteplass i hele bredden der kjørebanen er utvidet, i gågate og i gatetun utenom anviste plasser. Ved gangfelt er det forbudt å stanse nærmere enn 5 meter foran (§ 17 nr 1 d).",
+    "Trafikkreglene § 17 nr 2: запрещено парковаться перед въездом или выездом, на разъезде (møteplass) на всём расширенном участке, на пешеходной улице (gågate) и в жилой зоне (gatetun) вне отведённых мест. У пешеходного перехода нельзя останавливаться ближе 5 метров перед ним (§ 17 nr 1 d).",
+    "Парковка запрещена там, где машина мешает: выезд, разъезд, пешеходная улица. У перехода считай 5 м, не 10.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

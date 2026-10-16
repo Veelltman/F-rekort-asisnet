@@ -214,6 +214,9 @@
     w("173", "å flette (inn i trafikken)", "перестраиваться, вливаться (в поток)", "Der to felt går sammen til ett, fletter bilene vekselvis.", "Там, где две полосы сливаются в одну, машины встраиваются поочерёдно.", "Действия"),
     w("174", "tilleggsskilt", "дополнительная табличка (под знаком)", "Et tilleggsskilt under et forbudsskilt kan vise klokkeslett og ukedager.", "Дополнительная табличка под запрещающим знаком может показывать время и дни недели.", "Правила"),
     w("175", "kjegle", "дорожный конус", "Kjegler viser hvor kjørefeltet er stengt ved vegarbeid.", "Конусы показывают, где полоса закрыта на дорожных работах.", "Дорога"),
-    w("176", "trikk", "трамвай", "Du skal gi fri veg for trikken, også når du kjører på forkjørsveg.", "Трамваю нужно уступить дорогу, даже если ты едешь по главной.", "Машина")
+    w("176", "trikk", "трамвай", "Du skal gi fri veg for trikken, også når du kjører på forkjørsveg.", "Трамваю нужно уступить дорогу, даже если ты едешь по главной.", "Машина"),
+    w("177", "hvit stokk", "белая трость (у незрячих)", "Ser du en person med hvit stokk, skal du kjøre ekstra sakte.", "Если видишь человека с белой тростью, нужно ехать особенно медленно.", "Основное"),
+    w("178", "campingvogn", "жилой прицеп, караван", "Med campingvogn er grensen normalt 80 km/t, selv om skiltet viser mer.", "С жилым прицепом предел обычно 80 км/ч, даже если знак разрешает больше.", "Машина"),
+    w("179", "innkjørsel", "въезд (во двор, в гараж)", "Det er forbudt å parkere foran en innkjørsel.", "Парковаться перед въездом во двор запрещено.", "Дорога")
   ];
 })();
