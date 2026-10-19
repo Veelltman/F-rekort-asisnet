@@ -1072,7 +1072,41 @@
     ],
     "Trafikkreglene § 17 nr 2: det er forbudt å parkere foran inn- eller utkjørsel, på møteplass i hele bredden der kjørebanen er utvidet, i gågate og i gatetun utenom anviste plasser. Ved gangfelt er det forbudt å stanse nærmere enn 5 meter foran (§ 17 nr 1 d).",
     "Trafikkreglene § 17 nr 2: запрещено парковаться перед въездом или выездом, на разъезде (møteplass) на всём расширенном участке, на пешеходной улице (gågate) и в жилой зоне (gatetun) вне отведённых мест. У пешеходного перехода нельзя останавливаться ближе 5 метров перед ним (§ 17 nr 1 d).",
-    "Парковка запрещена там, где машина мешает: выезд, разъезд, пешеходная улица. У перехода считай 5 м, не 10.")
+    "Парковка запрещена там, где машина мешает: выезд, разъезд, пешеходная улица. У перехода считай 5 м, не 10."),
+
+    q("104", "Du venter ti minutter på en venn utenfor en boligblokk. Kan du la motoren gå på tomgang hele tiden?",
+      "Ты десять минут ждёшь друга у жилого дома. Можно всё это время держать двигатель включённым на холостом ходу?",
+      [
+        ["Nei, ved bebyggelse er tomgang som gir unødig støy eller eksos forbudt", "Нет, у жилых домов холостой ход, от которого лишний шум или выхлоп, запрещён"],
+        ["Ja, forbudet gjelder bare om natta", "Да, запрет действует только ночью", "Regelen i § 16 nr 1 gjelder hele døgnet, ikke bare om natta.", "Правило § 16 nr 1 действует круглые сутки, а не только ночью."],
+        ["Ja, så lenge bilen står lovlig parkert", "Да, если машина стоит на разрешённом месте", "Lovlig parkering er én ting, men selve tomgangen er forbudt når den gir unødig støy eller eksos ved bebyggelse.", "Разрешённая парковка — это одно, а холостой ход у жилых домов запрещён сам по себе, если от него лишний шум или выхлоп."],
+        ["Ja, forbudet gjelder bare dieselbiler", "Да, запрет касается только дизельных машин", "Loven skiller ikke mellom bensin og diesel. Den gjelder all bruk av motorvogn som gir unødig støy eller utslipp.", "Закон не делит машины на бензиновые и дизельные: речь о любой машине, которая без нужды шумит или дымит."]
+      ],
+      "Trafikkreglene § 16 nr 1: i eller ved bebyggelse må det ikke være bruk av motor på tomgang eller annen bruk av motorvogn som gir unødig støy eller unødig utslipp av røyk eller gass. Skal du vente, slår du av motoren.",
+      "Trafikkreglene § 16 nr 1: в населённых местах и рядом с домами нельзя держать двигатель на холостом ходу или иначе использовать машину так, чтобы был лишний шум или выхлоп. Ждёшь — глуши мотор.",
+      "Стоишь и ждёшь у домов — выключи двигатель."),
+
+    q("105", "Du svinger inn på en veg som har to kjørefelt i din nye kjøreretning. Hvilket felt kan du svinge inn i?",
+      "Ты поворачиваешь на дорогу, где в твоём новом направлении две полосы. На какую полосу можно повернуть?",
+      [
+        ["Det feltet som passer best, for eksempel ut fra hvor du skal videre", "На ту, что удобнее, например, с учётом того, куда ты едешь дальше"],
+        ["Bare feltet lengst til høyre, og så kan du skifte felt etterpå", "Только на крайнюю правую, а перестроиться можно потом", "Ved sving inn på veg med to eller flere felt i samme retning kan du velge det feltet som passer best (§ 6 nr 3). Du må ikke først inn i høyre felt.", "При повороте на дорогу с двумя и более полосами в одну сторону можно выбрать удобную полосу (§ 6 nr 3). Сначала в правую заезжать не обязательно."],
+        ["Ved venstresving bare i feltet lengst til venstre", "При левом повороте — только на крайнюю левую", "Det er bare før svingen at du skal ligge i feltet lengst til venstre (§ 6 nr 1). Inn på den nye vegen kan du velge felt (§ 6 nr 3).", "Крайнюю левую полосу занимаешь до поворота (§ 6 nr 1). А на новой дороге полосу можно выбрать (§ 6 nr 3)."],
+        ["Bare feltet lengst til venstre, fordi høyre felt er for busser", "Только на левую: правая полоса для автобусов", "Et felt er bare kollektivfelt når det er skiltet slik. Uten skilt er høyre felt et vanlig kjørefelt.", "Полоса для общественного транспорта — только там, где стоит знак. Без знака правая полоса обычная."]
+      ],
+      "Trafikkreglene § 6 nr 3: ved sving inn på kjørebane med to eller flere kjørefelt i kjøreretningen kan det kjøres inn i det av feltene som passer best. Før svingen skal du likevel ligge i feltet lengst til høyre ved høyresving og lengst til venstre ved venstresving (§ 6 nr 1). Kjørefeltpiler og skilt går foran.",
+      "Trafikkreglene § 6 nr 3: поворачивая на проезжую часть с двумя и более полосами в твоём направлении, можно въехать на ту полосу, которая удобнее. Но до поворота занимаешь крайнюю правую при правом повороте и крайнюю левую при левом (§ 6 nr 1). Стрелки на полосах и знаки важнее.",
+      "До поворота — крайняя полоса, после поворота — та, что удобнее для дальнейшего пути."),
+
+    qm("m20", "Hvor er det forbudt å rygge eller vende? Velg alle riktige.", "Где запрещено сдавать назад или разворачиваться? Выбери все верные.", [
+      ["På motorveg", "На автомагистрали (motorveg)", true],
+      ["På motortrafikkveg", "На скоростной дороге (motortrafikkveg)", true],
+      ["På avkjøringsvegen fra en motorveg", "На съезде с автомагистрали", true],
+      ["På en vanlig gate i et boligområde uten skilt, når du har god sikt og ingen kommer", "На обычной улице в жилом районе без знаков, когда хороший обзор и никого нет", false, "Her er det ikke noe forbud. Du har vikeplikt for alle mens du rygger eller vender (§ 11 nr 1), men det er lov.", "Здесь запрета нет. Пока сдаёшь назад или разворачиваешься, ты уступаешь всем (§ 11 nr 1), но делать это можно."]
+    ],
+    "Trafikkreglene § 11 nr 2: rygging og vending er forbudt på motorveg og motortrafikkveg og på inn- eller utkjøringsveg til slike veger. Ellers er det lov, men den som rygger eller vender, har vikeplikt for annen trafikant (§ 11 nr 1).",
+    "Trafikkreglene § 11 nr 2: задний ход и разворот запрещены на motorveg и motortrafikkveg, а также на въездах и съездах с них. В остальных местах можно, но тот, кто сдаёт назад или разворачивается, уступает всем (§ 11 nr 1).",
+    "Проехал съезд на автомагистрали — едешь до следующего. Назад и разворот там нельзя, даже на самом съезде.")
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

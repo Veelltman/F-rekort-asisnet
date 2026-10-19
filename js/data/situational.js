@@ -1947,6 +1947,58 @@
       ],
       "Trafikkreglene § 17 nr 1 c: det er forbudt å stanse helt eller delvis på fortau, gangveg eller sykkelveg. Fortauet er for gående, og en bil der tvinger for eksempel folk med barnevogn eller rullestol ut i kjørebanen.",
       "Trafikkreglene § 17 nr 1 c: запрещено останавливаться полностью или частично на тротуаре, пешеходной или велосипедной дорожке. Тротуар для пешеходов, а машина на нём выталкивает, например, людей с коляской или в инвалидном кресле на проезжую часть.",
-      "Тротуар — ни одним колесом: даже «на минутку» и даже двумя колёсами нельзя.")
+      "Тротуар — ни одним колесом: даже «на минутку» и даже двумя колёсами нельзя."),
+
+    q("104", null,
+      "Du har grønt lys og skal rett fram i et lyskryss. På den andre siden av krysset står det kø, og det er ikke plass til bilen din der. Hva gjør du?",
+      "У тебя зелёный, ты едешь прямо через перекрёсток со светофором. За перекрёстком стоит пробка, и места для твоей машины там нет. Что делаешь?",
+      [
+        ["Venter foran krysset til det blir plass på den andre siden", "Жду перед перекрёстком, пока за ним не освободится место"],
+        ["Kjører inn, fordi grønt lys gir meg rett til å kjøre", "Въезжаю: зелёный даёт мне право ехать", "Grønt lys betyr ikke at du kan kjøre inn i krysset og bli stående der. Du må ikke sperre for trafikken på den kryssende vegen (§ 5 nr 4).", "Зелёный не значит, что можно въехать на перекрёсток и застрять там. Нельзя перекрывать движение по пересекаемой дороге (§ 5 nr 4)."],
+        ["Kjører inn og venter midt i krysset, så mister jeg ikke plassen i køen", "Въезжаю и жду посреди перекрёстка, чтобы не потерять место в очереди", "Når lyset skifter, sperrer du for dem som får grønt fra sidevegen. Det er akkurat dette § 5 nr 4 forbyr.", "Когда свет сменится, ты перекроешь путь тем, кому дали зелёный с боковой улицы. Именно это запрещает § 5 nr 4."],
+        ["Kjører gjennom krysset og stanser på gangfeltet rett etter, så krysset er fritt", "Проезжаю перекрёсток и встаю на пешеходном переходе сразу за ним — перекрёсток же свободен", "Du skal også unngå å stanse på gangfelt (§ 9 nr 4). Da må gående gå rundt bilen din, kanskje ut blant bilene.", "На пешеходном переходе тоже нельзя вставать (§ 9 nr 4): пешеходам придётся обходить машину, возможно, между другими машинами."]
+      ],
+      "Trafikkreglene § 5 nr 4: den som kjører inn i et vegkryss, skal kjøre slik at det ikke må stanses til unødig hinder for trafikk på den kryssende vegen. Ser du at det ikke er plass etter krysset, venter du foran, selv om lyset er grønt. § 9 nr 4: unngå stans på gangfelt.",
+      "Trafikkreglene § 5 nr 4: въезжая на перекрёсток, нужно ехать так, чтобы не пришлось остановиться и мешать движению по пересекаемой дороге. Если за перекрёстком нет места, ждёшь перед ним, даже на зелёный. § 9 nr 4: на пешеходном переходе стараться не останавливаться.",
+      "Перед въездом на перекрёсток смотри не на светофор, а за перекрёсток: есть ли куда встать."),
+
+    q("105", null,
+      "Du kjører på en smal toveis veg. I ditt kjørefelt står en lastebil parkert, og en bil kommer imot. Det er ikke plass til at dere passerer hverandre ved lastebilen. Hvem skal vente?",
+      "Ты едешь по узкой двусторонней дороге. В твоей полосе стоит припаркованный грузовик, навстречу едет машина. Разъехаться у грузовика места нет. Кто должен ждать?",
+      [
+        ["Du, fordi hindringen står på din side av vegen", "Ты, потому что препятствие на твоей стороне дороги"],
+        ["Den som kommer først fram til lastebilen", "Тот, кто первым подъедет к грузовику", "Det er ikke om å gjøre å komme først. Loven sier at den som har sperringen på sin side, har vikeplikt (§ 7 nr 6).", "Дело не в том, кто успел первым. По закону уступает тот, у кого препятствие на его стороне (§ 7 nr 6)."],
+        ["Den møtende bilen, fordi du kommer fra dens høyre side", "Встречная машина, потому что ты у неё справа", "Høyreregelen gjelder i kryss. Her møtes dere på samme veg, og da gjelder § 7 nr 6 om sperring.", "Правило правой руки действует на перекрёстках. Здесь вы встречаетесь на одной дороге, и действует § 7 nr 6 о препятствии."],
+        ["Den møtende bilen, fordi du allerede har lagt deg ut og blinker til venstre", "Встречная машина: ты уже сместился влево и включил левый поворотник", "Blinklyset viser bare hva du vil gjøre. Det gir deg ingen rett til å kjøre først forbi en sperring på din side.", "Поворотник лишь показывает, что ты собираешься сделать. Права проехать первым мимо препятствия на твоей стороне он не даёт."]
+      ],
+      "Trafikkreglene § 7 nr 6: kjørende som møtes, skal om nødvendig vike til høyre og kjøre sakte eller stanse. Er en del av vegen sperret, har den vikeplikt som har sperringen på sin side. Du venter derfor bak lastebilen til den møtende bilen har passert.",
+      "Trafikkreglene § 7 nr 6: встречные машины при необходимости принимают вправо и замедляются или останавливаются. Если часть дороги перекрыта, уступает тот, на чьей стороне препятствие. Поэтому ты ждёшь за грузовиком, пока встречная не проедет.",
+      "Препятствие на твоей полосе — значит, ждёшь ты. Объезжаешь, только когда встречная полоса свободна."),
+
+    q("106", null,
+      "Du venter ved et kryss uten skilt. Fra venstre kommer et begravelsesfølge: en likbil og mange biler etter hverandre med lyset på. Det er små luker mellom bilene. Hva gjør du?",
+      "Ты стоишь у перекрёстка без знаков. Слева идёт похоронная процессия: катафалк и много машин друг за другом с включёнными фарами. Между машинами небольшие промежутки. Что делаешь?",
+      [
+        ["Venter til hele følget har kjørt forbi", "Жду, пока проедет вся процессия"],
+        ["Kjører inn i en luke, fordi jeg kommer fra høyre for dem", "Въезжаю в промежуток: я же у них справа", "Du må ikke hindre eller forstyrre et begravelsesfølge (§ 10 nr 3). Å kjøre inn mellom bilene bryter opp følget.", "Похоронной процессии нельзя мешать (§ 10 nr 3). Если въехать между машинами, процессия разорвётся."],
+        ["Venter bare til likbilen har passert, og kjører så inn mellom de andre bilene", "Жду только катафалк, а потом въезжаю между остальными машинами", "Følget er alle bilene som kjører sammen, ikke bare likbilen. Hele følget skal få kjøre samlet.", "Процессия — это все машины, которые едут вместе, а не только катафалк. Ей нужно дать проехать целиком."],
+        ["Tuter kort, så de slipper meg fram", "Коротко сигналю, чтобы меня пропустили", "Unødig bruk av lydsignal er forbudt (§ 14 nr 1), og du skal ikke forstyrre følget.", "Ненужный звуковой сигнал запрещён (§ 14 nr 1), и процессии мешать нельзя."]
+      ],
+      "Trafikkreglene § 10 nr 3: trafikant må ikke hindre eller forstyrre gående i gruppe under tilsyn av leder, prosesjon, begravelsesfølge, militær kjøretøykolonne eller sivilforsvarskolonne. Du venter til hele følget har passert.",
+      "Trafikkreglene § 10 nr 3: нельзя мешать группе пешеходов под присмотром руководителя, шествию, похоронной процессии, военной колонне или колонне гражданской обороны. Ждёшь, пока проедет вся процессия.",
+      "Колонну, процессию, группу детей с воспитателем не разрываешь: пропускаешь целиком."),
+
+    q("107", null,
+      "Du har stanset på vegskulderen for å se på kartet. Nå vil du kjøre ut i kjørebanen igjen. En bil nærmer seg bakfra i feltet ditt og er ikke langt unna. Hva gjør du?",
+      "Ты остановился на обочине, чтобы посмотреть карту. Теперь хочешь выехать обратно на проезжую часть. Сзади по твоей полосе подъезжает машина, она уже недалеко. Что делаешь?",
+      [
+        ["Lar bilen passere først, fordi jeg har vikeplikt", "Пропускаю её: уступать должен я"],
+        ["Blinker til venstre og kjører ut; bilen bak må slippe meg inn", "Включаю левый поворотник и выезжаю: машина сзади должна меня пустить", "Blinklyset viser hva du vil gjøre, men gir deg ikke rett til å kjøre ut. Den som kjører ut fra vegskulderen, har vikeplikt (§ 7 nr 4).", "Поворотник показывает намерение, но права выехать не даёт. Кто выезжает с обочины, тот уступает (§ 7 nr 4)."],
+        ["Kjører ut, fordi jeg er foran bilen og den bak må holde avstand", "Выезжаю: я впереди, а задний обязан держать дистанцию", "Regelen om avstand gjelder bilen som allerede kjører bak en annen i feltet. Du står på skulderen og er ikke i feltet ennå, så du må vike (§ 8 nr 1).", "Правило о дистанции касается машины, которая уже едет за другой в полосе. Ты стоишь на обочине и ещё не в полосе, так что уступаешь ты (§ 8 nr 1)."],
+        ["Kjører ut så lenge bilen er mer enn 50 meter bak", "Выезжаю, если машина дальше 50 метров", "Loven har ikke noe fast antall meter. Du må ikke hindre eller tvinge den andre til å bremse (§ 7 nr 1), og her er bilen nær.", "В законе нет фиксированного числа метров. Нельзя мешать другому и заставлять его тормозить (§ 7 nr 1), а машина уже близко."]
+      ],
+      "Trafikkreglene § 7 nr 4: den som svinger inn på kjørebanen fra vegens skulder, har vikeplikt for annen trafikant. § 8 nr 1: det samme gjelder den som kjører ut fra vegkanten. Du blinker, ser i speilet og over skulderen, og kjører ut først når det er en trygg luke.",
+      "Trafikkreglene § 7 nr 4: тот, кто выезжает на проезжую часть с обочины, уступает остальным. § 8 nr 1: то же — при отъезде от края дороги. Включаешь поворотник, смотришь в зеркало и через плечо и выезжаешь, только когда есть безопасный промежуток.",
+      "С обочины, от края дороги, с парковки ты вливаешься в поток — значит, уступаешь ты.")
   ];
 })();

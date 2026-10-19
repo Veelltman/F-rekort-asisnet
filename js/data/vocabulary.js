@@ -217,6 +217,9 @@
     w("176", "trikk", "трамвай", "Du skal gi fri veg for trikken, også når du kjører på forkjørsveg.", "Трамваю нужно уступить дорогу, даже если ты едешь по главной.", "Машина"),
     w("177", "hvit stokk", "белая трость (у незрячих)", "Ser du en person med hvit stokk, skal du kjøre ekstra sakte.", "Если видишь человека с белой тростью, нужно ехать особенно медленно.", "Основное"),
     w("178", "campingvogn", "жилой прицеп, караван", "Med campingvogn er grensen normalt 80 km/t, selv om skiltet viser mer.", "С жилым прицепом предел обычно 80 км/ч, даже если знак разрешает больше.", "Машина"),
-    w("179", "innkjørsel", "въезд (во двор, в гараж)", "Det er forbudt å parkere foran en innkjørsel.", "Парковаться перед въездом во двор запрещено.", "Дорога")
+    w("179", "innkjørsel", "въезд (во двор, в гараж)", "Det er forbudt å parkere foran en innkjørsel.", "Парковаться перед въездом во двор запрещено.", "Дорога"),
+    w("180", "tomgang", "холостой ход (мотор работает, машина стоит)", "Slå av motoren i stedet for å stå på tomgang utenfor huset.", "Выключи двигатель, а не стой на холостом ходу у дома.", "Машина"),
+    w("181", "begravelsesfølge", "похоронная процессия", "Du må ikke kjøre inn i et begravelsesfølge.", "Нельзя въезжать в похоронную процессию.", "Приоритет"),
+    w("182", "hindring", "препятствие", "Er det en hindring i ditt felt, må du vente på møtende trafikk.", "Если в твоей полосе препятствие, нужно пропустить встречные машины.", "Условия")
   ];
 })();
