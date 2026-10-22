@@ -4,6 +4,24 @@
   "use strict";
 
   const tr = window.I18N.t;
+  /* Число + фраза: первое слово фразы склоняется по числу («1 задание», «3 задания», «136 заданий»; en/no — ед./мн.) */
+  const PLURAL = {
+    "заданий": ["задание", "задания", "заданий"], "вопросов": ["вопрос", "вопроса", "вопросов"],
+    "слов": ["слово", "слова", "слов"], "ошибок": ["ошибка", "ошибки", "ошибок"],
+    "завдань": ["завдання", "завдання", "завдань"], "питань": ["питання", "питання", "питань"],
+    "слів": ["слово", "слова", "слів"], "помилок": ["помилка", "помилки", "помилок"],
+    "tasks": ["task", "tasks"], "questions": ["question", "questions"], "words": ["word", "words"], "mistakes": ["mistake", "mistakes"],
+    "oppgaver": ["oppgave", "oppgaver"]
+  };
+  function cnt(n, phrase) {
+    const text = tr(phrase), m = text.match(/^([^\s.,)]+)(.*)$/s);
+    const forms = m && PLURAL[m[1]];
+    if (!forms) return `${n} ${text}`;
+    let i;
+    if (forms.length === 2) i = n === 1 ? 0 : 1;
+    else { const d = n % 10, h = n % 100; i = d === 1 && h !== 11 ? 0 : d >= 2 && d <= 4 && (h < 12 || h > 14) ? 1 : 2; }
+    return `${n} ${forms[i]}${m[2]}`;
+  }
 
   const D = window.QUESTION_DATA;
   const S = window.Storage;
@@ -432,14 +450,14 @@
       const st = S.getTopicStats(key, D[key]);
       return listRow({
         icon: t.icon, title: t.title, action: `go('topic',{key:'${key}'})`,
-        sub: `${esc(t.title_ru)} · ${st.seen ? `${tr("пройдено")} ${st.seen} ${tr("из")} ${st.total}` : `${st.total} ${tr("заданий")}`}`,
-        badge: st.weak ? `<span class="badge badge-danger">${st.weak} ${tr("ошибок")}</span>` : "",
+        sub: `${esc(t.title_ru)} · ${st.seen ? `${tr("пройдено")} ${st.seen} ${tr("из")} ${st.total}` : cnt(st.total, "заданий")}`,
+        badge: st.weak ? `<span class="badge badge-danger">${cnt(st.weak, "ошибок")}</span>` : "",
         meta: st.seen ? `<span class="pill ${st.accuracy >= 85 ? "good" : st.accuracy >= 70 ? "mid" : "bad"}">${st.accuracy}%</span>` : "",
         progress: st.coverage
       });
     }).join("") + listRow({
       icon: ICONS.vocab, title: "Ordforråd", action: "go('vocab')",
-      sub: `${tr("Лексика")} · ${vs.seen ? `${vs.seen} ${tr("из")} ${vs.total} ${tr("слов")}` : `${vs.total} ${tr("слов")}`}`,
+      sub: `${tr("Лексика")} · ${vs.seen ? `${vs.seen} ${tr("из")} ${vs.total} ${tr("слов")}` : cnt(vs.total, "слов")}`,
       meta: vs.seen ? `<span class="pill ${vs.accuracy >= 85 ? "good" : vs.accuracy >= 70 ? "mid" : "bad"}">${vs.accuracy}%</span>` : "",
       progress: vs.coverage
     });
@@ -502,7 +520,7 @@
 
   /* Сводка темы под заголовком: полоска пройденного и точность */
   function topicSummary(acc, seen, total, unit) {
-    if (!seen) return `<div class="topic-summary"><span>${total} ${unit}, ${tr("ещё не начато")}</span></div>`;
+    if (!seen) return `<div class="topic-summary"><span>${cnt(total, unit)}, ${tr("ещё не начато")}</span></div>`;
     return `
       <div class="topic-summary">
         <span class="meter"><i style="width:${Math.round((seen / total) * 100)}%"></i></span>
@@ -534,23 +552,23 @@
         modeCard(tr("Новые знаки"), "10 " + tr("знаков, которые ты ещё не видел или давно не повторял."), p.key, "new"),
         modeCard(tr("Что означает знак"), `${tr("Картинка, четыре названия.")} ${k.meaning.length} ${tr("знаков.")}`, p.key, "meaning"),
         modeCard(tr("Найди знак"), `${tr("Название, четыре картинки.")} ${k.pick.length} ${tr("знаков.")}`, p.key, "pick"),
-        modeCard(tr("Тип знака"), `${tr("Предупреждающий, запрещающий, предписывающий…")} ${k.category.length} ${tr("заданий.")}`, p.key, "category"),
-        modeCard(tr("Разметка"), `${tr("Линии и стрелки на асфальте.")} ${k.marking.length} ${tr("вопросов.")}`, p.key, "marking"),
-        modeCard(tr("Только мои ошибки"), weak.length ? `${weak.length} ${tr("заданий, где ты ошибался.")}` : tr("Пока нет ошибок в этой теме."), p.key, "weak", false, !weak.length)
+        modeCard(tr("Тип знака"), `${tr("Предупреждающий, запрещающий, предписывающий…")} ${cnt(k.category.length, "заданий.")}`, p.key, "category"),
+        modeCard(tr("Разметка"), `${tr("Линии и стрелки на асфальте.")} ${cnt(k.marking.length, "вопросов.")}`, p.key, "marking"),
+        modeCard(tr("Только мои ошибки"), weak.length ? cnt(weak.length, "заданий, где ты ошибался.") : tr("Пока нет ошибок в этой теме."), p.key, "weak", false, !weak.length)
       ];
     } else {
       modes = [
         modeCard(tr("Быстрая тренировка"), "10 " + tr("случайных вопросов. Хорошо для ежедневной практики."), p.key, "quick", true),
         modeCard(tr("Новые вопросы"), "10 " + tr("вопросов, которые ты ещё не видел или давно не повторял."), p.key, "new"),
-        modeCard(tr("Вся тема"), `${tr("Все")} ${all.length} ${tr("вопросов в случайном порядке.")}`, p.key, "all"),
-        modeCard(tr("Только мои ошибки"), weak.length ? `${weak.length} ${tr("вопросов, где ты ошибался.")}` : tr("Пока нет ошибок в этой теме."), p.key, "weak", false, !weak.length)
+        modeCard(tr("Вся тема"), `${tr("Все")} ${cnt(all.length, "вопросов в случайном порядке.")}`, p.key, "all"),
+        modeCard(tr("Только мои ошибки"), weak.length ? cnt(weak.length, "вопросов, где ты ошибался.") : tr("Пока нет ошибок в этой теме."), p.key, "weak", false, !weak.length)
       ];
       /* Проверка машины: ещё и все пункты по порядку, как в листовке trafikkstasjonen */
-      if (all.some(q => q.n)) modes.splice(3, 0, modeCard(tr("По порядку листовки"), `${all.length} ${tr("вопросов в том же порядке, что и в листовке с trafikkstasjonen.")}`, p.key, "ordered"));
+      if (all.some(q => q.n)) modes.splice(3, 0, modeCard(tr("По порядку листовки"), cnt(all.length, "вопросов в том же порядке, что и в листовке с trafikkstasjonen."), p.key, "ordered"));
     }
     view.innerHTML = `
       ${pageHead({ back: { label: tr("Главная"), action: "go('home')" }, icon: t.icon, title: t.title, sub: esc(t.title_ru) })}
-      ${topicSummary(st.accuracy, st.seen, st.total, tr("заданий"))}
+      ${topicSummary(st.accuracy, st.seen, st.total, "заданий")}
       <div class="list">${modes.join("")}</div>`;
   };
 
@@ -612,7 +630,7 @@
               <div class="tile-icon">${r.t.icon}</div>
               <div class="grow">
                 <h3>${esc(r.t.title_ru)}</h3>
-                <p class="topic-sub">${r.weak.length} ${tr("заданий с ошибками")}${due ? ` · ${tr("к повторению сегодня:")} ${due}` : ""}</p>
+                <p class="topic-sub">${cnt(r.weak.length, "заданий с ошибками")}${due ? ` · ${tr("к повторению сегодня:")} ${due}` : ""}</p>
               </div>
               <button class="btn btn-primary btn-small" onclick="go('quiz',{key:'${r.key}',mode:'weak'})">${tr("Тренировать")}</button>
             </div>
@@ -632,7 +650,7 @@
               <div class="tile-icon">${ICONS.vocab}</div>
               <div class="grow">
                 <h3>${tr("Лексика")}</h3>
-                <p class="topic-sub">${weakVocab.length} ${tr("слов, которые ты отметил как «не знаю»")}</p>
+                <p class="topic-sub">${cnt(weakVocab.length, "слов, которые ты отметил как «не знаю»")}</p>
               </div>
               <button class="btn btn-primary btn-small" onclick="go('vocab',{mode:'weak'})">${tr("Повторить")}</button>
             </div>
@@ -673,7 +691,7 @@
       const resumable = saved && saved.index < saved.ids.length;
       const known = groups.known.length, wk = groups.weak.length;
       view.innerHTML = `
-        ${pageHead({ back: { label: tr("Главная"), action: "go('home')" }, icon: ICONS.vocab, title: "Ordforråd", sub: `${tr("Лексика:")} ${all.length} ${tr("слов")}` })}
+        ${pageHead({ back: { label: tr("Главная"), action: "go('home')" }, icon: ICONS.vocab, title: "Ordforråd", sub: `${tr("Лексика:")} ${cnt(all.length, "слов")}` })}
         <div class="topic-summary">
           <span class="meter"><i style="width:${Math.round(((known + wk) / all.length) * 100)}%"></i></span>
           <span class="pill good">${tr("знаю")} ${known}</span>
@@ -682,8 +700,8 @@
         </div>
         <div class="list">
           ${resumable ? listRow({ icon: icon("play"), primary: true, title: tr("Продолжить"), sub: `${tr("Начатая колода:")} ${saved.index} ${tr("из")} ${saved.ids.length} ${tr("пройдено.")}`, action: "go('vocab',{mode:'resume'})" }) : ""}
-          ${listRow({ icon: icon("plus"), primary: !resumable, disabled: !groups.new.length, title: tr("Новые слова"), sub: groups.new.length ? `${Math.min(20, groups.new.length)} ${tr("слов, которые ты ещё не видел (всего новых")} ${groups.new.length}).` : `${tr("Все")} ${all.length} ${tr("слов уже пройдены хотя бы раз. Новые слова появляются каждые три дня, а пока повторяй незнакомые.")}`, action: "go('vocab',{mode:'new'})" })}
-          ${listRow({ icon: icon("repeat"), disabled: !wk, title: tr("Повторить незнакомые"), sub: wk ? wk + " " + tr("слов, которые ты отметил «не знаю».") : tr("Незнакомых слов нет."), action: "go('vocab',{mode:'weak'})" })}
+          ${listRow({ icon: icon("plus"), primary: !resumable, disabled: !groups.new.length, title: tr("Новые слова"), sub: groups.new.length ? `${cnt(Math.min(20, groups.new.length), "слов, которые ты ещё не видел (всего новых")} ${groups.new.length}).` : `${tr("Все")} ${all.length} ${tr("слов уже пройдены хотя бы раз. Новые слова появляются каждые три дня, а пока повторяй незнакомые.")}`, action: "go('vocab',{mode:'new'})" })}
+          ${listRow({ icon: icon("repeat"), disabled: !wk, title: tr("Повторить незнакомые"), sub: wk ? cnt(wk, "слов, которые ты отметил «не знаю».") : tr("Незнакомых слов нет."), action: "go('vocab',{mode:'weak'})" })}
           ${listRow({ icon: icon("cards"), title: tr("Все слова"), sub: tr("Вся колода в случайном порядке."), action: "go('vocab',{mode:'all'})" })}
         </div>`;
       return;

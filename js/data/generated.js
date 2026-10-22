@@ -51,7 +51,7 @@
     big: { no: "Den største bilen kjører først", ru: "Едет тот, у кого машина больше",
       why_no: "Størrelsen på kjøretøyet gir ingen forrang. Unntaket er sporvogn: alle skal gi den fri veg (trafikkreglene § 10 nr 2).", why_ru: "Размер машины не даёт преимущества. Исключение — трамвай: ему все обязаны уступать дорогу (trafikkreglene § 10 nr 2)." },
     left: { no: "Den som er til venstre kjører først", ru: "Едет тот, кто слева",
-      why_no: "Høyreregelen sier det motsatte: du viker for trafikk fra høyre.", why_ru: "Правило правой руки говорит обратное: уступаешь тому, кто справа." }
+      why_no: "Det finnes ingen regel om at den som er til venstre, kjører først. Rekkefølgen bestemmes av lys, skilt og høyreregelen, og etter høyreregelen viker du for den som kommer fra høyre.", why_ru: "Правила «кто слева, тот первый» нет. Порядок определяют светофор, знаки и правило правой руки, а по нему уступают тому, кто справа." }
   };
   /* exclude — варианты, которые в этой ситуации не будут явной ошибкой
      (например «кто слева, тот первый», когда B слева и действительно едет первой). */
@@ -66,6 +66,24 @@
     return { id: "gen-sit-" + id, topic: "situational", kind: "generated", fresh };
   }
 
+  /* Пересекаются ли пути двух машин (правостороннее движение, from/to — стороны въезда и выезда).
+     Правый поворот конфликтует только с тем, кто выезжает туда же; два левых навстречу друг другу не пересекаются (§ 6 nr 4). */
+  function conflict(a, b) {
+    if (a.to === b.to) return true;
+    const ma = manOf(a.from, a.to), mb = manOf(b.from, b.to);
+    if (ma === "right" || mb === "right") return false;
+    const opposite = manOf(a.from, b.from) === "straight";
+    if (opposite) return ma !== mb;            // налево против прямо — да; прямо/прямо и налево/налево — нет
+    return true;                               // с соседних сторон прямо и налево всегда пересекаются
+  }
+  /* Случайные манёвры A (с юга) и B (со стороны side), при которых пути пересекаются */
+  function crossingPair(side, aMans, bMans) {
+    for (;;) {
+      const aMan = rnd(aMans), bMan = rnd(bMans);
+      if (conflict({ from: "south", to: toFor("south", aMan) }, { from: side, to: toFor(side, bMan) })) return [aMan, bMan];
+    }
+  }
+
   /* Встречный конфликт: A и B на одной оси (B с севера) */
   function oncomingResult(aMan, bMan) {
     if (aMan === "left" && bMan !== "left") return "me";
@@ -77,8 +95,7 @@
 
     /* 1. Правило правой руки, B справа */
     gen("hoyre-fra-hoyre", () => {
-      const aMan = rnd(["straight", "left", "right"]);
-      const bMan = rnd(["straight", "left"]);
+      const [aMan, bMan] = crossingPair("east", ["straight", "left", "right"], ["straight", "left"]);
       return {
         prompt_no: `Kryss uten skilt eller lys. Du (A) skal kjøre ${MAN_KEY[aMan].no}. Bil B kommer fra høyre og skal ${MAN_KEY[bMan].no}. Hvem har vikeplikt?`,
         prompt_ru: `Перекрёсток без знаков и светофора. Ты (A) едешь ${MAN_KEY[aMan].ru}. Машина B едет справа и ${bMan === "straight" ? "едет прямо" : "поворачивает " + MAN_KEY[bMan].ru}. Кто уступает?`,
@@ -92,8 +109,7 @@
 
     /* 2. Правило правой руки, B слева */
     gen("hoyre-fra-venstre", () => {
-      const aMan = rnd(["straight", "right", "left"]);
-      const bMan = rnd(["straight", "right"]);
+      const [aMan, bMan] = crossingPair("west", ["straight", "right", "left"], ["straight", "right", "left"]);
       return {
         prompt_no: `Kryss uten skilt eller lys. Du (A) skal kjøre ${MAN_KEY[aMan].no}. Bil B kommer fra venstre og skal ${MAN_KEY[bMan].no}. Hvem har vikeplikt?`,
         prompt_ru: `Перекрёсток без знаков и светофора. Ты (A) едешь ${MAN_KEY[aMan].ru}. Машина B едет слева и ${bMan === "straight" ? "едет прямо" : "поворачивает " + MAN_KEY[bMan].ru}. Кто уступает?`,
@@ -108,13 +124,12 @@
     /* 3. Ты на главной, B с боковой */
     gen("forkjorsveg-du", () => {
       const side = rnd(["east", "west"]);
-      const aMan = rnd(["straight", "left", "right"]);
-      const bMan = rnd(["straight", "left", "right"]);
+      const [aMan, bMan] = crossingPair(side, ["straight", "left", "right"], ["straight", "left", "right"]);
       return {
         prompt_no: `Du (A) kjører på forkjørsveg og skal ${MAN_KEY[aMan].no}. Bil B kommer ${FROM[side].no} fra en sideveg med vikeplikt. Hvem har vikeplikt?`,
         prompt_ru: `Ты (A) на главной дороге, едешь ${MAN_KEY[aMan].ru}. Машина B выезжает ${FROM[side].ru} с второстепенной дороги. Кто уступает?`,
         image: scene({ you: { from: "south", to: toFor("south", aMan) }, others: [{ from: side, to: toFor(side, bMan) }], signs: { south: "priority", [side]: "yield" } }),
-        options: whoOptions("other"),
+        options: whoOptions("other", ["left"]),
         explanation_no: "På forkjørsveg gjelder ikke høyreregelen. Trafikk fra sideveger må vike, også når den kommer fra høyre.",
         explanation_ru: "На главной дороге правило правой руки не действует. Транспорт с боковых дорог уступает, даже если он справа.",
         tip_ru: "Жёлтый ромб «выключает» правило правой руки. Главная ловушка на теории."
@@ -124,8 +139,7 @@
     /* 4. У тебя vikeplikt */
     gen("vikeplikt-du", () => {
       const side = rnd(["east", "west"]);
-      const aMan = rnd(["straight", "left", "right"]);
-      const bMan = rnd(["straight", "left", "right"]);
+      const [aMan, bMan] = crossingPair(side, ["straight", "left", "right"], ["straight", "left", "right"]);
       return {
         prompt_no: `Du (A) har vikepliktskilt og skal ${MAN_KEY[aMan].no}. Bil B kommer ${FROM[side].no} på den kryssende vegen og skal ${MAN_KEY[bMan].no}. Hvem har vikeplikt?`,
         prompt_ru: `У тебя (A) знак «уступи дорогу», едешь ${MAN_KEY[aMan].ru}. Машина B едет ${FROM[side].ru} по пересекаемой дороге. Кто уступает?`,
@@ -200,13 +214,14 @@
 
     /* 8. Светофор: у тебя зелёный, у B красный */
     gen("lys-gront", () => {
-      const side = rnd(["east", "west"]);
       const aMan = rnd(["straight", "right"]);
+      /* B едет прямо; при правом повороте A пути пересекаются, только если B слева (выезжаете на одну дорогу) */
+      const side = aMan === "right" ? "west" : rnd(["east", "west"]);
       return {
         prompt_no: `Lyskryss. Du (A) har grønt og skal ${MAN_KEY[aMan].no}. Bil B kommer ${FROM[side].no} og har rødt. Hvem har vikeplikt?`,
         prompt_ru: `Перекрёсток со светофором. У тебя (A) зелёный, едешь ${MAN_KEY[aMan].ru}. Машина B ${FROM[side].ru}, у неё красный. Кто уступает?`,
         image: scene({ you: { from: "south", to: toFor("south", aMan) }, others: [{ from: side, to: side === "east" ? "west" : "east" }], lights: { south: "green", [side]: "red" } }),
-        options: whoOptions("other"),
+        options: whoOptions("other", ["left"]),
         explanation_no: "Trafikklys går foran både skilt og høyreregelen. B har rødt og må stoppe. Du kjører, men med aktsomhet.",
         explanation_ru: "Светофор важнее и знаков, и правила правой руки. У B красный, она стоит. Ты едешь, но с осторожностью.",
         tip_ru: "Иерархия: полицейский → светофор → знаки → правило правой руки."

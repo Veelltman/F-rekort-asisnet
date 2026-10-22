@@ -1887,7 +1887,7 @@
       "Если машина смотрит вниз по склону и есть бордюр, колёса поворачивают к бордюру. Тогда, если машина покатится вперёд, бордюр её остановит. Обязательно дополнительно включай ручник и передачу.",
       "Четыре варианта склона — четыре разных поворота колёс: вверх/вниз и с бордюром/без меняют направление."),
 
-    qm("m11", null, "Hva er riktig om kjøring i rundkjøring? Velg alle riktige.", "Что верно про движение в кольце (rundkjøring)? Выбери все верные.", [
+    qm("m11", null, "Du skal gjennom en rundkjøring og ut på andre side, der det er et gangfelt. Velg alle riktige.", "Ты проезжаешь круг и съезжаешь на другой стороне, где на выезде пешеходный переход. Выбери все верные.", [
       ["Biler som allerede er inne i rundkjøringen, har forrang foran biler som skal kjøre inn", "У машин, которые уже в кольце, приоритет перед тем, кто въезжает", true],
       ["Du skal blinke til høyre like før du kjører ut av rundkjøringen", "Перед выездом из кольца нужно включить правый поворотник", true],
       ["Du har vikeplikt for gående som er i eller på vei ut i gangfeltet ved utkjøringen", "Ты уступаешь пешеходам, которые идут по переходу на выезде из кольца или вот-вот на него ступят", true],

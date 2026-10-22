@@ -164,7 +164,6 @@
     w("131", "sikkerhetsavstand", "безопасная дистанция", "Hold sikkerhetsavstand til bilen foran, spesielt i høy fart.", "Держи безопасную дистанцию до машины впереди, особенно на высокой скорости.", "Приоритет"),
     w("132", "brøytebil", "снегоуборочная машина", "Vær forsiktig med å kjøre forbi en brøytebil, sikten framover er dårlig.", "Осторожно с обгоном снегоуборочной машины — за ней плохо видно дорогу впереди.", "Условия"),
     w("133", "kjettingpåbud", "обязательное использование цепей", "Kjettingpåbud gjelder på enkelte fjelloverganger om vinteren.", "На некоторых горных перевалах зимой обязательны цепи противоскольжения.", "Условия"),
-    w("134", "møtende trafikk", "встречное движение", "Blend ned for møtende trafikk i god tid.", "Заранее переключайся на ближний свет для встречного движения.", "Приоритет"),
 
     /* ---------- Дорога и знаки ---------- */
     w("135", "fartshump", "лежачий полицейский", "Senk farten når du ser en fartshump i veien.", "Снизь скорость, когда видишь лежачего полицейского.", "Дорога"),
