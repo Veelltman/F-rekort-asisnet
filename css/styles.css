@@ -473,7 +473,7 @@ main {
 @keyframes q-in { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
 .question-image { display: flex; justify-content: center; margin: 0 0 20px; }
 .sign-icon { width: 150px; height: 150px; }
-.scene-icon { width: min(100%, 300px); height: auto; aspect-ratio: 1; border-radius: var(--r-md); border: 1px solid var(--border); }
+.scene-icon { width: min(100%, 480px); height: auto; border-radius: var(--r-md); border: 1px solid var(--border); display: block; }
 .question-text { position: relative; padding-right: 50px; }
 .question-text .lang-no { font-size: 1.16rem; font-weight: 550; line-height: 1.45; margin-bottom: 6px; color: var(--ink); letter-spacing: -0.01em; }
 .question-text .lang-ru { color: var(--ink-2); font-size: 0.96rem; }

@@ -12,6 +12,7 @@ vm.createContext(ctx);
 
 const files = [
   "js/icons/signs-svg.js",
+  "js/scene-kit.js",
   "js/data/signs-catalog.js",
   "js/data/signs.js",
   "js/data/situational.js",
@@ -62,10 +63,10 @@ D.vocabulary.forEach(w => {
 });
 
 /* Ловушки на ошибки, которые робот уже делал. Каждая — с объяснением, что не так. */
-const HILL = ctx.window.HILL_SCENE && ctx.window.HILL_SCENE();
+/* картинки ситуаций — только новым художником (js/scene-kit.js), 400×300 */
 D.situational.forEach(q => {
-  if (HILL && q.image === HILL && /oppover|kantstein|fortauskant/i.test(q.prompt_no.replace(/uten fortauskant/i, "")))
-    errors.push(`situational ${q.id}: hillScene() рисует СПУСК БЕЗ бордюра (канава), а в вопросе подъём или бордюр — поставь null`);
+  const img = q.fresh ? q.fresh().image : q.image;
+  if (img && !/viewBox="0 0 400 300"/.test(img)) errors.push(`situational ${q.id}: картинка не из js/scene-kit.js (scene()/street()/SK.hill()/SK.illus())`);
 });
 const TRAPS = [
   [/vinterdekk-?krav|påbudt med vinterdekk|krav om vinterdekk/i, "зимние шины для легковой не обязательны — обязательны 3 мм протектора зимой"],

@@ -31,51 +31,62 @@ q("027",                                    // id: следующий свобо
 
 **Обязательно:** у каждого неверного варианта 3-й и 4-й элементы — объяснение, почему именно этот вариант неверен (норвежский и русский). Сайт показывает его после ответа: «Du svarte: … — почему неверно», затем «Riktig svar: … — обоснование». Не повторяй в нём общее объяснение вопроса, а говори конкретно про ошибку в выбранном варианте (какое правило или число перепутано).
 
-В `situational.js` второй аргумент после id — картинка: `scene({...})` или `null`. Схема:
+В `situational.js` второй аргумент после id — картинка. Её рисует `js/scene-kit.js` (холст 400×300, вид сверху, ты — синяя машина «A», едешь снизу вверх). Посмотреть все схемы разом: открой `tools/scenes.html` на локальном сайте (`#ids=sit-101,sit-102` — только эти, крупно). Перед выбором схемы найди похожий вопрос (`node scripts/dump-questions.js similar <id>`) и посмотри, как нарисован он.
+
+**1. Перекрёсток — `scene({...})`**
 
 ```js
 scene({
-  you: { from: "south", to: "north" },       // ты — машина A; to: north = прямо, west = налево, east = направо
-  others: [{ from: "east", to: "west" }],    // другие машины B, C…; kind: "bike" для велосипедиста
-  signs: { south: "yield" },                 // знак на стороне: yield | priority | stop
-  lights: { south: "green", east: "red" },   // светофоры
-  roundabout: true                           // круговое движение
+  you: { from: "south", to: "west" },          // ты — A; to: north = прямо, west = налево, east = направо
+  others: [{ from: "north", to: "south" }],    // B, C…; kind: "bike" | "scooter" | "bus" | "truck" | "tram" | "emergency"
+  signs: { south: "yield", east: "priority" }, // yield | stop | priority (+ разметка «зубы» / стоп-линия сама)
+  lights: { south: "green", east: "red" },     // red | yellow | green | redyellow | flash (мигающий жёлтый)
+  peds: ["west"],                              // переход на рукаве + пешеход идёт по нему
+  rails: "ns",                                 // трамвайные рельсы: "ns" (север–юг) | "ew"
+  arms: ["north", "south", "west"],            // Т-перекрёсток: только эти рукава
+  extra: [{ kind: "car", x: 215, y: 96, rot: 0, color: "#e0483a", label: false, brake: true }], // любые участники в точках
+  tags: [{ text: "KØ", x: 262, y: 60 }]        // короткая подпись-табличка
+})
+scene({ you: { from: "south", to: "north" }, roundabout: true, others: [{ from: "west", to: "east" }] }) // кольцо; машины others уже на кольце
+scene({ roundabout: true, lanes: 2, you: { from: "south", to: "west", lane: "left" }, others: [{ from: "south", to: "north", lane: "right", entering: true }] })
+```
+Центр перекрёстка (200,150), полосы: въезд с юга x=215, с севера x=185, с востока y=135, с запада y=165. Поворотники ставятся сами по манёвру.
+
+**2. Прямая дорога — `street({...})`**
+
+Полосы по умолчанию: встречная x=184, твоя x=216, тротуары 144–168 и 232–256.
+```js
+street({
+  lanes: ["down", "up"],            // слева направо; "up" — в твою сторону. Магистраль: ["up", "up"]
+  laneW: 32, center: "dashed",      // dashed | solid | warn | double | dashToSolid (solidFrom) | none
+  sides: { left: "walk", right: "grass" },   // walk (тротуар) | grass | shoulder (обочина) | snow (брустверы)
+  weather: "night",                 // night | dusk | rain | snow | fog | sun
+  features: [ ... ],                // см. ниже
+  actors: [                         // y — вертикаль; lane: "right" (твоя, по умолчанию) | "left" (встречная, едет вниз) | номер полосы; или x
+    { label: "A", y: 245, path: [[216, 170]] },                         // path — стрелка пути (точки)
+    { label: "B", lane: "left", y: 40, color: "#e0483a", path: [[184, 120]] },
+    { kind: "adult", x: 246, y: 120, rot: 270, walk: [230, 120] },     // люди: adult | child | cane | worker | officer | patrol
+    { kind: "bike", x: 225, y: 104, label: "S" }                        // и: truck, bus, tram, tractor, emergency, scooter, moose, horse, sheep, cone, post, triangle, crash, note
+  ],
+  tags: [{ text: "RASTEPLASS", x: 326, y: 40 }]
 })
 ```
+Опции машин: `blink: "left" | "right" | "hazard"`, `brake: true`, `beams: "low" | "high"` (ночью), `trailer: "box" | "caravan"` (+ `trailerRot`, `sway`), `door: "left" | "right"`, `steer`, `smoke`, `doors` (у трамвая), `label: false` — без буквы.
 
-Для ситуаций на прямой дороге есть второй тип схемы, `road({...})` — используй его вместо перекрёстка, когда в вопросе нет перекрёстка:
+Особенности (`features`): `zebra {y}` · `sideRoad {y, side: "right"|"left"|"both", yield}` · `driveway {y, side, label, lines, building, surface}` · `bikeLane {side, gap:[y1,y2]}` · `bikePath {join}` · `busStop {y, side, bay}` · `tramRails` · `rail {y, barriers: "up"|"down", lights: "flash"|"off", train:{x,dir}}` · `railSide {x, train:{y,dir,lights}}` · `tunnel {y, sign}` · `inTunnel {exit, lay}` · `passingPlace {y, label}` · `roadwork {lane, from, to, worker}` · `ramp {kind: "on"|"off", to}` · `parkingLane {side, cars}` · `lot` (с `noRoad: true`) · `bridge {y, h, icy}` · `puddle {y, x, kind: "water"|"ice"}` · `stopLine {y}` · `light {y, state}` · `sign {kind, y, side, x, size, under}` · `crest {y}` · `lowSun` · `cabin {x, y, text}` · `tag {text, x, y}`.
 
-```js
-road({ bus: true, limit: 50 })   // автобус с поворотником выезжает с остановки, A сзади
-road({ crossing: true })         // пешеходный переход, пешеход справа
-road({ crossing: "far" })        // пешеход почти перешёл, на дальнем краю перехода
-road({ narrow: true })           // узкая дорога, разъезд (møteplass) на стороне A, B навстречу
-road({ exit: "parking" })        // A выезжает с парковки на дорогу; exit: "gatetun" — из жилой зоны
-road({ tcross: true })           // T-перекрёсток: боковая дорога справа, B выезжает из неё
-road({ bikeLane: true })         // велополоса справа, A поворачивает направо, велосипедист B едет прямо
-road({ overtake: true })         // машина B впереди с левым поворотником объезжает велосипедиста, A сзади
-road({ night: true })            // ночь, пешеход в тёмном идёт по левой обочине навстречу
-road({ truck: true, tcross: true }) // грузовик впереди сместился влево перед правым поворотом
-road({ tram: true })             // трамвай на остановке, пассажиры переходят к тротуару
-road({ parkedChild: true })      // A припаркована справа, ребёнок выходит к тротуару, B проезжает
-road({ onramp: true })           // выезд на автомагистраль по полосе разгона
-road({ rail: true })             // переезд без шлагбаума, мигающий красный
-road({ wild: true })             // знак «Dyr», лось у обочины
-road({ bridge: true })           // мост через воду, мороз
-road({ rain: true })             // ливень, лужа, аквапланирование
-road({ roadwork: true })         // дорожные работы: конусы, жёлтый временный знак 50 и постоянный 80
-road({ tunnel: true })           // въезд в тоннель в солнечный день
-road({ rest: true })             // rasteplass: карман и синий знак
-road({ trailer: true })          // машина с прицепом сдаёт задом в узкий въезд
-road({ lot: true })              // парковка: A задела B
-hillScene()                      // вид сбоку: парковка на уклоне без бордюра, кювет справа
-```
+Знаки (`kind`): yield, stop, priority, priorityEnd, gangfelt, roundabout, motorway, gatetun, gagate, tunnel, moose, children, rail, railBarrier, roadwork, narrowYield, narrowPrio, parking, noParking, noStopping, horse, descent, slippery, lightsAhead, tram, cyclist, noOvertaking, crossingAhead, priorityCross, oneway, queue, `speed:60`, `temp:50` (жёлтый временный), bus, rest, cross (андреевский крест), chains. `under: "A0430-additional-trucks"` — табличка из `img/signs`.
 
-Картинку ставь `null` только там, где её действительно нечем заменить (например, «выпил вчера, можно ли ехать утром»).
+**3. Склон — `SK.hill({ dir: "up" | "down", edge: "curb" | "ditch", wheels: "straight" })`** — машина у края, стрелка показывает, куда она покатится.
 
-В `scene({...})` у других машин можно задать вид: `kind: "bus" | "truck" | "tram" | "emergency" | "bike"` — если в вопросе автобус, грузовик, трамвай или машина с мигалкой, на схеме должен быть именно он. Пешеход на переходе рукава: `peds: ["east"]`.
+**4. Иллюстрация — `SK.illus("wine-morning" | "party-glass" | "medicine" | "frost")`** — для вопросов не про дорогу.
 
-Картинка обязана соответствовать тексту вопроса: не ставь схему перекрёстка к вопросу про автобус или погоду. Если подходящей схемы нет — ставь `null` (автомагистраль, погода, усталость, оборудование).
+**Правила для картинок:**
+- Картинка обязана соответствовать тексту: те же участники, стороны, знаки, светофоры, погода. Нет подходящей — `null`.
+- **Картинка показывает ситуацию, а не ответ.** Не рисуй правильный манёвр как решение (путь в разъезд, когда спрашивают «кто ждёт»; колёса, повёрнутые правильно; точку «включи поворотник здесь») и не пиши в подписях ответ («ANNENHVER», «VANNPLANING»).
+- Подписи (`tags`) — короткие, по-норвежски, заглавными, только то, что есть в тексте вопроса.
+- Старые короткие вызовы `road({ crossing: true })` и т.п. ещё работают, но новые задания рисуй через `street({...})`.
+- `node scripts/check-data.js` проверяет, что картинка сделана этим художником.
 
 ## Вопросы с несколькими правильными ответами
 
@@ -136,7 +147,7 @@ w("057", "ord på norsk", "перевод", "Eksempelsetning på norsk.", "Пе�
 - Остановку автобуса в Норвегии обозначает знак 512; жёлтого зигзага в Skiltforskriften нет. Лежачий полицейский — знак 109, kollektivfelt — 508.
 - Промилле: от 0,2 — штраф; выше 0,5 — лишение прав и риск тюрьмы. Не пиши, что от 0,5 «всегда безусловный срок».
 - В объяснении неверного варианта не пиши то, что в данной ситуации было бы правдой (например, «кто слева, тот первый» на круге — это верно, такой вариант туда не ставь).
-- Если в вопросе есть светофор, знак или пешеход — они должны быть и на картинке (`lights`, `signs`, `peds` в `scene()`).
+- Если в вопросе есть светофор, знак или пешеход — они должны быть и на картинке (`lights`, `signs`, `peds` в `scene()`; `features`/`actors` в `street()`).
 
 - Круглый синий знак 520 «Sykkelveg» (и 522 «Gangveg») в Норвегии — **opplysningsskilt**, не påbud. Не приводи его как пример предписывающего знака.
 - Обгон у перехода: закон (§ 12 nr 6) запрещает обгонять машину, которая закрывает обзор перехода. Не пиши «обгон на переходе запрещён всегда».
@@ -161,7 +172,7 @@ w("057", "ord på norsk", "перевод", "Eksempelsetning på norsk.", "Пе�
 - **Царапина на пустой машине** — vegtrafikkloven § 12: сообщить потерпевшему **или полиции** (записка с контактами — способ сообщить).
 - **Трамвай** — § 10 nr 2: ему уступают все, в том числе на главной дороге. Если перекрёсток со светофором — едут по светофору; не пиши «у трамвая всегда приоритет».
 - **Пешеход у перехода** — § 9 nr 2: уступаешь тому, кто на переходе или **на пути к нему** («på veg ut i det»). Пешеход «преимуществом» не обладает — это у тебя обязанность уступить.
-- `hillScene()` рисует **спуск без бордюра, с канавой (GRØFT)**. Для подъёма или для бордюра эту картинку не используй — ставь `null`.
+- Парковка на склоне — `SK.hill({ dir, edge, wheels: "straight" })`: направление и край задаются, колёса на картинке прямо (ответ не подсказываем).
 - Перед тем как писать новый вопрос, проверь `node scripts/dump-questions.js rules` / `situational` — уже есть: телефон в руке (rules-009), ближний свет днём (rules-012), ремни 15 лет (rules-018), 3 мм зимой (rules-021), правый поворот через велополосу (sit-024, sit-074), задний ход с прицепом (sit-031), переезд с мигающим красным (sit-033).
 
 ## Озвучка новых слов

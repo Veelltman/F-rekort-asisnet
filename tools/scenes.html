@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Схемы ситуаций — предпросмотр</title>
+<base href="../">
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; padding: 16px; font: 13px/1.4 Inter, Arial, sans-serif; background: #f3f5f8; color: #1d1f24; }
+  h1 { font-size: 18px; margin: 0 0 12px; }
+  .bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .bar button { border: 1px solid #c9d0d8; background: #fff; border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; }
+  .card { background: #fff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 10px; }
+  .card svg { width: 100%; height: auto; display: block; border-radius: 8px; }
+  .id { font-weight: 700; margin-top: 8px; }
+  .q { color: #4b5563; }
+  .none { display: grid; place-items: center; aspect-ratio: 4 / 3; background: #fde8e8; color: #9b1c1c; border-radius: 8px; font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>Схемы ситуаций</h1>
+<div class="bar">
+  <button data-f="all">Все</button><button data-f="static">Только задачи</button><button data-f="gen">Только генераторы</button><button data-f="none">Без картинки</button>
+</div>
+<div class="grid" id="grid"></div>
+<script src="js/scene-kit.js"></script>
+<script src="js/data/situational.js"></script>
+<script src="js/data/generated.js"></script>
+<script>
+  const D = window.QUESTION_DATA;
+  function render(filter) {
+    const items = [];
+    D.situational.forEach(q => {
+      const gen = !!q.fresh;
+      if (filter === "static" && gen) return;
+      if (filter === "gen" && !gen) return;
+      const n = gen ? 4 : 1;
+      for (let i = 0; i < n; i++) {
+        const inst = gen ? Object.assign({}, q, q.fresh()) : q;
+        if (filter === "none" && inst.image) return;
+        items.push(`<div class="card">${inst.image || '<div class="none">нет картинки</div>'}<div class="id">${q.id}</div><div class="q">${inst.prompt_no}</div><div class="q">${inst.prompt_ru}</div></div>`);
+      }
+    });
+    document.getElementById("grid").innerHTML = items.join("");
+  }
+  document.querySelectorAll("[data-f]").forEach(b => b.onclick = () => render(b.dataset.f));
+  /* #ids=sit-001,sit-002 — только эти задания, крупно (для проверки) */
+  function fromHash() {
+    const h = new URLSearchParams(location.hash.slice(1));
+    const ids = (h.get("ids") || "").split(",").filter(Boolean);
+    if (!ids.length) return render(h.get("f") || "all");
+    const cols = h.get("cols") || 2;
+    document.getElementById("grid").style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    document.getElementById("grid").innerHTML = ids.map(id => {
+      const q = D.situational.find(x => x.id === id) || (window.SK_SAMPLES || {})[id];
+      if (!q) return `<div class="card">нет ${id}</div>`;
+      const inst = q.fresh ? Object.assign({}, q, q.fresh()) : q;
+      return `<div class="card">${inst.image || '<div class="none">нет картинки</div>'}<div class="id">${id}</div><div class="q">${inst.prompt_no || ""}</div></div>`;
+    }).join("");
+  }
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+</script>
+</body>
+</html>

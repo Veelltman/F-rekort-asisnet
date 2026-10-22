@@ -1,501 +1,65 @@
-/* Банк вопросов: ситуационные задачи (перекрёстки, приоритет, круговое движение).
-   Схемы перекрёстков рисуются функцией scene(). Ты — всегда машина «A» (синяя). */
+/* Банк вопросов: ситуационные задачи (перекрёстки, приоритет, круговое движение, дорога).
+   Картинки рисует js/scene-kit.js (window.SK). Ты — всегда синяя машина «A».
+
+   Как задать картинку (подробно — в CONTRIBUTING-BOT.md):
+     scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south" }], signs: { south: "yield" } })
+         перекрёсток; стороны north/south/east/west; signs: yield | stop | priority; lights: red | yellow | green | flash;
+         peds: ["east"] — пешеход на переходе рукава; roundabout: true (lanes: 2); rails: "ns"|"ew"; arms: [...] — Т-перекрёсток
+     street({ features: [...], actors: [...] })  — прямая дорога, ты едешь снизу вверх
+     SK.hill({ dir: "up"|"down", edge: "curb"|"ditch", wheels: "straight" })  — парковка на склоне
+     SK.illus("wine-morning" | "party-glass" | "medicine" | "frost")
+     null — если ни одна схема честно не показывает ситуацию */
 
 (function () {
   "use strict";
 
-  /* ---------- Отрисовка перекрёстка ----------
-     viewBox 200×200, центр (100,100). Дорога шириной 64, две полосы по 32.
-     Правостороннее движение: машина едет по правой полосе своего направления. */
+  const SK = window.SK;
+  function scene(cfg) { return SK.junction(cfg); }
+  function street(cfg) { return SK.street(cfg); }
 
-  const C = 100, HALF = 32, LANE = 16, EDGE = 168, BOUND = 132;
-  /* Полоса подъезда (координата поперёк дороги) и направление движения */
-  const APPROACH = {
-    south: { axis: "y", lane: C + LANE, from: 200, dir: -1, rot: 0 },
-    north: { axis: "y", lane: C - LANE, from: 0, dir: 1, rot: 180 },
-    east:  { axis: "x", lane: C - LANE, from: 200, dir: -1, rot: 270 },
-    west:  { axis: "x", lane: C + LANE, from: 0, dir: 1, rot: 90 }
+  /* Старые короткие вызовы road({ crossing: true }) и т.п. — теперь рисуются новым художником */
+  const A = (y, extra) => Object.assign({ label: "A", y: y || 245, path: [[216, (y || 245) - 70]] }, extra || {});
+  const ROAD_PRESETS = {
+    crossing: c => street({ features: [{ type: "zebra", y: 120 }], actors: [c.crossing === "far"
+      ? { kind: "adult", x: 174, y: 120, rot: 270, color: "#6b4fa0", walk: [154, 120] }
+      : { kind: "adult", x: 246, y: 120, rot: 270, color: "#6b4fa0", walk: [230, 120] }, A(245)] }),
+    narrow: () => street({ laneW: 22, center: "none", sides: { left: "grass", right: "grass" }, features: [{ type: "passingPlace", y: 150 }],
+      actors: [A(250), { label: "B", lane: "left", y: 40, color: "#e0483a", path: [[189, 110]] }] }),
+    exit: c => street({ features: [{ type: "driveway", y: 150, side: "right", label: c.exit === "gatetun" ? "GATETUN" : "P", lines: c.exit !== "gatetun" }],
+      actors: [{ label: "A", x: 296, y: 158, rot: 270, path: [[248, 158]] }, { label: "B", lane: "left", y: 46, color: "#e0483a", path: [[184, 250]] }] }),
+    tcross: () => street({ features: [{ type: "sideRoad", y: 110, side: "right" }],
+      actors: [{ label: "B", x: 330, y: 95, rot: 270, color: "#e0483a", path: [[246, 95]] }, A(250)] }),
+    bikeLane: () => street({ laneW: 34, features: [{ type: "sideRoad", y: 90, side: "right", w: 56 }, { type: "bikeLane", side: "right", gap: [62, 118] }],
+      actors: [{ label: "A", x: 210, y: 210, blink: "right", path: [[210, 130], [250, 104], [340, 104]] }, { kind: "bike", x: 227, y: 268, label: "B", path: [[227, 200], [227, 20]] }] }),
+    bus: c => street({ features: [{ type: "busStop", y: 116, side: "right", bay: true }, { type: "sign", kind: "speed:" + (c.limit || 50), y: 290, side: "left" }],
+      actors: [{ kind: "bus", x: 245, y: 120, label: "B", blink: "left", path: [[245, 70], [216, 30], [216, 6]] }, A(255)] }),
+    overtake: () => street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "bike", x: 225, y: 104, label: "S", path: [[225, 50]] },
+      { label: "B", y: 172, color: "#e0483a", blink: "left", path: [[205, 132], [188, 96], [188, 30]] }, A(258)] }),
+    night: () => street({ sides: { left: "grass", right: "grass" }, weather: "night", actors: [{ kind: "adult", x: 160, y: 96, rot: 180, color: "#30353c" }, A(250, { beams: "low" })] }),
+    tunnel: () => street({ sides: { left: "grass", right: "grass" }, features: [{ type: "tunnel", y: 100, sign: true }], actors: [A(240)] }),
+    rail: () => street({ sides: { left: "grass", right: "grass" }, features: [{ type: "rail", y: 110, lights: "flash" }], actors: [A(250)] }),
+    roadwork: () => street({ sides: { left: "grass", right: "grass" }, features: [{ type: "roadwork", lane: 1, from: 30, to: 140 }, { type: "sign", kind: "roadwork", y: 230 }], actors: [A(255)] }),
+    trailer: () => street({ features: [{ type: "sideRoad", y: 120, side: "right", w: 44 }], actors: [{ label: "A", x: 214, y: 52, trailer: "box", trailerRot: -55, steer: -26 }] }),
+    lot: () => street({ noRoad: true, features: [{ type: "lot" }], actors: [{ label: "A", x: 186, y: 168, rot: 160 }, { label: "B", x: 218, y: 120, color: "#e0483a" }] }),
+    wild: () => street({ sides: { left: "grass", right: "grass" }, weather: "dusk", features: [{ type: "sign", kind: "moose", y: 268, size: 28 }], actors: [{ kind: "moose", x: 262, y: 92, rot: 250 }, A(230, { beams: "low" })] }),
+    bridge: () => street({ sides: { left: "grass", right: "grass" }, features: [{ type: "bridge", y: 110, h: 96 }], actors: [A(250)] }),
+    rain: () => street({ sides: { left: "grass", right: "grass" }, weather: "rain", actors: [A(200)] }),
+    rest: () => street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "off" }, { type: "sign", kind: "rest", x: 300, y: 150, size: 28 }], actors: [{ label: "A", lane: 1, y: 256, path: [[216, 200]] }] }),
+    tram: () => street({ laneW: 34, features: [{ type: "tramRails" }], actors: [{ kind: "tram", x: 200, y: 92, label: "T", doors: true }, { label: "A", x: 220, y: 240, path: [[220, 176]] }] }),
+    parkedChild: () => street({ actors: [{ label: "A", x: 220, y: 150, door: "right" }, { kind: "child", x: 244, y: 162, rot: 90, color: "#f08c1a" }] }),
+    onramp: () => street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "on", to: 60 }],
+      actors: [{ label: "A", x: 247, y: 240, blink: "left", path: [[247, 160], [216, 80], [216, 6]] }, { label: "B", lane: 1, y: 170, color: "#e0483a", path: [[216, 40]] }] }),
+    truck: () => street({ features: [{ type: "sideRoad", y: 80, side: "right" }], actors: [{ kind: "truck", x: 200, y: 160, label: "B", color: "#e0483a", blink: "right", path: [[200, 112], [252, 95], [340, 95]] }, A(262)] })
   };
-  /* Полоса выезда для направления движения "to" */
-  const EXITLANE = {
-    north: { axis: "y", lane: C + LANE, end: 4 },
-    south: { axis: "y", lane: C - LANE, end: 196 },
-    east:  { axis: "x", lane: C + LANE, end: 196 },
-    west:  { axis: "x", lane: C - LANE, end: 4 }
-  };
-
-  function pt(axisCoord, laneCoord, axis) {
-    return axis === "y" ? [laneCoord, axisCoord] : [axisCoord, laneCoord];
-  }
-
-  function trajectory(from, to, laneShift) {
-    const a = APPROACH[from], e = EXITLANE[to];
-    const aLane = a.lane + (laneShift || 0) * (a.axis === "y" ? (from === "south" ? 1 : -1) : (from === "east" ? -1 : 1));
-    const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
-    const boundIn = a.from === 200 ? BOUND : 200 - BOUND;
-    const p0 = pt(startCoord, aLane, a.axis);
-    const p1 = pt(boundIn, aLane, a.axis);
-    if (a.axis === e.axis) {
-      const p3 = pt(e.end, aLane, a.axis);
-      return { d: `M ${p0} L ${p3}`, endAngle: angleOf(p1, p3) };
-    }
-    const eLane = e.lane + (laneShift || 0) * (e.axis === "y" ? (to === "north" ? 1 : -1) : (to === "east" ? 1 : -1));
-    const boundOut = e.end > C ? BOUND : 200 - BOUND;
-    const p2 = pt(boundOut, eLane, e.axis);
-    const p3 = pt(e.end, eLane, e.axis);
-    const ctrl = a.axis === "y" ? [aLane, eLane] : [eLane, aLane];
-    return { d: `M ${p0} L ${p1} Q ${ctrl} ${p2} L ${p3}`, endAngle: angleOf(p2, p3) };
-  }
-
-  function roundaboutPath(from, to, inner) {
-    const R = inner ? 34 : 40;
-    const ang = { south: 90, east: 0, north: -90, west: 180 };
-    /* Правая полоса подъезда входит в кольцо чуть «раньше» по ходу, выезд чуть «позже» */
-    const inA = ang[from] - 22, outA = ang[to] + 22;
-    let a1 = inA, a2 = outA;
-    while (a2 >= a1 - 10) a2 -= 360;
-    const pts = [];
-    for (let t = a1; t >= a2; t -= 8) pts.push([C + R * Math.cos(t * Math.PI / 180), C + R * Math.sin(t * Math.PI / 180)]);
-    const a = APPROACH[from];
-    const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
-    const p0 = pt(startCoord, a.lane + (inner ? -8 * laneSign(from) : 0), a.axis);
-    const e = EXITLANE[to];
-    const p3 = pt(e.end, e.lane, e.axis);
-    const last = pts[pts.length - 1];
-    return { d: `M ${p0} L ${pts.map(p => p.map(v => v.toFixed(1)).join(" ")).join(" L ")} L ${p3}`, endAngle: angleOf(last, p3) };
-  }
-
-  function angleOf(p, q) { return Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI; }
-
-  function arrowHead(d, endAngle, color) {
-    const m = d.match(/L ([\d.]+)[ ,]([\d.]+)$/);
-    if (!m) return "";
-    const x = +m[1], y = +m[2];
-    return `<polygon points="0,-5 9,0 0,5" fill="${color}" transform="translate(${x} ${y}) rotate(${endAngle})"/>`;
-  }
-
-  /* Корпус ТС: рисуется носом вверх, потом поворачивается на rot. kind: car | bus | truck | tram | emergency | bike */
-  function body(kind, label, color, rot) {
-    const lbl = (y, fill) => `<text x="0" y="${y}" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="${fill || "#fff"}" transform="rotate(${-rot})">${label}</text>`;
-    if (kind === "bike") return `<rect x="-4" y="-10" width="8" height="20" rx="4" fill="${color}"/><circle cx="0" cy="-6" r="3.8" fill="#fff"/>
-        <text x="0" y="24" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="${color}" transform="rotate(${-rot})">${label}</text>`;
-    if (kind === "bus") return `<rect x="-9" y="-22" width="18" height="44" rx="3" fill="#f0a020"/>
-        <rect x="-7" y="-20" width="14" height="5" rx="1.5" fill="#fff" opacity="0.85"/>
-        ${[-12, -5, 9, 16].map(y => `<rect x="-9" y="${y}" width="2.5" height="4" fill="#fff" opacity="0.7"/><rect x="6.5" y="${y}" width="2.5" height="4" fill="#fff" opacity="0.7"/>`).join("")}
-        <rect x="-7" y="17" width="14" height="3" rx="1" fill="#fff" opacity="0.35"/>${lbl(4.5)}`;
-    if (kind === "truck") return `<rect x="-9" y="-10" width="18" height="34" rx="2" fill="#8a949c" stroke="#fff" stroke-width="1"/>
-        <rect x="-8" y="-25" width="16" height="13" rx="3" fill="${color}"/><rect x="-6" y="-23" width="12" height="4" rx="1.5" fill="#fff" opacity="0.85"/>${lbl(10)}`;
-    if (kind === "tram") return `<rect x="-8" y="-26" width="16" height="52" rx="6" fill="#2b62c9"/>
-        ${[-21, -13, 8, 16].map(y => `<rect x="-6" y="${y}" width="12" height="5" rx="1" fill="#fff" opacity="0.8"/>`).join("")}
-        <line x1="-5" y1="-4" x2="5" y2="-4" stroke="#111" stroke-width="1.2" opacity="0.6"/>${lbl(3.5)}`;
-    if (kind === "emergency") return `<rect x="-8" y="-14" width="16" height="28" rx="4" fill="#fff" stroke="#c9cfd6" stroke-width="1"/>
-        <rect x="-8" y="-1" width="16" height="4" fill="#d81e1e"/><rect x="-6" y="-11" width="12" height="6" rx="2" fill="#9fc8ff"/>
-        <rect x="-4" y="-16" width="8" height="3" rx="1.5" fill="#1d5fd6"/><circle cx="0" cy="-17" r="3.5" fill="#1d5fd6" opacity="0.35"/>${lbl(11.5, "#1d1f24")}`;
-    return `<rect x="-8" y="-14" width="16" height="28" rx="4" fill="${color}"/>
-        <rect x="-6" y="-11" width="12" height="6" rx="2" fill="#fff" opacity="0.75"/>
-        <rect x="-6" y="7" width="12" height="4" rx="1.5" fill="#fff" opacity="0.35"/>${lbl(4.5)}`;
-  }
-  function at(x, y, rot, kind, label, color) {
-    return `<g transform="translate(${x} ${y}) rotate(${rot})">${body(kind, label, color, rot)}</g>`;
-  }
-
-  /* +1 = сдвиг от осевой к обочине для этого направления подъезда */
-  function laneSign(from) { return from === "south" || from === "west" ? 1 : -1; }
-
-  function vehicle(from, to, label, color, kind, roundabout, inner) {
-    const a = APPROACH[from];
-    const traj = roundabout ? roundaboutPath(from, to, inner) : trajectory(from, to, kind === "bike" ? 11 : 0);
-    const startCoord = a.from === 200 ? EDGE : 200 - EDGE;
-    const lane = a.lane + (kind === "bike" ? 11 * laneSign(from) : 0) + (inner ? -8 * laneSign(from) : 0);
-    const [x, y] = pt(startCoord, lane, a.axis);
-    const path = `<path d="${traj.d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
-      ${arrowHead(traj.d, traj.endAngle, color)}`;
-    return `${path}${at(x, y, a.rot, kind, label, color)}`;
-  }
-
-  /* Знак стоит справа от подъезжающего, перед перекрёстком */
-  const SIGN_SPOT = { south: [144, 146], north: [56, 54], east: [146, 56], west: [54, 144] };
-  const LIGHT_SPOT = { south: [142, 136], north: [58, 64], east: [136, 58], west: [64, 142] };
-
-  function signMarker(side, kind) {
-    const [x, y] = SIGN_SPOT[side];
-    const post = `<line x1="${x}" y1="${y + 8}" x2="${x}" y2="${y + 14}" stroke="#4b5563" stroke-width="2"/>`;
-    if (kind === "yield") return `${post}<polygon points="${x - 8},${y - 7} ${x + 8},${y - 7} ${x},${y + 8}" fill="#fff" stroke="#d81e1e" stroke-width="2.5" stroke-linejoin="round"/>`;
-    if (kind === "priority") return `${post}<polygon points="${x},${y - 9} ${x + 9},${y} ${x},${y + 9} ${x - 9},${y}" fill="#fff" stroke="#d81e1e" stroke-width="1.5"/><polygon points="${x},${y - 5} ${x + 5},${y} ${x},${y + 5} ${x - 5},${y}" fill="#f6c945"/>`;
-    if (kind === "stop") return `${post}<polygon points="${x - 4},${y - 9} ${x + 4},${y - 9} ${x + 9},${y - 4} ${x + 9},${y + 4} ${x + 4},${y + 9} ${x - 4},${y + 9} ${x - 9},${y + 4} ${x - 9},${y - 4}" fill="#d81e1e" stroke="#fff" stroke-width="1.5"/>`;
-    return "";
-  }
-
-  function lightMarker(side, color) {
-    const [x, y] = LIGHT_SPOT[side];
-    const on = color === "green" ? "#2aa46a" : color === "yellow" ? "#f6c945" : "#d81e1e";
-    return `<rect x="${x - 5}" y="${y - 12}" width="10" height="24" rx="3" fill="#1f2937"/>
-      <circle cx="${x}" cy="${y - 6}" r="3" fill="${color === "red" ? on : "#4b2020"}"/>
-      <circle cx="${x}" cy="${y}" r="3" fill="${color === "yellow" ? on : "#4b4020"}"/>
-      <circle cx="${x}" cy="${y + 6}" r="3" fill="${color === "green" ? on : "#1f3a2a"}"/>`;
-  }
-
-  function scene(cfg) {
-    const palette = ["#e0483a", "#2aa46a", "#f0a020"];
-    const twoLanes = cfg.roundabout && cfg.lanes === 2;
-    const cars = [vehicle(cfg.you.from, cfg.you.to, "A", "#1d5fd6", null, cfg.roundabout, twoLanes && cfg.you.lane === "left")];
-    (cfg.others || []).forEach((o, i) => cars.push(vehicle(o.from, o.to, o.label || String.fromCharCode(66 + i), o.kind === "bike" ? "#2aa46a" : palette[i % 3], o.kind, cfg.roundabout)));
-    const signs = Object.keys(cfg.signs || {}).map(side => signMarker(side, cfg.signs[side])).join("");
-    const lights = Object.keys(cfg.lights || {}).map(side => lightMarker(side, cfg.lights[side])).join("");
-    /* Зебра на указанном рукаве + пешеход, идущий через неё */
-    const PED = { east: { zebra: (i) => `<rect x="146" y="${72 + i * 10}" width="10" height="6"/>`, at: [151, 56], ang: 90 },
-                  west: { zebra: (i) => `<rect x="44" y="${72 + i * 10}" width="10" height="6"/>`, at: [49, 144], ang: -90 },
-                  north: { zebra: (i) => `<rect x="${72 + i * 10}" y="44" width="6" height="10"/>`, at: [144, 49], ang: 180 },
-                  south: { zebra: (i) => `<rect x="${72 + i * 10}" y="146" width="6" height="10"/>`, at: [56, 151], ang: 0 } };
-    const peds = (cfg.peds || []).map(side => { const p = PED[side]; return `<g fill="#fff" opacity="0.95">${[0, 1, 2, 3, 4, 5].map(p.zebra).join("")}</g>${person(p.at[0], p.at[1], p.ang)}`; }).join("");
-
-    const centerLines = cfg.roundabout ? "" : `
-      <g stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6">
-        <line x1="100" y1="0" x2="100" y2="66"/><line x1="100" y1="134" x2="100" y2="200"/>
-        <line x1="0" y1="100" x2="66" y2="100"/><line x1="134" y1="100" x2="200" y2="100"/>
-      </g>`;
-    const roundabout = cfg.roundabout ? `
-      <circle cx="100" cy="100" r="62" fill="#5d6770"/>
-      <circle cx="100" cy="100" r="26" fill="#cfd6dc"/>
-      <circle cx="100" cy="100" r="20" fill="#7fb37a"/>
-      <g fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.7">
-        <circle cx="100" cy="100" r="30"/>${twoLanes ? '<circle cx="100" cy="100" r="44"/>' : ""}
-      </g>` : "";
-    /* Двухполосный подъезд: пунктир делит правую половину «своей» дороги на две полосы */
-    let laneSplit = "";
-    if (twoLanes) {
-      const a = APPROACH[cfg.you.from];
-      const near = a.from === 200 ? 136 : 64, far = a.from;
-      laneSplit = a.axis === "y"
-        ? `<line x1="${a.lane}" y1="${near}" x2="${a.lane}" y2="${far}" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.85"/>`
-        : `<line x1="${near}" y1="${a.lane}" x2="${far}" y2="${a.lane}" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.85"/>`;
-    }
-    const crossings = cfg.roundabout ? "" : `
-      <g stroke="#fff" stroke-width="1.6" opacity="0.9">
-        <line x1="68" y1="134" x2="100" y2="134"/><line x1="100" y1="66" x2="132" y2="66"/>
-        <line x1="134" y1="68" x2="134" y2="100"/><line x1="66" y1="100" x2="66" y2="132"/>
-      </g>`;
-
-    return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
-      <rect width="200" height="200" fill="#e4ede0"/>
-      <rect x="62" y="0" width="76" height="200" fill="#cfd6dc"/>
-      <rect x="0" y="62" width="200" height="76" fill="#cfd6dc"/>
-      <rect x="68" y="0" width="64" height="200" fill="#5d6770"/>
-      <rect x="0" y="68" width="200" height="64" fill="#5d6770"/>
-      <g stroke="#fff" stroke-width="1.5" opacity="0.85">
-        <line x1="68" y1="0" x2="68" y2="66"/><line x1="132" y1="0" x2="132" y2="66"/>
-        <line x1="68" y1="134" x2="68" y2="200"/><line x1="132" y1="134" x2="132" y2="200"/>
-        <line x1="0" y1="68" x2="66" y2="68"/><line x1="0" y1="132" x2="66" y2="132"/>
-        <line x1="134" y1="68" x2="200" y2="68"/><line x1="134" y1="132" x2="200" y2="132"/>
-      </g>
-      ${centerLines}
-      ${roundabout}
-      ${laneSplit}
-      ${crossings}
-      ${signs}
-      ${lights}
-      ${peds}
-      ${cars.join("")}
-    </svg>`;
+  function road(cfg) {
+    const key = Object.keys(ROAD_PRESETS).find(k => cfg[k]);
+    return key ? ROAD_PRESETS[key](cfg) : street(cfg);
   }
   window.SCENE = scene;
-
-  /* ---------- Схемы на прямой дороге (без перекрёстка) ----------
-     road({ bus: true, limit: 50 })   — автобус выезжает с остановки, A сзади
-     road({ crossing: true })         — пешеходный переход, пешеход справа
-     road({ crossing: "far" })        — пешеход почти перешёл: на дальнем (левом) краю перехода
-     road({ narrow: true })           — узкая дорога с разъездом (møteplass) на стороне A, B навстречу
-     road({ exit: "parking" })        — A выезжает с парковки справа на дорогу; exit: "gatetun" — из жилой зоны
-     road({ tcross: true })           — T-перекрёсток: боковая дорога справа, B выезжает из неё
-     road({ bikeLane: true })         — велополоса справа, A поворачивает направо, велосипедист B едет прямо
-     road({ overtake: true })         — B впереди с левым поворотником объезжает велосипедиста S, A сзади
-     road({ night: true })            — ночь, пешеход в тёмном на левой обочине навстречу A
-     road({ truck: true, tcross: true }) — грузовик B впереди сместился влево перед правым поворотом
-     road({ tram: true })             — трамвай стоит на остановке, пассажиры переходят к тротуару
-     В scene(): others[].kind может быть "bike" | "bus" | "truck" | "tram" | "emergency"; peds: ["east"] — пешеход на переходе рукава */
-
-  function carAt(x, y, rot, label, color, long) { return at(x, y, rot, long ? "bus" : "car", label, color); }
-  function bikeAt(x, y, rot, label, color) { return at(x, y, rot, "bike", label, color); }
-  function pathArrow(d, color) {
-    const pts = d.match(/[\d.]+[ ,][\d.]+/g).map(s => s.split(/[ ,]/).map(Number));
-    const [p, q] = [pts[pts.length - 2], pts[pts.length - 1]];
-    return `<path d="${d}" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5" opacity="0.9"/>
-      ${arrowHead(d, angleOf(p, q), color)}`;
-  }
-  /* Пешеход. ang: направление стрелки движения (0 = вправо, 90 = вниз, 180 = влево, -90 = вверх). dir -1 = влево (старый вызов) */
-  function person(x, y, ang, color) {
-    if (ang === -1) ang = 180; else if (ang === 1) ang = 0;
-    const c = color || "#1d1f24";
-    return `<g transform="translate(${x} ${y})">
-        <circle cx="0" cy="-9" r="4" fill="${c}"/>
-        <path d="M -4 -4 L 4 -4 L 5 6 L 2 6 L 2 14 L -2 14 L -2 6 L -5 6 Z" fill="${c}"/>
-        <polygon points="8,0 16,0 16,-3 22,2 16,7 16,4 8,4" fill="${c}" opacity="0.8" transform="rotate(${ang || 0})"/>
-      </g>`;
-  }
-  function speedSign(x, y, n) {
-    return `<g transform="translate(${x} ${y})"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/>
-        <circle r="10" fill="#fff" stroke="#d81e1e" stroke-width="2.5"/>
-        <text y="3.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="#111">${n}</text></g>`;
-  }
-
-  function road(cfg) {
-    const A = "#1d5fd6", B = "#e0483a", BUS = "#f0a020", BIKE = "#2aa46a";
-    const narrow = !!cfg.narrow, night = !!cfg.night;
-    const x0 = narrow ? 84 : 68, x1 = narrow ? 116 : 132;      /* асфальт */
-    const GRASS = night ? "#1e261e" : "#e4ede0", WALK = night ? "#3a4048" : "#cfd6dc", ASPH = night ? "#2b3138" : "#5d6770";
-    let extra = "", vehicles = "";
-
-    /* боковой въезд справа (T-перекрёсток, парковка, gatetun) */
-    const side = cfg.tcross || cfg.exit || cfg.bikeLane;
-    const sideRoad = side ? `
-      <rect x="${x1}" y="${cfg.exit ? 78 : 62}" width="${200 - x1}" height="${cfg.exit ? 44 : 76}" fill="#cfd6dc"/>
-      <rect x="${x1}" y="${cfg.exit ? 84 : 68}" width="${200 - x1}" height="${cfg.exit ? 32 : 64}" fill="${cfg.exit === "parking" ? "#8a949c" : "#5d6770"}"/>
-      ${cfg.exit ? "" : `<line x1="${x1}" y1="68" x2="200" y2="68" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
-      <line x1="${x1}" y1="132" x2="200" y2="132" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
-      <line x1="${x1 + 2}" y1="100" x2="200" y2="100" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`}` : "";
-
-    /* разметка основной дороги: центр прерывается напротив бокового въезда */
-    const gapTop = side ? (cfg.exit ? 78 : 62) : 0, gapBot = side ? (cfg.exit ? 122 : 138) : 0;
-    const center = (narrow || cfg.lot) ? "" : cfg.onramp
-      ? `<line x1="100" y1="0" x2="100" y2="200" stroke="#fff" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.9"/>`
-      : (side
-      ? `<line x1="100" y1="0" x2="100" y2="${gapTop}" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/><line x1="100" y1="${gapBot}" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`
-      : `<line x1="100" y1="0" x2="100" y2="200" stroke="#f6c945" stroke-width="2" stroke-dasharray="7 6"/>`);
-    const rightEdge = side
-      ? `<line x1="${x1}" y1="0" x2="${x1}" y2="${gapTop}"/><line x1="${x1}" y1="${gapBot}" x2="${x1}" y2="200"/>`
-      : `<line x1="${x1}" y1="0" x2="${x1}" y2="200"/>`;
-
-    if (cfg.bus) {
-      /* остановка-карман справа, автобус с левым поворотником */
-      extra += `<path d="M ${x1} 60 Q ${x1 + 26} 64 ${x1 + 26} 84 L ${x1 + 26} 116 Q ${x1 + 26} 136 ${x1} 140 Z" fill="#5d6770"/>
-        <text x="${x1 + 13}" y="150" text-anchor="middle" font-family="Arial" font-weight="700" font-size="7" fill="#1d1f24">BUSS</text>
-        ${speedSign(x1 + 28, 30, cfg.limit || 50)}`;
-      vehicles += `${pathArrow(`M ${x1 + 13} 80 Q ${x1 + 13} 60 ${x1 - 16} 48 L ${x1 - 16} 20`, BUS)}
-        ${carAt(x1 + 13, 104, 0, "B", BUS, true)}
-        <circle cx="${x1 + 5}" cy="84" r="3" fill="#ffb300" stroke="#fff" stroke-width="1"/>
-        ${pathArrow(`M ${x1 - 16} 158 L ${x1 - 16} 144`, A)}
-        ${carAt(x1 - 16, 178, 0, "A", A)}`;
-    }
-    if (cfg.crossing) {
-      extra += `<g fill="#fff" opacity="0.95">${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${x0 + 4 + i * 10.5}" y="90" width="6" height="20"/>`).join("")}</g>`;
-      vehicles += `${cfg.crossing === "far" ? person(x0 + 9, 100, -1) : person(154, 100, -1)}
-        ${pathArrow(`M ${x1 - 16} 158 L ${x1 - 16} 124`, A)}
-        ${carAt(x1 - 16, 178, 0, "A", A)}`;
-    }
-    if (cfg.narrow) {
-      /* разъезд на стороне A (справа по ходу) */
-      extra += `<rect x="${x1 - 2}" y="88" width="24" height="54" rx="8" fill="#5d6770"/>
-        <rect x="${x1 - 2}" y="88" width="24" height="54" rx="8" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
-        <text x="${x1 + 10}" y="152" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6.5" fill="#1d1f24">MØTEPLASS</text>`;
-      vehicles += `${pathArrow(`M 100 158 L 100 148 Q 100 130 ${x1 + 10} 126`, A)}
-        ${carAt(100, 178, 0, "A", A)}
-        ${pathArrow("M 100 40 L 100 96", B)}
-        ${carAt(100, 26, 180, "B", B)}`;
-    }
-    if (cfg.exit) {
-      extra += cfg.exit === "parking"
-        ? `<rect x="168" y="86" width="14" height="14" rx="2" fill="#1d5fd6"/><text x="175" y="97" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff">P</text>
-           <g stroke="#fff" stroke-width="1.2" opacity="0.6"><line x1="150" y1="86" x2="150" y2="114"/><line x1="185" y1="86" x2="185" y2="114"/></g>`
-        : `<rect x="168" y="84" width="16" height="16" rx="2" fill="#1d5fd6"/><text x="176" y="92" text-anchor="middle" font-family="Arial" font-weight="700" font-size="5" fill="#fff">GATE</text><text x="176" y="98" text-anchor="middle" font-family="Arial" font-weight="700" font-size="5" fill="#fff">TUN</text>`;
-      vehicles += `${pathArrow(`M 150 108 L 132 108 Q 116 108 116 90 L 116 50`, A)}
-        ${carAt(164, 108, 270, "A", A)}
-        ${pathArrow("M 84 40 L 84 140", B)}
-        ${carAt(84, 26, 180, "B", B)}
-        ${pathArrow(`M 116 172 L 116 150`, "#2aa46a")}
-        ${carAt(116, 190, 0, "C", "#2aa46a")}`;
-    }
-    if (cfg.tcross && !cfg.truck) {
-      vehicles += `${pathArrow(`M 170 116 L 140 116 Q 116 116 116 92 L 116 40`, B)}
-        ${carAt(182, 116, 270, "B", B)}
-        ${pathArrow(`M ${x1 - 16} 166 L ${x1 - 16} 148`, A)}
-        ${carAt(x1 - 16, 184, 0, "A", A)}`;
-    }
-    if (cfg.overtake) {
-      /* B впереди даёт левый поворотник и объезжает велосипедиста; A сзади */
-      vehicles += `${pathArrow("M 116 104 Q 116 88 102 82 L 102 44", B)}
-        ${at(116, 122, 0, "car", "B", B)}
-        <circle cx="108" cy="109" r="3" fill="#ffb300" stroke="#fff" stroke-width="1"/>
-        ${pathArrow(`M ${x1 - 5} 62 L ${x1 - 5} 40`, BIKE)}
-        ${at(x1 - 5, 76, 0, "bike", "S", BIKE)}
-        ${pathArrow("M 116 158 L 116 146", A)}
-        ${at(116, 178, 0, "car", "A", A)}`;
-    }
-    if (cfg.night) {
-      /* Ночь: пешеход в тёмной одежде идёт по левой обочине навстречу A */
-      extra += `<polygon points="106,164 84,56 148,56 126,164" fill="#fff6c8" opacity="0.22"/>`;
-      vehicles += `${person(x0 + 6, 96, 90, "#5a616b")}
-        ${pathArrow("M 116 158 L 116 140", A)}
-        ${at(116, 178, 0, "car", "A", A)}`;
-    }
-    if (cfg.truck) {
-      /* Длинный грузовик впереди сместился влево перед правым поворотом в боковую дорогу */
-      vehicles += `${pathArrow("M 106 96 Q 108 100 134 100 L 172 100", B)}
-        ${at(106, 122, 0, "truck", "B", B)}
-        <circle cx="114" cy="98" r="3" fill="#ffb300" stroke="#fff" stroke-width="1"/>
-        ${pathArrow("M 116 168 L 116 156", A)}
-        ${at(116, 186, 0, "car", "A", A)}`;
-    }
-    if (cfg.tram) {
-      /* Рельсы посередине, трамвай стоит с открытыми дверями, пассажиры идут к правому тротуару */
-      extra += `<g stroke="#9aa3ab" stroke-width="1.5"><line x1="95" y1="0" x2="95" y2="200"/><line x1="105" y1="0" x2="105" y2="200"/></g>`;
-      vehicles += `${at(100, 84, 0, "tram", "T", "#2b62c9")}
-        <g fill="#ffb300"><rect x="108" y="70" width="2.5" height="8"/><rect x="108" y="90" width="2.5" height="8"/></g>
-        ${person(120, 80, 0)}${person(122, 100, 0)}
-        ${pathArrow("M 116 158 L 116 144", A)}
-        ${at(116, 178, 0, "car", "A", A)}`;
-    }
-    if (cfg.parkedChild) {
-      /* A припаркована у правого края; ребёнок выходит к тротуару, слева проезжает B */
-      vehicles += `${at(x1 - 10, 110, 0, "car", "A", A)}
-        ${person(x1 + 8, 112, 0)}
-        <path d="M ${x1 - 2} 104 L ${x1 + 4} 104" stroke="#1f7a4d" stroke-width="2.5" stroke-linecap="round"/>
-        ${pathArrow("M 84 40 L 84 150", B)}
-        ${at(84, 26, 180, "car", "B", B)}`;
-    }
-    if (cfg.onramp) {
-      /* автомагистраль: два ряда в одну сторону, полоса разгона справа вливается */
-      extra += `<path d="M ${x1} 200 L ${x1 + 30} 200 L ${x1 + 30} 120 Q ${x1 + 30} 90 ${x1} 60 Z" fill="${ASPH}"/>
-        <line x1="${x1 + 30}" y1="200" x2="${x1 + 30}" y2="120" stroke="#fff" stroke-width="1.5" opacity="0.85"/>
-        <path d="M ${x1 + 30} 120 Q ${x1 + 30} 90 ${x1} 60" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.85"/>
-        <line x1="${x1}" y1="60" x2="${x1}" y2="200" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.9"/>
-        <g transform="translate(${x0 - 22} 36)"><rect x="-9" y="-9" width="18" height="18" rx="2" fill="#1b5bc7"/><path d="M -5 6 L 0 -6 L 5 6 M -3 1 L 3 1" stroke="#fff" stroke-width="2" fill="none"/></g>`;
-      vehicles += `${pathArrow(`M ${x1 + 15} 150 L ${x1 + 15} 118 Q ${x1 + 12} 90 ${x1 - 14} 66 L ${x1 - 14} 30`, A)}
-        ${at(x1 + 15, 172, 0, "car", "A", A)}
-        ${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 40`, B)}
-        ${at(x1 - 16, 190, 0, "car", "B", B)}
-        ${pathArrow(`M ${x0 + 16} 120 L ${x0 + 16} 20`, "#2aa46a")}
-        ${at(x0 + 16, 136, 0, "car", "C", "#2aa46a")}`;
-    }
-    if (cfg.rail) {
-      /* переезд без шлагбаума, мигающий красный */
-      extra += `<g stroke="#8a7a5a" stroke-width="3"><line x1="0" y1="92" x2="200" y2="92"/><line x1="0" y1="104" x2="200" y2="104"/></g>
-        <g stroke="#6b5f45" stroke-width="2">${[10, 30, 50, 150, 170, 190].map(x => `<line x1="${x}" y1="86" x2="${x}" y2="110"/>`).join("")}</g>
-        <g transform="translate(${x1 + 14} 126)"><line x1="0" y1="0" x2="0" y2="14" stroke="#555" stroke-width="2"/><path d="M -8 -12 L 8 4 M -8 4 L 8 -12" stroke="#fff" stroke-width="5"/><path d="M -8 -12 L 8 4 M -8 4 L 8 -12" stroke="#d81e1e" stroke-width="2.5"/><circle cx="-7" cy="-2" r="3.2" fill="#ff2a2a"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite"/></circle><circle cx="7" cy="-2" r="3.2" fill="#ff2a2a"><animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/></circle></g>
-        <rect x="${x0}" y="114" width="${x1 - x0}" height="3" fill="#fff"/>`;
-      vehicles += `${at(160, 98, 90, "tram", "T", "#2b62c9")}
-        ${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 132`, A)}
-        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
-    }
-    if (cfg.wild) {
-      /* знак «Dyr» и лось у обочины в сумерках */
-      extra += `<g transform="translate(${x1 + 16} 60)"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/><polygon points="0,-13 12,8 -12,8" fill="#fff" stroke="#d81e1e" stroke-width="2.5" stroke-linejoin="round"/><path d="M -5 6 L -5 -1 L -2 -4 L 2 -4 L 5 -1 L 5 6 M -4 -4 L -7 -8 M 4 -4 L 7 -8" stroke="#111" stroke-width="1.8" fill="none"/></g>
-        <g transform="translate(${x1 + 14} 118)" fill="#3a2e22"><path d="M -14 8 L -14 -4 L -8 -8 L 4 -8 L 12 -14 L 16 -12 L 12 -6 L 12 8 L 8 8 L 8 0 L -8 0 L -8 8 Z"/><path d="M 8 -14 L 6 -22 L 10 -18 L 12 -24 L 14 -16" stroke="#3a2e22" stroke-width="2" fill="none"/></g>
-        ${pathArrow(`M ${x1 + 2} 122 L ${x1 - 18} 122`, "#3a2e22")}`;
-      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 150`, A)}
-        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
-    }
-    if (cfg.bridge) {
-      /* мост через воду: настил и перила; иней на мосту */
-      extra += `<rect x="0" y="70" width="200" height="60" fill="#9fc4e8"/>
-        <rect x="${x0 - 8}" y="70" width="${x1 - x0 + 16}" height="60" fill="#8d97a1"/>
-        <rect x="${x0}" y="70" width="${x1 - x0}" height="60" fill="#c9d3dc"/>
-        <g stroke="#fff" stroke-width="1" opacity="0.9">${[76, 88, 100, 112, 124].map(y => `<line x1="${x0 + 6}" y1="${y}" x2="${x1 - 6}" y2="${y}" stroke-dasharray="2 6"/>`).join("")}</g>
-        <g stroke="#5d6770" stroke-width="3"><line x1="${x0 - 6}" y1="70" x2="${x0 - 6}" y2="130"/><line x1="${x1 + 6}" y1="70" x2="${x1 + 6}" y2="130"/></g>
-        <text x="${x1 + 12}" y="104" font-family="Arial" font-weight="700" font-size="7" fill="#1d1f24">-2°</text>`;
-      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 148`, A)}
-        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
-    }
-    if (cfg.rain) {
-      /* ливень: лужа на полосе, машина теряет сцепление */
-      extra += `<ellipse cx="${x1 - 16}" cy="96" rx="22" ry="14" fill="#7fb0e0" opacity="0.7"/>
-        <g stroke="#7fb0e0" stroke-width="1.5" opacity="0.8">${[0, 1, 2, 3, 4, 5, 6, 7].map(i => `<line x1="${12 + i * 24}" y1="${8 + (i % 3) * 6}" x2="${8 + i * 24}" y2="${20 + (i % 3) * 6}"/>`).join("")}</g>`;
-      vehicles += `${pathArrow(`M ${x1 - 16} 160 L ${x1 - 16} 118`, A)}
-        <path d="M ${x1 - 16} 118 Q ${x1 - 8} 100 ${x1 - 20} 84" stroke="${A}" stroke-width="2" stroke-dasharray="3 3" fill="none" opacity="0.6"/>
-        ${at(x1 - 16, 176, 0, "car", "A", A)}`;
-    }
-    if (cfg.roadwork) {
-      /* дорожные работы: жёлтый временный знак 50 рядом с постоянным 80, конусы, сужение */
-      extra += `<rect x="${x1 - 18}" y="40" width="18" height="70" fill="#8a949c" opacity="0.6"/>
-        <g fill="#f0a020">${[44, 60, 76, 92, 108].map(y => `<polygon points="${x1 - 18},${y + 8} ${x1 - 14},${y} ${x1 - 10},${y + 8}"/>`).join("")}</g>
-        <g transform="translate(${x1 + 14} 30)"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/><rect x="-12" y="-12" width="24" height="24" fill="#f5d800"/><circle r="9" fill="#f5d800" stroke="#d81e1e" stroke-width="2.5"/><text y="3.5" text-anchor="middle" font-family="Arial" font-weight="700" font-size="8" fill="#111">50</text></g>
-        ${speedSign(x1 + 14, 140, 80)}`;
-      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 120 Q ${x1 - 16} 112 ${x1 - 26} 108 L ${x1 - 26} 44`, A)}
-        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
-    }
-    if (cfg.tunnel) {
-      /* въезд в тоннель в солнечный день */
-      extra += `<rect x="0" y="0" width="200" height="90" fill="#8b8f93"/>
-        <path d="M ${x0 - 10} 90 L ${x0 - 10} 40 Q 100 -10 ${x1 + 10} 40 L ${x1 + 10} 90 Z" fill="#1b1e24"/>
-        <circle cx="176" cy="132" r="12" fill="#ffd54a"/><g stroke="#ffd54a" stroke-width="2">${[0, 45, 90, 135, 180, 225, 270, 315].map(a => `<line x1="${176 + 16 * Math.cos(a * Math.PI / 180)}" y1="${132 + 16 * Math.sin(a * Math.PI / 180)}" x2="${176 + 20 * Math.cos(a * Math.PI / 180)}" y2="${132 + 20 * Math.sin(a * Math.PI / 180)}"/>`).join("")}</g>`;
-      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 100`, A)}
-        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
-    }
-    if (cfg.rest) {
-      /* rasteplass: синий знак и карман справа */
-      extra += `<path d="M ${x1} 70 Q ${x1 + 30} 74 ${x1 + 30} 100 L ${x1 + 30} 130 Q ${x1 + 30} 150 ${x1} 154 Z" fill="${ASPH}"/>
-        <g transform="translate(${x1 + 15} 40)"><line x1="0" y1="0" x2="0" y2="16" stroke="#555" stroke-width="2"/><rect x="-11" y="-11" width="22" height="22" rx="2" fill="#1b5bc7"/><path d="M -7 4 L 7 4 M -5 4 L -5 -3 M 5 4 L 5 -3 M -8 -3 L 8 -3 M -3 -3 L -3 -7 M 3 -3 L 3 -7" stroke="#fff" stroke-width="1.6" fill="none"/></g>
-        <text x="${x1 + 15}" y="164" text-anchor="middle" font-family="Arial" font-weight="700" font-size="6.5" fill="#1d1f24">RASTEPLASS</text>`;
-      vehicles += `${pathArrow(`M ${x1 - 16} 176 L ${x1 - 16} 150 Q ${x1 - 16} 120 ${x1 + 14} 112`, A)}
-        ${at(x1 - 16, 190, 0, "car", "A", A)}`;
-    }
-    if (cfg.trailer) {
-      /* машина с прицепом сдаёт задом в узкий въезд справа: прицеп идёт в другую сторону, чем руль */
-      extra += `<rect x="${x1}" y="96" width="${200 - x1}" height="28" fill="${ASPH}"/>
-        <rect x="${x1}" y="90" width="${200 - x1}" height="6" fill="${WALK}"/><rect x="${x1}" y="124" width="${200 - x1}" height="6" fill="${WALK}"/>`;
-      vehicles += `${at(x1 - 16, 74, 0, "car", "A", A)}
-        <g transform="translate(${x1 - 10} 100) rotate(-35)"><rect x="-7" y="-14" width="14" height="24" rx="2" fill="#8a949c" stroke="#fff" stroke-width="1"/><line x1="0" y1="-14" x2="0" y2="-24" stroke="#555" stroke-width="2"/></g>
-        ${pathArrow(`M ${x1 - 4} 112 L ${x1 + 34} 110`, "#8a949c")}
-        <path d="M ${x1 - 16} 56 Q ${x1 - 30} 50 ${x1 - 34} 62" stroke="${A}" stroke-width="2" fill="none"/><polygon points="${x1 - 36},${58} ${x1 - 32},${66} ${x1 - 28},${60}" fill="${A}"/>`;
-    }
-    if (cfg.lot) {
-      /* парковка: A задела B, обе стоят */
-      extra += `<rect x="0" y="0" width="200" height="200" fill="#8a949c"/>
-        <g stroke="#fff" stroke-width="1.5" opacity="0.8">${[20, 56, 92, 128, 164].map(x => `<line x1="${x}" y1="30" x2="${x}" y2="90"/><line x1="${x}" y1="110" x2="${x}" y2="170"/>`).join("")}</g>
-        <rect x="150" y="12" width="14" height="14" rx="2" fill="#1d5fd6"/><text x="157" y="23" text-anchor="middle" font-family="Arial" font-weight="700" font-size="10" fill="#fff">P</text>
-        <g fill="#f5d800"><polygon points="70,86 74,80 78,86 82,80 86,86"/></g>`;
-      vehicles += `${at(74, 60, 0, "car", "B", B)}
-        <g transform="translate(88 92) rotate(20)">${body("car", "A", A, 20)}</g>`;
-    }
-    if (cfg.bikeLane) {
-      /* велополоса вдоль правого края, прерывается у бокового въезда */
-      const bl = `<rect x="${x1 - 10}" y="0" width="10" height="${gapTop}" fill="#b8503c" opacity="0.85"/><rect x="${x1 - 10}" y="${gapBot}" width="10" height="${200 - gapBot}" fill="#b8503c" opacity="0.85"/>
-        <line x1="${x1 - 10}" y1="0" x2="${x1 - 10}" y2="${gapTop}" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="${x1 - 10}" y1="${gapBot}" x2="${x1 - 10}" y2="200" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 4"/>
-        <g fill="none" stroke="#fff" stroke-width="1.2"><circle cx="${x1 - 7.5}" cy="30" r="2.2"/><circle cx="${x1 - 2.5}" cy="30" r="2.2"/><path d="M ${x1 - 7.5} 30 L ${x1 - 5} 25 L ${x1 - 2.5} 30 M ${x1 - 5} 25 L ${x1 - 4} 22"/></g>`;
-      extra += bl;
-      vehicles += `${pathArrow(`M 108 166 L 108 130 Q 108 100 140 100 L 172 100`, A)}
-        ${carAt(108, 184, 0, "A", A)}
-        ${pathArrow(`M ${x1 - 5} 158 L ${x1 - 5} 136`, BIKE)}
-        ${bikeAt(x1 - 5, 170, 0, "B", BIKE)}`;
-    }
-
-    return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
-      <rect width="200" height="200" fill="${GRASS}"/>
-      <rect x="${x0 - 6}" y="0" width="${x1 - x0 + 12}" height="200" fill="${WALK}"/>
-      ${sideRoad}
-      <rect x="${x0}" y="0" width="${x1 - x0}" height="200" fill="${ASPH}"/>
-      ${extra}
-      ${cfg.lot ? "" : `<g stroke="#fff" stroke-width="1.5" opacity="0.85">
-        <line x1="${x0}" y1="0" x2="${x0}" y2="200"/>
-        ${rightEdge}
-      </g>`}
-      ${center}
-      ${vehicles}
-    </svg>`;
-  }
   window.ROAD = road;
-
-  /* Вид сбоку: машина стоит на уклоне носом вниз, справа кювет, колёса повёрнуты к нему */
-  function hillScene() {
-    return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="scene-icon">
-      <rect width="200" height="200" fill="#dfe9f5"/>
-      <path d="M 0 70 L 200 130 L 200 200 L 0 200 Z" fill="#6f7a52"/>
-      <path d="M 0 70 L 200 130 L 200 138 L 0 78 Z" fill="#5d6770"/>
-      <path d="M 150 118 L 176 150 L 200 156 L 200 130 Z" fill="#3e4a2c"/>
-      <text x="168" y="172" text-anchor="middle" font-family="Arial" font-weight="700" font-size="7" fill="#fff">GRØFT</text>
-      <g transform="translate(90 92) rotate(16.7)">
-        <rect x="-30" y="-14" width="60" height="16" rx="4" fill="#1d5fd6"/>
-        <rect x="-18" y="-24" width="30" height="12" rx="4" fill="#1d5fd6"/>
-        <rect x="-14" y="-22" width="10" height="8" rx="1" fill="#cfe4ff"/>
-        <circle cx="-18" cy="4" r="6" fill="#1d1f24"/><circle cx="18" cy="4" r="6" fill="#1d1f24"/>
-        <ellipse cx="18" cy="4" rx="3" ry="6" fill="#8a949c"/>
-        <text x="0" y="-2" text-anchor="middle" font-family="Arial" font-weight="700" font-size="9" fill="#fff">A</text>
-      </g>
-      <path d="M 118 118 Q 140 122 152 140" stroke="#1f7a4d" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/>
-      <polygon points="148,132 156,144 144,144" fill="#1f7a4d"/>
-      <text x="30" y="40" font-family="Arial" font-weight="700" font-size="8" fill="#1d1f24">↓ nedover</text>
-    </svg>`;
-  }
+  function hillScene(cfg) { return SK.hill(cfg || { dir: "down", edge: "ditch", wheels: "straight" }); }
   window.HILL_SCENE = hillScene;
+
 
   function q(id, image, prompt_no, prompt_ru, opts, explanation_no, explanation_ru, tip_ru) {
     return {
@@ -648,7 +212,7 @@
       "Светофор важнее и знаков, и правила правой руки. Зелёный — можно ехать, но с осторожностью.",
       "Иерархия: указания полицейского > светофор > знаки > правило правой руки."),
 
-    q("011", road({ crossing: true }),
+    q("011", street({ features: [{ type: "zebra", y: 120 }], actors: [{ kind: "adult", x: 246, y: 120, rot: 270, color: "#6b4fa0", walk: [230, 120] }, { label: "A", y: 245, path: [[216, 170]] }] }),
       "Du nærmer deg et gangfelt. En fotgjenger står på fortauet og ser ut til å ville krysse. Hva gjør du?",
       "Ты подъезжаешь к пешеходному переходу. Пешеход стоит на тротуаре и, похоже, хочет перейти. Что делаешь?",
       [
@@ -661,7 +225,7 @@
       "Ты уступаешь пешеходу, который на переходе ИЛИ собирается ступить на него. Покажи явно, что останавливаешься.",
       "В Норвегии нормально уступать пешеходу, который только собирается перейти. Так и на экзамене ожидают."),
 
-    q("012", road({ narrow: true }),
+    q("012", street({ laneW: 22, center: "none", sides: { left: "grass", right: "grass" }, features: [{ type: "passingPlace", y: 150 }], actors: [{ label: "A", y: 250, path: [[211, 200]] }, { label: "B", lane: "left", y: 40, color: "#e0483a", path: [[189, 110]] }] }),
       "Smal vei med møteplass på din side. Bil B kommer imot. Hvem skal vente?",
       "Узкая дорога, карман для разъезда на твоей стороне. Машина B едет навстречу. Кто ждёт?",
       [
@@ -687,7 +251,7 @@
       "Правило правой руки цепочкой: у B никого справа — едет первым. Ты уступаешь B, C уступает тебе.",
       "Найди того, у кого справа никого нет — он едет первым. Дальше по цепочке."),
 
-    q("014", road({ exit: "parking" }),
+    q("014", street({ features: [{ type: "driveway", y: 150, side: "right", label: "P", lines: true }], actors: [{ label: "A", x: 296, y: 158, rot: 270, blink: "right", path: [[238, 158], [216, 130], [216, 40]] }, { label: "B", lane: "left", y: 46, color: "#e0483a", path: [[184, 250]] }, { label: "C", y: 266, color: "#22a06b", path: [[216, 210]] }] }),
       "Du kjører ut fra en parkeringsplass og inn på veien. Hvem har vikeplikt?",
       "Ты выезжаешь с парковки на дорогу. Кто уступает?",
       [
@@ -700,7 +264,7 @@
       "Выезд с парковки, двора, заправки — ты всегда уступаешь транспорту на дороге и пешеходам на тротуаре.",
       "Здесь правило правой руки НЕ работает. Выезжающий со «второстепенной территории» уступает всем."),
 
-    q("015", road({ bus: true, limit: 50 }),
+    q("015", street({ features: [{ type: "busStop", y: 116, side: "right", bay: true }, { type: "sign", kind: "speed:50", y: 290, side: "left" }], actors: [{ kind: "bus", x: 245, y: 120, label: "B", blink: "left", path: [[245, 70], [216, 30], [216, 6]] }, { label: "A", y: 255, path: [[216, 190]] }] }),
       "En buss med blinklys signaliserer at den vil kjøre ut fra holdeplass i 50-sone. Hva gjør du?",
       "Автобус с поворотником показывает, что выезжает с остановки в зоне 50 км/ч. Что делаешь?",
       [
@@ -726,7 +290,7 @@
       "Спецтранспорт с мигалками и сиреной имеет преимущество перед всем. Освободи дорогу, но без опасных резких манёвров.",
       "Не тормози резко посреди перекрёстка — лучше спокойно доехать до места, где можно безопасно уступить."),
 
-    q("017", road({ tcross: true }),
+    q("017", street({ features: [{ type: "sideRoad", y: 110, side: "right" }], actors: [{ label: "B", x: 330, y: 95, rot: 270, color: "#e0483a", blink: "right", path: [[246, 95], [216, 70], [216, 10]] }, { label: "A", y: 250, path: [[216, 140]] }] }),
       "T-kryss uten skilt. Du kjører på den gjennomgående vegen. Bil B kommer fra sidevegen til høyre. Hvem viker?",
       "Т-образный перекрёсток без знаков. Ты едешь по сквозной дороге. Машина B выезжает с боковой справа. Кто уступает?",
       [
@@ -778,7 +342,7 @@
       "При повороте ты уступаешь пешеходам и велосипедистам, пересекающим дорогу, на которую сворачиваешь.",
       "Пешеходы на зелёный и ты на зелёный одновременно — норма в Норвегии. Ты ждёшь."),
 
-    q("021", scene({ you: { from: "south", to: "west", lane: "left" }, roundabout: true, lanes: 2 }),
+    q("021", scene({ you: { from: "south", to: "west", lane: "left", blink: "left" }, roundabout: true, lanes: 2 }),
       "Rundkjøring med to felt. Du skal ta tredje avkjøring (til venstre). Hvilket felt velger du inn?",
       "Круг с двумя полосами. Тебе нужен третий съезд (налево). Какую полосу выбрать при въезде?",
       [
@@ -791,7 +355,7 @@
       "Если налево или разворот — левая полоса и левый поворотник при въезде. Перед съездом перестраивайся вправо с правым поворотником.",
       "Правая полоса — для первого и второго съезда. Левая — для третьего и разворота."),
 
-    q("022", road({ onramp: true }),
+    q("022", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "on", to: 60 }, { type: "sign", kind: "motorway", x: 128, y: 70, size: 26 }], actors: [{ label: "A", x: 247, y: 240, blink: "left", path: [[247, 160], [216, 80], [216, 6]] }, { label: "B", lane: 1, y: 170, color: "#e0483a", path: [[216, 40]] }, { label: "C", lane: 0, y: 120, color: "#22a06b", path: [[184, 30]] }] }),
       "Du kjører inn på motorveg via påkjøringsfelt. Hvem har vikeplikt?",
       "Ты въезжаешь на автомагистраль по полосе разгона. Кто уступает?",
       [
@@ -804,7 +368,7 @@
       "Trafikkreglene § 8: перестраивающийся уступает, а на полосе разгона нужно подстроить скорость под поток, в который вливаешься. Используй всю полосу и выбери просвет. Те, кто едет в соседней полосе, обязаны облегчить въезд.",
       "Не останавливайся в конце полосы разгона: набери скорость потока, иначе слияние станет опасным."),
 
-    q("023", road({ overtake: true }),
+    q("023", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "bike", x: 225, y: 104, label: "S", path: [[225, 50]] }, { label: "B", y: 172, color: "#e0483a", blink: "left", path: [[205, 132], [188, 96], [188, 30]] }, { label: "A", y: 258, path: [[216, 222]] }] }),
       "Bilen foran deg gir tegn til venstre for å kjøre forbi en syklist. Du ville også kjørt forbi. Hva gjør du?",
       "Машина впереди включает левый поворотник, чтобы объехать велосипедиста. Ты тоже хотел обогнать. Что делаешь?",
       [
@@ -817,7 +381,7 @@
       "Trafikkreglene § 12 nr 2 b: перед обгоном нужно убедиться, что машина впереди не подала сигнал об обгоне. Дождись, пока она объедет велосипедиста и ситуация прояснится.",
       "«Обгон обгоняющего» — один из самых опасных манёвров и прямое нарушение."),
 
-    q("024", road({ bikeLane: true }),
+    q("024", street({ laneW: 34, features: [{ type: "sideRoad", y: 90, side: "right", w: 56 }, { type: "bikeLane", side: "right", gap: [62, 118] }], actors: [{ label: "A", x: 210, y: 210, blink: "right", path: [[210, 130], [250, 104], [340, 104]] }, { kind: "bike", x: 227, y: 268, label: "B", path: [[227, 200], [227, 20]] }] }),
       "Du skal svinge til høyre i et kryss. Det er sykkelfelt på høyre side, og en syklist bak deg kjører rett fram. Hva gjør du?",
       "Ты поворачиваешь направо на перекрёстке. Справа велополоса, велосипедист сзади едет прямо. Что делаешь?",
       [
@@ -830,7 +394,7 @@
       "При повороте направо через велополосу ты уступаешь велосипедистам, едущим прямо, в том числе тем, кто догоняет сзади.",
       "Перед поворотом направо — правое зеркало и взгляд через плечо. Это проверяют на oppkjøring."),
 
-    q("025", road({ night: true }),
+    q("025", street({ sides: { left: "grass", right: "grass" }, weather: "night", actors: [{ kind: "adult", x: 160, y: 96, rot: 180, color: "#30353c", walk: [160, 126] }, { label: "A", y: 250, beams: "high", path: [[216, 196]] }], tags: [{ text: "MØRKE KLÆR", x: 98, y: 70 }] }),
       "Det er mørkt, og du ser en fotgjenger i mørke klær som går på venstre side av en veg uten fortau. Hva gjør du?",
       "Темно, ты видишь пешехода в тёмной одежде, идущего по левой стороне дороги без тротуара. Что делаешь?",
       [
@@ -843,7 +407,7 @@
       "Пешеходы без тротуара идут по левой стороне навстречу движению. Дальний свет слепит. Снизь скорость и держи дистанцию.",
       "Осенью и зимой в Норвегии темно большую часть дня. Пешеход без рефлекса виден с 25–30 м, с рефлексом — со 140 м."),
 
-    q("026", road({ exit: "gatetun" }),
+    q("026", street({ features: [{ type: "driveway", y: 150, side: "right", surface: "#cdbfae", label: "GATETUN" }, { type: "sign", kind: "gatetun", x: 268, y: 116, size: 24 }], actors: [{ kind: "child", x: 330, y: 140, rot: 0, color: "#f08c1a" }, { label: "A", x: 300, y: 158, rot: 270, blink: "right", path: [[238, 158], [216, 130], [216, 40]] }, { label: "B", lane: "left", y: 46, color: "#e0483a", path: [[184, 250]] }] }),
       "Du kjører ut fra et gatetun og inn på en vanlig gate. Hvem har vikeplikt?",
       "Ты выезжаешь из жилой зоны (gatetun) на обычную улицу. Кто уступает?",
       [
@@ -856,7 +420,7 @@
       "Выезд из gatetun, gågate, парковки, заправки или двора всегда означает уступить транспорту, в который ты вливаешься.",
       "Все «выезды с территорий» работают одинаково: ты последний в очереди."),
 
-    q("027", road({ tunnel: true }),
+    q("027", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "tunnel", y: 100, sign: true }], weather: "sun", actors: [{ label: "A", y: 240, path: [[216, 120]] }] }),
       "Du kjører inn i en lang tunnel på en solfylt dag. Hva bør du gjøre?",
       "Ты въезжаешь в длинный тоннель в солнечный день. Что нужно сделать?",
       [
@@ -869,7 +433,7 @@
       "Глазам нужно время привыкнуть к темноте после яркого солнца. Сними очки, снизь скорость и держи увеличенную дистанцию первые секунды.",
       "Переход свет-тьма — частая причина растерянности у тоннеля. Заранее сбавь скорость и сними очки."),
 
-    q("028", road({ rest: true }),
+    q("028", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "off" }, { type: "sign", kind: "rest", x: 300, y: 150, size: 28 }, { type: "tag", text: "RASTEPLASS", x: 326, y: 40 }], actors: [{ label: "A", lane: 1, y: 256, path: [[216, 200]] }] }),
       "Du kjenner deg svært trøtt mens du kjører på motorveien. Hva er riktig å gjøre?",
       "Ты чувствуешь сильную усталость за рулём на автомагистрали. Как правильно поступить?",
       [
@@ -882,7 +446,7 @@
       "Усталость за рулём очень опасна и может вызвать микросон. Музыка и открытое окно помогают лишь ненадолго. Правильное решение — остановиться и отдохнуть.",
       "Микросон длится всего пару секунд, но на скорости 80 км/ч машина за это время проезжает десятки метров без контроля."),
 
-    q("029", road({ parkedChild: true }),
+    q("029", street({ actors: [{ label: "A", x: 220, y: 150, door: "right" }, { kind: "child", x: 244, y: 162, rot: 90, color: "#f08c1a", walk: [256, 162] }, { label: "B", lane: "left", y: 40, color: "#e0483a", path: [[184, 260]] }], tags: [{ text: "FORTAU", x: 300, y: 250 }] }),
       "Du har parkert langs høyre side av en trafikkert vei. Barnet ditt sitter i baksetet. Hvordan skal barnet gå ut av bilen?",
       "Ты припарковался у правого края оживлённой дороги. Ребёнок сидит на заднем сиденье. Как ребёнку выходить из машины?",
       [
@@ -895,7 +459,7 @@
       "Выходить нужно всегда со стороны, противоположной движению, то есть к тротуару, чтобы не попасть под проезжающую машину.",
       "Это правило касается всех пассажиров, но особенно важно для детей — приучи их к этому с первой поездки."),
 
-    q("030", road({ wild: true }),
+    q("030", street({ sides: { left: "grass", right: "grass" }, weather: "dusk", features: [{ type: "sign", kind: "moose", y: 268, size: 28 }], actors: [{ kind: "moose", x: 262, y: 92, rot: 250 }, { label: "A", y: 230, beams: "low", path: [[216, 160]] }] }),
       "Du kjører på landevei i skumringen og passerer et viltskilt med elg. Hva gjør du?",
       "Ты едешь по загородной дороге в сумерках и проезжаешь знак с изображением лося. Что делаешь?",
       [
@@ -908,7 +472,7 @@
       "Знак с животным предупреждает об участках с частым переходом диких животных, особенно в сумерках. Снизь скорость и будь особенно внимателен — если появилось одно животное, за ним часто следуют другие.",
       "Столкновение с лосем на скорости очень опасно из-за высоты животного. Лучше сбросить скорость заранее, чем экстренно тормозить."),
 
-    q("031", road({ trailer: true }),
+    q("031", street({ features: [{ type: "sideRoad", y: 120, side: "right", w: 44 }], actors: [{ kind: "arrow", pts: [[236, 92], [262, 118], [330, 120]], color: "#1f63e0", opts: { dash: "7 6" } }, { label: "A", x: 214, y: 52, trailer: "box", trailerRot: -55, steer: -26 }], tags: [{ text: "RYGGER INN TIL HØYRE", x: 318, y: 40 }] }),
       "Du skal rygge en bil med tilhenger inn på en smal vei. Hva er viktig å huske?",
       "Тебе нужно сдать назад на машине с прицепом на узкую дорогу. Что важно помнить?",
       [
@@ -921,7 +485,7 @@
       "При движении задним ходом с прицепом прицеп поворачивает в сторону, противоположную повороту руля. Работай рулём небольшими движениями, активно используй зеркала и, если можно, попроси кого-то направлять тебя.",
       "Потренируйся на пустой площадке заранее — реакция прицепа на руль непривычна большинству новичков."),
 
-    q("032", road({ bridge: true }),
+    q("032", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "bridge", y: 110, h: 96 }], actors: [{ label: "A", y: 250, path: [[216, 172]] }], tags: [{ text: "KALD MORGEN · −2 °C", x: 310, y: 250 }] }),
       "Det er en kald morgen, og du nærmer deg en bro. Veien før broen var tørr. Hva bør du tenke på?",
       "Холодное утро, ты приближаешься к мосту. Дорога перед мостом была сухой. О чём нужно помнить?",
       [
@@ -934,7 +498,7 @@
       "Мосты окружены холодным воздухом со всех сторон и теряют тепло быстрее, чем обычная дорога. Поэтому они часто становятся скользкими раньше остальной трассы.",
       "Классическая ловушка теории: «мост сухой на вид» ≠ «мост не скользкий». Сбавляй скорость заранее."),
 
-    q("033", road({ rail: true }),
+    q("033", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "rail", y: 110, lights: "flash", train: { x: 50, dir: 1 } }], actors: [{ label: "A", y: 250, path: [[216, 172]], brake: true }] }),
       "Du nærmer deg en planovergang (jernbaneovergang) uten bom, og det røde lyset blinker. Hva gjør du?",
       "Ты приближаешься к железнодорожному переезду без шлагбаума, мигает красный сигнал. Что делаешь?",
       [
@@ -947,7 +511,7 @@
       "Мигающий красный на переезде означает, что приближается поезд. Нужно остановиться и ждать, пока сигнал не погаснет, даже если шлагбаума или поезда ещё не видно.",
       "Тормозной путь поезда в разы длиннее, чем у машины. Никогда не пытайся проскочить на мигающий красный."),
 
-    q("034", road({ truck: true, tcross: true }),
+    q("034", street({ features: [{ type: "sideRoad", y: 80, side: "right" }], actors: [{ kind: "truck", x: 200, y: 160, label: "B", color: "#e0483a", blink: "right", path: [[200, 112], [252, 95], [340, 95]] }, { label: "A", y: 262, path: [[216, 230]] }] }),
       "Et langt vogntog foran deg skal svinge til høyre, men beveger seg først til venstre i kjørefeltet. Hva bør du gjøre?",
       "Длинный грузовик с прицепом впереди тебя собирается повернуть направо, но сначала смещается влево в полосе. Что нужно сделать?",
       [
@@ -973,7 +537,7 @@
       "На круге действует та же обязанность уступать для велосипедистов, что и для машин: тот, кто уже на кругу, имеет преимущество — независимо от типа транспорта.",
       "Не думай, что раз это велосипедист, можно «проскочить». Правило приоритета на круге не зависит от размера транспорта."),
 
-    q("036", road({ tram: true }),
+    q("036", street({ laneW: 34, features: [{ type: "tramRails" }, { type: "tag", text: "HOLDEPLASS", x: 300, y: 40 }], actors: [{ kind: "tram", x: 200, y: 92, label: "T", doors: true }, { kind: "adult", x: 222, y: 70, rot: 90, color: "#6b4fa0", walk: [250, 70] }, { kind: "adult", x: 226, y: 112, rot: 90, color: "#22a06b", walk: [252, 112] }, { label: "A", x: 220, y: 240, path: [[220, 176]], brake: true }] }),
       "En trikk har stoppet ved en holdeplass midt i gaten, uten trafikkøy mellom skinnene og fortauet. Dørene åpnes. Hva gjør du?",
       "Трамвай остановился на остановке посреди улицы, без островка безопасности между рельсами и тротуаром. Двери открылись. Что делаешь?",
       [
@@ -986,7 +550,7 @@
       "Trafikkreglene § 9 nr 3: если объезжаешь трамвай справа у остановки без островка, нужно остановиться и пропустить пассажиров, которые выходят или садятся. Для автобуса у остановки действует § 13: ехать медленно и при необходимости остановиться.",
       "Пассажиры трамвая выходят прямо на проезжую часть — это одна из самых опасных ситуаций в городе, всегда останавливайся полностью."),
 
-    q("037", hillScene(),
+    q("037", SK.hill({ dir: "down", edge: "ditch", wheels: "straight" }),
       "Du skal parkere i en bakke uten fortauskant (grøft på siden), og bilen peker nedover. Hva bør du gjøre med forhjulene?",
       "Нужно припарковаться на склоне без бордюра (сбоку канава), машина направлена вниз по склону. Что сделать с передними колёсами?",
       [
@@ -999,7 +563,7 @@
       "При парковке на склоне без бордюра поворачивай колёса так, чтобы при откате машина ушла от дороги (в сторону канавы). Дополнительно используй ручник и включи передачу или паркинг.",
       "Правило простое: колёса должны «уводить» машину от проезжей части, а не на неё, если тормоза подведут."),
 
-    q("038", road({ rain: true }),
+    q("038", street({ sides: { left: "grass", right: "grass" }, weather: "rain", features: [{ type: "puddle", y: 136 }], actors: [{ label: "A", y: 150, path: [[216, 60]], pathOpts: { dash: "6 6" } }], tags: [{ text: "KRAFTIG REGN", x: 306, y: 40 }] }),
       "Du kjører i kraftig regn og merker plutselig at rattet føles lett og bilen ikke reagerer på styringen. Hva er dette, og hva gjør du?",
       "Ты едешь в сильный дождь и вдруг чувствуешь, что руль стал «лёгким», а машина не реагирует на управление. Что это, и что делать?",
       [
@@ -1012,7 +576,7 @@
       "Аквапланирование возникает, когда слой воды приподнимает шины над дорогой, и машина теряет сцепление с покрытием. Плавно отпусти газ, избегай резкого торможения и резких движений рулём, пока шины снова не «зацепятся» за дорогу.",
       "Резкое торможение или руль в сторону во время аквапланирования — верный способ уйти в занос. Главное — не паниковать и ехать прямо."),
 
-    q("039", road({ roadwork: true }),
+    q("039", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "sign", kind: "temp:50", y: 220, size: 28 }, { type: "sign", kind: "speed:80", y: 290, side: "left", size: 26 }, { type: "sign", kind: "roadwork", y: 120, size: 24 }], actors: [{ kind: "cone", x: 228, y: 40 }, { kind: "cone", x: 228, y: 62 }, { kind: "cone", x: 228, y: 84 }, { kind: "worker", x: 262, y: 64, rot: 270 }, { label: "A", y: 250, path: [[216, 170]] }] }),
       "Du kjører inn i et anleggsområde med gule (midlertidige) skilt som viser en lavere fartsgrense enn den faste skiltingen. Hva gjelder?",
       "Ты въезжаешь в зону дорожных работ с жёлтыми (временными) знаками, показывающими ограничение скорости ниже обычного. Что действует?",
       [
@@ -1025,7 +589,7 @@
       "Жёлтые знаки в зоне дорожных работ — временные, и они важнее постоянных (белых) знаков. Будь особенно внимателен к рабочим и изменённой траектории дороги.",
       "Жёлтый фон знака в Норвегии означает «временно», и такой знак всегда приоритетнее обычного белого на этом участке."),
 
-    q("040", null,
+    q("040", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "off" }, { type: "tag", text: "RASTEPLASS", x: 326, y: 40 }, { type: "cabin", x: 86, y: 150, text: "BARNET HAR LØSNET BELTET" }], actors: [{ label: "A", lane: 1, y: 256, path: [[216, 200]] }] }),
       "Du oppdager i speilet at barnet i baksetet har løsnet beltet mens du kjører på motorveien. Hva gjør du?",
       "Ты замечаешь в зеркале, что ребёнок на заднем сиденье отстегнул ремень во время движения по автомагистрали. Что делаешь?",
       [
@@ -1038,7 +602,7 @@
       "Отвлекаться от дороги, чтобы что-то сделать на заднем сиденье, очень опасно на скорости. Найди безопасное место для остановки и реши проблему там.",
       "Правило простое: любая проблема с ребёнком в машине решается после безопасной остановки, а не за рулём на ходу."),
 
-    q("041", road({ lot: true }),
+    q("041", street({ noRoad: true, features: [{ type: "lot" }], actors: [{ label: "A", x: 186, y: 168, rot: 160 }, { label: "B", x: 218, y: 120, rot: 0, color: "#e0483a" }, { kind: "crash", x: 204, y: 146 }, { kind: "adult", x: 250, y: 160, rot: 90, color: "#8e5bd6" }, { kind: "adult", x: 150, y: 150, rot: 0, color: "#3d4a5c" }] }),
       "Du kolliderer lett med en annen bil på en parkeringsplass — bare materiell skade. Den andre føreren vil bare kjøre videre uten å utveksle opplysninger. Hva gjør du?",
       "Ты слегка столкнулся с другой машиной на парковке — только материальный ущерб. Другой водитель хочет просто уехать, не обменявшись данными. Что делаешь?",
       [
@@ -1051,7 +615,7 @@
       "Все участники ДТП обязаны сообщить имя и адрес и оставаться на месте, пока не обменяются необходимыми данными. Это касается и случаев только с материальным ущербом.",
       "Не позволяй второму водителю просто уехать — обмен данными обязателен по закону, а не только «по-хорошему»."),
 
-    q("042", null,
+    q("042", SK.illus("wine-morning"),
       "Du drakk et par glass vin på middagsselskap i går kveld og sov godt. I dag føler du deg helt våken og skal kjøre til jobb. Hva bør du tenke på?",
       "Вчера вечером на ужине ты выпил пару бокалов вина и хорошо выспался. Сегодня чувствуешь себя бодрым и собираешься ехать на работу. О чём нужно помнить?",
       [
@@ -1077,7 +641,7 @@
       "Знак «уступи дорогу» означает уступить всему движению на дороге, куда ты въезжаешь, с любой стороны. При повороте налево ты ещё и пересекаешь одно из направлений, поэтому проверяй обе стороны, прежде чем ехать.",
       "Поворот налево со второстепенной: смотри налево, направо и ещё раз налево, прежде чем трогаться."),
 
-    q("044", scene({ you: { from: "south", to: "west" }, lights: { south: "green" }, peds: ["west"] }),
+    q("044", scene({ you: { from: "south", to: "west" }, lights: { south: "green", north: "green" }, peds: ["west"] }),
       "Du har grønt lys og skal svinge til venstre. Fotgjengere krysser gangfeltet i gaten du svinger inn i, også på grønt. Hva gjør du?",
       "У тебя зелёный, поворачиваешь налево. Пешеходы переходят по переходу на той улице, куда ты поворачиваешь, — тоже на зелёный. Что делать?",
       [
@@ -1129,7 +693,7 @@
       "Правило правой руки действует одинаково для всех участников движения, включая велосипедистов. Если велосипедист едет справа на нерегулируемом перекрёстке, ты уступаешь ему точно так же, как машине.",
       "Велосипед на перекрёстке — это тоже «транспорт справа». Забыть про него — частая ошибка."),
 
-    q("048", road({ crossing: "far" }),
+    q("048", street({ features: [{ type: "zebra", y: 120 }], actors: [{ kind: "adult", x: 174, y: 120, rot: 270, color: "#6b4fa0", walk: [154, 120] }, { label: "A", y: 245, path: [[216, 170]] }] }),
       "Fotgjengeren har nesten krysset gangfeltet og har bare noen skritt igjen, lengst unna deg. Kan du kjøre nå?",
       "Пешеход почти перешёл дорогу, ему осталось буквально пару шагов на дальней стороне. Можно ехать?",
       [
@@ -1142,7 +706,7 @@
       "Trafikkreglene § 9 nr 2: ты уступаешь пешеходам, которые вступают на переход или находятся на нём. Это действует, пока пешеход на переходе, а не только пока он не прошёл твою сторону дороги.",
       "«Почти закончил» — не то же самое, что «закончил». Жди, пока переход будет полностью пуст."),
 
-    q("049", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }], lights: { south: "yellow", east: "yellow" } }),
+    q("049", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }], lights: { south: "flash", east: "flash", north: "flash", west: "flash" } }),
       "Trafikklyset blinker gult i alle retninger (ute av vanlig drift). Det finnes ingen andre skilt i krysset. Bil B kommer fra høyre. Hvem har vikeplikt?",
       "Светофор мигает жёлтым во всех направлениях (работает в аварийном режиме). Других знаков на перекрёстке нет. Машина B едет справа. Кто уступает?",
       [
@@ -1155,7 +719,7 @@
       "Мигающий жёлтый означает, что светофор не регулирует перекрёсток и требует особой осторожности. Без других знаков действует правило правой руки, как на обычном нерегулируемом перекрёстке.",
       "Мигающий жёлтый = светофора как бы нет. Смотри на знаки и на правило правой руки."),
 
-    q("050", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "north", kind: "bike" }] }),
+    q("050", street({ features: [{ type: "bikePath", join: 140 }], actors: [{ kind: "bike", x: 270, y: 200, label: "B", path: [[270, 160], [226, 112], [224, 60]] }, { label: "A", y: 250, path: [[216, 160]] }] }),
       "En syklist kommer ut fra en sykkelvei og skal inn på vegen din, i samme retning som deg. Det er ikke skilt eller lys. Hvem har vikeplikt?",
       "Велосипедист выезжает с велодорожки на твою дорогу, в том же направлении, что и ты. Знаков и светофора нет. Кто уступает?",
       [
@@ -1181,7 +745,7 @@
       "Trafikkreglene § 7 nr. 3: поворачивающий водитель обязан уступить пешеходам, переходящим ту дорогу, куда ведёт поворот, и велосипедистам, едущим прямо. Перед завершением поворота нужно проверить и тех, и других.",
       "Поворот направо — это два взгляда: назад-вправо (велосипед) и вперёд (пешеход на переходе)."),
 
-    q("052", null,
+    q("052", street({ sides: { left: "walk", right: "none" }, features: [{ type: "bikeLane", side: "right" }, { type: "parkingLane", side: "right" }], actors: [{ label: "A", x: 247, y: 130, door: "left" }, { kind: "bike", x: 225, y: 250, label: "S", path: [[225, 160], [225, 60]] }] }),
       "Du har nettopp parkert bilen langs en gate der det er sykkelfelt rett ved siden av bilen. Hva bør du gjøre før du åpner bildøren?",
       "Ты только что припарковался вдоль улицы, где прямо рядом с машиной проходит велополоса. Что нужно сделать, прежде чем открыть дверь?",
       [
@@ -1194,7 +758,7 @@
       "Открывание двери без проверки («дуринг») — частая причина серьёзных аварий с велосипедистами. Перед тем как открыть дверь в сторону велополосы или проезжей части, всегда проверяй зеркало и оглядывайся через плечо.",
       "Правило «голландской ручки»: открывай дверь дальней от улицы рукой — тело само развернётся, и ты увидишь велосипедиста."),
 
-    q("053", null,
+    q("053", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "off" }, { type: "sign", kind: "rest", x: 300, y: 150, size: 28 }, { type: "tag", text: "RASTEPLASS", x: 326, y: 40 }], actors: [{ label: "A", lane: 1, y: 256, path: [[216, 200]] }, { kind: "car", lane: 0, y: 120, label: false, color: "#8e5bd6" }] }),
       "Du har kjørt lenge på motorveien og merker at du blir søvnig og øynene faller igjen. Hva er tryggest å gjøre?",
       "Ты долго едешь по автомагистрали и чувствуешь, что засыпаешь — глаза сами закрываются. Что безопаснее всего сделать?",
       [
@@ -1207,7 +771,7 @@
       "Усталость за рулём — одна из самых частых причин тяжёлых аварий, особенно ночью на автомагистрали. Единственная действенная мера — остановиться и отдохнуть, желательно вздремнуть 15–20 минут.",
       "Если веки тяжелеют — это уже не «я потерплю», это сигнал ехать на ближайшую стоянку."),
 
-    q("054", null,
+    q("054", street({ sides: { left: "snow", right: "snow" }, weather: "snow", features: [{ type: "sign", kind: "descent", y: 270, size: 28 }, { type: "puddle", y: 80, kind: "ice" }], actors: [{ label: "A", y: 180, path: [[216, 110]] }], tags: [{ text: "LANG, BRATT BAKKE NED", x: 92, y: 40 }] }),
       "Du kjører nedover en lang, bratt bakke om vinteren på snø og is. Hva er lurest for å holde kontroll på farten?",
       "Зимой ты едешь вниз по длинному крутому спуску по снегу и льду. Как разумнее всего контролировать скорость?",
       [
@@ -1220,7 +784,7 @@
       "На скользком спуске стоит ехать на пониженной передаче и использовать торможение двигателем, слегка подтормаживая педалью. Это даёт более плавный контроль скорости, чем резкое торможение педалью само по себе.",
       "Правило зимнего спуска: вниз — на той же передаче, на которой поднимался бы в эту горку."),
 
-    q("055", scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south", kind: "tram" }] }),
+    q("055", scene({ you: { from: "south", to: "west" }, others: [{ from: "north", to: "south", kind: "tram", label: "T" }], rails: "ns" }),
       "Du skal svinge til venstre, og en sporvogn (trikk) kommer rett fram i samme kryss. Hvem har vikeplikt?",
       "Ты поворачиваешь налево, и трамвай едет прямо через тот же перекрёсток. Кто уступает?",
       [
@@ -1233,7 +797,7 @@
       "Trafikkreglene § 10 nr. 2: все участники движения обязаны уступать дорогу трамваю и при необходимости останавливаться. Это действует и тогда, когда ты поворачиваешь, а трамвай едет прямо.",
       "Трамвай — как король на шахматной доске: ему уступают всегда, никакие другие правила его не перебивают."),
 
-    q("056", scene({ you: { from: "south", to: "north" }, lights: { south: "red" } }),
+    q("056", scene({ you: { from: "south", to: "north", dist: 104 }, lights: { south: "red" }, extra: [{ kind: "car", x: 215, y: 214, rot: 0, color: "#8e5bd6", label: false, brake: true }], tags: [{ text: "RØDT LYS — KØ", x: 300, y: 285 }] }),
       "Du står i kø for rødt lys og telefonen din pipir med en melding. Har du lov til å lese eller skrive på håndholdt mobil nå?",
       "Ты стоишь в очереди на красный свет, и телефон пикнул с сообщением. Можно ли читать или писать в телефоне прямо сейчас?",
       [
@@ -1246,7 +810,7 @@
       "Телефон в руках запрещён во время движения, и это включает короткие остановки — пробку или красный свет. Пользоваться им в руках можно только когда машина по-настоящему припаркована.",
       "«Стоим на красном» — это ещё «за рулём», а не «припарковались». Телефон подождёт до настоящей стоянки."),
 
-    q("057", null,
+    q("057", street({ actors: [{ kind: "bike", x: 244, y: 130, rot: 330, label: "B", path: [[230, 104], [222, 60]] }, { label: "A", y: 230, path: [[216, 160]] }] }),
       "Du kjører sakte forbi et fortau. En syklist kommer ut fra fortauet og skal ut i kjørebanen rett foran deg. Hvem har vikeplikt?",
       "Ты медленно едешь мимо тротуара. Велосипедист съезжает с тротуара на проезжую часть прямо перед тобой. Кто уступает?",
       [
@@ -1285,7 +849,7 @@
       "Правило правой руки действует одинаково для всех, независимо от размера. Если машина едет слева от тебя на перекрёстке без знаков и светофора, уступать должна именно она — хоть велосипед, хоть фура.",
       "Забудь про размер машины — на перекрёстке без знаков решает только направление: «слева» всегда уступает."),
 
-    q("060", scene({ you: { from: "south", to: "north" }, peds: ["north"], lights: { south: "yellow" } }),
+    q("060", street({ features: [{ type: "zebra", y: 120 }, { type: "light", y: 96, state: "flash" }], actors: [{ kind: "adult", x: 244, y: 128, rot: 270, color: "#6b4fa0", walk: [228, 128] }, { label: "A", y: 245, path: [[216, 170]] }] }),
       "Du nærmer deg et gangfelt der det henger et blinkende gult lys over veien, uten rødt eller grønt. En fotgjenger står klar til å krysse. Hva gjør du?",
       "Ты подъезжаешь к пешеходному переходу, над которым мигает жёлтый сигнал — без красного и зелёного. Пешеход готов переходить дорогу. Что делаешь?",
       [
@@ -1311,7 +875,7 @@
       "Знак главной дороги регулирует только очерёдность между машинами. Когда ты поворачиваешь и пересекаешь пешеходный переход, идущие по нему пешеходы всегда имеют право закончить переход — независимо от того, едешь ли ты по главной дороге.",
       "Главная дорога решает спор с другими машинами, а не с пешеходами. Пешеход на переходе побеждает всегда."),
 
-    q("062", null,
+    q("062", street({ center: "dashToSolid", solidFrom: 130, sides: { left: "grass", right: "grass" }, features: [{ type: "crest", y: 80 }], actors: [{ kind: "tractor", y: 160, color: "#2f8f3a", label: false }, { label: "A", y: 250, path: [[216, 212]] }], tags: [{ text: "TRAKTOR", x: 290, y: 160 }] }),
       "Du ligger bak en traktor som kjører sakte. Midtlinjen er brutt (stiplet), men rett foran ser du at den blir heltrukket idet veien går over en bakketopp. Hva gjør du?",
       "Ты едешь за трактором, который тащится медленно. Осевая прерывистая, но впереди видно, что она становится сплошной прямо перед вершиной подъёма. Что делаешь?",
       [
@@ -1324,7 +888,7 @@
       "Обгон запрещён там, где видимость недостаточна, например у непросматриваемого подъёма, и весь обгон целиком должен пройти на участке с прерывистой линией. Если видишь, что линия становится сплошной или видимость пропадает, — заранее откажись от манёвра.",
       "Не начинай обгон, если не уверен, что успеешь ЗАКОНЧИТЬ его на прерывистой линии и с хорошим обзором."),
 
-    q("063", null,
+    q("063", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, actors: [{ kind: "post", x: 246, y: 104 }, { label: "B", lane: 1, y: 92, color: "#e0483a", path: [[216, 30]] }, { label: "A", lane: 1, y: 250, path: [[216, 190]] }] }),
       "Du vil bruke tresekundersregelen for å sjekke avstanden til bilen foran på tørr motorvei. Hvordan gjør du det riktig?",
       "Ты хочешь применить правило трёх секунд, чтобы проверить дистанцию до машины впереди на сухой автомагистрали. Как сделать это правильно?",
       [
@@ -1338,7 +902,7 @@
       "Три секунды — это минимум на сухой дороге. На мокрой или зимой мысленно удваивай счёт."),
 
     /* ---------- Несколько правильных ответов ---------- */
-    qm("m01", road({ crossing: true }),
+    qm("m01", street({ features: [{ type: "zebra", y: 120 }], actors: [{ kind: "adult", x: 246, y: 128, rot: 270, color: "#6b4fa0", walk: [230, 128] }, { kind: "car", lane: "left", y: 150, label: false, color: "#8e5bd6", brake: true }, { label: "A", y: 250, path: [[216, 180]] }] }),
       "Du nærmer deg et gangfelt. Hva skal du gjøre? Velg alle riktige.", "Ты подъезжаешь к пешеходному переходу. Что нужно делать? Выбери все верные.", [
       ["Senke farten i god tid", "Заранее снизить скорость", true],
       ["Være klar til å stoppe for gående som er på veg ut i gangfeltet", "Быть готовым остановиться перед пешеходом, выходящим на переход", true],
@@ -1393,7 +957,7 @@
     "Поворот налево — самый «слабый» манёвр на перекрёстке: уступаешь встречному транспорту, едущему прямо или поворачивающему направо, и пешеходам с велосипедистами, переходящим дорогу, на которую поворачиваешь. Заранее включай поворотник.",
     "При повороте налево ты в долгу у всех: и у встречных, и у пешеходов на переходе."),
 
-    qm("m06", null,
+    qm("m06", street({ sides: { left: "grass", right: "grass" }, center: "none", actors: [{ kind: "sheep", x: 196, y: 96, rot: 200 }, { kind: "sheep", x: 214, y: 114, rot: 160 }, { kind: "sheep", x: 182, y: 128, rot: 250 }, { kind: "sheep", x: 228, y: 82, rot: 120 }, { kind: "sheep", x: 260, y: 140, rot: 90 }, { label: "A", y: 255, path: [[216, 200]], brake: true }] }),
       "Du kjører på en fylkesvei om sommeren, og en flokk med sau går løs midt i kjørebanen. Velg alle riktige.", "Ты едешь летом по региональной дороге, и посреди проезжей части идёт стадо овец, пасущихся без присмотра. Выбери все верные.", [
       ["Senker farten kraftig og er forberedt på å stoppe helt", "Резко снижаю скорость и готов полностью остановиться", true],
       ["Holder god avstand og lar sauene få tid til å bevege seg unna i eget tempo", "Держу дистанцию и даю овцам самим спокойно уйти с дороги", true],
@@ -1417,7 +981,7 @@
       "Без знаков действует правило правой руки: ты уступаешь тем, кто едет справа, а тем, кто едет слева, уступаешь не ты — независимо от размера машины.",
       "Главное — с какой стороны едет другой, а не какой он величины."),
 
-    q("065", scene({ you: { from: "south", to: "north" }, roundabout: true, others: [{ from: "west", to: "north" }] }),
+    q("065", scene({ you: { from: "south", to: "north" }, roundabout: true }),
       "Du skal ta andre avkjøring (rett fram) i rundkjøringen. Når blinker du til høyre?",
       "Тебе нужен второй съезд с круга (прямо). Когда включаешь правый поворотник?",
       [
@@ -1430,7 +994,7 @@
       "Если нужен первый съезд — правый поворотник включаешь ещё до въезда. Если дальше — после того, как проехал съезд перед своим, чтобы остальные видели, где ты выедешь.",
       "Первый съезд — правый сразу; дальше — правый после предыдущего съезда."),
 
-    q("066", road({ tcross: true }),
+    q("066", street({ features: [{ type: "sideRoad", y: 110, side: "right", yield: true }, { type: "sign", kind: "yield", x: 262, y: 66, size: 24 }, { type: "sign", kind: "priority", y: 284, size: 24 }], actors: [{ label: "B", x: 316, y: 95, rot: 270, color: "#e0483a", path: [[236, 95]] }, { label: "A", y: 250, path: [[216, 140]] }] }),
       "Du kjører på en vei med forkjørsrett. En bil fra sideveien til høyre ser ikke ut til å bremse, og kan kjøre rett ut foran deg. Hva gjør du, selv om du formelt har forkjørsrett?",
       "Ты едешь по дороге с преимуществом. Машина с боковой дороги справа не тормозит и может выехать прямо перед тобой. Что делаешь, хотя формально преимущество у тебя?",
       [
@@ -1443,7 +1007,7 @@
       "Формальное преимущество не защищает от аварии — ты всегда обязан быть внимательным. Если видишь, что другой водитель не собирается уступать, снижай скорость и будь готов затормозить.",
       "Право проезда — не щит. Лучше затормозить, чем доказывать, кто был прав."),
 
-    q("067", road({ overtake: true }),
+    q("067", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "bike", x: 225, y: 104, label: "S", path: [[225, 50]] }, { label: "B", y: 160, x: 200, color: "#e0483a", blink: "left", path: [[188, 116], [188, 40]] }, { label: "A", y: 250, path: [[216, 214]] }] }),
       "Bilen foran deg (B) har lagt seg ut til venstre med blinklys for å kjøre forbi en syklist. Du kjører rett bak B. Hva gjør du?",
       "Машина впереди (B) сместилась влево с поворотником, чтобы обогнать велосипедиста. Ты едешь прямо за B. Что делаешь?",
       [
@@ -1456,7 +1020,7 @@
       "Когда машина впереди кого-то обгоняет, держи дистанцию и жди, пока манёвр завершится, прежде чем планировать свой собственный обгон.",
       "Два обгона разом — это не экономия времени, а риск."),
 
-    q("068", road({ bus: true, limit: 50 }),
+    q("068", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "busStop", y: 110, side: "right" }], actors: [{ kind: "bus", x: 216, y: 110, label: "B", color: "#f5b800", blink: "hazard", brake: true }, { kind: "child", x: 246, y: 104, rot: 0, color: "#22a06b" }, { kind: "child", x: 190, y: 66, rot: 270, color: "#f08c1a", walk: [170, 66] }, { label: "A", y: 255, path: [[216, 190]] }] }),
       "En skolebuss har stoppet med blinkende varsellys ved en holdeplass uten fortau. Du nærmer deg bakfra. Hva bør du spesielt tenke på?",
       "Школьный автобус остановился с мигающими аварийками на остановке без тротуара. Ты подъезжаешь сзади. На что обратить особое внимание?",
       [
@@ -1482,7 +1046,7 @@
       "Жёлтый свет значит: остановись, если можешь сделать это безопасно и спокойно. Если безопасно остановиться уже нельзя — доезжай до конца, а не тормози резко.",
       "Если успеваешь безопасно затормозить — тормози. Жёлтый — не разрешение проехать, а последний шанс остановиться."),
 
-    q("070", null,
+    q("070", SK.illus("medicine"),
       "Du har fått et reseptbelagt legemiddel som har en rød varseltrekant på pakningen, og kjenner deg trøtt etter å ha tatt det. Kan du kjøre bil?",
       "Тебе выписали рецептурное лекарство, на упаковке — красный предупреждающий треугольник, и после приёма тебя клонит в сон. Можно ли садиться за руль?",
       [
@@ -1519,7 +1083,7 @@
       "Знак «Stopp» (знак 204) требует полной остановки у стоп-линии каждый раз, независимо от того, насколько пустой выглядит дорога. Ехать дальше можно только убедившись, что это безопасно.",
       "«Stopp» значит именно стоп, а не «притормози, если что»."),
 
-    q("072", null,
+    q("072", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "horse", x: 238, y: 96, rider: "#20324d" }, { kind: "horse", x: 238, y: 150, rider: "#8e5bd6" }, { label: "A", y: 258, path: [[216, 222]] }], tags: [{ text: "RYTTERE", x: 300, y: 60 }] }),
       "Du kjører forbi noen ryttere på hest langs vegkanten. Hestene ser urolige ut. Hva bør du gjøre?",
       "Ты обгоняешь всадников на лошадях у края дороги. Лошади выглядят беспокойными. Что тебе следует сделать?",
       [
@@ -1532,7 +1096,7 @@
       "Лошади могут испугаться машин, звука и скорости. Проявляй особую осторожность: заметно снижай скорость и держи хорошую дистанцию, обгоняя всадников.",
       "Лошадь — не машина с правилами, а живое существо: главное — медленно и без резких сигналов."),
 
-    q("073", null,
+    q("073", street({ sides: { left: "snow", right: "snow" }, weather: "snow", features: [{ type: "sign", kind: "chains", y: 214, size: 28, under: "A0430-additional-trucks" }], actors: [{ label: "A", y: 250, path: [[216, 170]] }, { kind: "truck", lane: "left", y: 70, color: "#8a949e", label: false }], tags: [{ text: "FJELLOVERGANG", x: 92, y: 40 }] }),
       "Du skal kjøre over et fjellovergang om vinteren der det er skiltet kjettingpåbud for tunge kjøretøy. Du kjører personbil med gode vinterdekk uten kjetting. Gjelder påbudet for deg?",
       "Ты едешь через горный перевал зимой, где установлен знак об обязательных цепях противоскольжения для тяжёлых машин. Ты на легковой машине с хорошими зимними шинами без цепей. Касается ли тебя этот запрет?",
       [
@@ -1545,7 +1109,7 @@
       "Требование цепей противоскольжения на горных перевалах обычно касается тяжёлых машин — грузовиков и автобусов, а не обычных легковых. Но скорость всё равно нужно подстраивать под дорожные условия, независимо от знака.",
       "Знак с цепями — это почти всегда про грузовики и автобусы, а не про твою легковушку."),
 
-    q("074", road({ bikeLane: true }),
+    q("074", street({ laneW: 34, features: [{ type: "sideRoad", y: 90, side: "right", w: 56 }, { type: "bikeLane", side: "right", gap: [62, 118] }], actors: [{ label: "A", x: 210, y: 210, blink: "right", path: [[210, 130], [250, 104], [340, 104]] }, { kind: "scooter", x: 227, y: 268, label: "B", path: [[227, 200], [227, 20]] }] }),
       "Du skal svinge til høyre over et sykkelfelt. En elsparkesykkel kommer bakfra i sykkelfeltet og skal rett fram. Hvem har vikeplikt?",
       "Тебе нужно повернуть направо через велополосу. Сзади по велополосе едет электросамокат, ему прямо. Кто уступает?",
       [
@@ -1558,7 +1122,7 @@
       "Когда поворачиваешь через велополосу, ты уступаешь велосипедистам и электросамокатам, которые едут прямо, в том числе догоняющим сзади (trafikkreglene § 7 nr 3).",
       "Поворачиваешь через велополосу — уступаешь всем, кто едет по ней прямо, будь то велосипед или самокат."),
 
-    q("075", null,
+    q("075", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "lowSun" }], actors: [{ label: "A", y: 240, path: [[216, 170]] }, { kind: "car", lane: "left", y: 60, label: false, color: "#8e5bd6" }] }),
       "Du kjører rett mot en lav sol som gjør det nesten umulig å se vegen tydelig. Hva bør du gjøre?",
       "Ты едешь прямо навстречу низкому солнцу, которое почти не даёт разглядеть дорогу. Что тебе следует сделать?",
       [
@@ -1571,7 +1135,7 @@
       "Низкое солнце может слепить не хуже темноты. Снижай скорость, используй козырёк или очки и будь готов остановиться, если дорогу не видно чётко.",
       "Если солнце слепит так, что дороги не видно, — это сигнал притормозить, а не зажмуриться."),
 
-    q("076", null,
+    q("076", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, actors: [{ label: "A", lane: 1, y: 100, trailer: "caravan", trailerRot: 16, sway: true }], tags: [{ text: "TILHENGEREN SLINGRER", x: 92, y: 40 }] }),
       "Du kjører med tilhenger på motorveg i høy fart, og tilhengeren begynner å slingre fra side til side. Hva gjør du?",
       "Ты едешь с прицепом по автомагистрали на высокой скорости, и прицеп начинает раскачиваться из стороны в сторону. Что делаешь?",
       [
@@ -1584,7 +1148,7 @@
       "При раскачивании прицепа нужно плавно отпустить газ и дать скорости снижаться постепенно, не тормозя резко и не делая резких движений рулём. Резкие действия обычно только усиливают раскачивание.",
       "Прицеп закачало — газ отпускаем плавно, руки спокойные, резких движений нет."),
 
-    q("077", road({ crossing: true }),
+    q("077", street({ features: [{ type: "zebra", y: 120 }], actors: [{ kind: "patrol", x: 238, y: 104, rot: 270 }, { kind: "child", x: 222, y: 122, rot: 270, color: "#f08c1a", walk: [204, 122] }, { kind: "child", x: 236, y: 132, rot: 270, color: "#22a06b" }, { label: "A", y: 245, path: [[216, 175]], brake: true }] }),
       "En skolepatrulje står ved et gangfelt og hjelper barn over vegen. Barna er på vei ut i gangfeltet. Hva gjør du?",
       "У перехода стоит школьный патруль и помогает детям перейти дорогу. Дети выходят на переход. Что делаешь?",
       [
@@ -1597,7 +1161,7 @@
       "Trafikkreglene § 13 nr 2 b: проезжая мимо школьного патруля, едешь особенно медленно и при необходимости останавливаешься. § 9 nr 2: ты уступаешь пешеходам на переходе и тем, кто на него выходит. Патруль управляет детьми, а не машинами.",
       "Патруль — не регулировщик, но дети на переходе — значит, ты стоишь."),
 
-    qm("m08", null, "Du kjenner at du blir svært trøtt mens du kjører på motorveg. Velg alle riktige.", "Ты чувствуешь, что сильно устаёшь за рулём на автомагистрали. Выбери все верные.", [
+    qm("m08", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "off" }, { type: "sign", kind: "rest", x: 300, y: 150, size: 28 }, { type: "tag", text: "RASTEPLASS / BENSIN", x: 320, y: 40 }], actors: [{ label: "A", lane: 1, y: 256, path: [[216, 200]] }] }), "Du kjenner at du blir svært trøtt mens du kjører på motorveg. Velg alle riktige.", "Ты чувствуешь, что сильно устаёшь за рулём на автомагистрали. Выбери все верные.", [
       ["Stopper på en rasteplass eller bensinstasjon for å hvile", "Останавливаюсь на площадке отдыха или заправке, чтобы отдохнуть", true],
       ["Lufter ut bilen og tar en kort pause med en kopp kaffe hvis det hjelper", "Проветриваю машину и делаю короткую паузу, возможно с чашкой кофе, если это помогает", true],
       ["Tar en kort powerlur (10–20 minutter) hvis jeg kan stoppe trygt", "Делаю короткий сон (10–20 минут), если могу безопасно остановиться", true],
@@ -1607,7 +1171,7 @@
     "При сильной усталости реально помогает только настоящая остановка и отдых, возможно короткий сон. Кофе и свежий воздух могут быть дополнением, но музыка и ветер сами по себе микросон не остановят.",
     "Если клонит в сон за рулём, единственное надёжное лекарство — остановиться, а не громче музыка."),
 
-    q("078", road({ narrow: true }),
+    q("078", street({ laneW: 24, center: "none", sides: { left: "snow", right: "snow" }, weather: "snow", features: [{ type: "passingPlace", y: 205 }], actors: [{ label: "A", y: 268, path: [[212, 240]] }, { label: "B", lane: "left", y: 70, color: "#e0483a", path: [[188, 140]] }] }),
       "Vinteren har lagt høye brøytekanter langs begge sider av en smal vei, og det er en møteplass (utvidelse) på din side. En møtende bil (B) har allerede begynt å kjøre inn på den smale, innsnevrede delen av veien forover. Hva gjør du?",
       "Зимой вдоль узкой дороги намело высокие снежные брустверы, и на твоей стороне есть разъезд (møteplass). Встречная машина (B) уже начала въезжать на суженный из-за снега участок впереди. Что делаешь?",
       [
@@ -1620,7 +1184,7 @@
       "Зимой снежные брустверы делают узкие дороги ещё уже. Встречные водители должны заранее принять вправо и при необходимости остановиться. Тот, у кого разъезд на его стороне, заезжает в него и ждёт — неважно, кто подъехал первым.",
       "Разъезд на твоей стороне — значит, ждёшь ты. Снег это правило не меняет, только делает дорогу уже."),
 
-    q("079", road({ exit: "parking" }),
+    q("079", street({ features: [{ type: "driveway", y: 150, side: "right", label: "P", lines: true }], actors: [{ label: "A", x: 296, y: 158, rot: 270, path: [[248, 158]] }, { label: "B", y: 262, color: "#e0483a", path: [[216, 196]] }, { label: "C", lane: "left", y: 44, color: "#22a06b", path: [[184, 110]] }] }),
       "Du kjører ut fra en parkeringsplass ved et kjøpesenter og skal ut på hovedveien. Bil B kommer fra venstre i nærmeste kjørefelt, og bil C kommer fra høyre i det andre kjørefeltet. Hvem har vikeplikt?",
       "Ты выезжаешь с парковки у торгового центра на главную дорогу. Машина B едет слева по ближней полосе, а машина C — справа по дальней. Кто уступает?",
       [
@@ -1633,7 +1197,7 @@
       "Выезд с парковки, двора, заправки и подобных мест всегда означает уступить движению на дороге, куда ты выезжаешь, независимо от того, с какой стороны оно едет.",
       "Выезжаешь «не с дороги» на дорогу — уступаешь всем, кто уже на ней, слева и справа."),
 
-    q("080", scene({ you: { from: "south", to: "north" }, roundabout: true, lanes: 2 }),
+    q("080", scene({ you: { from: "south", to: "north", lane: "right" }, roundabout: true, lanes: 2, others: [{ from: "south", to: "west", lane: "left", entering: true, dist: 104, label: "B", blink: "left" }] }),
       "Du kjører inn i en rundkjøring med to felt og skal ta andre avkjøring, rett fram. Hvilket felt bør du som regel velge inn i rundkjøringen?",
       "Ты въезжаешь в круговое движение с двумя полосами и должен взять второй съезд, то есть проехать прямо. Какую полосу обычно нужно выбрать при въезде?",
       [
@@ -1646,7 +1210,7 @@
       "В круговом движении с двумя полосами обычно используют правую полосу для одного из первых съездов (прямо или раньше), а левую — когда едешь далеко по кругу или налево. Но всегда следуй разметке и знакам, если они есть.",
       "Едешь недалеко по кругу — держись правой полосы; едешь далеко или налево — левой."),
 
-    q("081", road({ tunnel: true }),
+    q("081", street({ sides: { left: "none", right: "none" }, features: [{ type: "inTunnel", exit: 70, lay: 200 }], actors: [{ label: "A", x: 224, y: 200, smoke: true, blink: "hazard" }, { kind: "adult", x: 250, y: 150, rot: 0, color: "#6b4fa0", walk: [262, 90] }], tags: [{ text: "NØDUTGANG", x: 320, y: 40 }] }),
       "Du kjører i en lang tunnel, og bilen din tar plutselig fyr. Hva er riktig fremgangsmåte?",
       "Ты едешь по длинному тоннелю, и в машине внезапно начинается пожар. Как правильно действовать?",
       [
@@ -1659,7 +1223,7 @@
       "При пожаре в тоннеле нужно, если возможно, выехать из него на машине. Если нет — съехать максимально к краю, выключить двигатель, выйти из машины и дойти до ближайшего эвакуационного выхода или безопасного места, как можно быстрее вызвав спасателей.",
       "В тоннеле при пожаре: если можешь — выезжай; если нет — к краю, мотор выключил, сам к выходу, и звонок спасателям."),
 
-    q("082", null,
+    q("082", SK.hill({ dir: "up", edge: "curb", wheels: "straight" }),
       "Du parkerer i en bakke der bilen peker oppover, og det er fortauskant (kantstein) på høyre side av veien. Hvordan bør du vri forhjulene?",
       "Ты паркуешься на подъёме, машина смотрит вверх по склону, и справа есть бордюр. Как нужно повернуть передние колёса?",
       [
@@ -1672,7 +1236,7 @@
       "Если паркуешься на подъёме с бордюром, поворачивай передние колёса в сторону от бордюра. Тогда, если машина покатится назад, бордюр её остановит. Обязательно дополнительно используй ручник и передачу или паркинг.",
       "Подъём + бордюр — колёса от бордюра. Спуск без бордюра — колёса в сторону кювета/края."),
 
-    q("083", null,
+    q("083", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "roadwork", lane: 1, from: 30, to: 140 }, { type: "light", y: 196, state: "red" }, { type: "stopLine", y: 210 }], actors: [{ kind: "worker", x: 266, y: 150, rot: 180, wave: true }, { label: "A", y: 255, path: [[216, 226]] }], tags: [{ text: "MIDLERTIDIG LYS", x: 320, y: 214 }, { text: "VEGARBEIDER", x: 316, y: 126 }] }),
       "Ved et vegarbeid viser det midlertidige lyssignalet rødt for deg. En vegarbeider som dirigerer trafikken, står ved siden av lyset og vinker deg tydelig fram. Hva gjelder?",
       "На дорожных работах временный светофор показывает тебе красный. Рядом со светофором стоит рабочий, который регулирует движение, и чётко машет тебе: проезжай. Что действует?",
       [
@@ -1685,7 +1249,7 @@
       "Указания человека, регулирующего движение, например на дорожных работах, важнее и светофора, и знаков, и разметки. Всегда сначала следуй сигналам регулировщика.",
       "Живой человек с жестом главнее любого светофора и знака."),
 
-    qm("m09", null, "Du kjører forbi et trekantet varselskilt med symbolet for barn, nær en skole og en barnehage. Velg alle riktige.", "Ты проезжаешь мимо треугольного предупреждающего знака с силуэтом детей, рядом со школой и детским садом. Выбери все верные.", [
+    qm("m09", street({ features: [{ type: "sign", kind: "children", y: 262, size: 28 }], actors: [{ kind: "child", x: 244, y: 110, rot: 180, color: "#f08c1a" }, { kind: "child", x: 150, y: 140, rot: 0, color: "#22a06b" }, { label: "A", y: 230, path: [[216, 160]] }], tags: [{ text: "SKOLE", x: 92, y: 64 }, { text: "BARNEHAGE", x: 312, y: 40 }] }), "Du kjører forbi et trekantet varselskilt med symbolet for barn, nær en skole og en barnehage. Velg alle riktige.", "Ты проезжаешь мимо треугольного предупреждающего знака с силуэтом детей, рядом со школой и детским садом. Выбери все верные.", [
       ["Senker farten og er forberedt på at barn kan komme ut i vegen uventet", "Снижаю скорость и готов к тому, что ребёнок может неожиданно выбежать на дорогу", true],
       ["Er spesielt oppmerksom i tidsrom med mye gange til og fra skolen", "Особенно внимателен в часы, когда много детей идёт в школу и из неё", true],
       ["Holder god avstand til fortau og vegkant der barn kan oppholde seg", "Держу бо́льшую дистанцию от тротуара и края дороги, где могут быть дети", true],
@@ -1695,7 +1259,7 @@
     "Предупреждающий знак с детьми говорит о том, что ты проезжаешь место — школу или детский сад — где дети часто находятся рядом с дорогой. Снижай скорость, будь особенно внимателен и держи дистанцию от тротуара и края дороги.",
     "Знак с детьми — это не формальность: тут реально могут выбежать на дорогу."),
 
-    q("085", null,
+    q("085", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "off" }, { type: "tag", text: "AVKJØRING", x: 320, y: 40 }], actors: [{ label: "A", lane: 1, y: 256, blink: "right", path: [[216, 220], [247, 150], [262, 40]] }, { label: "B", lane: 0, y: 150, color: "#8e5bd6", path: [[184, 60]] }] }),
       "Du skal ta neste avkjøring fra motorveien. Når bør du redusere farten din?",
       "Тебе нужно съехать с автомагистрали на следующем съезде. Когда нужно снижать скорость?",
       [
@@ -1708,7 +1272,7 @@
       "Нужно держать скорость потока на магистрали, пока не окажешься в самой съездной полосе, и снижать скорость уже там. Торможение в обычных полосах вынуждает машины позади резко тормозить.",
       "Тормози только внутри съездной полосы — она для этого и сделана."),
 
-    q("086", null,
+    q("086", scene({ you: { from: "south", to: "north", lane: "right", dist: 104 }, roundabout: true, lanes: 2, others: [{ from: "south", to: "north", lane: "left", kind: "truck", entering: true, dist: 92, label: "B" }] }),
       "Du kjører inn i en rundkjøring. Et vogntog i feltet til venstre for deg skal ta samme avkjøring og svinger bredt for å få plass. Hva gjør du?",
       "Ты въезжаешь в круговое движение. Фура в полосе слева от тебя едет на тот же съезд и забирает широко, чтобы хватило места на повороте. Что делаешь?",
       [
@@ -1734,7 +1298,7 @@
       "Приоритет означает, что можно ехать дальше в обычном темпе, но это не освобождает от внимательности. У знака «Уступи дорогу» (202) полностью останавливаться не обязательно, но пропустить тебя водитель обязан. Следи за машиной и будь готов притормозить, если она всё же не уступит.",
       "Приоритет — не повод терять внимательность: следи, уступит ли другая машина на самом деле."),
 
-    q("089", road({ tunnel: true }),
+    q("089", street({ lanes: ["up", "up"], sides: { left: "none", right: "none" }, features: [{ type: "inTunnel" }, { type: "ramp", kind: "off" }], actors: [{ label: "A", lane: 1, y: 150, path: [[216, 30]] }], tags: [{ text: "AVKJØRINGEN ER PASSERT", x: 300, y: 270 }] }),
       "Du kjører inn i en lang tunnel og ser etter noen sekunder at du skulle ha tatt en avkjøring du nå har kjørt forbi. Hva gjør du?",
       "Ты въезжаешь в длинный тоннель и через несколько секунд понимаешь, что проехал нужный тебе съезд. Что делаешь?",
       [
@@ -1747,7 +1311,7 @@
       "Если проехал свой съезд в тоннеле, продолжай ехать в обычном темпе до выезда, а дальше ищи новый путь. Останавливаться в тоннеле запрещено (§ 17 nr 1 a), а разворот или задний ход там смертельно опасны.",
       "Пропустил съезд в тоннеле — просто доезжай до выезда: стоять там нельзя, а разворот и задний ход — смертельный риск."),
 
-    q("090", null,
+    q("090", SK.illus("frost"),
       "Om morgenen er alle rutene på bilen din dekket av rim, bortsett fra en liten flekk på frontruta du har skrapt fri. Kan du kjøre slik?",
       "Утром все стёкла машины покрыты инеем, кроме маленького очищенного пятачка на лобовом стекле. Можно ехать в таком виде?",
       [
@@ -1760,7 +1324,7 @@
       "Нельзя ехать, пока все стёкла, зеркала и фонари не очищены от инея, льда или снега — нужен полный обзор во все стороны. Маленького очищенного пятачка недостаточно.",
       "Инеем покрыты все стёкла — чисти все, а не только «дырочку» для обзора вперёд."),
 
-    q("091", road({ lot: true }),
+    q("091", street({ noRoad: true, features: [{ type: "lot" }], actors: [{ label: "A", x: 212, y: 200, rot: 200 }, { label: false, kind: "car", x: 228, y: 252, rot: 180, color: "#8e5bd6" }, { kind: "crash", x: 222, y: 228 }, { kind: "note", x: 228, y: 262 }], tags: [{ text: "INGEN I BILEN", x: 300, y: 286 }] }),
       "Du rygger ut fra en parkeringsplass og kjenner et lite smell. Du ser at du har skrapt opp en parkert bil som står uten fører. Ingen har sett det. Hva er du pliktig til å gjøre?",
       "Ты сдаёшь назад с парковки и чувствуешь лёгкий толчок. Оказывается, ты поцарапал припаркованную машину, в которой никого нет. Никто этого не видел. Что ты обязан сделать?",
       [
@@ -1773,7 +1337,7 @@
       "Vegtrafikkloven § 12: если ты причинил материальный ущерб, а рядом нет никого со стороны потерпевшего, нужно как можно скорее сообщить потерпевшему или полиции. На практике: поищи владельца, а если не нашёл — оставь на машине имя и телефон или позвони в полицию.",
       "Нет владельца на месте — не значит «можно уехать»: записка с контактами обязательна."),
 
-    q("092", null,
+    q("092", SK.illus("party-glass"),
       "På en fest drikker du et glass du trodde var alkoholfritt, men det viser seg å inneholde litt alkohol. Du kjenner deg helt normal og skal kjøre hjem etter festen. Er det greit å kjøre?",
       "На вечеринке ты выпил стакан, который считал безалкогольным, но оказалось, что в нём немного алкоголя. Ты чувствуешь себя совершенно нормально и собираешься ехать домой после вечеринки. Можно ли садиться за руль?",
       [
@@ -1786,7 +1350,7 @@
       "Предел промилле в Норвегии — 0,2, и он действует независимо от того, чувствуешь ли ты опьянение, и выпил ли ты случайно. Если точно не знаешь, сколько алкоголя попало в организм — за руль садиться не стоит.",
       "«Чувствую себя нормально» не считается — важен только промилле, а его на глаз не определить."),
 
-    qm("m10", null, "Bilen din får motorstopp midt på en vanlig vei utenfor tettbygd strøk, og du må gjøre en nødstans i kjørebanen. Velg alle riktige.", "Твоя машина внезапно сломалась прямо на обычной дороге за городом, и тебе нужно сделать вынужденную остановку прямо на проезжей части. Выбери все верные.", [
+    qm("m10", street({ sides: { left: "grass", right: "grass" }, actors: [{ label: "A", y: 90, blink: "hazard" }, { kind: "worker", x: 236, y: 168, rot: 180 }, { kind: "triangle", x: 216, y: 268 }] }), "Bilen din får motorstopp midt på en vanlig vei utenfor tettbygd strøk, og du må gjøre en nødstans i kjørebanen. Velg alle riktige.", "Твоя машина внезапно сломалась прямо на обычной дороге за городом, и тебе нужно сделать вынужденную остановку прямо на проезжей части. Выбери все верные.", [
       ["Jeg setter på nødblinklysene så snart bilen stopper", "Включаю аварийку, как только машина останавливается", true],
       ["Alle som går ut av bilen, tar på seg refleksvest, uansett om det er mørkt eller lyst", "Все, кто выходит из машины, надевают светоотражающий жилет — независимо от времени суток", true],
       ["Jeg setter varseltrekanten i god avstand bak bilen, om mulig minst 150 meter", "Ставлю аварийный треугольник подальше позади машины, по возможности не ближе 150 метров", true],
@@ -1822,7 +1386,7 @@
       "На перекрёстке без знаков правило правой руки действует для каждого отдельно: ты уступаешь той машине, что справа от тебя (C), а B, что слева, уступает тебе. Как разберутся между собой B и C — их личное дело.",
       "Правая рука — только она даёт приоритет. Левая сторона тебе не указ."),
 
-    q("095", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east", kind: "tram" }], signs: { south: "priority" } }),
+    q("095", scene({ you: { from: "south", to: "north" }, others: [{ from: "west", to: "east", kind: "tram", label: "T" }], signs: { south: "priority" }, rails: "ew" }),
       "Du kjører på en forkjørsvei med forkjørsskilt. Fra sideveien til venstre kommer en trikk rett mot krysset. Hvem har vikeplikt?",
       "Ты едешь по главной дороге со знаком приоритета. Слева с боковой улицы к перекрёстку приближается трамвай. Кто уступает?",
       [
@@ -1835,7 +1399,7 @@
       "Trafikkreglene § 10 nr 2: трамваю и поезду нужно уступить дорогу и при необходимости остановиться. Это действует и на главной дороге: знак приоритета даёт преимущество только перед обычными машинами с боковых дорог. (Если на перекрёстке светофор — все едут по светофору.)",
       "Трамваю уступают все — даже если у тебя знак главной дороги."),
 
-    q("096", null,
+    q("096", street({ features: [{ type: "rail", y: 150, barriers: "up", lights: "off" }], actors: [{ kind: "car", y: 110, color: "#8e5bd6", label: false, brake: true }, { kind: "car", y: 62, color: "#e0483a", label: false, brake: true }, { kind: "car", y: 14, color: "#22a06b", label: false, brake: true }, { label: "A", y: 250, path: [[216, 205]] }], tags: [{ text: "KØ", x: 270, y: 60 }] }),
       "Du nærmer deg en planovergang. Bommene er oppe, og lyset blinker ikke. Det står en bilkø på andre siden, og det er usikkert om det er plass til bilen din helt over skinnene. Hva gjør du?",
       "Ты подъезжаешь к железнодорожному переезду. Шлагбаумы подняты, сигнал не мигает. За переездом стоит очередь машин, и непонятно, хватит ли места, чтобы твоя машина полностью проехала за рельсы. Что делаешь?",
       [
@@ -1848,7 +1412,7 @@
       "Нельзя выезжать на переезд, если нет уверенности, что хватит места проехать полностью на другую сторону. Застрять прямо на рельсах крайне опасно, даже если поезда в этот момент нет. А если мигает красный или опускаются шлагбаумы — останавливаться нужно всегда.",
       "Правило простое: не видишь свободного места за переездом — не въезжаешь, очередь или нет."),
 
-    q("097", road({ roadwork: true }),
+    q("097", street({ lanes: ["down", "up", "up"], sides: { left: "walk", right: "walk" }, features: [{ type: "roadwork", lane: 2, from: 10, to: 110 }], actors: [{ label: "B", x: 200, y: 150, color: "#e0483a", path: [[200, 60]] }, { label: "A", x: 232, y: 220, blink: "left", path: [[232, 170], [204, 128], [204, 40]] }, { kind: "car", x: 200, y: 262, color: "#22a06b", label: false }] }),
       "Et kjørefelt er stengt på grunn av vegarbeid, og kjeglene tvinger trafikken til å flette sammen til ett felt. Du kjører i feltet som blir stengt. Hva er riktig fremgangsmåte?",
       "Из-за дорожных работ одна полоса закрыта, конусы заставляют поток слиться в одну полосу. Ты едешь по закрывающейся полосе. Как правильно поступить?",
       [
@@ -1861,7 +1425,7 @@
       "Trafikkreglene § 8 nr 1: когда число полос в одном направлении сокращается, обязанность уступать при перестроении не действует. Обе стороны подстраивают скорость так, чтобы машины проезжали поочерёдно («молния», glidelåsprinsippet). В пробке обе полосы используют до самого места слияния.",
       "Сужение полосы — это «молния»: по одной машине из каждой полосы, а не «кто раньше втиснулся»."),
 
-    q("098", road({ trailer: true }),
+    q("098", street({ features: [{ type: "sideRoad", y: 120, side: "right", w: 44 }], actors: [{ kind: "arrow", pts: [[240, 100], [266, 120], [334, 122]], color: "#1f63e0", opts: { dash: "7 6" } }, { label: "A", x: 214, y: 48, trailer: "caravan", trailerRot: -55, steer: -26 }, { kind: "adult", x: 300, y: 152, rot: 270, color: "#22a06b", wave: true }], tags: [{ text: "MEDHJELPER", x: 314, y: 180 }] }),
       "Du skal rygge en bil med tilhenger inn på en smal vei, men ser dårlig bakover i speilene på grunn av tilhengerens størrelse. Hva er tryggest å gjøre?",
       "Тебе нужно сдать назад на машине с прицепом на узкую дорогу, но из-за размера прицепа в зеркалах почти ничего не видно позади. Как безопаснее поступить?",
       [
@@ -1874,7 +1438,7 @@
       "Когда обзор назад с прицепом плохой, безопаснее остановиться и проверить самому, а также воспользоваться помощником снаружи машины, который даёт понятные сигналы — а не сдавать назад «на глазок».",
       "Не видишь — не едешь. Останавливайся и проверяй, а не угадывай."),
 
-    q("099", null,
+    q("099", SK.hill({ dir: "down", edge: "curb", wheels: "straight" }),
       "Du parkerer i en bakke der bilen peker nedover, og det er fortauskant (kantstein) på høyre side av veien. Hvordan bør du vri forhjulene?",
       "Ты паркуешься на спуске, машина смотрит вниз по склону, и справа есть бордюр. Как нужно повернуть передние колёса?",
       [
@@ -1887,7 +1451,7 @@
       "Если машина смотрит вниз по склону и есть бордюр, колёса поворачивают к бордюру. Тогда, если машина покатится вперёд, бордюр её остановит. Обязательно дополнительно включай ручник и передачу.",
       "Четыре варианта склона — четыре разных поворота колёс: вверх/вниз и с бордюром/без меняют направление."),
 
-    qm("m11", null, "Du skal gjennom en rundkjøring og ut på andre side, der det er et gangfelt. Velg alle riktige.", "Ты проезжаешь круг и съезжаешь на другой стороне, где на выезде пешеходный переход. Выбери все верные.", [
+    qm("m11", scene({ you: { from: "south", to: "north" }, roundabout: true, peds: ["north"], others: [{ from: "west", to: "east" }] }), "Du skal gjennom en rundkjøring og ut på andre side, der det er et gangfelt. Velg alle riktige.", "Ты проезжаешь круг и съезжаешь на другой стороне, где на выезде пешеходный переход. Выбери все верные.", [
       ["Biler som allerede er inne i rundkjøringen, har forrang foran biler som skal kjøre inn", "У машин, которые уже в кольце, приоритет перед тем, кто въезжает", true],
       ["Du skal blinke til høyre like før du kjører ut av rundkjøringen", "Перед выездом из кольца нужно включить правый поворотник", true],
       ["Du har vikeplikt for gående som er i eller på vei ut i gangfeltet ved utkjøringen", "Ты уступаешь пешеходам, которые идут по переходу на выезде из кольца или вот-вот на него ступят", true],
@@ -1897,7 +1461,7 @@
     "В кольце уже движущийся по кругу транспорт имеет приоритет перед въезжающими, а пешеходов, которые идут или вот-вот ступят на переход у выезда, нужно пропустить (§ 9 nr 2). Правый поворотник перед въездом включают только для первого выезда, а перед выездом — всегда.",
     "Главное в кольце: кто уже внутри — главный, а поворотник перед выездом — всегда обязателен."),
 
-    q("100", null,
+    q("100", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "passingPlace", y: 84, label: "LOMME" }], actors: [{ label: "A", y: 150, trailer: "caravan", path: [[216, 112]] }, { kind: "car", y: 262, color: "#e0483a", label: false }, { kind: "car", lane: "left", y: 40, color: "#22a06b", label: false, path: [[184, 110]] }], tags: [{ text: "KØ BAK DEG", x: 300, y: 270 }] }),
       "Du kjører med campingvogn opp en smal og svingete bakke, langt under fartsgrensen. Det er møtende trafikk, og en lang kø har samlet seg bak deg. Hva bør du gjøre?",
       "Ты едешь с жилым прицепом (campingvogn) вверх по узкой извилистой дороге, гораздо медленнее лимита. Есть встречные машины, а за тобой собралась длинная очередь. Как правильно поступить?",
       [
@@ -1910,7 +1474,7 @@
       "Trafikkreglene § 12 nr 4: если машина едет медленно или занимает много места, а дорога плохо просматривается или есть встречные, водитель при необходимости должен уйти вправо, сбросить скорость или остановиться, чтобы другие могли обогнать.",
       "Медленный и широкий — значит ты помогаешь себя обогнать: прижмись вправо и пропусти очередь в кармане."),
 
-    q("101", null,
+    q("101", street({ actors: [{ kind: "cane", x: 238, y: 120, rot: 270 }, { label: "A", y: 250, path: [[216, 170]] }], tags: [{ text: "IKKE GANGFELT", x: 308, y: 40 }] }),
       "I et boligområde ser du en person med hvit stokk som står ved kanten av vegen og ser ut til å ville gå over. Det er ikke noe gangfelt her. Hva gjør du?",
       "В жилом районе ты видишь человека с белой тростью: он стоит у края дороги и, похоже, хочет перейти. Пешеходного перехода здесь нет. Что делаешь?",
       [
@@ -1923,7 +1487,7 @@
       "Trafikkreglene § 13 nr 2 c: проезжая мимо человека с белой тростью или собакой-поводырём, водитель обязан держать особенно низкую скорость и при необходимости сразу остановиться. Это действует и там, где перехода нет.",
       "Белая трость или собака-поводырь — сигнал «тормози»: человек может не видеть машину."),
 
-    q("102", null,
+    q("102", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "sideRoad", y: 66, side: "both", w: 52 }], actors: [{ label: "B", y: 150, color: "#e0483a", path: [[216, 100]] }, { label: "A", y: 245, blink: "left", path: [[198, 205], [184, 160], [184, 70]], pathOpts: { dash: "8 6" } }] }),
       "Du kjører på en veg med ett felt i hver retning. Foran ligger et kryss uten skilt og uten trafikklys. Bilen foran deg kjører litt sakte. Kan du kjøre forbi den like foran eller i krysset?",
       "Ты едешь по дороге с одной полосой в каждую сторону. Впереди перекрёсток без знаков и без светофора. Машина перед тобой едет немного медленно. Можно обогнать её прямо перед перекрёстком или на нём?",
       [
@@ -1936,7 +1500,7 @@
       "Trafikkreglene § 12 nr 5: обгон запрещён прямо перед перекрёстком и на нём. Исключения: две и больше полос в твою сторону, перекрёсток со светофором или регулировщиком, а также когда пересекаемая дорога уступает по знаку. На перекрёстке с правилом правой руки запрет действует.",
       "На перекрёстке, где действует правило правой руки, справа может выехать машина, которую ты не ждёшь, — поэтому там не обгоняют."),
 
-    q("103", null,
+    q("103", street({ laneW: 28, actors: [{ label: "A", x: 232, y: 150, blink: "hazard" }, { kind: "adult", x: 262, y: 140, rot: 90, color: "#6b4fa0" }], tags: [{ text: "TO HJUL PÅ FORTAUET?", x: 318, y: 40 }] }),
       "Du skal levere en tung pakke i en smal gate. For ikke å sperre kjørebanen vil du stanse et par minutter med to hjul oppe på fortauet. Det er ingen skilt. Er det lov?",
       "Тебе нужно занести тяжёлую посылку на узкой улице. Чтобы не перегораживать проезжую часть, хочешь на пару минут встать двумя колёсами на тротуар. Знаков нет. Так можно?",
       [
@@ -1949,7 +1513,7 @@
       "Trafikkreglene § 17 nr 1 c: запрещено останавливаться полностью или частично на тротуаре, пешеходной или велосипедной дорожке. Тротуар для пешеходов, а машина на нём выталкивает, например, людей с коляской или в инвалидном кресле на проезжую часть.",
       "Тротуар — ни одним колесом: даже «на минутку» и даже двумя колёсами нельзя."),
 
-    q("104", null,
+    q("104", scene({ you: { from: "south", to: "north", dist: 70 }, lights: { south: "green" }, extra: [{ kind: "car", x: 215, y: 96, rot: 0, color: "#e0483a", label: false, brake: true }, { kind: "car", x: 215, y: 50, rot: 0, color: "#22a06b", label: false, brake: true }, { kind: "car", x: 215, y: 4, rot: 0, color: "#f08c1a", label: false, brake: true }], tags: [{ text: "KØ", x: 262, y: 60 }] }),
       "Du har grønt lys og skal rett fram i et lyskryss. På den andre siden av krysset står det kø, og det er ikke plass til bilen din der. Hva gjør du?",
       "У тебя зелёный, ты едешь прямо через перекрёсток со светофором. За перекрёстком стоит пробка, и места для твоей машины там нет. Что делаешь?",
       [
@@ -1962,7 +1526,7 @@
       "Trafikkreglene § 5 nr 4: въезжая на перекрёсток, нужно ехать так, чтобы не пришлось остановиться и мешать движению по пересекаемой дороге. Если за перекрёстком нет места, ждёшь перед ним, даже на зелёный. § 9 nr 4: на пешеходном переходе стараться не останавливаться.",
       "Перед въездом на перекрёсток смотри не на светофор, а за перекрёсток: есть ли куда встать."),
 
-    q("105", null,
+    q("105", street({ laneW: 28, sides: { left: "walk", right: "walk" }, actors: [{ kind: "truck", x: 214, y: 110, color: "#8a949e", label: false, blink: "hazard" }, { label: "B", lane: "left", y: 52, color: "#e0483a", path: [[186, 150]] }, { label: "A", y: 255, path: [[214, 200]] }] }),
       "Du kjører på en smal toveis veg. I ditt kjørefelt står en lastebil parkert, og en bil kommer imot. Det er ikke plass til at dere passerer hverandre ved lastebilen. Hvem skal vente?",
       "Ты едешь по узкой двусторонней дороге. В твоей полосе стоит припаркованный грузовик, навстречу едет машина. Разъехаться у грузовика места нет. Кто должен ждать?",
       [
@@ -1975,7 +1539,7 @@
       "Trafikkreglene § 7 nr 6: встречные машины при необходимости принимают вправо и замедляются или останавливаются. Если часть дороги перекрыта, уступает тот, на чьей стороне препятствие. Поэтому ты ждёшь за грузовиком, пока встречная не проедет.",
       "Препятствие на твоей полосе — значит, ждёшь ты. Объезжаешь, только когда встречная полоса свободна."),
 
-    q("106", null,
+    q("106", scene({ you: { from: "south", to: "north", dist: 70 }, extra: [{ kind: "car", x: 176, y: 165, rot: 90, color: "#2a2f36", label: false }, { kind: "car", x: 116, y: 165, rot: 90, color: "#4b5563", label: false }, { kind: "car", x: 66, y: 165, rot: 90, color: "#4b5563", label: false }, { kind: "car", x: 16, y: 165, rot: 90, color: "#4b5563", label: false }], tags: [{ text: "BEGRAVELSESFØLGE →", x: 92, y: 204 }] }),
       "Du venter ved et kryss uten skilt. Fra venstre kommer et begravelsesfølge: en likbil og mange biler etter hverandre med lyset på. Det er små luker mellom bilene. Hva gjør du?",
       "Ты стоишь у перекрёстка без знаков. Слева идёт похоронная процессия: катафалк и много машин друг за другом с включёнными фарами. Между машинами небольшие промежутки. Что делаешь?",
       [
@@ -1988,7 +1552,7 @@
       "Trafikkreglene § 10 nr 3: нельзя мешать группе пешеходов под присмотром руководителя, шествию, похоронной процессии, военной колонне или колонне гражданской обороны. Ждёшь, пока проедет вся процессия.",
       "Колонну, процессию, группу детей с воспитателем не разрываешь: пропускаешь целиком."),
 
-    q("107", null,
+    q("107", street({ sides: { left: "grass", right: "shoulder" }, actors: [{ label: "A", x: 244, y: 150, blink: "left" }, { label: "B", y: 268, color: "#e0483a", path: [[216, 180]] }], tags: [{ text: "VEGSKULDER", x: 304, y: 110 }] }),
       "Du har stanset på vegskulderen for å se på kartet. Nå vil du kjøre ut i kjørebanen igjen. En bil nærmer seg bakfra i feltet ditt og er ikke langt unna. Hva gjør du?",
       "Ты остановился на обочине, чтобы посмотреть карту. Теперь хочешь выехать обратно на проезжую часть. Сзади по твоей полосе подъезжает машина, она уже недалеко. Что делаешь?",
       [
@@ -2001,7 +1565,7 @@
       "Trafikkreglene § 7 nr 4: тот, кто выезжает на проезжую часть с обочины, уступает остальным. § 8 nr 1: то же — при отъезде от края дороги. Включаешь поворотник, смотришь в зеркало и через плечо и выезжаешь, только когда есть безопасный промежуток.",
       "С обочины, от края дороги, с парковки ты вливаешься в поток — значит, уступаешь ты."),
 
-    q("108", null,
+    q("108", street({ sides: { left: "grass", right: "grass" }, actors: [{ label: "A", y: 140, path: [[216, 80]] }, { label: "B", lane: "left", rot: 0, y: 196, color: "#e0483a", blink: "left", path: [[184, 110], [184, 70], [210, 30]] }] }),
       "Du kjører på en landeveg med ett felt i hver retning. Bilen bak deg blinker til venstre og begynner å kjøre forbi deg. Hva gjør du?",
       "Ты едешь по загородной дороге, по одной полосе в каждую сторону. Машина сзади включает левый поворотник и начинает тебя обгонять. Что делаешь?",
       [
@@ -2014,7 +1578,7 @@
       "Trafikkreglene § 12 nr 4: когда тебя хотят обогнать слева, ты держишься как можно правее и не прибавляешь скорость. Если ты едешь медленно или на большой машине, а дорога плохо просматривается или есть встречные, при необходимости принимаешь вправо, сбрасываешь скорость или останавливаешься.",
       "Тебя обгоняют — правее и не газуй. Помоги обгону закончиться, а не соревнуйся."),
 
-    q("109", null,
+    q("109", street({ laneW: 34, features: [{ type: "tramRails" }], actors: [{ kind: "tram", x: 200, y: 96, label: "T" }, { label: "A", x: 200, y: 250, path: [[220, 200], [222, 110], [222, 40]], pathOpts: { dash: "8 6" } }] }),
       "Du kjører i en bygate bak en trikk som kjører midt i gaten. Trikken er ikke ved en holdeplass, og det er god plass i kjørebanen til høyre for den. Kan du kjøre forbi trikken på høyre side?",
       "Ты едешь по городской улице за трамваем, который идёт посередине улицы. Трамвай не на остановке, справа от него на проезжей части много места. Можно обогнать трамвай справа?",
       [
@@ -2027,7 +1591,7 @@
       "Trafikkreglene § 12 nr 1 b: трамвай (sporvogn), едущий или стоящий, можно обгонять справа. Но помни: у остановки без островка нужно остановиться и пропустить пассажиров (§ 9 nr 3), а обгонять трамвай, который закрывает часть пешеходного перехода, нельзя (§ 12 nr 6).",
       "Трамвай — исключение: его обгоняют справа. Но у остановки без островка и перед переходом — стоп и внимание."),
 
-    q("110", null,
+    q("110", street({ lanes: ["up", "up"], sides: { left: "grass", right: "grass" }, features: [{ type: "ramp", kind: "on", to: 40 }], actors: [{ label: "B", x: 247, y: 150, color: "#e0483a", blink: "left", path: [[247, 100], [216, 40]] }, { label: "A", lane: 1, y: 250, path: [[216, 200]] }] }),
       "Du kjører i høyre felt på motorvegen. Litt foran deg kommer en bil i påkjøringsfeltet og skal inn i ditt felt. Venstre felt er ledig. Hva bør du gjøre?",
       "Ты едешь по правой полосе автомагистрали. Чуть впереди по полосе разгона едет машина, ей нужно в твою полосу. Левая полоса свободна. Что лучше сделать?",
       [
@@ -2040,7 +1604,7 @@
       "Trafikkreglene § 8 nr 2: кто едет по полосе разгона, подстраивает скорость под поток, в который вливается. А те, кто едет в этой полосе, должны облегчить ему въезд. Если левая полоса свободна и это безопасно — перестройся, иначе немного подстрой скорость.",
       "На магистрали работают оба: тот, кто въезжает, подстраивается, а ты помогаешь ему влиться."),
 
-    q("111", null,
+    q("111", street({ features: [{ type: "driveway", y: 110, side: "right", building: true, label: "PARKERINGSHUS" }], actors: [{ kind: "bike", x: 244, y: 40, rot: 180, label: "S", path: [[244, 86]] }, { label: "A", y: 230, blink: "right", path: [[216, 140], [250, 112], [300, 112]] }] }),
       "Du skal svinge inn i en innkjørsel til et parkeringshus, og da må du krysse fortauet. En syklist sykler sakte langs fortauet mot innkjørselen. Hvem har vikeplikt?",
       "Тебе нужно свернуть во въезд на многоэтажную парковку и для этого пересечь тротуар. По тротуару к въезду медленно едет велосипедист. Кто должен уступить?",
       [
@@ -2053,7 +1617,7 @@
       "Trafikkreglene § 7 nr 3: кто сворачивает через тротуар, уступает пешеходам, велосипедистам и электросамокатам, которые по нему движутся. § 9 nr 2: при пересечении тротуара уступаешь и пешеходам. Останавливаешься перед тротуаром и пропускаешь велосипедиста.",
       "Тротуар — чужая территория. Пересекаешь его ты — значит, ты и ждёшь."),
 
-    q("112", null,
+    q("112", street({ sides: { left: "grass", right: "grass" }, weather: "night", features: [{ type: "railSide", x: 112, train: { y: 40, dir: 1, lights: true } }], actors: [{ label: "A", y: 250, beams: "high", path: [[216, 190]] }] }),
       "Det er mørkt, og du kjører med fjernlys på en veg som går rett ved siden av en jernbane. Et tog kommer imot deg på sporet langs vegen. Ingen biler kommer imot. Hva gjør du med lyset?",
       "Темно, ты едешь с дальним светом по дороге, которая идёт прямо вдоль железной дороги. Навстречу по путям рядом с дорогой идёт поезд. Встречных машин нет. Что делаешь со светом?",
       [
@@ -2066,7 +1630,7 @@
       "Trafikkreglene § 15 nr 2: дальним светом нельзя слепить других участников движения. То же самое при встрече с поездом, трамваем или судном, которое идёт вдоль дороги. § 15 nr 3: когда дальний нельзя, включаешь ближний.",
       "Навстречу кто-то с глазами — машина, поезд, трамвай или катер у берега — переключайся на ближний."),
 
-    q("113", scene({ you: { from: "south", to: "west" } }),
+    q("113", scene({ you: { from: "south", to: "west" }, arms: ["north", "south", "west"] }),
       "Du kjører på en vanlig toveis veg med ett felt i hver retning og skal svinge til venstre inn på en sideveg. Hvor skal bilen være før du svinger?",
       "Ты едешь по обычной дороге с одной полосой в каждую сторону и собираешься повернуть налево на боковую дорогу. Где должна быть машина перед поворотом?",
       [
@@ -2079,7 +1643,7 @@
       "Trafikkreglene § 6 nr 2: на двусторонней дороге перед левым поворотом держишься как можно ближе к середине проезжей части, перед правым — как можно ближе к правому краю. Поворотник включаешь заранее (§ 14 nr 2). Машины сзади тогда могут объехать тебя справа (§ 12 nr 1 a).",
       "Налево — к середине, направо — к правому краю. Куда поворачиваешь, туда и прижимаешься."),
 
-    q("114", null,
+    q("114", street({ actors: [{ kind: "worker", x: 238, y: 118, rot: 270 }, { kind: "child", x: 222, y: 120, rot: 270, color: "#f5d90a" }, { kind: "child", x: 208, y: 120, rot: 270, color: "#f5d90a" }, { kind: "child", x: 194, y: 120, rot: 270, color: "#f5d90a" }, { kind: "child", x: 180, y: 120, rot: 270, color: "#f5d90a" }, { kind: "worker", x: 164, y: 120, rot: 270, walk: [148, 120] }, { label: "A", y: 250, path: [[216, 180]], brake: true }], tags: [{ text: "BARNEHAGEGRUPPE", x: 300, y: 70 }] }),
       "I et boligområde krysser en barnehagegruppe vegen. Barna går i en lang rekke, og to voksne leder gruppen. De går ikke i et gangfelt. Hva gjør du?",
       "В жилом районе дорогу переходит группа из детского сада. Дети идут длинной цепочкой, их ведут двое взрослых. Пешеходного перехода там нет. Что делаешь?",
       [
@@ -2092,7 +1656,7 @@
       "Trafikkreglene § 10 nr 3: нельзя мешать группе пешеходов, которую ведёт сопровождающий, — и вне перехода тоже. § 13 nr 2 a: когда дети на дороге или рядом, едешь особенно медленно и при необходимости останавливаешься. Ждёшь, пока перейдёт вся группа.",
       "Группа с воспитателем — как одна колонна: её не разрывают, ждут до последнего ребёнка."),
 
-    q("115", null,
+    q("115", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "truck", y: 40, color: "#8a949e", label: false, path: [[216, 2]] }, { label: "B", y: 120, color: "#e0483a" }, { label: "A", y: 200 }, { kind: "car", y: 272, color: "#22a06b", label: false, blink: "left" }], tags: [{ text: "SAKTE LASTEBIL", x: 300, y: 34 }] }),
       "Du kjører på en landeveg i en kø av biler bak en lastebil som kjører sakte. Bilene bak deg vil kjøre forbi når det blir mulig. Hvor stor avstand bør du holde til bilen foran?",
       "Ты едешь по загородной дороге в колонне машин за медленным грузовиком. Машины сзади хотят обогнать, когда появится возможность. Какую дистанцию держать до машины впереди?",
       [

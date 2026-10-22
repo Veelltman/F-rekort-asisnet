@@ -11,13 +11,13 @@
 - Сайт: https://veelltman.github.io/F-rekort-asisnet/ (GitHub Pages, ветка `main`, обновляется через ~1 мин после push)
 - Репозиторий: https://github.com/Veelltman/F-rekort-asisnet
 - Сервер: https://forerkort-trener.velltman.workers.dev (Cloudflare Worker, папка `worker/`, KV `USERS`; wrangler залогинен на этой машине)
-- Робот-редактор: routine `trig_01Ur86axpC8vnp75S2iwextm`, раз в 3 дня в 09:00 UTC (12:00 Киев) читает `CONTRIBUTING-BOT.md`, добавляет +8 ситуаций, +6 правил, +6 слов, гоняет `node scripts/check-data.js`, коммитит в main. Его коммиты стоит проверять на факты (уже была ошибка про велополосу). Звук для новых слов робот не делает — после его запуска: `npm install --no-save msedge-tts && node scripts/make-audio.js`.
+- Робот-редактор: routine `trig_01Ur86axpC8vnp75S2iwextm` (модель Opus 5.5 с 13.10.2026), раз в 3 дня в 09:00 UTC (12:00 Киев): читает `CONTRIBUTING-BOT.md`, смотрит все вопросы (`dump-questions.js list`), добавляет +4 ситуации, +3 правила, +3 слова, сверяет каждый факт с `docs/law/*.txt`, проверяет повторы (`dump-questions.js similar <id>`), гоняет `check-data.js` (там ловушки на его прошлые ошибки), коммитит в main. С Opus и законом в проекте ошибок почти нет (16–22.10 — ни одной), но проверять всё равно. Звук для новых слов делает GitHub Actions (`.github/workflows/audio.yml`) сам после push. Проверка робота = открыть новые задания, сверить § по docs/law, посмотреть картинки в `tools/scenes.html`.
 - Код приглашения для регистрации на сайте: `prøve`. Первый зарегистрированный = владелец.
 - «Учитель» (Claude API) пользователь решил не подключать: ключ на сервере не задан, друзьям учитель закрыт по замыслу. Не предлагать снова, если не спросит.
 
 ## Стек и запуск
 
-Статический сайт: vanilla JS, без сборки. Локально: `npx -y serve -l 5173 .` (конфиг в `.claude/launch.json`, имя `site`). Проверка данных: `node scripts/check-data.js` — запускать после любых правок в `js/data/`. Сверка фактов глазами: `node scripts/dump-questions.js rules|situational|signs|vocabulary` (или `<id генератора> 5` — несколько случайных вариантов). Перед каждым push: `node scripts/bump-version.js` (обновляет `?v=` в index.html и `APP_VERSION` в sw.js — иначе телефоны не увидят обновление). Worker деплоится отдельно: `cd worker && npx wrangler deploy`.
+Статический сайт: vanilla JS, без сборки. Локально: `npx -y serve -l 5173 .` (конфиг в `.claude/launch.json`, имя `site`). Проверка данных: `node scripts/check-data.js` — запускать после любых правок в `js/data/`. Сверка фактов глазами: `node scripts/dump-questions.js rules|situational|signs|vocabulary` (или `<id генератора> 5` — несколько случайных вариантов; `list` — все вопросы строкой; `similar <id>` — похожие). Все схемы ситуаций разом: `http://localhost:5173/tools/scenes.html` (`#ids=sit-001,sit-002&cols=2` — только эти, крупно). Перед каждым push: `node scripts/bump-version.js` (обновляет `?v=` в index.html и `APP_VERSION` в sw.js — иначе телефоны не увидят обновление). Worker деплоится отдельно: `cd worker && npx wrangler deploy`.
 
 Git identity не настроен глобально — коммитить так:
 `git -c core.autocrlf=false -c user.name="malet" -c user.email="malets239@gmail.com" commit -m "..."` затем `git push origin main`.
@@ -38,7 +38,8 @@ Git identity не настроен глобально — коммитить т�
 - `js/pwa.js` + `sw.js` — версионный кэш оболочки, тост «Обновить», установка, офлайн-загрузка знаков/звука
 - Роутинг через hash (`#/topic?key=signs`), `go(name, params, {replace, force})`, `window.ROUTE_GUARD` для экзамена
 - `js/data/signs-catalog.js` — 155 знаков (картинки в `img/signs/`), `signs.js` генерирует задания трёх типов
-- `js/data/situational.js` — ручные ситуации + функция `scene()` (схемы перекрёстков, правостороннее движение, круг против часовой)
+- `js/scene-kit.js` — художник схем (с 22.10.2026, холст 400×300, вид сверху): `SK.junction` (= `scene()`: перекрёсток, Т, кольцо 1–2 полосы, рельсы, extra/tags), `SK.street` (= `street()`: прямая дорога + features/actors: переходы, остановки, переезды, тоннели, магистраль, велополосы, погода, ночь), `SK.hill`, `SK.illus`. Знаки — настоящие PNG из `img/signs`. Правило: картинка показывает ситуацию, а не ответ. Описание API — в CONTRIBUTING-BOT.md
+- `js/data/situational.js` — ручные ситуации; у каждой своя схема (`scene()`/`street()`/`SK.hill()`/`SK.illus()`); старые `road({...})` — обёртка над street
 - `js/data/rules.js` — правила; ставки forenklet forelegg с 15.02.2026 (индексируются ежегодно в феврале — при смене года пересверить с tryggeveier.no / lovdata.no)
 - `js/data/generated.js` — генераторы: движок приоритета для перекрёстков и числовые задачи (штрафы, баллы, дистанции, прицеп)
 - `js/data/sikkerhet.js` — тема «Sikkerhetskontroll» (72 вопроса — ровно пункты листовки «Sikkerhetskontroll av bil» с trafikkstasjonen, поле `n` = номер пункта; режим «По порядку листовки» = mode ordered). В экзамен teoriprøven и «Задание дня» не входит — только отдельная тема. Робот её не пополняет.
@@ -51,6 +52,7 @@ Git identity не настроен глобально — коммитить т�
 
 ## Как проверять факты
 
+Тексты законов лежат в проекте: `docs/law/` (trafikkreglene, vegtrafikkloven, bruksforskriften, skiltforskriften), обновлять `node scripts/fetch-law.js`. Искать: `grep -n "^§ 12." docs/law/trafikkreglene.txt` и т.п.
 WebFetch по lovdata пересказывает и путает номера пунктов, дословно цитировать отказывается. Надёжнее скачать страницу и искать по тексту:
 `curl -sL https://lovdata.no/dokument/SF/forskrift/1986-03-21-747/KAPITTEL_3 -o tr.html` (trafikkreglene), `.../forskrift/2005-10-07-1219` (skiltforskriften, там формат «NNN NNN Название»), `.../forskrift/1990-01-25-92` (bruk av kjøretøy), затем убрать теги через node и искать «§ 12.» и т.п.
 Полная проверка 23.09.2026: все правила, ситуации, генераторы, разметка, номера знаков и лексика сверены; ошибки чаще всего в автогенераторах (варианты, которые в конкретной ситуации оказываются правдой) и в картинках (нет светофора/знака, о котором говорит вопрос).
