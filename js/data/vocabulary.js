@@ -223,7 +223,10 @@
     w("182", "hindring", "препятствие", "Er det en hindring i ditt felt, må du vente på møtende trafikk.", "Если в твоей полосе препятствие, нужно пропустить встречные машины.", "Условия"),
     w("183", "gangfart", "скорость пешехода, шагом", "I gågate og gatetun må du ikke kjøre fortere enn i gangfart.", "На пешеходной улице и в жилой зоне нельзя ехать быстрее пешехода.", "Правила"),
     w("184", "sporvogn", "трамвай (официальное слово в законе)", "En sporvogn kan du kjøre forbi på høyre side.", "Трамвай можно обгонять справа.", "Машина"),
-    w("185", "felt for fartsreduksjon", "полоса торможения (перед съездом)", "Før du tar avkjøringen, skal du kjøre inn i feltet for fartsreduksjon og bremse der.", "Перед съездом перестройся в полосу торможения и тормози уже там.", "Дорога")
+    w("185", "felt for fartsreduksjon", "полоса торможения (перед съездом)", "Før du tar avkjøringen, skal du kjøre inn i feltet for fartsreduksjon og bremse der.", "Перед съездом перестройся в полосу торможения и тормози уже там.", "Дорога"),
+    w("186", "kø", "очередь, пробка", "Når du står i kø, skal du unngå å stanse på gangfeltet.", "Стоя в пробке, старайся не останавливаться на пешеходном переходе.", "Условия"),
+    w("187", "kollisjonspute", "подушка безопасности (airbag)", "Kollisjonsputen løser ut ved en kraftig kollisjon.", "Подушка безопасности срабатывает при сильном столкновении.", "Машина"),
+    w("188", "vognkort", "свидетельство о регистрации машины (техпаспорт)", "I vognkortet står blant annet bilens tillatte totalvekt.", "В свидетельстве о регистрации указана, среди прочего, разрешённая полная масса машины.", "Машина")
 
   ];
 })();

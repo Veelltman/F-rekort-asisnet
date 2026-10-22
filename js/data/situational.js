@@ -2051,7 +2051,59 @@
       ],
       "Trafikkreglene § 7 nr 3: kjørende som vil svinge inn over fortau, har vikeplikt for gående, syklende og førere av elsparkesykkel som ferdes på fortauet. § 9 nr 2: den som krysser fortau, har også vikeplikt for gående. Du stanser før fortauet og lar syklisten passere.",
       "Trafikkreglene § 7 nr 3: кто сворачивает через тротуар, уступает пешеходам, велосипедистам и электросамокатам, которые по нему движутся. § 9 nr 2: при пересечении тротуара уступаешь и пешеходам. Останавливаешься перед тротуаром и пропускаешь велосипедиста.",
-      "Тротуар — чужая территория. Пересекаешь его ты — значит, ты и ждёшь.")
+      "Тротуар — чужая территория. Пересекаешь его ты — значит, ты и ждёшь."),
+
+    q("112", null,
+      "Det er mørkt, og du kjører med fjernlys på en veg som går rett ved siden av en jernbane. Et tog kommer imot deg på sporet langs vegen. Ingen biler kommer imot. Hva gjør du med lyset?",
+      "Темно, ты едешь с дальним светом по дороге, которая идёт прямо вдоль железной дороги. Навстречу по путям рядом с дорогой идёт поезд. Встречных машин нет. Что делаешь со светом?",
+      [
+        ["Blender ned til nærlys, så jeg ikke blender lokomotivføreren", "Переключаюсь на ближний, чтобы не ослепить машиниста"],
+        ["Beholder fjernlyset: regelen om å blende ned gjelder bare møtende biler", "Оставляю дальний: переключаться нужно только перед встречными машинами", "Regelen gjelder alle trafikanter og nevner også jernbanetog, sporvogn og fartøy langs vegen (§ 15 nr 2).", "Правило касается всех участников движения, и в нём прямо названы поезд, трамвай и судно, идущие вдоль дороги (§ 15 nr 2)."],
+        ["Blender ned bare hvis toget blinker med lyset først", "Переключаюсь, только если поезд сначала мигнёт мне", "Du skal ikke vente på et tegn. Plikten er din: fjernlyset må ikke blende andre (§ 15 nr 2).", "Ждать сигнала не нужно. Обязанность твоя: дальний не должен никого слепить (§ 15 nr 2)."],
+        ["Slår av alt lys til toget har passert", "Выключаю весь свет, пока поезд не проедет", "Under kjøring skal fjernlys, nærlys eller godkjent kjørelys alltid være på (§ 15 nr 1). I mørket trenger du nærlys for å se vegen.", "Во время движения всегда должен гореть дальний, ближний или разрешённые ходовые огни (§ 15 nr 1). В темноте без ближнего ты дороги не увидишь."]
+      ],
+      "Trafikkreglene § 15 nr 2: fjernlys må ikke brukes slik at annen trafikant blir blendet. Det samme gjelder ved møte med jernbanetog, sporvogn eller fartøy (båt) som går langs vegen. § 15 nr 3: når fjernlys ikke er tillatt, bruker du nærlys.",
+      "Trafikkreglene § 15 nr 2: дальним светом нельзя слепить других участников движения. То же самое при встрече с поездом, трамваем или судном, которое идёт вдоль дороги. § 15 nr 3: когда дальний нельзя, включаешь ближний.",
+      "Навстречу кто-то с глазами — машина, поезд, трамвай или катер у берега — переключайся на ближний."),
+
+    q("113", scene({ you: { from: "south", to: "west" } }),
+      "Du kjører på en vanlig toveis veg med ett felt i hver retning og skal svinge til venstre inn på en sideveg. Hvor skal bilen være før du svinger?",
+      "Ты едешь по обычной дороге с одной полосой в каждую сторону и собираешься повернуть налево на боковую дорогу. Где должна быть машина перед поворотом?",
+      [
+        ["Så nær midten av kjørebanen som mulig, i mitt eget felt", "Как можно ближе к середине проезжей части, в своей полосе"],
+        ["Helt ute til høyre, så bilene bak kan kjøre forbi meg til venstre", "У самого правого края, чтобы машины сзади объехали меня слева", "Det er motsatt: ved venstresving skal du kjøre nær midten (§ 6 nr 2). Da kan bilene bak kjøre forbi deg på høyre side (§ 12 nr 1 a).", "Наоборот: при левом повороте держишься ближе к середине (§ 6 nr 2). Тогда машины сзади объедут тебя справа (§ 12 nr 1 a)."],
+        ["Over midtlinjen, i det motgående feltet, så jeg kan svinge fortere", "За осевой, во встречной полосе, чтобы быстрее повернуть", "Loven sier nær midten, ikke over den. I det motgående feltet sperrer du for møtende trafikk og kan kollidere front mot front.", "Закон говорит «ближе к середине», а не за неё. Во встречной полосе ты перекрываешь путь встречным и рискуешь лобовым столкновением."],
+        ["Plasseringen spiller ingen rolle, det viktigste er blinklyset", "Положение неважно, главное — поворотник", "Loven krever både tegn (§ 14 nr 2) og riktig plassering (§ 6 nr 2). Plasseringen viser også de andre hva du skal gjøre.", "Закон требует и сигнал (§ 14 nr 2), и правильное положение (§ 6 nr 2). Положение на дороге тоже подсказывает другим, что ты собираешься делать."]
+      ],
+      "Trafikkreglene § 6 nr 2: på toveis kjørebane skal du ved sving til venstre kjøre så nær midten av kjørebanen som mulig. Ved sving til høyre kjører du så nær høyre kant som mulig. Gi tegn i god tid (§ 14 nr 2). Bilene bak kan da kjøre forbi deg til høyre (§ 12 nr 1 a).",
+      "Trafikkreglene § 6 nr 2: на двусторонней дороге перед левым поворотом держишься как можно ближе к середине проезжей части, перед правым — как можно ближе к правому краю. Поворотник включаешь заранее (§ 14 nr 2). Машины сзади тогда могут объехать тебя справа (§ 12 nr 1 a).",
+      "Налево — к середине, направо — к правому краю. Куда поворачиваешь, туда и прижимаешься."),
+
+    q("114", null,
+      "I et boligområde krysser en barnehagegruppe vegen. Barna går i en lang rekke, og to voksne leder gruppen. De går ikke i et gangfelt. Hva gjør du?",
+      "В жилом районе дорогу переходит группа из детского сада. Дети идут длинной цепочкой, их ведут двое взрослых. Пешеходного перехода там нет. Что делаешь?",
+      [
+        ["Stanser og venter til hele gruppen er over vegen", "Останавливаюсь и жду, пока вся группа перейдёт"],
+        ["Kjører forsiktig gjennom når det blir en luke i rekka", "Аккуратно проезжаю, когда в цепочке появится просвет", "Du må ikke hindre eller forstyrre gående i gruppe under tilsyn av leder (§ 10 nr 3). Kjører du inn i en luke, deler du gruppen.", "Нельзя мешать группе пешеходов, которую ведёт взрослый (§ 10 nr 3). Если проехать в просвет, группа разорвётся."],
+        ["Kjører videre: utenfor gangfelt er det de gående som skal passe på bilene", "Еду дальше: вне перехода пешеходы сами должны пропускать машины", "For en gruppe under tilsyn av leder gjelder § 10 nr 3 også utenfor gangfelt. Og når barn er på eller ved vegen, skal du ha særlig lav fart og om nødvendig stanse (§ 13 nr 2 a).", "Для группы с сопровождающим § 10 nr 3 действует и вне перехода. А когда дети на дороге или рядом с ней, нужно ехать особенно медленно и при необходимости остановиться (§ 13 nr 2 a)."],
+        ["Tuter kort, så de voksne ser bilen og stopper barna", "Коротко сигналю, чтобы взрослые заметили машину и остановили детей", "Unødig bruk av lydsignal er forbudt (§ 14 nr 1), og du skal ikke forstyrre gruppen (§ 10 nr 3). Et tut kan også skremme barna.", "Ненужный звуковой сигнал запрещён (§ 14 nr 1), а группе мешать нельзя (§ 10 nr 3). К тому же гудок может напугать детей."]
+      ],
+      "Trafikkreglene § 10 nr 3: trafikant må ikke hindre eller forstyrre gående i gruppe under tilsyn av leder. Dette gjelder også utenfor gangfelt. § 13 nr 2 a: ved barn som er på eller ved vegen, skal du holde særlig lav fart og om nødvendig stanse. Du venter til hele gruppen har gått over.",
+      "Trafikkreglene § 10 nr 3: нельзя мешать группе пешеходов, которую ведёт сопровождающий, — и вне перехода тоже. § 13 nr 2 a: когда дети на дороге или рядом, едешь особенно медленно и при необходимости останавливаешься. Ждёшь, пока перейдёт вся группа.",
+      "Группа с воспитателем — как одна колонна: её не разрывают, ждут до последнего ребёнка."),
+
+    q("115", null,
+      "Du kjører på en landeveg i en kø av biler bak en lastebil som kjører sakte. Bilene bak deg vil kjøre forbi når det blir mulig. Hvor stor avstand bør du holde til bilen foran?",
+      "Ты едешь по загородной дороге в колонне машин за медленным грузовиком. Машины сзади хотят обогнать, когда появится возможность. Какую дистанцию держать до машины впереди?",
+      [
+        ["Så stor at jeg ikke kjører på den hvis den bremser, og at en bil som kjører forbi, kan komme inn i luka foran meg", "Такую, чтобы не врезаться, если она затормозит, и чтобы обгоняющая машина могла встать в промежуток передо мной"],
+        ["Så liten som mulig, så ingen kan presse seg inn foran meg", "Как можно меньше, чтобы никто не втиснулся передо мной", "Loven krever det motsatte: avstanden skal være slik at den som kjører forbi, kan komme inn mellom bilene uten fare (§ 5 nr 3). Liten avstand gir også fare for påkjøring.", "Закон требует обратного: дистанция должна позволять обгоняющему безопасно встать между машинами (§ 5 nr 3). А маленькая дистанция ещё и грозит ударом в зад."],
+        ["Avstanden er ikke viktig så lenge vi kjører sakte", "Дистанция неважна, пока едем медленно", "Også i lav fart kan bilen foran bremse brått. Avstanden skal hindre påkjøring uansett fart (§ 5 nr 3).", "И на малой скорости передняя машина может резко затормозить. Дистанция должна защищать от столкновения при любой скорости (§ 5 nr 3)."],
+        ["Nøyaktig 50 meter, det står i loven", "Ровно 50 метров, так написано в законе", "Loven har ikke noe tall i meter. Den sier hva avstanden skal være god nok til (§ 5 nr 3). Tresekundersregelen er bare et hjelpemiddel.", "Числа в метрах в законе нет. Он говорит, для чего дистанция должна быть достаточной (§ 5 nr 3). Правило трёх секунд — лишь подсказка."]
+      ],
+      "Trafikkreglene § 5 nr 3: avstanden til bilen foran skal være så stor at du ikke kjører på den hvis den senker farten eller stanser. Avstanden skal også være slik at den som kjører forbi, uten fare kan kjøre inn mellom kjøretøyene. I en kø bak et sakte kjøretøy gjør du det lettere og tryggere for andre å kjøre forbi.",
+      "Trafikkreglene § 5 nr 3: дистанция до впереди идущей машины должна быть такой, чтобы не врезаться, если она сбросит скорость или остановится. И такой, чтобы обгоняющий мог безопасно встать между машинами. В колонне за медленной машиной ты этим помогаешь другим обгонять безопасно.",
+      "В колонне оставляй «карман» перед собой: это место для того, кто обгоняет, а не повод втиснуться.")
 
   ];
 })();

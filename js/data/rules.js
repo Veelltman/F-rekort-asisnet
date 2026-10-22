@@ -1140,7 +1140,41 @@
     ],
     "Trafikkreglene § 13 nr 3: på gågate må det ikke kjøres fortere enn i gangfart. § 9 nr 2: den som kjører på gågate, har vikeplikt for gående. § 7 nr 4: den som kommer fra gågate, har vikeplikt for annen trafikant. Parkere i gågate er forbudt (§ 17 nr 2 c).",
     "Trafikkreglene § 13 nr 3: по gågate можно ехать не быстрее пешехода. § 9 nr 2: на gågate водитель уступает пешеходам. § 7 nr 4: выезжающий с gågate уступает всем. Парковаться на gågate запрещено (§ 17 nr 2 c).",
-    "Gågate — улица пешеходов: шагом, уступая всем, а на выезде снова уступаешь.")
+    "Gågate — улица пешеходов: шагом, уступая всем, а на выезде снова уступаешь."),
+
+    q("108", "Du har vært innblandet i en trafikkulykke og har kjørt hjem. Du forstår at politiet kan komme til å etterforske ulykken. Kan du drikke alkohol hjemme samme kveld?",
+      "Ты попал в ДТП и доехал домой. Ты понимаешь, что полиция может начать расследование. Можно дома в тот же вечер выпить?",
+      [
+        ["Nei, ikke de første seks timene etter kjøringen, med mindre politiet har tatt prøve eller sagt at prøve ikke skal tas", "Нет, не в первые шесть часов после поездки, если только полиция уже не взяла пробу или не решила, что проба не нужна"],
+        ["Ja, så lenge jeg ikke skal kjøre mer i dag", "Да, раз я сегодня больше не сяду за руль", "Forbudet gjelder selv om du ikke skal kjøre igjen. Det handler om kjøringen du allerede har gjort (vegtrafikkloven § 22 femte ledd).", "Запрет действует, даже если ты больше не поедешь. Он касается поездки, которая уже была (vegtrafikkloven § 22, пятый абзац)."],
+        ["Ja, når bilen står parkert hjemme", "Да, когда машина уже стоит дома", "Forbudet begynner nettopp når du er ferdig med kjøringen, og varer i seks timer.", "Запрет начинается как раз тогда, когда поездка закончена, и длится шесть часов."],
+        ["Nei, ikke på 24 timer", "Нет, сутки нельзя", "Loven sier seks timer, ikke 24. Forbudet slutter også før, hvis politiet har tatt prøve eller avgjort at prøve ikke skal tas.", "В законе шесть часов, а не сутки. И запрет кончается раньше, если полиция взяла пробу или решила, что она не нужна."]
+      ],
+      "Vegtrafikkloven § 22 femte ledd: føreren må ikke drikke alkohol eller ta andre rusmidler de første seks timene etter at kjøringen er slutt, når han forstår at det kan bli politietterforskning på grunn av kjøringen. Forbudet gjelder ikke etter at politiet har tatt blåseprøve eller blodprøve, eller har avgjort at prøve ikke skal tas.",
+      "Vegtrafikkloven § 22, пятый абзац: водителю нельзя пить алкоголь или принимать другие одурманивающие вещества в первые шесть часов после поездки, если он понимает, что из-за неё может быть полицейское расследование. Запрет снимается, когда полиция взяла пробу (дыхание или кровь) или решила, что проба не нужна.",
+      "После ДТП — шесть часов ни капли, пока полиция не разберётся. Иначе нельзя доказать, что ты был трезвым за рулём."),
+
+    q("109", "Du har kjørt forbi en bil på en toveis landeveg. Når kan du svinge inn til høyre igjen?",
+      "Ты обогнал машину на двусторонней загородной дороге. Когда можно вернуться в правую полосу?",
+      [
+        ["Når jeg kan gjøre det uten å skape fare for eller hindre bilen jeg kjørte forbi", "Когда это не создаст опасности и помехи машине, которую я обогнал"],
+        ["Med en gang fronten min er forbi fronten på den andre bilen", "Сразу, как только мой передний бампер окажется впереди её бампера", "Da er du altfor nær. Du kan tvinge den andre til å bremse, og det forbyr § 12 nr 3.", "Тогда ты слишком близко и можешь заставить её тормозить, а § 12 nr 3 это запрещает."],
+        ["Jeg kan bli i venstre felt til neste kryss", "Можно оставаться слева до следующего перекрёстка", "§ 12 nr 3 sier at du skal svinge til høyre igjen når forbikjøringen er avsluttet. Du skal også holde til høyre på vegen (§ 5 nr 1).", "§ 12 nr 3 требует вернуться вправо, когда обгон закончен. И вообще нужно держаться правой стороны (§ 5 nr 1)."],
+        ["Først når bilen jeg kjørte forbi, blinker med lyset", "Только когда обогнанная машина мигнёт фарами", "Ingen regel krever et slikt tegn. Det er du som må vurdere avstanden, for eksempel i speilet.", "Никакое правило не требует такого сигнала. Дистанцию оцениваешь ты сам, например по зеркалу."]
+      ],
+      "Trafikkreglene § 12 nr 3: den som har kjørt forbi til venstre, skal svinge til høyre igjen når forbikjøringen er avsluttet, uten å skape fare for, hindre eller unødig forstyrre den som ble forbikjørt. Sjekk i speilet at det er god avstand før du svinger inn.",
+      "Trafikkreglene § 12 nr 3: кто обогнал слева, после обгона возвращается вправо, не создавая опасности, помехи и лишнего беспокойства обогнанному. Перед возвратом проверь в зеркале, что дистанция хорошая.",
+      "Ориентир из автошколы: видишь обогнанную машину во внутреннем зеркале целиком — можно возвращаться."),
+
+    qm("m22", "Hvor er det forbudt å kjøre langs med bil? (Å krysse for å komme inn eller ut er noe annet.) Velg alle riktige.", "Где запрещено ехать на машине вдоль? (Пересечь, чтобы въехать или выехать, — другое дело.) Выбери все верные.", [
+      ["På fortau", "По тротуару", true],
+      ["På gangveg", "По пешеходной дорожке (gangveg)", true],
+      ["I sykkelfelt", "По велополосе", true],
+      ["I gatetun", "В жилой зоне (gatetun)", false, "I gatetun er det lov å kjøre, men bare i gangfart og med vikeplikt for gående (§ 13 nr 3 og § 9 nr 2).", "В gatetun ездить можно, но только со скоростью пешехода и уступая пешеходам (§ 13 nr 3 и § 9 nr 2)."]
+    ],
+    "Trafikkreglene § 4 nr 1: kjørende skal bruke kjørebanen. Det er forbudt å kjøre på fortau eller gangveg, og andre enn syklende (og liten elektrisk motorvogn) må ikke bruke sykkelveg eller sykkelfelt. Du kan krysse fortau eller sykkelfelt for å svinge inn eller ut, men da har du vikeplikt (§ 7 nr 3, § 9 nr 2). Å stanse i sykkelfelt er også forbudt (§ 17 nr 1 g).",
+    "Trafikkreglene § 4 nr 1: водитель едет по проезжей части. По тротуару и gangveg ездить запрещено, а велодорожкой и велополосой могут пользоваться только велосипедисты (и электросамокаты). Пересекать тротуар или велополосу при повороте можно, но тогда ты уступаешь (§ 7 nr 3, § 9 nr 2). Останавливаться на велополосе тоже нельзя (§ 17 nr 1 g).",
+    "Машина — только на проезжей части. Тротуар и велополосу можно лишь пересечь, уступая тем, кто на них.")
 
   ];
 
