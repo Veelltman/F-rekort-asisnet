@@ -220,6 +220,10 @@
     w("179", "innkjørsel", "въезд (во двор, в гараж)", "Det er forbudt å parkere foran en innkjørsel.", "Парковаться перед въездом во двор запрещено.", "Дорога"),
     w("180", "tomgang", "холостой ход (мотор работает, машина стоит)", "Slå av motoren i stedet for å stå på tomgang utenfor huset.", "Выключи двигатель, а не стой на холостом ходу у дома.", "Машина"),
     w("181", "begravelsesfølge", "похоронная процессия", "Du må ikke kjøre inn i et begravelsesfølge.", "Нельзя въезжать в похоронную процессию.", "Приоритет"),
-    w("182", "hindring", "препятствие", "Er det en hindring i ditt felt, må du vente på møtende trafikk.", "Если в твоей полосе препятствие, нужно пропустить встречные машины.", "Условия")
+    w("182", "hindring", "препятствие", "Er det en hindring i ditt felt, må du vente på møtende trafikk.", "Если в твоей полосе препятствие, нужно пропустить встречные машины.", "Условия"),
+    w("183", "gangfart", "скорость пешехода, шагом", "I gågate og gatetun må du ikke kjøre fortere enn i gangfart.", "На пешеходной улице и в жилой зоне нельзя ехать быстрее пешехода.", "Правила"),
+    w("184", "sporvogn", "трамвай (официальное слово в законе)", "En sporvogn kan du kjøre forbi på høyre side.", "Трамвай можно обгонять справа.", "Машина"),
+    w("185", "felt for fartsreduksjon", "полоса торможения (перед съездом)", "Før du tar avkjøringen, skal du kjøre inn i feltet for fartsreduksjon og bremse der.", "Перед съездом перестройся в полосу торможения и тормози уже там.", "Дорога")
+
   ];
 })();

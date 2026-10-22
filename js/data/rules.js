@@ -1106,7 +1106,42 @@
     ],
     "Trafikkreglene § 11 nr 2: rygging og vending er forbudt på motorveg og motortrafikkveg og på inn- eller utkjøringsveg til slike veger. Ellers er det lov, men den som rygger eller vender, har vikeplikt for annen trafikant (§ 11 nr 1).",
     "Trafikkreglene § 11 nr 2: задний ход и разворот запрещены на motorveg и motortrafikkveg, а также на въездах и съездах с них. В остальных местах можно, но тот, кто сдаёт назад или разворачивается, уступает всем (§ 11 nr 1).",
-    "Проехал съезд на автомагистрали — едешь до следующего. Назад и разворот там нельзя, даже на самом съезде.")
+    "Проехал съезд на автомагистрали — едешь до следующего. Назад и разворот там нельзя, даже на самом съезде."),
+
+    q("106", "Du kjører på en veg med to felt i din retning. Det er tett kø i begge felt, og alle kjører i den farten bilen foran bestemmer. Høyre felt, der du er, går litt fortere enn venstre felt. Er det lov at du kommer forbi bilene i venstre felt?",
+      "Ты едешь по дороге с двумя полосами в твою сторону. В обеих плотная пробка, все едут со скоростью, которую задаёт машина впереди. Твоя правая полоса движется чуть быстрее левой. Можно ли так проезжать мимо машин в левой полосе?",
+      [
+        ["Ja, i tett kø der alle felt er fulle, kan ett felt komme forbi et annet på høyre side", "Да: в плотной пробке, когда заняты все полосы, одна полоса может обгонять другую справа"],
+        ["Nei, forbikjøring skal alltid skje til venstre, så du må holde samme fart som venstre felt", "Нет, обгон только слева, поэтому нужно ехать со скоростью левой полосы", "Hovedregelen er forbikjøring til venstre, men § 12 nr 1 c gjør unntak når trafikken er så tett at bilene fyller alle feltene.", "Основное правило — обгон слева, но § 12 nr 1 c делает исключение, когда поток такой плотный, что машины заняли все полосы."],
+        ["Ja, men bare på motorveg", "Да, но только на автомагистрали", "Unntaket i § 12 nr 1 c gjelder på alle veger med flere felt i samme retning, ikke bare på motorveg.", "Исключение из § 12 nr 1 c действует на любой дороге с несколькими полосами в одну сторону, не только на автомагистрали."],
+        ["Ja, men bare når venstre felt står helt stille", "Да, но только если левая полоса совсем стоит", "Loven krever ikke at venstre felt står stille. Det holder at alle felt er fulle og farten bestemmes av bilen foran.", "Закон не требует, чтобы левая полоса стояла. Достаточно, что все полосы заняты и скорость задаёт машина впереди."]
+      ],
+      "Trafikkreglene § 12 nr 1 c: er trafikken så tett at kjøretøyene fyller alle feltene i kjøreretningen, og farten bestemmes av kjøretøyet foran, kan kjøretøy i ett felt kjøre forbi til høyre for kjøretøy i et annet felt. Utenom slik kø gjelder hovedregelen: forbikjøring skjer til venstre.",
+      "Trafikkreglene § 12 nr 1 c: если поток такой плотный, что машины заняли все полосы в одном направлении и скорость задаёт впереди идущий, машины в одной полосе могут проезжать справа от машин в другой. Вне такой пробки действует основное правило: обгон слева.",
+      "Пробка во всех полосах — каждая полоса едет как едет, это не обгон справа. На свободной дороге — обгон только слева."),
+
+    q("107", "Du står i kø foran et rødt lys. En syklist sykler forbi køen på høyre side, mellom bilene og fortauskanten. Er det lov for syklisten?",
+      "Ты стоишь в пробке перед красным светом. Велосипедист проезжает мимо очереди справа, между машинами и бордюром. Ему это можно?",
+      [
+        ["Ja, syklister kan kjøre forbi biler på høyre side", "Да, велосипедисты могут обгонять машины справа"],
+        ["Nei, all forbikjøring skal skje til venstre", "Нет, любой обгон — только слева", "For syklister er det et eget unntak: de kan kjøre forbi andre kjøretøy enn sykkel og elsparkesykkel til høyre (§ 18 nr 1).", "Для велосипедистов есть отдельное исключение: они могут обгонять справа любые транспортные средства, кроме велосипедов и электросамокатов (§ 18 nr 1)."],
+        ["Bare hvis det er sykkelfelt langs vegen", "Только если вдоль дороги есть велополоса", "Retten til å kjøre forbi til høyre i § 18 nr 1 krever ikke sykkelfelt.", "Право обгонять справа по § 18 nr 1 не зависит от наличия велополосы."],
+        ["Nei, syklisten skal vente i køen som en vanlig bil", "Нет, велосипедист должен стоять в очереди, как обычная машина", "Loven gir syklister lov til å kjøre forbi til høyre (§ 18 nr 1). Derfor må du være klar over at det kan komme en syklist på høyre side.", "Закон разрешает велосипедистам обгонять справа (§ 18 nr 1). Поэтому нужно помнить, что справа может появиться велосипедист."]
+      ],
+      "Trafikkreglene § 18 nr 1: syklende kan kjøre forbi til høyre for andre kjøretøy enn sykkel og elsparkesykkel. Derfor må du sjekke speil og blindsone før du svinger til høyre, og før du åpner døra mot høyre.",
+      "Trafikkreglene § 18 nr 1: велосипедист может обгонять справа любые транспортные средства, кроме велосипедов и электросамокатов. Поэтому перед правым поворотом и перед тем как открыть правую дверь смотри в зеркало и в слепую зону.",
+      "В пробке справа может проскочить велосипедист — это законно. Зеркало и плечо перед поворотом направо."),
+
+    qm("m21", "Du har lov til å kjøre inn i en gågate for å levere varer. Hva gjelder? Velg alle riktige.", "Тебе разрешено въехать на пешеходную улицу (gågate), чтобы доставить товар. Что действует? Выбери все верные.", [
+      ["Du må ikke kjøre fortere enn i gangfart", "Ехать можно не быстрее пешехода", true],
+      ["Du har vikeplikt for de gående", "Ты уступаешь пешеходам", true],
+      ["Når du kjører ut av gågata, har du vikeplikt for trafikken på vegen", "Выезжая с gågate, ты уступаешь транспорту на дороге", true],
+      ["De gående skal gå til side, fordi du har lov til å kjøre der", "Пешеходы должны отойти в сторону: тебе же разрешено там ехать", false, "Lov til å kjøre inn gir ingen forrang. På gågate har kjørende vikeplikt for gående (§ 9 nr 2).", "Разрешение на въезд не даёт преимущества. На gågate водитель уступает пешеходам (§ 9 nr 2)."]
+    ],
+    "Trafikkreglene § 13 nr 3: på gågate må det ikke kjøres fortere enn i gangfart. § 9 nr 2: den som kjører på gågate, har vikeplikt for gående. § 7 nr 4: den som kommer fra gågate, har vikeplikt for annen trafikant. Parkere i gågate er forbudt (§ 17 nr 2 c).",
+    "Trafikkreglene § 13 nr 3: по gågate можно ехать не быстрее пешехода. § 9 nr 2: на gågate водитель уступает пешеходам. § 7 nr 4: выезжающий с gågate уступает всем. Парковаться на gågate запрещено (§ 17 nr 2 c).",
+    "Gågate — улица пешеходов: шагом, уступая всем, а на выезде снова уступаешь.")
+
   ];
 
   /* Вопросы, где знак описан словами, показываем и сам знак — так на экзамене. */

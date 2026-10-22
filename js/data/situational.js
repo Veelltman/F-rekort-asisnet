@@ -1999,6 +1999,59 @@
       ],
       "Trafikkreglene § 7 nr 4: den som svinger inn på kjørebanen fra vegens skulder, har vikeplikt for annen trafikant. § 8 nr 1: det samme gjelder den som kjører ut fra vegkanten. Du blinker, ser i speilet og over skulderen, og kjører ut først når det er en trygg luke.",
       "Trafikkreglene § 7 nr 4: тот, кто выезжает на проезжую часть с обочины, уступает остальным. § 8 nr 1: то же — при отъезде от края дороги. Включаешь поворотник, смотришь в зеркало и через плечо и выезжаешь, только когда есть безопасный промежуток.",
-      "С обочины, от края дороги, с парковки ты вливаешься в поток — значит, уступаешь ты.")
+      "С обочины, от края дороги, с парковки ты вливаешься в поток — значит, уступаешь ты."),
+
+    q("108", null,
+      "Du kjører på en landeveg med ett felt i hver retning. Bilen bak deg blinker til venstre og begynner å kjøre forbi deg. Hva gjør du?",
+      "Ты едешь по загородной дороге, по одной полосе в каждую сторону. Машина сзади включает левый поворотник и начинает тебя обгонять. Что делаешь?",
+      [
+        ["Holder meg så langt til høyre som mulig og øker ikke farten", "Держусь как можно правее и не прибавляю скорость"],
+        ["Øker farten litt, så forbikjøringen går fortere", "Немного прибавляю, чтобы обгон закончился быстрее", "Det er forbudt å øke farten når noen kjører forbi deg (§ 12 nr 4). Da blir forbikjøringen lengre og farligere.", "Прибавлять скорость, когда тебя обгоняют, запрещено (§ 12 nr 4). От этого обгон становится длиннее и опаснее."],
+        ["Legger meg mot midten av vegen, så bilen ikke kan kjøre forbi", "Смещаюсь к середине дороги, чтобы машина не смогла обогнать", "Du skal tvert imot holde deg så langt til høyre som mulig (§ 12 nr 4). Å stenge vegen for den som kjører forbi, er farlig.", "Наоборот, нужно держаться как можно правее (§ 12 nr 4). Перекрывать дорогу обгоняющему опасно."],
+        ["Blinker til venstre for å vise at forbikjøringen er farlig", "Включаю левый поворотник, чтобы показать, что обгонять опасно", "Blinklys viser at du selv skal svinge eller skifte plass (§ 14 nr 2). Den bak kan tro at du skal svinge til venstre.", "Поворотник показывает, что ты сам поворачиваешь или смещаешься (§ 14 nr 2). Задний водитель может решить, что ты поворачиваешь налево."]
+      ],
+      "Trafikkreglene § 12 nr 4: når noen vil kjøre forbi til venstre, skal den som kjører foran, holde så langt til høyre som mulig og ikke øke farten. Kjører du sakte eller med stor bil, og vegen er uoversiktlig eller har møtende trafikk, skal du om nødvendig vike til høyre og sette ned farten eller stanse.",
+      "Trafikkreglene § 12 nr 4: когда тебя хотят обогнать слева, ты держишься как можно правее и не прибавляешь скорость. Если ты едешь медленно или на большой машине, а дорога плохо просматривается или есть встречные, при необходимости принимаешь вправо, сбрасываешь скорость или останавливаешься.",
+      "Тебя обгоняют — правее и не газуй. Помоги обгону закончиться, а не соревнуйся."),
+
+    q("109", null,
+      "Du kjører i en bygate bak en trikk som kjører midt i gaten. Trikken er ikke ved en holdeplass, og det er god plass i kjørebanen til høyre for den. Kan du kjøre forbi trikken på høyre side?",
+      "Ты едешь по городской улице за трамваем, который идёт посередине улицы. Трамвай не на остановке, справа от него на проезжей части много места. Можно обогнать трамвай справа?",
+      [
+        ["Ja, en trikk kan du kjøre forbi på høyre side", "Да, трамвай можно обогнать справа"],
+        ["Nei, forbikjøring skal alltid skje til venstre", "Нет, обгонять можно только слева", "Hovedregelen er forbikjøring til venstre, men loven har unntak. Et av dem er nettopp trikk: den kan forbikjøres til høyre (§ 12 nr 1 b).", "Основное правило — обгон слева, но в законе есть исключения. Одно из них как раз трамвай: его можно обгонять справа (§ 12 nr 1 b)."],
+        ["Bare hvis trikken blinker til venstre", "Только если у трамвая включён левый поворотник", "Kravet om at den foran skal svinge til venstre, gjelder forbikjøring av biler til høyre (§ 12 nr 1 a). For trikk finnes ikke et slikt krav.", "Условие «передний поворачивает налево» касается обгона машин справа (§ 12 nr 1 a). Для трамвая такого условия нет."],
+        ["Nei, du må ligge bak trikken til den svinger av", "Нет, нужно ехать за трамваем, пока он не свернёт", "Ingen regel sier at du må bli liggende bak en trikk som kjører. Du må bare gi den fri veg og følge reglene for forbikjøring.", "Никакое правило не требует ехать за движущимся трамваем. Нужно лишь уступать ему и соблюдать правила обгона."]
+      ],
+      "Trafikkreglene § 12 nr 1 b: forbikjøring av trikk (sporvogn) som kjører eller står stille, kan skje til høyre. Husk likevel: ved holdeplass uten trafikkøy skal du stanse og slippe passasjerene av og på (§ 9 nr 3), og du må ikke kjøre forbi en trikk som skjuler deler av et gangfelt (§ 12 nr 6).",
+      "Trafikkreglene § 12 nr 1 b: трамвай (sporvogn), едущий или стоящий, можно обгонять справа. Но помни: у остановки без островка нужно остановиться и пропустить пассажиров (§ 9 nr 3), а обгонять трамвай, который закрывает часть пешеходного перехода, нельзя (§ 12 nr 6).",
+      "Трамвай — исключение: его обгоняют справа. Но у остановки без островка и перед переходом — стоп и внимание."),
+
+    q("110", null,
+      "Du kjører i høyre felt på motorvegen. Litt foran deg kommer en bil i påkjøringsfeltet og skal inn i ditt felt. Venstre felt er ledig. Hva bør du gjøre?",
+      "Ты едешь по правой полосе автомагистрали. Чуть впереди по полосе разгона едет машина, ей нужно в твою полосу. Левая полоса свободна. Что лучше сделать?",
+      [
+        ["Gjør det lettere for bilen å komme inn, for eksempel ved å skifte til venstre felt eller tilpasse farten", "Облегчаю ей въезд: например, перестраиваюсь влево или подстраиваю скорость"],
+        ["Holder fart og felt: bilen i påkjøringsfeltet har vikeplikt, så det er dens problem", "Держу скорость и полосу: у неё обязанность уступить, это её проблема", "Bilen i påkjøringsfeltet skal tilpasse seg, men loven sier også at du i feltet skal lette utkjøringen fra påkjøringsfeltet (§ 8 nr 2).", "Машина на разгоне должна подстроиться, но закон и от тебя требует облегчить ей выезд с полосы разгона (§ 8 nr 2)."],
+        ["Øker farten, så bilen ikke rekker å komme inn foran meg", "Прибавляю, чтобы она не успела встать передо мной", "Dette gjør det vanskeligere for bilen å komme inn, og det er det motsatte av det § 8 nr 2 krever.", "Так ты мешаешь ей въехать, а § 8 nr 2 требует обратного."],
+        ["Stanser i feltet og vinker bilen inn", "Останавливаюсь в полосе и машу ей рукой", "Det er forbudt å stanse på motorveg (§ 17 nr 1 e), og en brå stans kan gi påkjøring bakfra.", "Останавливаться на автомагистрали запрещено (§ 17 nr 1 e), а резкая остановка может кончиться ударом сзади."]
+      ],
+      "Trafikkreglene § 8 nr 2: den som kjører i felt for fartsøkning, skal tilpasse farten til trafikken i feltet den skal inn i. Samtidig skal de som kjører i dette feltet, lette utkjøringen fra påkjøringsfeltet. Er venstre felt ledig og det er trygt, kan du skifte felt; ellers kan du justere farten litt.",
+      "Trafikkreglene § 8 nr 2: кто едет по полосе разгона, подстраивает скорость под поток, в который вливается. А те, кто едет в этой полосе, должны облегчить ему въезд. Если левая полоса свободна и это безопасно — перестройся, иначе немного подстрой скорость.",
+      "На магистрали работают оба: тот, кто въезжает, подстраивается, а ты помогаешь ему влиться."),
+
+    q("111", null,
+      "Du skal svinge inn i en innkjørsel til et parkeringshus, og da må du krysse fortauet. En syklist sykler sakte langs fortauet mot innkjørselen. Hvem har vikeplikt?",
+      "Тебе нужно свернуть во въезд на многоэтажную парковку и для этого пересечь тротуар. По тротуару к въезду медленно едет велосипедист. Кто должен уступить?",
+      [
+        ["Jeg, fordi jeg svinger inn over fortauet", "Я, потому что сворачиваю через тротуар"],
+        ["Syklisten, fordi syklister på fortau alltid har vikeplikt", "Велосипедист: велосипедисты на тротуаре всегда уступают", "Syklisten har vikeplikt når han vil inn på eller krysse vegen fra fortauet (§ 7 nr 4). Her blir han på fortauet, og det er du som krysser det (§ 7 nr 3).", "Велосипедист уступает, когда съезжает с тротуара на дорогу или пересекает её (§ 7 nr 4). Здесь он остаётся на тротуаре, а пересекаешь его ты (§ 7 nr 3)."],
+        ["Syklisten, fordi det er forbudt å sykle på fortauet", "Велосипедист, потому что ездить по тротуару запрещено", "Sykling på fortau er lov når det er lite gående og syklisten ikke er til fare (§ 18 nr 3). Uansett skal du ikke kjøre på ham.", "Ездить по тротуару на велосипеде можно, когда пешеходов мало и он никому не мешает (§ 18 nr 3). В любом случае наезжать на него нельзя."],
+        ["Den som kommer først fram til innkjørselen", "Тот, кто первым доедет до въезда", "Vikeplikt avhenger ikke av hvem som kommer først. Den som svinger inn over fortau, viker for dem som ferdes på fortauet.", "Обязанность уступить не зависит от того, кто первый. Кто сворачивает через тротуар, уступает тем, кто по нему движется."]
+      ],
+      "Trafikkreglene § 7 nr 3: kjørende som vil svinge inn over fortau, har vikeplikt for gående, syklende og førere av elsparkesykkel som ferdes på fortauet. § 9 nr 2: den som krysser fortau, har også vikeplikt for gående. Du stanser før fortauet og lar syklisten passere.",
+      "Trafikkreglene § 7 nr 3: кто сворачивает через тротуар, уступает пешеходам, велосипедистам и электросамокатам, которые по нему движутся. § 9 nr 2: при пересечении тротуара уступаешь и пешеходам. Останавливаешься перед тротуаром и пропускаешь велосипедиста.",
+      "Тротуар — чужая территория. Пересекаешь его ты — значит, ты и ждёшь.")
+
   ];
 })();
