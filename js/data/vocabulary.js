@@ -225,7 +225,10 @@
     w("185", "felt for fartsreduksjon", "полоса торможения (перед съездом)", "Før du tar avkjøringen, skal du kjøre inn i feltet for fartsreduksjon og bremse der.", "Перед съездом перестройся в полосу торможения и тормози уже там.", "Дорога"),
     w("186", "kø", "очередь, пробка", "Når du står i kø, skal du unngå å stanse på gangfeltet.", "Стоя в пробке, старайся не останавливаться на пешеходном переходе.", "Условия"),
     w("187", "kollisjonspute", "подушка безопасности (airbag)", "Kollisjonsputen løser ut ved en kraftig kollisjon.", "Подушка безопасности срабатывает при сильном столкновении.", "Машина"),
-    w("188", "vognkort", "свидетельство о регистрации машины (техпаспорт)", "I vognkortet står blant annet bilens tillatte totalvekt.", "В свидетельстве о регистрации указана, среди прочего, разрешённая полная масса машины.", "Машина")
+    w("188", "vognkort", "свидетельство о регистрации машины (техпаспорт)", "I vognkortet står blant annet bilens tillatte totalvekt.", "В свидетельстве о регистрации указана, среди прочего, разрешённая полная масса машины.", "Машина"),
+    w("189", "slepetau", "буксировочный трос", "Slepetauet skal være tydelig merket når du sleper en bil.", "Буксировочный трос должен быть хорошо заметен, когда буксируешь машину.", "Машина"),
+    w("190", "nødhjul", "докатка (компактное запасное колесо)", "Med nødhjul kjører du bare til nærmeste verksted.", "На докатке едешь только до ближайшей мастерской.", "Машина"),
+    w("191", "trafikkontroll", "проверка на дороге (полицией или Statens vegvesen)", "I en trafikkontroll skal du bli ved bilen til kontrollen er ferdig.", "При проверке на дороге нужно оставаться у машины, пока она не закончится.", "Правила")
 
   ];
 })();

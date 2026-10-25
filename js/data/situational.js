@@ -1667,7 +1667,59 @@
       ],
       "Trafikkreglene § 5 nr 3: avstanden til bilen foran skal være så stor at du ikke kjører på den hvis den senker farten eller stanser. Avstanden skal også være slik at den som kjører forbi, uten fare kan kjøre inn mellom kjøretøyene. I en kø bak et sakte kjøretøy gjør du det lettere og tryggere for andre å kjøre forbi.",
       "Trafikkreglene § 5 nr 3: дистанция до впереди идущей машины должна быть такой, чтобы не врезаться, если она сбросит скорость или остановится. И такой, чтобы обгоняющий мог безопасно встать между машинами. В колонне за медленной машиной ты этим помогаешь другим обгонять безопасно.",
-      "В колонне оставляй «карман» перед собой: это место для того, кто обгоняет, а не повод втиснуться.")
+      "В колонне оставляй «карман» перед собой: это место для того, кто обгоняет, а не повод втиснуться."),
+
+    q("116", scene({ you: { from: "south", to: "north" }, others: [{ from: "east", to: "west" }], signs: { south: "yield" }, lights: { south: "green", east: "red" } }),
+      "Lyskryss. Du (A) skal rett fram og har grønt lys. Ved lyset står det også et vikepliktskilt for din veg. Bil B kommer fra høyre og har rødt lys. Hvem har vikeplikt?",
+      "Перекрёсток со светофором. Ты (A) едешь прямо, у тебя зелёный. Рядом со светофором для твоей дороги стоит ещё и знак «Уступи дорогу». Машина B едет справа, у неё красный. Кто должен уступить?",
+      [
+        ["B, fordi trafikklyset gjelder foran vikepliktskiltet", "B: сигнал светофора важнее знака «Уступи дорогу»"],
+        ["Jeg, fordi jeg har vikepliktskilt", "Я, потому что у меня знак «Уступи дорогу»", "Når lyset er i drift, gjelder lyset foran vikepliktskiltet (§ 3 nr 1). Skiltet får betydning når lyset er slått av eller blinker gult.", "Пока светофор работает, он важнее знака (§ 3 nr 1). Знак начинает действовать, когда светофор выключен или мигает жёлтым."],
+        ["Jeg, fordi B kommer fra høyre", "Я, потому что B справа", "Høyreregelen gjelder bare når lys eller skilt ikke sier noe annet (§ 3 nr 1). Her har B rødt og skal stanse.", "Правило правой руки действует, только если светофор и знаки не говорят иного (§ 3 nr 1). Здесь у B красный, и он должен стоять."],
+        ["Den som kommer først fram til krysset", "Тот, кто первым подъедет к перекрёстку", "Her er det lyset som bestemmer rekkefølgen, ikke hvem som er først.", "Очерёдность здесь задаёт светофор, а не то, кто приехал раньше."]
+      ],
+      "Trafikkreglene § 3 nr 1: anvisning gitt ved trafikklyssignal gjelder foran anvisning om vikeplikt gitt ved offentlig trafikkskilt. Du har grønt og kan kjøre, B har rødt og skal vente. Vikepliktskiltet gjelder når lyset er slått av eller blinker gult. Grønt lys betyr likevel ikke at du kan slutte å se deg for.",
+      "Trafikkreglene § 3 nr 1: сигнал светофора важнее знака, который велит уступить. У тебя зелёный — едешь, у B красный — он ждёт. Знак «Уступи дорогу» действует, когда светофор выключен или мигает жёлтым. Но и на зелёный смотреть по сторонам всё равно нужно.",
+      "Светофор работает — слушай светофор. Погас или мигает жёлтым — смотри на знак."),
+
+    q("117", street({ features: [{ type: "zebra", y: 150 }], actors: [{ kind: "car", y: 110, color: "#e0483a", label: false, brake: true }, { kind: "car", y: 60, color: "#22a06b", label: false, brake: true }, { kind: "car", y: 10, color: "#f08c1a", label: false, brake: true }, { label: "A", y: 236, brake: true }], tags: [{ text: "KØ", x: 290, y: 60 }] }),
+      "Du kjører i kø i en bygate. Rett foran deg er et gangfelt. Bilene på den andre siden av gangfeltet står stille, og det er ikke plass til bilen din der. Ingen fotgjengere er i gangfeltet akkurat nå. Hva gjør du?",
+      "Ты едешь в пробке по городской улице. Прямо перед тобой пешеходный переход. Машины за переходом стоят, и места для твоей машины там нет. Пешеходов на переходе сейчас нет. Что делаешь?",
+      [
+        ["Venter foran gangfeltet til det er plass til hele bilen på den andre siden", "Жду перед переходом, пока за ним не освободится место для всей машины"],
+        ["Kjører fram og blir stående på gangfeltet, siden ingen fotgjengere er der nå", "Проезжаю и стою на переходе — пешеходов ведь сейчас нет", "Fotgjengere kan komme når som helst, og da sperrer bilen din gangfeltet. Loven sier at du skal unngå stans på gangfelt (§ 9 nr 4).", "Пешеходы могут подойти в любую секунду, и твоя машина перекроет им переход. Закон требует избегать остановки на переходе (§ 9 nr 4)."],
+        ["Kjører halvveis inn på gangfeltet, så bilene bak kommer litt fram", "Заезжаю на переход наполовину, чтобы машины сзади продвинулись", "Også halvveis på gangfeltet sperrer du for de gående. § 9 nr 4 gjelder hele gangfeltet.", "Даже наполовину стоя на переходе, ты мешаешь пешеходам. § 9 nr 4 касается всего перехода."],
+        ["Kjører fram og stopper på gangfeltet, men slår på nødblinken", "Проезжаю, встаю на переходе, но включаю аварийку", "Nødblinken endrer ikke regelen: du skal unngå stans på gangfelt (§ 9 nr 4).", "Аварийка правило не отменяет: остановки на переходе нужно избегать (§ 9 nr 4)."]
+      ],
+      "Trafikkreglene § 9 nr 4: kjørende skal unngå stans på gangfelt. Når du står i kø, kjører du derfor ikke ut på gangfeltet før det er plass til hele bilen etter det. Da kan de gående krysse trygt.",
+      "Trafikkreglene § 9 nr 4: водитель должен избегать остановки на пешеходном переходе. Поэтому в пробке не заезжай на переход, пока за ним не будет места для всей машины. Тогда пешеходы смогут спокойно перейти.",
+      "Пробка перед «зеброй»: стоишь до перехода, пока за ним нет места на всю машину."),
+
+    q("118", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "car", y: 80, color: "#f3f5f7", label: false }, { kind: "officer", x: 300, y: 160, rot: 270 }, { label: "A", y: 200, brake: true }], tags: [{ text: "POLITIKONTROLL", x: 310, y: 60 }] }),
+      "Politiet stanser deg i en trafikkontroll. Du har vist førerkortet, og nå går politibetjenten bort til politibilen for å sjekke noe. Du har det travelt. Hva gjør du?",
+      "Полиция останавливает тебя для проверки на дороге. Ты показал права, и теперь полицейский пошёл к своей машине что-то проверить. Ты торопишься. Что делаешь?",
+      [
+        ["Blir ved bilen min til kontrollen er ferdig eller jeg får lov til å kjøre", "Остаюсь у своей машины, пока проверка не закончится или мне не разрешат ехать"],
+        ["Kjører videre, for jeg har jo vist førerkortet", "Уезжаю: права я уже показал", "Kontrollen er ikke ferdig før politiet sier det. Du skal bli ved bilen til kontrollen er avsluttet eller du har fått lov til å dra (bruksforskriften § 1-8 b).", "Проверка не окончена, пока это не скажет полиция. Нужно оставаться у машины, пока она не закончится или тебе не разрешат уехать (bruksforskriften § 1-8 b)."],
+        ["Går en tur til kiosken i nærheten mens jeg venter", "Схожу пока в ближайший киоск", "Under kontrollen skal du oppholde deg ved kjøretøyet (bruksforskriften § 1-8 b), ikke gå fra det.", "Во время проверки нужно оставаться у машины (bruksforskriften § 1-8 b), а не уходить от неё."],
+        ["Kjører bilen et stykke fram til en bedre plass uten å si fra", "Отгоняю машину вперёд на место получше, никого не предупредив", "Under kontrollen skal du gjøre som politiet viser med tegn eller skilt (bruksforskriften § 1-8 a). Flytter du bilen på eget initiativ, kan det se ut som du kjører fra kontrollen.", "Во время проверки нужно делать так, как показывает полиция жестами или знаками (bruksforskriften § 1-8 a). Если сам переставишь машину, это может выглядеть как попытка уехать."]
+      ],
+      "Vegtrafikkloven § 10: føreren skal straks stanse for kontroll når politiet eller Statens vegvesen krever det, og vise fram dokumenter som det er påbudt å ha med under kjøringen. Bruksforskriften § 1-8: under kontrollen skal føreren gjøre som det blir vist med tegn eller skilt, og bli ved kjøretøyet til kontrollen er avsluttet eller til han har fått lov til å forlate stedet.",
+      "Vegtrafikkloven § 10: водитель должен сразу остановиться, если этого требует полиция или Statens vegvesen, и показать документы, которые обязан иметь при себе. Bruksforskriften § 1-8: во время проверки водитель делает то, что показывают жестами или знаками, и остаётся у машины, пока проверка не закончится или ему не разрешат уехать.",
+      "Проверку заканчивает полиция, а не ты: жди у машины, пока не скажут, что можно ехать."),
+
+    q("119", street({ sides: { left: "grass", right: "grass" }, actors: [{ label: "A", y: 150, trailer: "caravan", path: [[216, 90]] }], tags: [{ text: "CAMPINGVOGN", x: 310, y: 220 }] }),
+      "Du skal trekke en campingvogn som er bredere enn bilen. I de vanlige sidespeilene ser du bare veggene på campingvogna, ikke vegen bak den. Hva gjelder?",
+      "Тебе нужно буксировать жилой прицеп (караван), который шире машины. В обычных боковых зеркалах видны только его стенки, а дороги за ним не видно. Что верно?",
+      [
+        ["Bilen må ha speil som viser begge sider av campingvogna og vegen bak, for eksempel forlengede speil", "На машине должны быть зеркала, в которых видны обе стороны каравана и дорога за ним — например, удлинённые зеркала"],
+        ["Det er nok å bruke det innvendige speilet", "Достаточно внутреннего зеркала", "Campingvogna dekker utsikten bakover i det innvendige speilet. Er tilhengeren like bred som bilen eller bredere, skal begge sider av den kunne ses i de utvendige speilene (bruksforskriften § 4-2 nr 7).", "Караван закрывает обзор во внутреннем зеркале. А если прицеп не уже машины, обе его стороны должны быть видны в наружных зеркалах (bruksforskriften § 4-2 nr 7)."],
+        ["Det går bra hvis en passasjer ser bakover og sier fra", "Нормально, если пассажир смотрит назад и подсказывает", "Kravet gjelder speilene på bilen. En passasjer kan ikke erstatte at du selv ser vegen bak i speilene (§ 4-2 nr 7).", "Требование касается зеркал на машине. Пассажир не заменит того, что ты сам видишь дорогу сзади в зеркалах (§ 4-2 nr 7)."],
+        ["Det går bra hvis jeg kjører under 60 km/t", "Нормально, если ехать медленнее 60 км/ч", "Kravet om speil gjelder uansett fart. Lav fart hjelper ikke når du ikke ser bilene bak og ved siden av deg.", "Требование к зеркалам не зависит от скорости. Медленная езда не поможет, если не видишь машин сзади и сбоку."]
+      ],
+      "Bruksforskriften § 4-2 nr 7 a: når du trekker tilhenger, må minst ett speil vise tilhengeren. Er tilhengeren like bred som bilen eller bredere, skal begge sider av den kunne ses i de utvendige speilene. Speilene skal også vise vegbanen bak deg: minst 2,5 m bredt på venstre side og 2 m på høyre side, 10 m bak speilet. Klarer ikke de vanlige speilene dette, monterer du forlengede speil.",
+      "Bruksforskriften § 4-2 nr 7 a: при буксировке прицепа хотя бы одно зеркало должно его показывать. Если прицеп не уже машины, обе его стороны должны быть видны в наружных зеркалах. И зеркала должны показывать дорогу сзади: слева полосу шириной не меньше 2,5 м, справа — 2 м, на расстоянии 10 м за зеркалом. Если обычные зеркала этого не дают, ставишь удлинённые.",
+      "Прицеп шире машины — ставь удлинённые зеркала ещё до выезда.")
 
   ];
 })();

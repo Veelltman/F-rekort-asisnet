@@ -1174,7 +1174,41 @@
     ],
     "Trafikkreglene § 4 nr 1: kjørende skal bruke kjørebanen. Det er forbudt å kjøre på fortau eller gangveg, og andre enn syklende (og liten elektrisk motorvogn) må ikke bruke sykkelveg eller sykkelfelt. Du kan krysse fortau eller sykkelfelt for å svinge inn eller ut, men da har du vikeplikt (§ 7 nr 3, § 9 nr 2). Å stanse i sykkelfelt er også forbudt (§ 17 nr 1 g).",
     "Trafikkreglene § 4 nr 1: водитель едет по проезжей части. По тротуару и gangveg ездить запрещено, а велодорожкой и велополосой могут пользоваться только велосипедисты (и электросамокаты). Пересекать тротуар или велополосу при повороте можно, но тогда ты уступаешь (§ 7 nr 3, § 9 nr 2). Останавливаться на велополосе тоже нельзя (§ 17 nr 1 g).",
-    "Машина — только на проезжей части. Тротуар и велополосу можно лишь пересечь, уступая тем, кто на них.")
+    "Машина — только на проезжей части. Тротуар и велополосу можно лишь пересечь, уступая тем, кто на них."),
+
+    q("110", "Du har fått punktering og har satt på det lille nødhjulet (plass-sparende reservehjul) som lå i bilen. Hva gjelder for bruken av det?",
+      "У тебя прокол, и ты поставил маленькую докатку (компактное запасное колесо), которая лежала в машине. Как можно на ней ездить?",
+      [
+        ["Jeg kan bare bruke det til å kjøre til nærmeste verksted, og ikke fortere enn farten som er merket på hjulet", "Только до ближайшей мастерской и не быстрее скорости, указанной на колесе"],
+        ["Jeg kan kjøre med det som vanlig til neste dekkskift", "Можно ездить как обычно до следующей смены шин", "Nødhjulet må bare brukes på nødvendig transport til nærmeste reparasjonssted (bruksforskriften § 1-4 (6) nr 2).", "Докатку можно использовать только для поездки до ближайшего места ремонта (bruksforskriften § 1-4 (6) nr 2)."],
+        ["Det finnes ingen fartsgrense for nødhjul, bare kjør forsiktig", "Для докатки нет ограничения скорости, просто езжай аккуратно", "Dekket eller felgen er merket med høyeste fart, og den må du holde deg under. Hvordan hjulet skal brukes, står også i instruksjonsboka.", "На шине или диске указана максимальная скорость, превышать её нельзя. Как пользоваться колесом, написано и в инструкции к машине."],
+        ["Nødhjul er forbudt i Norge, så jeg må ringe etter bergingsbil", "Докатки в Норвегии запрещены, надо вызывать эвакуатор", "På personbil er plass-sparende reservehjul tillatt (bruksforskriften § 1-4 (6) nr 2).", "На легковой машине компактное запасное колесо разрешено (bruksforskriften § 1-4 (6) nr 2)."]
+      ],
+      "Bruksforskriften § 1-4 (6) nr 2: på personbil er plass-sparende eller lett reservehjul tillatt. Dekket eller felgen skal være merket med høyeste fart, og bruken skal være beskrevet i en anvisning eller i instruksjonsboka. Hjulet må bare brukes under nødvendig transport til nærmeste reparasjonssted.",
+      "Bruksforskriften § 1-4 (6) nr 2: на легковой машине компактное или облегчённое запасное колесо разрешено. На шине или диске указана максимальная скорость, а как им пользоваться — в инструкции. Ехать на таком колесе можно только до ближайшего места ремонта.",
+      "Докатка — чтобы доехать до шиномонтажа, а не чтобы на ней жить. И смотри цифру скорости на колесе."),
+
+    q("111", "Du frakter noen lange planker i bilen. De stikker 1,5 meter ut bak bilen. Hva må du gjøre?",
+      "Ты везёшь в машине длинные доски. Они торчат сзади на 1,5 метра. Что нужно сделать?",
+      [
+        ["Merke enden av lasten tydelig, og i mørket også med en lykt med rødt lys", "Чётко пометить конец груза, а в темноте ещё и фонарём с красным светом"],
+        ["Ingenting, så lenge lasten er godt festet", "Ничего, если груз хорошо закреплён", "Feste er ikke nok. Last som stikker ut mer enn 1 meter bak, skal også merkes (bruksforskriften § 3-4 nr 3).", "Закрепить мало. Груз, который торчит сзади больше чем на 1 метр, нужно ещё и пометить (bruksforskriften § 3-4 nr 3)."],
+        ["Slå på nødblinken hele turen", "Всю дорогу ехать с аварийкой", "Nødblinken erstatter ikke merking. Regelen krever merking ytterst på lasten (§ 3-4 nr 3).", "Аварийка не заменяет метку. Правило требует пометить сам конец груза (§ 3-4 nr 3)."],
+        ["Ikke kjøre: last kan ikke stikke ut bak bilen", "Не ехать: груз вообще не может торчать сзади", "Last kan stikke ut bak, men når det er mer enn 1 meter, må den merkes (§ 3-4 nr 3).", "Груз может торчать сзади, но если больше чем на 1 метр — его нужно пометить (§ 3-4 nr 3)."]
+      ],
+      "Bruksforskriften § 3-4 nr 3: last som stikker ut mer enn 1,00 meter bak kjøretøyet, skal merkes ytterst med noe rødt og hvitt (det røde skal reflektere lys). Ved tilfeldig transport kan merkingen gjøres på en annen tydelig måte. I mørke eller dårlig sikt skal lasten også ha en lykt med rødt lys bakover og til sidene. Lasten må heller ikke dekke lys eller kjennemerke (§ 3-2 nr 1).",
+      "Bruksforskriften § 3-4 nr 3: груз, который торчит сзади больше чем на 1,00 метра, помечают на самом конце чем-то красно-белым (красное должно отражать свет). При разовой перевозке можно пометить и по-другому, лишь бы было хорошо видно. В темноте или при плохой видимости нужен ещё фонарь с красным светом назад и в стороны. И груз не должен закрывать фонари и номер (§ 3-2 nr 1).",
+      "Торчит сзади больше метра — повесь красно-белую метку, а в темноте ещё и красный фонарик."),
+
+    qm("m23", "Bilen til en venn har fått motorstopp, og du skal slepe den med bilen din på offentlig veg. Hva gjelder? Velg alle riktige.", "Машина друга заглохла, и ты будешь буксировать её своей машиной по дороге общего пользования. Что верно? Выбери все верные.", [
+      ["Du kan bare slepe én bil om gangen", "Буксировать можно только одну машину за раз", true],
+      ["Bilen som slepes, må kunne bremses på en trygg måte", "Буксируемую машину должно быть можно надёжно затормозить", true],
+      ["Slepetauet eller slepestanga skal være tydelig merket", "Трос или жёсткая сцепка должны быть хорошо заметны", true],
+      ["Virker ikke bremsene på bilen som slepes, går det bra så lenge dere kjører sakte", "Если у буксируемой машины не работают тормоза, ничего страшного, если ехать медленно", false, "Loven krever at bilen som slepes, kan bremses forsvarlig (bruksforskriften § 4-1 nr 2). Lav fart gjør ikke dette unødvendig.", "Закон требует, чтобы буксируемую машину можно было надёжно тормозить (bruksforskriften § 4-1 nr 2). Малая скорость этого не отменяет."]
+    ],
+    "Bruksforskriften § 4-1: på offentlig veg er det bare lov å slepe én motorvogn om gangen. Motorvogna som slepes, må kunne bremses på forsvarlig måte. Stang, tau eller lignende som brukes til slep, skal være tydelig merket, så andre ser at bilene henger sammen.",
+    "Bruksforskriften § 4-1: на дороге общего пользования можно буксировать только одну машину за раз. Буксируемую машину должно быть можно надёжно тормозить. Жёсткая сцепка, трос и т. п. должны быть хорошо заметно помечены, чтобы другие видели, что машины связаны.",
+    "Буксир: одна машина, у неё рабочие тормоза, трос хорошо заметен (например, с флажком).")
 
   ];
 
