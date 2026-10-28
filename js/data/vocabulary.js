@@ -228,7 +228,10 @@
     w("188", "vognkort", "свидетельство о регистрации машины (техпаспорт)", "I vognkortet står blant annet bilens tillatte totalvekt.", "В свидетельстве о регистрации указана, среди прочего, разрешённая полная масса машины.", "Машина"),
     w("189", "slepetau", "буксировочный трос", "Slepetauet skal være tydelig merket når du sleper en bil.", "Буксировочный трос должен быть хорошо заметен, когда буксируешь машину.", "Машина"),
     w("190", "nødhjul", "докатка (компактное запасное колесо)", "Med nødhjul kjører du bare til nærmeste verksted.", "На докатке едешь только до ближайшей мастерской.", "Машина"),
-    w("191", "trafikkontroll", "проверка на дороге (полицией или Statens vegvesen)", "I en trafikkontroll skal du bli ved bilen til kontrollen er ferdig.", "При проверке на дороге нужно оставаться у машины, пока она не закончится.", "Правила")
+    w("191", "trafikkontroll", "проверка на дороге (полицией или Statens vegvesen)", "I en trafikkontroll skal du bli ved bilen til kontrollen er ferdig.", "При проверке на дороге нужно оставаться у машины, пока она не закончится.", "Правила"),
+    w("192", "passasjer", "пассажир", "Bilen må ikke ha flere passasjerer enn den er registrert for.", "В машине не может быть больше пассажиров, чем она зарегистрирована.", "Основное"),
+    w("193", "fartsgrensesone", "зона ограничения скорости", "Fartsgrensen i en fartsgrensesone gjelder helt til skiltet «Slutt på fartsgrensesone».", "Ограничение в зоне действует до знака «Конец зоны ограничения скорости».", "Правила"),
+    w("194", "parkeringsbrems / håndbrekk", "стояночный тормоз, ручник", "Sett på parkeringsbremsen før du går ut av bilen.", "Поставь машину на ручник, прежде чем выйти.", "Машина")
 
   ];
 })();

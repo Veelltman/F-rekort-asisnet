@@ -1719,7 +1719,59 @@
       ],
       "Bruksforskriften § 4-2 nr 7 a: når du trekker tilhenger, må minst ett speil vise tilhengeren. Er tilhengeren like bred som bilen eller bredere, skal begge sider av den kunne ses i de utvendige speilene. Speilene skal også vise vegbanen bak deg: minst 2,5 m bredt på venstre side og 2 m på høyre side, 10 m bak speilet. Klarer ikke de vanlige speilene dette, monterer du forlengede speil.",
       "Bruksforskriften § 4-2 nr 7 a: при буксировке прицепа хотя бы одно зеркало должно его показывать. Если прицеп не уже машины, обе его стороны должны быть видны в наружных зеркалах. И зеркала должны показывать дорогу сзади: слева полосу шириной не меньше 2,5 м, справа — 2 м, на расстоянии 10 м за зеркалом. Если обычные зеркала этого не дают, ставишь удлинённые.",
-      "Прицеп шире машины — ставь удлинённые зеркала ещё до выезда.")
+      "Прицеп шире машины — ставь удлинённые зеркала ещё до выезда."),
+
+    q("120", null,
+      "Kryss uten skilt og lys. Du (A) skal svinge til venstre. Den møtende bilen B skal også svinge til venstre. Hvordan kan dere svinge?",
+      "Перекрёсток без знаков и светофора. Ты (A) поворачиваешь налево. Встречная машина B тоже поворачивает налево. Как вы можете повернуть?",
+      [
+        ["Vi kan svinge samtidig, foran hverandre, når det er plass og ingen andre hindres", "Можем повернуть одновременно, «перед носом» друг у друга, если хватает места и мы никому не мешаем"],
+        ["Vi må kjøre rundt hverandre, forbi midten av krysset, før vi svinger", "Мы должны объехать друг друга за центром перекрёстка и только потом повернуть", "Loven sier at møtende biler kan svinge til venstre for hverandre, altså foran hverandre (§ 6 nr 4). Det er ikke et krav å kjøre rundt midten.", "Закон разрешает встречным поворачивать налево «перед» друг другом (§ 6 nr 4). Объезжать за центром перекрёстка не требуется."],
+        ["Det er aldri lov å svinge samtidig, én av oss må vente", "Одновременно поворачивать нельзя никогда, один должен ждать", "Trafikkreglene § 6 nr 4 tillater nettopp at møtende biler svinger til venstre samtidig. Dere venter bare hvis det ikke er plass.", "Trafikkreglene § 6 nr 4 как раз разрешает встречным одновременно поворачивать налево. Ждать нужно, только если не хватает места."],
+        ["Begge må først stanse helt midt i krysset", "Сначала обе машины должны полностью остановиться в центре перекрёстка", "Ingen regel krever full stans midt i krysset. Du stanser bare hvis du må vike for noen, for eksempel gående.", "Никакое правило не требует полной остановки в центре перекрёстка. Останавливаешься, только если нужно кого-то пропустить, например пешехода."]
+      ],
+      "Trafikkreglene § 6 nr 4: kjøretøy som kommer fra motsatte retninger, kan svinge til venstre for hverandre. Det betyr at to møtende biler som begge skal til venstre, kan svinge foran hverandre samtidig, hvis det er plass. På tovegs veg legger du deg så nær midten som mulig før svingen (§ 6 nr 2). Husk fortsatt gående og syklende i vegen du svinger inn i (§ 7 nr 3).",
+      "Trafikkreglene § 6 nr 4: машины, едущие навстречу друг другу, могут поворачивать налево «перед» друг другом. То есть две встречные машины, которые обе поворачивают налево, могут повернуть одновременно, если места хватает. Перед поворотом на двусторонней дороге держишься как можно ближе к середине (§ 6 nr 2). И не забывай про пешеходов и велосипедистов на дороге, куда поворачиваешь (§ 7 nr 3).",
+      "Оба налево навстречу — поворачиваете одновременно, «перед носом» друг у друга, если есть место."),
+
+    q("121", street({ lanes: ["down", "up", "up"], sides: { left: "walk", right: "walk" }, features: [{ type: "sideRoad", y: 70, side: "right", w: 52 }], actors: [{ label: "A", lane: "upLeft", y: 240, blink: "right" }] }),
+      "Du kjører i venstre felt på en bygate med to felt i din retning. I neste kryss skal du svinge til høyre. Hva gjør du?",
+      "Ты едешь по левой полосе городской улицы, где в твою сторону две полосы. На следующем перекрёстке тебе направо. Что делаешь?",
+      [
+        ["Skifter i god tid til høyre felt, viker for dem som er der, og svinger fra høyre felt", "Заранее перестраиваюсь в правую полосу, пропуская тех, кто в ней едет, и поворачиваю из правой полосы"],
+        ["Blir i venstre felt og svinger rett til høyre derfra, når jeg har blinket", "Остаюсь в левой полосе и поворачиваю направо прямо из неё, включив поворотник", "Ved sving til høyre skal du i god tid legge deg i feltet lengst til høyre (§ 6 nr 1). Blinklyset gir deg ikke rett til å svinge over høyre felt.", "Перед правым поворотом нужно заранее встать в крайнюю правую полосу (§ 6 nr 1). Поворотник не даёт права поворачивать через правую полосу."],
+        ["Kjører helt fram til krysset i venstre felt og skifter felt i selve krysset", "Доезжаю до перекрёстка в левой полосе и перестраиваюсь прямо на перекрёстке", "Feltskiftet skal skje i god tid før krysset (§ 6 nr 1). I krysset blir det uventet og farlig for dem i høyre felt.", "Перестраиваться нужно заранее, до перекрёстка (§ 6 nr 1). На самом перекрёстке это неожиданно и опасно для тех, кто в правой полосе."],
+        ["Det spiller ingen rolle hvilket felt jeg svinger fra, bare jeg ser meg godt for", "Неважно, из какой полосы поворачивать, главное — хорошо смотреть по сторонам", "Loven sier tydelig hvilket felt du skal bruke: lengst til høyre ved sving til høyre (§ 6 nr 1).", "Закон прямо говорит, какую полосу использовать: крайнюю правую при повороте направо (§ 6 nr 1)."]
+      ],
+      "Trafikkreglene § 6 nr 1: på kjørebane med to eller flere felt i kjøreretningen skal du i god tid kjøre inn i feltet lengst til høyre når du skal svinge til høyre. Når du skifter felt, har du vikeplikt for dem som allerede er i feltet (§ 8 nr 1), og du gir tegn med blinklys (§ 14 nr 2). Selve svingen tar du så nær høyre kant som mulig (§ 6 nr 2).",
+      "Trafikkreglene § 6 nr 1: на проезжей части с двумя и более полосами в твою сторону перед правым поворотом нужно заранее перестроиться в крайнюю правую полосу. При перестроении ты уступаешь тем, кто уже едет в этой полосе (§ 8 nr 1), и включаешь поворотник (§ 14 nr 2). Сам поворот делаешь как можно ближе к правому краю (§ 6 nr 2).",
+      "Направо — из крайней правой, налево — из крайней левой. Перестраиваться заранее, а не на перекрёстке."),
+
+    q("122", street({ sides: { left: "grass", right: "grass" }, weather: "night", actors: [{ label: "B", lane: "left", y: 50, color: "#e0483a", beams: "low" }, { label: "A", y: 240, beams: "low" }] }),
+      "Det er mørkt, og du kjører på en landeveg uten gatelys. En bil kommer imot, så du har blendet ned til nærlys. Nå ser du vegen bare et kort stykke foran deg. Hva gjelder for farten din?",
+      "Темно, ты едешь по загородной дороге без фонарей. Навстречу едет машина, поэтому ты переключился на ближний свет. Теперь дорогу видно только на небольшом расстоянии впереди. Что верно про твою скорость?",
+      [
+        ["Jeg må holde så lav fart at jeg kan stanse på den strekningen jeg ser", "Нужно ехать так медленно, чтобы успеть остановиться на том участке, который я вижу"],
+        ["Jeg kan holde fartsgrensen, det varer jo bare noen sekunder", "Можно держать разрешённую скорость, это ведь всего на несколько секунд", "Fartsgrensen er bare den høyeste farten. Du må uansett kunne stanse på den strekningen du har oversikt over (§ 13 nr 1), også i noen sekunder.", "Ограничение — это лишь максимум. Ты в любом случае должен успеть остановиться на видимом участке (§ 13 nr 1), даже на несколько секунд."],
+        ["Jeg beholder fjernlyset til bilen har passert, så jeg ser lenger", "Оставляю дальний, пока машина не проедет — так видно дальше", "Fjernlyset må ikke blende andre (§ 15 nr 2). Du blender ned og tilpasser farten i stedet.", "Дальний свет не должен ослеплять других (§ 15 nr 2). Ты переключаешься на ближний и снижаешь скорость."],
+        ["Jeg kan kjøre som før, for lyset fra den møtende bilen lyser opp vegen", "Можно ехать как прежде: фары встречной машины освещают дорогу", "Lyset fra møtende bil blender deg heller og gjør det vanskeligere å se folk og dyr i vegkanten. Du må kunne stanse på det du selv ser (§ 13 nr 1).", "Фары встречной скорее слепят и мешают заметить людей и животных у обочины. Остановиться нужно успеть на том, что видишь ты сам (§ 13 nr 1)."]
+      ],
+      "Trafikkreglene § 13 nr 1: kjørende må kunne stanse på den vegstrekningen de har oversikt over, og foran enhver påregnelig hindring. Med nærlys ser du kortere enn med fjernlys. Derfor må du ofte senke farten når du blender ned, for eksempel for en fotgjenger i mørke klær eller et dyr i vegen.",
+      "Trafikkreglene § 13 nr 1: водитель должен успеть остановиться на участке дороги, который он видит, и перед любым препятствием, которое можно ожидать. С ближним светом видно меньше, чем с дальним. Поэтому, переключившись на ближний, часто нужно сбросить скорость — например, из-за пешехода в тёмной одежде или животного на дороге.",
+      "Правило: видишь меньше — едешь медленнее. Тормозной путь должен помещаться в освещённый участок."),
+
+    q("123", street({ features: [{ type: "busStop", y: 110, side: "right" }], actors: [{ label: "A", y: 150, blink: "right", brake: true }, { kind: "adult", x: 244, y: 164, rot: 90, color: "#6b4fa0" }], tags: [{ text: "HOLDEPLASS", x: 320, y: 60 }] }),
+      "Du skal slippe av en venn ved et skilt for bussholdeplass i en bygate. Du står i et vanlig kjørefelt, ikke i kollektivfelt. Ingen buss er i nærheten, og vennen går rett ut av bilen. Er det lov å stanse her for dette?",
+      "Ты хочешь высадить друга у знака автобусной остановки на городской улице. Ты в обычной полосе, не в полосе для общественного транспорта. Автобуса поблизости нет, и друг сразу выходит. Можно здесь для этого остановиться?",
+      [
+        ["Ja, kort stans for av- eller påstigning er lov når det ikke hindrer bussen", "Да, короткая остановка для высадки или посадки разрешена, если она не мешает автобусу"],
+        ["Nei, stans er forbudt nærmere enn 20 meter fra skiltet, uten unntak", "Нет, ближе 20 метров от знака остановка запрещена без исключений", "Forbudet på 20 meter har et unntak: av- eller påstigning er lov når det ikke er til hinder for buss, drosje eller sporvogn (§ 17 nr 1 h).", "У запрета в 20 метров есть исключение: высадка и посадка разрешены, если не мешают автобусу, такси или трамваю (§ 17 nr 1 h)."],
+        ["Ja, og jeg kan også vente der i ti minutter til vennen kommer tilbake", "Да, и ещё могу подождать там минут десять, пока друг не вернётся", "Unntaket gjelder bare selve av- og påstigningen. Å vente der er vanlig stans, og det er forbudt nærmere enn 20 meter fra skiltet (§ 17 nr 1 h).", "Исключение касается только самой высадки и посадки. Ждать там — это обычная остановка, а она запрещена ближе 20 метров от знака (§ 17 nr 1 h)."],
+        ["Ja, selv om en buss står rett bak meg og vil inn til holdeplassen", "Да, даже если сзади стоит автобус и хочет подъехать к остановке", "Da er stansen til hinder for bussen, og unntaket gjelder ikke (§ 17 nr 1 h). Kjør videre og slipp av vennen et annet sted.", "Тогда ты мешаешь автобусу, и исключение не действует (§ 17 nr 1 h). Проезжай дальше и высади друга в другом месте."]
+      ],
+      "Trafikkreglene § 17 nr 1 h: det er forbudt å stanse på vegutvidelse for holdeplass for buss, drosje eller sporvogn, eller nærmere enn 20 meter fra skiltet for slik holdeplass. Unntatt er av- eller påstigning når den ikke er til hinder for buss, drosje eller sporvogn. I kollektivfelt er det likevel forbudt å stanse (§ 17 nr 1 g).",
+      "Trafikkreglene § 17 nr 1 h: запрещено останавливаться в «кармане» остановки автобуса, такси или трамвая и ближе 20 метров от знака такой остановки. Исключение — высадка или посадка пассажиров, если это не мешает автобусу, такси или трамваю. Но в полосе для общественного транспорта останавливаться всё равно нельзя (§ 17 nr 1 g).",
+      "У остановки: высадить друга можно быстро и если автобуса нет; ждать там нельзя.")
 
   ];
 })();

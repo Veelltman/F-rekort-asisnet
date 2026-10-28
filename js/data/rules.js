@@ -1208,7 +1208,41 @@
     ],
     "Bruksforskriften § 4-1: på offentlig veg er det bare lov å slepe én motorvogn om gangen. Motorvogna som slepes, må kunne bremses på forsvarlig måte. Stang, tau eller lignende som brukes til slep, skal være tydelig merket, så andre ser at bilene henger sammen.",
     "Bruksforskriften § 4-1: на дороге общего пользования можно буксировать только одну машину за раз. Буксируемую машину должно быть можно надёжно тормозить. Жёсткая сцепка, трос и т. п. должны быть хорошо заметно помечены, чтобы другие видели, что машины связаны.",
-    "Буксир: одна машина, у неё рабочие тормоза, трос хорошо заметен (например, с флажком).")
+    "Буксир: одна машина, у неё рабочие тормоза, трос хорошо заметен (например, с флажком)."),
+
+    q("112", "Du har passert skiltet 362 Fartsgrense med 60. Litt senere kjører du rett fram gjennom et vegkryss, og etter krysset står det ikke noe nytt skilt. Hvilken fartsgrense gjelder nå?",
+      "Ты проехал знак 362 «Ограничение скорости» 60. Чуть позже ты проезжаешь прямо через перекрёсток, и после него нового знака нет. Какое ограничение действует теперь?",
+      [
+        ["Fortsatt 60 km/t, til et nytt skilt viser noe annet", "По-прежнему 60 км/ч, пока новый знак не покажет другое"],
+        ["50 km/t, fordi fartsgrensen slutter i hvert kryss", "50 км/ч: ограничение заканчивается на каждом перекрёстке", "I Norge slutter ikke fartsgrensen i et kryss. Den gjelder til nytt skilt 362, 364, 366, 540 eller 548 (skiltforskriften, skilt 362).", "В Норвегии ограничение не заканчивается на перекрёстке. Оно действует до нового знака 362, 364, 366, 540 или 548 (skiltforskriften, знак 362)."],
+        ["80 km/t, fordi den generelle grensen utenfor tettbygd strøk gjelder igjen", "80 км/ч: снова действует общее ограничение вне населённого пункта", "Den generelle grensen gjelder ikke igjen bare fordi du har kjørt gjennom et kryss. Skiltet 362 gjelder videre til det blir opphevet av et nytt skilt.", "Общее ограничение не возвращается только потому, что ты проехал перекрёсток. Знак 362 действует дальше, пока его не отменит новый знак."],
+        ["Skiltet gjelder bare de første 500 meterne", "Знак действует только первые 500 метров", "Skiltet har ingen fast lengde. Det gjelder til en annen fartsgrense er skiltet eller skilt 364 «Slutt på særskilt fartsgrense» kommer.", "У знака нет фиксированной длины. Он действует, пока не будет другого ограничения или знака 364 «Конец особого ограничения скорости»."]
+      ],
+      "Skiltforskriften, skilt 362 Fartsgrense: forbudet gjelder på vegstrekningen fram til annen fartsgrense er angitt med nytt skilt 362 eller skilt 366 Fartsgrensesone, eller til skilt 364 Slutt på særskilt fartsgrense, 540 Gatetun eller 548 Gågate. Et vegkryss opphever ikke fartsgrensen. Hvis du svinger inn på en annen veg, er det skiltene på den vegen som gjelder.",
+      "Skiltforskriften, знак 362: ограничение действует на участке дороги, пока другое ограничение не будет указано новым знаком 362 или знаком 366 «Зона ограничения скорости», либо до знака 364 «Конец особого ограничения скорости», 540 «Жилая зона» или 548 «Пешеходная улица». Перекрёсток ограничение не отменяет. Если же поворачиваешь на другую дорогу, действуют знаки той дороги.",
+      "Едешь прямо — ограничение едет с тобой, пока не увидишь новый знак. Перекрёсток его не сбрасывает."),
+
+    q("113", "Bilen din er registrert for 5 personer. Dere er 6 voksne venner som skal en kort tur i byen. Kan den sjette sitte på fanget til en annen eller i bagasjerommet?",
+      "Твоя машина зарегистрирована на 5 человек. Вас шестеро взрослых друзей, и надо проехать немного по городу. Может шестой сесть кому-нибудь на колени или в багажник?",
+      [
+        ["Nei, bilen må ikke ha flere personer enn den er registrert for, og alle skal sitte på registrerte plasser", "Нет: в машине не может быть больше людей, чем она зарегистрирована, и все должны сидеть на зарегистрированных местах"],
+        ["Ja, på korte turer i byen er det lov", "Да, на короткие поездки по городу можно", "Regelen gjelder uansett hvor kort turen er. Bruksforskriften § 3-1 har ikke noe unntak for korte turer.", "Правило действует, как бы коротко ни ехать. В bruksforskriften § 3-1 нет исключения для коротких поездок."],
+        ["Ja, hvis personen i bagasjerommet holder seg fast", "Да, если человек в багажнике крепко держится", "Under kjøring er det bare lov å oppholde seg på registrerte plasser (§ 3-1). Bagasjerommet er ikke en registrert plass.", "Во время езды можно находиться только на зарегистрированных местах (§ 3-1). Багажник — не зарегистрированное место."],
+        ["Ja, hvis alle andre bruker bilbelte", "Да, если все остальные пристёгнуты", "Belte på de andre gjør ikke den sjette plassen lovlig. Bilen må ikke brukes med flere personer enn den er registrert for (§ 3-1).", "То, что остальные пристёгнуты, не делает шестое место законным. Машину нельзя использовать с большим числом людей, чем она зарегистрирована (§ 3-1)."]
+      ],
+      "Bruksforskriften § 3-1 (1): et kjøretøy må ikke brukes med flere personer enn det er registrert for. Under kjøring er det bare lov å oppholde seg på registrerte plasser. Hvor mange plasser bilen har, står i vognkortet. Den sjette må ta en annen bil, buss eller taxi.",
+      "Bruksforskriften § 3-1 (1): машину нельзя использовать с большим числом людей, чем она зарегистрирована. Во время езды можно находиться только на зарегистрированных местах. Сколько мест у машины, написано в свидетельстве о регистрации (vognkort). Шестому придётся ехать на другой машине, автобусе или такси.",
+      "Сколько мест в vognkort — столько людей в машине. Ни колени, ни багажник не считаются."),
+
+    qm("m24", "Du skal gå fra bilen og inn i en butikk. Hva sier reglene? Velg alle riktige.", "Ты выходишь из машины и идёшь в магазин. Что говорят правила? Выбери все верные.", [
+      ["Du skal sørge for at bilen ikke kan komme i gang eller rulle av seg selv", "Нужно позаботиться, чтобы машина не могла сама тронуться или покатиться", true],
+      ["Du skal gjøre noe for å hindre at andre kan bruke bilen, for eksempel ta med nøkkelen og låse", "Нужно помешать чужим воспользоваться машиной, например забрать ключ и запереть её", true],
+      ["Reglene gjelder bare hvis du er borte i mer enn fem minutter", "Правила действуют, только если уходишь больше чем на пять минут", false, "Bruksforskriften § 1-7 har ingen tidsgrense. Den gjelder hver gang føreren forlater bilen.", "В bruksforskriften § 1-7 нет ограничения по времени. Оно действует каждый раз, когда водитель отходит от машины."],
+      ["Det er nok å slå på nødblinken, så kan nøkkelen stå i", "Достаточно включить аварийку, а ключ можно оставить в машине", false, "Nødblinken hindrer ikke at bilen ruller eller at noen kjører av gårde med den. Du skal sikre bilen mot begge deler (§ 1-7).", "Аварийка не помешает машине покатиться или кому-то на ней уехать. Защитить машину нужно и от того, и от другого (§ 1-7)."]
+    ],
+    "Bruksforskriften § 1-7: fører som forlater kjøretøy, skal sørge for at det ikke kommer i gang av seg selv. Fører av motorvogn skal også treffe hensiktsmessige tiltak for å hindre uvedkommende bruk. I praksis: sett på parkeringsbremsen, ta med nøkkelen og lås bilen.",
+    "Bruksforskriften § 1-7: водитель, который оставляет машину, должен позаботиться, чтобы она сама не тронулась с места. Водитель автомобиля должен ещё и принять разумные меры, чтобы машиной не воспользовались посторонние. На практике: ставишь стояночный тормоз, забираешь ключ и запираешь машину.",
+    "Уходишь от машины даже на минуту: ручник, ключ с собой, замок.")
 
   ];
 
