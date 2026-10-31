@@ -1695,7 +1695,7 @@
       "Trafikkreglene § 9 nr 4: водитель должен избегать остановки на пешеходном переходе. Поэтому в пробке не заезжай на переход, пока за ним не будет места для всей машины. Тогда пешеходы смогут спокойно перейти.",
       "Пробка перед «зеброй»: стоишь до перехода, пока за ним нет места на всю машину."),
 
-    q("118", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "car", y: 80, color: "#f3f5f7", label: false }, { kind: "officer", x: 300, y: 160, rot: 270 }, { label: "A", y: 200, brake: true }], tags: [{ text: "POLITIKONTROLL", x: 310, y: 60 }] }),
+    q("118", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "police", x: 246, y: 96, label: false, beacon: false }, { kind: "officer", x: 262, y: 150, rot: 270 }, { label: "A", y: 200, brake: true }], tags: [{ text: "POLITIKONTROLL", x: 310, y: 60 }] }),
       "Politiet stanser deg i en trafikkontroll. Du har vist førerkortet, og nå går politibetjenten bort til politibilen for å sjekke noe. Du har det travelt. Hva gjør du?",
       "Полиция останавливает тебя для проверки на дороге. Ты показал права, и теперь полицейский пошёл к своей машине что-то проверить. Ты торопишься. Что делаешь?",
       [
@@ -1721,7 +1721,7 @@
       "Bruksforskriften § 4-2 nr 7 a: при буксировке прицепа хотя бы одно зеркало должно его показывать. Если прицеп не уже машины, обе его стороны должны быть видны в наружных зеркалах. И зеркала должны показывать дорогу сзади: слева полосу шириной не меньше 2,5 м, справа — 2 м, на расстоянии 10 м за зеркалом. Если обычные зеркала этого не дают, ставишь удлинённые.",
       "Прицеп шире машины — ставь удлинённые зеркала ещё до выезда."),
 
-    q("120", null,
+    q("120", scene({ you: { from: "south", to: "west", via: [[215, 188], [180, 140], [40, 135]] }, others: [{ from: "north", to: "east", via: [[185, 112], [220, 160], [360, 165]] }] }),
       "Kryss uten skilt og lys. Du (A) skal svinge til venstre. Den møtende bilen B skal også svinge til venstre. Hvordan kan dere svinge?",
       "Перекрёсток без знаков и светофора. Ты (A) поворачиваешь налево. Встречная машина B тоже поворачивает налево. Как вы можете повернуть?",
       [
@@ -1799,7 +1799,7 @@
       "Trafikkreglene § 12 nr 2: перед обгоном нужно, среди прочего, убедиться, что тебя сзади никто уже не начал обгонять (буква c). § 12 nr 4: когда тебя обгоняют слева, держишься как можно правее и не прибавляешь скорость. Поэтому перед выездом на обгон всегда смотри в зеркало и в слепую зону.",
       "Перед обгоном — зеркало. Если сзади уже обгоняют тебя, сначала пропусти их."),
 
-    q("126", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "truck", x: 208, y: 110, label: "B", color: "#f2b01e" }, { label: "A", y: 240 }], tags: [{ text: "GULT BLINKLYS", x: 300, y: 70 }] }),
+    q("126", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "truck", x: 208, y: 110, label: "B", color: "#f2b01e", beacon: "amber" }, { label: "A", y: 240 }], tags: [{ text: "GULT BLINKLYS", x: 300, y: 70 }] }),
       "Foran deg kjører en lastebil som brukes til vegarbeid (B). Den kjører svært sakte, litt over midtlinjen, og har blinkende gult lys på taket. Hva betyr det gule blinklyset?",
       "Впереди едет грузовик дорожной службы (B). Он едет очень медленно, немного заезжая за осевую, и на крыше у него мигает жёлтый маячок. Что означает этот жёлтый маячок?",
       [

@@ -93,6 +93,12 @@
       <path d="M -6 -22 L 6 -14 M -6 -14 L 6 -22" stroke="#2a2f36" stroke-width="1.4"/>
       ${o.doors ? `<g fill="${P.amber}"><rect x="10" y="-36" width="2.5" height="9"/><rect x="10" y="-14" width="2.5" height="9"/><rect x="10" y="12" width="2.5" height="9"/><rect x="10" y="32" width="2.5" height="9"/></g>` : ""}`;
   }
+  function policeBody(color, o) {
+    return `${carBody("#f3f5f7", o)}
+      <g>${[-16, -8, 0, 8].map((y, i) => `<rect x="-10" y="${y}" width="4" height="8" fill="${i % 2 ? "#f5d90a" : "#1d4ed8"}"/><rect x="6" y="${y}" width="4" height="8" fill="${i % 2 ? "#1d4ed8" : "#f5d90a"}"/>`).join("")}</g>
+      <rect x="-7" y="-4" width="14" height="4" rx="1.5" fill="#1d4ed8"/>
+      ${o.beacon === false ? "" : `<circle cx="-5" cy="-2" r="6" fill="#3b82f6" opacity="0.45"><animate attributeName="opacity" values="0.6;0;0.6" dur="0.6s" repeatCount="indefinite"/></circle><circle cx="5" cy="-2" r="6" fill="#3b82f6" opacity="0.45"><animate attributeName="opacity" values="0;0.6;0" dur="0.6s" repeatCount="indefinite"/></circle>`}`;
+  }
   function emergencyBody(color, o) {
     /* скорая: жёлто-зелёная «шашка», синие проблесковые маячки */
     return `${carBody("#f3f5f7", o)}
@@ -144,8 +150,8 @@
   /* kind: car | truck | bus | tram | emergency | tractor | bike | scooter | police */
   function vehicle(o) {
     const kind = o.kind || "car", color = o.color || P.you, rot = o.rot || 0;
-    const opts = { blink: o.blink, brake: o.brake, steer: o.steer, doors: o.doors };
-    const bodyFn = { truck: truckBody, bus: busBody, tram: tramBody, emergency: emergencyBody, tractor: tractorBody, bike: bikeBody, scooter: scooterBody }[kind] || carBody;
+    const opts = { blink: o.blink, brake: o.brake, steer: o.steer, doors: o.doors, beacon: o.beacon };
+    const bodyFn = { police: policeBody, truck: truckBody, bus: busBody, tram: tramBody, emergency: emergencyBody, tractor: tractorBody, bike: bikeBody, scooter: scooterBody }[kind] || carBody;
     const col = kind === "tram" ? (o.color || "#2f6fd0") : kind === "bus" ? (o.color || "#d8322c") : color;
     let trailer = "";
     if (o.trailer) trailer = `<g transform="translate(0 ${kind === "car" ? 28 : 46})">${trailerBody(o.trailer)}</g>`;
@@ -154,7 +160,10 @@
     const door = o.door ? `<rect x="${o.door === "left" ? -10 - 15 : 10}" y="-7" width="15" height="2.8" rx="1" fill="${col}" stroke="#fff" stroke-width="0.6" transform="rotate(${o.door === "left" ? -35 : 35} ${o.door === "left" ? -10 : 10} -6)"/>` : "";
     const smoke = o.smoke ? `<g opacity="0.9"><circle cx="0" cy="-24" r="9" fill="#ff7a1a"/><circle cx="-3" cy="-28" r="6" fill="#ffd21a"/>` +
       `<circle cx="6" cy="-40" r="10" fill="#6b7280" opacity="0.75"/><circle cx="-6" cy="-52" r="12" fill="#6b7280" opacity="0.6"/><circle cx="4" cy="-68" r="15" fill="#6b7280" opacity="0.45"/></g>` : "";
-    const body = `<g transform="translate(${f1(o.x)} ${f1(o.y)}) rotate(${rot})">${trailer}${bodyFn(col, opts)}${door}${smoke}</g>`;
+    const by0 = kind === "truck" ? -27 : kind === "bus" ? -24 : 2;
+    const beacon = (o.beacon === "amber" || o.beacon === "blue") && kind !== "police" ? (() => { const c = o.beacon === "amber" ? "#ffb000" : "#3b82f6";
+      return `<rect x="-6" y="${by0 - 2}" width="12" height="4" rx="1.5" fill="${c}"/><circle cx="0" cy="${by0}" r="9" fill="${c}" opacity="0.5"><animate attributeName="opacity" values="0.7;0.05;0.7" dur="0.8s" repeatCount="indefinite"/></circle>`; })() : "";
+    const body = `<g transform="translate(${f1(o.x)} ${f1(o.y)}) rotate(${rot})">${trailer}${bodyFn(col, opts)}${door}${smoke}${beacon}</g>`;
     const bx = o.badgeAt ? o.badgeAt[0] : o.x, by = o.badgeAt ? o.badgeAt[1] : o.y;
     const small = kind === "bike" || kind === "scooter";
     const lb = o.label === false ? "" : badge(small ? bx + 14 : bx, small ? by + 4 : by, o.label, o.badgeColor || (kind === "bike" || kind === "scooter" ? P.green : col === "#f3f5f7" ? P.ink : col));
@@ -475,7 +484,9 @@
     let base = junctionBase(cfg), marks = "", furniture = "", paths = "", cars = "";
     const signs = cfg.signs || {}, lights = cfg.lights || {};
     DIRS.forEach(side => {
-      if (signs[side]) { marks += armMarking(side, signs[side] === "stop" ? "stop" : signs[side] === "yield" ? "yield" : ""); furniture += sign(signs[side], SIGN_AT[side][0], SIGN_AT[side][1], 26); }
+      if (signs[side]) { marks += armMarking(side, signs[side] === "stop" ? "stop" : signs[side] === "yield" ? "yield" : ""); { /* знак и светофор на одной стороне — знак чуть дальше от дороги */
+        const off = lights[side] ? { south: [24, 0], north: [-24, 0], east: [0, -24], west: [0, 24] }[side] : [0, 0];
+        furniture += sign(signs[side], SIGN_AT[side][0] + off[0], SIGN_AT[side][1] + off[1], 26); } }
       if (lights[side]) { marks += armMarking(side, "light"); furniture += light(LIGHT_AT[side][0], LIGHT_AT[side][1], lights[side]); }
     });
     (cfg.peds || []).forEach(side => {
@@ -489,7 +500,8 @@
       const small = v.kind === "bike" || v.kind === "scooter";
       const shift = small ? 9 : 0;
       const dist = v.dist != null ? v.dist : (v.kind === "truck" || v.kind === "bus" ? 70 : v.kind === "tram" ? 82 : v.from === "south" ? (idx === 0 ? 62 : 104) : v.from === "north" ? 52 : 92);
-      const pts = junctionPath(v.from, v.to, dist, shift);
+      /* via — свои точки пути после старта (например, левые повороты «перед носом» друг у друга, § 6 nr 4) */
+      const pts = v.via ? [laneIn(v.from, dist, shift)].concat(v.via) : junctionPath(v.from, v.to, dist, shift);
       const man = manOf(v.from, v.to);
       paths += arrow(pts, v.color);
       const [x, y] = pts[0];
