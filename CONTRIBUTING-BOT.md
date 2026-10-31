@@ -50,7 +50,7 @@ scene({
 scene({ you: { from: "south", to: "north" }, roundabout: true, others: [{ from: "west", to: "east" }] }) // кольцо; машины others уже на кольце
 scene({ roundabout: true, lanes: 2, you: { from: "south", to: "west", lane: "left" }, others: [{ from: "south", to: "north", lane: "right", entering: true }] })
 ```
-Центр перекрёстка (200,150), полосы: въезд с юга x=215, с севера x=185, с востока y=135, с запада y=165. Поворотники ставятся сами по манёвру.
+Центр перекрёстка (200,150), полосы: въезд с юга x=215, с севера x=185, с востока y=135, с запада y=165. Поворотники ставятся сами по манёвру. Свой путь машины: `via: [[x,y], ...]` (например, два встречных левых поворота «перед носом» друг у друга — sit-120). Если на одной стороне и знак, и светофор, знак встанет рядом сам.
 
 **2. Прямая дорога — `street({...})`**
 
@@ -66,12 +66,12 @@ street({
     { label: "A", y: 245, path: [[216, 170]] },                         // path — стрелка пути (точки)
     { label: "B", lane: "left", y: 40, color: "#e0483a", path: [[184, 120]] },
     { kind: "adult", x: 246, y: 120, rot: 270, walk: [230, 120] },     // люди: adult | child | cane | worker | officer | patrol
-    { kind: "bike", x: 225, y: 104, label: "S" }                        // и: truck, bus, tram, tractor, emergency, scooter, moose, horse, sheep, cone, post, triangle, crash, note
+    { kind: "bike", x: 225, y: 104, label: "S" }                        // и: truck, bus, tram, tractor, emergency, police, scooter, moose, horse, sheep, cone, post, triangle, crash, note
   ],
   tags: [{ text: "RASTEPLASS", x: 326, y: 40 }]
 })
 ```
-Опции машин: `blink: "left" | "right" | "hazard"`, `brake: true`, `beams: "low" | "high"` (ночью), `trailer: "box" | "caravan"` (+ `trailerRot`, `sway`), `door: "left" | "right"`, `steer`, `smoke`, `doors` (у трамвая), `label: false` — без буквы.
+Опции машин: `beacon: "amber" | "blue"` (маячок на крыше), `blink: "left" | "right" | "hazard"`, `brake: true`, `beams: "low" | "high"` (ночью), `trailer: "box" | "caravan"` (+ `trailerRot`, `sway`), `door: "left" | "right"`, `steer`, `smoke`, `doors` (у трамвая), `label: false` — без буквы.
 
 Особенности (`features`): `zebra {y}` · `sideRoad {y, side: "right"|"left"|"both", yield}` · `driveway {y, side, label, lines, building, surface}` · `bikeLane {side, gap:[y1,y2]}` · `bikePath {join}` · `busStop {y, side, bay}` · `tramRails` · `rail {y, barriers: "up"|"down", lights: "flash"|"off", train:{x,dir}}` · `railSide {x, train:{y,dir,lights}}` · `tunnel {y, sign}` · `inTunnel {exit, lay}` · `passingPlace {y, label}` · `roadwork {lane, from, to, worker}` · `ramp {kind: "on"|"off", to}` · `parkingLane {side, cars}` · `lot` (с `noRoad: true`) · `bridge {y, h, icy}` · `puddle {y, x, kind: "water"|"ice"}` · `stopLine {y}` · `light {y, state}` · `sign {kind, y, side, x, size, under}` · `crest {y}` · `lowSun` · `cabin {x, y, text}` · `tag {text, x, y}`.
 
