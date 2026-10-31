@@ -1242,7 +1242,41 @@
     ],
     "Bruksforskriften § 1-7: fører som forlater kjøretøy, skal sørge for at det ikke kommer i gang av seg selv. Fører av motorvogn skal også treffe hensiktsmessige tiltak for å hindre uvedkommende bruk. I praksis: sett på parkeringsbremsen, ta med nøkkelen og lås bilen.",
     "Bruksforskriften § 1-7: водитель, который оставляет машину, должен позаботиться, чтобы она сама не тронулась с места. Водитель автомобиля должен ещё и принять разумные меры, чтобы машиной не воспользовались посторонние. На практике: ставишь стояночный тормоз, забираешь ключ и запираешь машину.",
-    "Уходишь от машины даже на минуту: ручник, ключ с собой, замок.")
+    "Уходишь от машины даже на минуту: ручник, ключ с собой, замок."),
+
+    q("114", "Du har en registrert campingvogn som du trekker etter personbilen. Hva sier forskriften om brannslokkingsapparat?",
+      "У тебя зарегистрированный жилой прицеп (campingvogn), который ты возишь за легковой машиной. Что говорит предписание об огнетушителе?",
+      [
+        ["Campingvogna skal ha minst ett pulverapparat på minst 2 kg, plassert sikkert og lett tilgjengelig", "В прицепе должен быть хотя бы один порошковый огнетушитель не меньше 2 кг, надёжно закреплённый и легко доступный"],
+        ["Det er ikke noe krav, brannslokker er bare påbudt i buss", "Никаких требований нет, огнетушитель обязателен только в автобусе", "Bruksforskriften § 1-5 nr 6 nevner campingbil og registrert campingvogn særskilt. Kravet gjelder ikke bare buss.", "В bruksforskriften § 1-5 nr 6 отдельно названы автодом (campingbil) и зарегистрированный жилой прицеп. Требование касается не только автобусов."],
+        ["Bare hvis campingvogna har gassanlegg", "Только если в прицепе есть газовое оборудование", "Forskriften stiller ikke krav om gassanlegg. Kravet gjelder alle registrerte campingvogner, uansett når de ble registrert (§ 1-5 nr 6).", "Предписание не ставит условия про газ. Требование касается всех зарегистрированных жилых прицепов, когда бы их ни зарегистрировали (§ 1-5 nr 6)."],
+        ["Apparatet skal være på minst 6 kg", "Огнетушитель должен быть не меньше 6 кг", "6 kg gjelder buss med over 22 sitteplasser (§ 1-5 nr 2). For campingvogn er kravet minst 2 kg.", "6 кг — это для автобуса больше чем на 22 места (§ 1-5 nr 2). Для жилого прицепа — не меньше 2 кг."]
+      ],
+      "Bruksforskriften § 1-5 nr 6: campingbil og registrert campingvogn skal under bruk ha minst ett håndslokkeapparat med minst 2 kg pulver, plassert sikkert og lett tilgjengelig. Apparatet skal være av en type som er godkjent i Norge eller et annet EU/EØS-land. I en vanlig personbil er brannslokker ikke påbudt, men anbefalt.",
+      "Bruksforskriften § 1-5 nr 6: в автодоме и зарегистрированном жилом прицепе во время использования должен быть хотя бы один ручной огнетушитель минимум на 2 кг порошка, надёжно закреплённый и легко доступный. Тип огнетушителя должен быть одобрен в Норвегии или другой стране ЕС/ЕЭЗ. В обычной легковой машине огнетушитель не обязателен, но рекомендуется.",
+      "Campingvogn и campingbil — огнетушитель 2 кг обязателен. Обычная легковушка — по желанию."),
+
+    qm("m25", "Når kan politiet ta alkotest (blåseprøve) av deg som bilfører? Velg alle riktige.", "Когда полиция может проверить тебя, водителя, алкотестером (дыхнуть в трубку)? Выбери все верные.", [
+      ["Når du blir stanset i en vanlig trafikkontroll, også uten mistanke", "Когда тебя остановили на обычной проверке, даже без подозрений", true],
+      ["Når du er innblandet i et trafikkuhell, også om det ikke var din skyld", "Когда ты участник ДТП, даже если ты не виноват", true],
+      ["Bare når politiet har sett deg kjøre farlig eller kjenner lukt av alkohol", "Только когда полиция видела опасную езду или чувствует запах алкоголя", false, "Politiet trenger ingen mistanke. Det er nok at du er stanset i trafikkontroll eller innblandet i et uhell (vegtrafikkloven § 22 a nr 3 og 4).", "Подозрение полиции не нужно. Достаточно того, что тебя остановили на проверке или ты попал в ДТП (vegtrafikkloven § 22 a nr 3 и 4)."],
+      ["Bare hvis du sier ja, ellers må politiet la deg kjøre videre", "Только с твоего согласия, иначе полиция должна тебя отпустить", false, "Nekter du alkotest, blir du som regel tatt med til utåndingsprøve eller blodprøve (vegtrafikkloven § 22 a annet ledd).", "Если откажешься от алкотестера, тебя, как правило, отвезут на точную проверку выдыхаемого воздуха или анализ крови (vegtrafikkloven § 22 a, второй абзац)."]
+    ],
+    "Vegtrafikkloven § 22 a: politiet kan ta alkotest av fører av motorvogn når det er grunn til å tro at han har kjørt ruspåvirket, når han er innblandet i et trafikkuhell med eller uten egen skyld, og når han er stanset i trafikkontroll. Nekter føreren å blåse, blir han i alminnelighet fremstilt for utåndingsprøve eller blodprøve.",
+    "Vegtrafikkloven § 22 a: полиция может проверить водителя алкотестером, если есть основания думать, что он ехал пьяным, если он участник ДТП (виноват он или нет) и если его остановили на проверке. Если водитель отказывается дышать в трубку, его, как правило, направляют на точную проверку выдыхаемого воздуха или на анализ крови.",
+    "Остановили на проверке — дышать в трубку придётся, даже если ты ничего не нарушал."),
+
+    q("115", "Du kjører en elbil (personbil med tillatt totalvekt 2 100 kg). Et felt er skiltet med 506 Tungtrafikkfelt «3,5 t». Kan du kjøre i dette feltet?",
+      "Ты едешь на электромобиле (легковая, разрешённая полная масса 2 100 кг). Полоса обозначена знаком 506 «Полоса для тяжёлого транспорта» с табличкой «3,5 t». Можно ехать по этой полосе?",
+      [
+        ["Nei, feltet er for motorvogn med tillatt totalvekt over det som står på skiltet", "Нет, полоса для машин с разрешённой полной массой больше указанной на знаке"],
+        ["Ja, elbil kan bruke alle slike spesialfelt", "Да, электромобиль может ездить по всем таким особым полосам", "Unntaket for elbil gjelder kollektivfelt og sambruksfelt. I tungtrafikkfelt er det bare utrykningskjøretøy som har et slikt unntak (§ 5 nr 2).", "Исключение для электромобилей касается полос для общественного транспорта и полос для машин с пассажирами. В полосе для тяжёлого транспорта такое исключение есть только у экстренных служб (§ 5 nr 2)."],
+        ["Ja, hvis jeg har med meg minst én passasjer", "Да, если со мной есть хотя бы один пассажир", "Antall personer i bilen har betydning i sambruksfelt (skilt 509), ikke i tungtrafikkfelt. Her er det vekten som teller.", "Число людей в машине важно для полосы 509 «Sambruksfelt», а не для полосы тяжёлого транспорта. Здесь считается масса."],
+        ["Ja, hvis det er kø i det vanlige feltet", "Да, если в обычной полосе пробка", "Kø gir ingen rett til å bruke tungtrafikkfelt. Kjøring der er bare tillatt som skiltet sier (§ 5 nr 2).", "Пробка не даёт права ехать по полосе для тяжёлого транспорта. Ездить по ней можно только так, как указано на знаке (§ 5 nr 2)."]
+      ],
+      "Trafikkreglene § 5 nr 2: kjøring i tungtrafikkfelt er bare tillatt som angitt på offentlig trafikkskilt, men uniformert utrykningskjøretøy kan alltid bruke feltet. Skilt 506 Tungtrafikkfelt viser et felt for motorvogn med tillatt totalvekt høyere enn angitt. Elbilens unntak i § 5 nr 2 gjelder bare kollektivfelt og sambruksfelt.",
+      "Trafikkreglene § 5 nr 2: ездить по полосе для тяжёлого транспорта можно только так, как указано на знаке; униформированные машины экстренных служб могут пользоваться ею всегда. Знак 506 Tungtrafikkfelt обозначает полосу для машин с разрешённой полной массой больше указанной. Исключение для электромобилей в § 5 nr 2 касается только kollektivfelt и sambruksfelt.",
+      "Электромобилю можно в kollektivfelt, но не в tungtrafikkfelt — там решает вес на знаке.")
 
   ];
 

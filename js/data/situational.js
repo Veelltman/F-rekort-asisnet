@@ -1771,7 +1771,59 @@
       ],
       "Trafikkreglene § 17 nr 1 h: det er forbudt å stanse på vegutvidelse for holdeplass for buss, drosje eller sporvogn, eller nærmere enn 20 meter fra skiltet for slik holdeplass. Unntatt er av- eller påstigning når den ikke er til hinder for buss, drosje eller sporvogn. I kollektivfelt er det likevel forbudt å stanse (§ 17 nr 1 g).",
       "Trafikkreglene § 17 nr 1 h: запрещено останавливаться в «кармане» остановки автобуса, такси или трамвая и ближе 20 метров от знака такой остановки. Исключение — высадка или посадка пассажиров, если это не мешает автобусу, такси или трамваю. Но в полосе для общественного транспорта останавливаться всё равно нельзя (§ 17 nr 1 g).",
-      "У остановки: высадить друга можно быстро и если автобуса нет; ждать там нельзя.")
+      "У остановки: высадить друга можно быстро и если автобуса нет; ждать там нельзя."),
+
+    q("124", street({ sides: { left: "grass", right: "grass" }, features: [{ type: "sideRoad", y: 70, side: "left", w: 52 }], actors: [{ kind: "bike", x: 228, y: 120, rot: 330, label: "S" }, { label: "A", y: 240 }] }),
+      "Du kjører rett fram på en landeveg. Foran deg sykler en syklist (S) helt til høyre i vegen. Han bremser ned ved høyre kant, ser seg tilbake og vil krysse vegen for å svinge til venstre inn på sidevegen. Hvem har vikeplikt?",
+      "Ты едешь прямо по загородной дороге. Впереди у самого правого края едет велосипедист (S). Он тормозит у правого края, оглядывается и хочет пересечь дорогу, чтобы свернуть налево на боковую дорогу. Кто должен уступить?",
+      [
+        ["Syklisten har vikeplikt for meg", "Велосипедист должен уступить мне"],
+        ["Jeg, fordi bilister alltid må vike for syklister", "Я, потому что водитель всегда уступает велосипедисту", "Det finnes ingen slik regel. Når syklisten holder seg til høyre og svinger til venstre derfra, har syklisten vikeplikt (§ 18 nr 2).", "Такого правила нет. Если велосипедист держится справа и поворачивает налево оттуда, уступает именно он (§ 18 nr 2)."],
+        ["Jeg, hvis syklisten gir tegn med armen", "Я, если велосипедист показывает рукой", "Tegn med armen viser bare hva syklisten vil gjøre (§ 14 nr 2). Det gir ham ikke rett til å kjøre foran deg.", "Знак рукой только показывает, что велосипедист собирается делать (§ 14 nr 2). Права проехать перед тобой он не даёт."],
+        ["Ingen, den som kommer først fram, kjører først", "Никто: кто первым подъехал, тот и едет", "Trafikkreglene har ingen «først til mølla»-regel. Her sier § 18 nr 2 klart at syklisten har vikeplikt.", "Правила «кто первый, тот и едет» нет. Здесь § 18 nr 2 прямо говорит, что уступает велосипедист."]
+      ],
+      "Trafikkreglene § 18 nr 2: en syklist som vil svinge til venstre, kan fortsette å holde til høyre på vegen og svinge der det passer. Syklisten har da vikeplikt for annen trafikant. Du har altså ikke vikeplikt, men du skal fortsatt kjøre forsiktig og være klar til å bremse hvis syklisten feilberegner (vegtrafikkloven § 3).",
+      "Trafikkreglene § 18 nr 2: велосипедист, который хочет повернуть налево, может держаться правого края и повернуть там, где ему удобно. Тогда он уступает всем остальным. То есть уступать ты не обязан, но ехать всё равно нужно осторожно и быть готовым затормозить, если велосипедист ошибётся (vegtrafikkloven § 3).",
+      "Велосипедист поворачивает налево от правого края — уступает он. Но тормоз держи наготове."),
+
+    q("125", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "truck", x: 216, y: 110, label: "B", color: "#e0483a" }, { label: "A", y: 200 }, { label: "C", x: 186, y: 262, rot: 0, color: "#3a9d5d", blink: "left" }] }),
+      "Du ligger bak en lastebil (B) på en landeveg med stiplet midtlinje og vil kjøre forbi den. I speilet ser du at bilen bak deg (C) allerede har lagt seg ut i motgående felt med blinklys for å kjøre forbi deg. Hva gjør du?",
+      "Ты едешь за грузовиком (B) по загородной дороге с прерывистой осевой и хочешь его обогнать. В зеркале видно, что машина сзади (C) уже выехала на встречную полосу с поворотником, чтобы обогнать тебя. Что делаешь?",
+      [
+        ["Venter med forbikjøringen, holder meg til høyre og øker ikke farten", "Откладываю обгон, держусь правее и не прибавляю скорость"],
+        ["Legger meg ut likevel, fordi jeg var først bak lastebilen", "Всё равно выезжаю: я ведь первым был за грузовиком", "Før forbikjøring må du forvisse deg om at ingen bak deg har begynt å kjøre forbi deg (§ 12 nr 2 c). Hvem som kom først, spiller ingen rolle.", "Перед обгоном нужно убедиться, что тебя сзади никто уже не начал обгонять (§ 12 nr 2 c). Кто первым подъехал — неважно."],
+        ["Øker farten, så C ikke rekker å komme forbi", "Прибавляю скорость, чтобы C не успел обогнать", "Når noen kjører forbi deg, skal du holde til høyre og ikke øke farten (§ 12 nr 4). Ellers kan C bli fanget i motgående felt.", "Когда тебя обгоняют, нужно держаться правее и не прибавлять скорость (§ 12 nr 4). Иначе C может застрять на встречной."],
+        ["Blinker til venstre, så C skjønner at han må slippe meg ut først", "Включаю левый поворотник, чтобы C понял, что сначала выезжаю я", "Blinklyset gir deg ingen rett til å legge deg ut. C har allerede begynt forbikjøringen, og da skal du vente (§ 12 nr 2 c).", "Поворотник не даёт права выехать. C уже начал обгон, значит ждать должен ты (§ 12 nr 2 c)."]
+      ],
+      "Trafikkreglene § 12 nr 2: før forbikjøring skal du blant annet forvisse deg om at ingen bakenforkjørende har begynt å kjøre forbi deg (bokstav c). § 12 nr 4: når noen vil kjøre forbi til venstre, skal du holde så langt til høyre som mulig og ikke øke farten. Derfor sjekker du alltid speilet og blindsonen før du legger deg ut.",
+      "Trafikkreglene § 12 nr 2: перед обгоном нужно, среди прочего, убедиться, что тебя сзади никто уже не начал обгонять (буква c). § 12 nr 4: когда тебя обгоняют слева, держишься как можно правее и не прибавляешь скорость. Поэтому перед выездом на обгон всегда смотри в зеркало и в слепую зону.",
+      "Перед обгоном — зеркало. Если сзади уже обгоняют тебя, сначала пропусти их."),
+
+    q("126", street({ sides: { left: "grass", right: "grass" }, actors: [{ kind: "truck", x: 208, y: 110, label: "B", color: "#f2b01e" }, { label: "A", y: 240 }], tags: [{ text: "GULT BLINKLYS", x: 300, y: 70 }] }),
+      "Foran deg kjører en lastebil som brukes til vegarbeid (B). Den kjører svært sakte, litt over midtlinjen, og har blinkende gult lys på taket. Hva betyr det gule blinklyset?",
+      "Впереди едет грузовик дорожной службы (B). Он едет очень медленно, немного заезжая за осевую, и на крыше у него мигает жёлтый маячок. Что означает этот жёлтый маячок?",
+      [
+        ["Bilen arbeider på vegen og kan avvike fra trafikkreglene, så jeg må være ekstra forsiktig", "Машина работает на дороге и может отступать от правил, поэтому нужно быть особенно осторожным"],
+        ["Det er et utrykningskjøretøy, så jeg må straks kjøre til siden og stanse", "Это машина экстренной службы, нужно сразу прижаться к обочине и остановиться", "Utrykningskjøretøy varsler med blinkende blått lys (§ 14 nr 3 og § 10 nr 1). Gult blinklys betyr noe annet.", "Экстренные службы предупреждают синим проблесковым светом (§ 14 nr 3 и § 10 nr 1). Жёлтый маячок означает другое."],
+        ["Forbikjøring er forbudt så lenge det gule lyset blinker", "Пока мигает жёлтый маячок, обгонять запрещено", "Det gule lyset i seg selv forbyr ikke forbikjøring. Vanlige regler gjelder (§ 12): du må se langt nok fram, og det må ikke være sperrelinje.", "Сам жёлтый маячок обгон не запрещает. Действуют обычные правила (§ 12): дорога впереди должна хорошо просматриваться, и не должно быть сплошной."],
+        ["Ingenting spesielt, bilen må følge de samme reglene som alle andre", "Ничего особенного: эта машина обязана соблюдать те же правила, что и все", "Nettopp kjøretøy for vegarbeid kan få lov til å avvike fra reglene (vegtrafikkloven § 11). Gult blinklys varsler at de gjør det.", "Как раз машинам дорожных работ разрешено отступать от правил (vegtrafikkloven § 11). Жёлтый маячок предупреждает, что они так и делают."]
+      ],
+      "Trafikkreglene § 14 nr 3: fører av kjøretøy som brukes til vegarbeid eller liknende og som avviker fra vegtrafikkreglene, skal varsle med blinkende gult lys når det trengs for å hindre fare. Vegtrafikkloven § 11 gir slike kjøretøy adgang til å avvike fra en del regler. Regn med at bilen kan kjøre sakte, stanse eller ligge midt i vegen. Hold god avstand og kjør forbi bare når det er trygt.",
+      "Trafikkreglene § 14 nr 3: водитель машины, которая работает на дороге (или похожей) и отступает от правил движения, должен предупреждать жёлтым проблесковым светом, когда это нужно, чтобы не было опасности. Vegtrafikkloven § 11 разрешает таким машинам отступать от части правил. Жди, что она может ехать медленно, остановиться или занять середину дороги. Держи дистанцию и обгоняй, только когда это безопасно.",
+      "Синий маячок — уступи дорогу экстренной службе. Жёлтый — рабочая машина, жди от неё чего угодно."),
+
+    q("127", street({ lanes: ["down", "up", "up"], sides: { left: "walk", right: "walk" }, features: [{ type: "tramRails" }], actors: [{ label: "A", x: 200, y: 150 }, { kind: "tram", x: 200, y: 262, label: "T" }] }),
+      "Gaten har to felt i din retning. Trikkeskinnene ligger i venstre felt, og du kjører oppå dem. En trikk (T) kommer bakfra og nærmer seg. Høyre felt er ledig. Hva gjør du?",
+      "На улице две полосы в твою сторону. Трамвайные рельсы проходят по левой полосе, и ты едешь прямо по ним. Сзади приближается трамвай (T). Правая полоса свободна. Что делаешь?",
+      [
+        ["Sjekker speil og blindsone, blinker og skifter til høyre felt, så trikken får fri veg", "Смотрю в зеркало и слепую зону, включаю поворотник и перестраиваюсь вправо, чтобы освободить путь трамваю"],
+        ["Blir på skinnene, for trikken kommer bakfra og må vente på meg", "Остаюсь на рельсах: трамвай сзади, пусть ждёт меня", "Plikten til å gi fri veg for sporvogn gjelder uansett hvor trikken kommer fra (§ 10 nr 2). Trikken kan ikke svinge rundt deg.", "Обязанность освободить путь трамваю действует, откуда бы он ни ехал (§ 10 nr 2). Объехать тебя трамвай не может."],
+        ["Øker farten over fartsgrensen, så trikken ikke tar meg igjen", "Разгоняюсь выше лимита, чтобы трамвай меня не догнал", "Fartsgrensen gjelder også nå, og du gir ikke fri veg ved å kjøre fra trikken. Du skal flytte deg bort fra skinnene (§ 10 nr 2).", "Ограничение скорости действует и сейчас, а убегать от трамвая — не значит уступить ему путь. Нужно уйти с рельсов (§ 10 nr 2)."],
+        ["Stanser på skinnene og venter til trikken har kjørt forbi", "Останавливаюсь на рельсах и жду, пока трамвай проедет", "Trikken kan ikke kjøre forbi en bil som står på skinnene. Da sperrer du bare vegen for den (§ 10 nr 2).", "Трамвай не может проехать мимо машины, стоящей на рельсах. Так ты просто перекроешь ему путь (§ 10 nr 2)."]
+      ],
+      "Trafikkreglene § 10 nr 2: trafikanter skal gi fri veg og om nødvendig stanse for sporvogn. Det gjelder også når trikken kommer bakfra i samme felt. Når du skifter felt for å gi plass, har du vikeplikt for dem som allerede kjører i det nye feltet (§ 8 nr 1), så du sjekker speil og blindsone og blinker først.",
+      "Trafikkreglene § 10 nr 2: участники движения должны освободить путь трамваю и при необходимости остановиться. Это касается и трамвая, который догоняет тебя сзади по той же полосе. При перестроении ты уступаешь тем, кто уже едет в соседней полосе (§ 8 nr 1), поэтому сначала зеркало, слепая зона и поворотник.",
+      "Трамвай сзади звонит — уходи с рельсов, как только это безопасно.")
 
   ];
 })();

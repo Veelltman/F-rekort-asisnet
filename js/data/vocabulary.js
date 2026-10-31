@@ -231,7 +231,10 @@
     w("191", "trafikkontroll", "проверка на дороге (полицией или Statens vegvesen)", "I en trafikkontroll skal du bli ved bilen til kontrollen er ferdig.", "При проверке на дороге нужно оставаться у машины, пока она не закончится.", "Правила"),
     w("192", "passasjer", "пассажир", "Bilen må ikke ha flere passasjerer enn den er registrert for.", "В машине не может быть больше пассажиров, чем она зарегистрирована.", "Основное"),
     w("193", "fartsgrensesone", "зона ограничения скорости", "Fartsgrensen i en fartsgrensesone gjelder helt til skiltet «Slutt på fartsgrensesone».", "Ограничение в зоне действует до знака «Конец зоны ограничения скорости».", "Правила"),
-    w("194", "parkeringsbrems / håndbrekk", "стояночный тормоз, ручник", "Sett på parkeringsbremsen før du går ut av bilen.", "Поставь машину на ручник, прежде чем выйти.", "Машина")
+    w("194", "parkeringsbrems / håndbrekk", "стояночный тормоз, ручник", "Sett på parkeringsbremsen før du går ut av bilen.", "Поставь машину на ручник, прежде чем выйти.", "Машина"),
+    w("195", "alkotest / blåseprøve", "проверка алкотестером («дыхнуть в трубку»)", "Politiet kan be deg ta en alkotest i en vanlig trafikkontroll.", "Полиция может попросить тебя дыхнуть в алкотестер на обычной проверке.", "Правила"),
+    w("196", "brannslukker / håndslokker", "огнетушитель", "En registrert campingvogn skal ha en brannslukker på minst 2 kg.", "В зарегистрированном жилом прицепе должен быть огнетушитель не меньше 2 кг.", "Машина"),
+    w("197", "tungtrafikkfelt", "полоса для тяжёлого транспорта", "En vanlig personbil kan ikke kjøre i tungtrafikkfeltet.", "Обычной легковой машине нельзя ехать по полосе для тяжёлого транспорта.", "Основное")
 
   ];
 })();
