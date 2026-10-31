@@ -4,7 +4,7 @@
    - Картинки знаков и звук — отдельный долгоживущий кэш: отдаём из кэша, при промахе тянем из сети.
    - Новая версия не подменяет старую молча: ждёт сообщения SKIP_WAITING от страницы (тост «Обновить»). */
 
-const APP_VERSION = "mvrwglap";
+const APP_VERSION = "mvw6q2zt";
 const SHELL_CACHE = "forerkort-shell-" + APP_VERSION;
 const ASSET_CACHE = "forerkort-assets";
 
