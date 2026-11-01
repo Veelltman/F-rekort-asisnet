@@ -473,6 +473,9 @@ main {
 @keyframes q-in { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
 .question-image { display: flex; justify-content: center; margin: 0 0 20px; }
 .sign-icon { width: 150px; height: 150px; }
+.has-3d svg.scene-icon[data-3d]:not([data-3d-done]) { opacity: 0; }
+.scene-3d { animation: scene3dIn .25s ease-out; }
+@keyframes scene3dIn { from { opacity: 0; } to { opacity: 1; } }
 .scene-icon { width: min(100%, 480px); height: auto; border-radius: var(--r-md); border: 1px solid var(--border); display: block; }
 .question-text { position: relative; padding-right: 50px; }
 .question-text .lang-no { font-size: 1.16rem; font-weight: 550; line-height: 1.45; margin-bottom: 6px; color: var(--ink); letter-spacing: -0.01em; }

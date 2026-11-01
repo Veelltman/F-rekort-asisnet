@@ -28,10 +28,16 @@
   const rad = a => a * Math.PI / 180;
   const ang = (p, q) => Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI;
 
+  /* ---------- Метки для объёмного вида (js/scene3d.js) ----------
+     Каждый объект, который в 3D стоит над землёй, обёрнут в <g data-o="{json}">. Всё остальное — «земля» (текстура плиты). */
+  const escA = t => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const M = (d, inner) => `<g data-o="${escA(JSON.stringify(d))}">${inner}</g>`;
+  const FX = (kind, inner) => inner ? `<g data-fx="${kind}">${inner}</g>` : "";
+
   /* ---------- Обёртка ---------- */
   function svg(body, opts) {
     const o = opts || {};
-    return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" class="scene-icon"${o.label ? ` aria-label="${o.label}"` : ""}>` +
+    return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" class="scene-icon"${o.three ? ` data-3d="1"` : ""}${o.label ? ` aria-label="${o.label}"` : ""}>` +
       `<rect width="${W}" height="${H}" fill="${o.bg || P.grass}"/>${body}</svg>`;
   }
 
@@ -142,7 +148,8 @@
       `<text y="3.9" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="11" fill="${color}">${label}</text></g>`;
   }
 
-  function beamsFor(x, y, rot, mode) {
+  function beamsFor(x, y, rot, mode) { return FX("beams", beamsRaw(x, y, rot, mode)); }
+  function beamsRaw(x, y, rot, mode) {
     const len = mode === "high" ? 160 : 90, spread = mode === "high" ? 60 : 34;
     return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${rot})"><path d="M -8 -20 L ${-spread} ${-20 - len} L ${spread} ${-20 - len} L 8 -20 Z" fill="#fff4b8" opacity="${mode === "high" ? 0.32 : 0.26}"/></g>`;
   }
@@ -167,7 +174,9 @@
     const bx = o.badgeAt ? o.badgeAt[0] : o.x, by = o.badgeAt ? o.badgeAt[1] : o.y;
     const small = kind === "bike" || kind === "scooter";
     const lb = o.label === false ? "" : badge(small ? bx + 14 : bx, small ? by + 4 : by, o.label, o.badgeColor || (kind === "bike" || kind === "scooter" ? P.green : col === "#f3f5f7" ? P.ink : col));
-    return body + lb;
+    const d = { t: "veh", kind, x: o.x, y: o.y, rot, color: col };
+    ["blink", "brake", "trailer", "trailerRot", "sway", "door", "smoke", "beacon", "beams", "steer", "doors"].forEach(k => { if (o[k] != null && o[k] !== false) d[k] = o[k]; });
+    return M(d, body) + (lb ? M({ t: "ui", x: small ? bx + 14 : bx, y: small ? by + 4 : by, z: kind === "bus" || kind === "truck" || kind === "tram" ? 40 : small ? 22 : 26 }, lb) : "");
   }
 
   /* ---------- Люди и животные ----------
@@ -187,15 +196,21 @@
       <circle cx="0" cy="0.4" r="4" fill="${o.hair || "#3b2a20"}"/><circle cx="0" cy="-1.2" r="2.4" fill="#e9c3a6" opacity="${o.kind === "worker" || o.kind === "officer" ? 0 : 0.0}"/>
       ${o.kind === "worker" || o.kind === "patrol" ? `<circle cx="0" cy="0.4" r="4.2" fill="#ffd21f"/>` : o.kind === "officer" ? `<circle cx="0" cy="0.4" r="4.2" fill="#14233a"/>` : ""}</g>`;
     const walk = o.walk ? arrow([[o.x, o.y], o.walk], o.walkColor || P.ink, { width: 2.4, head: 7, halo: true }) : "";
-    return walk + body;
+    return walk + M({ t: "person", kind: o.kind || "adult", x: o.x, y: o.y, rot, color: coat, wave: !!o.wave, s }, body);
   }
   function moose(x, y, rot) {
+    return M({ t: "moose", x, y, rot: rot || 0 }, mooseSvg(x, y, rot));
+  }
+  function mooseSvg(x, y, rot) {
     return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${rot || 0})">
       <ellipse cx="2" cy="3" rx="9" ry="20" fill="#000" opacity="0.15"/>
       <ellipse cx="0" cy="2" rx="8.5" ry="18" fill="#5a4030"/><ellipse cx="0" cy="-19" rx="4.5" ry="7" fill="#4a3426"/>
       <path d="M -3 -22 Q -12 -26 -14 -32 M -9 -26 L -12 -22 M 3 -22 Q 12 -26 14 -32 M 9 -26 L 12 -22" stroke="#8a6a50" stroke-width="2.4" fill="none" stroke-linecap="round"/></g>`;
   }
   function horse(x, y, rot, rider) {
+    return M({ t: "horse", x, y, rot: rot || 0, rider: rider || null }, horseSvg(x, y, rot, rider));
+  }
+  function horseSvg(x, y, rot, rider) {
     return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${rot || 0})">
       <ellipse cx="2" cy="3" rx="8" ry="22" fill="#000" opacity="0.15"/>
       <ellipse cx="0" cy="3" rx="7.5" ry="17" fill="#8a5a36"/><ellipse cx="0" cy="-17" rx="3.6" ry="8" fill="#7a4c2c"/>
@@ -203,6 +218,9 @@
       ${rider ? `<ellipse cx="0" cy="2" rx="7.5" ry="4.6" fill="${rider}"/><circle cx="0" cy="2.4" r="3.6" fill="#ffd21f"/>` : ""}</g>`;
   }
   function sheep(x, y, rot) {
+    return M({ t: "sheep", x, y, rot: rot || 0 }, sheepSvg(x, y, rot));
+  }
+  function sheepSvg(x, y, rot) {
     return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${rot || 0})"><ellipse cx="1.5" cy="2" rx="8" ry="11" fill="#000" opacity="0.15"/>` +
       `<g fill="#f6f4ef">${[[-4, -3], [4, -3], [-4, 5], [4, 5], [0, 1], [0, -6], [0, 8]].map(([a, b]) => `<circle cx="${a}" cy="${b}" r="4.6"/>`).join("")}</g>` +
       `<ellipse cx="0" cy="-12" rx="3.4" ry="4.4" fill="#2f2a26"/></g>`;
@@ -216,23 +234,23 @@
     if (a.kind === "sheep") return sheep(a.x, a.y, a.rot);
     if (a.kind === "cone") return cone(a.x, a.y);
     if (a.kind === "arrow") return arrow(a.pts, a.color || P.you, a.opts);
-    if (a.kind === "post") return `<g transform="translate(${f1(a.x)} ${f1(a.y)})"><ellipse cx="2" cy="2" rx="4" ry="2" fill="#000" opacity="0.2"/><rect x="-3" y="-22" width="6" height="22" rx="1.5" fill="#fff" stroke="#9aa3ac" stroke-width="0.8"/><rect x="-3" y="-17" width="6" height="5" fill="#1d1f24"/><rect x="-1.5" y="-16" width="3" height="3" fill="#f5a623"/></g>`;
+    if (a.kind === "post") return M({ t: "post", x: a.x, y: a.y }, `<g transform="translate(${f1(a.x)} ${f1(a.y)})"><ellipse cx="2" cy="2" rx="4" ry="2" fill="#000" opacity="0.2"/><rect x="-3" y="-22" width="6" height="22" rx="1.5" fill="#fff" stroke="#9aa3ac" stroke-width="0.8"/><rect x="-3" y="-17" width="6" height="5" fill="#1d1f24"/><rect x="-1.5" y="-16" width="3" height="3" fill="#f5a623"/></g>`);
     if (a.kind === "crash") return `<g transform="translate(${f1(a.x)} ${f1(a.y)})"><polygon points="0,-12 3,-4 11,-6 6,1 12,7 3,6 0,13 -3,6 -12,7 -6,1 -11,-6 -3,-4" fill="#ffd21f" stroke="#e0483a" stroke-width="1.6" stroke-linejoin="round"/></g>`;
     if (a.kind === "note") return `<g transform="translate(${f1(a.x)} ${f1(a.y)}) rotate(${a.rot || 0})"><rect x="-6" y="-4.5" width="12" height="9" rx="1" fill="#fffbe6" stroke="#c9b458" stroke-width="0.8"/><path d="M -4 -1.5 L 4 -1.5 M -4 1 L 3 1" stroke="#6b7480" stroke-width="0.8"/></g>`;
-    if (a.kind === "triangle") return `<g transform="translate(${f1(a.x)} ${f1(a.y)}) rotate(${a.rot || 0})"><polygon points="0,-10 9,7 -9,7" fill="#fff" stroke="#e0231a" stroke-width="3.2" stroke-linejoin="round"/></g>`;
+    if (a.kind === "triangle") return M({ t: "triangle", x: a.x, y: a.y, rot: a.rot || 0 }, `<g transform="translate(${f1(a.x)} ${f1(a.y)}) rotate(${a.rot || 0})"><polygon points="0,-10 9,7 -9,7" fill="#fff" stroke="#e0231a" stroke-width="3.2" stroke-linejoin="round"/></g>`);
     return vehicle(a);
   }
   function cone(x, y) {
-    return `<g transform="translate(${f1(x)} ${f1(y)})"><circle cx="1" cy="1.5" r="6" fill="#000" opacity="0.15"/><circle r="6" fill="#f26b1d"/><circle r="3.6" fill="#fff"/><circle r="1.8" fill="#f26b1d"/></g>`;
+    return M({ t: "cone", x, y }, `<g transform="translate(${f1(x)} ${f1(y)})"><circle cx="1" cy="1.5" r="6" fill="#000" opacity="0.15"/><circle r="6" fill="#f26b1d"/><circle r="3.6" fill="#fff"/><circle r="1.8" fill="#f26b1d"/></g>`);
   }
   function tree(x, y, r) {
     r = r || 13;
-    return `<g transform="translate(${f1(x)} ${f1(y)})"><circle cx="3" cy="4" r="${r}" fill="#000" opacity="0.10"/><circle r="${r}" fill="${P.tree}"/>` +
-      `<circle cx="${-r * 0.3}" cy="${-r * 0.3}" r="${r * 0.55}" fill="${P.tree2}" opacity="0.7"/></g>`;
+    return M({ t: "tree", x, y, r }, `<g transform="translate(${f1(x)} ${f1(y)})"><circle cx="3" cy="4" r="${r}" fill="#000" opacity="0.10"/><circle r="${r}" fill="${P.tree}"/>` +
+      `<circle cx="${-r * 0.3}" cy="${-r * 0.3}" r="${r * 0.55}" fill="${P.tree2}" opacity="0.7"/></g>`);
   }
   function house(x, y, w, h) {
-    return `<g><rect x="${x + 3}" y="${y + 4}" width="${w}" height="${h}" fill="#000" opacity="0.10"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.roof}"/>` +
-      `<path d="M ${x} ${y} L ${x + w / 2} ${y + h / 2} L ${x + w} ${y} M ${x} ${y + h} L ${x + w / 2} ${y + h / 2} L ${x + w} ${y + h}" stroke="${P.roof2}" stroke-width="1.5" fill="none"/></g>`;
+    return M({ t: "house", x, y, w, h }, `<g><rect x="${x + 3}" y="${y + 4}" width="${w}" height="${h}" fill="#000" opacity="0.10"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.roof}"/>` +
+      `<path d="M ${x} ${y} L ${x + w / 2} ${y + h / 2} L ${x + w} ${y} M ${x} ${y + h} L ${x + w / 2} ${y + h / 2} L ${x + w} ${y + h}" stroke="${P.roof2}" stroke-width="1.5" fill="none"/></g>`);
   }
 
   /* ---------- Стрелки пути ----------
@@ -302,12 +320,15 @@
   function sign(kind, x, y, size, under) {
     const s = size || 26, uh = under ? s * 0.5 : 0;
     const plate = under ? `<image href="img/signs/${under}.png" x="${-s / 2}" y="${-s * 0.55 - uh}" width="${s}" height="${uh}" preserveAspectRatio="xMidYMid meet"/>` : "";
-    return `<g transform="translate(${f1(x)} ${f1(y)})"><ellipse cx="2" cy="2" rx="4" ry="2" fill="#000" opacity="0.18"/>` +
+    return M({ t: "sign", kind, x, y, size: s, under: under || null }, `<g transform="translate(${f1(x)} ${f1(y)})"><ellipse cx="2" cy="2" rx="4" ry="2" fill="#000" opacity="0.18"/>` +
       `<line x1="0" y1="0" x2="0" y2="${-s * 0.55}" stroke="#6b7480" stroke-width="2.2"/>${plate}` +
-      `<g transform="translate(0 ${-s * 0.55 - uh - s / 2})">${signArt(kind, s)}</g></g>`;
+      `<g transform="translate(0 ${-s * 0.55 - uh - s / 2})">${signArt(kind, s)}</g></g>`);
   }
   /* Светофор: state red | yellow | green | redyellow | flash (мигающий жёлтый) | off */
   function light(x, y, state, opts) {
+    return M({ t: "light", x, y, state, ped: !!(opts && opts.ped) }, lightSvg(x, y, state, opts));
+  }
+  function lightSvg(x, y, state, opts) {
     const o = opts || {}, s = o.scale || 1;
     const on = c => state === c || (state === "redyellow" && (c === "red" || c === "yellow"));
     const lamp = (cy, c, col, dim) => {
@@ -325,12 +346,13 @@
   /* Табличка-подпись на схеме (например, «MØTEPLASS», «P») */
   function tag(text, x, y, opts) {
     const o = opts || {}, fs = o.size || 9, w = text.length * fs * 0.68 + 12;
-    return `<g transform="translate(${f1(x)} ${f1(y)})"><rect x="${-w / 2}" y="-8" width="${w}" height="16" rx="8" fill="${o.bg || "#fff"}" opacity="${o.opacity || 0.92}"/>` +
-      `<text y="3.3" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="${fs}" fill="${o.color || P.ink}" >${text}</text></g>`;
+    return M({ t: "ui", x, y, z: 0 }, `<g transform="translate(${f1(x)} ${f1(y)})"><rect x="${-w / 2}" y="-8" width="${w}" height="16" rx="8" fill="${o.bg || "#fff"}" opacity="${o.opacity || 0.92}"/>` +
+      `<text y="3.3" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="${fs}" fill="${o.color || P.ink}" >${text}</text></g>`);
   }
 
   /* ---------- Погода и время суток ---------- */
-  function overlay(kind) {
+  function overlay(kind) { return FX(kind, overlayRaw(kind)); }
+  function overlayRaw(kind) {
     if (kind === "night") return `<rect width="${W}" height="${H}" fill="#0b1630" opacity="0.62"/>`;
     if (kind === "dusk") return `<rect width="${W}" height="${H}" fill="#2b2147" opacity="0.38"/>`;
     if (kind === "rain") return `<rect width="${W}" height="${H}" fill="#5c7a99" opacity="0.18"/><g stroke="#cfe3f5" stroke-width="1.3" opacity="0.75">` +
@@ -509,7 +531,7 @@
         blink: v.blink !== undefined ? v.blink : man === "left" ? "left" : man === "right" ? "right" : null, brake: v.brake, badgeColor: v.color });
     });
     if (cfg.police) furniture += person({ x: CX - 4, y: CY + 2, rot: 0, kind: "officer" });
-    return svg(base + railsFor(cfg) + marks + paths + furniture + extras(cfg) + cars + overlay(cfg.weather) + tagsFor(cfg), { label: cfg.alt });
+    return svg(base + railsFor(cfg) + marks + paths + furniture + extras(cfg) + cars + overlay(cfg.weather) + tagsFor(cfg), { label: cfg.alt, three: true });
   }
 
   /* трамвайные рельсы через перекрёсток: "ns" (север–юг) или "ew" (запад–восток) */
@@ -600,7 +622,7 @@
       const t = cfg.blinkAt, bx = CX + youR * Math.cos(rad(t)), by = CY + youR * Math.sin(rad(t));
       furniture += `<g transform="translate(${f1(bx)} ${f1(by)})"><circle r="11" fill="${P.amber}" opacity="0.35"><animate attributeName="r" values="7;15;7" dur="1.2s" repeatCount="indefinite"/></circle><circle r="5.5" fill="${P.amber}" stroke="#fff" stroke-width="1.6"/></g>`;
     }
-    return svg(g + marks + paths + furniture + extras(cfg) + cars + overlay(cfg.weather) + tagsFor(cfg), { label: cfg.alt });
+    return svg(g + marks + paths + furniture + extras(cfg) + cars + overlay(cfg.weather) + tagsFor(cfg), { label: cfg.alt, three: true });
   }
 
   /* =====================================================================
@@ -650,13 +672,14 @@
       return "";
     };
     if (!cfg.noRoad) ground += sideStrip("left") + sideStrip("right");
-    /* декор по краям */
+    /* декор по краям — ставится после особенностей и не туда, где рельсы, съезды, вода, знаки или люди */
+    const decor = [];
     if (cfg.decor !== false && !cfg.noRoad) {
       const lx = x0 - 60, rx = x1 + 60;
-      if (sides.left === "walk") ground += house(x0 - 24 - 70, 20, 56, 44) + tree(x0 - 50, 130, 14) + house(x0 - 24 - 66, 200, 50, 54);
-      else ground += tree(lx, 50, 15) + tree(lx - 30, 150, 13) + tree(lx + 10, 250, 16);
-      if (sides.right === "walk") ground += house(x1 + 24 + 16, 30, 56, 44) + tree(x1 + 54, 150, 13) + house(x1 + 24 + 20, 214, 52, 50);
-      else ground += tree(rx, 70, 14) + tree(rx + 32, 180, 16) + tree(rx - 6, 270, 12);
+      if (sides.left === "walk") decor.push(["house", x0 - 24 - 70, 20, 56, 44], ["tree", x0 - 50, 130, 14], ["house", x0 - 24 - 66, 200, 50, 54]);
+      else decor.push(["tree", lx, 50, 15], ["tree", lx - 30, 150, 13], ["tree", lx + 10, 250, 16]);
+      if (sides.right === "walk") decor.push(["house", x1 + 24 + 16, 30, 56, 44], ["tree", x1 + 54, 150, 13], ["house", x1 + 24 + 20, 214, 52, 50]);
+      else decor.push(["tree", rx, 70, 14], ["tree", rx + 32, 180, 16], ["tree", rx - 6, 270, 12]);
     }
     if (!cfg.noRoad) road += `<rect x="${x0}" y="0" width="${width}" height="${H}" fill="${P.asph}"/>`;
     if (cfg.noRoad) { /* только особенности и участники */ }
@@ -684,6 +707,36 @@
       const r = fn(ft, geo, cfg);
       ground += r.ground || ""; road += r.road || ""; marks += r.marks || ""; over += r.over || ""; furniture += r.furniture || ""; top += r.top || "";
     });
+    /* занятые места: особенности, знаки, люди и машины вне дороги */
+    const busy = [];
+    const box = (a, b, c, d) => busy.push([a, b, c, d]);
+    (cfg.features || []).forEach(ft => {
+      const y = ft.y, sd = ft.side || "right";
+      const sideX = sd === "right" ? [x1, W] : sd === "left" ? [0, x0] : [0, W];
+      if (ft.type === "rail") box(0, (y || 100) - 30, W, (y || 100) + 30);
+      if (ft.type === "bridge") box(0, (y || 120) - (ft.h || 80) / 2 - 6, W, (y || 120) + (ft.h || 80) / 2 + 6);
+      if (ft.type === "sideRoad") { const w = (ft.w || 60) / 2 + 18; if (sd === "both") box(0, (y || 110) - w, W, (y || 110) + w); else box(sideX[0], (y || 110) - w, sideX[1], (y || 110) + w); }
+      if (ft.type === "driveway") { const w = (ft.w || 44) / 2 + (ft.building ? 40 : 8); box(sideX[0], (y || 120) - w - (ft.label ? 20 : 0), sideX[1], (y || 120) + w); }
+      if (ft.type === "busStop") box(sd === "right" ? x1 : 0, (y || 110) - 75, sd === "right" ? x1 + 50 : x0, (y || 110) + 75);
+      if (ft.type === "passingPlace") box(sd === "right" ? x1 : x0 - 120, (y || 140) - 40, sd === "right" ? x1 + 120 : x0, (y || 140) + 40);
+      if (ft.type === "railSide") box((ft.x || x0 - 60) - 30, 0, (ft.x || x0 - 60) + 30, H);
+      if (ft.type === "ramp") box(x1, ft.kind === "off" ? 0 : (ft.to || 70) - 10, x1 + 110, H);
+      if (ft.type === "parkingLane") box(sd === "right" ? x1 : x0 - 60, 0, sd === "right" ? x1 + 60 : x0, H);
+      if (ft.type === "bikePath") box(x1 + 24, (ft.join || 130) - 30, x1 + 52, H);
+      if (ft.type === "tunnel") box(0, 0, W, (ft.y || 90) + 6);
+      if (ft.type === "inTunnel" || ft.type === "lot") box(0, 0, W, H);
+      if (ft.type === "sign" || ft.type === "light") { const sx = ft.x != null ? ft.x : sd === "left" ? x0 - 16 : x1 + 16; box(sx - 16, y - 40, sx + 16, y + 8); }
+      if (ft.type === "zebra") { box(x1, y - 50, x1 + 30, y + 10); box(x0 - 30, y - 10, x0, y + 50); }
+    });
+    (cfg.actors || []).forEach(a => { if (a.x != null && (a.x < x0 - 4 || a.x > x1 + 4)) box(a.x - 22, a.y - 26, a.x + 22, a.y + 26); });
+    (cfg.tags || []).forEach(t => box(t.x - t.text.length * 3.5 - 8, t.y - 10, t.x + t.text.length * 3.5 + 8, t.y + 10));
+    const hit = (a, b, c, d) => busy.some(([e, f2, g2, h2]) => a < g2 && c > e && b < h2 && d > f2);
+    let decorSvg = "";
+    decor.forEach(([k, x, y, w, h]) => {
+      if (k === "tree") { if (!hit(x - w, y - w, x + w, y + w)) decorSvg += tree(x, y, w); }
+      else if (!hit(x, y, x + w, y + h)) decorSvg += house(x, y, w, h);
+    });
+
     /* участники */
     let beams = "";
     (cfg.actors || []).forEach((a, i) => {
@@ -695,7 +748,7 @@
       actors += actor(Object.assign(p, { rot: PEOPLE.indexOf(a.kind) >= 0 ? (a.rot || 0) : rot }));
     });
     const night = cfg.weather === "night" || cfg.weather === "dusk";
-    return svg(ground + road + marks + over + furniture + actors + overlay(cfg.weather) + (night ? beams : "") + top + tagsFor(cfg), { label: cfg.alt });
+    return svg(ground + road + marks + over + decorSvg + furniture + actors + overlay(cfg.weather) + (night ? beams : "") + top + tagsFor(cfg), { label: cfg.alt, three: true });
   }
 
   /* Особенности прямой дороги. Каждая возвращает слои { ground, road, marks, over, furniture, top } */
@@ -735,7 +788,7 @@
       road += `<rect x="${wx}" y="${y - w / 2}" width="24" height="${w}" fill="${P.walk}"/><line x1="${wx}" y1="${y - w / 2}" x2="${wx + 24}" y2="${y - w / 2}" stroke="${P.walkLine}"/><line x1="${wx}" y1="${y + w / 2}" x2="${wx + 24}" y2="${y + w / 2}" stroke="${P.walkLine}"/>`;
       if (ft.building) road += `<rect x="${s === "right" ? g.x1 + 40 : 0}" y="${y - w / 2 - 34}" width="${s === "right" ? W - g.x1 - 40 : g.x0 - 40}" height="${w + 68}" fill="#c3c9d0"/><rect x="${s === "right" ? g.x1 + 40 : g.x0 - 44}" y="${y - w / 2}" width="4" height="${w}" fill="#2a2f36"/>`;
       if (ft.lines) road += Array.from({ length: 4 }, (_, i) => `<line x1="${s === "right" ? g.x1 + 40 + i * 30 : g.x0 - 40 - i * 30}" y1="${y - w / 2 - 30}" x2="${s === "right" ? g.x1 + 40 + i * 30 : g.x0 - 40 - i * 30}" y2="${y - w / 2 - 4}" stroke="#fff" stroke-width="1.4" opacity="0.7"/>`).join("");
-      const furniture = ft.label ? tag(ft.label, s === "right" ? Math.min(W - 40, g.x1 + 74) : Math.max(40, g.x0 - 74), y - w / 2 - 12, { bg: ft.label === "P" ? "#1b5bc7" : "#fff", color: ft.label === "P" ? "#fff" : P.ink }) : "";
+      const furniture = ft.label ? tag(ft.label, s === "right" ? Math.min(W - 40, g.x1 + 96) : Math.max(40, g.x0 - 96), y - w / 2 - 22, { bg: ft.label === "P" ? "#1b5bc7" : "#fff", color: ft.label === "P" ? "#fff" : P.ink }) : "";
       return { road, furniture };
     },
     /* велополоса у правого края: { side } */
@@ -775,10 +828,10 @@
         `<g stroke="#8c949c" stroke-width="3"><line x1="0" y1="${y - 8}" x2="${W}" y2="${y - 8}"/><line x1="0" y1="${y + 8}" x2="${W}" y2="${y + 8}"/></g>`;
       let road = `<rect x="${g.x0}" y="${y - 20}" width="${g.x1 - g.x0}" height="40" fill="#646d78"/><g stroke="#8c949c" stroke-width="3"><line x1="${g.x0}" y1="${y - 8}" x2="${g.x1}" y2="${y - 8}"/><line x1="${g.x0}" y1="${y + 8}" x2="${g.x1}" y2="${y + 8}"/></g>`;
       let furniture = sign("cross", g.x1 + 18, y + 54, 26);
-      if (ft.lights) furniture += `<g transform="translate(${g.x1 + 18} ${y + 30})"><rect x="-13" y="-5" width="26" height="10" rx="5" fill="#1f2630"/>` +
+      if (ft.lights) furniture += M({ t: "raillight", x: g.x1 + 18, y: y + 30, state: ft.lights }, `<g transform="translate(${g.x1 + 18} ${y + 30})"><rect x="-13" y="-5" width="26" height="10" rx="5" fill="#1f2630"/>` +
         (ft.lights === "flash"
           ? `<circle cx="-7" r="3.8" fill="#ff2a1a"><animate attributeName="opacity" values="1;0.1;1" dur="1s" repeatCount="indefinite"/></circle><circle cx="7" r="3.8" fill="#ff2a1a"><animate attributeName="opacity" values="0.1;1;0.1" dur="1s" repeatCount="indefinite"/></circle>`
-          : `<circle cx="-7" r="3.8" fill="#4a1d1a"/><circle cx="7" r="3.8" fill="#4a1d1a"/>`) + `</g>`;
+          : `<circle cx="-7" r="3.8" fill="#4a1d1a"/><circle cx="7" r="3.8" fill="#4a1d1a"/>`) + `</g>`);
       let marks = `<rect x="${g.x0 + 2}" y="${y + 34}" width="${g.x1 - g.x0 - 4}" height="4" fill="${P.line}"/>`;
       if (ft.barriers) {
         const down = ft.barriers === "down";
@@ -800,11 +853,12 @@
         `<rect x="${g.x0 - 10}" y="0" width="${g.x1 - g.x0 + 20}" height="${y}" fill="#1a1e24" opacity="0.92"/>` +
         `<rect x="${g.x0 - 16}" y="${y - 10}" width="${g.x1 - g.x0 + 32}" height="12" rx="3" fill="#a4abb3"/>` +
         (ft.inside ? Array.from({ length: 4 }, (_, i) => `<circle cx="${g.x0 - 4}" cy="${12 + i * 20}" r="2" fill="#ffd36a"/><circle cx="${g.x1 + 4}" cy="${12 + i * 20}" r="2" fill="#ffd36a"/>`).join("") : "");
-      return { over, furniture: ft.sign ? sign("tunnel", g.x1 + 22, y + 70, 26) : "" };
+      return { over: M({ t: "tunnel", y, x0: g.x0, x1: g.x1 }, over), furniture: ft.sign ? sign("tunnel", g.x1 + 22, y + 70, 26) : "" };
     },
     /* весь вид внутри тоннеля: стены, освещение, аварийный выход */
     inTunnel(ft, g) {
-      const ground = `<rect x="0" y="0" width="${W}" height="${H}" fill="#2a2f36"/>` +
+      const walls = M({ t: "tunnelWalls", x0: g.x0, x1: g.x1 }, "");
+      const ground = walls + `<rect x="0" y="0" width="${W}" height="${H}" fill="#2a2f36"/>` +
         `<rect x="${g.x0 - 20}" y="0" width="${g.x1 - g.x0 + 40}" height="${H}" fill="#3a414a"/>`;
       let furniture = Array.from({ length: 8 }, (_, i) => `<rect x="${g.x0 - 16}" y="${i * 40 + 8}" width="6" height="16" rx="2" fill="#ffd36a" opacity="0.9"/><rect x="${g.x1 + 10}" y="${i * 40 + 8}" width="6" height="16" rx="2" fill="#ffd36a" opacity="0.9"/>`).join("");
       if (ft.exit) furniture += `<g transform="translate(${g.x1 + 34} ${ft.exit})"><rect x="-14" y="-12" width="28" height="24" rx="3" fill="#16a34a"/><path d="M -6 6 L -2 -2 L 2 2 L 6 -6 M 2 -6 L 6 -6 L 6 -2" stroke="#fff" stroke-width="2" fill="none"/></g>`;
@@ -872,7 +926,7 @@
       const over = `<rect x="${g.x0 - 10}" y="${y - h / 2}" width="${g.x1 - g.x0 + 20}" height="${h}" fill="#8e98a2"/><rect x="${g.x0}" y="${y - h / 2}" width="${g.x1 - g.x0}" height="${h}" fill="${ft.icy ? "#aab8c6" : P.asph}"/>` +
         (ft.icy ? Array.from({ length: 10 }, (_, i) => `<path d="M ${g.x0 + 8 + (i * 13) % (g.x1 - g.x0 - 16)} ${y - h / 2 + 6 + i * 7} l 6 3" stroke="#eaf4ff" stroke-width="1.6"/>`).join("") : "") +
         `<rect x="${g.x0 - 10}" y="${y - h / 2}" width="4" height="${h}" fill="#c7ccd2"/><rect x="${g.x1 + 6}" y="${y - h / 2}" width="4" height="${h}" fill="#c7ccd2"/>`;
-      return { ground, over };
+      return { ground, over: over + M({ t: "bridge", y, h, x0: g.x0, x1: g.x1 }, "") };
     },
     /* лужа / наледь на полосе: { y, x, kind: "water"|"ice" } */
     puddle(ft, g) {
@@ -896,7 +950,7 @@
       let top = "";
       if (ft.train) {
         const dir = ft.train.dir || 1, y = ft.train.y || 60;
-        top += `<g transform="translate(${x} ${y}) rotate(${dir > 0 ? 90 : -90})">${trainSprite(0, 0, 1)}</g>`;
+        top += M({ t: "train", x, y, dir: 1, rot: dir > 0 ? 90 : -90 }, `<g transform="translate(${x} ${y}) rotate(${dir > 0 ? 90 : -90})">${trainRaw(0, 0, 1)}</g>`);
         if (ft.train.lights) top += `<g transform="translate(${x} ${y + dir * 64}) rotate(${dir > 0 ? 180 : 0})"><path d="M -8 0 L -30 -120 L 30 -120 L 8 0 Z" fill="#fff4b8" opacity="0.28"/></g>`;
       }
       return { ground, top };
@@ -926,15 +980,18 @@
         `<g transform="translate(8 18) scale(0.8)"><ellipse rx="8.5" ry="5.2" fill="#f08c1a"/><circle cy="0.4" r="4" fill="#3b2a20"/></g>` +
         `<path d="M 14 8 L 20 24 M 20 24 L 17 30" stroke="#e0483a" stroke-width="2.2" stroke-linecap="round"/>` +
         `<text y="74" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="9" fill="${P.ink}">${ft.text || "BELTET LØSNET"}</text></g>`;
-      return { top };
+      return { top: M({ t: "ui", x, y, z: 0, card: true }, top) };
     },
     /* солнце низко впереди */
-    lowSun() { return { top: `<defs><radialGradient id="skLow" cx="0.5" cy="0" r="0.75"><stop offset="0" stop-color="#fff8d6" stop-opacity="1"/><stop offset="0.5" stop-color="#ffe7a0" stop-opacity="0.55"/><stop offset="1" stop-color="#ffe7a0" stop-opacity="0"/></radialGradient></defs><rect width="${W}" height="${H}" fill="url(#skLow)"/><circle cx="200" cy="-6" r="34" fill="#fffbe6"/>` }; },
+    lowSun() { return { top: FX("lowsun", `<defs><radialGradient id="skLow" cx="0.5" cy="0" r="0.75"><stop offset="0" stop-color="#fff8d6" stop-opacity="1"/><stop offset="0.5" stop-color="#ffe7a0" stop-opacity="0.55"/><stop offset="1" stop-color="#ffe7a0" stop-opacity="0"/></radialGradient></defs><rect width="${W}" height="${H}" fill="url(#skLow)"/><circle cx="200" cy="-6" r="34" fill="#fffbe6"/>`) }; },
     /* уклон: стрелка и подпись */
     slope(ft) { return { top: tag(ft.text || "BRATT BAKKE ↓", ft.x || 340, ft.y || 24, { size: 8.5 }) }; }
   };
 
-  function trainSprite(x, y, dir) {
+  function trainSprite(x, y, dir, rot) {
+    return M({ t: "train", x, y, dir, rot: rot || 0 }, trainRaw(x, y, dir));
+  }
+  function trainRaw(x, y, dir) {
     const cars = [0, 1, 2, 3].map(i => `<rect x="${-i * 92 * dir - 44}" y="-12" width="88" height="24" rx="5" fill="${i === 0 ? "#c8202c" : "#d6dbe0"}" stroke="#9aa3ac" stroke-width="1"/>` +
       `<g fill="${P.glass}" opacity="0.6">${[0, 1, 2, 3, 4].map(k => `<rect x="${-i * 92 * dir - 38 + k * 16}" y="-9" width="10" height="4" rx="1"/><rect x="${-i * 92 * dir - 38 + k * 16}" y="5" width="10" height="4" rx="1"/>`).join("")}</g>`).join("");
     const nose = `<path d="M ${44 * dir} -12 Q ${58 * dir} -12 ${60 * dir} 0 Q ${58 * dir} 12 ${44 * dir} 12 Z" fill="#c8202c"/>`;
@@ -958,9 +1015,10 @@
     g += `<rect x="${x0}" y="0" width="${x1 - x0}" height="${H}" fill="${P.asph}"/><line x1="${(x0 + x1) / 2}" y1="0" x2="${(x0 + x1) / 2}" y2="${H}" stroke="${P.yellow}" stroke-width="2.4" stroke-dasharray="14 10"/>`;
     g += `<rect width="${W}" height="${H}" fill="url(#skHill${down ? "D" : "U"})"/>`;
     /* табличка: стрелка показывает, куда идёт склон вниз */
-    g += `<g transform="translate(58 150)"><rect x="-44" y="-50" width="88" height="100" rx="12" fill="#fff" opacity="0.94"/>` +
+    g += `<g data-fx="tilt-${down ? "down" : "up"}"></g>` + (curb ? M({ t: "curb", x: x1, y0: 0, y1: H }, "") : "");
+    g += M({ t: "ui", x: 58, y: 150, z: 0 }, `<g transform="translate(58 150)"><rect x="-44" y="-50" width="88" height="100" rx="12" fill="#fff" opacity="0.94"/>` +
       `<path d="M 0 ${-26 * fall} L 0 ${22 * fall}" stroke="${P.ink}" stroke-width="3"/><polygon points="-8,${14 * fall} 8,${14 * fall} 0,${28 * fall}" fill="${P.ink}"/>` +
-      `<text y="${down ? 40 : -36}" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="8.5" fill="${P.ink}">NEDOVER</text></g>`;
+      `<text y="${down ? 40 : -36}" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="8.5" fill="${P.ink}">NEDOVER</text></g>`);
     g += tag(down ? "BILEN PEKER NEDOVER" : "BILEN PEKER OPPOVER", 185, 18, { size: 8 });
     if (curb) g += tag("FORTAUSKANT", x1 + 17, 286, { size: 7.5 }); else g += tag("GRØFT", x1 + 15, 286, { size: 7.5 });
     /* машина у правого края, нос вверх; руль к краю = +28°, от края = −28° */
@@ -974,7 +1032,7 @@
     const startY = cy + 26 * fall, endY = cy + 100 * fall;
     const target = [toEdge ? x1 + (curb ? -2 : 12) : wh === "straight" ? cx : x0 + 40, endY];
     g += arrow(wh === "straight" ? [[cx, startY], target] : [[cx, startY], [cx, startY + 18 * fall], target], wh === "straight" ? P.orange : toEdge ? P.green : P.red, { width: 2.8, dash: "5 5", head: 9, radius: 18 });
-    return svg(g, { label: cfg.alt, bg: P.grass });
+    return svg(g, { label: cfg.alt, bg: P.grass, three: true });
   }
 
   /* =====================================================================

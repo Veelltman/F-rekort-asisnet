@@ -25,6 +25,7 @@
   <button data-f="all">Все</button><button data-f="static">Только задачи</button><button data-f="gen">Только генераторы</button><button data-f="none">Без картинки</button>
 </div>
 <div class="grid" id="grid"></div>
+<script>if (location.hash.includes("flat=1")) window.SCENES_3D = false;</script>
 <script src="js/scene-kit.js"></script>
 <script src="js/data/situational.js"></script>
 <script src="js/data/generated.js"></script>
@@ -63,5 +64,6 @@
   window.addEventListener("hashchange", fromHash);
   fromHash();
 </script>
+<script type="module" src="js/scene3d.js"></script>
 </body>
 </html>
