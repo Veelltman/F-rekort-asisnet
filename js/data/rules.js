@@ -1276,7 +1276,42 @@
       ],
       "Trafikkreglene § 5 nr 2: kjøring i tungtrafikkfelt er bare tillatt som angitt på offentlig trafikkskilt, men uniformert utrykningskjøretøy kan alltid bruke feltet. Skilt 506 Tungtrafikkfelt viser et felt for motorvogn med tillatt totalvekt høyere enn angitt. Elbilens unntak i § 5 nr 2 gjelder bare kollektivfelt og sambruksfelt.",
       "Trafikkreglene § 5 nr 2: ездить по полосе для тяжёлого транспорта можно только так, как указано на знаке; униформированные машины экстренных служб могут пользоваться ею всегда. Знак 506 Tungtrafikkfelt обозначает полосу для машин с разрешённой полной массой больше указанной. Исключение для электромобилей в § 5 nr 2 касается только kollektivfelt и sambruksfelt.",
-      "Электромобилю можно в kollektivfelt, но не в tungtrafikkfelt — там решает вес на знаке.")
+      "Электромобилю можно в kollektivfelt, но не в tungtrafikkfelt — там решает вес на знаке."),
+
+    q("116", "Du skal kjøre en kort tur til butikken og oppdager at du ikke har førerkortet med deg. Hva sier vegtrafikkloven?",
+      "Ты собираешься съездить в магазин недалеко и замечаешь, что прав с собой нет. Что говорит vegtrafikkloven?",
+      [
+        ["Under kjøring skal føreren alltid ha førerkortet med seg, også på korte turer", "Во время езды водитель всегда должен иметь права при себе, даже на короткой поездке"],
+        ["Det holder at politiet kan sjekke førerretten min i registeret", "Достаточно того, что полиция может проверить мои права по базе", "Loven sier at føreren skal ha førerkortet med seg under kjøring (vegtrafikkloven § 24). At politiet kan finne opplysninger i et register, endrer ikke plikten.", "Закон требует иметь права при себе во время езды (vegtrafikkloven § 24). То, что полиция может найти данные в базе, эту обязанность не отменяет."],
+        ["Kravet gjelder bare på lange turer eller utenfor egen kommune", "Требование действует только в дальних поездках или за пределами своей коммуны", "Plikten gjelder all kjøring. Loven skiller ikke mellom korte og lange turer (vegtrafikkloven § 24).", "Обязанность касается любой езды. Закон не делит поездки на короткие и дальние (vegtrafikkloven § 24)."],
+        ["Kravet gjelder bare i prøveperioden de to første årene", "Требование действует только в испытательный срок, первые два года", "Prøveperioden har betydning for prikker, ikke for denne plikten. Alle førere skal ha førerkortet med seg (vegtrafikkloven § 24).", "Испытательный срок влияет на штрафные баллы, а не на эту обязанность. Права при себе должен иметь каждый водитель (vegtrafikkloven § 24)."]
+      ],
+      "Vegtrafikkloven § 24: den som skal føre motorvogn, må ha førerett og førerkort for denne gruppen av motorvogner. Under kjøring skal føreren alltid ha førerkortet med seg. Ved trafikkontroll skal du vise fram offentlige dokumenter som det er påbudt å ha med under kjøringen (forskrift om bruk av kjøretøy § 1-8 c).",
+      "Vegtrafikkloven § 24: чтобы управлять машиной, нужны право управления и водительское удостоверение на эту категорию. Во время езды водитель всегда должен иметь права при себе. На проверке нужно показать официальные документы, которые положено возить с собой (forskrift om bruk av kjøretøy § 1-8 c).",
+      "Ключи от машины и права — в одном кармане. Нет прав с собой — не садись за руль, даже «только до магазина»."),
+
+    q("117", "Du ser en syklist som sykler på fortauet. Hva sier trafikkreglene om sykling på fortau?",
+      "Ты видишь велосипедиста, который едет по тротуару. Что говорят правила про езду на велосипеде по тротуару?",
+      [
+        ["Det er lov når det er lite gangtrafikk og ikke er til fare eller hinder for gående. Forbi gående skal syklisten kjøre i gangfart, ikke over 6 km/t", "Можно, когда пешеходов мало и это не опасно и не мешает им. Мимо пешеходов велосипедист едет со скоростью шага, не быстрее 6 км/ч"],
+        ["Det er alltid forbudt å sykle på fortauet", "Ездить на велосипеде по тротуару запрещено всегда", "Trafikkreglene § 18 nr 3 tillater sykling på fortau når gangtrafikken er liten og syklingen ikke gir fare eller hinder for gående.", "Trafikkreglene § 18 nr 3 разрешает ездить по тротуару, когда пешеходов мало и велосипедист не создаёт им опасности и помех."],
+        ["Det er lov i hvilken som helst fart, bare syklisten ringer med bjella", "Можно с любой скоростью, лишь бы велосипедист звонил в звонок", "Bjella gir ingen ekstra rett. Forbi gående skal syklisten holde god avstand og kjøre i tilnærmet gangfart, ikke over 6 km/t (§ 18 nr 3).", "Звонок никаких особых прав не даёт. Мимо пешеходов велосипедист держит хорошую дистанцию и едет почти со скоростью шага, не быстрее 6 км/ч (§ 18 nr 3)."],
+        ["Det er bare lov for barn under 12 år", "Можно только детям младше 12 лет", "Trafikkreglene har ingen aldersgrense for sykling på fortau. Det som avgjør, er hvor mye gangtrafikk det er, og at gående ikke utsettes for fare (§ 18 nr 3).", "В правилах нет возрастного ограничения для езды по тротуару. Решает то, сколько там пешеходов и не создаётся ли для них опасность (§ 18 nr 3)."]
+      ],
+      "Trafikkreglene § 18 nr 3: sykling på gangveg, fortau eller i gangfelt er tillatt når gangtrafikken er liten og syklingen ikke medfører fare eller er til hinder for gående. Ved passering av gående skal syklisten holde god avstand, kjøre i tilnærmet gangfart og uansett ikke fortere enn 6 km/t. Som bilfører må du regne med syklister på fortauet, for eksempel når du krysser fortauet ved en innkjørsel.",
+      "Trafikkreglene § 18 nr 3: ездить на велосипеде по пешеходной дорожке, тротуару или переходу можно, когда пешеходов мало и это не опасно и не мешает им. Проезжая мимо пешеходов, велосипедист держит хорошую дистанцию, едет почти со скоростью шага и в любом случае не быстрее 6 км/ч. Водителю стоит помнить, что на тротуаре бывают велосипедисты, например когда пересекаешь тротуар у въезда во двор.",
+      "Велосипед на тротуаре — законно, если пешеходов мало. Мимо людей — не быстрее 6 км/ч."),
+
+    qm("m26", "Hva må du forvisse deg om før du begynner å kjøre forbi? Velg alle riktige.", "В чём нужно убедиться, прежде чем начать обгон? Выбери все верные.", [
+      ["At vegen er fri for hinder langt nok framover", "Что дорога впереди свободна на достаточно длинном участке", true],
+      ["At du helt sikkert kan komme inn i trafikkstrømmen igjen uten å forstyrre den", "Что ты точно сможешь вернуться в поток, никому не помешав", true],
+      ["At bilen foran kjører minst 10 km/t under fartsgrensen", "Что машина впереди едет как минимум на 10 км/ч медленнее лимита", false, "Trafikkreglene har ingen slik regel. § 12 nr 2 handler om fri veg, signal fra bilen foran og bak deg og om du kommer trygt inn igjen, ikke om farten til den du kjører forbi.", "В правилах такого нет. § 12 nr 2 говорит о свободной дороге, сигналах машин впереди и сзади и о том, сможешь ли ты безопасно вернуться, а не о скорости того, кого обгоняешь."],
+      ["At du har blinket i minst 5 sekunder før du legger deg ut", "Что ты мигал поворотником не меньше 5 секунд, прежде чем выехать", false, "Du skal gi tegn før du endrer plass i sideretning (§ 14 nr 2), men det finnes ikke noe krav om et bestemt antall sekunder.", "Сигнал перед смещением в сторону подать нужно (§ 14 nr 2), но никакого требования о точном числе секунд нет."]
+    ],
+    "Trafikkreglene § 12 nr 2: før forbikjøring skal du forvisse deg om at a) vegen er fri for hinder på tilstrekkelig lang strekning framover, b) den forankjørende ikke har gitt tegn om forbikjøring, c) ingen bakenforkjørende har begynt å kjøre forbi deg, og d) det åpenbart lar seg gjøre å komme inn i trafikkstrømmen igjen uten å forstyrre den.",
+    "Trafikkreglene § 12 nr 2: перед обгоном нужно убедиться, что а) дорога впереди свободна на достаточно длинном участке, б) машина впереди не показала, что сама идёт на обгон, в) тебя сзади никто уже не начал обгонять и г) ты явно сможешь вернуться в поток, никому не помешав.",
+    "Перед обгоном четыре вопроса: впереди свободно? передний не обгоняет? меня сзади не обгоняют? есть куда вернуться?")
+
 
   ];
 

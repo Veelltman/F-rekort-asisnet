@@ -234,7 +234,10 @@
     w("194", "parkeringsbrems / håndbrekk", "стояночный тормоз, ручник", "Sett på parkeringsbremsen før du går ut av bilen.", "Поставь машину на ручник, прежде чем выйти.", "Машина"),
     w("195", "alkotest / blåseprøve", "проверка алкотестером («дыхнуть в трубку»)", "Politiet kan be deg ta en alkotest i en vanlig trafikkontroll.", "Полиция может попросить тебя дыхнуть в алкотестер на обычной проверке.", "Правила"),
     w("196", "brannslukker / håndslokker", "огнетушитель", "En registrert campingvogn skal ha en brannslukker på minst 2 kg.", "В зарегистрированном жилом прицепе должен быть огнетушитель не меньше 2 кг.", "Машина"),
-    w("197", "tungtrafikkfelt", "полоса для тяжёлого транспорта", "En vanlig personbil kan ikke kjøre i tungtrafikkfeltet.", "Обычной легковой машине нельзя ехать по полосе для тяжёлого транспорта.", "Основное")
+    w("197", "tungtrafikkfelt", "полоса для тяжёлого транспорта", "En vanlig personbil kan ikke kjøre i tungtrafikkfeltet.", "Обычной легковой машине нельзя ехать по полосе для тяжёлого транспорта.", "Основное"),
+    w("198", "sykkelveg", "велодорожка", "Bilen må ikke kjøre på sykkelvegen. Den er for syklister og elsparkesykler.", "Машине нельзя ехать по велодорожке. Она для велосипедов и электросамокатов.", "Основное"),
+    w("199", "vannpytt", "лужа", "Kjør sakte forbi vannpytter når det står folk på fortauet.", "Проезжай лужи медленно, если на тротуаре стоят люди.", "Условия"),
+    w("200", "uoversiktlig", "с плохим обзором", "Det er forbudt å stanse i en uoversiktlig kurve.", "В повороте с плохим обзором останавливаться запрещено.", "Условия")
 
   ];
 })();
