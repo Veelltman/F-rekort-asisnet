@@ -1310,7 +1310,42 @@
     ],
     "Trafikkreglene § 12 nr 2: før forbikjøring skal du forvisse deg om at a) vegen er fri for hinder på tilstrekkelig lang strekning framover, b) den forankjørende ikke har gitt tegn om forbikjøring, c) ingen bakenforkjørende har begynt å kjøre forbi deg, og d) det åpenbart lar seg gjøre å komme inn i trafikkstrømmen igjen uten å forstyrre den.",
     "Trafikkreglene § 12 nr 2: перед обгоном нужно убедиться, что а) дорога впереди свободна на достаточно длинном участке, б) машина впереди не показала, что сама идёт на обгон, в) тебя сзади никто уже не начал обгонять и г) ты явно сможешь вернуться в поток, никому не помешав.",
-    "Перед обгоном четыре вопроса: впереди свободно? передний не обгоняет? меня сзади не обгоняют? есть куда вернуться?")
+    "Перед обгоном четыре вопроса: впереди свободно? передний не обгоняет? меня сзади не обгоняют? есть куда вернуться?"),
+
+    q("118", "Du vil spare penger og setter piggdekk bare på forhjulene. Bak har du piggfrie vinterdekk. Er dette lov på en vanlig personbil?",
+      "Хочешь сэкономить и ставишь шипованную резину только на передние колёса, а сзади — зимние шины без шипов. Так можно на обычной легковой машине?",
+      [
+        ["Nei. Har personbilen piggdekk, skal den ha piggdekk på alle hjul. Unntaket er piggdekk på én aksel og kjetting på de andre hjulene", "Нет. Если на легковушке шипы, они должны быть на всех колёсах. Исключение — шипы на одной оси и цепи на остальных колёсах"],
+        ["Ja, så lenge forhjulene er drivhjul", "Да, если передние колёса ведущие", "Forskriften skiller ikke mellom drivhjul og andre hjul. Piggdekk skal være på alle hjul (bruksforskriften § 1-4 (4) nr 2).", "Правила не делят колёса на ведущие и неведущие. Шипы должны стоять на всех колёсах (bruksforskriften § 1-4 (4) nr 2)."],
+        ["Ja, alle fire dekkene er vinterdekk, og det er nok", "Да, все четыре шины зимние, этого достаточно", "Det holder ikke at alle dekkene er vinterdekk. Med pigger på bare én aksel får bilen ulikt veggrep foran og bak, og derfor krever forskriften pigger på alle hjul.", "Того, что все шины зимние, мало. С шипами только на одной оси сцепление спереди и сзади разное, поэтому правила требуют шипы на всех колёсах."],
+        ["Nei, piggdekk skal bare sitte på bakhjulene", "Нет, шипы ставят только на задние колёса", "Det finnes ingen slik regel. Kravet er piggdekk på alle hjul, ikke bare foran eller bare bak.", "Такого правила нет. Требование — шипы на всех колёсах, а не только спереди или только сзади."]
+      ],
+      "Forskrift om bruk av kjøretøy § 1-4 (4) nr 2: dersom bil med tillatt totalvekt ikke over 3 500 kg utstyres med piggdekk, skal kjøretøyet ha piggdekk på alle hjul. Bil kan likevel ha piggdekk på én aksel og kjetting ellers. I tillegg skal det være tilnærmet like mange pigger i alle piggdekk (nr 5).",
+      "Forskrift om bruk av kjøretøy § 1-4 (4) nr 2: если на машину с разрешённой полной массой до 3 500 кг ставят шипованную резину, шипы должны быть на всех колёсах. Можно, правда, шипы на одной оси и цепи на остальных. И во всех шинах должно быть примерно одинаковое число шипов (nr 5).",
+      "Шипы — все четыре или ни одного. Единственный вариант «наполовину» — шипы на одной оси плюс цепи на другой."),
+
+    q("119", "Det er 20. oktober i Sør-Norge. På en fjellovergang har det kommet snø, og vegen er dekket av is. Kan du bruke kjetting på personbilen?",
+      "20 октября, юг Норвегии. На горном перевале выпал снег, дорога покрыта льдом. Можно поставить цепи на легковую машину?",
+      [
+        ["Ja, kjetting er lov også før 1. november når føret gjør det nødvendig", "Да, цепи можно и до 1 ноября, если этого требуют дорожные условия"],
+        ["Nei, kjetting er først lov fra 1. november", "Нет, цепи разрешены только с 1 ноября", "Forbudsperioden har et unntak: kjetting kan brukes når føreforholdene gjør det nødvendig (bruksforskriften § 1-4 (5) nr 1). Snø og is er nettopp et slikt føre.", "У запретного периода есть исключение: цепи можно, когда этого требуют условия на дороге (bruksforskriften § 1-4 (5) nr 1). Снег и лёд — как раз тот случай."],
+        ["Ja, kjetting kan brukes hele året, også på bar og tørr veg", "Да, цепи можно круглый год, даже на сухом голом асфальте", "Fra første mandag etter 2. påskedag til og med 31. oktober er kjetting forbudt om ikke føret gjør det nødvendig. På bar veg er det ikke nødvendig, og kjettingen skader vegen.", "С первого понедельника после второго дня Пасхи по 31 октября цепи запрещены, если только их не требуют условия. На сухом асфальте они не нужны и только портят дорогу."],
+        ["Nei, kjetting er bare lov på tunge kjøretøy over 3 500 kg", "Нет, цепи разрешены только тяжёлым машинам больше 3 500 кг", "Tunge kjøretøy har plikt til å ha med kjetting om vinteren, men personbiler har også lov til å bruke kjetting når føret krever det.", "Тяжёлые машины обязаны возить с собой цепи зимой, но и легковым цепи можно ставить, когда этого требует дорога."]
+      ],
+      "Forskrift om bruk av kjøretøy § 1-4 (5) nr 1: kjetting må ikke brukes fra og med første mandag etter 2. påskedag til og med 31. oktober om ikke føreforholdene gjør det nødvendig. I Nordland, Troms og Finnmark er perioden 1. mai til 15. oktober. På snø og is i oktober er kjetting altså lov. Den samme regelen med unntak gjelder piggdekk (§ 1-4 (4) nr 1).",
+      "Forskrift om bruk av kjøretøy § 1-4 (5) nr 1: цепи нельзя использовать с первого понедельника после второго дня Пасхи по 31 октября, если этого не требуют условия на дороге. В Nordland, Troms и Finnmark этот период — с 1 мая по 15 октября. Так что на снегу и льду в октябре цепи можно. То же правило с тем же исключением действует для шипов (§ 1-4 (4) nr 1).",
+      "Даты для шипов и цепей — не замок, а правило «по умолчанию». Лёг снег раньше — можно раньше."),
+
+    qm("m27", "Forbikjøring er som hovedregel forbudt like foran eller i vegkryss. Når gjelder ikke dette forbudet? Velg alle riktige.",
+      "Как правило, обгон прямо перед перекрёстком или на нём запрещён. Когда этот запрет не действует? Выбери все верные.", [
+      ["Når kjørebanen har to eller flere kjørefelt i din kjøreretning", "Когда в твою сторону две полосы или больше", true],
+      ["Når trafikken i krysset reguleres av trafikklys eller politi", "Когда движение на перекрёстке регулирует светофор или полиция", true],
+      ["Når trafikken på den kryssende vegen har vikeplikt etter skilt, for eksempel fordi du kjører på forkjørsveg", "Когда движение на пересекаемой дороге по знаку должно уступать — например, ты едешь по главной (forkjørsveg)", true],
+      ["Når vegen har ett felt i hver retning og krysset er uten skilt og lys, men du ser at det ikke kommer noen fra sidevegene", "Когда на дороге по одной полосе в каждую сторону, перекрёсток без знаков и светофора, но ты видишь, что с боковых дорог никто не едет", false, "I et kryss uten skilt gjelder høyreregelen, og forbudet mot forbikjøring gjelder fullt ut. En bil fra sidevegen kan dukke opp på et øyeblikk og ha forrang (§ 12 nr 5 og § 7 nr 2).", "На перекрёстке без знаков действует правило правой руки, и запрет обгона действует полностью. Машина с боковой дороги может появиться в любую секунду, и уступать придётся тебе (§ 12 nr 5 и § 7 nr 2)."]
+    ],
+    "Trafikkreglene § 12 nr 5: forbikjøring er forbudt like foran eller i vegkryss. Dette gjelder ikke a) på kjørebane med to eller flere kjørefelt i kjøreretningen, b) ved forbikjøring til høyre av en bil som svinger til venstre, c) når trafikken i krysset reguleres av trafikklyssignal eller politi, d) når trafikken på kryssende veg har vikeplikt ved skilt. Forbikjøring er likevel forbudt der sikten er hindret, og du må alltid forvisse deg om at det er trygt (§ 12 nr 2).",
+    "Trafikkreglene § 12 nr 5: обгон прямо перед перекрёстком или на нём запрещён. Это не действует а) на дороге с двумя и более полосами в твою сторону, б) при обгоне справа машины, которая поворачивает налево, в) когда движение на перекрёстке регулирует светофор или полиция, г) когда пересекаемая дорога по знаку уступает. Но там, где обзор закрыт, обгон всё равно запрещён, и убедиться в безопасности нужно всегда (§ 12 nr 2).",
+    "Обгон у перекрёстка можно, только если сбоку тебе точно уступят: светофор, полиция, знак «уступи» у них или отдельная полоса у тебя.")
 
 
   ];

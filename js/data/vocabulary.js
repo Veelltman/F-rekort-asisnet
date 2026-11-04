@@ -237,7 +237,11 @@
     w("197", "tungtrafikkfelt", "полоса для тяжёлого транспорта", "En vanlig personbil kan ikke kjøre i tungtrafikkfeltet.", "Обычной легковой машине нельзя ехать по полосе для тяжёлого транспорта.", "Основное"),
     w("198", "sykkelveg", "велодорожка", "Bilen må ikke kjøre på sykkelvegen. Den er for syklister og elsparkesykler.", "Машине нельзя ехать по велодорожке. Она для велосипедов и электросамокатов.", "Основное"),
     w("199", "vannpytt", "лужа", "Kjør sakte forbi vannpytter når det står folk på fortauet.", "Проезжай лужи медленно, если на тротуаре стоят люди.", "Условия"),
-    w("200", "uoversiktlig", "с плохим обзором", "Det er forbudt å stanse i en uoversiktlig kurve.", "В повороте с плохим обзором останавливаться запрещено.", "Условия")
+    w("200", "uoversiktlig", "с плохим обзором", "Det er forbudt å stanse i en uoversiktlig kurve.", "В повороте с плохим обзором останавливаться запрещено.", "Условия"),
+    w("201", "sambruksfelt", "полоса для машин с пассажирами (общая полоса)", "I sambruksfeltet kan du kjøre hvis det sitter minst så mange personer i bilen som skiltet viser.", "По этой полосе можно ехать, если в машине не меньше людей, чем указано на знаке.", "Основное"),
+    w("202", "aksel", "ось (колёс)", "Dekkene på samme aksel skal ha omtrent de samme egenskapene.", "Шины на одной оси должны быть примерно одинаковыми по свойствам.", "Машина"),
+    w("203", "slitebane", "протектор (беговая часть шины)", "Mønsterdybden måles i hovedrillene midt på slitebanen.", "Глубину рисунка меряют в главных канавках посередине протектора.", "Машина")
+
 
   ];
 })();
