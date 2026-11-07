@@ -240,7 +240,10 @@
     w("200", "uoversiktlig", "с плохим обзором", "Det er forbudt å stanse i en uoversiktlig kurve.", "В повороте с плохим обзором останавливаться запрещено.", "Условия"),
     w("201", "sambruksfelt", "полоса для машин с пассажирами (общая полоса)", "I sambruksfeltet kan du kjøre hvis det sitter minst så mange personer i bilen som skiltet viser.", "По этой полосе можно ехать, если в машине не меньше людей, чем указано на знаке.", "Основное"),
     w("202", "aksel", "ось (колёс)", "Dekkene på samme aksel skal ha omtrent de samme egenskapene.", "Шины на одной оси должны быть примерно одинаковыми по свойствам.", "Машина"),
-    w("203", "slitebane", "протектор (беговая часть шины)", "Mønsterdybden måles i hovedrillene midt på slitebanen.", "Глубину рисунка меряют в главных канавках посередине протектора.", "Машина")
+    w("203", "slitebane", "протектор (беговая часть шины)", "Mønsterdybden måles i hovedrillene midt på slitebanen.", "Глубину рисунка меряют в главных канавках посередине протектора.", "Машина"),
+    w("204", "kjørefeltsignal", "сигнал над полосой (крест или стрелка)", "Et rødt kryss i kjørefeltsignalet betyr at du ikke må kjøre i feltet.", "Красный крест в сигнале над полосой значит, что по этой полосе ехать нельзя.", "Основное"),
+    w("205", "politibetjent", "полицейский", "Politibetjenten holder armen rett opp, og alle må stanse.", "Полицейский поднял руку вверх, и все должны остановиться.", "Основное"),
+    w("206", "utsyn", "обзор (из машины)", "Føreren skal ha godt utsyn til alle sider.", "У водителя должен быть хороший обзор во все стороны.", "Условия")
 
 
   ];

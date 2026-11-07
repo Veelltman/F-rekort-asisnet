@@ -1345,7 +1345,42 @@
     ],
     "Trafikkreglene § 12 nr 5: forbikjøring er forbudt like foran eller i vegkryss. Dette gjelder ikke a) på kjørebane med to eller flere kjørefelt i kjøreretningen, b) ved forbikjøring til høyre av en bil som svinger til venstre, c) når trafikken i krysset reguleres av trafikklyssignal eller politi, d) når trafikken på kryssende veg har vikeplikt ved skilt. Forbikjøring er likevel forbudt der sikten er hindret, og du må alltid forvisse deg om at det er trygt (§ 12 nr 2).",
     "Trafikkreglene § 12 nr 5: обгон прямо перед перекрёстком или на нём запрещён. Это не действует а) на дороге с двумя и более полосами в твою сторону, б) при обгоне справа машины, которая поворачивает налево, в) когда движение на перекрёстке регулирует светофор или полиция, г) когда пересекаемая дорога по знаку уступает. Но там, где обзор закрыт, обгон всё равно запрещён, и убедиться в безопасности нужно всегда (§ 12 nr 2).",
-    "Обгон у перекрёстка можно, только если сбоку тебе точно уступят: светофор, полиция, знак «уступи» у них или отдельная полоса у тебя.")
+    "Обгон у перекрёстка можно, только если сбоку тебе точно уступят: светофор, полиция, знак «уступи» у них или отдельная полоса у тебя."),
+
+    q("120", "Ved utkjøringen fra en brannstasjon står et lyssignal over vegen med to røde lys som blinker vekselvis. Du ser ingen brannbil. Hva gjør du?",
+      "У выезда из пожарной части над дорогой висит сигнал: два красных огня мигают по очереди. Пожарной машины не видно. Что делаешь?",
+      [
+        ["Stanser ved stopplinjen eller i trygg avstand foran signalet og kjører ikke forbi så lenge det blinker", "Останавливаюсь у стоп-линии или на безопасном расстоянии перед сигналом и не проезжаю, пока он мигает"],
+        ["Kjører forsiktig forbi: blinkende lys betyr bare at jeg skal være ekstra oppmerksom", "Осторожно проезжаю: мигающий свет значит только «будь внимательнее»", "Det gjelder gult blinksignal (1098). Rødt stoppblinksignal (1094) betyr at du ikke må passere i det hele tatt.", "Это про мигающий жёлтый (сигнал 1098). Красный мигающий стоп-сигнал (1094) значит, что проезжать нельзя вообще."],
+        ["Kjører forbi hvis jeg ikke ser noen utrykningskjøretøy", "Проезжаю, если не вижу машин экстренных служб", "Forbudet gjelder uansett hva du ser. Brannbilen kan komme ut av garasjen i neste sekund.", "Запрет действует независимо от того, что ты видишь. Пожарная машина может выехать из гаража в следующую секунду."],
+        ["Stanser helt, ser meg godt for og kjører videre, som ved et stoppskilt", "Полностью останавливаюсь, внимательно смотрю по сторонам и еду дальше, как у знака «Стоп»", "Ved stoppskilt kan du kjøre etter at du har stanset. Rødt stoppblinksignal kan du ikke passere før det har sluttet å blinke.", "У знака «Стоп» после остановки можно ехать. А мимо красного мигающего сигнала нельзя проезжать, пока он не перестанет мигать."]
+      ],
+      "Skiltforskriften § 24, signal 1094 Rødt stoppblinksignal: trafikant må ikke passere signalet. Stans skal skje ved stopplinjen eller i betryggende avstand foran signalet. Signalet viser ett eller to vekselvis blinkende røde lys. Det brukes der trafikken av og til må stanses helt, for eksempel ved utkjøring for utrykningskjøretøy.",
+      "Skiltforskriften § 24, сигнал 1094 «Rødt stoppblinksignal» (красный мигающий стоп-сигнал): проезжать сигнал нельзя. Останавливаться нужно у стоп-линии или на безопасном расстоянии перед сигналом. Сигнал — один красный огонь или два, мигающих по очереди. Его ставят там, где движение иногда нужно полностью остановить, например у выезда машин экстренных служб.",
+      "Мигает красный — стоишь, как на обычном красном. Мигает жёлтый — едешь, но очень внимательно."),
+
+    q("121", "Du vil bruke telefonen som kart og fester en mobilholder midt på frontruta. Telefonen skjuler nå en del av utsikten framover. Hva sier reglene?",
+      "Ты хочешь использовать телефон как навигатор и крепишь держатель посреди лобового стекла. Теперь телефон закрывает часть обзора вперёд. Что говорят правила?",
+      [
+        ["Det er ikke lov: føreren skal passe på at ingen gjenstand hindrer sikten. Holderen må flyttes dit den ikke skjuler vegen", "Так нельзя: водитель следит, чтобы никакой предмет не мешал обзору. Держатель надо переставить туда, где он не закрывает дорогу"],
+        ["Det er lov, så lenge telefonen sitter i holderen og jeg ikke holder den i hånden", "Можно, раз телефон в держателе и я не беру его в руку", "At telefonen er håndfri, handler om bruken av telefonen. Kravet om fri sikt er et eget krav (bruksforskriften § 1-3), og det gjelder også her.", "То, что телефон в держателе, — это про пользование телефоном. Требование свободного обзора — отдельное (bruksforskriften § 1-3), и оно действует и здесь."],
+        ["Reglene om sikt gjelder bare snø, is og dugg på rutene", "Правила об обзоре касаются только снега, льда и запотевания стёкол", "§ 1-3 nevner også «merke eller annen gjenstand». En telefon på ruta er nettopp en slik gjenstand.", "В § 1-3 названы и «наклейка или другой предмет». Телефон на стекле — как раз такой предмет."],
+        ["Det er lov hvis holderen er godkjent og sitter godt fast", "Можно, если держатель сертифицирован и хорошо закреплён", "Det hjelper ikke at holderen sitter godt. Det som teller, er om den hindrer sikten eller forstyrrer deg.", "Хорошее крепление тут не помогает. Важно одно: мешает ли он обзору или отвлекает ли тебя."]
+      ],
+      "Forskrift om bruk av kjøretøy § 1-3: føreren skal sørge for å ha tilstrekkelig utsyn til alle sider, og skal passe på at snø, is, dugg eller merke eller annen gjenstand ikke hindrer sikten eller virker forstyrrende. Plasser holderen lavt eller ved siden, der den ikke skjuler vegen, og still inn kartet før du kjører.",
+      "Forskrift om bruk av kjøretøy § 1-3: водитель должен обеспечить себе достаточный обзор во все стороны и следить, чтобы снег, лёд, запотевание, наклейки или другие предметы не мешали видеть дорогу и не отвлекали. Ставь держатель пониже или сбоку, где он не закрывает дорогу, а маршрут настраивай до поездки.",
+      "Всё, что на стекле, — проверь из водительского кресла: если за этим может спрятаться пешеход, держателю там не место."),
+
+    qm("m28", "En politibetjent dirigerer trafikken i et kryss. Hva betyr tegnene? Velg alle riktige.",
+      "Полицейский регулирует движение на перекрёстке. Что значат его сигналы? Выбери все верные.", [
+      ["Armen rett opp: alle skal stanse, og den som allerede er i krysset, skal kjøre ut av det", "Рука поднята вверх: все должны остановиться, а кто уже на перекрёстке, должен его покинуть", true],
+      ["Armen rett ut til siden: den som kommer forfra eller bakfra, skal stanse, mens den som kommer fra siden, kan kjøre", "Рука вытянута в сторону: кто едет к полицейскому спереди или сзади, останавливается, а кто подъезжает сбоку, может ехать", true],
+      ["En lykt med rødt lys som svinges fram og tilbake: den som kjører mot lyset, skal stanse", "Фонарь с красным светом, которым машут из стороны в сторону: кто едет в сторону этого света, должен остановиться", true],
+      ["Armen rett ut til siden: alle trafikanter i krysset skal stanse", "Рука вытянута в сторону: все участники движения на перекрёстке останавливаются", false, "Det er armen rett opp som stanser alle. Når armen er rettet ut, skal bare de som kommer forfra eller bakfra stanse. De som kommer fra siden, kan kjøre.", "Всех останавливает поднятая вверх рука. Когда рука вытянута в сторону, стоят только те, кто едет спереди или сзади, а кто подъезжает сбоку — едет."]
+    ],
+    "Skiltforskriften § 25: a) er armen rettet utad, skal trafikant som nærmer seg forfra eller bakfra stanse, mens den som kommer fra siden, kan passere. b) Er armen rettet oppad, skal alle stanse. Den som er kommet så langt fram at bilen ikke kan stanse uten fare, kan fortsette, og den som er i krysset, skal kjøre ut av det. c) Når en lykt med rødt lys svinges fram og tilbake, skal den som ferdes mot lyset stanse. Politiets tegn gjelder foran trafikklys og skilt (trafikkreglene § 3 nr 2).",
+    "Skiltforskriften § 25: а) рука вытянута в сторону — останавливаются те, кто приближается спереди или сзади, а кто едет сбоку, может проезжать. б) Рука поднята вверх — останавливаются все. Кто подъехал так близко, что не может остановиться без опасности, может продолжить движение, а кто уже на перекрёстке, должен его покинуть. в) Машут фонарём с красным светом — останавливается тот, кто едет в сторону этого света. Сигналы полиции важнее светофора и знаков (trafikkreglene § 3 nr 2).",
+    "Видишь грудь или спину полицейского — стой (как красный). Видишь его бок — едь (как зелёный). Рука вверх — как жёлтый: стоят все.")
 
 
   ];
