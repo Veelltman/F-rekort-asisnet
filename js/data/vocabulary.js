@@ -243,7 +243,10 @@
     w("203", "slitebane", "протектор (беговая часть шины)", "Mønsterdybden måles i hovedrillene midt på slitebanen.", "Глубину рисунка меряют в главных канавках посередине протектора.", "Машина"),
     w("204", "kjørefeltsignal", "сигнал над полосой (крест или стрелка)", "Et rødt kryss i kjørefeltsignalet betyr at du ikke må kjøre i feltet.", "Красный крест в сигнале над полосой значит, что по этой полосе ехать нельзя.", "Основное"),
     w("205", "politibetjent", "полицейский", "Politibetjenten holder armen rett opp, og alle må stanse.", "Полицейский поднял руку вверх, и все должны остановиться.", "Основное"),
-    w("206", "utsyn", "обзор (из машины)", "Føreren skal ha godt utsyn til alle sider.", "У водителя должен быть хороший обзор во все стороны.", "Условия")
+    w("206", "utsyn", "обзор (из машины)", "Føreren skal ha godt utsyn til alle sider.", "У водителя должен быть хороший обзор во все стороны.", "Условия"),
+    w("207", "kjennemerke / nummerskilt", "номерной знак", "Kjennemerket bak på bilen må ikke være skjult av sykler eller snø.", "Задний номерной знак не должен быть закрыт велосипедами или снегом.", "Машина"),
+    w("208", "sykkelstativ", "велобагажник (на фаркоп или крышу)", "Skjuler sykkelstativet baklysene, trenger du en lysbjelke.", "Если велобагажник закрывает задние фонари, нужна световая панель.", "Машина"),
+    w("209", "gårdsveg", "дорога к хутору (частная, к ферме)", "Den som kjører ut fra en gårdsveg, har vikeplikt for all trafikk på vegen.", "Кто выезжает с дороги к хутору, уступает всем на дороге.", "Приоритет")
 
 
   ];

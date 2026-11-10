@@ -1380,7 +1380,42 @@
     ],
     "Skiltforskriften § 25: a) er armen rettet utad, skal trafikant som nærmer seg forfra eller bakfra stanse, mens den som kommer fra siden, kan passere. b) Er armen rettet oppad, skal alle stanse. Den som er kommet så langt fram at bilen ikke kan stanse uten fare, kan fortsette, og den som er i krysset, skal kjøre ut av det. c) Når en lykt med rødt lys svinges fram og tilbake, skal den som ferdes mot lyset stanse. Politiets tegn gjelder foran trafikklys og skilt (trafikkreglene § 3 nr 2).",
     "Skiltforskriften § 25: а) рука вытянута в сторону — останавливаются те, кто приближается спереди или сзади, а кто едет сбоку, может проезжать. б) Рука поднята вверх — останавливаются все. Кто подъехал так близко, что не может остановиться без опасности, может продолжить движение, а кто уже на перекрёстке, должен его покинуть. в) Машут фонарём с красным светом — останавливается тот, кто едет в сторону этого света. Сигналы полиции важнее светофора и знаков (trafikkreglene § 3 nr 2).",
-    "Видишь грудь или спину полицейского — стой (как красный). Видишь его бок — едь (как зелёный). Рука вверх — как жёлтый: стоят все.")
+    "Видишь грудь или спину полицейского — стой (как красный). Видишь его бок — едь (как зелёный). Рука вверх — как жёлтый: стоят все."),
+
+    q("122", "En venn vil gi deg en radarvarsler, et apparat som piper når politiet måler farten med radar. Er det lov å ha den i bilen?",
+      "Друг хочет подарить тебе антирадар — прибор, который пищит, когда полиция меряет скорость радаром. Можно держать его в машине?",
+      [
+        ["Nei. Det er forbudt både å ha og å bruke utstyr som varsler om trafikkontroller i en motorvogn", "Нет. В машине запрещено и иметь, и использовать прибор, который предупреждает о проверках на дороге"],
+        ["Ja, det er lov å ha den i bilen, bare ikke å slå den på", "Да, возить можно, нельзя только включать", "Loven forbyr også å besitte slikt utstyr i motorvogn, ikke bare å bruke det (vegtrafikkloven § 13 a).", "Закон запрещает и само наличие такого прибора в машине, а не только его использование (vegtrafikkloven § 13 a)."],
+        ["Ja, så lenge du holder fartsgrensen", "Да, если соблюдаешь ограничение скорости", "Forbudet gjelder selve utstyret. Det spiller ingen rolle om du kjører lovlig fort.", "Запрет касается самого прибора. Неважно, нарушаешь ли ты скорость."],
+        ["Ja, hvis apparatet er kjøpt lovlig i et annet land", "Да, если прибор законно куплен в другой стране", "Det avgjørende er bruk og besittelse i motorvogn i Norge. Hvor apparatet er kjøpt, endrer ikke forbudet.", "Важно, что прибор находится в машине в Норвегии. Где его купили, роли не играет."]
+      ],
+      "Vegtrafikkloven § 13 a: i motorvogn er det forbudt å besitte eller bruke utstyr som har til formål å varsle om eller forstyrre trafikkontroller. Forbudet gjelder også utstyr som blokkerer eller skjuler signaler fra utstyr for kontroll og overvåkning av trafikk. En radarvarsler hører altså ikke hjemme i bilen, selv om den er avslått.",
+      "Vegtrafikkloven § 13 a: в машине запрещено иметь или использовать устройства, которые предупреждают о проверках на дороге или мешают им. Это касается и приборов, которые глушат или скрывают сигналы аппаратуры контроля движения. Антирадару в машине не место, даже выключенному.",
+      "Антирадар в Норвегии — не «серая зона»: нельзя даже просто возить его в бардачке."),
+
+    q("123", "Du setter et sykkelstativ på hengerfestet og to sykler på det. Syklene skjuler bilens kjennemerke (nummerskiltet) og baklysene. Hva krever reglene?",
+      "Ты ставишь велобагажник на фаркоп и вешаешь на него два велосипеда. Велосипеды закрывают номерной знак и задние фонари. Что требуют правила?",
+      [
+        ["En lysbjelke med baklys, bremselys, blinklys og refleks, merket med bilens registreringsnummer", "Световую панель с габаритами, стоп-сигналами, поворотниками и катафотом, на которой написан номер машины"],
+        ["Ingenting, hvis du bare kjører i dagslys", "Ничего, если ездишь только днём", "Kravet gjelder hele tiden. Andre må se bremselys og blinklys også om dagen, og politiet skal kunne lese nummeret (bruksforskriften § 3-4 nr 7 b).", "Требование действует всегда. Стоп-сигналы и поворотники должны быть видны и днём, а номер — читаться (bruksforskriften § 3-4 nr 7 b)."],
+        ["Å kjøre med nødblink på hele turen", "Ехать всю дорогу с аварийкой", "Nødblinken er for fare og nødstans. Den erstatter ikke bremselys, blinklys og kjennemerke som syklene skjuler.", "Аварийка — для опасности и вынужденной остановки. Она не заменяет закрытые велосипедами стоп-сигналы, поворотники и номер."],
+        ["Å legge en lapp med bilnummeret i bakruta", "Положить записку с номером машины в заднее стекло", "En lapp i ruta er ikke nok, og den gir ikke lys. Reglene krever en lysbjelke med lys, refleks og tydelig merking med nummeret (§ 3-4 nr 7 b og c).", "Записки в стекле мало, и она не светит. Нужна световая панель с фонарями, катафотом и чётко нанесённым номером (§ 3-4 nr 7 b и c)."]
+      ],
+      "Bruksforskriften § 3-4 nr 7 b: skjuler sykkelen bilens lys eller kjennemerke, skal det brukes en lysbjelke merket med bilens bokstav- og tallkombinasjon. Lysbjelken skal ha baklys, stopplys, retningssignallys og refleks. Nr 7 c: merkingen er svart på hvit eller aluminiumsfarget bunn, omtrent like stor som på kjennemerket, godt synlig og holdbar.",
+      "Bruksforskriften § 3-4 nr 7 b: если велосипед закрывает фонари или номер машины, нужна световая панель с буквами и цифрами номера. На ней должны быть габариты, стоп-сигналы, поворотники и катафот. Nr 7 c: номер — чёрный на белом или серебристом фоне, примерно того же размера, что на номерном знаке, хорошо видный и прочный.",
+      "Велосипеды закрыли зад машины — повесь «новый зад»: панель с фонарями и номером."),
+
+    qm("m29", "Du skal frakte noen brede plater på takstativet til en vanlig personbil. Hva er riktig om last som stikker ut på sidene? Velg alle riktige.",
+      "Ты везёшь на багажнике на крыше обычной легковушки широкие листы. Что верно про груз, который выступает по бокам? Выбери все верные.", [
+      ["Uten tillatelse fra Statens vegvesen må lasten ikke stikke mer enn 15 cm ut på sidene av bilen", "Без разрешения Statens vegvesen груз не может выступать за борта машины больше чем на 15 см", true],
+      ["Last som stikker 15 cm eller mer ut på sidene, skal merkes foran og bak med skrå røde og gule striper", "Груз, выступающий по бокам на 15 см и больше, помечают спереди и сзади косыми красно-жёлтыми полосами", true],
+      ["Last kan stikke inntil en halv meter ut på hver side, så lenge den er godt festet", "Груз может выступать до полуметра с каждой стороны, если хорошо закреплён", false, "Grensen uten tillatelse er 15 cm (bruksforskriften § 3-4 nr 1 a). God festing er et eget krav og gir ikke rett til bredere last.", "Без разрешения предел — 15 см (bruksforskriften § 3-4 nr 1 a). Хорошее крепление — отдельное требование, оно не даёт права на более широкий груз."],
+      ["I mørket holder det at bilens vanlige lys er på", "В темноте достаточно обычных фар и фонарей машины", false, "Last som stikker ut på sidene, skal i mørke eller dårlig sikt også ha lykter ytterst på lasten: hvitt lys forover og rødt lys bakover (§ 3-4 nr 2).", "Груз, выступающий по бокам, в темноте и при плохой видимости ещё и подсвечивают по краям: белый свет вперёд, красный назад (§ 3-4 nr 2)."]
+    ],
+    "Bruksforskriften § 3-4 nr 1 a: for transport med bredde inntil 2,55 meter, last medregnet, må lasten ikke stikke mer enn 15 cm utenfor kjøretøyets sider uten tillatelse fra Statens vegvesen (det finnes et eget unntak for båt). Nr 2: last som stikker 15 cm eller mer ut på sidene, skal merkes foran og bak med skrå røde og gule striper, minst 50 cm høyt og 25 cm bredt. I mørke eller usiktbart vær skal den også ha lykter ytterst: minst to med hvitt lys forover og to med rødt lys bakover på hver side.",
+    "Bruksforskriften § 3-4 nr 1 a: при ширине транспорта до 2,55 м вместе с грузом груз не может выступать за борта больше чем на 15 см без разрешения Statens vegvesen (для лодки есть отдельное исключение). Nr 2: груз, выступающий по бокам на 15 см и больше, помечают спереди и сзади косыми красно-жёлтыми полосами, не меньше 50 см в высоту и 25 см в ширину. В темноте и при плохой видимости по краям груза ещё нужны фонари: с каждой стороны минимум два белых вперёд и два красных назад.",
+    "Сбоку: больше 15 см — уже нужно разрешение и полосатая метка. Сзади: больше 1 метра — красно-белая метка.")
 
 
   ];
