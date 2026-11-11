@@ -120,10 +120,12 @@
       <rect x="-7" y="6" width="14" height="12" rx="2" fill="${P.glass}" opacity="0.75"/>
       <polygon points="-6,26 6,26 0,34" fill="#f08c1a" stroke="#d81e1e" stroke-width="1.2"/>`;
   }
-  function bikeBody(color) {
-    /* велосипедист сверху: колёса по оси, плечи, шлем */
-    return `<rect x="-1.4" y="-17" width="2.8" height="34" rx="1.4" fill="#2a2f36"/>
-      <rect x="-7" y="-10.5" width="14" height="2" rx="1" fill="#2a2f36"/>
+  function bikeBody(color, o) {
+    /* велосипедист сверху: колёса по оси, плечи, шлем; o.rider === false — пустой велосипед */
+    const frame = `<rect x="-1.4" y="-17" width="2.8" height="34" rx="1.4" fill="#2a2f36"/>
+      <rect x="-7" y="-10.5" width="14" height="2" rx="1" fill="#2a2f36"/>`;
+    if (o && o.rider === false) return frame;
+    return frame + `
       <ellipse cx="0" cy="-1" rx="7" ry="5.5" fill="${color}"/>
       <path d="M -6 -3 L -6.5 -10 M 6 -3 L 6.5 -10" stroke="${color}" stroke-width="2.6" stroke-linecap="round"/>
       <circle cx="0" cy="-4" r="4" fill="#f4f6f8" stroke="#2a2f36" stroke-width="1"/>`;
@@ -157,7 +159,7 @@
   /* kind: car | truck | bus | tram | emergency | tractor | bike | scooter | police */
   function vehicle(o) {
     const kind = o.kind || "car", color = o.color || P.you, rot = o.rot || 0;
-    const opts = { blink: o.blink, brake: o.brake, steer: o.steer, doors: o.doors, beacon: o.beacon };
+    const opts = { blink: o.blink, brake: o.brake, steer: o.steer, doors: o.doors, beacon: o.beacon, rider: o.rider };
     const bodyFn = { police: policeBody, truck: truckBody, bus: busBody, tram: tramBody, emergency: emergencyBody, tractor: tractorBody, bike: bikeBody, scooter: scooterBody }[kind] || carBody;
     const col = kind === "tram" ? (o.color || "#2f6fd0") : kind === "bus" ? (o.color || "#d8322c") : color;
     let trailer = "";
@@ -175,7 +177,7 @@
     const small = kind === "bike" || kind === "scooter";
     const lb = o.label === false ? "" : badge(small ? bx + 14 : bx, small ? by + 4 : by, o.label, o.badgeColor || (kind === "bike" || kind === "scooter" ? P.green : col === "#f3f5f7" ? P.ink : col));
     const d = { t: "veh", kind, x: o.x, y: o.y, rot, color: col };
-    ["blink", "brake", "trailer", "trailerRot", "sway", "door", "smoke", "beacon", "beams", "steer", "doors"].forEach(k => { if (o[k] != null && o[k] !== false) d[k] = o[k]; });
+    ["blink", "brake", "trailer", "trailerRot", "sway", "door", "smoke", "beacon", "beams", "steer", "doors", "rider"].forEach(k => { if (o[k] != null && o[k] !== false) d[k] = o[k]; });
     return M(d, body) + (lb ? M({ t: "ui", x: small ? bx + 14 : bx, y: small ? by + 4 : by, z: kind === "bus" || kind === "truck" || kind === "tram" ? 40 : small ? 22 : 26 }, lb) : "");
   }
 
@@ -936,6 +938,17 @@
         : `<ellipse cx="${x}" cy="${y}" rx="30" ry="42" fill="#7fb0e0" opacity="0.7"/><ellipse cx="${x - 6}" cy="${y - 10}" rx="10" ry="14" fill="#cfe5f7" opacity="0.6"/>` };
     },
     /* стоп-линия поперёк твоих полос: { y } */
+    laneSignals(ft, g) {
+      const y = ft.y || 70, sig = ft.signals || [];
+      const sym = (k, s) => k === "red" ? `<path d="M ${-s} ${-s} L ${s} ${s} M ${-s} ${s} L ${s} ${-s}" stroke="#ff3b2a" stroke-width="2.4"/>`
+        : k === "green" ? `<path d="M 0 ${s} L 0 ${-s} M ${-s * 0.7} ${-s * 0.2} L 0 ${-s} L ${s * 0.7} ${-s * 0.2}" stroke="#25d366" stroke-width="2.4" fill="none"/>`
+        : k === "yellowLeft" ? `<path d="M ${s * 0.65} ${s * 0.65} L ${-s * 0.6} ${-s * 0.6} M ${-s * 0.6} ${s * 0.15} L ${-s * 0.6} ${-s * 0.6} L ${s * 0.15} ${-s * 0.6}" stroke="#ffc21a" stroke-width="2.4" fill="none"/>`
+        : k === "yellowRight" ? `<path d="M ${-s * 0.65} ${s * 0.65} L ${s * 0.6} ${-s * 0.6} M ${s * 0.6} ${s * 0.15} L ${s * 0.6} ${-s * 0.6} L ${-s * 0.15} ${-s * 0.6}" stroke="#ffc21a" stroke-width="2.4" fill="none"/>` : "";
+      const boxes = sig.map((k, i) => ({ x: g.laneX(i), k }));
+      const art = `<g><rect x="${g.x0 - 10}" y="${y - 3}" width="${g.x1 - g.x0 + 20}" height="6" fill="#5b636d"/>` +
+        boxes.map(b => `<g transform="translate(${b.x} ${y})"><rect x="-8" y="-8" width="16" height="16" rx="2" fill="#141820"/>${sym(b.k, 5)}</g>`).join("") + `</g>`;
+      return { top: M({ t: "gantry", y, x0: g.x0, x1: g.x1, boxes }, art) };
+    },
     stopLine(ft, g) { const c = g.center != null ? g.center : g.x0; return { marks: `<rect x="${c}" y="${ft.y}" width="${g.x1 - c}" height="4" fill="${P.line}"/>` }; },
     /* светофор у правого края: { y, state } */
     light(ft, g) { return { furniture: light(g.x1 + 14, ft.y, ft.state) }; },

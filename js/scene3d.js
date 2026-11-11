@@ -192,12 +192,15 @@ function riderBody(color, standing) {
   const head = mesh(new THREE.SphereGeometry(2.2, 12, 10), mat(0xf4f6f8, { rough: 0.4 })); head.position.set(0, standing ? 17 : 15, standing ? -0.5 : -1.5); g.add(head);
   return g;
 }
-function bike(color) {
+function bike(color, noRider) {
   const g = new THREE.Group();
   [-8, 8].forEach(z => { const t = mesh(new THREE.TorusGeometry(3.6, 0.5, 8, 18), mat(0x1d2025)); t.rotation.y = Math.PI / 2; t.position.set(0, 3.6, z); g.add(t); });
   const fr = mesh(new THREE.BoxGeometry(0.8, 0.8, 16), mat(0x2a2f36)); fr.position.set(0, 6, 0); g.add(fr);
   const hb = mesh(new THREE.BoxGeometry(8, 0.7, 0.7), mat(0x2a2f36)); hb.position.set(0, 9, -7); g.add(hb);
-  g.add(riderBody(color, false));
+  if (!noRider) g.add(riderBody(color, false));
+  else { /* пустой велосипед: седло и цветная рама, чтобы читался без седока */
+    const seat = mesh(new THREE.BoxGeometry(2.2, 1, 4), mat(0x1d2025)); seat.position.set(0, 8.4, 4); g.add(seat);
+    const fr2 = mesh(new THREE.BoxGeometry(1.4, 1.4, 14), mat(color, { paint: true })); fr2.position.set(0, 6.4, 0); g.add(fr2); g.scale.setScalar(1.4); }
   return g;
 }
 function scooter(color) {
@@ -226,7 +229,7 @@ function vehicle3d(d) {
   else if (d.kind === "bus") model = bus(color, d);
   else if (d.kind === "tram") model = tram(color, d);
   else if (d.kind === "tractor") model = tractor(color);
-  else if (d.kind === "bike") model = bike(color);
+  else if (d.kind === "bike") model = bike(color, d.rider === false);
   else if (d.kind === "scooter") model = scooter(color);
   else if (d.kind === "police") model = police(d);
   else if (d.kind === "emergency") model = ambulance(d);
@@ -446,6 +449,33 @@ function bridge3d(d) {
   });
   return g;
 }
+/* портал над дорогой с сигналами над каждой полосой (красный крест / зелёная стрелка / жёлтая стрелка) */
+function signalFace(k) {
+  const c = document.createElement("canvas"); c.width = c.height = 64;
+  const x = c.getContext("2d"); x.fillStyle = "#141820"; x.fillRect(0, 0, 64, 64);
+  x.lineWidth = 7; x.lineCap = "round"; x.lineJoin = "round";
+  const col = k === "red" ? "#ff3b2a" : k === "green" ? "#25d366" : "#ffc21a";
+  x.strokeStyle = col; x.shadowColor = col; x.shadowBlur = 8; x.beginPath();
+  if (k === "red") { x.moveTo(16, 16); x.lineTo(48, 48); x.moveTo(48, 16); x.lineTo(16, 48); }
+  else if (k === "green") { x.moveTo(32, 52); x.lineTo(32, 12); x.moveTo(18, 26); x.lineTo(32, 12); x.lineTo(46, 26); }
+  else if (k === "yellowLeft") { x.moveTo(48, 48); x.lineTo(16, 16); x.moveTo(16, 38); x.lineTo(16, 16); x.lineTo(38, 16); }
+  else if (k === "yellowRight") { x.moveTo(16, 48); x.lineTo(48, 16); x.moveTo(48, 38); x.lineTo(48, 16); x.lineTo(26, 16); }
+  x.stroke();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+function gantry3d(d) {
+  const g = new THREE.Group(), z = d.y - H / 2, top = 40, steel = mat(0x8a939e, { rough: 0.4, metal: 0.6 });
+  [d.x0 - 12, d.x1 + 12].forEach(x => { const p = mesh(new THREE.BoxGeometry(2.4, top, 2.4), steel); p.position.set(x - W / 2, top / 2, z); g.add(p); });
+  const beam = mesh(new THREE.BoxGeometry(d.x1 - d.x0 + 26, 3, 3), steel); beam.position.set((d.x0 + d.x1) / 2 - W / 2, top, z); g.add(beam);
+  (d.boxes || []).forEach(b => {
+    if (!b.k) return;
+    const head = new THREE.Group(); head.position.set(b.x - W / 2, top - 9, z + 1); head.rotation.x = -0.5; g.add(head);
+    const box = mesh(new THREE.BoxGeometry(17, 17, 3), mat(0x1f2630)); head.add(box);
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(15, 15), new THREE.MeshBasicMaterial({ map: signalFace(b.k) }));
+    face.position.z = 1.6; head.add(face);
+  });
+  return g;
+}
 function curb3d(d) {
   const c = mesh(new THREE.BoxGeometry(5, 3.5, H), mat(0xb3bac3, { rough: 0.8 }));
   c.position.set(d.x - W / 2 + 2.5, 1.75, 0);
@@ -549,6 +579,7 @@ async function build(svgEl) {
     else if (d.t === "tunnelWalls") o = tunnelWalls3d(d);
     else if (d.t === "bridge") o = bridge3d(d);
     else if (d.t === "curb") o = curb3d(d);
+    else if (d.t === "gantry") o = gantry3d(d);
     else if (d.t === "tree") o = place(tree3d(d), d, 0);
     else if (d.t === "house") o = house3d(d);
     else if (d.t === "cone") { o = place(cone3d(), d, 0); o.scale.setScalar(1.35); }

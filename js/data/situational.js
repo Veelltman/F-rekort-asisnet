@@ -1968,7 +1968,7 @@
       "Trafikkreglene § 7 nr 3: тот, кто поворачивает, уступает пешеходам, велосипедистам и водителям электросамокатов, которые едут прямо по проезжей части или по обочине. А § 7 nr 2 добавляет: при повороте налево уступаешь транспорту, который оказывается справа от тебя, то есть встречному. Пропусти велосипедиста и только потом поворачивай.",
       "Велосипедист навстречу — как встречная машина, только его легче не заметить. Обочина не «вне игры»."),
 
-    q("139", street({ lanes: ["up", "up"], sides: { left: "none", right: "none" }, features: [{ type: "inTunnel" }], actors: [{ label: "A", lane: 1, y: 170 }, { label: "B", lane: 0, y: 250, color: "#e0483a" }], tags: [{ text: "GUL PIL", x: 216, y: 70 }] }),
+    q("139", street({ lanes: ["up", "up"], sides: { left: "none", right: "none" }, features: [{ type: "inTunnel" }, { type: "laneSignals", y: 82, signals: ["green", "yellowLeft"] }], actors: [{ label: "A", lane: 1, y: 170 }, { label: "B", lane: 0, y: 250, color: "#e0483a" }] }),
       "Du (A) kjører i høyre felt i en lang tunnel med to felt i din retning. Over feltet ditt lyser et kjørefeltsignal med en gul pil som peker skrått til venstre. En bil (B) ligger litt bak deg i venstre felt. Hva gjør du?",
       "Ты (A) едешь по правой полосе в длинном тоннеле, где в твою сторону две полосы. Над твоей полосой горит сигнал полосы — жёлтая стрелка, направленная наискосок влево. Чуть позади тебя по левой полосе едет машина (B). Что делаешь?",
       [
@@ -2020,7 +2020,7 @@
       "Trafikkreglene § 7 nr 3: кто поворачивает, уступает пешеходам, велосипедистам и водителям электросамокатов, которые движутся прямо по проезжей части или по обочине. Это действует и там, где перехода нет. Пешеход вправе идти по обочине (§ 19 nr 1). Заранее сбрось скорость и пропусти пешехода через боковую дорогу, потом поворачивай.",
       "Поворачиваешь — пропусти всех, кто идёт или едет прямо рядом с тобой: и по дороге, и по обочине."),
 
-    q("143", street({ sides: { left: "grass", right: "grass" }, weather: "night", actors: [{ kind: "bike", x: 227, y: 112, rot: 0, label: false }, { kind: "adult", x: 215, y: 114, rot: 0, color: "#8a96a3", walk: [215, 96] }, { label: "A", y: 250, beams: "low", path: [[216, 190]] }], tags: [{ text: "LEIER SYKKEL", x: 304, y: 80 }] }),
+    q("143", street({ sides: { left: "grass", right: "grass" }, weather: "night", actors: [{ kind: "bike", x: 227, y: 112, rot: 0, label: false, rider: false, color: "#f0b429" }, { kind: "adult", x: 215, y: 114, rot: 0, color: "#8a96a3", walk: [215, 96] }, { label: "A", y: 250, beams: "low", path: [[216, 190]] }], tags: [{ text: "LEIER SYKKEL", x: 304, y: 80 }] }),
       "Det er mørkt, og du kjører på en landeveg uten fortau og uten vegskulder. Helt til høyre i kjørebanen, i samme retning som deg, går en person og leier en sykkel. Hva er riktig?",
       "Темно, ты едешь по загородной дороге без тротуара и без обочины. У самого правого края проезжей части в ту же сторону, что и ты, идёт человек и ведёт велосипед рядом с собой. Что верно?",
       [
